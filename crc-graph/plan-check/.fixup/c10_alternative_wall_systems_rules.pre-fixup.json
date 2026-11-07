@@ -1,0 +1,847 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Alternative Wall Systems",
+  "community_id": 10,
+  "extracted_from_sections": [
+    "appendix_ah_patio_covers.md",
+    "appendix_ar_light_straw_clay_construction.md",
+    "appendix_as_strawbale_construction.md",
+    "appendix_au_cob_construction_monolithic_adobe.md",
+    "appendix_aw_3d_printed_building_construction.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_ah_105_structural_a",
+      "cite": "AH105.1",
+      "section_node": "section_ah_105_1",
+      "title": "Patio cover design loads minimum 10 psf live and code-prescribed wind",
+      "intent": "Ensure patio covers can support minimum live load and resist wind so light roof structures over outdoor living areas remain safe.",
+      "applies_when": [
+        {
+          "is_patio_cover": true
+        }
+      ],
+      "requires": {
+        "type": "design_loads",
+        "min_live_load_psf": 10,
+        "snow_load_governs_when": "snow_load > 10 psf",
+        "wind_loads_per": "R301.2.1",
+        "stress_limits_per": "this_code"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural calculations showing dead + 10 psf live load (or governing snow load) on patio cover",
+        "Wind load calculations per R301.2.1 with site-specific Vult",
+        "Framing plans and member sizing for the patio cover",
+        "Connection details to dwelling unit (if attached)"
+      ],
+      "depends_on": [
+        "section_r301_2_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ah_105_structural_b",
+      "cite": "AH105.2",
+      "section_node": "section_ah_105_2",
+      "title": "Patio cover slab-on-grade footings in zero-frost areas",
+      "intent": "Allow footing-free slab support for patio covers only where frost is not a concern and column loads stay light.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_patio_cover": true
+            },
+            {
+              "frostline_depth_per_table_r301_2": "zero"
+            },
+            {
+              "foundation_type": "slab_on_grade_without_footings"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foundation",
+        "slab_per": "R506",
+        "min_slab_thickness_inches": 3.5,
+        "max_column_load_lb": 750,
+        "load_basis": "live_plus_dead"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site frostline data referencing Table R301.2",
+        "Slab thickness and reinforcement details per R506",
+        "Column load calculations confirming <= 750 lb per column",
+        "Foundation plan showing column locations and slab edge details"
+      ],
+      "depends_on": [
+        "section_r506",
+        "section_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ar_103_construction",
+      "cite": "AR103",
+      "section_node": "section_ar_103",
+      "title": "Light straw-clay limited to nonbearing infill, one story, prescribed bracing and stabilization",
+      "intent": "Constrain prescriptive use of light straw-clay to single-story nonbearing infill walls with adequate framing, bracing and stabilization.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "wall_system": "light_straw_clay"
+            },
+            {
+              "in_seismic_design_category_a_or_b": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wall_system_constraints",
+        "use": "nonbearing_infill_only",
+        "max_stories_above_grade_plane": 1,
+        "bracing_method": "Method_LIB_per_R602_10",
+        "solid_sheathing_on_lsc_walls": "prohibited",
+        "vertical_stabilization": {
+          "framing_per": [
+            "Figure_AR103.2.4(1)",
+            "Figure_AR103.2.4(2)",
+            "Figure_AR103.2.4(3)"
+          ],
+          "max_nonstructural_member_spacing_in": 32
+        },
+        "horizontal_stabilization": {
+          "max_spacing_in": 24,
+          "acceptable_members": [
+            "3/4_in_bamboo",
+            "1/2_in_fiberglass_rod",
+            "1_in_wood_dowel",
+            "nominal_1x2_wood"
+          ]
+        },
+        "mixture_per_table": "AR103.2.3",
+        "tested_per": [
+          "std_astm_e2392"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "in_seismic_design_category_c_d0_d1_or_d2": true
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "alternative": "approved_engineered_design_per_R301_1_3"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "bldg_height_>1_story_above_grade_plane": true
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "alternative": "approved_engineered_design_by_registered_design_professional"
+        }
+      ],
+      "evidence_required": [
+        "Structural drawings identifying light straw-clay as nonbearing infill",
+        "Bracing plan using Method LIB without solid sheathing on LSC walls",
+        "Stabilization details (vertical and horizontal) matching Figures AR103.2.4(1)-(3)",
+        "Mix design and clay subsoil suitability test results per Table AR103.2.3 and ASTM E2392",
+        "Registered design professional stamp where any exception applies"
+      ],
+      "depends_on": [
+        "section_r602_10",
+        "section_r301_1_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_as_103_bales",
+      "cite": "AS103",
+      "section_node": "section_as_103",
+      "title": "Strawbale material requirements: shape, size, ties, moisture, density and straw type",
+      "intent": "Ensure each bale used in a strawbale wall is dimensionally consistent, sufficiently dense, dry, and made of acceptable cereal-grain straw so wall behavior matches code assumptions.",
+      "applies_when": [
+        {
+          "wall_system": "strawbale"
+        }
+      ],
+      "requires": {
+        "type": "material",
+        "shape": "rectangular",
+        "min_height_in": 12,
+        "min_thickness_in": 12,
+        "consistency_within_continuous_wall": "uniform_height_and_thickness",
+        "ties": {
+          "materials": [
+            "synthetic_fiber",
+            "natural_fiber",
+            "metal_wire"
+          ],
+          "min_distance_from_untied_face_in": 3,
+          "max_distance_from_untied_face_in": 6,
+          "max_spacing_in": 12,
+          "broken_tie_handling": "retie_to_required_density"
+        },
+        "max_moisture_content_pct_at_first_plaster": 20,
+        "moisture_meter_required": true,
+        "moisture_sample_pct": 5,
+        "min_moisture_samples": 10,
+        "min_dry_density_pcf": 6.5,
+        "density_sample_pct": 2,
+        "min_density_samples": 5,
+        "acceptable_straw_types": [
+          "wheat",
+          "rice",
+          "rye",
+          "barley",
+          "oat"
+        ],
+        "hay_prohibited": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "is_partial_bale_in_nonrectangular_space": true
+            }
+          ],
+          "effect": "shape_requirement_relaxed",
+          "alternative": "partial_bales_per_AS103.6_with_retie_per_AS103.3"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "straw_type_other_than_listed": true
+                },
+                {
+                  "approved_by_building_official": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_straw_type_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Bale specification sheet showing dimensions and tie pattern",
+        "Moisture test report from straw/hay-rated meter for 5% / >=10 bales",
+        "Density test calculations for 2% / >=5 bales showing >= 6.5 pcf dry",
+        "Documentation of straw species (wheat/rice/rye/barley/oat) or building official approval",
+        "Inspection record verifying retie of any broken-tie or partial bales"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_au_103_materials_mixing",
+      "cite": "AU103",
+      "section_node": "section_au_103",
+      "title": "Cob mix proportions, shrinkage test, installation lifts, dry joints and drying holes",
+      "intent": "Control cob mix quality and placement so monolithic walls develop required strength, bond and dimensional stability.",
+      "applies_when": [
+        {
+          "wall_system": "cob"
+        }
+      ],
+      "requires": {
+        "type": "material_and_installation",
+        "straw_source": [
+          "wheat",
+          "rice",
+          "rye",
+          "barley",
+          "oat",
+          "similar_reinforcing_fibers"
+        ],
+        "straw_condition": "dry_to_touch_and_free_of_visible_decay",
+        "mix_proportions": "any_that_pass_shrinkage_compressive_and_modulus_of_rupture_tests",
+        "shrinkage_test": {
+          "form_dimensions_in": [
+            24,
+            3.5,
+            3.5
+          ],
+          "max_total_length_shrinkage_in": 1,
+          "crack_width_close_threshold_in": 0.0625,
+          "approval_before_placement": true
+        },
+        "compressive_strength_per": "AU106.6",
+        "modulus_of_rupture_per": "AU106.7",
+        "mixing_consistency": "plastic_and_capable_of_bonding_lifts",
+        "installation_lift_height": "self_supporting_with_minimal_slumping",
+        "dry_joint_handling": [
+          "cover_to_retain_moisture",
+          "shade_from_sun",
+          "wet_previous_layer_before_next"
+        ],
+        "drying_holes": {
+          "max_diameter_in": 0.75,
+          "min_spacing_diameters": 10,
+          "prohibited_in_braced_wall_panels": true,
+          "max_design_load_pct_of_allowable_bearing": 90,
+          "must_be_filled_before_final_inspection": true
+        },
+        "roof_loads_added_only_when": "walls_sufficiently_dry_to_resist_compression",
+        "tested_per": [
+          "std_astm_e2392"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cob mix design and shrinkage test results approved by building official prior to placement",
+        "Compressive strength test report per AU106.6 and modulus of rupture report per AU106.7",
+        "Installation log showing lift heights, dry-joint treatment and curing methods",
+        "Drying-hole layout drawing showing diameter, spacing and exclusion from braced wall panels",
+        "Inspection sign-off that drying holes are filled before final inspection"
+      ],
+      "depends_on": [
+        "section_au_106_6",
+        "section_au_106_7"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_au_105_cob_walls",
+      "cite": "AU105",
+      "section_node": "section_au_105",
+      "title": "Cob wall building, height, seismic, thickness and out-of-plane limits",
+      "intent": "Restrict prescriptive cob construction to single-story low-seismic buildings with thickness and out-of-plane resistance that match tested wall behavior.",
+      "applies_when": [
+        {
+          "wall_system": "cob"
+        }
+      ],
+      "requires": {
+        "type": "wall_system_constraints",
+        "max_stories": 1,
+        "max_building_height_ft": 20,
+        "permitted_seismic_design_categories": [
+          "A",
+          "B",
+          "C"
+        ],
+        "wall_height_per": [
+          "Table_AU105.3",
+          "Table_AU106.11(1)"
+        ],
+        "wall_thickness_excluding_finish": {
+          "min_in": 10,
+          "max_in_top_two_thirds": 24,
+          "bottom_third_max": "not_limited",
+          "structural_walls_also_per": "AU106.2_item_2",
+          "taper_per": "AU106.5_item_1"
+        },
+        "out_of_plane_resistance_per": "Table_AU105.3",
+        "out_of_plane_loading_basis": [
+          "R301.2.1",
+          "R301.2.2"
+        ],
+        "openings": {
+          "max_width_ft": 6,
+          "max_wall_height_below_opening_ft": 6,
+          "horizontal_reinforcing": "2x2_in_14ga_galvanized_steel_mesh_4_in_embed_extending_12_in_past_opening",
+          "vertical_reinforcing": "5/8_in_threaded_rod_full_height_4_in_from_each_side_with_7_in_foundation_embedment",
+          "midheight_reinforcing_when_wall_below_opening_>4ft6in": true
+        },
+        "min_wall_segment_length_between_openings_ft_in": "2_6",
+        "wall_segment_<4ft_requires_vertical_reinforcing": true,
+        "tested_per": [
+          "std_astm_e2392"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "in_seismic_design_category_d0_d1_or_d2": true
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "alternative": "approved_engineered_design"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_interior_cob_wall": true
+                },
+                {
+                  "not": {
+                    "in_seismic_design_category_a_with_height_to_thickness_ratio_le_6": true
+                  }
+                }
+              ]
+            }
+          ],
+          "effect": "engineered_design_required_for_interior_seismic_load"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "in_special_wind_region": true
+                },
+                {
+                  "wind_design_required_per_figure_R301_2_1_1": true
+                }
+              ]
+            }
+          ],
+          "effect": "engineered_design_required"
+        }
+      ],
+      "evidence_required": [
+        "Architectural plans showing one story, building height <= 20 ft and seismic design category",
+        "Wall sections showing thickness >= 10 in and top-two-thirds <= 24 in with any taper",
+        "Out-of-plane resistance method matched to Table AU105.3 row with H, T values",
+        "Reinforcing details at all openings >2 ft wide (mesh and 5/8-in threaded rod)",
+        "Engineer's stamp where any exception applies"
+      ],
+      "depends_on": [
+        "section_au_106",
+        "section_r301_2_1",
+        "section_r301_2_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_ar_light_straw_clay",
+      "cite": "AR101.1",
+      "section_node": "section_appendix_ar",
+      "title": "Scope of Appendix AR: nonbearing light straw-clay in low-seismic categories",
+      "intent": "Establish when Appendix AR applies and when an engineered design is required instead of prescriptive provisions.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "wall_system": "light_straw_clay"
+            },
+            {
+              "appendix_ar_adopted_by_state_agency_or_ordinance": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "permitted_use": "nonbearing_building_material_and_wall_infill",
+        "permitted_seismic_design_categories": [
+          "A",
+          "B"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "in_seismic_design_category_c_d0_d1_or_d2": true
+            }
+          ],
+          "effect": "prescriptive_provisions_do_not_apply",
+          "alternative": "approved_engineered_design_per_R301_1_3"
+        }
+      ],
+      "evidence_required": [
+        "Statement on plans citing adoption of Appendix AR by adopting agency",
+        "Site seismic design category documentation",
+        "Confirmation walls are nonbearing in framing plan",
+        "Registered design professional approval if SDC C, D0, D1 or D2"
+      ],
+      "depends_on": [
+        "section_r301_1_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_as_strawbale",
+      "cite": "AS101.1",
+      "section_node": "section_appendix_as",
+      "title": "Scope of Appendix AS: prescriptive and performance strawbale construction",
+      "intent": "Define scope of strawbale construction provisions and require code compliance for everything not modified by this appendix.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "wall_system": "strawbale"
+            },
+            {
+              "appendix_as_adopted_by_state_agency_or_ordinance": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "compliance_basis": "this_code_except_as_modified_by_appendix_AS",
+        "alternative_methods_path": "R104.11"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plans citing adoption of Appendix AS",
+        "Demonstration that any departure from prescriptive provisions is approved per R104.11",
+        "Code compliance check for items not modified by Appendix AS"
+      ],
+      "depends_on": [
+        "section_r104_11"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_au_cob_construction",
+      "cite": "AU101.1",
+      "section_node": "section_appendix_au",
+      "title": "Scope of Appendix AU: cob (monolithic adobe) construction",
+      "intent": "Define applicability of cob construction provisions and require base code compliance for items not modified.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "wall_system": "cob"
+            },
+            {
+              "appendix_au_adopted_by_state_agency_or_ordinance": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "compliance_basis": "this_code_except_as_modified_by_appendix_AU",
+        "alternative_test_path": "R104.11.1",
+        "history_of_successful_use_acceptable_in_lieu_of_testing": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plans citing adoption of Appendix AU",
+        "Test reports per R104.11.1 OR documented history of successful use accepted by the building official",
+        "Code compliance check for items not modified by Appendix AU"
+      ],
+      "depends_on": [
+        "section_r104_11"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_aw_3d_printed",
+      "cite": "AW101.1",
+      "section_node": "section_appendix_aw",
+      "title": "Scope of Appendix AW: 3D-printed building construction with UL 3401 certification",
+      "intent": "Require 3D-printed buildings to be designed by UL 3401-certified organizations and built with materials and processes documented in the UL 3401 report of findings.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_3d_printed_construction": true
+            },
+            {
+              "appendix_aw_adopted_by_state_agency_or_ordinance": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "design_construction_inspection",
+        "design_organization_certified_per": "UL_3401",
+        "approved_by_building_official": true,
+        "structural_design_and_ul_3401_report_submitted_per": "104.11",
+        "construction_method_per": "UL_3401_report_of_findings",
+        "additive_manufacturing_materials": "only_listed_in_UL_3401_report_of_findings",
+        "containers_labeled": true,
+        "deposition_environment_within": "UL_3401_specified_limits",
+        "max_layers_curing_finishing_per": "UL_3401_report_of_findings",
+        "initial_special_inspection_required": true,
+        "initial_inspection_by": "approved_agency_that_evaluated_fabrication_process",
+        "tested_per": [
+          "UL_3401"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_single_housing_tract": true
+                },
+                {
+                  "same_equipment_operators_and_process_on_all_buildings": true
+                },
+                {
+                  "approved_by_building_official": true
+                }
+              ]
+            }
+          ],
+          "effect": "subsequent_building_inspections_reduced",
+          "alternative": "first_building_plus_selected_subsequent_buildings_at_official_discretion"
+        }
+      ],
+      "evidence_required": [
+        "UL 3401 certification of the design organization by approved agency",
+        "UL 3401 report of findings (with unique construction-method identifier) on file",
+        "Submittal package per Section 104.11 including structural design and UL 3401 report",
+        "Labels on additive manufacturing material containers matching UL 3401 listing",
+        "Initial special inspection report by the approved agency before/at start of fabrication"
+      ],
+      "depends_on": [
+        "section_r104_11"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r104_11_alternative_methods",
+      "cite": "R104.11",
+      "section_node": "section_r104_11",
+      "title": "Alternative materials, design and methods of construction",
+      "intent": "Provide a code-compliant pathway for alternative wall systems (light straw-clay, strawbale, cob, 3D-printed) when they are not strictly prescriptive but demonstrate equivalent performance.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "uses_alternative_material_design_or_method_of_construction": true
+            },
+            {
+              "wall_system": "strawbale"
+            },
+            {
+              "wall_system": "cob"
+            },
+            {
+              "wall_system": "light_straw_clay"
+            },
+            {
+              "is_3d_printed_construction": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "approval_path",
+        "demonstration": "equivalence_to_code_in_quality_strength_effectiveness_fire_resistance_durability_and_safety",
+        "tests_per": "R104.11.1",
+        "history_of_successful_use_may_be_considered": true,
+        "building_official_approval_required": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Alternative methods application package submitted to the building official",
+        "Test reports or documented history of successful use per R104.11.1",
+        "Building official's written approval of the alternative material/design/method"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r301_design_loads",
+      "cite": "R301",
+      "section_node": "section_r301",
+      "title": "Design criteria for alternative wall systems: wind, seismic and out-of-plane loading",
+      "intent": "Anchor alternative wall system out-of-plane loading and seismic categorization to the base code's design criteria so site-specific hazards are correctly applied.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "wall_system": "strawbale"
+            },
+            {
+              "wall_system": "cob"
+            },
+            {
+              "wall_system": "light_straw_clay"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "design_criteria",
+        "ultimate_design_wind_speed_per": "R301.2.1",
+        "seismic_design_category_per": "R301.2.2",
+        "engineered_design_required_when": [
+          "in_special_wind_region",
+          "wind_design_required_per_figure_R301_2_1_1"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site Vult derived per R301.2.1 (with mapped or special-wind-region documentation)",
+        "Seismic Design Category determination per R301.2.2",
+        "Identification of any special wind region triggering engineered design",
+        "Out-of-plane resistance selection cross-referenced to wind speed and SDC in the appendix table (AS105.4 / AU105.3)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r506_concrete_floors",
+      "cite": "R506",
+      "section_node": "section_r506",
+      "title": "Concrete slab-on-ground floors used to support patio covers and screen enclosures",
+      "intent": "Ensure slabs supporting patio covers or screen enclosures meet R506 (subgrade, vapor retarder and minimum thickness) when used in lieu of footings.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "any_of": [
+                {
+                  "is_patio_cover": true
+                },
+                {
+                  "is_screen_enclosure_in_hurricane_prone_region": true
+                }
+              ]
+            },
+            {
+              "foundation_type": "slab_on_grade_without_footings"
+            },
+            {
+              "frostline_depth_per_table_r301_2": "zero"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "slab_construction",
+        "slab_per": "R506",
+        "min_slab_thickness_inches": 3.5,
+        "max_column_load_lb": 750
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing slab thickness >= 3.5 in and detailing per R506",
+        "Column-load calculation confirming <= 750 lb per column",
+        "Frostline-depth confirmation citing Table R301.2"
+      ],
+      "depends_on": [
+        "section_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_wood_wall_framing",
+      "cite": "R602",
+      "section_node": "section_r602",
+      "title": "Wood wall framing and bracing for alternative wall system stabilization",
+      "intent": "Require structural and stabilization framing in alternative wall systems (light straw-clay studs, strawbale braced panels, cob lintels with adjacent framing) to comply with the base wood wall framing and bracing provisions.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "wall_system": "light_straw_clay"
+                },
+                {
+                  "member_is_load_bearing_or_stabilization": true
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "wall_system": "strawbale"
+                },
+                {
+                  "any_of": [
+                    {
+                      "is_braced_wall_panel": true
+                    },
+                    {
+                      "is_post_and_beam_with_strawbale_infill": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wood_framing",
+        "framing_members_per": "R602",
+        "bracing_per": "R602.10",
+        "braced_wall_panel_lengths_per": "R602.10.3",
+        "headers_per": "Table_R602.7(1)",
+        "boundary_nailing_per": "Table_R602.3(1)"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "wall_system": "strawbale"
+                },
+                {
+                  "in_seismic_design_category_c_d0_d1_or_d2": true
+                }
+              ]
+            }
+          ],
+          "effect": "additional_bracing_required",
+          "alternative": "Table_R602.10.3(3)_total_length_increased_60_percent_for_SDC_C_D0_D1_D2"
+        }
+      ],
+      "evidence_required": [
+        "Framing plan citing R602 member sizes for load-bearing and stabilization members",
+        "Bracing plan per R602.10 with method identified (Method LIB for LSC walls)",
+        "Header schedule per Table R602.7(1)",
+        "Braced wall panel lengths per R602.10.3 with 60% increase for SDC C-D2 strawbale walls",
+        "Boundary nailing schedule per Table R602.3(1)"
+      ],
+      "depends_on": [
+        "section_r602_10",
+        "section_r602_10_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

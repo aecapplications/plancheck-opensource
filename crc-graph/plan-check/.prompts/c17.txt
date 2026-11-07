@@ -1,0 +1,72 @@
+You are a plan-check rule extraction subagent. The graph community "Flood & Expansive Soil Foundations" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/chapter_3_building_planning_c.md
+crc-graph/chapters/chapter_4_foundations_a.md
+crc-graph/chapters/chapter_4_foundations_b.md
+
+Output path: crc-graph/plan-check/c17_flood_expansive_soil_foundations_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  r322_1                                    R322.1 General Flood
+  r322_2                                    R322.2 Flood hazard areas (A Zones)
+  r322_3                                    R322.3 Coastal high-hazard areas
+  r401_4                                    R401.4 Soil tests
+  r403_1_8                                  R403.1.8 Foundations on expansive soils
+  r404_4                                    R404.4 Retaining walls
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  def_expansive_soil                        Defined: Expansive Soil
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — use standards from sister communities if cited)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Flood & Expansive Soil Foundations",
+  "community_id": 17,
+  "extracted_from_sections": ["chapter_3_building_planning_c.md", "chapter_4_foundations_a.md", "chapter_4_foundations_b.md"],
+  "rules": [ ... ]
+}
+
+Aim for 3-6 rules. After writing the file, just confirm "wrote c17_flood_expansive_soil_foundations_rules.json with N rules" and stop.

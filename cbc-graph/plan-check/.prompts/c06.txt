@@ -1,0 +1,144 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 17A Special Inspections And Tests" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch16_chapter_16_structural_design.md
+cbc-graph/chapters/ch17a_chapter_17a_special_inspections_and_tests.md
+cbc-graph/chapters/ch18_chapter_18_soils_and_foundations.md
+cbc-graph/chapters/ch18a_chapter_18a_soils_and_foundations.md
+cbc-graph/chapters/ch1_chapter_1_scope_and_administration.md
+cbc-graph/chapters/ch31f_chapter_31f_slc_marine_oil_terminals.md
+cbc-graph/chapters/ch35_chapter_35_referenced_standards.md
+cbc-graph/chapters/ch7_chapter_7_fire_and_smoke_protection_features.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c06_chapter_17a_special_inspections_and_tests_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_110_3                                                     110.3 Required Inspections
+  sec_1604_3_2                                                  1604.3.2 Reinforced Concrete Deflection
+  sec_1604_3_3                                                  1604.3.3 Steel Deflection
+  sec_1704a                                                     Section 1704A Special Inspections and Tests, Contractor Resp
+  sec_1705a                                                     Section 1705A Required Special Inspections and Tests (Ch 17A
+  sec_1705a_13                                                  Section 1705A.13 Special Inspections for Seismic Resistance 
+  sec_1705a_13_1                                                Section 1705A.13.1 Structural Steel Seismic Inspections (Ch 
+  sec_1705a_14                                                  Section 1705A.14 Testing for Seismic Resistance (Ch 17A)
+  sec_1705a_15                                                  Section 1705A.15 Sprayed Fire-resistant Materials (Ch 17A)
+  sec_1705a_16                                                  Section 1705A.16 Mastic and Intumescent Fire-resistant Coati
+  sec_1705a_17                                                  Section 1705A.17 Exterior Insulation and Finish Systems EIFS
+  sec_1705a_18                                                  Section 1705A.18 Fire-resistant Penetrations and Joints (Ch 
+  sec_1705a_2                                                   Section 1705A.2 Steel Construction Special Inspections (Ch 1
+  sec_1705a_2_1                                                 Section 1705A.2.1 Structural Steel (Ch 17A)
+  sec_1705a_2_5                                                 Section 1705A.2.5 Inspection and Tests of Structural Welding
+  sec_1705a_3                                                   Section 1705A.3 Concrete Construction Special Inspections (C
+  sec_1705a_3_1                                                 Section 1705A.3.1 Welding of Reinforcing Bars (Ch 17A)
+  sec_1705a_3_3                                                 Section 1705A.3.3 Batch Plant Inspection (Ch 17A)
+  sec_1705a_3_9                                                 Section 1705A.3.9 Shotcrete (Ch 17A)
+  sec_1808_8                                                    1808.8 Concrete Foundations
+  sec_1808a_8                                                   1808A.8 Concrete Foundations
+  sec_1808a_8_6                                                 1808A.8.6 Seismic Requirements
+  sec_1810_3                                                    1810.3 Design and Detailing of Deep Foundations
+  sec_1810_3_11                                                 1810.3.11 Pile Caps
+  sec_1810a_3_11                                                1810A.3.11 Pile Caps
+  sec_1810a_3_2_2                                               1810A.3.2.2 Prestressing Steel
+  sec_1810a_3_2_3                                               1810A.3.2.3 Steel
+  sec_1810a_3_5_3_1                                             1810A.3.5.3.1 Structural Steel H-Piles
+  sec_1810a_3_8                                                 1810A.3.8 Precast Concrete Piles
+  sec_704_13                                                    704.13 Sprayed Fire-Resistant Materials (SFRM)
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_1705a_2_1                                               Table 1705A.2.1 Required Special Inspections and Tests of St
+  table_1705a_3                                                 Table 1705A.3 Required Special Inspections and Tests of Conc
+  table_1808_8_1                                                Table 1808.8.1 Minimum Compressive Strength of Concrete
+  table_1808_8_2                                                Table 1808.8.2 Minimum Concrete Cover
+  table_1808a_8_1                                               Table 1808A.8.1 Minimum Specified Compressive Strength of Co
+  table_1808a_8_2                                               Table 1808A.8.2 Minimum Concrete Cover
+  table_1810_3_2_6                                              Table 1810.3.2.6 Allowable Stresses for Deep Foundation Mate
+  concept_batch_plant_inspection                                Batch Plant Inspection — continuous inspection of concrete b
+  concept_sfrm_inspection                                       Sprayed Fire-resistant Material SFRM Inspection — thickness,
+  concept_shotcrete_inspection                                  Shotcrete Special Inspection — continuous inspection during 
+  concept_special_inspection                                    Special Inspection (OSHPD/DSA) — independent agency inspecti
+  concept_statement_of_special_inspections                      Statement of Special Inspections — design professional docum
+  concept_structural_observation                                Structural Observation — registered design professional visu
+  concept_tio_program                                           Test Inspection and Observation TIO Program (OSHPD) — qualit
+  def_sfrm                                                      Sprayed Fire-Resistant Materials (SFRM)
+  std_awci_12b                                                  AWCI 12-B-14 Technical Manual 12B Third Edition Standard Pra
+  std_aws_d1_1                                                  AWS D1.1/D1.1M-15 Structural Welding Code—Steel
+  std_aws_d1_3                                                  AWS D1.3/D1.3M-08 Structural Welding Code—Sheet Steel
+  std_aws_d1_4                                                  AWS D1.4/D1.4M-2018 Structural Welding Code—Steel Reinforcin
+  std_aws_d1_8                                                  AWS D1.8/D1.8M-2016 Structural Welding Code—Seismic Suppleme
+  std_aws_qc1                                                   AWS QC1-2016 Specification for AWS Certification of Welding 
+  std_calgreen                                                  California Green Building Standards Code (CALGreen)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_aci_318                                                   Standard: ACI 318-14 Building Code Requirements for Structur
+  std_aci_506_2                                                 ACI 506.2-13 [DSA-SS, DSA-SS/CC] Guide to Shotcrete
+  std_aci_550_5                                                 ACI 550.5-18 Code Requirements for the Design of Precast Con
+  std_aisc_341                                                  AISC 341
+  std_aisc_358                                                  ANSI/AISC 358-16/s1-18 Prequalified Connections for Special 
+  std_aisc_358_dsa                                              ANSI/AISC 358-16/s1-18/s2-20 [DSA-SS, DSA-SS/CC] Prequalifie
+  std_aisc_360                                                  AISC 360 Specification for Structural Steel Buildings
+  std_astm_a252                                                 ASTM A252
+  std_astm_a36                                                  ASTM A36
+  std_astm_a416                                                 ASTM A416
+  std_astm_a572                                                 ASTM A572
+  std_astm_a588                                                 ASTM A588
+  std_astm_a6                                                   ASTM A6
+  std_astm_c172                                                 ASTM C172/C172M-2017 Practice for Sampling Freshly Mixed Con
+  std_astm_c31                                                  ASTM C31/C31M-2018B Practice for Making and Curing Concrete 
+  std_astm_c94                                                  ASTM C94 (Standard Specification for Ready-Mixed Concrete)
+  std_astm_e2174                                                ASTM E2174-2018 Standard Practice for On-site Inspection of 
+  std_astm_e2393                                                ASTM E2393-10a(2015) Standard Practice for On-site Inspectio
+  std_astm_e2570                                                ASTM E2570/E2570M-07(2014)e1 Standard Test Method for Evalua
+  std_astm_e605                                                 ASTM E605/E605M-93(2015)e1 Test Method for Thickness and Den
+  std_astm_e736                                                 ASTM E736
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_110_3>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 17A Special Inspections And Tests",
+  "community_id": 6,
+  "extracted_from_sections": ["ch16_chapter_16_structural_design.md", "ch17a_chapter_17a_special_inspections_and_tests.md", "ch18_chapter_18_soils_and_foundations.md", "ch18a_chapter_18a_soils_and_foundations.md", "ch1_chapter_1_scope_and_administration.md", "ch31f_chapter_31f_slc_marine_oil_terminals.md", "ch35_chapter_35_referenced_standards.md", "ch7_chapter_7_fire_and_smoke_protection_features.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-30 rules. After writing the file, just confirm "wrote c06_chapter_17a_special_inspections_and_tests_rules.json with N rules" and stop.

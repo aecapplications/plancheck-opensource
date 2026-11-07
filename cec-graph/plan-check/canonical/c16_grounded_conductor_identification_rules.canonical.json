@@ -1,0 +1,2333 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Grounded Conductor Identification",
+  "community_id": 16,
+  "extracted_from_sections": [
+    "03_chapter_1_general.txt",
+    "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+    "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt",
+    "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt",
+    "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt",
+    "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_110_21",
+      "cite": "110.21",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_110_21",
+      "title": "Mark all electrical equipment with manufacturer identification and durable required ratings",
+      "intent": "Ensure every piece of electrical equipment is traceable to a responsible organization and that ratings and hazard labels survive the installed environment.",
+      "applies_when": [
+        {
+          "predicate": "is_electrical_equipment"
+        }
+      ],
+      "requires": {
+        "type": "equipment_marking",
+        "manufacturer_name_trademark_or_descriptive_marking_present": true,
+        "voltage_current_wattage_or_other_ratings_marked_where_required": true,
+        "marking_durable_for_environment": true,
+        "field_applied_hazard_labels_permanently_affixed_and_not_handwritten": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_reconditioned_equipment_in_industrial_occupancy"
+            },
+            {
+              "predicate": "maintenance_supervision_ensures_qualified_persons_only"
+            },
+            {
+              "predicate": "reconditioned_by_owner_or_operator_as_part_of_regular_maintenance_program"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Equipment schedules showing manufacturer and model for all electrical equipment",
+        "Listing labels or nameplate photos showing manufacturer identification and ratings",
+        "Specifications for field-applied caution/warning/danger labels (durability, non-handwritten)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26",
+      "cite": "110.26",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_26",
+      "title": "Provide and maintain working space about electrical equipment",
+      "intent": "Guarantee ready and safe access for operation and maintenance of energized equipment.",
+      "applies_when": [
+        {
+          "predicate": "equipment_voltage_to_ground_<=_1000v"
+        },
+        {
+          "predicate": "likely_to_require_examination_adjustment_servicing_or_maintenance_while_energized"
+        }
+      ],
+      "requires": {
+        "type": "working_space",
+        "depth_per_table_110_26_a_1_min_3ft": true,
+        "width_>=_30in_or_equipment_width": true,
+        "height_>=_6.5ft_or_equipment_height": true,
+        "doors_open_>=_90_degrees": true,
+        "working_space_not_used_for_storage": true,
+        "entrance_and_egress_provided": true,
+        "illumination_provided_for_indoor_service_equipment_workspaces": true,
+        "dedicated_equipment_space_to_6ft_above_equipment_or_structural_ceiling": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "dead_front_assembly_with_all_connections_accessible_from_other_than_back_or_sides"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "special_permission_granted"
+            },
+            {
+              "predicate": "exposed_live_parts_<=_30v_rms_42v_peak_or_60v_dc"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Electrical room plans with dimensioned working clearances at panelboards, switchboards, and MCCs",
+        "Elevations showing 6.5 ft headroom and dedicated equipment space",
+        "Reflected ceiling / lighting plan showing workspace illumination",
+        "Door swing and egress details for rooms with equipment rated 800 A or more"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_6",
+      "cite": "200.6",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6",
+      "title": "Identify grounded conductors by an approved means, including by system where systems are mixed",
+      "intent": "Prevent misconnection of grounded (neutral) conductors by requiring consistent, distinguishable identification.",
+      "applies_when": [
+        {
+          "predicate": "circuit_has_grounded_conductor"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "identification_per_200_6_a_for_6_awg_or_smaller": true,
+        "identification_per_200_6_b_for_4_awg_or_larger": true,
+        "flexible_cord_grounded_conductor_white_or_gray_or_per_400_22": true,
+        "grounded_conductors_of_different_systems_identified_by_system": true,
+        "means_of_identification_documented_or_permanently_posted_where_systems_originate": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor schedule or one-line diagram noting grounded conductor color coding by system",
+        "Panelboard identification posting or documentation of neutral identification method",
+        "Cable and conductor specifications showing insulation colors"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_6_a",
+      "cite": "200.6(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a",
+      "title": "Identify insulated grounded conductors 6 AWG or smaller by a listed means",
+      "intent": "Small grounded conductors must be identifiable along their entire length so they are never mistaken for ungrounded conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_insulated_grounded_conductor"
+        },
+        {
+          "predicate": "conductor_size_<=_6_awg"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "any_of": [
+          "continuous_white_outer_finish",
+          "continuous_gray_outer_finish",
+          "three_continuous_white_or_gray_stripes_on_other_than_green_insulation",
+          "white_or_gray_finish_with_colored_tracer_threads_in_braid",
+          "pv_single_conductor_cable_marked_at_terminations_per_200_6_a_1_through_a_4",
+          "type_mi_cable_distinctive_marking_at_terminations",
+          "fixture_wire_per_402_8",
+          "aerial_cable_ridge_on_exterior_or_methods_a_1_through_a_5"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wire and cable specifications listing insulation color for grounded conductors",
+        "Panel schedules or details indicating white/gray neutral identification",
+        "For MI cable or PV cable, termination marking details"
+      ],
+      "depends_on": [
+        "cec_402_8",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_690_41"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_6_a_1",
+      "cite": "200.6(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a_1",
+      "title": "Permit continuous white outer finish as grounded conductor identification",
+      "intent": "Establish the continuous white outer finish as the primary identification means for small grounded conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_insulated_grounded_conductor"
+        },
+        {
+          "predicate": "conductor_size_<=_6_awg"
+        },
+        {
+          "predicate": "identification_means_is_white_outer_finish"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "outer_finish_continuous_white_along_entire_length": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor specification showing continuous white insulation for neutrals",
+        "Field inspection photos of installed grounded conductors"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_6_b",
+      "cite": "200.6(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_b",
+      "title": "Identify insulated grounded conductors 4 AWG or larger by finish, stripes, or encircling termination marking",
+      "intent": "Large grounded conductors may be re-identified at terminations, but the marking must fully encircle the conductor.",
+      "applies_when": [
+        {
+          "predicate": "is_insulated_grounded_conductor"
+        },
+        {
+          "predicate": "conductor_size_>=_4_awg"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "any_of": [
+          "continuous_white_outer_finish",
+          "continuous_gray_outer_finish",
+          "three_continuous_white_or_gray_stripes_on_other_than_green_insulation",
+          "distinctive_white_or_gray_marking_at_terminations_encircling_conductor_at_installation"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder conductor schedule showing neutral identification method",
+        "Termination marking detail (tape/marking encircling conductor) for large neutrals"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_7",
+      "cite": "200.7",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_7",
+      "title": "Reserve white, gray, or triple-striped insulation for grounded conductors only",
+      "intent": "Prevent shock and miswiring by prohibiting use of grounded-conductor colors on ungrounded conductors except under controlled reidentification conditions.",
+      "applies_when": [
+        {
+          "predicate": "conductor_has_white_or_gray_covering_or_three_white_or_gray_stripes_or_white_gray_termination_marking"
+        }
+      ],
+      "requires": {
+        "type": "conductor_use_restriction",
+        "used_only_for_grounded_circuit_conductor": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "circuit_voltage_<_50v"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "circuit_voltage_>=_50v"
+            },
+            {
+              "predicate": "conductor_part_of_cable_assembly"
+            },
+            {
+              "predicate": "insulation_permanently_reidentified_at_terminations_and_visible_accessible_points_with_color_other_than_white_gray_green"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "is_flexible_cord_conductor"
+            },
+            {
+              "predicate": "used_for_connecting_appliance_or_equipment_permitted_by_400_10"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Wiring legend showing color coding by conductor function",
+        "Details for reidentified cable-assembly conductors used in switch loops",
+        "Inspection notes confirming white/gray used only as grounded conductors"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_12",
+      "cite": "210.12",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_12",
+      "title": "Provide readily accessible AFCI protection for dwelling, dormitory, and guest-room 120 V branch circuits",
+      "intent": "Reduce fire risk from arcing faults on 15 A and 20 A, 120 V branch circuits in sleeping and living areas.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_voltage_=_120v"
+        },
+        {
+          "predicate": "branch_circuit_single_phase"
+        },
+        {
+          "predicate": "branch_circuit_rating_15a_or_20a"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "supplies_dwelling_unit_habitable_room_kitchen_laundry_closet_or_hallway"
+            },
+            {
+              "predicate": "supplies_dormitory_unit_room"
+            },
+            {
+              "predicate": "supplies_hotel_motel_guest_room_or_nursing_home_patient_sleeping_room"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "afci_protection",
+        "protected_by_one_of_means_210_12_a_1_through_6": true,
+        "arc_fault_circuit_interrupter_readily_accessible": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "individual_branch_circuit_supplies_fire_alarm_system_per_760_41_b_or_760_121_b"
+            },
+            {
+              "predicate": "circuit_in_metal_raceway_or_steel_armored_cable_with_metal_boxes"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedules identifying AFCI-protected branch circuits",
+        "Floor plans mapping outlets in AFCI-required rooms to protected circuits",
+        "AFCI device listing/type (combination-type, branch/feeder + outlet type, etc.)",
+        "Fire alarm branch circuit wiring method detail where the exception is used"
+      ],
+      "depends_on": [
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_41",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_121"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_5",
+      "cite": "210.5",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5",
+      "title": "Identify branch-circuit grounded and equipment grounding conductors",
+      "intent": "Carry Article 200 and 250.119 identification requirements into every branch circuit.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "grounded_conductor_identified_per_200_6": true,
+        "equipment_grounding_conductor_identified_per_250_119": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Branch circuit conductor legend (neutral white/gray, EGC green or bare)",
+        "Panel schedule cross-referencing circuit conductor identification"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_5_c",
+      "cite": "210.5(C)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c",
+      "title": "Identify ungrounded branch-circuit conductors per system type",
+      "intent": "Route each ungrounded conductor identification requirement to the correct subsection for ac multi-voltage or dc systems.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        },
+        {
+          "predicate": "conductor_is_ungrounded"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "any_of": [
+          "identified_per_210_5_c_1_where_more_than_one_nominal_voltage_system",
+          "identified_per_210_5_c_2_where_supplied_from_dc_system"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line diagram showing all nominal voltage systems on the premises",
+        "Conductor color-code schedule by system"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_5_c_1",
+      "cite": "210.5(C)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_1",
+      "title": "Identify ungrounded conductors by phase and voltage class where multiple nominal voltage systems exist",
+      "intent": "Prevent cross-system wiring errors by marking every termination, connection, and splice point and posting the method at each panelboard.",
+      "applies_when": [
+        {
+          "predicate": "premises_has_branch_circuits_from_more_than_one_nominal_voltage_system"
+        },
+        {
+          "predicate": "conductor_is_ungrounded"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "identified_by_phase_or_line_and_system_voltage_class": true,
+        "identified_at_all_termination_connection_and_splice_points": true,
+        "means_permitted": [
+          "separate_color_coding",
+          "marking_tape",
+          "tagging",
+          "other_approved_means"
+        ],
+        "method_documented_readily_available_or_permanently_posted_at_each_panelboard": true,
+        "label_durable_and_not_handwritten": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "existing_installation_with_existing_voltage_system"
+            },
+            {
+              "predicate": "different_voltage_system_being_added"
+            },
+            {
+              "predicate": "new_system_label_includes_other_unidentified_systems_exist_on_premises"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Color-code schedule by phase and voltage class on drawings",
+        "Panelboard label detail showing posted identification method",
+        "Splice/termination marking specification"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_5_c_2",
+      "cite": "210.5(C)(2)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_2",
+      "title": "Identify dc branch-circuit ungrounded conductors by polarity (red positive, black negative)",
+      "intent": "Ensure dc polarity is unambiguous at every termination on systems over 60 volts.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_supplied_from_dc_system"
+        },
+        {
+          "predicate": "dc_system_voltage_>_60v"
+        },
+        {
+          "predicate": "conductor_is_ungrounded"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "identified_by_polarity_at_all_termination_connection_and_splice_points": true,
+        "conductor_size_<=_6_awg_positive_means": [
+          "continuous_red_outer_finish",
+          "continuous_red_stripe_on_non_green_white_gray_black_insulation",
+          "imprinted_plus_or_positive_repeated_<=_610mm_intervals_per_310_8_b",
+          "approved_sleeving_or_shrink_tubing_with_plus_or_positive"
+        ],
+        "conductor_size_<=_6_awg_negative_means": [
+          "continuous_black_outer_finish",
+          "continuous_black_stripe_on_non_green_white_gray_red_insulation",
+          "imprinted_minus_or_negative_repeated_<=_610mm_intervals_per_310_8_b",
+          "approved_sleeving_or_shrink_tubing_with_minus_or_negative"
+        ],
+        "conductor_size_>=_4_awg_marking_tape_tagging_or_approved_means": true,
+        "identification_method_documented_or_posted_at_each_panelboard": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "DC one-line diagram with polarity color code legend",
+        "Panelboard posting or documentation of dc identification method",
+        "Conductor marking specification (red/black finish, stripes, or imprint intervals)"
+      ],
+      "depends_on": [
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8",
+      "cite": "210.8",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8",
+      "title": "Install required GFCI protection in readily accessible locations",
+      "intent": "Provide personnel shock protection wherever 210.8(A) through (F) require it, with devices that can be reset without tools or ladders.",
+      "applies_when": [
+        {
+          "predicate": "location_or_equipment_listed_in_210_8_a_through_f"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_installed_in_readily_accessible_location": true,
+        "receptacle_distance_measured_as_shortest_cord_path_without_piercing_floor_wall_ceiling_or_barrier": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans locating GFCI devices (breaker or receptacle) and demonstrating ready accessibility",
+        "Panel schedules flagging GFCI-protected circuits",
+        "Dimensioned plans showing sink/tub distances used to trigger GFCI requirements"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_b_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8_a",
+      "cite": "210.8(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a",
+      "title": "GFCI-protect dwelling unit 125-250 V receptacles in specified locations",
+      "intent": "Protect occupants from ground faults at receptacles in wet, damp, grade-level, and service locations of dwellings.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit_receptacle"
+        },
+        {
+          "predicate": "receptacle_rating_125v_through_250v"
+        },
+        {
+          "predicate": "single_phase_branch_circuit_rated_<=_150v_to_ground"
+        },
+        {
+          "predicate": "location_listed_in_210_8_a_1_through_a_11"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_protection_for_personnel_provided": true,
+        "locations": [
+          "bathrooms",
+          "garages_and_grade_level_accessory_buildings",
+          "outdoors",
+          "crawl_spaces_at_or_below_grade",
+          "basements",
+          "kitchen_countertop_receptacles",
+          "sinks_within_6ft",
+          "boathouses",
+          "bathtubs_or_showers_within_6ft",
+          "laundry_areas",
+          "indoor_damp_and_wet_locations"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "listed_locking_support_and_mounting_receptacle_for_ceiling_luminaire_or_fan"
+            },
+            {
+              "predicate": "no_general_purpose_convenience_receptacle_integral_to_fixture"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Dwelling floor plans with receptacles keyed to GFCI protection in each listed location",
+        "Panel schedule showing GFCI breakers or device schedule showing GFCI receptacles",
+        "Kitchen/bath elevations showing countertop and sink receptacle locations"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8_a_1",
+      "cite": "210.8(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_1",
+      "title": "GFCI-protect dwelling bathroom receptacles",
+      "intent": "Bathrooms present the highest shock exposure in dwellings; every qualifying receptacle there must be GFCI protected.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit_receptacle"
+        },
+        {
+          "predicate": "receptacle_rating_125v_through_250v"
+        },
+        {
+          "predicate": "single_phase_branch_circuit_rated_<=_150v_to_ground"
+        },
+        {
+          "predicate": "in_bathroom"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_protection_for_personnel_provided": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "listed_locking_support_and_mounting_receptacle_for_ceiling_luminaire_or_fan"
+            },
+            {
+              "predicate": "no_general_purpose_convenience_receptacle_integral_to_fixture"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Bathroom plans/elevations showing receptacle locations",
+        "Device or panel schedule showing GFCI protection for bathroom receptacle circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8_a_3",
+      "cite": "210.8(A)(3)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_3",
+      "title": "GFCI-protect dwelling outdoor receptacles",
+      "intent": "Outdoor receptacles are exposed to wet conditions and must have personnel GFCI protection, with a narrow allowance for dedicated de-icing circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit_receptacle"
+        },
+        {
+          "predicate": "receptacle_rating_125v_through_250v"
+        },
+        {
+          "predicate": "single_phase_branch_circuit_rated_<=_150v_to_ground"
+        },
+        {
+          "predicate": "installed_outdoors"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_protection_for_personnel_provided": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_not_readily_accessible"
+            },
+            {
+              "predicate": "branch_circuit_dedicated_to_snow_melting_deicing_or_pipeline_vessel_heating"
+            },
+            {
+              "predicate": "installed_per_426_28_or_427_22"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Site/exterior elevation plans locating outdoor receptacles",
+        "GFCI device or breaker schedule for outdoor circuits",
+        "For de-icing exception: dedicated circuit identification and 426.28 GFPE documentation"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_426_28"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8_a_5",
+      "cite": "210.8(A)(5)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_5",
+      "title": "GFCI-protect dwelling basement receptacles",
+      "intent": "Basements are at or below grade and often damp; receptacles there require GFCI protection except a dedicated alarm-system receptacle.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit_receptacle"
+        },
+        {
+          "predicate": "receptacle_rating_125v_through_250v"
+        },
+        {
+          "predicate": "single_phase_branch_circuit_rated_<=_150v_to_ground"
+        },
+        {
+          "predicate": "in_basement"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_protection_for_personnel_provided": true,
+        "alarm_exception_receptacle_not_counted_toward_210_52_g_required_receptacles": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_supplies_only_permanently_installed_fire_alarm_or_burglar_alarm_system"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Basement floor plan with receptacle circuits and GFCI devices",
+        "Fire/burglar alarm power connection detail where the exception is used",
+        "Confirmation that a separate 210.52(G) receptacle is provided when the exception receptacle is used"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_41",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_121"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_8_b_1",
+      "cite": "210.8(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_b_1",
+      "title": "GFCI-protect bathroom receptacles in other than dwelling units",
+      "intent": "Extend bathroom GFCI protection to commercial and institutional occupancies for qualifying receptacle ratings.",
+      "applies_when": [
+        {
+          "predicate": "occupancy_other_than_dwelling_unit"
+        },
+        {
+          "predicate": "in_bathroom"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "receptacle_rating_125v_through_250v"
+                },
+                {
+                  "predicate": "single_phase_branch_circuit_rated_<=_150v_to_ground"
+                },
+                {
+                  "predicate": "branch_circuit_rating_<=_50a"
+                }
+              ]
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "three_phase_branch_circuit_rated_<=_150v_to_ground"
+                },
+                {
+                  "predicate": "branch_circuit_rating_<=_100a"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_protection_for_personnel_provided": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "listed_locking_support_and_mounting_receptacle_for_ceiling_luminaire_or_fan"
+            },
+            {
+              "predicate": "no_general_purpose_convenience_receptacle_integral_to_fixture"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Non-dwelling bathroom plans with receptacle circuits identified",
+        "Panel schedule showing GFCI protection for those circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_12",
+      "cite": "215.12",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_12",
+      "title": "Identify feeder grounded, grounding, and ungrounded conductors",
+      "intent": "Apply the same identification discipline to feeders as to branch circuits, including multi-voltage-system and dc polarity marking.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "insulated_grounded_conductor_identified_per_200_6": true,
+        "equipment_grounding_conductor_identified_per_250_119": true,
+        "ungrounded_conductors_identified_per_215_12_c_1_or_c_2": true,
+        "identification_method_documented_or_permanently_posted_at_each_feeder_panelboard": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder schedule and one-line diagram with conductor identification legend",
+        "Feeder panelboard posting/documentation of identification method",
+        "For dc feeders over 60 V, polarity marking specification"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_9",
+      "cite": "215.9",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_9",
+      "title": "Permit feeder-level GFCI in lieu of downstream GFCI provisions",
+      "intent": "Allow a single readily accessible feeder GFCI to satisfy branch-circuit and temporary-wiring GFCI requirements it supplies.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "downstream_circuits_require_gfci_per_210_8_or_590_6_a"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "feeder_gfci_permitted_in_lieu_of_downstream_gfci": true,
+        "feeder_gfci_installed_in_readily_accessible_location": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line diagram showing feeder GFCI device location",
+        "Documentation mapping which 210.8/590.6(A) requirements are satisfied by the feeder GFCI"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_590_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_29_6",
+      "cite": "29.6",
+      "section_node": "cec_29_6",
+      "title": "Scope: NFPA 72 29.6.3(5) secondary power-supply provisions for dwelling smoke alarms",
+      "intent": "Flag that smoke alarms in dwelling units have secondary power-supply requirements in NFPA 72 that interact with AFCI-protected circuits under 210.12.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "smoke_alarms_installed"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "coordinate_smoke_alarm_secondary_power_supply_with_nfpa_72_29_6_3_5": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Smoke alarm power supply detail (primary branch circuit and battery/secondary supply)",
+        "Fire alarm/smoke alarm submittal referencing NFPA 72 compliance"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_12"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_300_1",
+      "cite": "300.1",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1",
+      "title": "Scope: raceway metric designators and trade sizes are identification only",
+      "intent": "Clarify that conduit/tubing size limits in Chapter 3 articles are expressed by metric designator and trade size per 300.1(C), which do not represent actual dimensions.",
+      "applies_when": [
+        {
+          "predicate": "raceway_size_specified_by_metric_designator_or_trade_size"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "interpret_sizes_per_300_1_c_identification_only": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule using standard trade sizes/metric designators",
+        "Raceway fill calculations referencing the designated sizes"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_300_22",
+      "cite": "300.22",
+      "section_node": "03_chapter_1_general_300_22",
+      "title": "Restrict wiring in ducts, plenums, and other air-handling spaces to methods complying with 300.22",
+      "intent": "Limit combustible wiring materials in air-handling spaces so smoke and fire are not distributed through the air system.",
+      "applies_when": [
+        {
+          "predicate": "wiring_installed_in_duct_plenum_or_other_space_used_for_environmental_air"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "wiring_method_listed_for_air_handling_application_or_installed_per_300_22": true,
+        "nonmetallic_cable_ties_and_accessories_in_plenums_listed_low_smoke_and_heat_release": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mechanical/electrical coordination plans identifying plenums and fabricated ducts",
+        "Wiring method and cable listing documentation for plenum spaces",
+        "Support-accessory (cable tie) listing data for plenum installations"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_8",
+      "cite": "310.8",
+      "section_node": "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8",
+      "title": "Mark conductors and cables in accordance with 310.8",
+      "intent": "Conductor surface marking per 310.8 is the anchor for identifying cable type, size, and ratings, including enclosed conductors of prewired assemblies.",
+      "applies_when": [
+        {
+          "predicate": "is_conductor_or_cable_installed_as_wiring_method"
+        }
+      ],
+      "requires": {
+        "type": "conductor_marking",
+        "cables_marked_per_310_8": true,
+        "enclosed_conductors_of_prewired_assemblies_marked_per_310_8": true,
+        "dc_polarity_imprint_intervals_per_310_8_b_where_used": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable cut sheets showing surface marking (type, size, temperature rating)",
+        "Prewired assembly tags/labels identifying enclosed conductors",
+        "Field photos of installed cable markings"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_342_20",
+      "cite": "342.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_342_20",
+      "title": "Limit IMC to trade sizes 1/2 through 4",
+      "intent": "Keep intermediate metal conduit within the sizes for which it is manufactured and listed.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_imc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_103_trade_size_4": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing IMC sizes",
+        "Raceway fill calculations for each IMC run"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_348_12",
+      "cite": "348.12",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_12",
+      "title": "Prohibit FMC in wet locations, hoistways, battery rooms, and other listed conditions",
+      "intent": "Flexible metal conduit lacks liquidtight and physical-damage protection and is barred from the seven listed conditions.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_fmc"
+        }
+      ],
+      "requires": {
+        "type": "use_restriction",
+        "not_in_wet_locations": true,
+        "not_in_hoistways_except_per_620_21_a_1": true,
+        "not_in_storage_battery_rooms": true,
+        "not_in_hazardous_locations_unless_permitted_by_other_articles": true,
+        "not_where_exposed_to_deteriorating_materials_such_as_oil_or_gasoline": true,
+        "not_underground_or_embedded_in_poured_concrete_or_aggregate": true,
+        "not_where_subject_to_physical_damage": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method schedule keyed to location types (wet/dry, hazardous, underground)",
+        "Elevator hoistway wiring details where FMC is used per 620.21(A)(1)",
+        "Site plan confirming no FMC in underground or embedded runs"
+      ],
+      "depends_on": [
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_348_20",
+      "cite": "348.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_20",
+      "title": "Limit FMC to trade sizes 1/2 through 4, with 3/8 permitted only for listed short applications",
+      "intent": "Restrict undersized flexible metal conduit to controlled short-length uses such as motor leads and luminaire taps.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_fmc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_103_trade_size_4": true,
+        "trade_size_3_8_permitted_only_for": [
+          "motor_leads_per_430_245_b",
+          "lengths_<=_1.8m_for_utilization_equipment_listed_assembly_or_luminaire_taps_per_410_117_c",
+          "manufactured_wiring_systems_per_604_100_a",
+          "hoistways_per_620_21_a_1",
+          "listed_assembly_connecting_wired_luminaire_sections_per_410_137_c"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing FMC sizes",
+        "Details for any 3/8 trade size FMC showing qualifying application and length limit",
+        "Luminaire tap connection details"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_430_245",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_137",
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_348_30",
+      "cite": "348.30",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_30",
+      "title": "Secure FMC within 12 in. of terminations and support at intervals not exceeding 4.5 ft",
+      "intent": "Keep flexible metal conduit mechanically supported so terminations and conductors are not stressed.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_fmc"
+        }
+      ],
+      "requires": {
+        "type": "securing_and_supporting",
+        "secured_within_300mm_12in_of_each_box_cabinet_conduit_body_or_termination": true,
+        "supported_at_intervals_<=_1.4m_4_5ft": true,
+        "cable_ties_listed_and_identified_for_securement_and_support": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "fished_between_access_points_in_concealed_finished_spaces"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "flexibility_necessary_after_installation"
+            },
+            {
+              "predicate": "unsecured_length_within_348_30_a_exception_2_limits_3ft_to_5ft_by_size"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "luminaire_tap_length_<=_1.8m_per_410_117_c"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "length_<=_1.8m_within_accessible_ceiling_to_luminaire_or_equipment"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Installation details showing FMC strap spacing and distances to boxes",
+        "Support hardware specifications (listed cable ties or straps)",
+        "Ceiling-space luminaire whip details where exceptions apply"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_350_20",
+      "cite": "350.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_350_20",
+      "title": "Limit LFMC to trade sizes 1/2 through 4, with 3/8 only as covered in 348.20(A)",
+      "intent": "Restrict liquidtight flexible metal conduit sizes to those manufactured and listed, mirroring FMC small-size allowances.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfmc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_103_trade_size_4": true,
+        "trade_size_3_8_permitted_only_as_covered_in_348_20_a": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing LFMC sizes",
+        "Details for any 3/8 LFMC showing qualifying 348.20(A) application"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_352_10",
+      "cite": "352.10",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_10",
+      "title": "Use PVC conduit only in the locations permitted by 352.10(A) through (I)",
+      "intent": "Confine rigid PVC conduit to concealed, corrosive, wet, damp, exposed-identified, and underground applications for which it is suited.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_pvc_conduit"
+        }
+      ],
+      "requires": {
+        "type": "use_permission",
+        "location_within_352_10_a_through_i": [
+          "concealed_in_walls_floors_ceilings",
+          "corrosive_influences_per_300_6",
+          "cinder_fill",
+          "wet_locations_arranged_to_prevent_water_entry",
+          "dry_and_damp_locations",
+          "exposed_work_identified_where_subject_to_physical_damage",
+          "underground_direct_burial_or_concrete_encased_per_300_5_and_300_50",
+          "support_of_conduit_bodies",
+          "insulation_temperature_within_listed_rating"
+        ],
+        "supports_bolts_straps_screws_corrosion_resistant_in_wet_locations": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method schedule mapping PVC use to permitted locations",
+        "Underground raceway plan and burial depth details",
+        "Schedule 80 or identified PVC specification where exposed to physical damage"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_352_20",
+      "cite": "352.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_20",
+      "title": "Limit PVC conduit to trade sizes 1/2 through 6",
+      "intent": "Keep rigid PVC conduit within manufactured/listed size range.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_pvc_conduit"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_155_trade_size_6": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing PVC sizes",
+        "Raceway fill calculations for PVC runs"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_353_20",
+      "cite": "353.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_353_20",
+      "title": "Limit HDPE conduit to trade sizes 1/2 through 6",
+      "intent": "Keep high density polyethylene conduit within manufactured/listed size range.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_hdpe_conduit"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_155_trade_size_6": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing HDPE sizes",
+        "Underground duct bank details for HDPE runs"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_354_120",
+      "cite": "354.120",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_354_120",
+      "title": "Mark NUCC every 10 ft per 110.21 and identify enclosed conductors per 310.8",
+      "intent": "Ensure the factory conductor-in-conduit assembly and its enclosed conductors remain identifiable after installation.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_nucc"
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "marked_at_least_every_3_05m_10ft_per_110_21": true,
+        "conduit_material_type_included_in_marking": true,
+        "conductor_or_cable_identification_tag_on_each_assembly_end_or_reel": true,
+        "enclosed_conductors_marked_per_310_8": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "NUCC product cut sheet showing marking intervals and content",
+        "Assembly end/reel tag identifying enclosed conductors",
+        "Field verification photos of installed markings"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_110_21",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_354_20",
+      "cite": "354.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_354_20",
+      "title": "Limit NUCC to trade sizes 1/2 through 4",
+      "intent": "Keep nonmetallic underground conduit with conductors within manufactured/listed size range.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_nucc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_103_trade_size_4": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Underground conduit schedule showing NUCC sizes",
+        "Bending radius verification per Table 354.24"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_355_20",
+      "cite": "355.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_20",
+      "title": "Limit RTRC to trade sizes 1/2 through 6",
+      "intent": "Keep reinforced thermosetting resin conduit within manufactured/listed size range.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_rtrc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_155_trade_size_6": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing RTRC sizes",
+        "RTRC listing data (e.g., Type XW where exposed to damage)"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_356_120",
+      "cite": "356.120",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_120",
+      "title": "Mark LFNC every 2 ft with type designation and trade size per 110.21",
+      "intent": "Keep liquidtight flexible nonmetallic conduit identifiable by type (LFNC-A/B/C), size, and suitability, including prewired assemblies.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfnc"
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "marked_at_least_every_600mm_2ft_per_110_21": true,
+        "marking_includes_type_designation_per_356_2_and_trade_size": true,
+        "outdoor_or_direct_burial_conduit_so_marked": true,
+        "prewired_assembly_conductors_identified_by_tag_at_each_end": true,
+        "enclosed_conductors_marked_per_310_8": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "LFNC product cut sheet with marking content and interval",
+        "Direct burial/outdoor marking verification",
+        "Prewired assembly tag detail"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_110_21",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_2",
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_356_2",
+      "cite": "356.2",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_2",
+      "title": "Scope: LFNC type designations (LFNC-A, LFNC-B, LFNC-C)",
+      "intent": "Definitional scope rule: LFNC construction types determine allowable applications and lengths cited in Articles 356 and 620.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfnc"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "conduit_construction_matches_designated_type": [
+          "lfnc_a_bonded_core_and_cover_with_reinforcement_layers",
+          "lfnc_b_smooth_inner_surface_integral_reinforcement",
+          "lfnc_c_corrugated_without_integral_reinforcement"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "LFNC product data identifying type designation",
+        "Elevator/escalator details where LFNC-B lengths over 6 ft rely on 356.2(2)"
+      ],
+      "depends_on": [
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_356_20",
+      "cite": "356.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_20",
+      "title": "Limit LFNC to trade sizes 1/2 through 4, with 3/8 only for motor leads or short luminaire/equipment taps",
+      "intent": "Restrict undersized LFNC to controlled applications with length limits.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfnc"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_103_trade_size_4": true,
+        "trade_size_3_8_permitted_only_for": [
+          "motor_leads_per_430_245_b",
+          "lengths_<=_1.8m_listed_assembly_luminaire_taps_per_410_117_c_or_utilization_equipment"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing LFNC sizes",
+        "Details for 3/8 LFNC applications with length verification"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_430_245",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_360_20",
+      "cite": "360.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_360_20",
+      "title": "Limit FMT to trade sizes 1/2 through 3/4, with 3/8 only per 300.22(B)/(C) or short luminaire assemblies",
+      "intent": "Flexible metallic tubing is a small, limited-use raceway; sizes outside 1/2 to 3/4 are barred except narrow allowances.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_fmt"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_21_trade_size_3_4": true,
+        "trade_size_3_8_permitted_only_for": [
+          "installations_per_300_22_b_and_c",
+          "lengths_<=_1.8m_as_part_of_listed_assembly_or_for_luminaires_per_410_117_c"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing FMT sizes",
+        "Air-handling space wiring details where 3/8 FMT is used per 300.22(B)/(C)",
+        "Luminaire whip length verification for 3/8 FMT"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_300_22",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_362_20",
+      "cite": "362.20",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_362_20",
+      "title": "Limit ENT to trade sizes 1/2 through 2 1/2",
+      "intent": "Keep electrical nonmetallic tubing within manufactured/listed size range.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_ent"
+        }
+      ],
+      "requires": {
+        "type": "raceway_size",
+        "min_metric_designator_16_trade_size_1_2": true,
+        "max_metric_designator_63_trade_size_2_1_2": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conduit schedule showing ENT sizes",
+        "Building height/thermal barrier documentation supporting ENT use per 362.10"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_402_8",
+      "cite": "402.8",
+      "section_node": "cec_402_8",
+      "title": "Identify grounded fixture wire per 402.8",
+      "intent": "Fixture wires used as grounded conductors must carry the Article 402 identification so the grounded conductor is distinguishable within luminaire wiring.",
+      "applies_when": [
+        {
+          "predicate": "is_fixture_wire"
+        },
+        {
+          "predicate": "conductor_is_grounded_conductor"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "fixture_wire_grounded_conductor_identified_per_402_8": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire wiring diagrams showing grounded fixture wire identification",
+        "Fixture wire specifications (type and identification means)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_117",
+      "cite": "410.117",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117",
+      "title": "Limit luminaire tap connections in small flexible raceways to 6 ft per 410.117(C)",
+      "intent": "Luminaire tap conductors run in 3/8 flexible conduit or as listed assemblies must be kept short and are the only basis for reduced securing/support.",
+      "applies_when": [
+        {
+          "predicate": "conductors_are_tap_connections_to_luminaires"
+        },
+        {
+          "predicate": "installed_in_trade_size_3_8_flexible_conduit_or_listed_assembly"
+        }
+      ],
+      "requires": {
+        "type": "luminaire_tap",
+        "length_<=_1.8m_6ft": true,
+        "installed_per_410_117_c": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire whip/tap details showing length not exceeding 6 ft",
+        "Listed assembly documentation for prefabricated luminaire whips"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_20",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_137",
+      "cite": "410.137",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_137",
+      "title": "Scope: auxiliary equipment limitations for electric-discharge and LED lamps per 410.137",
+      "intent": "Flag that ballasts, drivers, and other auxiliary lamp equipment on branch circuits permitted by 210.6 are further limited by 410.137.",
+      "applies_when": [
+        {
+          "predicate": "circuit_supplies_auxiliary_equipment_of_electric_discharge_or_led_lamps"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "auxiliary_equipment_complies_with_410_137_limitations": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire and ballast/driver schedule with voltage ratings",
+        "Branch-circuit voltage documentation per 210.6"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_410_90",
+      "cite": "410.90",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_90",
+      "title": "Scope: connect screw shell lampholders to grounded conductors per 410.90",
+      "intent": "Screw shell lampholders on circuits with a grounded conductor must have the screw shell connected to the grounded conductor, protecting persons relamping.",
+      "applies_when": [
+        {
+          "predicate": "luminaire_uses_screw_shell_lampholder"
+        },
+        {
+          "predicate": "circuit_has_grounded_conductor"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "screw_shell_lampholder_connection_to_grounded_conductor_per_410_90": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire wiring diagrams showing screw shell connected to grounded conductor",
+        "Lampholder terminal identification per 200.10(C)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_422_5",
+      "cite": "422.5",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5",
+      "title": "GFCI-protect outlets supplying appliances specified in 422.5(A)",
+      "intent": "Appliances identified in 422.5(A) must have GFCI protection from either the appliance side (422.5(B)(3)-(B)(5)) or the outlet/branch-circuit side (422.5(B)(1) or (B)(2)).",
+      "applies_when": [
+        {
+          "predicate": "outlet_supplies_appliance_specified_in_422_5_a"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "any_of": [
+          "gfci_provided_per_422_5_b_3_through_b_5",
+          "outlet_gfci_per_422_5_b_1_or_b_2"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance schedule identifying 422.5(A) appliances",
+        "Panel schedule or device schedule showing GFCI protection for those outlets",
+        "Appliance listing data where appliance-integral GFCI (422.5(B)(3)-(B)(5)) is relied upon"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_5_a",
+      "cite": "422.5(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_a",
+      "title": "Scope: appliances specified in 422.5(A) trigger GFCI requirements",
+      "intent": "The 422.5(A) appliance list (including vending machines per (A)(5) and dishwashers) defines which appliance outlets require GFCI protection.",
+      "applies_when": [
+        {
+          "predicate": "appliance_is_listed_in_422_5_a"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "outlet_gfci_requirement_of_210_8_d_and_422_5_applies": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance schedule flagging 422.5(A) appliance types (e.g., vending machines, dishwashers)",
+        "GFCI protection mapping for each flagged appliance outlet"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_5_a_5",
+      "cite": "422.5(A)(5)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_a_5",
+      "title": "GFCI-protect branch circuits supplying vending machines",
+      "intent": "Vending machines without appliance-integral GFCI must be supplied from GFCI-protected branch circuits.",
+      "applies_when": [
+        {
+          "predicate": "appliance_is_vending_machine_per_422_5_a_5"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "gfci_provided_per_422_5_b_3_or_b_4"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "branch_circuit_gfci_per_422_5_b_1_or_b_2": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plans locating vending machine outlets",
+        "Panel schedule showing GFCI protection on vending machine branch circuits",
+        "Vending machine listing data if integral GFCI is claimed"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_5_b_1",
+      "cite": "422.5(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_1",
+      "title": "Scope: 422.5(B)(1) is an accepted supply-side GFCI means for appliance outlets",
+      "intent": "Identify GFCI provided in accordance with 422.5(B)(1) as one of the two supply-side compliance paths referenced by 210.8(D).",
+      "applies_when": [
+        {
+          "predicate": "outlet_supplies_appliance_specified_in_422_5_a"
+        },
+        {
+          "predicate": "gfci_compliance_path_is_supply_side"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_in_accordance_with_422_5_b_1": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "GFCI device schedule identifying the 422.5(B)(1) means used",
+        "Panel schedule cross-reference for the protected appliance circuit"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_422_5_b_3",
+      "cite": "422.5(B)(3)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_3",
+      "title": "Scope: appliance-side GFCI per 422.5(B)(3) relieves the outlet GFCI requirement",
+      "intent": "Where GFCI protection is provided in accordance with 422.5(B)(3) (through (B)(5)), the supply outlet need not be separately GFCI protected.",
+      "applies_when": [
+        {
+          "predicate": "outlet_supplies_appliance_specified_in_422_5_a"
+        },
+        {
+          "predicate": "appliance_side_gfci_provided_per_422_5_b_3"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "appliance_side_gfci_documented": true,
+        "outlet_level_gfci_not_additionally_required": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance listing/instruction data showing integral or factory-provided GFCI per 422.5(B)(3)",
+        "Submittal correlating appliance GFCI means to each affected outlet"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_426_28",
+      "cite": "426.28",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_426_28",
+      "title": "Apply 426.28 equipment ground-fault protection to dedicated de-icing/snow-melting receptacle circuits in lieu of GFCI",
+      "intent": "Dedicated snow-melting/de-icing circuits with not-readily-accessible receptacles may use 426.28 ground-fault protection of equipment instead of personnel GFCI.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_dedicated_to_electric_snow_melting_deicing_or_pipeline_vessel_heating"
+        },
+        {
+          "predicate": "receptacle_not_readily_accessible"
+        }
+      ],
+      "requires": {
+        "type": "ground_fault_protection_of_equipment",
+        "installed_in_accordance_with_426_28_or_427_22": true,
+        "circuit_dedicated_no_other_loads": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof/site plan locating de-icing receptacles and demonstrating not-readily-accessible placement",
+        "Panel schedule showing dedicated circuit with equipment ground-fault protection",
+        "GFPE device specification per 426.28"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_3",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_430_245",
+      "cite": "430.245",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_430_245",
+      "title": "Scope: undersized raceway permitted only for enclosing motor leads per 430.245(B)",
+      "intent": "The recurring small-conduit exception (RMC, FMC, LFNC, EMT below trade size 1/2) exists solely to enclose motor terminal leads as permitted by 430.245(B).",
+      "applies_when": [
+        {
+          "predicate": "raceway_smaller_than_trade_size_1_2_proposed"
+        },
+        {
+          "predicate": "raceway_encloses_motor_leads"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "use_limited_to_enclosing_motor_leads_per_430_245_b": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor termination detail showing lead enclosure raceway type and size",
+        "Motor equipment submittal identifying factory lead arrangement"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_20",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_550_13",
+      "cite": "550.13",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_13",
+      "title": "Provide grounding-type, GFCI-protected receptacle outlets in mobile and manufactured homes",
+      "intent": "Mobile/manufactured home receptacles must be grounding type and carry GFCI protection per 210.8(A) plus the additional 550.13(B) areas.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "receptacle_outlet_installed"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_outlets",
+        "grounding_type_installed_per_406_4": true,
+        "gfci_protection_per_210_8_a": true,
+        "additional_gfci_areas_for_125v_15_20a_receptacles": [
+          "compartments_accessible_from_outside_unit",
+          "bathrooms_including_luminaire_receptacles",
+          "kitchen_countertop_receptacles",
+          "sinks_within_1_8m_6ft",
+          "dishwashers"
+        ],
+        "no_receptacles_within_or_over_bathtub_or_shower_space": true,
+        "no_face_up_countertop_receptacles": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Unit floor plan with receptacle layout and GFCI designations",
+        "Manufacturer wiring diagram showing grounding-type devices",
+        "Dielectric/continuity/polarity test records per 550.17"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_555_9",
+      "cite": "555.9",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_555_9",
+      "title": "Scope: GFCI requirements for boat hoists per 555.9",
+      "intent": "Flag that boat hoist outlets have dedicated GFCI requirements in Article 555 beyond the general 210.8 provisions.",
+      "applies_when": [
+        {
+          "predicate": "equipment_is_boat_hoist"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "gfci_protection_per_555_9_applies": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dock/boathouse electrical plan locating boat hoist circuits",
+        "GFCI device schedule for boat hoist outlets"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_590_6",
+      "cite": "590.6",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_590_6",
+      "title": "Use listed portable-type GFCI protection for cord-and-plug-connected temporary wiring",
+      "intent": "Temporary wiring GFCI protection supplied through plug-and-cord connection must be listed portable GFCI or equivalent so protection travels with the connection.",
+      "applies_when": [
+        {
+          "predicate": "is_temporary_wiring"
+        },
+        {
+          "predicate": "gfci_protection_supplied_by_plug_and_cord_connection_to_branch_circuit_or_feeder"
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "listed_as_portable_gfci_or_equivalent_protection_level": true,
+        "assured_equipment_grounding_conductor_program_per_590_6_b_2_permitted_only_in_industrial_establishments_with_qualified_personnel": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Temporary power plan identifying GFCI means for each circuit",
+        "Listing data for portable GFCI cord sets or devices",
+        "Assured equipment grounding conductor program documentation where used"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_9",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_604_10",
+      "cite": "604.10",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_604_10",
+      "title": "Restrict manufactured wiring systems to accessible dry locations and listed air-handling applications",
+      "intent": "Manufactured wiring systems are limited to accessible, dry locations unless listed for ducts/plenums and installed per 300.22, or listed for outdoor use.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_manufactured_wiring_system"
+        }
+      ],
+      "requires": {
+        "type": "use_permission",
+        "location_accessible_and_dry": true,
+        "duct_plenum_air_handling_use_only_where_listed_and_installed_per_300_22": true,
+        "outdoor_assemblies_listed_for_outdoor_locations": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "tapped_cable_end_extends_into_hollow_wall_for_direct_termination_at_switch_or_outlet_point"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Manufactured wiring system listing documentation",
+        "Reflected ceiling plan showing accessible installation locations",
+        "Plenum listing evidence where installed in air-handling spaces"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_300_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_620_21",
+      "cite": "620.21",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21",
+      "title": "Use specified raceway or metal-clad cable wiring methods in elevator hoistways, machine rooms, and cars",
+      "intent": "Confine elevator, escalator, and lift wiring to robust raceway/cable methods, with flexible methods limited to 6 ft lengths except as specifically excepted.",
+      "applies_when": [
+        {
+          "predicate": "wiring_in_hoistway_wellway_runway_machinery_space_control_space_car_machine_room_or_control_room"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_traveling_cable"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "permitted_methods": [
+          "rigid_metal_conduit",
+          "intermediate_metal_conduit",
+          "electrical_metallic_tubing",
+          "rigid_nonmetallic_conduit",
+          "wireways",
+          "type_mc_mi_or_ac_cable"
+        ],
+        "flexible_methods_limited_to_1_8m_6ft_except_per_620_21_exceptions": true,
+        "unused_conductors_insulated_or_protected_from_contact_with_live_parts": true,
+        "oshpd1_seismic_switches_not_cord_and_plug_connected": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "cords_and_cables_of_listed_cord_and_plug_connected_equipment"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "lfnc_b_per_356_2_2_trade_size_3_8_or_larger"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Elevator electrical plans showing wiring methods in hoistway, car, and machine room",
+        "Details of flexible conduit lengths (6 ft limit) at controllers and machines",
+        "Class 2 cable support and protection details in hoistways",
+        "For OSHPD 1 projects, seismic switch hardwiring detail"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_2",
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_620_25",
+      "cite": "620.25",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_25",
+      "title": "Supply other elevator utilization equipment from additional branch circuits with OCPDs in the machine/control room",
+      "intent": "Keep utilization equipment beyond car lighting, machine-room, and pit circuits on separate branch circuits with overcurrent devices located where elevator personnel can find them.",
+      "applies_when": [
+        {
+          "predicate": "elevator_utilization_equipment_not_covered_by_620_22_620_23_or_620_24"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit",
+        "additional_dedicated_branch_circuits_provided": true,
+        "equipment_restricted_to_620_1_scope": true,
+        "overcurrent_devices_located_in_machine_room_control_room_machinery_space_or_control_space": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Elevator power riser/one-line showing separate branch circuits for other utilization equipment",
+        "Panel schedule locating overcurrent devices in machine/control room",
+        "Equipment list confirming loads fall within 620.1 scope"
+      ],
+      "depends_on": [
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_620_5",
+      "cite": "620.5",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_5",
+      "title": "Provide 110.26(A) working clearances at elevator controllers and disconnecting means",
+      "intent": "Elevator electrical equipment needs standard working space unless a qualified-persons condition of 620.5(A) through (D) is met.",
+      "applies_when": [
+        {
+          "predicate": "equipment_is_elevator_controller_disconnecting_means_or_other_electrical_equipment"
+        }
+      ],
+      "requires": {
+        "type": "working_space",
+        "working_space_per_110_26_a": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "maintenance_supervision_ensures_qualified_persons_only"
+            },
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "equipment_has_flexible_leads_and_repositionable_per_620_5_a"
+                },
+                {
+                  "predicate": "live_parts_guarded_isolated_or_insulated_per_620_5_b"
+                },
+                {
+                  "predicate": "equipment_not_examined_adjusted_serviced_or_maintained_while_energized"
+                },
+                {
+                  "predicate": "uninsulated_parts_<=_30v_rms_42v_peak_or_60v_dc"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Machine room / control space plans with dimensioned clearances at controllers and disconnects",
+        "Documentation of any 620.5(A)-(D) condition relied upon (flexible leads, guarding, low voltage)",
+        "Maintenance/supervision statement where clearance relief is claimed"
+      ],
+      "depends_on": [
+        "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_26"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_41",
+      "cite": "690.41",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_690_41",
+      "title": "Identify solidly grounded PV system conductors at terminations per 200.6(A)",
+      "intent": "Single-conductor PV cable used as a solidly grounded conductor cannot rely on continuous white finish and must be marked at terminations at installation time.",
+      "applies_when": [
+        {
+          "predicate": "is_photovoltaic_power_system"
+        },
+        {
+          "predicate": "single_conductor_sunlight_resistant_outdoor_rated_cable_used_as_solidly_grounded_conductor_as_permitted_by_690_41"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "identified_at_time_of_installation_by_markings_at_terminations": true,
+        "marking_method_per_200_6_a_1_through_a_4": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV system one-line diagram identifying grounded conductor configuration",
+        "Termination marking detail for PV grounded conductors",
+        "PV cable specification (single-conductor, sunlight-resistant, outdoor-rated)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_760_121",
+      "cite": "760.121",
+      "section_node": "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_121",
+      "title": "Supply PLFA circuits from listed power sources on dedicated, identified branch circuits without GFCI/AFCI",
+      "intent": "Power-limited fire alarm systems must have a listed power source and a dedicated, red-identified, qualified-access branch circuit that cannot be interrupted by GFCI or AFCI devices.",
+      "applies_when": [
+        {
+          "predicate": "circuit_is_power_limited_fire_alarm_plfa"
+        }
+      ],
+      "requires": {
+        "type": "fire_alarm_power_supply",
+        "power_source_listed_plfa_or_class_3_transformer_power_supply_or_marked_listed_equipment": true,
+        "branch_circuit_supplies_no_other_loads": true,
+        "branch_circuit_ocpd_location_permanently_identified_at_fire_alarm_control_unit": true,
+        "disconnecting_means_red_identified_accessible_only_to_qualified_personnel_and_marked_fire_alarm_circuit": true,
+        "branch_circuit_not_supplied_through_gfci_or_afci": true,
+        "disconnecting_means_permitted_to_be_secured_in_on_position": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Fire alarm power source listing documentation (PLFA/Class 3)",
+        "Panel schedule showing dedicated fire alarm branch circuit without GFCI/AFCI",
+        "Fire alarm control unit label identifying the branch-circuit OCPD location",
+        "Red-identified disconnect detail marked FIRE ALARM CIRCUIT"
+      ],
+      "depends_on": [
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_41",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_12"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_760_41",
+      "cite": "760.41",
+      "section_node": "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_41",
+      "title": "Supply NPLFA circuits at 600 V or less from Chapters 1-4 compliant sources on dedicated, identified branch circuits without GFCI/AFCI",
+      "intent": "Non-power-limited fire alarm circuits need a code-compliant power source not over 600 volts and a dedicated, red-identified branch circuit immune to GFCI/AFCI interruption.",
+      "applies_when": [
+        {
+          "predicate": "circuit_is_non_power_limited_fire_alarm_nplfa"
+        }
+      ],
+      "requires": {
+        "type": "fire_alarm_power_supply",
+        "power_source_complies_with_chapters_1_through_4": true,
+        "output_voltage_<=_600v_nominal": true,
+        "branch_circuit_supplies_no_other_loads": true,
+        "branch_circuit_ocpd_location_permanently_identified_at_fire_alarm_control_unit": true,
+        "disconnecting_means_red_identified_accessible_only_to_qualified_personnel_and_marked_fire_alarm_circuit": true,
+        "branch_circuit_not_supplied_through_gfci_or_afci": true,
+        "fire_alarm_circuit_disconnect_permitted_secured_in_on_position": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Fire alarm power riser showing NPLFA source voltage (not more than 600 V nominal)",
+        "Panel schedule showing dedicated fire alarm branch circuit without GFCI/AFCI",
+        "Fire alarm control unit label identifying branch-circuit OCPD location",
+        "Red-identified disconnect detail marked FIRE ALARM CIRCUIT"
+      ],
+      "depends_on": [
+        "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_121",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_12"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

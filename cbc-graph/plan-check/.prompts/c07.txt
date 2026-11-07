@@ -1,0 +1,139 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 31F Slc Marine Oil Terminals" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch16_chapter_16_structural_design.md
+cbc-graph/chapters/ch18_chapter_18_soils_and_foundations.md
+cbc-graph/chapters/ch18a_chapter_18a_soils_and_foundations.md
+cbc-graph/chapters/ch31f_chapter_31f_slc_marine_oil_terminals.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c07_chapter_31f_slc_marine_oil_terminals_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_1610_1                                                    1610.1 Lateral Soil Pressures
+  sec_1803_1                                                    1803.1 General - Geotechnical Investigations
+  sec_1803_2                                                    1803.2 Investigations Required
+  sec_1803_3                                                    1803.3 Basis of Investigation
+  sec_1803_5                                                    1803.5 Investigated Conditions
+  sec_1803_5_1                                                  1803.5.1 Classification
+  sec_1803_5_11                                                 1803.5.11 Seismic Design Categories C through F
+  sec_1803_5_12                                                 1803.5.12 Seismic Design Categories D through F
+  sec_1803_5_3                                                  1803.5.3 Expansive Soil
+  sec_1803_5_5                                                  1803.5.5 Deep Foundations
+  sec_1803_6                                                    1803.6 Reporting
+  sec_1803a_5                                                   1803A.5 Investigated Conditions
+  sec_1803a_5_1                                                 1803A.5.1 Classification
+  sec_1803a_5_3                                                 1803A.5.3 Expansive Soil
+  sec_1807_2                                                    1807.2 Retaining Walls
+  sec_1807_2_3                                                  1807.2.3 Safety Factor
+  sec_1808_6                                                    1808.6 Design for Expansive Soils
+  sec_1808_6_2                                                  1808.6.2 Slab-on-Ground Foundations
+  sec_1808a_6                                                   1808A.6 Design for Expansive Soils
+  sec_1808a_6_2                                                 1808A.6.2 Slab-on-Ground Foundations
+  sec_1810_1                                                    1810.1 General - Deep Foundations
+  sec_1813_1                                                    1813.1 General - Vibro Stone Columns for Ground Improvement
+  sec_1813a                                                     1813A Vibro Stone Columns for Ground Improvement
+  sec_1813a_2                                                   1813A.2 Geotechnical Report
+  sec_3101f_5                                                   3101F.5 Spill Prevention
+  sec_3101f_6                                                   3101F.6 Oil Spill Exposure Classification
+  sec_3103f_4                                                   3103F.4 Earthquake Loads
+  sec_3104f                                                     3104F Seismic Analysis and Structural Performance
+  sec_3104f_2_1                                                 3104F.2.1 Seismic Performance Criteria
+  sec_3104f_2_3                                                 3104F.2.3 Analytical Procedures
+  sec_3106f                                                     3106F Geotechnical Hazards and Foundations
+  sec_3106f_2_1                                                 3106F.2.1 Site Classes
+  sec_3106f_4                                                   3106F.4 Liquefaction Potential
+  sec_3107f                                                     3107F Structural Analysis and Design of Components
+  sec_3108f_3                                                   3108F.3 Emergency Shutdown Systems
+  sec_3112f                                                     3112F LNG Marine Terminals
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_1610_1                                                  Table 1610.1 Lateral Soil Load
+  table_31f_1_1                                                 Table 31F-1-1 MOT Oil Spill Exposure Classification
+  table_31f_4_1                                                 Table 31F-4-1 Seismic Performance Criteria
+  table_31f_4_2                                                 Table 31F-4-2 Minimum Required Analytical Procedures
+  table_31f_6_1                                                 Table 31F-6-1 Site Classes
+  concept_deep_foundations                                      Deep Foundations
+  concept_expansive_soil                                        Expansive Soil
+  concept_liquefaction                                          Concept: Liquefaction Potential
+  concept_pushover_analysis                                     Concept: Nonlinear Static (Pushover) Analysis
+  concept_seismic_performance                                   Concept: Seismic Performance Levels (Level 1 and Level 2)
+  concept_spill_classification                                  Concept: Oil Spill Exposure Classification
+  concept_vibro_stone_columns                                   Vibro Stone Columns (VSC)
+  def_dpga                                                      Defined Term: Design Peak Ground Acceleration (DPGA)
+  def_dsa                                                       Defined Term: Design Spectral Acceleration (DSA)
+  def_esd                                                       Defined Term: Emergency Shutdown (ESD)
+  def_expansive_soil                                            Expansive Soil
+  def_vibro_stone_column                                        Vibro Stone Column (VSC)
+  std_api_rp_2a_wsd                                             Standard: API RP 2A-WSD Recommended Practice for Planning De
+  std_ccps_guidelines                                           Standard: CCPS Guidelines for Hazard Evaluation Procedures 3
+  std_ccr_2_2385                                                Standard: 2 CCR 2385 Operations Manual
+  std_cfr_33_154_550                                            Standard: 33 CFR 154.550 Marine Transfer Facility Equipment 
+  std_cgs_sp_117a                                               Standard: CGS Special Publication 117A Guidelines for Evalua
+  std_fema_356                                                  Standard: FEMA 356 Prestandard and Commentary for Seismic Re
+  std_fema_440                                                  Standard: FEMA 440 Improvement of Nonlinear Static Seismic A
+  std_polb_wdc                                                  Standard: POLB Wharf Design Criteria WDC Version 3.0 2012
+  std_pti_dc_10_5                                               PTI DC 10.5
+  std_wri_crsi                                                  WRI/CRSI Design of Slab-on-Ground Foundations
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_asce_copri_61                                             Standard: ASCE/COPRI 61-14 Seismic Design of Piers and Wharv
+  std_asce_sei_41                                               Standard: ASCE/SEI 41-17 Seismic Evaluation and Retrofit of 
+  std_astm_d1586                                                ASTM D1586
+  std_astm_d2216                                                Standard: ASTM D2216 Standard Test Methods for Laboratory De
+  std_astm_d2487                                                ASTM D2487 Standard Practice for Classification of Soils
+  std_astm_d422                                                 ASTM D422
+  std_astm_d4318                                                Standard: ASTM D4318 Standard Test Methods for Liquid Limit 
+  std_astm_d4829                                                ASTM D4829
+  std_astm_d5778                                                ASTM D5778
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_1610_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 31F Slc Marine Oil Terminals",
+  "community_id": 7,
+  "extracted_from_sections": ["ch16_chapter_16_structural_design.md", "ch18_chapter_18_soils_and_foundations.md", "ch18a_chapter_18a_soils_and_foundations.md", "ch31f_chapter_31f_slc_marine_oil_terminals.md"],
+  "rules": [ ... ]
+}
+
+Aim for 9-36 rules. After writing the file, just confirm "wrote c07_chapter_31f_slc_marine_oil_terminals_rules.json with N rules" and stop.

@@ -1,0 +1,189 @@
+You are a plan-check rule extraction subagent. The graph community "Nonmetallic Wireways — Article 378" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c03_nonmetallic_wireways_article_378_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_10  378.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_12  378.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_120  378.120 Marking
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_20  378.20 Conductors Connected in Parallel
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_22  378.22 Number of Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_23  378.23 Insulated Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_30  378.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_44  378.44 Expansion Fittings
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_56  378.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_60  378.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_70  378.70 Extensions from Nonmetallic Wireways
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_10  380.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_12  380.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_23  380.23 Insulated Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_76  380.76 Metal Multioutlet Assembly Through Dry Partitions
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_10  382.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_100  382.100 Construction
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_104  382.104 Flat Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_112  382.112 Insulation
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_12  382.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_15  382.15 Exposed
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_30  382.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_42  382.42 Devices
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_56  382.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_10  384.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_100  384.100 Construction
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_12  384.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_22  384.22 Number of Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_30  384.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_60  384.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_10  386.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_12  386.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_22  386.22 Number of Conductors or Cables
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_56  386.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_60  386.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_70  386.70 Combination Raceways
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_10  388.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_12  388.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_56  388.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_60  388.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_10  390.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_12  390.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_15  390.15 Covering
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_22  390.22 Maximum Number of Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_56  390.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_70  390.70 Laid in Straight Lines
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_74  390.74 Junction Boxes
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_75  390.75 Inserts
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_10  392.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_100  392.100 Construction
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_18  392.18 Cable Tray Installation
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_20  392.20 Cable and Conductor Installation
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_22  392.22 Number of Conductors or Cables
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_30  392.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_44  392.44 Expansion Splice Plates
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_46  392.46 Bushed Conduit and Tubing
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_56  392.56 Cable Splices
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_60  392.60 Grounding and Bonding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_80  392.80 Ampacity of Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_10  393.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_104  393.104 Sizes and Types of Conductors
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_12  393.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_2  393.2 Definitions
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_21  393.21 Disconnecting Means
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_30  393.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_40  393.40 Connectors and Enclosures
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_45  393.45 Overcurrent and Reverse Polarity Protection
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_60  393.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_10  394.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_12  394.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_17  394.17 Through or Parallel to Framing Members
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_19  394.19 Clearances
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_23  394.23 In Accessible Attics
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_30  394.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_42  394.42 Devices
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_56  394.56 Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_10  396.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_12  396.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_30  396.30 Messenger
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_56  396.56 Conductor Splices and Taps
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_60  396.60 Grounding
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_10  398.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_12  398.12 Uses Not Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_15  398.15 Exposed Work
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_17  398.17 Through or Parallel to Framing Members
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_19  398.19 Clearances
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_23  398.23 In Accessible Attics
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_30  398.30 Securing and Supporting
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_399_10  399.10 Uses Permitted
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_399_30  399.30 Support
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_chapter_9_table_11  Chapter 9 Table 11(A)/(B) Class 2 Power Levels
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_310_16  Table 310.16 Allowable Ampacities
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_310_17  Table 310.17 Single-Conductor Free Air Ampacities
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_310_18  Table 310.18 Allowable Ampacities
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_310_19  Table 310.19 Single-Conductor Free Air Ampacities
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_310_20  Table 310.20 Three Single Conductors on Messenger
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_311_60_c  Table 311.60(C) MV Ampacity Tables
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_312_6_a  Table 312.6(A) Deflection Dimensions
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_352_44  Table 352.44 PVC Expansion Characteristics
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_384_22  Table 384.22 Channel Size and Inside Cross-Sectional Area
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_10_a  Table 392.10(A) Wiring Methods Permitted in Cable Tray
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_22_a  Table 392.22(A) Allowable Cable Fill Area Multiconductor
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_22_a_5  Table 392.22(A)(5) Vent Channel Multiconductor Fill
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_22_a_6  Table 392.22(A)(6) Solid Channel Multiconductor Fill
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_22_b_1  Table 392.22(B)(1) Single-Conductor Cable Tray Fill
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_60_b  Table 392.60(B) Metal Area for Cable Tray as EGC
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_396_10_a  Table 396.10(A) Cable Types for Messenger-Supported Wiring
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_490_24  Table 490.24 Impulse Withstand BIL
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_522_22  Table 522.22 Class 2 Ampacities
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_chapter_3  Chapter 3 — Wiring Methods and Materials (Articles 378–399)
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_cable_tray  Cable Tray System
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_concealable_nonmetallic_extension  Concealable Nonmetallic Extension
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_concealed_knob_and_tube  Concealed Knob-and-Tube Wiring
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_low_voltage_suspended_ceiling  Low-Voltage Suspended Ceiling Power Distribution System
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_messenger_supported_wiring  Messenger-Supported Wiring
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_multioutlet_assembly  Multioutlet Assembly
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_nonmetallic_extension  Nonmetallic Extension
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_nonmetallic_wireway  Nonmetallic Wireway
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_open_wiring_on_insulators  Open Wiring on Insulators
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_outdoor_overhead_conductors  Outdoor Overhead Conductors over 1000 V
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_strut_type_channel_raceway  Strut-Type Channel Raceway
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_surface_metal_raceway  Surface Metal Raceway
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_surface_nonmetallic_raceway  Surface Nonmetallic Raceway
+  09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_system_underfloor_raceway  Underfloor Raceway
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_10>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Nonmetallic Wireways — Article 378",
+  "community_id": 3,
+  "extracted_from_sections": ["09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 22-90 rules. After writing the file, just confirm "wrote c03_nonmetallic_wireways_article_378_rules.json with N rules" and stop.

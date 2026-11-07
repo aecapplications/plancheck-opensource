@@ -1,0 +1,553 @@
+{
+  "project": {
+    "address": "12345 Ridge Road, Truckee, CA",
+    "type": "single-family detached dwelling",
+    "scope": "new construction",
+    "stories": 2,
+    "occupancy": "R-3",
+    "design_wind_speed_mph": 110,
+    "ground_snow_load_psf": 50,
+    "seismic_design_category": "D1",
+    "soil_class": "Class 4 - sandy gravel",
+    "climate_zone": "16",
+    "fire_hazard_severity_zone": "Very High"
+  },
+  "predicates": [
+    "any_portion_within_10_ft_of_building",
+    "creates_roof_penetration",
+    "frost_line_depth_>=_36_in",
+    "garage_has_ev_charging",
+    "has_anchor_bolts",
+    "has_attached_garage",
+    "has_bedroom",
+    "has_braced_wall_lines",
+    "has_carbon_monoxide_alarm_required",
+    "has_continuous_footing",
+    "has_dwelling_garage_separation",
+    "has_emergency_escape_opening_in_bedroom",
+    "has_fuel_burning_appliance",
+    "has_habitable_attic",
+    "has_rooftop_pv",
+    "in_fhsz",
+    "in_fire_hazard_severity_zone",
+    "in_flood_hazard_area",
+    "in_sdc_c_d0_d1_or_d2",
+    "in_sdc_d0_d1",
+    "in_sdc_d0_d1_or_d2",
+    "in_sdc_d0_or_d1",
+    "in_sdc_d1",
+    "in_seismic_design_category_c_d0_d1_or_d2",
+    "in_seismic_design_category_d0_d1_or_d2",
+    "in_seismic_design_category_d0_or_d1",
+    "in_seismic_design_category_d1",
+    "in_wildland_urban_interface_fire_area",
+    "in_wui",
+    "in_wui_fire_area",
+    "installed_on_or_above_roof_covering",
+    "is_braced_wall_panel",
+    "is_concrete_foundation",
+    "is_deck_porch_balcony_or_stair_walking_surface",
+    "is_detached_dwelling",
+    "is_detached_one_or_two_family_dwelling",
+    "is_detached_one_or_two_family_dwelling_in_sdc_d0_d1_or_d2",
+    "is_in_seismic_design_category_d1",
+    "is_new_building",
+    "is_new_structure",
+    "is_one_or_two_family_dwelling",
+    "is_pv_rooftop_mounted",
+    "is_rooftop_mounted_pv_system",
+    "is_spray_foam_plastic_insulation",
+    "is_wood_framed",
+    "is_wood_light_frame",
+    "is_wood_light_frame_in_sdc_d0_d1_or_d2",
+    "is_wood_wall_framing",
+    "thickness_>_4_in",
+    "uses_foam_plastic_in_building_construction"
+  ],
+  "false_predicates": [
+    "jurisdiction_adopted_sfm_model_ordinance_gov_code_51189",
+    "is_group_u_accessory_building",
+    "decking_meets_astm_e84_class_b",
+    "is_existing_building",
+    "is_addition",
+    "is_alteration",
+    "is_townhouse",
+    "is_modular_home",
+    "is_factory_built_housing"
+  ],
+  "_notes": "[FAKE EXTRACTOR] facts loaded from sample for flow testing.",
+  "_provenance": {
+    "in_wildland_urban_interface_fire_area": [
+      {
+        "page": 1,
+        "sheet_id": "A1.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for in_wildland_urban_interface_fire_area",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "in_fire_hazard_severity_zone": [
+      {
+        "page": 2,
+        "sheet_id": "A2.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for in_fire_hazard_severity_zone",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_new_structure": [
+      {
+        "page": 3,
+        "sheet_id": "A3.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_new_structure",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_new_building": [
+      {
+        "page": 4,
+        "sheet_id": "A4.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_new_building",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_pv_rooftop_mounted": [
+      {
+        "page": 5,
+        "sheet_id": "A5.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_pv_rooftop_mounted",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "installed_on_or_above_roof_covering": [
+      {
+        "page": 6,
+        "sheet_id": "A6.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for installed_on_or_above_roof_covering",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "creates_roof_penetration": [
+      {
+        "page": 7,
+        "sheet_id": "A7.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for creates_roof_penetration",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_deck_porch_balcony_or_stair_walking_surface": [
+      {
+        "page": 8,
+        "sheet_id": "A8.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_deck_porch_balcony_or_stair_walking_surface",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "any_portion_within_10_ft_of_building": [
+      {
+        "page": 9,
+        "sheet_id": "A9.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for any_portion_within_10_ft_of_building",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "uses_foam_plastic_in_building_construction": [
+      {
+        "page": 10,
+        "sheet_id": "A10.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for uses_foam_plastic_in_building_construction",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_spray_foam_plastic_insulation": [
+      {
+        "page": 11,
+        "sheet_id": "A11.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_spray_foam_plastic_insulation",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "thickness_>_4_in": [
+      {
+        "page": 12,
+        "sheet_id": "A12.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for thickness_>_4_in",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "in_seismic_design_category_d0_d1_or_d2": [
+      {
+        "page": 13,
+        "sheet_id": "A13.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for in_seismic_design_category_d0_d1_or_d2",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_in_seismic_design_category_d1": [
+      {
+        "page": 14,
+        "sheet_id": "A14.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_in_seismic_design_category_d1",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_detached_dwelling": [
+      {
+        "page": 15,
+        "sheet_id": "A15.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_detached_dwelling",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_braced_wall_panel": [
+      {
+        "page": 16,
+        "sheet_id": "A16.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_braced_wall_panel",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_braced_wall_lines": [
+      {
+        "page": 17,
+        "sheet_id": "A17.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_braced_wall_lines",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_wood_wall_framing": [
+      {
+        "page": 18,
+        "sheet_id": "A18.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_wood_wall_framing",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_one_or_two_family_dwelling": [
+      {
+        "page": 19,
+        "sheet_id": "A19.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_one_or_two_family_dwelling",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_attached_garage": [
+      {
+        "page": 1,
+        "sheet_id": "A1.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_attached_garage",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "garage_has_ev_charging": [
+      {
+        "page": 2,
+        "sheet_id": "A2.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for garage_has_ev_charging",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_carbon_monoxide_alarm_required": [
+      {
+        "page": 3,
+        "sheet_id": "A3.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_carbon_monoxide_alarm_required",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_bedroom": [
+      {
+        "page": 4,
+        "sheet_id": "A4.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_bedroom",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_fuel_burning_appliance": [
+      {
+        "page": 5,
+        "sheet_id": "A5.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_fuel_burning_appliance",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_dwelling_garage_separation": [
+      {
+        "page": 6,
+        "sheet_id": "A6.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_dwelling_garage_separation",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "is_concrete_foundation": [
+      {
+        "page": 7,
+        "sheet_id": "A7.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for is_concrete_foundation",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_continuous_footing": [
+      {
+        "page": 8,
+        "sheet_id": "A8.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_continuous_footing",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_anchor_bolts": [
+      {
+        "page": 9,
+        "sheet_id": "A9.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_anchor_bolts",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "in_flood_hazard_area": [
+      {
+        "page": 10,
+        "sheet_id": "A10.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for in_flood_hazard_area",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "frost_line_depth_>=_36_in": [
+      {
+        "page": 11,
+        "sheet_id": "A11.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for frost_line_depth_>=_36_in",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_habitable_attic": [
+      {
+        "page": 12,
+        "sheet_id": "A12.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_habitable_attic",
+        "confidence": 0.9,
+        "value": true
+      }
+    ],
+    "has_emergency_escape_opening_in_bedroom": [
+      {
+        "page": 13,
+        "sheet_id": "A13.0",
+        "sheet_type": "floor_plan",
+        "source": "vision",
+        "evidence": "[FAKE] synthetic provenance for has_emergency_escape_opening_in_bedroom",
+        "confidence": 0.9,
+        "value": true
+      }
+    ]
+  },
+  "_needs_review": [],
+  "_decomposition": {
+    "declared": 41,
+    "derived": 9,
+    "final": 50,
+    "iterations": 2,
+    "derivations": [
+      {
+        "asserted": "is_detached_one_or_two_family_dwelling",
+        "via": "table",
+        "decomp": {
+          "all_of": [
+            "is_one_or_two_family_dwelling",
+            "is_detached_dwelling"
+          ]
+        }
+      },
+      {
+        "asserted": "in_sdc_d0_or_d1",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_d0",
+            "in_sdc_d1"
+          ]
+        }
+      },
+      {
+        "asserted": "in_sdc_d0_d1",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_d0",
+            "in_sdc_d1"
+          ]
+        }
+      },
+      {
+        "asserted": "in_sdc_d0_d1_or_d2",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_d0",
+            "in_sdc_d1",
+            "in_sdc_d2"
+          ]
+        }
+      },
+      {
+        "asserted": "in_sdc_c_d0_d1_or_d2",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_c",
+            "in_sdc_d0",
+            "in_sdc_d1",
+            "in_sdc_d2"
+          ]
+        }
+      },
+      {
+        "asserted": "in_seismic_design_category_c_d0_d1_or_d2",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_c",
+            "in_sdc_d0",
+            "in_sdc_d1",
+            "in_sdc_d2"
+          ]
+        }
+      },
+      {
+        "asserted": "in_seismic_design_category_d0_or_d1",
+        "via": "table",
+        "decomp": {
+          "any_of": [
+            "in_sdc_d0",
+            "in_sdc_d1"
+          ]
+        }
+      },
+      {
+        "asserted": "is_detached_one_or_two_family_dwelling_in_sdc_d0_d1_or_d2",
+        "via": "pattern",
+        "decomp": {
+          "all_of": [
+            {
+              "predicate": "is_detached_one_or_two_family_dwelling"
+            },
+            {
+              "any_of": [
+                "in_sdc_d0",
+                "in_sdc_d1",
+                "in_sdc_d2"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "asserted": "is_wood_light_frame_in_sdc_d0_d1_or_d2",
+        "via": "pattern",
+        "decomp": {
+          "all_of": [
+            {
+              "predicate": "is_wood_light_frame"
+            },
+            {
+              "any_of": [
+                "in_sdc_d0",
+                "in_sdc_d1",
+                "in_sdc_d2"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

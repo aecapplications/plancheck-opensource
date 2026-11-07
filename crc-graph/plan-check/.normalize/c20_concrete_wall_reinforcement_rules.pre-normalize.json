@@ -1,0 +1,450 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Concrete Wall Reinforcement",
+  "community_id": 20,
+  "extracted_from_sections": [
+    "chapter_6_wall_construction_d.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r608_5",
+      "cite": "R608.5",
+      "section_node": "section_r608_5",
+      "title": "Concrete wall materials shall comply with R608.5 (concrete, reinforcement, anchors, forms)",
+      "intent": "Establish that all materials used to construct concrete walls (concrete, reinforcing steel, anchor bolts, sheet steel, forms, form ties) meet the standards specified in R608.5 and its subsections so the wall achieves the assumed strength and durability.",
+      "applies_when": [
+        {
+          "predicate": "is_concrete_wall_construction"
+        }
+      ],
+      "requires": {
+        "type": "material_compliance",
+        "concrete_and_materials_per": "R608.5.1 (PCA 100, ACI 318 or ACI 332)",
+        "cements_per": [
+          "ASTM C150",
+          "ASTM C595",
+          "ASTM C1157"
+        ],
+        "concrete_mixing_and_delivery_per": [
+          "ASTM C94",
+          "ASTM C685"
+        ],
+        "minimum_compressive_strength_psi_at_28_days": 2500,
+        "steel_reinforcement_per": [
+          "ASTM A615",
+          "ASTM A706",
+          "ASTM A996"
+        ],
+        "anchor_bolts_per": [
+          "ASTM A307 Grade A (with heads)",
+          "ASTM F1554 Grade 36 minimum"
+        ],
+        "sheet_steel_per": [
+          "ASTM A653 SS",
+          "ASTM A792 SS",
+          "ASTM A875 SS"
+        ],
+        "sheet_steel_minimum_grade": 33,
+        "icf_flat_form_standard": "ASTM E2634",
+        "tested_per": [
+          "ASTM_C143",
+          "ASTM_C150",
+          "ASTM_C595",
+          "ASTM_C1157",
+          "ASTM_C94",
+          "ASTM_C685",
+          "ASTM_A615",
+          "ASTM_A706",
+          "ASTM_A996",
+          "ASTM_A307",
+          "ASTM_F1554",
+          "ASTM_A653",
+          "ASTM_A792",
+          "ASTM_A875",
+          "ASTM_A36",
+          "ASTM_E2634",
+          "PCA_100",
+          "ACI_318",
+          "ACI_332"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "aggregate_size_limit_check"
+            },
+            {
+              "predicate": "removable_forms_used"
+            },
+            {
+              "predicate": "approved_workability_and_consolidation_methods"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "scope": "R608.5.1.3 maximum aggregate size limits"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "slump_exceeds_6_inches"
+            },
+            {
+              "predicate": "approved_segregation_resistant_mix"
+            },
+            {
+              "predicate": "in_accordance_with_form_manufacturers_recommendations"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "scope": "R608.5.1.4 slump limit for removable forms"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "self_consolidating_concrete"
+            },
+            {
+              "predicate": "slump_>=_8_inches"
+            },
+            {
+              "predicate": "approved_for_placement_without_internal_vibration"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "scope": "R608.5.1.6 internal vibration requirement"
+        }
+      ],
+      "evidence_required": [
+        "Concrete mix design specifying f'c >= 2,500 psi at 28 days, cement type per ASTM C150/C595/C1157, slump limits, and aggregate gradation",
+        "Reinforcing steel mill certifications showing compliance with ASTM A615, A706, or A996",
+        "Anchor bolt and sheet-steel material specifications and certifications (ASTM A307/F1554; ASTM A653/A792/A875 SS, minimum Grade 33)",
+        "Form manufacturer data sheets and, for flat ICF systems, conformance to ASTM E2634",
+        "Slump and compressive-strength test reports per ASTM C143 and applicable cylinder tests"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_5_4",
+      "cite": "R608.5.4",
+      "section_node": "section_r608_5_4",
+      "title": "Reinforcement installation: secure placement, cover, lap splices, development, hooks, and waffle-grid web restrictions",
+      "intent": "Ensure reinforcing steel is positioned, covered, spliced, developed, hooked, and (for waffle-grid webs) excluded as required so the prescriptive structural performance assumed in R608.6 through R608.8 is actually achieved in the field.",
+      "applies_when": [
+        {
+          "predicate": "is_concrete_wall_construction"
+        },
+        {
+          "predicate": "wall_contains_reinforcing_steel"
+        }
+      ],
+      "requires": {
+        "type": "reinforcement_installation",
+        "support_and_cover": {
+          "secure_with_tie_wire_or_bar_support": true,
+          "cover_concrete_cast_against_earth_inches": 3,
+          "cover_removable_forms_exposed_to_earth_or_weather_inches": {
+            "no_5_and_smaller": 1.5,
+            "no_6_and_larger": 2.0
+          },
+          "cover_removable_forms_not_exposed_inches": 0.75,
+          "cover_stay_in_place_forms_inches": 0.75,
+          "minus_tolerance_max_inches": "min(one-third required cover, 3/8)"
+        },
+        "location_in_walls_per": [
+          "section_r404_1_3_3_7_2",
+          "section_r608_6_5"
+        ],
+        "lap_splices": {
+          "length_per_table": "TABLE R608.5.4(1)",
+          "figure": "FIGURE R608.5.4(1)",
+          "max_noncontact_gap_inches": "min(one-fifth required lap length, 6)"
+        },
+        "development_in_tension_per": [
+          "TABLE R608.5.4(1)",
+          "FIGURE R608.5.4(2)"
+        ],
+        "standard_hooks_per_figure": "FIGURE R608.5.4(3)",
+        "waffle_grid_web_restriction": "no reinforcement (including stirrups) in webs; form ties permitted",
+        "alternate_bar_size_or_grade": {
+          "permitted_per": "TABLE R608.5.4(2)",
+          "min_spacing": "one-half the wall thickness",
+          "max_spacing_inches": 48
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Reinforcement placement details on plans showing bar size, spacing, and required cover for each wall type and exposure (earth, weather, removable form, stay-in-place form)",
+        "Lap splice schedule referencing Table R608.5.4(1) with bar size, grade, splice length, and noncontact-gap limits",
+        "Tension development length and hook details per Table R608.5.4(1) and Figures R608.5.4(2) and R608.5.4(3)",
+        "Note prohibiting reinforcement (including stirrups) in waffle-grid webs",
+        "If alternate bar size/grade is used, calculations or tabular reference to Table R608.5.4(2) showing equivalent area of steel per linear foot"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_6",
+      "cite": "R608.6",
+      "section_node": "section_r608_6",
+      "title": "Above-grade concrete walls: minimum thickness, reinforcement, and lateral support per R608.6",
+      "intent": "Ensure above-grade concrete walls (load-bearing and nonload-bearing) have prescribed minimum thickness, vertical and horizontal reinforcement for wind, support on continuous foundations, and lateral support to floor/roof framing so out-of-plane and in-plane loads are resisted.",
+      "applies_when": [
+        {
+          "predicate": "is_above_grade_concrete_wall"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "wall_form_type_flat"
+            },
+            {
+              "predicate": "wall_form_type_waffle_grid"
+            },
+            {
+              "predicate": "wall_form_type_screen_grid"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_design",
+        "thickness_and_reinforcement_per_table": [
+          "TABLE R608.6(1)",
+          "TABLE R608.6(2)",
+          "TABLE R608.6(3)",
+          "TABLE R608.6(4)"
+        ],
+        "construction_per_figure": [
+          "FIGURE R608.6(1)",
+          "FIGURE R608.6(2)",
+          "FIGURE R608.6(3)",
+          "FIGURE R608.6(4)"
+        ],
+        "supported_on": "continuous foundation walls or slabs-on-ground monolithic with the footing per R403",
+        "wall_thickness_relative_to_story_above": ">= thickness of wall in story above",
+        "vertical_wall_reinforcement_for_wind_per_table": [
+          "TABLE R608.6(1)",
+          "TABLE R608.6(2)",
+          "TABLE R608.6(3)",
+          "TABLE R608.6(4)"
+        ],
+        "vertical_bar_at_corners_of_exterior_walls": true,
+        "minimum_horizontal_reinforcement_when_not_governed_by_R608_7_2_2_1": {
+          "bars": "four No. 4 bars [Grade 40 (280 MPa)]",
+          "placement": [
+            "top bar within 12 in of top of wall",
+            "bottom bar within 12 in of finish floor",
+            "one bar at approximately one-third wall height",
+            "one bar at approximately two-thirds wall height"
+          ]
+        },
+        "min_solid_wall_length_per": "section_r608_7",
+        "openings_and_lintels_per": "section_r608_8",
+        "lateral_support_for_out_of_plane_per": "section_r608_9",
+        "design_required_per_ACI_318_when": [
+          "wall or building outside limitations of R608.2",
+          "design required by tables in this section",
+          "wall not within scope of tables"
+        ],
+        "tested_per": [
+          "ACI_318"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall schedule on plans listing wall type (flat/waffle/screen), nominal thickness, and vertical bar size and spacing taken from Table R608.6(1)-(4) for the design wind speed and exposure",
+        "Foundation detail showing continuous foundation wall or monolithic slab-on-ground footing per Section R403",
+        "Corner detail showing a vertical bar at corners of exterior walls",
+        "Horizontal reinforcement schedule showing four No. 4 bars at the prescribed elevations (or the larger amount required by R608.7.2.2.1)",
+        "Lateral connection details from wall to floor and roof framing per Section R608.9; ACI 318 calculations if outside R608.2 limits"
+      ],
+      "depends_on": [
+        "section_r608_2",
+        "section_r608_5_4",
+        "section_r608_7",
+        "section_r608_8",
+        "section_r608_9",
+        "section_r403"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_7",
+      "cite": "R608.7",
+      "section_node": "section_r608_7",
+      "title": "Solid walls for lateral-force resistance: minimum length, segments, and reinforcement",
+      "intent": "Require each exterior wall line to contain a code-prescribed total length of solid-wall segments (with minimum segment length, maximum opening width, and corner placement) so the building has adequate in-plane shear resistance to wind.",
+      "applies_when": [
+        {
+          "predicate": "is_above_grade_concrete_wall"
+        },
+        {
+          "predicate": "wall_resists_lateral_in_plane_wind_forces"
+        }
+      ],
+      "requires": {
+        "type": "lateral_solid_wall",
+        "total_length_solid_wall_per_table": [
+          "TABLE R608.7.1.1(1)",
+          "TABLE R608.7.1.1(2)",
+          "TABLE R608.7.1.1(3)"
+        ],
+        "reduction_factors_permitted_per_table": [
+          "TABLE R608.7.1.1(4)",
+          "TABLE R608.7.1.1(5)",
+          "TABLE R608.7.1.1(6)"
+        ],
+        "equation": "TL >= R1 * R2 * R3 * UR  (Equation R6-1)",
+        "minimum_two_solid_wall_segments_per_wall_line": true,
+        "minimum_solid_wall_segment_length_inches": 24,
+        "max_segments_24_to_under_48_in_per_wall_line": 2,
+        "maximum_clear_opening_width_feet": 18,
+        "max_distance_from_corner_to_segment_end_feet": 6,
+        "segment_must_extend_full_story_height_without_openings": true,
+        "permitted_utility_openings_flat_or_waffle_grid_walls": {
+          "max_area_sq_in": 30,
+          "max_dimension_inches": 6.25,
+          "min_distance_from_segment_side_edges_inches": 6
+        },
+        "reinforcement_per": [
+          "section_r608_7_2_2",
+          "TABLE R608.7.1.1(6)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plan showing each exterior endwall and sidewall line with marked solid-wall segments, segment lengths, and total length TL compared to UR x R1 x R2 x R3",
+        "Calculation table or notes for reduction factors R1 (mean roof height), R2 (floor-to-ceiling height) and R3 (design strength) referencing Tables R608.7.1.1(4), (5), and (6)",
+        "Dimensioned details verifying minimum 24-in segment length, no more than two 24-to-<48-in segments per line, maximum 18-ft clear opening, and segment ends within 6 ft of each corner",
+        "Vertical-end and shear reinforcement schedule for each solid wall segment per Section R608.7.2.2 and Table R608.7.1.1(6)",
+        "Detail of any utility openings within solid wall segments confirming they are < 30 sq in, no dimension > 6-1/4 in, and at least 6 in from segment side edges"
+      ],
+      "depends_on": [
+        "section_r608_6",
+        "section_r608_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_8",
+      "cite": "R608.8",
+      "section_node": "section_r608_8",
+      "title": "Reinforcement around openings and lintels for openings >= 2 ft wide",
+      "intent": "Ensure that wall openings of at least 2 feet receive supplemental horizontal and vertical reinforcement, a properly designed lintel, and adequate concrete depth above so the opening does not undermine the wall's gravity and shear capacity.",
+      "applies_when": [
+        {
+          "predicate": "is_above_grade_concrete_wall"
+        },
+        {
+          "predicate": "wall_opening_width_>=_2_feet"
+        }
+      ],
+      "requires": {
+        "type": "openings_and_lintels",
+        "additional_to": [
+          "section_r404_1_3",
+          "section_r608_6",
+          "section_r608_7"
+        ],
+        "reinforcement_layout_per_figure": "FIGURE R608.8(1)",
+        "horizontal_reinforcement": {
+          "lintel_above_opening_per": "section_r608_8_2",
+          "bottom_of_opening_bar": "not less than one No. 4 bar within 12 in of bottom of opening",
+          "extension_beyond_edges": "develop the bar in tension per Section R608.5.4.4"
+        },
+        "vertical_reinforcement": {
+          "min_bars_each_side": "one No. 4 [Grade 40 (280 MPa)]",
+          "extends_full_story_height": true,
+          "location_within_inches_of_opening_side": 12
+        },
+        "minimum_depth_of_concrete_over_opening_inches": {
+          "flat_walls": 8,
+          "waffle_grid_walls": 8,
+          "screen_grid_walls": 12
+        },
+        "waffle_or_screen_grid_opening_location": "not less than one-half of a vertical core occurs along each side of the opening",
+        "lintels": {
+          "required_for_openings_>=_2_feet": true,
+          "uniform_loading_per": [
+            "section_r608_8_2_1",
+            "section_r608_8_2_2",
+            "section_r608_8_2_3"
+          ],
+          "concentrated_loads_designed_per": "ACI 318",
+          "max_clear_span_per_table": [
+            "TABLE R608.8(2)",
+            "TABLE R608.8(3)",
+            "TABLE R608.8(4)",
+            "TABLE R608.8(5)",
+            "TABLE R608.8(6)",
+            "TABLE R608.8(7)",
+            "TABLE R608.8(8)"
+          ],
+          "construction_per_figure": [
+            "FIGURE R608.8(2)",
+            "FIGURE R608.8(3)",
+            "FIGURE R608.8(4)"
+          ],
+          "stirrups": {
+            "max_spacing": "d/2 where d = lintel depth D minus cover",
+            "hooks": "135-degree standard hooks at one end (single bar or two bundled bars); 90- or 135-degree hooks at free end per Section R608.5.4.5 and Figure R608.5.4(3)",
+            "min_clear_spacing_between_top_bottom_bars_inches": 1
+          }
+        },
+        "tested_per": [
+          "ACI_318"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "continuous_horizontal_wall_reinforcement_within_12_in_of_top_of_wall_story_per_R404_1_3_2_or_R608_6_2"
+            },
+            {
+              "predicate": "meets_location_requirements_in_figures_R608_8_2_3_4"
+            },
+            {
+              "predicate": "meets_size_requirements_in_tables_R608_8_2_through_R608_8_10"
+            }
+          ],
+          "effect": "may_substitute_for_top_or_bottom_lintel_reinforcement",
+          "scope": "R608.8.1.1 horizontal reinforcement"
+        }
+      ],
+      "evidence_required": [
+        "Opening detail per Figure R608.8(1) showing one No. 4 bar within 12 in of bottom of opening, with bar extensions developed in tension per R608.5.4.4",
+        "Vertical reinforcement schedule showing one No. 4 [Grade 40] bar each side of the opening, full story height, within 12 in of opening side",
+        "Minimum concrete depth over openings: 8 in for flat/waffle-grid, 12 in for screen-grid; openings in waffle/screen-grid located so at least half a vertical core occurs each side",
+        "Lintel schedule with clear span, bar size, stirrup size and spacing (d/2), and standard hook details per Tables R608.8(2)-(8) and Figures R608.8(2)-(4)",
+        "ACI 318 design calculations for lintels supporting concentrated loads (e.g., roof or floor beams or girders)"
+      ],
+      "depends_on": [
+        "section_r608_5_4",
+        "section_r608_6",
+        "section_r608_7",
+        "r404_1_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

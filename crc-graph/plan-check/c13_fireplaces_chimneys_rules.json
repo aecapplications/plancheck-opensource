@@ -1,0 +1,644 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Fireplaces & Chimneys",
+  "community_id": 13,
+  "extracted_from_sections": [
+    "chapter_10_chimneys_and_fireplaces.md",
+    "chapter_44_referenced_standards.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r1001_masonry_fireplaces",
+      "cite": "R1001",
+      "section_node": "section_r1001",
+      "title": "Masonry fireplace construction, footings, seismic reinforcing, firebox, hearth, and clearance",
+      "intent": "Ensure masonry fireplaces are structurally sound, properly founded, seismically reinforced where required, and adequately separated from combustibles to prevent structural failure and fire hazards.",
+      "applies_when": [
+        {
+          "predicate": "fireplace_type_is_masonry"
+        }
+      ],
+      "requires": {
+        "type": "composite_construction_requirements",
+        "footing": {
+          "material": "concrete_or_solid_masonry",
+          "min_thickness_in": 12,
+          "min_projection_beyond_face_in": 6,
+          "founded_on": "natural_undisturbed_earth_or_engineered_fill_below_frost_depth",
+          "min_depth_below_finished_grade_in_when_no_freezing": 12
+        },
+        "seismic_reinforcing": {
+          "applies_when": {
+            "any_of": [
+              {
+                "predicate": "in_seismic_design_category_c"
+              },
+              {
+                "predicate": "in_seismic_design_category_d0"
+              },
+              {
+                "predicate": "in_seismic_design_category_d1"
+              },
+              {
+                "predicate": "in_seismic_design_category_d2"
+              }
+            ]
+          },
+          "vertical_bars": {
+            "chimney_width_lte_40_in": "four_no_4_continuous_vertical_bars",
+            "chimney_width_gt_40_in": "two_additional_no_4_bars_per_additional_40_in_or_per_additional_flue"
+          },
+          "horizontal_ties": {
+            "size": "1/4_inch_ties_or_equivalent",
+            "max_vertical_spacing_in": 18,
+            "two_ties_at_each_bend_in_vertical_bars": true
+          },
+          "table_reference": "Table R1001.1",
+          "section_reference": "R606"
+        },
+        "seismic_anchorage": {
+          "applies_when": {
+            "all_of": [
+              {
+                "any_of": [
+                  {
+                    "predicate": "in_seismic_design_category_c"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d0"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d1"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d2"
+                  }
+                ]
+              },
+              {
+                "predicate": "floor_ceiling_or_roof_line_more_than_6_ft_above_grade"
+              },
+              {
+                "predicate": "not_constructed_completely_within_exterior_walls"
+              }
+            ]
+          },
+          "straps": {
+            "size_in": "3/16_x_1",
+            "count": 2,
+            "min_embedment_into_chimney_in": 12,
+            "hooked_around_outer_bars_with_extension_in": 6,
+            "fasten_to_min_joists_or_rafters": 4,
+            "bolts": "two_1/2_inch_diameter"
+          }
+        },
+        "firebox_walls": {
+          "material": "solid_masonry_units_or_grouted_hollow_masonry_or_stone_or_concrete",
+          "min_back_and_side_wall_thickness_in_with_lining": 8,
+          "min_back_and_side_wall_thickness_in_without_lining": 10,
+          "min_firebrick_lining_thickness_in": 2,
+          "max_firebrick_joint_width_in": 0.25,
+          "firebrick_standard": [
+            "ASTM_C27",
+            "ASTM_C1261"
+          ],
+          "mortar_standard": "ASTM_C199_medium_duty_refractory"
+        },
+        "firebox_dimensions": {
+          "min_depth_in": 20,
+          "min_throat_above_opening_in": 8,
+          "min_throat_opening_depth_in": 4,
+          "passageway_cross_section_gte_flue_cross_section": true
+        },
+        "lintel": {
+          "material": "noncombustible",
+          "min_bearing_each_end_in": 4,
+          "damper_min_height_above_lintel_in": 8
+        },
+        "damper": {
+          "material": "ferrous_metal",
+          "min_height_above_opening_in": 8,
+          "operable_from_room": true
+        },
+        "hearth": {
+          "min_thickness_in": 4,
+          "min_extension_thickness_in": 2,
+          "min_extension_front_in_lt_6_sf_opening": 16,
+          "min_extension_side_in_lt_6_sf_opening": 8,
+          "min_extension_front_in_gte_6_sf_opening": 20,
+          "min_extension_side_in_gte_6_sf_opening": 12,
+          "supported_by_noncombustible_materials": true,
+          "no_combustible_against_underside": true
+        },
+        "clearance_to_combustibles": {
+          "min_front_and_sides_in": 2,
+          "min_back_in": 4,
+          "airspace_not_filled_except_fireblocking": true
+        },
+        "tested_per": [
+          "std_astm_c1261"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_rumford_fireplace"
+            }
+          ],
+          "effect": "alternate_dimensions_permitted",
+          "alternate_requirements": {
+            "min_depth_in": 12,
+            "min_depth_as_fraction_of_opening_width": "1/3",
+            "min_throat_above_lintel_in": 12,
+            "min_throat_area_as_fraction_of_opening_area": "1/20"
+          }
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "fireplace_listed_and_labeled_per_ul_127_for_contact_with_combustibles"
+            }
+          ],
+          "effect": "combustible_materials_may_contact_exterior_surfaces"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "fireplace_part_of_masonry_or_concrete_walls"
+            }
+          ],
+          "effect": "combustibles_must_be_at_least_12_in_from_inside_surface_of_nearest_firebox_lining"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "exposed_combustible_trim_or_sheathing"
+                },
+                {
+                  "predicate": "abuts_masonry_fireplace_sidewall_or_hearth_extension"
+                },
+                {
+                  "predicate": "trim_at_least_12_in_from_nearest_firebox_lining"
+                }
+              ]
+            }
+          ],
+          "effect": "abutment_permitted_per_figure_R1001_11"
+        },
+        {
+          "id": "ex5",
+          "applies_when": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "combustible_mantel_or_trim_on_fireplace_front"
+                },
+                {
+                  "predicate": "trim_outside_6_in_of_fireplace_opening"
+                }
+              ]
+            }
+          ],
+          "effect": "trim_permitted_with_max_projection_1/8_in_per_1_in_distance_within_12_in"
+        }
+      ],
+      "evidence_required": [
+        "Foundation/footing detail showing concrete or solid masonry, thickness, projection, and bearing depth",
+        "Seismic reinforcing schedule showing vertical bar count/size, horizontal tie spacing, and anchorage straps for SDC C/D0/D1/D2",
+        "Firebox section detail with wall thickness, firebrick lining thickness, mortar/firebrick spec citations (ASTM C1261, ASTM C199)",
+        "Hearth and hearth extension detail showing thickness and extension dimensions tied to fireplace opening size",
+        "Clearance-to-combustibles plan/section showing 2-inch front/side and 4-inch back airspace and fireblocking detail"
+      ],
+      "depends_on": [
+        "std_astm_c1261"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r1003_masonry_chimneys",
+      "cite": "R1003",
+      "section_node": "section_r1003",
+      "title": "Masonry chimney construction, seismic reinforcing/anchorage, flue lining, termination, and clearance",
+      "intent": "Ensure masonry chimneys are structurally sound, seismically reinforced and anchored where required, properly lined to resist flue gases, terminated to provide adequate draft, and separated from combustibles to prevent fires.",
+      "applies_when": [
+        {
+          "predicate": "chimney_type_is_masonry_or_concrete"
+        }
+      ],
+      "requires": {
+        "type": "composite_construction_requirements",
+        "footing": {
+          "material": "concrete_or_solid_masonry",
+          "min_thickness_in": 12,
+          "min_projection_beyond_face_in": 6,
+          "founded_on": "natural_undisturbed_earth_or_engineered_fill_below_frost_depth",
+          "min_depth_below_finished_grade_in_when_no_freezing": 12
+        },
+        "seismic_reinforcing": {
+          "applies_when": {
+            "any_of": [
+              {
+                "predicate": "in_seismic_design_category_c"
+              },
+              {
+                "predicate": "in_seismic_design_category_d0"
+              },
+              {
+                "predicate": "in_seismic_design_category_d1"
+              },
+              {
+                "predicate": "in_seismic_design_category_d2"
+              }
+            ]
+          },
+          "vertical_bars": {
+            "chimney_width_lte_40_in": "four_no_4_continuous_vertical_bars_anchored_in_foundation",
+            "chimney_width_gt_40_in": "two_additional_no_4_bars_per_additional_40_in_or_fraction"
+          },
+          "horizontal_ties": {
+            "size": "1/4_inch_ties_or_equivalent",
+            "max_spacing_in": 18,
+            "two_ties_at_each_bend": true
+          },
+          "not_required_in_categories": [
+            "A",
+            "B"
+          ]
+        },
+        "seismic_anchorage": {
+          "applies_when": {
+            "all_of": [
+              {
+                "any_of": [
+                  {
+                    "predicate": "in_seismic_design_category_c"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d0"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d1"
+                  },
+                  {
+                    "predicate": "in_seismic_design_category_d2"
+                  }
+                ]
+              },
+              {
+                "predicate": "floor_ceiling_or_roof_line_more_than_6_ft_above_grade"
+              },
+              {
+                "predicate": "not_constructed_completely_within_exterior_walls"
+              }
+            ]
+          },
+          "straps": {
+            "size_in": "3/16_x_1",
+            "count": 2,
+            "min_embedment_into_chimney_in": 12,
+            "hooked_around_outer_bars_with_extension_in": 6,
+            "fasten_to_min_joists": 4,
+            "bolts": "two_1/2_inch_diameter"
+          }
+        },
+        "wall_thickness": {
+          "material": "solid_masonry_units_or_hollow_masonry_units_grouted_solid",
+          "min_nominal_thickness_in": 4
+        },
+        "flue_lining_required": true,
+        "flue_lining_options": [
+          {
+            "option": "clay_flue_lining_per_ASTM_C315"
+          },
+          {
+            "option": "listed_chimney_lining_system_per_UL_1777"
+          },
+          {
+            "option": "factory_built_chimney_or_chimney_unit_listed_for_installation_within_masonry_chimneys"
+          },
+          {
+            "option": "other_approved_materials_resistant_to_corrosion_erosion_softening_cracking_up_to_1800F"
+          }
+        ],
+        "clay_flue_lining_installation": {
+          "standard": "ASTM_C1283",
+          "extends_from_in_below_lowest_inlet": 8,
+          "max_slope_from_vertical_deg": 30,
+          "mortar_standard": "ASTM_C199_medium_duty_water_insoluble_refractory"
+        },
+        "termination": {
+          "min_height_above_any_building_portion_within_10_ft_ft": 2,
+          "min_height_above_roof_penetration_ft": 3
+        },
+        "chimney_caps": {
+          "material": "concrete_metal_or_stone",
+          "drip_edge_required": true,
+          "caulked_bond_break_around_flue_liners_per_ASTM_C1283": true,
+          "sloped_to_shed_water": true
+        },
+        "spark_arrestor": {
+          "required_when": "chimney_attached_to_solid_fuel_appliance_or_fireplace",
+          "min_net_free_area_multiplier_of_flue_outlet": 4,
+          "screen_material_equivalent_to": "12_gage_wire_or_19_gage_galvanized_or_24_gage_stainless",
+          "max_opening_sphere_diameter_in": 0.5,
+          "min_opening_sphere_diameter_in": 0.375
+        },
+        "multiple_flues_separation": {
+          "min_wythe_thickness_in_between_adjacent_flues": 4,
+          "bonded_into_chimney_walls": true
+        },
+        "cleanout_opening": {
+          "max_distance_above_base_in": 6,
+          "upper_edge_min_below_lowest_inlet_in": 6,
+          "min_height_in": 6,
+          "noncombustible_cover_required": true
+        },
+        "clearance_to_combustibles": {
+          "min_interior_or_within_exterior_wall_in": 2,
+          "min_entirely_outside_exterior_walls_in": 1,
+          "airspace_not_filled_except_fireblocking": true
+        },
+        "chimney_cricket_required_when": {
+          "dimension_parallel_to_ridgeline_gt_in": 30,
+          "and_does_not_intersect_ridgeline": true
+        },
+        "tested_per": [
+          "std_astm_c315",
+          "std_astm_c1283",
+          "std_ul_1777"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "in_seismic_design_category_a_or_b"
+            }
+          ],
+          "effect": "reinforcement_and_seismic_anchorage_not_required"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "chimney_lining_listed_per_UL_1777_for_contact_with_combustibles"
+            }
+          ],
+          "effect": "combustibles_may_contact_exterior_surfaces"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "chimney_part_of_masonry_or_concrete_walls"
+            }
+          ],
+          "effect": "combustibles_must_be_at_least_12_in_from_inside_surface_of_nearest_flue_lining"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "exposed_combustible_trim_or_sheathing"
+                },
+                {
+                  "predicate": "trim_at_least_8_in_from_nearest_flue_lining"
+                }
+              ]
+            }
+          ],
+          "effect": "abutment_to_chimney_sidewalls_permitted_per_figure_R1003_18"
+        },
+        {
+          "id": "ex5",
+          "applies_when": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "two_flues_venting_only_one_appliance"
+                },
+                {
+                  "predicate": "joints_staggered_at_least_4_in"
+                }
+              ]
+            }
+          ],
+          "effect": "two_flues_may_adjoin_with_only_flue_lining_separation"
+        },
+        {
+          "id": "ex6",
+          "applies_when": [
+            {
+              "predicate": "cleaning_possible_through_fireplace_opening"
+            }
+          ],
+          "effect": "cleanout_opening_not_required_for_fireplace_flues"
+        }
+      ],
+      "evidence_required": [
+        "Footing detail with thickness, projection, founding-depth notes",
+        "Seismic reinforcing/anchorage schedule and details for SDC C/D0/D1/D2 (vertical bars, ties, straps, bolts)",
+        "Flue lining specification citing ASTM C315, ASTM C1283 installation, or UL 1777 listing",
+        "Chimney elevation showing termination heights (3 ft above roof, 2 ft above any building portion within 10 ft) and cap detail",
+        "Spark arrestor specification with net free area calculation, screen gauge/material, and opening sizes",
+        "Clearance-to-combustibles section showing 2-inch interior or 1-inch exterior airspace and fireblocking detail"
+      ],
+      "depends_on": [
+        "std_astm_c315",
+        "std_astm_c1283",
+        "std_ul_1777"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r1004_factory_built_fireplaces",
+      "cite": "R1004",
+      "section_node": "section_r1004",
+      "title": "Factory-built fireplaces shall be listed, labeled, tested to UL 127, and meet California EPA Phase 2 emissions",
+      "intent": "Ensure factory-built fireplaces achieve safety through third-party listing/labeling and California-specific low-emission performance instead of prescriptive masonry construction.",
+      "applies_when": [
+        {
+          "predicate": "fireplace_type_is_factory_built"
+        }
+      ],
+      "requires": {
+        "type": "listing_and_testing",
+        "must_be_listed_and_labeled": true,
+        "installed_per_listing_conditions": true,
+        "tested_per": [
+          "std_ul_127"
+        ],
+        "wood_burning_emissions": {
+          "applies_when": {
+            "predicate": "is_wood_burning_factory_built_fireplace"
+          },
+          "must_be_qualified_at": "US_EPA_Voluntary_Fireplace_Program_Phase_2_emissions_level",
+          "compliance_with": "California_Green_Building_Standards_Code_Chapter_4_Division_4.5"
+        },
+        "hearth_extensions": {
+          "installed_per_listing": true,
+          "readily_distinguishable_from_surrounding_floor": true,
+          "if_listed_and_labeled_must_comply_with": "UL_1618"
+        },
+        "decorative_shrouds": {
+          "prohibited_unless": "listed_and_labeled_for_use_with_specific_factory_built_fireplace_system_and_installed_per_manufacturer_instructions"
+        },
+        "gasketed_fireplace_doors": {
+          "prohibited_unless": "fireplace_system_specifically_tested_listed_and_labeled_for_such_use_per_UL_127"
+        }
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "UL 127 listing/labeling documentation for the specific fireplace model",
+        "Manufacturer's installation instructions and compliance with conditions of listing",
+        "For wood-burning units: certification of US EPA Voluntary Fireplace Program Phase 2 qualification and CALGreen Chapter 4 Division 4.5 compliance",
+        "Hearth extension cut sheet showing UL 1618 listing where applicable",
+        "Cut sheets for any decorative shrouds or gasketed doors showing they are listed for the specific system"
+      ],
+      "depends_on": [
+        "std_ul_127"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r1005_factory_built_chimneys",
+      "cite": "R1005",
+      "section_node": "section_r1005",
+      "title": "Factory-built chimneys shall be listed, labeled, and installed per manufacturer; UL 103/UL 127 marking required for the served appliance",
+      "intent": "Ensure factory-built chimneys are matched to their served appliance via the appropriate UL listing (HT for solid-fuel, UL 127 for factory-built fireplaces, UL 959 for medium-heat) and installed with required offsets, supports, and insulation shields to prevent fire and structural failure.",
+      "applies_when": [
+        {
+          "predicate": "chimney_type_is_factory_built"
+        }
+      ],
+      "requires": {
+        "type": "listing_and_installation",
+        "must_be_listed_and_labeled": true,
+        "installed_and_terminated_per_manufacturer_instructions": true,
+        "solid_fuel_appliances_in_dwelling_units": {
+          "applies_when": {
+            "all_of": [
+              {
+                "predicate": "installed_in_dwelling_unit"
+              },
+              {
+                "predicate": "serves_solid_fuel_burning_appliance"
+              }
+            ]
+          },
+          "must_comply_with": "UL_103_Type_HT",
+          "marking": [
+            "Type HT",
+            "Residential Type and Building Heating Appliance Chimney"
+          ]
+        },
+        "open_combustion_chamber_fireplace_chimneys": {
+          "applies_when": {
+            "predicate": "serves_open_combustion_chamber_fireplace"
+          },
+          "must_comply_with": "UL_103",
+          "marking": [
+            "Residential Type and Building Heating Appliance Chimney"
+          ]
+        },
+        "open_combustion_chamber_appliances_non_dwelling": {
+          "applies_when": {
+            "all_of": [
+              {
+                "predicate": "serves_open_combustion_chamber_appliance"
+              },
+              {
+                "predicate": "installed_in_building_other_than_dwelling_unit"
+              }
+            ]
+          },
+          "must_comply_with": "UL_103",
+          "marking_options": [
+            "Building Heating Appliance Chimney",
+            "Residential Type and Building Heating Appliance Chimney"
+          ]
+        },
+        "factory_built_fireplace_chimneys": {
+          "applies_when": {
+            "predicate": "serves_factory_built_fireplace"
+          },
+          "must_comply_with": "UL_127"
+        },
+        "medium_heat_appliances": {
+          "applies_when": {
+            "predicate": "flue_gas_temperature_above_1000F_at_chimney_entrance"
+          },
+          "must_comply_with": "UL_959"
+        },
+        "decorative_shrouds": {
+          "prohibited_unless": "listed_and_labeled_for_specific_factory_built_chimney_system_and_installed_per_manufacturer_instructions"
+        },
+        "structural_support": {
+          "structural_members_supporting_chimney_designed_for_additional_load": true
+        },
+        "offsets": {
+          "max_angle_from_vertical_deg": 30,
+          "max_elbows": 4
+        },
+        "insulation_shield": {
+          "required_when": "chimney_passes_through_insulated_assembly",
+          "min_steel_thickness_in": 0.0187,
+          "min_steel_gage": "26",
+          "clearance_from_chimney_to_insulation_per_manufacturer": true,
+          "in_attic_terminate_above_insulation_in": 2,
+          "secured_to_prevent_displacement": true
+        },
+        "tested_per": [
+          "std_ul_103",
+          "std_ul_127"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "serves_open_combustion_chamber_fireplace"
+            }
+          ],
+          "effect": "comply_with_UL_103_marked_Residential_Type_and_Building_Heating_Appliance_Chimney_in_lieu_of_Type_HT"
+        }
+      ],
+      "evidence_required": [
+        "UL 103 (Type HT where required) or UL 127 listing/labeling documentation for the chimney model and required nameplate marking",
+        "Manufacturer's installation instructions including support, offset, and insulation shield details",
+        "Structural calculation/detail showing supporting joists/rafters designed for the additional chimney load",
+        "Offset diagram showing maximum 30 degrees from vertical and no more than four elbows",
+        "Insulation shield detail (26-gage minimum steel) where chimney passes through insulated assemblies or attic, with 2-inch projection above attic insulation"
+      ],
+      "depends_on": [
+        "std_ul_103",
+        "std_ul_127"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

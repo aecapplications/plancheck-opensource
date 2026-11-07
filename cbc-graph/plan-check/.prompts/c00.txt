@@ -1,0 +1,168 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 24 Glass And Glazing" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch12_chapter_12_interior_environment.md
+cbc-graph/chapters/ch16_chapter_16_structural_design.md
+cbc-graph/chapters/ch17a_chapter_17a_special_inspections_and_tests.md
+cbc-graph/chapters/ch23_chapter_23_wood.md
+cbc-graph/chapters/ch24_chapter_24_glass_and_glazing.md
+cbc-graph/chapters/ch31_chapter_31_special_construction.md
+cbc-graph/chapters/ch35_chapter_35_referenced_standards.md
+cbc-graph/chapters/ch7_chapter_7_fire_and_smoke_protection_features.md
+cbc-graph/chapters/ch7a_chapter_7a_sfm_materials_and_construction_methods_for_exteri.md
+cbc-graph/chapters/ch8_chapter_8_interior_finishes.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c00_chapter_24_glass_and_glazing_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_1202_4_4                                                  1202.4.4 Flood Hazard Areas
+  sec_1609_2                                                    1609.2 Protection of Openings
+  sec_1612_2                                                    1612.2 Flood Design and Construction
+  sec_1612_4                                                    1612.4 Flood Hazard Documentation
+  sec_1709a                                                     Section 1709A Preconstruction Load Tests (Ch 17A)
+  sec_2303_1_9                                                  2303.1.9 Preservative-Treated Wood
+  sec_2303_2                                                    2303.2 Fire-Retardant-Treated Wood
+  sec_2304_12                                                   2304.12 Protection Against Decay and Termites
+  cbc_section_2401_general_glazing_scope                        Section 2401 General (Glazing Scope)
+  cbc_section_2402_glazing_replacement                          Section 2402 Glazing Replacement
+  cbc_section_2403_general_requirements_for_glass               Section 2403 General Requirements for Glass
+  cbc_section_2404_wind_snow_seismic_dead_loads_on_glass        Section 2404 Wind, Snow, Seismic and Dead Loads on Glass
+  cbc_section_2405_sloped_glazing_and_skylights                 Section 2405 Sloped Glazing and Skylights
+  cbc_section_2406_safety_glazing                               Section 2406 Safety Glazing
+  cbc_section_2407_glass_in_handrails_and_guards                Section 2407 Glass in Handrails and Guards
+  cbc_section_2408_glazing_in_athletic_facilities               Section 2408 Glazing in Athletic Facilities
+  cbc_section_2409_glass_in_walkways_elevator_hoistways_cars    Section 2409 Glass in Walkways, Elevator Hoistways and Cars
+  cbc_section_2410_structural_sealant_glazing                   Section 2410 Structural Sealant Glazing (SSG)
+  cbc_section_2411_thermal_barriers_aluminum_mullion            Section 2411 Thermal Barriers in Aluminum Mullion Systems
+  cbc_section_3102_membrane_structures                          Section 3102 Membrane Structures
+  cbc_section_3103_temporary_structures                         Section 3103 Temporary Structures
+  cbc_section_3104_pedestrian_walkways_and_tunnels              Section 3104 Pedestrian Walkways and Tunnels
+  cbc_section_3105_awnings_and_canopies                         Section 3105 Awnings and Canopies
+  cbc_section_3106_marquees                                     Section 3106 Marquees
+  cbc_section_3108_telecommunication_broadcast_towers           Section 3108 Telecommunication and Broadcast Towers
+  cbc_section_3109_swimming_pools_spas_hot_tubs                 Section 3109 Swimming Pools, Spas and Hot Tubs
+  cbc_section_3110_automatic_vehicular_gates                    Section 3110 Automatic Vehicular Gates
+  cbc_section_3111_solar_energy_systems                         Section 3111 Solar Energy Systems
+  cbc_section_3112_greenhouses                                  Section 3112 Greenhouses
+  cbc_section_3113_relocatable_buildings                        Section 3113 Relocatable Buildings
+  cbc_section_3114_public_restroom_buildings_flood_hazard       Section 3114 Public Use Restroom Buildings in Flood Hazard A
+  cbc_section_3115_intermodal_shipping_containers               Section 3115 Intermodal Shipping Containers
+  cbc_section_701a_scope_purpose_application                    Section 701A Scope, Purpose and Application
+  cbc_section_702a_definitions_wui                              Section 702A Definitions (WUI)
+  sec_703_3_1                                                   703.3.1 Noncombustible Materials
+  cbc_section_703a_standards_of_quality                         Section 703A Standards of Quality
+  cbc_section_704a_ignition_resistant_construction              Section 704A Ignition-Resistant Construction
+  cbc_section_705a_roofing                                      Section 705A Roofing
+  cbc_section_706a_vents                                        Section 706A Vents
+  cbc_section_707a_exterior_covering                            Section 707A Exterior Covering
+  cbc_section_708a_exterior_windows_skylights_doors             Section 708A Exterior Windows, Skylights and Doors
+  cbc_section_709a_decking                                      Section 709A Decking
+  cbc_section_710a_accessory_buildings                          Section 710A Accessory Buildings and Miscellaneous Structure
+  sec_720_1                                                     720.1 General — Thermal- and Sound-Insulating Materials
+  cbc_section_801_scope_interior_finishes                       Section 801 Scope (Interior Finishes)
+  cbc_section_803_wall_and_ceiling_finishes                     Section 803 Wall and Ceiling Finishes
+  cbc_section_804_interior_floor_finish                         Section 804 Interior Floor Finish
+  cbc_section_805_combustible_materials_type_i_ii               Section 805 Combustible Materials in Types I and II Construc
+  cbc_section_806_decorative_materials_and_trim                 Section 806 Decorative Materials and Trim
+  cbc_section_807_insulation                                    Section 807 Insulation
+  cbc_section_808_acoustical_ceiling_systems                    Section 808 Acoustical Ceiling Systems
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  cbc_table_2403_2_1_minimum_glazing_requirements               Table 2403.2.1 Minimum Glazing Requirements
+  cbc_table_2406_2_1_glazing_category_cpsc                      Table 2406.2(1) Minimum Category Classification CPSC 16 CFR 
+  cbc_table_2406_2_2_glazing_category_ansi                      Table 2406.2(2) Minimum Category Classification ANSI Z97.1
+  cbc_table_3115_8_5_3_allowable_shear_container_walls          Table 3115.8.5.3 Allowable Shear Values Container Walls
+  cbc_table_803_13_interior_finish_by_occupancy                 Table 803.13 Interior Wall and Ceiling Finish Requirements b
+  cbc_concept_safety_glazing_material                           Safety Glazing Material
+  cbc_finish_class_a_b_c                                        Interior Finish Classes A, B, C
+  cbc_hazardous_location_glazing                                Hazardous Location (Safety Glazing)
+  cbc_swimming_pool_safety_act                                  California Swimming Pool Safety Act
+  concept_fire_retardant_treated_wood                           Fire-Retardant-Treated Wood (FRTW)
+  concept_naturally_durable_wood                                Naturally Durable Wood
+  concept_preservative_treated_wood                             Preservative-Treated Wood
+  mat_fire_retardant_treated_wood                               Fire-Retardant-Treated Wood
+  mat_ignition_resistant_material                               Ignition-Resistant Material
+  mat_laminated_glass                                           Laminated Glass
+  mat_tempered_glass                                            Tempered Glass
+  std_aama_tir_a8                                               AAMA TIR A8-16 Structural Performance of Composite Thermal B
+  std_aama_wdma_csa_101                                         AAMA/WDMA/CSA 101/I.S.2/A440-17 North American Fenestration 
+  std_ccr_title19_div1_ch8                                      CCR Title 19 Division 1 Chapter 8 (Flame Resistance)
+  std_cpsc_16_cfr_1201                                          CPSC 16 CFR Part 1201
+  std_iso_1496_1                                                ISO 1496-1
+  std_sfm_12_7a_standards                                       SFM Standards 12-7A-1 through 12-7A-5
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_ansi_z97_1                                                ANSI Z97.1
+  std_asce_24                                                   ASCE 24
+  std_asce_55                                                   ASCE/SEI 55-16 Tensile Membrane Structures
+  std_astm_d2898                                                ASTM D2898 - Accelerated Weathering of Fire-Retardant-Treate
+  std_astm_d3201                                                ASTM D3201 - Hygroscopic Properties of Fire-Retardant-Treate
+  std_astm_d5516                                                ASTM D5516 - Fire-Retardant-Treated Plywood Flexure Properti
+  std_astm_d5664                                                ASTM D5664 - Fire-Retardant-Treated Lumber Properties
+  std_astm_e108_ul790                                           ASTM E108 / UL 790 (Roof Fire Classification)
+  std_astm_e1300                                                ASTM E1300 (Load Resistance of Glass)
+  std_astm_e136                                                 ASTM E136
+  std_astm_e1886                                                ASTM E1886-2013A Standard Test Method for Performance of Ext
+  std_astm_e1996                                                ASTM E1996 Standard Specification for Performance of Exterio
+  std_astm_e2652                                                ASTM E2652
+  std_astm_e2707                                                ASTM E2707 (Wall Assembly Flame Impingement)
+  std_astm_e2886                                                ASTM E2886 (Vent Ember Resistance)
+  std_astm_e330                                                 ASTM E330/E330M-14 Standard Test Method for Structural Perfo
+  std_astm_e648_nfpa_253                                        ASTM E648 / NFPA 253 (Critical Radiant Flux)
+  std_astm_e84                                                  ASTM E84
+  std_awpa_m4                                                   AWPA M4 - Standard for the Care of Preservative-Treated Wood
+  std_awpa_u1                                                   AWPA U1 - Use Category System: User Specification for Treate
+  std_nfpa_701                                                  NFPA 701
+  std_ul_723                                                    UL 723
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_1202_4_4>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 24 Glass And Glazing",
+  "community_id": 0,
+  "extracted_from_sections": ["ch12_chapter_12_interior_environment.md", "ch16_chapter_16_structural_design.md", "ch17a_chapter_17a_special_inspections_and_tests.md", "ch23_chapter_23_wood.md", "ch24_chapter_24_glass_and_glazing.md", "ch31_chapter_31_special_construction.md", "ch35_chapter_35_referenced_standards.md", "ch7_chapter_7_fire_and_smoke_protection_features.md", "ch7a_chapter_7a_sfm_materials_and_construction_methods_for_exteri.md", "ch8_chapter_8_interior_finishes.md"],
+  "rules": [ ... ]
+}
+
+Aim for 12-51 rules. After writing the file, just confirm "wrote c00_chapter_24_glass_and_glazing_rules.json with N rules" and stop.

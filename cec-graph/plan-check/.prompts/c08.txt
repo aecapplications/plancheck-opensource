@@ -1,0 +1,162 @@
+You are a plan-check rule extraction subagent. The graph community "Emergency Systems — Article 700" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c08_emergency_systems_article_700_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_1  700.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_10  700.10 Wiring Emergency System
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_10_b  700.10(B) Wiring Independence
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_10_d  700.10(D) Fire Protection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12  700.12 General Requirements Sources of Power
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_c  700.12(C) Storage Battery
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_d  700.12(D) Generator Set
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_e  700.12(E) Uninterruptible Power Supplies
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_f  700.12(F) Separate Service
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_g  700.12(G) Fuel Cell System
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_h  700.12(H) DC Microgrid Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_12_i  700.12(I) Unit Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_15  700.15 Loads on Emergency Branch Circuits
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_16  700.16 Emergency Illumination
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_17  700.17 Branch Circuits for Emergency Lighting
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_18  700.18 Circuits for Emergency Power
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_19  700.19 Multiwire Branch Circuits
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_2  700.2 Definitions
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_20  700.20 Switch Requirements
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_21  700.21 Switch Location
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_22  700.22 Exterior Lights
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_23  700.23 Dimmer and Relay Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_24  700.24 Directly Controlled Emergency Luminaires
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_25  700.25 Branch Circuit Emergency Lighting Transfer Switch
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_26  700.26 Automatic Load Control Relay
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_3  700.3 Tests and Maintenance
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_3_a  700.3(A) Conduct or Witness Test
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_3_b  700.3(B) Tested Periodically
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_3_f  700.3(F) Temporary Source for Maintenance
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_30  700.30 Accessibility
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_31  700.31 Ground-Fault Protection of Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_32  700.32 Selective Coordination
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_4  700.4 Capacity and Rating
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_5  700.5 Transfer Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_6  700.6 Signals
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_7  700.7 Signs
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_8  700.8 Surge Protection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_1  701.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_10  701.10 Wiring Legally Required Standby Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12  701.12 General Requirements Sources of Power
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_c  701.12(C) Storage Battery
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_d  701.12(D) Generator Set
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_e  701.12(E) Uninterruptible Power Supplies
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_f  701.12(F) Separate Service
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_g  701.12(G) Connection Ahead of Service Disconnecting Means
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_h  701.12(H) Fuel Cell System
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_i  701.12(I) DC Microgrid Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_12_j  701.12(J) Unit Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_2  701.2 Definition
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_3  701.3 Tests and Maintenance
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_30  701.30 Accessibility
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_31  701.31 Ground-Fault Protection of Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_32  701.32 Selective Coordination
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_4  701.4 Capacity and Rating
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_5  701.5 Transfer Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_6  701.6 Signals
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_701_7  701.7 Signs
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_1  702.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_10  702.10 Wiring Optional Standby Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_11  702.11 Portable Generator Grounding
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_12  702.12 Outdoor Generator Sets
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_2  702.2 Definition
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_4  702.4 Capacity and Rating
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_5  702.5 Transfer Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_6  702.6 Signals
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_702_7  702.7 Signs
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_1  708.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_10  708.10 Feeder and Branch Circuit Wiring
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_11  708.11 Branch Circuit and Feeder Distribution Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_12  708.12 Feeders and Branch Circuits Supplied by COPS
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_14  708.14 Wiring of HVAC Fire Alarm Security Emergency Comms Si
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_2  708.2 Definitions
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_20  708.20 Sources of Power
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_21  708.21 Ventilation
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_22  708.22 Capacity of Power Sources
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_24  708.24 Transfer Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_30  708.30 Branch Circuits Supplied by COPS
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_4  708.4 Risk Assessment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_5  708.5 Physical Security
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_50  708.50 Accessibility
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_52  708.52 Ground-Fault Protection of Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_54  708.54 Selective Coordination
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_6  708.6 Testing and Maintenance
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_64  708.64 Emergency Operations Plan
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_708_8  708.8 Commissioning
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_critical_operations_power_system  Critical Operations Power System COPS (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_dcoa  Designated Critical Operations Areas DCOA
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_emergency_system  Emergency System (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_700_10_b_a  Informational Note Figure 700.10(B)(a)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_700_10_b_b  Informational Note Figure 700.10(B)(b)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_700_32  Informational Note Figure 700.32
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_700_3_f  Informational Note Figure 700.3(F)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_701_32  Informational Note Figure 701.32
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_fig_708_54  Informational Note Figure 708.54
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_legally_required_standby  Legally Required Standby System (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_optional_standby  Optional Standby System (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_scada  Supervisory Control and Data Acquisition SCADA
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_700_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Emergency Systems — Article 700",
+  "community_id": 8,
+  "extracted_from_sections": ["23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 21-85 rules. After writing the file, just confirm "wrote c08_emergency_systems_article_700_rules.json with N rules" and stop.

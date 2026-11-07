@@ -1,0 +1,268 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Precast Concrete Foundations",
+  "community_id": 19,
+  "extracted_from_sections": [
+    "chapter_4_foundations_a.md",
+    "chapter_4_foundations_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r402_3",
+      "cite": "R402.3",
+      "section_node": "section_r402_3",
+      "title": "Precast concrete foundations: design and installation conformity",
+      "intent": "Ensure precast concrete foundations are engineered per the wall design rules and installed per code and the manufacturer's instructions so site assembly matches the approved design.",
+      "applies_when": [
+        {
+          "predicate": "foundation_type_is_precast_concrete"
+        }
+      ],
+      "requires": {
+        "type": "design_and_installation_conformance",
+        "design_per": [
+          "section_r404_5"
+        ],
+        "installation_per": [
+          "this_code",
+          "manufacturer_instructions"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Stamped precast foundation design package demonstrating compliance with Section R404.5",
+        "Manufacturer installation instructions on file with approved drawings",
+        "Field inspection records confirming installation matches manufacturer instructions and approved drawings"
+      ],
+      "depends_on": [
+        "section_r404_5"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_4",
+      "cite": "R403.4",
+      "section_node": "section_r403_4",
+      "title": "Footings for precast concrete foundations: scope",
+      "intent": "Direct the designer to the specific footing requirements (crushed stone or concrete) that apply when precast concrete foundations are used.",
+      "applies_when": [
+        {
+          "predicate": "foundation_type_is_precast_concrete"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with": [
+          "section_r403_4_1",
+          "section_r403_4_2",
+          "table_r403_4"
+        ],
+        "footing_options": [
+          "crushed_stone_footing",
+          "concrete_footing"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan calling out footing type (crushed stone per R403.4.1 or concrete per R403.4.2) for each precast wall run",
+        "Reference on plans to Table R403.4 sizing where crushed stone footings are used",
+        "Reference to Figures R403.4(1) and R403.4(2) details on the construction documents"
+      ],
+      "depends_on": [
+        "table_r403_4"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_4_a_crushed_stone",
+      "cite": "R403.4.1",
+      "section_node": "section_r403_4",
+      "title": "Crushed stone footings for precast foundations: material, sizing, lifts, seismic limit",
+      "intent": "Ensure crushed stone footings under precast foundations use clean, properly graded angular stone, are sized per Table R403.4, are consolidated in adequately thin lifts, and are not used in high seismic categories where their performance is unproven.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "foundation_type_is_precast_concrete"
+            },
+            {
+              "predicate": "footing_type_is_crushed_stone"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "material_and_construction_constraints",
+        "material": {
+          "free_from": [
+            "organic_soils",
+            "clayey_soils",
+            "silty_soils"
+          ],
+          "shape": "angular",
+          "gradation_standard": "ASTM C33",
+          "max_stone_size_in": 0.5,
+          "min_stone_size_in": 0.0625
+        },
+        "sizing_per": [
+          "table_r403_4",
+          "figure_r403_4_1"
+        ],
+        "consolidation": {
+          "method": "vibratory_plate",
+          "max_lift_thickness_in": 8
+        },
+        "seismic_limitation": {
+          "permitted_in_seismic_design_categories": [
+            "A",
+            "B",
+            "C"
+          ],
+          "prohibited_in_seismic_design_categories": [
+            "D0",
+            "D1",
+            "D2",
+            "E"
+          ]
+        },
+        "tested_per": [
+          "ASTM_C33"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Material submittal/cert showing crushed stone meets ASTM C33 with stone size 1/16 in to 1/2 in and angular shape",
+        "Soils report or supplier statement confirming stone is free from organic, clayey or silty soils",
+        "Foundation detail showing depth (D) and width (W) of crushed stone footing per Table R403.4 for the soil bearing value and number of stories",
+        "Inspection record of consolidation in lifts not greater than 8 inches with a vibratory plate",
+        "Site Seismic Design Category from R301.2.2 confirming SDC A, B or C"
+      ],
+      "depends_on": [
+        "table_r403_4",
+        "section_r301_2_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_4_b_concrete_footing",
+      "cite": "R403.4.2",
+      "section_node": "section_r403_4",
+      "title": "Concrete footings under precast foundations: install per R403.1 and Figure R403.4(2)",
+      "intent": "When concrete footings (rather than crushed stone) are used to support precast foundation walls, they must satisfy the standard concrete footing rules and the precast-specific detail figure.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "foundation_type_is_precast_concrete"
+            },
+            {
+              "predicate": "footing_type_is_concrete"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "construction_conformance",
+        "comply_with": [
+          "section_r403_1",
+          "figure_r403_4_2"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan/details showing concrete footing dimensions per R403.1 (Tables R403.1(1)–(3) and Figure R403.1(1))",
+        "Detail showing the precast-to-footing interface per Figure R403.4(2)",
+        "Concrete mix submittal meeting the required compressive strength for footings"
+      ],
+      "depends_on": [
+        "section_r403_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404_5",
+      "cite": "R404.5",
+      "section_node": "section_r404_5",
+      "title": "Precast concrete foundation walls: scope",
+      "intent": "Establish that precast concrete foundation walls are governed by the design, drawing-submittal, and identification subsections of R404.5.",
+      "applies_when": [
+        {
+          "predicate": "wall_is_precast_concrete_foundation_wall"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with": [
+          "section_r404_5_1",
+          "section_r404_5_2",
+          "section_r404_5_3"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan identifying walls as precast concrete and citing Section R404.5",
+        "Cross-reference to design (R404.5.1), submitted drawings (R404.5.2), and panel identification (R404.5.3) on the cover sheet or general notes"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404_5_1",
+      "cite": "R404.5.1",
+      "section_node": "section_r404_5_1",
+      "title": "Precast concrete foundation wall design: engineered design, materials, and stamped drawings",
+      "intent": "Require that precast foundation walls be engineered, that panel materials conform to the precast concrete materials standard or ACI 318, and that the panel drawings carry a registered design professional's seal so the as-built panels match a verified design.",
+      "applies_when": [
+        {
+          "predicate": "wall_is_precast_concrete_foundation_wall"
+        }
+      ],
+      "requires": {
+        "type": "engineered_design_and_materials",
+        "design_basis": "accepted_engineering_practice",
+        "materials_per": {
+          "any_of": [
+            "section_r402_3",
+            "ACI_318"
+          ]
+        },
+        "panel_drawings": {
+          "prepared_by": "registered_design_professional",
+          "seal_required": true
+        },
+        "tested_per": [
+          "ACI_318"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural calculations for the precast panels signed by a registered design professional",
+        "Materials specification on drawings citing R402.3 or ACI 318 (concrete strength >=5,000 psi at 28 days, reinforcing per ASTM A615/A706M/A996M, fastener grade, etc.)",
+        "Panel shop drawings stamped by a registered design professional",
+        "Connection details (panel-to-panel and panel-to-footing) consistent with the engineered design"
+      ],
+      "depends_on": [
+        "section_r402_3",
+        "ACI_318"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,448 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Roof Coverings (Asphalt/Tile/Metal)",
+  "community_id": 7,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_d.md",
+    "chapter_44_referenced_standards.md",
+    "chapter_9_roof_assemblies.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r337_6",
+      "cite": "R337.6",
+      "section_node": "r337_6",
+      "title": "Wildfire ember- and flame-resistant ventilation openings",
+      "intent": "Prevent building ignition during wildfire by blocking ember and flame intrusion through attic, eave, soffit, foundation, and crawl-space ventilation openings in Fire Hazard Severity Zones.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_in_fire_hazard_severity_zone"
+            },
+            {
+              "predicate": "is_in_wildland_urban_interface_fire_area"
+            }
+          ]
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "has_enclosed_attic_vent"
+            },
+            {
+              "predicate": "has_gable_end_vent"
+            },
+            {
+              "predicate": "has_ridge_or_off_ridge_vent"
+            },
+            {
+              "predicate": "has_eave_or_cornice_vent"
+            },
+            {
+              "predicate": "has_enclosed_eave_soffit_vent"
+            },
+            {
+              "predicate": "has_enclosed_rafter_space_vent"
+            },
+            {
+              "predicate": "has_underfloor_vent"
+            },
+            {
+              "predicate": "has_foundation_or_crawl_space_vent"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ventilation_opening_protection",
+        "method": "any_of",
+        "options": [
+          {
+            "approach": "csfm_listed_wui_vent",
+            "listing": "California State Fire Marshal Wildfire Flame and Ember Resistant Vent"
+          },
+          {
+            "approach": "astm_e2886_tested_listed_wui_vent",
+            "performance": [
+              {
+                "test": "ember_intrusion_test",
+                "criterion": "no_flaming_ignition_of_cotton_material"
+              },
+              {
+                "test": "flame_intrusion_integrity_test",
+                "criterion": "no_flaming_ignition"
+              },
+              {
+                "test": "unexposed_side_temperature",
+                "criterion": "<=_662_F_350_C"
+              }
+            ]
+          }
+        ],
+        "sloped_roof_dormer_off_ridge_or_ridge_vents": {
+          "mesh_opening_dim_min_inch": 0.0625,
+          "mesh_opening_dim_max_inch": 0.125,
+          "mesh_material_must_be_noncombustible": true,
+          "mesh_material_must_be_corrosion_resistant": true
+        },
+        "tested_per": [
+          "std_astm_e2886"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Vent product cut sheets showing CSFM WUI listing or ASTM E2886 test report and listing",
+        "Vent schedule on plans identifying location, model, and listing for each ventilation opening",
+        "Manufacturer mesh specification (1/16 inch minimum, 1/8 inch maximum) for off-ridge / ridge / dormer vents on sloped roofs",
+        "Documentation that mesh material is noncombustible and corrosion resistant"
+      ],
+      "depends_on": [
+        "std_astm_e2886",
+        "std_cbc_22"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r905_2",
+      "cite": "R905.2",
+      "section_node": "section_r905_2",
+      "title": "Asphalt shingle installation, slope, fastening, and wind classification",
+      "intent": "Ensure asphalt shingle roof coverings are installed on adequate substrate and slope, are fastened correctly, and are wind-classified for the site's design wind speed so that the roof remains weathertight and resists wind uplift.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_eq_asphalt_shingles"
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_assembly",
+        "deck": {
+          "must_be_solidly_sheathed": true
+        },
+        "slope": {
+          "min_slope_units_vertical_per_12_horizontal": 2,
+          "double_underlayment_required_when_slope_>=2:12_and_<4:12": true
+        },
+        "shingle_material_standard": "ASTM D3462",
+        "wind_resistance": {
+          "primary_test": "ASTM D7158",
+          "fallback_test_when_outside_d7158_scope": "ASTM D3161",
+          "classification_table": "table_r905_2_4_1",
+          "package_label_required": true
+        },
+        "fasteners": {
+          "material_any_of": [
+            "galvanized_steel",
+            "stainless_steel",
+            "aluminum",
+            "copper"
+          ],
+          "type": "roofing_nails",
+          "min_shank_gage": 12,
+          "min_shank_diameter_inch": 0.105,
+          "min_head_diameter_inch": 0.375,
+          "compliance_standard": "ASTM F1667",
+          "min_penetration_into_sheathing_inch": 0.75,
+          "must_penetrate_through_sheathing_when_thickness_<_0_75_inch": true
+        },
+        "attachment": {
+          "min_fasteners_per_strip_shingle": 4,
+          "min_fasteners_per_individual_shingle": 2,
+          "manufacturer_instructions_govern_when_slope_>_21:12": true
+        },
+        "tested_per": [
+          "std_astm_d3462",
+          "std_astm_d7158",
+          "std_astm_d3161",
+          "std_astm_f1667"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "shingles_outside_scope_of_astm_d7158"
+            }
+          ],
+          "effect": "substitute_requirement",
+          "substitute": "Shingles shall instead be tested and labeled to ASTM D3161 and meet the classification in Table R905.2.4.1; packaging shall bear an ASTM D3161 compliance label."
+        }
+      ],
+      "evidence_required": [
+        "Roof plan showing slope; details for double underlayment where slope is between 2:12 and 4:12",
+        "Manufacturer product data sheet for asphalt shingles citing ASTM D3462",
+        "Shingle package label or third-party test report showing ASTM D7158 (or ASTM D3161 fallback) classification meeting Table R905.2.4.1 for the site ultimate design wind speed",
+        "Site ultimate design wind speed (Vult) value used for selecting the shingle classification",
+        "Fastener specification (12 ga min, 3/8 inch head, ASTM F1667) and nailing schedule (4 per strip / 2 per individual) noted on roofing details"
+      ],
+      "depends_on": [
+        "std_astm_d3462",
+        "std_astm_d7158",
+        "std_astm_d3161",
+        "std_astm_f1667",
+        "table_r905_2_4_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r905_3",
+      "cite": "R905.3",
+      "section_node": "section_r905_3",
+      "title": "Clay and concrete tile roof installation, slope, materials, and attachment",
+      "intent": "Ensure clay and concrete roof tiles are installed on adequate sheathing and slope, meet referenced material standards, and are anchored to resist wind uplift, snow, and high-wind / tall-building exposures.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "roof_covering_type_eq_clay_tile"
+            },
+            {
+              "predicate": "roof_covering_type_eq_concrete_tile"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_assembly",
+        "deck": {
+          "must_be_solid_sheathing": true
+        },
+        "slope": {
+          "min_slope_units_vertical_per_12_horizontal": 2.5,
+          "double_underlayment_required_when_slope_between_2_5:12_and_4:12": true
+        },
+        "material_standards": {
+          "clay_tile": "ASTM C1167",
+          "concrete_tile": "ASTM C1492"
+        },
+        "fasteners": {
+          "type": "nails",
+          "must_be_corrosion_resistant": true,
+          "min_gage": 11,
+          "min_shank_diameter_inch": 0.12,
+          "min_head_diameter_inch": 0.3125,
+          "min_penetration_into_deck_inch": 0.75,
+          "or_through_full_deck_thickness": true,
+          "min_attaching_wire_diameter_inch": 0.083
+        },
+        "attachment": {
+          "perimeter_tiles_min_fasteners_per_tile": 1,
+          "tiles_lt_9_psf_min_fasteners_per_tile": 1,
+          "min_fasteners_in_snow_areas_per_tile": 2,
+          "manufacturer_instructions_govern_when_any_of": [
+            "wind_speed_>_130_mph",
+            "roof_height_above_grade_>_40_ft"
+          ],
+          "default_attachment_table": "Table R905.3.7"
+        },
+        "tested_per": [
+          "std_astm_c1167",
+          "std_astm_c1492"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "sheathing_type_eq_spaced_lumber_per_section_r803_1"
+                },
+                {
+                  "predicate": "any_of",
+                  "of": [
+                    {
+                      "predicate": "seismic_design_category_eq_a"
+                    },
+                    {
+                      "predicate": "seismic_design_category_eq_b"
+                    },
+                    {
+                      "predicate": "seismic_design_category_eq_c"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "substitute_requirement",
+          "substitute": "Spaced lumber sheathing in accordance with Section R803.1 is permitted in lieu of solid sheathing for tile roofs in Seismic Design Categories A, B, and C."
+        }
+      ],
+      "evidence_required": [
+        "Roof plan showing slope and deck construction (solid sheathing, or spaced lumber with SDC documentation)",
+        "Tile product data sheet citing ASTM C1167 (clay) or ASTM C1492 (concrete)",
+        "Site ultimate design wind speed and roof height-above-grade noted on plans, with manufacturer's high-wind / tall-building installation instructions when triggers are met",
+        "Fastening schedule (corrosion-resistant 11 ga nails, penetration, perimeter and snow-area attachments) keyed to Table R905.3.7",
+        "Snow-area determination if applicable, with two-fastener-per-tile detail"
+      ],
+      "depends_on": [
+        "std_astm_c1167",
+        "std_astm_c1492"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r905_4",
+      "cite": "R905.4",
+      "section_node": "section_r905_4",
+      "title": "Metal roof shingle installation, slope, materials, and wind resistance",
+      "intent": "Ensure metal roof shingle assemblies use corrosion-resistant materials, are installed only on adequate slopes, and are wind-tested and classified for the site's design wind speed.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_eq_metal_roof_shingles"
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_assembly",
+        "deck": {
+          "must_be_solid_or_closely_fitted_deck": true,
+          "exception_when_designed_for_spaced_sheathing": true
+        },
+        "slope": {
+          "min_slope_units_vertical_per_12_horizontal": 3
+        },
+        "material_standards": {
+          "reference_table": "Table R905.10.3(1)",
+          "must_be_naturally_corrosion_resistant_or_made_corrosion_resistant_per": "Table R905.10.3(2)",
+          "applicable_corrosion_standards_any_of": [
+            "ASTM A653 G90 (galvanized steel)",
+            "ASTM A792 AZ 50 (55% aluminum-zinc-alloy-coated steel)",
+            "ASTM B370 (cold-rolled copper)",
+            "ASTM B101 (lead-coated copper)"
+          ]
+        },
+        "wind_resistance": {
+          "test_any_of": [
+            "ASTM D3161",
+            "FM 4474",
+            "UL 580",
+            "UL 1897"
+          ],
+          "when_tested_per_d3161": {
+            "must_meet_classification_in": "Table R905.4.4.1",
+            "package_label_required": true
+          }
+        },
+        "tested_per": [
+          "std_astm_d3161",
+          "std_fm_4474",
+          "std_ul_580",
+          "std_ul_1897",
+          "std_astm_a653",
+          "std_astm_a792",
+          "std_astm_b370",
+          "std_astm_b101"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan showing slope (>= 3:12) and deck type (solid / closely fitted, or manufacturer's spaced-sheathing listing)",
+        "Manufacturer cut sheet referencing Table R905.10.3(1) material standard and corrosion-resistance per Table R905.10.3(2) (e.g., ASTM A653 G90, ASTM A792 AZ 50, ASTM B370)",
+        "Wind-resistance test report per ASTM D3161, FM 4474, UL 580, or UL 1897",
+        "Site ultimate design wind speed and matching ASTM D3161 classification per Table R905.4.4.1, with package label evidence",
+        "Valley flashing detail showing material per Table R905.10.3(1), 8 inch minimum extension, and 3/4 inch splash diverter rib"
+      ],
+      "depends_on": [
+        "std_astm_d3161",
+        "std_fm_4474",
+        "std_ul_580",
+        "std_ul_1897",
+        "std_astm_a653",
+        "std_astm_a792",
+        "std_astm_b370",
+        "std_astm_b101"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r905_10",
+      "cite": "R905.10",
+      "section_node": "section_r905_10",
+      "title": "Metal roof panel slope, materials, corrosion resistance, and attachment",
+      "intent": "Ensure metal roof panel systems are installed at slopes appropriate to their seam type, use corrosion-resistant materials, and are attached with compatible fasteners to remain weathertight and durable.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_eq_metal_roof_panels"
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_assembly",
+        "deck": {
+          "must_be_solid_or_spaced_sheathing": true,
+          "exception_when_designed_for_spaced_supports": true
+        },
+        "slope": {
+          "lapped_nonsoldered_seam_no_lap_sealant_min_slope": "3:12",
+          "lapped_nonsoldered_seam_with_lap_sealant_min_slope": "0.5:12",
+          "standing_seam_min_slope": "0.25:12"
+        },
+        "material_standards": {
+          "structural_metal_sheet_systems_must_be_designed_per": "California Building Code",
+          "metal_sheet_over_structural_decking_per": "Table R905.10.3(1)",
+          "corrosion_resistance_per": "Table R905.10.3(2)",
+          "examples_any_of": [
+            "ASTM A653 G90 (galvanized steel)",
+            "ASTM A792 AZ 50 (aluminum-zinc-alloy-coated steel)",
+            "ASTM B370 (cold-rolled copper)",
+            "ASTM B101 (lead-coated copper)"
+          ]
+        },
+        "attachment": {
+          "follow_manufacturer_instructions": true,
+          "default_when_no_manufacturer_instructions": {
+            "steel_roofs_fastener": "galvanized",
+            "copper_roofs_fastener_any_of": [
+              "copper",
+              "brass",
+              "bronze",
+              "copper_alloy",
+              "300_series_stainless_steel"
+            ],
+            "general_metal_roofs_fastener_acceptable": "stainless_steel"
+          }
+        },
+        "tested_per": [
+          "std_astm_a653",
+          "std_astm_a792",
+          "std_astm_b370",
+          "std_astm_b101",
+          "std_cbc_22"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan showing seam type (lapped without sealant / lapped with sealant / standing seam) and slope meeting the corresponding minimum",
+        "Manufacturer cut sheet citing Table R905.10.3(1) material standard and corrosion-resistance per Table R905.10.3(2)",
+        "For structural metal-sheet systems: structural design calculations per the California Building Code",
+        "Fastener specification compatible with the panel metal (galvanized for steel, copper/brass/bronze/300-series stainless for copper, stainless acceptable for metal in general) shown on roofing details",
+        "Underlayment specification per Section R905.1.1"
+      ],
+      "depends_on": [
+        "std_astm_a653",
+        "std_astm_a792",
+        "std_astm_b370",
+        "std_astm_b101",
+        "std_cbc_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Referenced Codes & EV Charging",
+  "community_id": 18,
+  "extracted_from_sections": [
+    "chapter_1_scope_and_application.md",
+    "chapter_3_building_planning_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r309_scope",
+      "cite": "R309",
+      "section_node": "section_r309",
+      "title": "Garages and carports scope",
+      "intent": "Establish that any garage or carport in a residential project must comply with the floor surface, fire-protection, opener, spring, flood-hazard and EV-infrastructure provisions of Section R309.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "structure_is_garage"
+            },
+            {
+              "predicate": "structure_is_carport"
+            }
+          ]
+        },
+        {
+          "predicate": "occupancy_is_one_or_two_family_dwelling_or_townhouse"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "comply_with_subsections": [
+          "R309.1",
+          "R309.2",
+          "R309.3",
+          "R309.4",
+          "R309.5",
+          "R309.6",
+          "R309.7",
+          "R309.8"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans identifying every garage and carport on the project",
+        "Note on cover sheet stating compliance with CRC Section R309",
+        "Cross-reference list mapping each R309 subsection to the sheet/detail demonstrating compliance"
+      ],
+      "depends_on": [
+        "section_1_1_5_referenced_codes",
+        "section_1_1_11_format",
+        "international_residential_code_2021"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r309_8_ev_infrastructure",
+      "cite": "R309.8",
+      "section_node": "section_r309_8_ev",
+      "title": "EV charging infrastructure required for new dwellings with attached garages",
+      "intent": "Ensure newly constructed one- and two-family dwellings and townhouses with attached private garages are pre-wired and equipped per CALGreen so that EV charging can be installed without major electrical retrofit.",
+      "applies_when": [
+        {
+          "predicate": "is_newly_constructed"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "occupancy_is_one_family_dwelling"
+            },
+            {
+              "predicate": "occupancy_is_two_family_dwelling"
+            },
+            {
+              "predicate": "occupancy_is_townhouse"
+            }
+          ]
+        },
+        {
+          "predicate": "has_attached_private_garage"
+        }
+      ],
+      "requires": {
+        "type": "referenced_code_compliance",
+        "referenced_document": "California Green Building Standards Code (CALGreen), Chapter 4, Division 4.1",
+        "subject": "EV charging infrastructure",
+        "scope": [
+          "raceway_or_conduit_from_service_panel_to_garage",
+          "panel_capacity_reserved_for_future_ev_charger",
+          "receptacle_or_terminations_per_calgreen_4_106_4"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Electrical single-line diagram showing dedicated raceway from service panel to attached garage",
+        "Panel schedule showing reserved breaker space and labeled 'EV CAPABLE' (or equivalent) per CALGreen 4.106.4",
+        "Garage interior elevation/detail showing termination location and outlet box for future EVSE",
+        "Permit drawing note citing CALGreen Chapter 4, Division 4.1 compliance",
+        "Load calculation reserving capacity for the future EV charging branch circuit"
+      ],
+      "depends_on": [
+        "section_r309",
+        "section_1_1_5_referenced_codes"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_1_1_5_referenced_codes",
+      "cite": "1.1.5",
+      "section_node": "section_1_1_5_referenced_codes",
+      "title": "Referenced codes and standards adopted by reference",
+      "intent": "Bind every code, standard and publication cited within the CRC (including the 2021 IRC, NFPA standards, UL listings, etc.) into the enforceable body of the code and require recognized engineering practice when a subject is not specifically covered.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "rule_cites_external_standard"
+            },
+            {
+              "predicate": "rule_cites_external_code"
+            },
+            {
+              "predicate": "subject_not_specifically_covered_by_crc"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "referenced_code_compliance",
+        "constraints": [
+          "external_standard_applied_at_title_and_date_published_in_crc",
+          "if_subject_not_covered_use_recognized_architectural_or_engineering_practice",
+          "nfpa_codes_and_fire_protection_handbook_permitted_as_authoritative_guides_for_fire_prevention"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Drawing/specification reference to the exact title and edition of each cited standard (e.g., 'UL 325', 'NFPA 13', '2021 IRC')",
+        "Code-analysis sheet listing every referenced standard invoked by the design and the CRC section that triggers it",
+        "For subjects not specifically covered: stamped engineer/architect narrative documenting the recognized practice applied"
+      ],
+      "depends_on": [
+        "international_residential_code_2021"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_1_1_11_format",
+      "cite": "1.1.11",
+      "section_node": "section_1_1_11_format",
+      "title": "CRC adopts the 2021 IRC chapter-by-chapter; reserved chapters are not adopted",
+      "intent": "Tell plan-checkers and designers which IRC chapters carry force of law in California: only chapters that are printed (and not labeled 'Reserved' or 'Not adopted by the State of California') are part of the CRC, with local-ordinance adoption available for the latter.",
+      "applies_when": [
+        {
+          "predicate": "rule_or_provision_originates_in_2021_international_residential_code"
+        }
+      ],
+      "requires": {
+        "type": "applicability_filter",
+        "constraints": [
+          "irc_chapter_marked_reserved_is_not_adopted",
+          "irc_chapter_marked_not_adopted_by_state_of_california_is_not_state_law_but_may_be_adopted_by_local_ordinance",
+          "matrix_adoption_tables_are_informational_only_and_not_regulatory"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "irc_chapter_marked_not_adopted_by_state_of_california"
+            },
+            {
+              "predicate": "local_jurisdiction_has_adopted_chapter_by_ordinance"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Code-analysis sheet confirming each cited IRC chapter is printed and not marked 'Reserved' in the 2022 CRC",
+        "For any provision relying on a 'Not adopted by the State of California' chapter: copy of the local ordinance adopting that chapter",
+        "Designer note stating Matrix Adoption Tables were used only as a guide and not as regulatory text"
+      ],
+      "depends_on": [
+        "international_residential_code_2021",
+        "section_1_1_5_referenced_codes"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

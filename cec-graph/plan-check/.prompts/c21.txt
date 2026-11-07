@@ -1,0 +1,115 @@
+You are a plan-check rule extraction subagent. The graph community "Cabinets & Cutout Boxes — Article 312" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c21_cabinets_cutout_boxes_article_312_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_1  312.1 Scope
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_10  312.10 Material
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_11  312.11 Spacing
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_2  312.2 Damp and Wet Locations
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_3  312.3 Position in Wall
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_4  312.4 Repairing Noncombustible Surfaces
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_5  312.5 Cabinets, Cutout Boxes, and Meter Socket Enclosures
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_6  312.6 Deflection of Conductors
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_7  312.7 Space in Enclosures
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_8  312.8 Switch and Overcurrent Device Enclosures
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_9  312.9 Side or Back Wiring Spaces or Gutters
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_1  314.1 Scope
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_15  314.15 Damp or Wet Locations
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_16  314.16 Number of Conductors in Outlet, Device, and Junction 
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_19  314.19 Boxes Enclosing Flush Devices
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_2  314.2 Round Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_20  314.20 Flush-Mounted Installations
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_21  314.21 Repairing Noncombustible Surfaces
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_22  314.22 Surface Extensions
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_23  314.23 Supports
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_24  314.24 Depth of Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_25  314.25 Covers and Canopies
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_27  314.27 Outlet Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_28  314.28 Pull and Junction Boxes and Conduit Bodies
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_29  314.29 Boxes, Conduit Bodies, and Handhole Enclosures to Be 
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_3  314.3 Nonmetallic Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_30  314.30 Handhole Enclosures
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_4  314.4 Metal Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_40  314.40 Metal Boxes, Conduit Bodies, and Fittings
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_41  314.41 Covers
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_42  314.42 Bushings
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_43  314.43 Nonmetallic Boxes (Construction)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_44  314.44 Marking
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_70  314.70 General (over 1000V)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_71  314.71 Size of Pull/Junction Boxes (over 1000V)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_72  314.72 Construction and Installation Requirements
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_40  334.40 Boxes and Fittings
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_311_60_d_4  Table 311.60(D)(4) Ambient Temperature Correction Factors
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_312_6_a  Table 312.6(A) Min Wire-Bending Space at Terminals
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_312_6_b  Table 312.6(B) Min Wire-Bending Space at Terminals
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_314_16_a  Table 314.16(A) Metal Boxes
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_314_16_b  Table 314.16(B) Volume Allowance per Conductor
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_cabinet  Cabinet
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_conduit_body  Conduit Body
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_cutout_box  Cutout Box
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_handhole  Handhole Enclosure
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_junction_box  Junction Box
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_meter_socket  Meter Socket Enclosure
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_outlet_box  Outlet Box
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_enclosure_pull_box  Pull Box
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_312_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Cabinets & Cutout Boxes — Article 312",
+  "community_id": 21,
+  "extracted_from_sections": ["07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 9-37 rules. After writing the file, just confirm "wrote c21_cabinets_cutout_boxes_article_312_rules.json with N rules" and stop.

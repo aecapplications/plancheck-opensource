@@ -1,0 +1,208 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Single-Ply Membrane Roofing",
+  "community_id": 21,
+  "extracted_from_sections": [
+    "chapter_44_referenced_standards.md",
+    "chapter_9_roof_assemblies.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r905_12_a_slope",
+      "cite": "R905.12.1",
+      "section_node": "section_r905_12",
+      "title": "Thermoset (EPDM) single-ply roof minimum slope",
+      "intent": "Ensure positive drainage on thermoset single-ply (EPDM) membrane roofs to prevent ponding and premature membrane failure.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoset_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "geometric_slope",
+        "metric": "design_slope",
+        "min_rise_per_run": "1/4:12",
+        "min_slope_percent": 2,
+        "applies_to": "roof_design_slope"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan and section details showing design slope of at least 1/4:12 (2%)",
+        "Drainage plan or roof drain layout demonstrating positive drainage",
+        "Manufacturer's installation instructions confirming acceptable slope range"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_12_b_material",
+      "cite": "R905.12.2",
+      "section_node": "section_r905_12",
+      "title": "Thermoset (EPDM) single-ply roof material standards",
+      "intent": "Ensure thermoset single-ply roof coverings meet recognized material specifications for durability and weather resistance.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoset_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "any_of_standards": [
+          "std_astm_d4637",
+          "std_astm_d5019"
+        ],
+        "tested_per": [
+          "std_astm_d4637"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Product data sheet or manufacturer specification identifying compliance with ASTM D4637 or ASTM D5019",
+        "Third-party test report or certification of conformance to the cited ASTM standard",
+        "Roofing material submittal stamped/approved for the specified roof assembly"
+      ],
+      "depends_on": [
+        "std_astm_d4637"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_12_c_application",
+      "cite": "R905.12.3",
+      "section_node": "section_r905_12",
+      "title": "Thermoset (EPDM) single-ply roof installation per chapter and manufacturer instructions",
+      "intent": "Ensure thermoset single-ply roof systems are installed consistent with code provisions and the manufacturer's tested system to maintain warranty and performance.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoset_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "installation_compliance",
+        "must_comply_with": [
+          "chapter_9_roof_assemblies",
+          "manufacturer_installation_instructions"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer's printed installation instructions submitted with the roofing package",
+        "Installer certification or training credential from the membrane manufacturer (if required by manufacturer)",
+        "Roof assembly detail drawings showing seams, terminations, flashings, and fasteners per manufacturer specifications",
+        "Inspection records or special inspection report verifying installation per manufacturer's instructions"
+      ],
+      "depends_on": [
+        "std_astm_d4637"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_13_a_slope",
+      "cite": "R905.13.1",
+      "section_node": "section_r905_13",
+      "title": "Thermoplastic (TPO/PVC) single-ply roof minimum slope",
+      "intent": "Ensure positive drainage on thermoplastic single-ply membrane roofs (TPO/PVC) to prevent ponding water and protect the membrane.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoplastic_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "geometric_slope",
+        "metric": "design_slope",
+        "min_rise_per_run": "1/4:12",
+        "min_slope_percent": 2,
+        "applies_to": "roof_design_slope"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan and section details showing design slope of at least 1/4:12 (2%)",
+        "Drainage / roof drain layout confirming positive drainage to drains or scuppers",
+        "Manufacturer's installation instructions confirming acceptable slope range"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_13_b_material",
+      "cite": "R905.13.2",
+      "section_node": "section_r905_13",
+      "title": "Thermoplastic (TPO/PVC) single-ply roof material standards",
+      "intent": "Ensure thermoplastic single-ply roof coverings meet recognized ASTM material specifications for the specific membrane chemistry (PVC, KEE, or TPO).",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoplastic_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "any_of_standards": [
+          "std_astm_d4434",
+          "std_astm_d6878"
+        ],
+        "additional_acceptable_standards": [
+          "ASTM D6754"
+        ],
+        "tested_per": [
+          "std_astm_d4434",
+          "std_astm_d6878"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Product data sheet or manufacturer specification identifying compliance with ASTM D4434 (PVC), D6754 (KEE), or D6878 (TPO)",
+        "Third-party test report or listing showing conformance to the cited ASTM standard",
+        "Roofing material submittal stamped/approved for the specified roof assembly"
+      ],
+      "depends_on": [
+        "std_astm_d4434",
+        "std_astm_d6878"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_13_c_application",
+      "cite": "R905.13.3",
+      "section_node": "section_r905_13",
+      "title": "Thermoplastic (TPO/PVC) single-ply roof installation per chapter and manufacturer instructions",
+      "intent": "Ensure thermoplastic single-ply roof systems are installed consistent with code provisions and the manufacturer's tested system to achieve weather-tight performance.",
+      "applies_when": [
+        {
+          "predicate": "roof_covering_type_is_thermoplastic_single_ply_membrane"
+        }
+      ],
+      "requires": {
+        "type": "installation_compliance",
+        "must_comply_with": [
+          "chapter_9_roof_assemblies",
+          "manufacturer_installation_instructions"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer's printed installation instructions submitted with the roofing package",
+        "Installer certification from the membrane manufacturer (if required)",
+        "Roof assembly detail drawings showing welded seams, terminations, flashings, and attachment per manufacturer specifications",
+        "Inspection records or special inspection report verifying installation per manufacturer's instructions"
+      ],
+      "depends_on": [
+        "std_astm_d4434",
+        "std_astm_d6878"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

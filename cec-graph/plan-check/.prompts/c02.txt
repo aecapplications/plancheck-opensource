@@ -1,0 +1,203 @@
+You are a plan-check rule extraction subagent. The graph community "Communications Bonding & Grounding — Article 800" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/26_chapter_8_communications_systems.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c02_communications_bonding_grounding_article_800_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  26_chapter_8_communications_systems_800_1                     800.1 Scope
+  26_chapter_8_communications_systems_800_100                   800.100 Cable and Primary Protector Bonding and Grounding
+  26_chapter_8_communications_systems_800_106                   800.106 Primary Protector Grounding and Bonding at Mobile Ho
+  26_chapter_8_communications_systems_800_110                   800.110 Raceways, Cable Routing Assemblies, and Cable Trays
+  26_chapter_8_communications_systems_800_113                   800.113 Installation of Wires, Cables, Cable Routing Assembl
+  26_chapter_8_communications_systems_800_154                   800.154 Applications of Listed Communications Wires, Cables,
+  26_chapter_8_communications_systems_800_180                   800.180 Grounding Devices
+  26_chapter_8_communications_systems_800_182                   800.182 Cable Routing Assemblies and Communications Raceways
+  26_chapter_8_communications_systems_800_2                     800.2 Definitions
+  26_chapter_8_communications_systems_800_21                    800.21 Access to Electrical Equipment Behind Panels
+  26_chapter_8_communications_systems_800_24                    800.24 Mechanical Execution of Work
+  26_chapter_8_communications_systems_800_25                    800.25 Abandoned Cables
+  26_chapter_8_communications_systems_800_26                    800.26 Spread of Fire or Products of Combustion
+  26_chapter_8_communications_systems_800_27                    800.27 Temperature Limitation of Wires and Cables
+  26_chapter_8_communications_systems_800_3                     800.3 Other Articles
+  26_chapter_8_communications_systems_800_44                    800.44 Overhead (Aerial) Wires and Cables
+  26_chapter_8_communications_systems_800_49                    800.49 Metal Entrance Conduit Grounding
+  26_chapter_8_communications_systems_800_53                    800.53 Separation from Lightning Conductors
+  26_chapter_8_communications_systems_805_1                     805.1 Scope - Communications Circuits
+  26_chapter_8_communications_systems_805_133                   805.133 Installation of Communications Wires, Cables, and Eq
+  26_chapter_8_communications_systems_805_156                   805.156 Dwelling Unit Communications Outlet
+  26_chapter_8_communications_systems_805_170                   805.170 Equipment - Listing Requirements
+  26_chapter_8_communications_systems_805_173                   805.173 Drop Wire and Cable
+  26_chapter_8_communications_systems_805_179                   805.179 Communications Wires and Cables
+  26_chapter_8_communications_systems_805_18                    805.18 Installation of Equipment
+  26_chapter_8_communications_systems_805_2                     805.2 Definitions
+  26_chapter_8_communications_systems_805_47                    805.47 Underground Communications Wires and Cables Entering 
+  26_chapter_8_communications_systems_805_48                    805.48 Unlisted Cables Entering Buildings
+  26_chapter_8_communications_systems_805_50                    805.50 Circuits Requiring Primary Protectors
+  26_chapter_8_communications_systems_805_90                    805.90 Protective Devices
+  26_chapter_8_communications_systems_805_93                    805.93 Grounding/Bonding/Interruption of Non-Current-Carryin
+  26_chapter_8_communications_systems_810_1                     810.1 Scope - Radio and Television Equipment
+  26_chapter_8_communications_systems_810_11                    810.11 Material - Antennas and Lead-in Conductors
+  26_chapter_8_communications_systems_810_12                    810.12 Supports - Outdoor Antennas
+  26_chapter_8_communications_systems_810_13                    810.13 Avoidance of Contacts with Conductors of Other System
+  26_chapter_8_communications_systems_810_14                    810.14 Splices
+  26_chapter_8_communications_systems_810_15                    810.15 Grounding - Masts and Metal Structures
+  26_chapter_8_communications_systems_810_16                    810.16 Size of Wire-Strung Antenna - Receiving Station
+  26_chapter_8_communications_systems_810_17                    810.17 Size of Lead-in - Receiving Station
+  26_chapter_8_communications_systems_810_18                    810.18 Clearances - Receiving Stations
+  26_chapter_8_communications_systems_810_19                    810.19 Electrical Supply Circuits Used in Lieu of Antenna
+  26_chapter_8_communications_systems_810_2                     810.2 Definitions
+  26_chapter_8_communications_systems_810_20                    810.20 Antenna Discharge Units - Receiving Stations
+  26_chapter_8_communications_systems_810_21                    810.21 Bonding Conductors and Grounding Electrode Conductors
+  26_chapter_8_communications_systems_810_3                     810.3 Other Articles
+  26_chapter_8_communications_systems_810_4                     810.4 Community Television Antenna
+  26_chapter_8_communications_systems_810_5                     810.5 Radio Noise Suppressors
+  26_chapter_8_communications_systems_810_51                    810.51 Other Sections - Amateur/Citizen Band
+  26_chapter_8_communications_systems_810_52                    810.52 Size of Antenna - Transmitting/Receiving
+  26_chapter_8_communications_systems_810_53                    810.53 Size of Lead-in Conductors
+  26_chapter_8_communications_systems_810_54                    810.54 Clearance on Building
+  26_chapter_8_communications_systems_810_55                    810.55 Entrance to Building
+  26_chapter_8_communications_systems_810_56                    810.56 Protection Against Accidental Contact
+  26_chapter_8_communications_systems_810_57                    810.57 Antenna Discharge Units - Transmitting Stations
+  26_chapter_8_communications_systems_810_58                    810.58 Bonding/Grounding - Amateur and Citizen Band Stations
+  26_chapter_8_communications_systems_810_6                     810.6 Antenna Lead-In Protectors
+  26_chapter_8_communications_systems_810_7                     810.7 Grounding Devices
+  26_chapter_8_communications_systems_810_70                    810.70 Clearance from Other Conductors
+  26_chapter_8_communications_systems_810_71                    810.71 General - Transmitters
+  26_chapter_8_communications_systems_820_1                     820.1 Scope - CATV
+  26_chapter_8_communications_systems_820_100                   820.100 Cable Bonding and Grounding
+  26_chapter_8_communications_systems_820_103                   820.103 Equipment Grounding
+  26_chapter_8_communications_systems_820_133                   820.133 Installation of Coaxial Cables and Equipment
+  26_chapter_8_communications_systems_820_15                    820.15 Power Limitations
+  26_chapter_8_communications_systems_820_179                   820.179 Coaxial Cables - Listing
+  26_chapter_8_communications_systems_820_2                     820.2 Definitions
+  26_chapter_8_communications_systems_820_3                     820.3 Other Articles
+  26_chapter_8_communications_systems_820_44                    820.44 Overhead (Aerial) Coaxial Cables
+  26_chapter_8_communications_systems_820_47                    820.47 Underground Coaxial Cables Entering Buildings
+  26_chapter_8_communications_systems_820_48                    820.48 Unlisted Cables Entering Buildings
+  26_chapter_8_communications_systems_820_93                    820.93 Grounding of the Outer Conductive Shield of Coaxial C
+  26_chapter_8_communications_systems_830_1                     830.1 Scope - Network-Powered Broadband
+  26_chapter_8_communications_systems_830_133                   830.133 Installation of NPB Cables and Equipment
+  26_chapter_8_communications_systems_830_15                    830.15 Power Limitations
+  26_chapter_8_communications_systems_830_160                   830.160 Bends
+  26_chapter_8_communications_systems_830_2                     830.2 Definitions
+  26_chapter_8_communications_systems_830_24                    830.24 Mechanical Execution of Work
+  26_chapter_8_communications_systems_830_3                     830.3 Other Articles
+  26_chapter_8_communications_systems_830_44                    830.44 Overhead (Aerial) Cables
+  26_chapter_8_communications_systems_830_47                    830.47 Underground Network-Powered Broadband Cables Entering
+  26_chapter_8_communications_systems_830_90                    830.90 Primary Electrical Protection
+  26_chapter_8_communications_systems_830_93                    830.93 Grounding/Interruption of Metallic Members of NPB Cab
+  26_chapter_8_communications_systems_840_1                     840.1 Scope - Premises-Powered Broadband
+  26_chapter_8_communications_systems_840_101                   840.101 Premises Circuits Not Leaving the Building
+  26_chapter_8_communications_systems_840_102                   840.102 Premises Circuits Leaving the Building (Grounding)
+  26_chapter_8_communications_systems_840_133                   840.133 Installation of Optical Fibers and Electrical Conduc
+  26_chapter_8_communications_systems_840_160                   840.160 Powering Circuits
+  26_chapter_8_communications_systems_840_170                   840.170 Equipment and Cables - Listing
+  26_chapter_8_communications_systems_840_2                     840.2 Definitions
+  26_chapter_8_communications_systems_840_24                    840.24 Mechanical Execution of Work
+  26_chapter_8_communications_systems_840_25                    840.25 Abandoned Cables
+  26_chapter_8_communications_systems_840_26                    840.26 Spread of Fire
+  26_chapter_8_communications_systems_840_3                     840.3 Other Articles
+  26_chapter_8_communications_systems_840_47                    840.47 Underground Wires and Cables Entering Buildings
+  26_chapter_8_communications_systems_840_48                    840.48 Unlisted Wires and Cables Entering Buildings
+  26_chapter_8_communications_systems_840_90                    840.90 Protective Devices
+  26_chapter_8_communications_systems_840_93                    840.93 Grounding or Interruption
+  26_chapter_8_communications_systems_840_94                    840.94 Premises Circuits Leaving the Building
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  26_chapter_8_communications_systems_table_800_154_a           Table 800.154(a) Applications of Listed Communications Wires
+  26_chapter_8_communications_systems_table_800_154_b           Table 800.154(b) Applications of Listed Communications Racew
+  26_chapter_8_communications_systems_table_800_154_c           Table 800.154(c) Applications of Listed Cable Routing Assemb
+  26_chapter_8_communications_systems_table_800_182_a           Table 800.182(a) Cable Routing Assembly Markings
+  26_chapter_8_communications_systems_table_800_182_b           Table 800.182(b) Communications Raceway Markings
+  26_chapter_8_communications_systems_table_805_179             Table 805.179 Cable Markings (CMP/CMR/CMG/CM/CMX/CMUC)
+  26_chapter_8_communications_systems_table_810_16_a            Table 810.16(A) Size of Receiving Station Outdoor Antenna Co
+  26_chapter_8_communications_systems_table_810_52              Table 810.52 Size of Outdoor Antenna Conductors (Transmittin
+  26_chapter_8_communications_systems_table_820_179             Table 820.179 Coaxial Cable Markings
+  26_chapter_8_communications_systems_table_830_15              Table 830.15 Limitations for Network-Powered Broadband Commu
+  26_chapter_8_communications_systems_table_830_47_c            Table 830.47(C) NPB Minimum Cover Requirements
+  26_chapter_8_communications_systems_cable_ci                  Circuit Integrity (CI) Cable
+  26_chapter_8_communications_systems_cable_cm_lp               Type CM-LP - General-purpose LP communications cable
+  26_chapter_8_communications_systems_cable_cmg_lp              Type CMG-LP - General-purpose LP communications cable
+  26_chapter_8_communications_systems_cable_cmp_lp              Type CMP-LP - Plenum LP communications cable
+  26_chapter_8_communications_systems_cable_cmr_lp              Type CMR-LP - Riser LP communications cable
+  26_chapter_8_communications_systems_cable_cmuc                Type CMUC - Under-carpet communications wire and cable
+  26_chapter_8_communications_systems_cable_hybrid_nm_cm        Hybrid Power and Communications Cable (NM/NM-B + CM)
+  26_chapter_8_communications_systems_concept_abandoned_cable   Abandoned Cable
+  26_chapter_8_communications_systems_concept_low_power_npb     Low-Power NPB Source (0-100 V, 100 VA max)
+  26_chapter_8_communications_systems_concept_medium_power_npb  Medium-Power NPB Source (0-150 V, 100 VA max)
+  26_chapter_8_communications_systems_concept_poe               Power over Ethernet / 4-pair powering
+  26_chapter_8_communications_systems_concept_point_of_entrance  Point of Entrance
+  26_chapter_8_communications_systems_concept_rolling_sphere    46 m (150 ft) Radius Rolling Sphere Zone of Protection
+  26_chapter_8_communications_systems_equipment_antenna         Antenna (wire-strung, vertical rod, flat, parabolic, dipole)
+  26_chapter_8_communications_systems_equipment_antenna_discharge_unit  Antenna Discharge Unit
+  26_chapter_8_communications_systems_equipment_antenna_lead_in_protector  Antenna Lead-In Surge Protector
+  26_chapter_8_communications_systems_equipment_cable_routing_assembly  Cable Routing Assembly
+  26_chapter_8_communications_systems_equipment_coaxial_cable   Coaxial Cable
+  26_chapter_8_communications_systems_equipment_communications_raceway  Communications Raceway (plenum/riser/general)
+  26_chapter_8_communications_systems_equipment_fault_protection_device  Fault Protection Device
+  26_chapter_8_communications_systems_equipment_grounding_block  Grounding Block (CATV)
+  26_chapter_8_communications_systems_equipment_grounding_electrode_conductor  Grounding Electrode Conductor / Bonding Conductor
+  26_chapter_8_communications_systems_equipment_intersystem_bonding_termination  Intersystem Bonding Termination
+  26_chapter_8_communications_systems_equipment_lead_in_conductor  Lead-in Conductor
+  26_chapter_8_communications_systems_equipment_messenger_cable  Messenger Cable
+  26_chapter_8_communications_systems_equipment_network_terminal  Network Terminal (ONU/ONT-class device)
+  26_chapter_8_communications_systems_equipment_niu             Network Interface Unit (NIU)
+  26_chapter_8_communications_systems_equipment_primary_protector  Primary Protector (fused/fuseless)
+  26_chapter_8_communications_systems_equipment_secondary_protector  Secondary Protector
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 26_chapter_8_communications_systems_800_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Communications Bonding & Grounding — Article 800",
+  "community_id": 2,
+  "extracted_from_sections": ["26_chapter_8_communications_systems.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 24-98 rules. After writing the file, just confirm "wrote c02_communications_bonding_grounding_article_800_rules.json with N rules" and stop.

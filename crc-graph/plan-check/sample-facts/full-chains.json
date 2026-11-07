@@ -1,0 +1,839 @@
+{
+  "project": {
+    "address": "12345 Ridge Road, Truckee, CA",
+    "type": "single-family detached dwelling",
+    "scope": "new construction",
+    "stories": 2,
+    "occupancy": "R-3",
+    "design_wind_speed_mph": 110,
+    "ground_snow_load_psf": 50,
+    "seismic_design_category": "D1",
+    "soil_class": "Class 4 - sandy gravel",
+    "climate_zone": "16",
+    "fire_hazard_severity_zone": "Very High"
+  },
+  "rule_pack": "merged_all_communities",
+  "summary": {
+    "rules_fired": 22,
+    "chains": 11,
+    "compression_ratio": 2.0,
+    "cross_pack_chains": 2,
+    "multi_rule_chains": 6,
+    "singleton_chains": 5,
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 204,
+      "duplicate": 28
+    }
+  },
+  "chains": [
+    {
+      "chain_id": "chain_section_r602_10_9_1",
+      "head": {
+        "rule_id": "rule_section_r602_10_9_1",
+        "cite": "R602.10.9.1",
+        "title": "In SDC D0-D2 braced wall panel footings shall meet Section R403.1.2",
+        "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+        "predicate_count": 2
+      },
+      "rules": [
+        {
+          "rule_id": "rule_section_r602_11_1",
+          "cite": "R602.11.1",
+          "title": "In SDC D0-D2 (and SDC C townhouses) provide 0.229 x 3 x 3 plate washers at all sill anchor bolts (slotted hole permitted within limits)",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": -1,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_section_r301_2_2_seismic",
+          "cite": "R301.2.2",
+          "title": "Apply IRC seismic provisions to townhouses and dwellings in SDC C/D0/D1/D2; SDC E uses the California Building Code",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": -1,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_r403_1_6_1",
+          "cite": "R403.1.6.1",
+          "title": "In SDC C (townhouses) and SDC D0/D1/D2 add plate washers, tighter interior anchor-bolt spacing, and 4-ft anchor spacing >2 stories",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": -1,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_section_r602_10_8_1",
+          "cite": "R602.10.8.1",
+          "title": "In SDC D0-D2 fasten braced wall panels to required foundations per R602.11.1 and use 8-16d top plate splice",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": -1,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_section_r602_10_9_1",
+          "cite": "R602.10.9.1",
+          "title": "In SDC D0-D2 braced wall panel footings shall meet Section R403.1.2",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 2
+        }
+      ],
+      "terminal_standards": [],
+      "evidence_required": [
+        {
+          "item": "Foundation plan showing every required braced wall panel supported on a continuous footing complying with R403.1.2",
+          "first_required_by": "R602.10.9.1"
+        },
+        {
+          "item": "Plan note linking R602.10.9.1 to the foundation plan",
+          "first_required_by": "R602.10.9.1"
+        },
+        {
+          "item": "Documentation of any R403.1.2 exception used (two-story with cripple wall <= 4 ft, etc.)",
+          "first_required_by": "R602.10.9.1"
+        },
+        {
+          "item": "Hardware schedule listing 3x3x0.229 plate washers (or approved anchor straps) at every required braced wall line anchor",
+          "first_required_by": "R602.11.1"
+        },
+        {
+          "item": "Detail showing slot dimensions <= bolt+3/16\" wide and <= 1-3/4\" long with cut washer above plate washer",
+          "first_required_by": "R602.11.1"
+        },
+        {
+          "item": "Plan note linking R602.11.1 to the SDC of the project",
+          "first_required_by": "R602.11.1"
+        },
+        {
+          "item": "Manufacturer spec sheet for anchor straps if used as alternative",
+          "first_required_by": "R602.11.1"
+        },
+        {
+          "item": "Seismic Design Category determination per Section R301.2.2.1",
+          "first_required_by": "R301.2.2"
+        },
+        {
+          "item": "Identification of building type (detached 1-2 family dwelling vs. townhouse)",
+          "first_required_by": "R301.2.2"
+        },
+        {
+          "item": "If SDC E: engineered design per California Building Code or reclassification documentation per R301.2.2.1.2",
+          "first_required_by": "R301.2.2"
+        },
+        {
+          "item": "Statement that seismic provisions of this code are applied",
+          "first_required_by": "R301.2.2"
+        },
+        {
+          "item": "Anchor-bolt schedule with plate washers (3x3x0.229) called out along all required braced wall lines",
+          "first_required_by": "R403.1.6.1"
+        },
+        {
+          "item": "Foundation plan showing interior braced wall and bearing-wall anchor bolt spacing <= 6 ft (or 4 ft if >2 stories) and within 12 in. of plate ends",
+          "first_required_by": "R403.1.6.1"
+        },
+        {
+          "item": "Stepped cripple wall detail per R602.11.2 if applicable",
+          "first_required_by": "R403.1.6.1"
+        },
+        {
+          "item": "Force-transfer detail at continuous wood foundations matching R602.11.1 capacity",
+          "first_required_by": "R403.1.6.1"
+        },
+        {
+          "item": "Foundation anchorage detail at each braced wall panel matching R602.11.1 (plate washers, anchor bolts)",
+          "first_required_by": "R602.10.8.1"
+        },
+        {
+          "item": "Top-plate splice detail showing 8-16d face nails on each side of the splice",
+          "first_required_by": "R602.10.8.1"
+        },
+        {
+          "item": "Bracing plan note pointing to R602.10.8.1 in SDC D0/D1/D2",
+          "first_required_by": "R602.10.8.1"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "Wind/Seismic Bracing & SDC Provisions"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r324_4_1_2_wind_load",
+      "head": {
+        "rule_id": "rule_r324_4_1_2_wind_load",
+        "cite": "R324.4.1.2",
+        "title": "Rooftop PV designed for component-and-cladding wind loads",
+        "rule_pack": "PV Systems & Roof Coverings",
+        "predicate_count": 1
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r324_4_1_1_roof_load",
+          "cite": "R324.4.1.1",
+          "title": "Roof load cases for portions covered and not covered by PV",
+          "rule_pack": "PV Systems & Roof Coverings",
+          "community_id": 5,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": -1,
+          "predicate_count": 1
+        },
+        {
+          "rule_id": "rule_r324_4_1_structural",
+          "cite": "R324.4.1",
+          "title": "Rooftop PV systems and their supporting roofs designed for applicable gravity loads",
+          "rule_pack": "PV Systems & Roof Coverings",
+          "community_id": 5,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": -1,
+          "predicate_count": 1
+        },
+        {
+          "rule_id": "rule_r324_4_1_2_wind_load",
+          "cite": "R324.4.1.2",
+          "title": "Rooftop PV designed for component-and-cladding wind loads",
+          "rule_pack": "PV Systems & Roof Coverings",
+          "community_id": 5,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 1
+        }
+      ],
+      "terminal_standards": [
+        "chapter_8",
+        "table_r301_2",
+        "table_r301_2_1_1"
+      ],
+      "evidence_required": [
+        {
+          "item": "Wind-load calculations for the PV array using Table R301.2.1(1) C&C loads",
+          "first_required_by": "R324.4.1.2"
+        },
+        {
+          "item": "Site exposure category and mean roof height documented in calculations",
+          "first_required_by": "R324.4.1.2"
+        },
+        {
+          "item": "Attachment / anchor capacity calculations stamped by an engineer",
+          "first_required_by": "R324.4.1.2"
+        },
+        {
+          "item": "Structural calculations showing both load cases for PV-covered roof areas",
+          "first_required_by": "R324.4.1.1"
+        },
+        {
+          "item": "Structural calculations showing dead + roof live/snow for non-PV-covered roof areas",
+          "first_required_by": "R324.4.1.1"
+        },
+        {
+          "item": "Reference to Table R301.2 climatic snow load on plans",
+          "first_required_by": "R324.4.1.1"
+        },
+        {
+          "item": "Structural calculations for the PV racking/support system signed by a licensed engineer",
+          "first_required_by": "R324.4.1"
+        },
+        {
+          "item": "Roof framing calculations or analysis demonstrating capacity to carry added PV dead load",
+          "first_required_by": "R324.4.1"
+        },
+        {
+          "item": "Plan note referencing Chapter 3 (gravity loads) and Chapter 8 (roof-ceiling construction)",
+          "first_required_by": "R324.4.1"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "PV Systems & Roof Coverings"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_section_r602_10_2",
+      "head": {
+        "rule_id": "rule_section_r602_10_2",
+        "cite": "R602.10.2",
+        "title": "Build braced wall panels as full-height segments without offsets and place them per Section R602.10",
+        "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+        "predicate_count": 1
+      },
+      "rules": [
+        {
+          "rule_id": "rule_section_r602_10_2",
+          "cite": "R602.10.2",
+          "title": "Build braced wall panels as full-height segments without offsets and place them per Section R602.10",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 1
+        },
+        {
+          "rule_id": "rule_section_r602_10_9",
+          "cite": "R602.10.9",
+          "title": "Support braced wall panels on cantilevered joists, post/pier, or stem walls only as R602.10.9 permits",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 1,
+          "predicate_count": 1
+        },
+        {
+          "rule_id": "rule_r602_10_8",
+          "cite": "R602.10.8",
+          "title": "Connect braced wall panels to floor framing or foundation with rim/blocking and Table R602.3(1) fastening",
+          "rule_pack": "Wood Wall Fastening & Stud Sizing",
+          "community_id": 12,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 1,
+          "predicate_count": 1
+        }
+      ],
+      "terminal_standards": [
+        "table_r602_3_1"
+      ],
+      "evidence_required": [
+        {
+          "item": "Wall elevations showing each braced wall panel from top plate to bottom plate without offsets",
+          "first_required_by": "R602.10.2"
+        },
+        {
+          "item": "Bracing plan citing Section R602.10.4 method for each panel",
+          "first_required_by": "R602.10.2"
+        },
+        {
+          "item": "Confirmation that panel placement complies with R602.10.2.2 / R602.10.2.2.1",
+          "first_required_by": "R602.10.2"
+        },
+        {
+          "item": "Foundation/floor-framing detail at each braced wall panel matching one of the permitted support types",
+          "first_required_by": "R602.10.9"
+        },
+        {
+          "item": "Engineered design for raised-floor post/pier supports",
+          "first_required_by": "R602.10.9"
+        },
+        {
+          "item": "Reinforcement schedule per Figure R602.10.9 for short masonry/concrete stem walls",
+          "first_required_by": "R602.10.9"
+        },
+        {
+          "item": "Statement that ABW and PFH panels are not attached to masonry stem walls",
+          "first_required_by": "R602.10.9"
+        },
+        {
+          "item": "Braced wall panel connection details showing rim joist, band joist, end joist, or blocking along the full panel length above and below",
+          "first_required_by": "R602.10.8"
+        },
+        {
+          "item": "Plate-to-framing nailing call-outs taken from Table R602.3(1)",
+          "first_required_by": "R602.10.8"
+        },
+        {
+          "item": "Where joists are parallel and a parallel member cannot be located above/below the panel, details of full-depth blocking at 16 inches o.c. on each side",
+          "first_required_by": "R602.10.8"
+        },
+        {
+          "item": "For panels bearing on concrete or masonry, anchor bolt schedule and detail per Section R403.1.6",
+          "first_required_by": "R602.10.8"
+        }
+      ],
+      "edges": [
+        {
+          "from": "rule_section_r602_10_2",
+          "to": "rule_r602_10_8",
+          "via": "graph:requires"
+        },
+        {
+          "from": "rule_section_r602_10_2",
+          "to": "rule_section_r602_10_9",
+          "via": "graph:requires"
+        }
+      ],
+      "rule_packs_spanned": [
+        "Wind/Seismic Bracing & SDC Provisions",
+        "Wood Wall Fastening & Stud Sizing"
+      ],
+      "cross_pack": true
+    },
+    {
+      "chain_id": "chain_r902_1_1_class_a_in_fhsz",
+      "head": {
+        "rule_id": "rule_r902_1_1_class_a_in_fhsz",
+        "cite": "R902.1.1",
+        "title": "Class A roof required in Fire Hazard Severity Zones",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 4
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r324_4_2_pv_fire_classification",
+          "cite": "R324.4.2",
+          "title": "Rooftop PV fire classification matches roof assembly",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": -1,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_r902_1_1_class_a_in_fhsz",
+          "cite": "R902.1.1",
+          "title": "Class A roof required in Fire Hazard Severity Zones",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": 0,
+          "predicate_count": 4
+        }
+      ],
+      "terminal_standards": [
+        "std_astm_e108",
+        "std_ul_2703",
+        "std_ul_790"
+      ],
+      "evidence_required": [
+        {
+          "item": "PV module/system listing showing UL 2703 fire classification (Class A, B, or C)",
+          "first_required_by": "R324.4.2"
+        },
+        {
+          "item": "Roof assembly fire classification (Class A in FHSZ per R902.1.1)",
+          "first_required_by": "R324.4.2"
+        },
+        {
+          "item": "Cross-check showing PV class is at least equal to roof class",
+          "first_required_by": "R324.4.2"
+        },
+        {
+          "item": "Manufacturer installation instructions and product listing",
+          "first_required_by": "R324.4.2"
+        },
+        {
+          "item": "FHSZ determination for project address (CAL FIRE map screenshot or jurisdiction declaration)",
+          "first_required_by": "R902.1.1"
+        },
+        {
+          "item": "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+          "first_required_by": "R902.1.1"
+        },
+        {
+          "item": "For replacements: roof area calc showing % replaced in past 12 months",
+          "first_required_by": "R902.1.1"
+        },
+        {
+          "item": "Confirmation jurisdiction has not adopted SFM model ordinance per Gov Code 51189",
+          "first_required_by": "R902.1.1"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r902_4_rooftop_pv_ul_2703",
+      "head": {
+        "rule_id": "rule_r902_4_rooftop_pv_ul_2703",
+        "cite": "R902.4",
+        "title": "Rooftop-mounted PV panel systems \u2014 UL 2703 fire classification",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 2
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r902_4_rooftop_pv_ul_2703",
+          "cite": "R902.4",
+          "title": "Rooftop-mounted PV panel systems \u2014 UL 2703 fire classification",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 2
+        },
+        {
+          "rule_id": "rule_r902_4_rooftop_pv_fire_classification",
+          "cite": "R902.4",
+          "title": "Rooftop-mounted PV systems: tested and identified to UL 2703",
+          "rule_pack": "PV Systems & Roof Coverings",
+          "community_id": 5,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": 1,
+          "predicate_count": 1
+        }
+      ],
+      "terminal_standards": [
+        "std_ul_2703"
+      ],
+      "evidence_required": [
+        {
+          "item": "PV system UL 2703 listing showing fire classification",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Manufacturer's installation instructions and listing details",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Site plan showing lot line distance to roof edge",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Local jurisdiction PV-class requirement reference (if applicable)",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "PV system UL 2703 listing/label and fire-classification documentation",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Manufacturer installation instructions consistent with the listing",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Site plan dimensioning roof edge to lot lines",
+          "first_required_by": "R902.4"
+        },
+        {
+          "item": "Plan note declaring jurisdictional fire class requirement, if any",
+          "first_required_by": "R902.4"
+        }
+      ],
+      "edges": [
+        {
+          "from": "rule_r902_4_rooftop_pv_ul_2703",
+          "to": "rule_r902_4_rooftop_pv_fire_classification",
+          "via": "shared_section_node:r902_4"
+        }
+      ],
+      "rule_packs_spanned": [
+        "PV Systems & Roof Coverings",
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": true
+    },
+    {
+      "chain_id": "chain_r337_5_1_wui_roofing_general",
+      "head": {
+        "rule_id": "rule_r337_5_1_wui_roofing_general",
+        "cite": "R337.5.1",
+        "title": "WUI roofing general \u2014 Class A in FHSZ",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 2
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r902_1_3_wui_additional_compliance",
+          "cite": "R902.1.3",
+          "title": "WUI roofing additional compliance with R337.5",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": -1,
+          "predicate_count": 1
+        },
+        {
+          "rule_id": "rule_r337_5_1_wui_roofing_general",
+          "cite": "R337.5.1",
+          "title": "WUI roofing general \u2014 Class A in FHSZ",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": 0,
+          "predicate_count": 2
+        }
+      ],
+      "terminal_standards": [
+        "std_astm_e108",
+        "std_ul_790"
+      ],
+      "evidence_required": [
+        {
+          "item": "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+          "first_required_by": "R337.5.1"
+        },
+        {
+          "item": "FHSZ determination for project address",
+          "first_required_by": "R337.5.1"
+        },
+        {
+          "item": "Manufacturer installation instructions matched to permit drawings",
+          "first_required_by": "R337.5.1"
+        },
+        {
+          "item": "Roofing assembly approval documentation",
+          "first_required_by": "R337.5.1"
+        },
+        {
+          "item": "WUI Fire Area determination for project address",
+          "first_required_by": "R902.1.3"
+        },
+        {
+          "item": "Cross-reference to R337.5 compliance documentation (Class A roof, cap sheet, valley flashing)",
+          "first_required_by": "R902.1.3"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r337_9_decking",
+      "head": {
+        "rule_id": "rule_r337_9_decking",
+        "cite": "R337.9",
+        "title": "WUI decking walking surface within 10 ft of building",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 3
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r337_9_decking",
+          "cite": "R337.9",
+          "title": "WUI decking walking surface within 10 ft of building",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": 0,
+          "predicate_count": 3
+        }
+      ],
+      "terminal_standards": [
+        "std_astm_e2632",
+        "std_astm_e2726",
+        "std_astm_e84",
+        "std_sfm_12_7a_4"
+      ],
+      "evidence_required": [
+        {
+          "item": "Decking product test report (ASTM E2632 + ASTM E2726, SFM 12-7A-4, or alternates)",
+          "first_required_by": "R337.9"
+        },
+        {
+          "item": "Conditions of acceptance verification (peak HRR <= 25 kW/ft^2; no sustained combustion)",
+          "first_required_by": "R337.9"
+        },
+        {
+          "item": "Deck plan showing surfaces within 10 ft of building",
+          "first_required_by": "R337.9"
+        },
+        {
+          "item": "Detail showing 6-inch vertical metal flashing at deck-to-wall intersections",
+          "first_required_by": "R337.9"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r324_4_3_pv_roof_penetrations",
+      "head": {
+        "rule_id": "rule_r324_4_3_pv_roof_penetrations",
+        "cite": "R324.4.3",
+        "title": "Rooftop PV roof penetrations flashed and sealed",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 2
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r324_4_3_pv_roof_penetrations",
+          "cite": "R324.4.3",
+          "title": "Rooftop PV roof penetrations flashed and sealed",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 2
+        }
+      ],
+      "terminal_standards": [],
+      "evidence_required": [
+        {
+          "item": "Mounting detail drawings showing flashing at every roof penetration",
+          "first_required_by": "R324.4.3"
+        },
+        {
+          "item": "Manufacturer-approved flashing/sealant product cut sheets",
+          "first_required_by": "R324.4.3"
+        },
+        {
+          "item": "Inspection sign-off for roof penetration weatherproofing",
+          "first_required_by": "R324.4.3"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r316_3_foam_plastic_surface_burning",
+      "head": {
+        "rule_id": "rule_r316_3_foam_plastic_surface_burning",
+        "cite": "R316.3",
+        "title": "Foam plastic surface burning characteristics",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 2
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r316_3_foam_plastic_surface_burning",
+          "cite": "R316.3",
+          "title": "Foam plastic surface burning characteristics",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 2
+        }
+      ],
+      "terminal_standards": [
+        "std_astm_e84"
+      ],
+      "evidence_required": [
+        {
+          "item": "Foam plastic product spec sheet listing flame spread index and smoke-developed index values",
+          "first_required_by": "R316.3"
+        },
+        {
+          "item": "ASTM E84 or UL 723 test report at intended thickness and density",
+          "first_required_by": "R316.3"
+        },
+        {
+          "item": "Manufacturer's listing showing thickness, density, and end-use configuration",
+          "first_required_by": "R316.3"
+        },
+        {
+          "item": "If thicker than 4 in: R316.6 specific approval documentation",
+          "first_required_by": "R316.3"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_section_r602_10_4",
+      "head": {
+        "rule_id": "rule_section_r602_10_4",
+        "cite": "R602.10.4",
+        "title": "Construct intermittent and continuously sheathed braced wall panels per Table R602.10.4",
+        "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+        "predicate_count": 1
+      },
+      "rules": [
+        {
+          "rule_id": "rule_section_r602_10_4",
+          "cite": "R602.10.4",
+          "title": "Construct intermittent and continuously sheathed braced wall panels per Table R602.10.4",
+          "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+          "community_id": 0,
+          "severity": "required",
+          "jurisdiction": "model_IRC",
+          "depth_from_head": 0,
+          "predicate_count": 1
+        }
+      ],
+      "terminal_standards": [],
+      "evidence_required": [
+        {
+          "item": "Method label for each panel cross-referenced to Table R602.10.4 row",
+          "first_required_by": "R602.10.4"
+        },
+        {
+          "item": "Sheathing/material thickness, fastener type and spacing on the wall details",
+          "first_required_by": "R602.10.4"
+        },
+        {
+          "item": "Notes prohibiting adhesive attachment in SDC C, D0, D1 and D2 (per Table R602.10.4 note a)",
+          "first_required_by": "R602.10.4"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "Wind/Seismic Bracing & SDC Provisions"
+      ],
+      "cross_pack": false
+    },
+    {
+      "chain_id": "chain_r337_7_scope_exterior_covering",
+      "head": {
+        "rule_id": "rule_r337_7_scope_exterior_covering",
+        "cite": "R337.7",
+        "title": "WUI exterior covering scope (parent)",
+        "rule_pack": "WUI Fire Compliance & PV Fire Class",
+        "predicate_count": 1
+      },
+      "rules": [
+        {
+          "rule_id": "rule_r337_7_scope_exterior_covering",
+          "cite": "R337.7",
+          "title": "WUI exterior covering scope (parent)",
+          "rule_pack": "WUI Fire Compliance & PV Fire Class",
+          "community_id": 4,
+          "severity": "required",
+          "jurisdiction": "California",
+          "depth_from_head": 0,
+          "predicate_count": 1
+        }
+      ],
+      "terminal_standards": [],
+      "evidence_required": [
+        {
+          "item": "Building elevations identifying exterior covering material at each face",
+          "first_required_by": "R337.7"
+        },
+        {
+          "item": "Schedule of exterior assemblies cross-referenced to R337.7.3 / R337.7.4 compliance",
+          "first_required_by": "R337.7"
+        }
+      ],
+      "edges": [],
+      "rule_packs_spanned": [
+        "WUI Fire Compliance & PV Fire Class"
+      ],
+      "cross_pack": false
+    }
+  ]
+}

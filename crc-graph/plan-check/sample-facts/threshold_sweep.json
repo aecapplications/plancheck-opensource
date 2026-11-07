@@ -1,0 +1,128 @@
+[
+  {
+    "threshold": 0.0,
+    "chains": 37,
+    "compression": 3.81,
+    "cross_pack": 6,
+    "multi_rule": 15,
+    "singletons": 22,
+    "top5_sizes": [
+      43,
+      24,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 204,
+      "duplicate": 28
+    }
+  },
+  {
+    "threshold": 0.6,
+    "chains": 37,
+    "compression": 3.81,
+    "cross_pack": 6,
+    "multi_rule": 15,
+    "singletons": 22,
+    "top5_sizes": [
+      43,
+      24,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 204,
+      "duplicate": 28
+    }
+  },
+  {
+    "threshold": 0.7,
+    "chains": 37,
+    "compression": 3.81,
+    "cross_pack": 6,
+    "multi_rule": 15,
+    "singletons": 22,
+    "top5_sizes": [
+      43,
+      24,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 203,
+      "duplicate": 28
+    }
+  },
+  {
+    "threshold": 0.8,
+    "chains": 37,
+    "compression": 3.81,
+    "cross_pack": 6,
+    "multi_rule": 15,
+    "singletons": 22,
+    "top5_sizes": [
+      43,
+      24,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 200,
+      "duplicate": 28
+    }
+  },
+  {
+    "threshold": 0.9,
+    "chains": 42,
+    "compression": 3.36,
+    "cross_pack": 6,
+    "multi_rule": 14,
+    "singletons": 28,
+    "top5_sizes": [
+      43,
+      21,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 175,
+      "duplicate": 28
+    }
+  },
+  {
+    "threshold": 1.0,
+    "chains": 42,
+    "compression": 3.36,
+    "cross_pack": 6,
+    "multi_rule": 14,
+    "singletons": 28,
+    "top5_sizes": [
+      43,
+      21,
+      14,
+      5,
+      5
+    ],
+    "edge_stats": {
+      "exact": 142,
+      "fuzzy": 60,
+      "graph": 175,
+      "duplicate": 28
+    }
+  }
+]

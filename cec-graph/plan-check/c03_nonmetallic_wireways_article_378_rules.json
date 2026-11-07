@@ -1,0 +1,3208 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Nonmetallic Wireways \u2014 Article 378",
+  "community_id": 3,
+  "extracted_from_sections": [
+    "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_378_10",
+      "cite": "378.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_10",
+      "title": "Limit nonmetallic wireway to permitted uses",
+      "intent": "Restrict nonmetallic wireways to the environments and configurations for which they are suited and identified.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "exposed_work_only_except_378_10_4",
+          "corrosive_environment_where_identified",
+          "wet_location_where_listed",
+          "extension_through_wall_unbroken_with_access_both_sides"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plan/spec showing wireway run as exposed work",
+        "Listing/identification mark for wet or corrosive use where applicable",
+        "Detail showing unbroken length and conductor access on both sides at any wall pass-through"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_12",
+      "cite": "378.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_12",
+      "title": "Prohibit nonmetallic wireway in unsuitable locations",
+      "intent": "Prevent use of nonmetallic wireways where physical, thermal, environmental, or hazard conditions exceed their listing.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "subject_to_physical_damage": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "exposed_to_sunlight_and_not_listed_for_sunlight": true
+            },
+            {
+              "ambient_temperature_outside_listed_range": true
+            },
+            {
+              "conductor_insulation_temp_exceeds_wireway_listing": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "permitted_by_other_article_for_hazardous_location"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Location classification confirming no hazardous (classified) area or physical-damage exposure",
+        "Listing mark for sunlight resistance where exposed to sun",
+        "Conductor insulation temperature rating vs wireway listed temperature comparison"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_20",
+      "cite": "378.20",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_20",
+      "title": "Group parallel conductors to balance current",
+      "intent": "Prevent current imbalance from inductive reactance in paralleled conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "conductors_connected_in_parallel"
+        }
+      ],
+      "requires": {
+        "type": "conductor_grouping",
+        "max_conductors_per_group_per_phase_or_neutral_or_grounded": 1,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line / cable schedule showing parallel conductor grouping per phase, neutral, and grounded conductor",
+        "Confirmation parallel arrangement complies with 310.10(G)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_22",
+      "cite": "378.22",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_22",
+      "title": "Limit conductor fill to 20 percent",
+      "intent": "Prevent overheating and damage by limiting cross-sectional fill of the wireway.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        }
+      ],
+      "requires": {
+        "type": "fill_limit",
+        "max_conductor_fill_percent": 20,
+        "basis": "interior_cross_sectional_area_at_any_cross_section",
+        "exclude_from_current_carrying": [
+          "signaling_circuit_conductors",
+          "motor_starter_starting_duty_conductors"
+        ],
+        "adjustment_factors_apply": "310.15(C)(1)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor fill calculation showing total conductor area <= 20% of interior cross-sectional area",
+        "Wireway interior cross-sectional area from listing/marking",
+        "Conductor schedule identifying any excluded signaling or motor-starting conductors"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_23",
+      "cite": "378.23",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_23",
+      "title": "Apply deflection and pull-box dimensions to insulated conductors",
+      "intent": "Ensure adequate bending space and pull distances to avoid conductor insulation damage.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "insulated_conductors_deflected_at_ends_or_entries"
+            },
+            {
+              "predicate": "wireway_direction_deflected_>_30_degrees"
+            },
+            {
+              "predicate": "conductors_4_awg_or_larger_pulled_through"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "dimensional_requirement",
+        "deflection_dimensions_per": "table_312_6_a_one_wire_per_terminal",
+        "pull_box_distance_straight_pulls_per": "314.28(A)(1)",
+        "pull_box_distance_angle_pulls_per": "314.28(A)(2)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wireway dimension detail at deflection points meeting Table 312.6(A) one-wire-per-terminal spacing",
+        "Pull calculation for 4 AWG and larger conductors against 314.28(A)(1)/(2)",
+        "Raceway/trade-size transposition for cables used as straight/angle pulls"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_30",
+      "cite": "378.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_30",
+      "title": "Support nonmetallic wireway at required intervals",
+      "intent": "Maintain mechanical integrity and prevent sag or joint failure.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "horizontal_support_interval_max_ft": 3,
+        "horizontal_absolute_max_between_supports_ft": 10,
+        "horizontal_support_at_each_end_or_joint": true,
+        "vertical_support_interval_max_ft": 4,
+        "vertical_max_joints_between_supports": 1,
+        "rigid_joints_required": true,
+        "listed_for_other_intervals_permitted": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "listed_for_other_support_intervals"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Support layout showing horizontal intervals <= 3 ft (<= 10 ft absolute) and at each end/joint",
+        "Vertical support detail at intervals <= 4 ft with no more than one joint between supports",
+        "Listing documentation where alternative support intervals are used"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_44",
+      "cite": "378.44",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_44",
+      "title": "Provide expansion fittings for thermal movement",
+      "intent": "Compensate for thermal expansion and contraction to prevent joint stress.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "expected_length_change_>=_0.25_in_in_straight_run"
+        }
+      ],
+      "requires": {
+        "type": "expansion_provision",
+        "expansion_fittings_required": true,
+        "trigger_length_change_in": 0.25,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Expansion/contraction calculation for straight runs (per PVC characteristics, Table 352.44)",
+        "Location and type of expansion fittings on the wireway layout"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_56",
+      "cite": "378.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_56",
+      "title": "Keep splices accessible and within 75 percent fill",
+      "intent": "Ensure splices remain accessible and do not overfill the wireway.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "contains_splices_or_taps"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_must_be_accessible": true,
+        "max_fill_at_splice_point_percent": 75,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing splice/tap locations accessible after installation",
+        "Fill calculation at splice points showing conductors + splices <= 75% of area"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_60",
+      "cite": "378.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_60",
+      "title": "Install separate equipment grounding conductor",
+      "intent": "Provide an effective ground-fault path since the nonmetallic raceway cannot serve as one.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "separate_equipment_grounding_conductor_required": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_used_to_ground_equipment_per_250_142"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "One-line/cable schedule showing a separate equipment grounding conductor in the wireway",
+        "Documentation invoking 250.142 where grounded conductor is used for equipment grounding"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_70",
+      "cite": "378.70",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_70",
+      "title": "Ground extensions from nonmetallic wireway",
+      "intent": "Maintain grounding continuity through extensions made with Chapter 3 wiring methods.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        },
+        {
+          "predicate": "has_extension_from_wireway"
+        }
+      ],
+      "requires": {
+        "type": "extension_grounding",
+        "extension_method": "cord_pendant_or_any_chapter_3_wiring_method",
+        "equipment_grounding_conductor_or_connection_required": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail of extension wiring method (cord pendant or Chapter 3 method)",
+        "Equipment grounding conductor installed in or connection made to the extension wiring method"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_378_120",
+      "cite": "378.120",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_378_120",
+      "title": "Mark wireway with manufacturer and interior area",
+      "intent": "Ensure identification and fill information remains visible for inspection.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_wireway"
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "marking_visible_after_installation": [
+          "manufacturer_name_or_trademark",
+          "interior_cross_sectional_area_sq_in"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Product marking showing manufacturer name/trademark visible after installation",
+        "Marking showing interior cross-sectional area in square inches"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_380_10",
+      "cite": "380.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_10",
+      "title": "Limit multioutlet assembly to dry locations",
+      "intent": "Restrict multioutlet assemblies to dry locations for which they are suited.",
+      "applies_when": [
+        {
+          "predicate": "is_multioutlet_assembly"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "dry_locations_only"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location classification confirming dry location for the assembly run"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_380_12",
+      "cite": "380.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_12",
+      "title": "Prohibit multioutlet assembly in unsuitable conditions",
+      "intent": "Prevent installation where concealment, damage, voltage, corrosion, or hazard conditions make the assembly unsafe.",
+      "applies_when": [
+        {
+          "predicate": "is_multioutlet_assembly"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "is_concealed_not_otherwise_permitted": true
+            },
+            {
+              "subject_to_severe_physical_damage": true
+            },
+            {
+              "voltage_>=_300v_and_metal_thickness_<_0.040_in": true
+            },
+            {
+              "subject_to_corrosive_vapors": true
+            },
+            {
+              "in_hoistway": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "is_cord_and_plug_connected": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "permitted_by_other_article_for_hazardous_location"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Location/installation detail showing no concealment, hoistway, or corrosive vapor exposure",
+        "Metal thickness >= 0.040 in. where voltage between conductors is 300 V or more",
+        "Connection method confirming not cord-and-plug connected"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_380_23",
+      "cite": "380.23",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_23",
+      "title": "Apply deflection and pull-box dimensions to field-assembled multioutlet assemblies",
+      "intent": "Provide adequate bending and pull space for conductors in field-assembled multioutlet assemblies.",
+      "applies_when": [
+        {
+          "predicate": "is_multioutlet_assembly"
+        },
+        {
+          "predicate": "is_field_assembled"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "insulated_conductors_deflected_at_ends_or_entries"
+            },
+            {
+              "predicate": "assembly_direction_deflected_>_30_degrees"
+            },
+            {
+              "predicate": "conductors_4_awg_or_larger_pulled_through"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "dimensional_requirement",
+        "deflection_dimensions_per": "table_312_6_a_one_wire_per_terminal",
+        "pull_box_distance_straight_pulls_per": "314.28(A)(1)",
+        "pull_box_distance_angle_pulls_per": "314.28(A)(2)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dimension detail at deflection points meeting Table 312.6(A)",
+        "Pull distance calculation for 4 AWG and larger conductors per 314.28(A)(1)/(2)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_380_76",
+      "cite": "380.76",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_380_76",
+      "title": "Allow metal multioutlet assembly through dry partitions with conditions",
+      "intent": "Permit pass-through of dry partitions only where covers are removable and no outlet is inside the partition.",
+      "applies_when": [
+        {
+          "predicate": "is_multioutlet_assembly"
+        },
+        {
+          "predicate": "is_metal"
+        },
+        {
+          "predicate": "passes_through_dry_partition"
+        }
+      ],
+      "requires": {
+        "type": "installation_condition",
+        "must_extend_through_not_run_within": true,
+        "cap_or_cover_removable_on_exposed_portions": true,
+        "no_outlet_within_partition": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Partition penetration detail showing assembly extends through (not within) the partition",
+        "Detail confirming caps/covers removable on exposed portions and no outlets inside the partition"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_10",
+      "cite": "382.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_10",
+      "title": "Limit nonmetallic extensions to permitted uses",
+      "intent": "Restrict nonmetallic extensions to existing 15/20A circuits, exposed dry locations, and low-rise residential/office occupancies.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "from_existing_outlet_on_15_or_20_amp_branch_circuit",
+          "run_exposed_or_concealed_per_382_15_in_dry_location",
+          "residential_or_office_not_exceeding_three_floors_abovegrade"
+        ],
+        "concealable_more_than_three_floors_where_identified": true,
+        "non_grounding_receptacle_origin_per": [
+          "250.130(C)",
+          "406.4(D)(2)(b)",
+          "406.4(D)(2)(c)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Branch circuit documentation showing origin from existing 15A or 20A outlet",
+        "Occupancy classification (residential/office) and floor count <= 3 abovegrade, or identification for higher floors",
+        "Location detail confirming dry location and exposed/permitted-concealed routing"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_12",
+      "cite": "382.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_12",
+      "title": "Prohibit nonmetallic extensions in unsuitable locations",
+      "intent": "Prevent use in unfinished spaces, over voltage limits, in corrosive vapors, or beyond the originating room.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "in_unfinished_basement_attic_or_roof_space": true
+            },
+            {
+              "voltage_between_conductors_>_150v_surface_extension": true
+            },
+            {
+              "voltage_between_conductors_>_300v_aerial_cable": true
+            },
+            {
+              "subject_to_corrosive_vapors": true
+            },
+            {
+              "run_through_floor_or_partition_or_outside_originating_room": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Routing detail confirming extension stays within the originating room and does not pass through floors/partitions",
+        "Circuit voltage documentation (<= 150 V surface / <= 300 V aerial)",
+        "Location classification confirming finished space and no corrosive vapors"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_15",
+      "cite": "382.15",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_15",
+      "title": "Keep surface extensions off the floor and conceal only where identified",
+      "intent": "Protect surface extensions from floor-level damage and limit concealment to identified products.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_extension"
+        },
+        {
+          "predicate": "is_run_exposed_or_concealed"
+        }
+      ],
+      "requires": {
+        "type": "routing_limit",
+        "min_height_above_floor_in": 2,
+        "not_run_on_floor": true,
+        "concealment_only_where_identified": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mounting detail showing extension not on floor and at least 2 in. above floor",
+        "Product identification for concealment where extension is concealed with paint/plaster/etc."
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_30",
+      "cite": "382.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_30",
+      "title": "Secure nonmetallic surface extensions at required intervals",
+      "intent": "Ensure extensions are anchored and isolated from conductive materials.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "max_fastening_interval_in": 8,
+        "first_fastening_allowance_from_attachment_plug_in": 12,
+        "min_one_fastening_between_adjacent_outlets": true,
+        "attach_only_to_woodwork_or_plaster": true,
+        "no_contact_with_metal_or_conductive_material_except_receptacle_plates": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Fastening layout showing intervals <= 8 in. (12 in. allowance to first fastening at attachment plug)",
+        "At least one fastening between each pair of adjacent outlets",
+        "Mounting detail confirming attachment only to woodwork/plaster and no contact with metalwork"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_42",
+      "cite": "382.42",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_42",
+      "title": "Use identified devices with concealable nonmetallic extensions",
+      "intent": "Ensure receptacles and self-contained devices are identified for and compatible with concealable extensions.",
+      "applies_when": [
+        {
+          "predicate": "is_concealable_nonmetallic_extension"
+        },
+        {
+          "predicate": "has_receptacle_or_self_contained_device"
+        }
+      ],
+      "requires": {
+        "type": "device_listing",
+        "receptacles_and_housings_identified_for_use": true,
+        "devices_comply_with": "406.4",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Device listing/identification marks for use with concealable nonmetallic extensions",
+        "Receptacle compliance documentation per 406.4"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_56",
+      "cite": "382.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_56",
+      "title": "Require continuous unspliced extension runs with covered taps",
+      "intent": "Prevent exposed conductors and unprotected splices in nonmetallic extensions.",
+      "applies_when": [
+        {
+          "predicate": "is_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "continuous_unbroken_length_no_splices": true,
+        "no_exposed_conductors_between_fittings": true,
+        "taps_only_with_approved_fully_covering_fittings": true,
+        "aerial_cable_tap_connectors_polarized": true,
+        "receptacle_type_tap_connectors_locking": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing continuous unbroken assembly without splices between fittings",
+        "Approved tap fittings fully covering tap connections",
+        "Locking/polarized tap connector specification for aerial/receptacle-type taps"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_100",
+      "cite": "382.100",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_100",
+      "title": "Construct concealable extensions as layered flat conductor design",
+      "intent": "Ensure concealable extensions provide a sectioned grounded and equipment grounding conductor enclosing the ungrounded conductor.",
+      "applies_when": [
+        {
+          "predicate": "is_concealable_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "construction",
+        "design": "multilayer_flat_conductor",
+        "layers": [
+          "center_ungrounded",
+          "sectioned_grounded",
+          "overall_sectioned_equipment_grounding"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Product cross-section/construction documentation showing multilayer flat conductor design",
+        "Listing confirming sectioned grounded and equipment grounding layers"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_104",
+      "cite": "382.104",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_104",
+      "title": "Use 14 or 12 AWG flat copper conductors with proper identification",
+      "intent": "Specify conductor sizes and identification for concealable extension construction.",
+      "applies_when": [
+        {
+          "predicate": "is_concealable_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "conductor_construction",
+        "conductor_material": "copper_flat",
+        "conductor_sizes_awg": [
+          "14",
+          "12"
+        ],
+        "ungrounded_identified_per": "310.6(C)",
+        "grounded_identified_per": "200.6",
+        "equipment_grounding_complies_with": "250.4(A)(5)",
+        "equipment_grounding_identification_methods": [
+          "250.119",
+          "clear_covering",
+          "green_stripes_or_hash_marks",
+          "printed_equipment_grounding_conductor_text"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor specification confirming flat copper equivalent to 14 or 12 AWG",
+        "Conductor identification markings for ungrounded, grounded, and equipment grounding layers"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_382_112",
+      "cite": "382.112",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_382_112",
+      "title": "Insulate flat conductor layers",
+      "intent": "Ensure each conductor layer is properly insulated and the EGC covered or insulated.",
+      "applies_when": [
+        {
+          "predicate": "is_concealable_nonmetallic_extension"
+        }
+      ],
+      "requires": {
+        "type": "insulation",
+        "ungrounded_and_grounded_individually_insulated_per": "310.14(A)(3)",
+        "equipment_grounding_conductor_covered_or_insulated": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Insulation specification for ungrounded and grounded flat conductor layers per 310.14(A)(3)",
+        "Confirmation equipment grounding conductor is covered or insulated"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_10",
+      "cite": "384.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_10",
+      "title": "Limit strut-type channel raceway to permitted uses",
+      "intent": "Restrict strut-type channel raceway to exposed, dry, and identified-protected conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "exposed",
+          "dry_locations",
+          "corrosive_vapors_where_protected_by_approved_finishes",
+          "power_poles",
+          "hazardous_classified_locations_per_chapter_5",
+          "unbroken_extensions_through_walls_partitions_floors_with_removable_closure_strips",
+          "ferrous_enamel_only_protected_indoors_only"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location/exposure detail confirming exposed and dry (or approved-finish corrosive) use",
+        "Wall/floor pass-through detail with removable closure strips and covered portion within the assembly",
+        "Indoor-only confirmation where ferrous channel is enamel-protected only"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_12",
+      "cite": "384.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_12",
+      "title": "Prohibit strut-type channel raceway where concealed or severely corroded",
+      "intent": "Prevent concealment and unsuitable corrosion exposure of strut-type channel raceways.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "is_concealed": true
+            },
+            {
+              "ferrous_enamel_only_protected_and_severe_corrosive_influence": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Installation detail confirming raceway is not concealed",
+        "Corrosion environment assessment for ferrous enamel-protected channel"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_22",
+      "cite": "384.22",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_22",
+      "title": "Limit number of conductors by percentage fill",
+      "intent": "Limit conductor fill of strut-type channel raceway per Table 384.22 to prevent overheating.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "fill_limit",
+        "percentage_fill_per": "table_384_22",
+        "cross_sectional_areas_per": "chapter_9_tables",
+        "adjustment_factors_310_15_c_1_not_apply_when": {
+          "all_of": [
+            {
+              "raceway_cross_sectional_area_>_4_sq_in": true
+            },
+            {
+              "current_carrying_conductors_<=_30": true
+            },
+            {
+              "conductor_fill_<=_20_percent": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor fill calculation against Table 384.22 percentage fill for the channel size",
+        "Cross-sectional area references from Chapter 9 tables",
+        "Documentation supporting non-application of 310.15(C)(1) adjustment factors where claimed"
+      ],
+      "depends_on": [
+        "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_384_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_30",
+      "cite": "384.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_30",
+      "title": "Secure and support strut-type channel raceway",
+      "intent": "Ensure raceway is mechanically supported at required intervals and near terminations.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "surface_mount_retention_straps_external": true,
+        "support_interval_max_ft": 10,
+        "support_within_ft_of_termination": 3,
+        "suspension_mount_interval_max_ft": 10,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Support layout showing intervals <= 10 ft and within 3 ft of each box/cabinet/termination",
+        "Retention strap detail for surface-mount runs or identified method for suspension mounts"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_60",
+      "cite": "384.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_60",
+      "title": "Provide grounding means at strut-type channel transitions",
+      "intent": "Ensure equipment grounding continuity at transitions and proper use as an EGC.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "transition_enclosures_have_egc_connection_means": true,
+        "permitted_as_egc_per": "250.118(13)",
+        "snap_fit_cover_not_egc_means_for_receptacle_in_cover": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail of equipment grounding connection means at transitions to other wiring methods",
+        "Documentation where channel raceway is used as an EGC per 250.118(13)",
+        "Confirmation snap-fit covers are not relied on for receptacle EGC continuity"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_384_100",
+      "cite": "384.100",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_384_100",
+      "title": "Construct strut-type channel raceway of approved materials",
+      "intent": "Ensure raceways are formed of approved corrosion-protected materials and couple without abrasion.",
+      "applies_when": [
+        {
+          "predicate": "is_strut_type_channel_raceway"
+        }
+      ],
+      "requires": {
+        "type": "construction",
+        "material": [
+          "steel",
+          "stainless_steel",
+          "aluminum"
+        ],
+        "steel_corrosion_protection": [
+          "galvanizing",
+          "organic_coating"
+        ],
+        "cover_material": [
+          "metal",
+          "nonmetallic"
+        ],
+        "couple_without_abrasion": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Material specification (steel/stainless/aluminum) and corrosion protection method for steel",
+        "Construction documentation showing sections couple without subjecting wires to abrasion"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_10",
+      "cite": "386.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_10",
+      "title": "Limit surface metal raceway to permitted uses",
+      "intent": "Restrict surface metal raceway to dry locations and specifically permitted special conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "dry_locations",
+          "class_i_division_2_per_501_10_b_3",
+          "under_raised_floors_per_645_5_e_2",
+          "unbroken_extension_through_dry_walls_partitions_floors_with_access_both_sides"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location classification confirming dry location use",
+        "Pass-through detail showing unbroken length and conductor access on both sides",
+        "Documentation for special uses (Class I Div 2 or raised-floor)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_12",
+      "cite": "386.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_12",
+      "title": "Prohibit surface metal raceway in unsuitable conditions",
+      "intent": "Prevent use where damage, voltage/thickness, corrosion, hoistway, or concealment conditions are unsafe.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "subject_to_severe_physical_damage_unless_approved": true
+            },
+            {
+              "voltage_>=_300v_and_metal_thickness_<_0.040_in": true
+            },
+            {
+              "subject_to_corrosive_vapors": true
+            },
+            {
+              "in_hoistway": true
+            },
+            {
+              "is_concealed_not_permitted_by_386_10": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "concealment_permitted_by_386_10"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Metal thickness >= 0.040 in. where voltage between conductors is 300 V or more",
+        "Location detail confirming no concealment, hoistway, or corrosive vapor exposure"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_22",
+      "cite": "386.22",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_22",
+      "title": "Limit conductors to raceway design number",
+      "intent": "Prevent overfill by limiting conductor count to the raceway's designed number.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        }
+      ],
+      "requires": {
+        "type": "fill_limit",
+        "max_conductors": "number_for_which_raceway_designed",
+        "adjustment_factors_310_15_c_1_not_apply_when": {
+          "all_of": [
+            {
+              "raceway_cross_sectional_area_>_4_sq_in": true
+            },
+            {
+              "current_carrying_conductors_<=_30": true
+            },
+            {
+              "conductor_fill_<=_20_percent": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Raceway design/listing showing maximum number of conductors",
+        "Conductor schedule confirming count within designed number",
+        "Documentation supporting non-application of 310.15(C)(1) where claimed"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_30",
+      "cite": "386.30",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_386_30",
+      "title": "Support surface metal raceway per manufacturer instructions",
+      "intent": "Ensure raceway support follows the listed installation instructions.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "support_per": "manufacturer_installation_instructions",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer installation instructions showing support requirements",
+        "Support layout consistent with manufacturer instructions"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required",
+      "_was_section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_30"
+    },
+    {
+      "id": "rule_386_56",
+      "cite": "386.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_56",
+      "title": "Limit splices and taps in surface metal raceway",
+      "intent": "Ensure accessible covers and 75 percent fill limit at splice points, or splice in boxes.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        },
+        {
+          "predicate": "contains_splices_or_taps"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_permitted_only_with_removable_accessible_cover": true,
+        "max_fill_at_splice_point_percent": 75,
+        "splices_without_removable_cover_only_in_boxes": true,
+        "type_fc_cable_taps_per": "322.56(B)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing removable cover accessible after installation at splice locations",
+        "Fill calculation at splice points <= 75% of area",
+        "Box detail where raceway lacks removable cover"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_60",
+      "cite": "386.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_60",
+      "title": "Provide grounding means at surface metal raceway transitions",
+      "intent": "Ensure equipment grounding continuity at transitions from other wiring methods.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        },
+        {
+          "predicate": "provides_transition_from_other_wiring_method"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "transition_enclosures_have_egc_connection_means": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail of equipment grounding connection means at raceway transitions"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_386_70",
+      "cite": "386.70",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_386_70",
+      "title": "Separate systems in combination raceways",
+      "intent": "Keep signaling and power/lighting circuits in separate identified compartments.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_metal_raceway"
+        },
+        {
+          "predicate": "is_combination_raceway_signaling_and_power"
+        }
+      ],
+      "requires": {
+        "type": "compartmentalization",
+        "separate_compartments_required": true,
+        "compartment_identification": [
+          "stamping",
+          "imprinting",
+          "color_coding"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Raceway detail showing separate compartments for signaling vs power/lighting",
+        "Compartment identification method (stamping/imprinting/color coding)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_388_10",
+      "cite": "388.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_10",
+      "title": "Limit surface nonmetallic raceway to permitted uses",
+      "intent": "Restrict surface nonmetallic raceway to dry locations and unbroken dry pass-throughs.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_nonmetallic_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "dry_locations",
+          "unbroken_extension_through_dry_walls_partitions_floors_with_access_both_sides"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location classification confirming dry location use",
+        "Pass-through detail showing unbroken length and conductor access on both sides"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_388_12",
+      "cite": "388.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_12",
+      "title": "Prohibit surface nonmetallic raceway in unsuitable conditions",
+      "intent": "Prevent use where concealment, damage, voltage, hoistway, hazard, or temperature conditions exceed the listing.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_nonmetallic_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "is_concealed_not_permitted_by_388_10_2": true
+            },
+            {
+              "subject_to_severe_physical_damage": true
+            },
+            {
+              "voltage_>=_300v_and_not_listed_for_higher_voltage": true
+            },
+            {
+              "in_hoistway": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "ambient_temperature_exceeds_listed": true
+            },
+            {
+              "conductor_insulation_temp_exceeds_raceway_listing": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "concealment_permitted_by_388_10_2"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "permitted_by_other_article_for_hazardous_location"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Location detail confirming no concealment, hoistway, or hazardous area",
+        "Listing voltage rating where voltage between conductors is 300 V or more",
+        "Conductor insulation and ambient temperature vs raceway listed ratings"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_388_56",
+      "cite": "388.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_56",
+      "title": "Limit splices and taps in surface nonmetallic raceway",
+      "intent": "Ensure openable accessible covers and 75 percent fill limit at splices, or splice in boxes.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_nonmetallic_raceway"
+        },
+        {
+          "predicate": "contains_splices_or_taps"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_permitted_only_with_cover_openable_in_place_accessible": true,
+        "max_fill_at_splice_point_percent": 75,
+        "splices_without_openable_cover_only_in_boxes": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing cover capable of being opened in place and accessible after installation",
+        "Fill calculation at splice points <= 75% of area",
+        "Box detail where raceway lacks openable cover"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_388_60",
+      "cite": "388.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_388_60",
+      "title": "Install separate EGC in surface nonmetallic raceway",
+      "intent": "Provide a ground-fault path since the nonmetallic raceway cannot serve as one.",
+      "applies_when": [
+        {
+          "predicate": "is_surface_nonmetallic_raceway"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "separate_equipment_grounding_conductor_required": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line/cable schedule showing separate equipment grounding conductor in the raceway"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_10",
+      "cite": "390.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_10",
+      "title": "Limit underfloor raceway to permitted installations",
+      "intent": "Restrict underfloor raceways to beneath flooring or flush in office occupancies with floor covering.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_uses": [
+          "beneath_concrete_or_other_flooring",
+          "office_occupancy_flush_with_concrete_covered_with_linoleum_or_equivalent"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor section detail showing raceway beneath flooring or flush per office occupancy",
+        "Floor covering specification (linoleum or equivalent) for flush installs"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_12",
+      "cite": "390.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_12",
+      "title": "Prohibit underfloor raceway in corrosive or hazardous conditions",
+      "intent": "Prevent installation in corrosive vapors and hazardous locations and protect metal raceways in corrosive concrete.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "subject_to_corrosive_vapors": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "metal_raceway_in_concrete_or_severe_corrosive_area_without_corrosion_protection": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "permitted_by_504_20"
+                },
+                {
+                  "predicate": "class_i_division_2_per_501_10_b_3"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Location classification confirming no corrosive vapors or hazardous area",
+        "Corrosion protection / approved material documentation for metal raceways in concrete"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_15",
+      "cite": "390.15",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_15",
+      "title": "Provide required concrete cover over underfloor raceways",
+      "intent": "Maintain minimum cover depth over raceways for mechanical protection.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        }
+      ],
+      "requires": {
+        "type": "cover_depth",
+        "raceway_not_over_4_in_wide_min_cover_in": 0.75,
+        "raceway_over_4_to_8_in_wide_spacing_>=_1_in_min_cover_in": 1,
+        "raceway_over_4_to_8_in_wide_spacing_<_1_in_min_cover_in": 1.5,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "flat_top_raceway_per_390_15_c_or_d"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Floor section detail showing concrete/wood cover depth over each raceway width class",
+        "Raceway width and spacing dimensions on the plan"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_22",
+      "cite": "390.22",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_22",
+      "title": "Limit underfloor raceway fill to 40 percent",
+      "intent": "Prevent overheating by limiting conductor fill to 40 percent of interior area.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        }
+      ],
+      "requires": {
+        "type": "fill_limit",
+        "max_conductor_fill_percent": 40,
+        "basis": "interior_cross_sectional_area",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor fill calculation showing combined area <= 40% of interior cross-sectional area",
+        "Raceway interior cross-sectional area documentation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_56",
+      "cite": "390.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_56",
+      "title": "Make splices and taps only in junction boxes",
+      "intent": "Confine splices to junction boxes to maintain accessibility and integrity.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        },
+        {
+          "predicate": "contains_splices_or_taps"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_only_in_junction_boxes": true,
+        "loop_wiring_not_a_splice": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_trench_type_flush_raceway_with_removable_accessible_cover"
+            },
+            {
+              "predicate": "max_fill_at_splice_point_<=_75_percent"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Junction box layout showing all splice/tap locations within boxes",
+        "Trench-type flush raceway detail with removable cover and <= 75% fill where exception is used"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_70",
+      "cite": "390.70",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_70",
+      "title": "Lay underfloor raceways in straight lines",
+      "intent": "Maintain raceway alignment between junction boxes for reliable conductor pulling.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        }
+      ],
+      "requires": {
+        "type": "alignment",
+        "straight_line_between_junction_box_centers": true,
+        "firmly_held_to_prevent_disturbance": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plan showing straight-line raceway runs coinciding with junction box centerlines",
+        "Detail showing raceways firmly held during construction"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_74",
+      "cite": "390.74",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_74",
+      "title": "Level and seal junction boxes; maintain metal continuity",
+      "intent": "Prevent water/concrete entry and maintain electrical continuity with metal raceways.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        },
+        {
+          "predicate": "has_junction_boxes"
+        }
+      ],
+      "requires": {
+        "type": "installation_condition",
+        "junction_boxes_leveled_to_floor_grade": true,
+        "junction_boxes_sealed_against_water_and_concrete": true,
+        "metal_raceway_boxes_metal_and_electrically_continuous": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Junction box detail showing leveling to floor grade and sealing against water/concrete",
+        "Confirmation boxes used with metal raceways are metal and electrically continuous"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_390_75",
+      "cite": "390.75",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_390_75",
+      "title": "Level, seal, and secure inserts",
+      "intent": "Prevent concrete entry and maintain continuity and conductor protection at inserts.",
+      "applies_when": [
+        {
+          "predicate": "is_underfloor_raceway"
+        },
+        {
+          "predicate": "has_inserts"
+        }
+      ],
+      "requires": {
+        "type": "installation_condition",
+        "inserts_leveled_and_sealed_against_concrete": true,
+        "metal_raceway_inserts_metal_and_electrically_continuous": true,
+        "prevent_chips_and_dirt_in_raceway": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Insert detail showing leveling and sealing against concrete entry",
+        "Confirmation inserts used with metal raceways are metal and electrically continuous",
+        "Method preventing chips/dirt from entering raceway during insert setting"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_10",
+      "cite": "392.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_10",
+      "title": "Use cable tray only for permitted wiring methods",
+      "intent": "Restrict cable tray contents to permitted wiring methods and require sunlight-resistant cables where sun-exposed.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_wiring_methods_per": "table_392_10_a",
+        "single_insulated_conductors_only_per": "392.10(B)(1)",
+        "sunlight_exposed_cables_must_be_sunlight_resistant": true,
+        "trays_and_fittings_identified_for_use": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable/raceway schedule confirming only Table 392.10(A) wiring methods are in the tray",
+        "Sunlight-resistance marking for cables exposed to direct sun",
+        "Listing/identification of trays and fittings for the intended use"
+      ],
+      "depends_on": [
+        "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_10_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_12",
+      "cite": "392.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_12",
+      "title": "Prohibit cable tray in hoistways or where damaged",
+      "intent": "Prevent cable tray use where physical damage or hoistway conditions are unsafe.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "in_hoistway": true
+            },
+            {
+              "subject_to_severe_physical_damage": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location detail confirming tray is not in a hoistway and not subject to severe physical damage"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_18",
+      "cite": "392.18",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_18",
+      "title": "Install cable tray as complete, accessible system",
+      "intent": "Ensure continuity, completion before cabling, exposure/accessibility, and proper marking of high-voltage trays.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "installation_condition",
+        "complete_system_with_maintained_continuity": true,
+        "run_completed_before_cable_installation": true,
+        "exposed_and_accessible_except_through_walls_per_392_18_d": true,
+        "pass_through_partitions_per": "300.21",
+        "over_600v_warning_marking_max_interval_ft": 10,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "not_accessible_in_industrial_with_qualified_supervision"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Tray installation detail showing complete system with maintained electrical continuity and support",
+        "Confirmation each run is completed before cables are installed",
+        "Over-600 V warning notices placed at intervals not exceeding 10 ft where applicable",
+        "Wall/floor penetration detail per 300.21"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_20",
+      "cite": "392.20",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_20",
+      "title": "Separate over-1000V cables and group parallel conductors",
+      "intent": "Prevent unsafe mixing of voltage classes and current imbalance in paralleled single conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "cable_installation",
+        "over_1000v_with_under_1000v_in_same_tray_requires": {
+          "any_of": [
+            {
+              "over_1000v_cables_are_type_mc": true
+            },
+            {
+              "solid_fixed_barrier_between_voltage_classes": true
+            }
+          ]
+        },
+        "parallel_single_conductors_one_per_phase_neutral_grounded_per_group": true,
+        "single_conductors_securely_bound_in_circuit_groups": true,
+        "single_conductors_1_0_through_4_0_in_single_layer": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable schedule showing over-1000 V cables are Type MC or separated by a solid fixed barrier",
+        "Parallel conductor grouping detail (one per phase/neutral/grounded per group)",
+        "Single-layer arrangement detail for 1/0 through 4/0 AWG single conductors"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_22",
+      "cite": "392.22",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_22",
+      "title": "Limit number/fill of cables in cable tray",
+      "intent": "Prevent overfill and overheating by limiting cable fill per tray type and conductor size.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "fill_limit",
+        "multiconductor_fill_per": "table_392_22_a",
+        "ventilated_channel_fill_per": "table_392_22_a_5",
+        "solid_channel_fill_per": "table_392_22_a_6",
+        "single_conductor_fill_per": "table_392_22_b_1",
+        "control_signal_only_ladder_vented_max_fill_percent": 50,
+        "control_signal_only_solid_bottom_max_fill_percent": 40,
+        "fill_calculated_per_divided_section_where_dividers_used": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable fill calculation per the applicable Table 392.22 column for tray type and cable size",
+        "Single-layer arrangement detail for 4/0 AWG and larger cables",
+        "Per-section fill calculation where dividers are used"
+      ],
+      "depends_on": [
+        "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_22_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_30",
+      "cite": "392.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_30",
+      "title": "Secure and support cable trays, cables, and conductors",
+      "intent": "Ensure trays and their contents are supported per instructions and transitions are protected.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "trays_supported_per": "installation_instructions",
+        "cables_fastened_to_transverse_members_in_non_horizontal_runs": true,
+        "support_at_raceway_entries_to_prevent_stress": true,
+        "max_unsupported_transition_distance_ft": 6,
+        "cable_ties_listed_and_identified": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Tray support layout per manufacturer installation instructions",
+        "Detail showing cables fastened to transverse members in non-horizontal runs",
+        "Transition detail showing distance to raceway/equipment not exceeding 6 ft with conductors secured and protected"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_44",
+      "cite": "392.44",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_44",
+      "title": "Provide expansion splice plates where needed",
+      "intent": "Compensate for thermal expansion and contraction in cable tray runs.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        },
+        {
+          "predicate": "thermal_expansion_compensation_needed"
+        }
+      ],
+      "requires": {
+        "type": "expansion_provision",
+        "expansion_splice_plates_required": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Thermal expansion assessment for tray runs",
+        "Location of expansion splice plates on the tray layout"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_46",
+      "cite": "392.46",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_46",
+      "title": "Protect and seal bushed conduit/tubing transitions",
+      "intent": "Protect conductors transitioning from tray and prevent debris entering equipment.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        },
+        {
+          "predicate": "conductors_transition_through_bushed_conduit_or_tubing"
+        }
+      ],
+      "requires": {
+        "type": "installation_condition",
+        "conductors_secured_at_transition_from_tray": true,
+        "conduit_or_tubing_sealed_at_outer_end": true,
+        "openings_protect_from_abrasion": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Transition detail showing conductors secured at the tray and bushed conduit/tubing sealed at outer end",
+        "Detail confirming conductors are protected from abrasion at flanged or bushed openings"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_56",
+      "cite": "392.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_56",
+      "title": "Keep cable splices accessible in tray",
+      "intent": "Ensure splices are made by approved methods and remain accessible and protected.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        },
+        {
+          "predicate": "contains_splices"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_made_and_insulated_by_approved_methods": true,
+        "splices_accessible": true,
+        "splices_may_project_above_side_rails_only_where_not_subject_to_damage": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing splices made/insulated by approved methods and accessible within the tray",
+        "Confirmation any splices projecting above side rails are not subject to physical damage"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_60",
+      "cite": "392.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_60",
+      "title": "Ground and bond metal cable trays",
+      "intent": "Ensure metal cable trays are grounded/bonded and meet criteria when used as an EGC.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        },
+        {
+          "predicate": "is_metal_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "trays_supporting_conductors_grounded_per": [
+          "250.96",
+          "article_250_part_iv"
+        ],
+        "non_power_trays_electrically_continuous": true,
+        "egc_use_requires_identified_sections_and_min_area_per": "table_392_60_b",
+        "bonding_jumper_at_discontinuous_transitions_per": "250.102",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding/bonding detail for metal trays supporting conductors per 250.96 and Article 250 Part IV",
+        "Tray cross-sectional metal area and identification where used as an EGC (Table 392.60(B))",
+        "Bonding jumper detail (sized per 250.102) at mechanically discontinuous transitions"
+      ],
+      "depends_on": [
+        "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_392_60_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_80",
+      "cite": "392.80",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_80",
+      "title": "Determine conductor ampacity per cable tray rules",
+      "intent": "Apply the correct ampacity tables and derating for cables installed in cable trays.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "ampacity",
+        "multiconductor_2000v_or_less_per": [
+          "table_310_16",
+          "table_310_18"
+        ],
+        "covered_tray_over_6ft_solid_cover_max_percent_multiconductor": 95,
+        "single_conductor_600kcmil_and_larger_uncovered_max_percent": 75,
+        "single_conductor_1_0_to_500kcmil_uncovered_max_percent": 65,
+        "adjustment_factors_310_15_c_1_apply_only_to_multiconductor_over_3_ccc": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_solid_bottom_cable_tray"
+            },
+            {
+              "predicate": "single_conductors_in_single_layer_with_spacing"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Ampacity calculation citing the applicable Table 310.16/310.17/310.18/310.19 values",
+        "Derating worksheet for covered trays (95%/70%/60% as applicable) and single-layer spacing",
+        "Identification of current-carrying conductor counts for adjustment factor application"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_392_100",
+      "cite": "392.100",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_392_100",
+      "title": "Construct cable trays with adequate strength and smooth edges",
+      "intent": "Ensure trays support wiring without damaging insulation and resist corrosion.",
+      "applies_when": [
+        {
+          "predicate": "is_cable_tray"
+        }
+      ],
+      "requires": {
+        "type": "construction",
+        "adequate_strength_and_rigidity": true,
+        "no_sharp_edges_burrs_or_projections": true,
+        "corrosion_resistant_ferrous_protected_per": "300.6",
+        "has_side_rails_or_equivalent": true,
+        "nonmetallic_trays_flame_retardant": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Tray construction/listing showing strength, rigidity, and smooth edges",
+        "Corrosion protection documentation for ferrous trays per 300.6",
+        "Flame-retardant material confirmation for nonmetallic trays"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_10",
+      "cite": "393.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_10",
+      "title": "Limit low-voltage suspended ceiling systems to permitted uses",
+      "intent": "Restrict these systems to listed Class 2 equipment, indoor dry locations, and qualifying occupancies.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permanently_connected": true,
+        "max_voltage_ac_v": 30,
+        "max_voltage_dc_v": 60,
+        "class_2_power_levels_per": [
+          "chapter_9_table_11_a",
+          "chapter_9_table_11_b"
+        ],
+        "permitted_uses": [
+          "indoor_dry_locations",
+          "residential_commercial_industrial",
+          "environmental_air_space_per_300_22_c_listed"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing documentation for utilization equipment rated <= 30 V ac / 60 V dc at Class 2 power levels",
+        "Location classification confirming indoor dry location",
+        "Listing for use in environmental air space where applicable"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_12",
+      "cite": "393.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_12",
+      "title": "Prohibit suspended ceiling systems in unsuitable locations",
+      "intent": "Prevent use in damp/wet, corrosive, concealed, hazardous, fire-rated, and critical-care locations.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "in_damp_or_wet_location": true
+            },
+            {
+              "subject_to_corrosive_fumes_or_vapors": true
+            },
+            {
+              "subject_to_physical_damage": true
+            },
+            {
+              "is_concealed": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "part_of_fire_rated_assembly_not_listed_for_it": true
+            },
+            {
+              "lighting_in_general_or_critical_patient_care_area": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location classification confirming indoor dry, accessible, non-hazardous location",
+        "Confirmation system is not part of a fire-rated assembly unless specifically listed",
+        "Confirmation not used for lighting in general or critical patient care areas"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_21",
+      "cite": "393.21",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_21",
+      "title": "Provide accessible in-sight disconnecting means",
+      "intent": "Ensure the Class 2 supply can be safely disconnected within sight for servicing.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "disconnect",
+        "disconnect_accessible_and_within_sight_of_class_2_source": true,
+        "multiwire_branch_circuit_simultaneous_disconnect_all_supply_conductors": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Disconnecting means location detail showing accessibility and within sight of the Class 2 source",
+        "Confirmation simultaneous disconnection of all supply conductors on multiwire branch circuits"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_30",
+      "cite": "393.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_30",
+      "title": "Secure suspended ceiling system to building structure",
+      "intent": "Ensure the system and its power grid rails are mechanically secured to the structure.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "secured_to_structure_by_hanging_wires_screws_or_bolts_per_instructions": true,
+        "power_grid_rails_mechanically_secured_to_ceiling_grid_assembly": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mounting detail showing attachment to building structure per installation instructions",
+        "Detail showing power grid rails mechanically secured to the overall ceiling grid assembly"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_40",
+      "cite": "393.40",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_40",
+      "title": "Use listed accessible connectors and enclosed wall connections",
+      "intent": "Ensure connections are listed, mechanically secure, accessible, and enclosed where in walls.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "connection",
+        "connections_made_with_listed_insulating_devices": true,
+        "connections_accessible_after_installation": true,
+        "soldered_connections_mechanically_secure_first": true,
+        "wall_connections_enclosed_per": "article_314_parts_i_ii_iii",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Connector listing documentation for busbar/cable/conductor connections",
+        "Detail showing connections accessible after installation",
+        "Enclosure detail per Article 314 for connections made in a wall"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_45",
+      "cite": "393.45",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_45",
+      "title": "Protect against overcurrent and reverse polarity",
+      "intent": "Limit overcurrent to 20 A and prevent unsafe interconnection or backfeed of Class 2 sources.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "class_2_supply_or_transformer_primary_max_overcurrent_amp": 20,
+        "class_2_outputs_not_paralleled_unless_listed": true,
+        "dc_reverse_polarity_backfeed_protection_required": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Overcurrent device rating documentation showing protection at not greater than 20 A",
+        "Listing documentation where Class 2 source outputs are interconnected/paralleled",
+        "Reverse polarity/backfeed protection detail for dc circuits"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_60",
+      "cite": "393.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_60",
+      "title": "Ground supply side and isolate load side of Class 2 source",
+      "intent": "Ensure proper grounding of the supply side and that load-side Class 2 circuits remain ungrounded.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "supply_side_connected_to_egc_per": "article_250_part_iv",
+        "load_side_class_2_circuits_not_grounded": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding detail showing supply side of Class 2 source connected to an EGC per Article 250 Part IV",
+        "Confirmation Class 2 load-side circuits are not grounded"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_393_104",
+      "cite": "393.104",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_393_104",
+      "title": "Specify minimum conductor sizes and types",
+      "intent": "Ensure load-side and power-feed conductors meet minimum copper sizes.",
+      "applies_when": [
+        {
+          "predicate": "is_low_voltage_suspended_ceiling_system"
+        }
+      ],
+      "requires": {
+        "type": "conductor_size",
+        "load_side_utilization_conductor_copper_min_awg": 18,
+        "power_feed_bus_rail_min_awg": 16,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "conductor_smaller_than_18_awg_but_not_smaller_than_24_awg"
+            },
+            {
+              "predicate": "is_class_2_circuit_totally_enclosed_chapter_3_method"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Conductor schedule showing load-side conductors are copper, 18 AWG minimum",
+        "Power feed bus rail specification (16 AWG minimum or equivalent)",
+        "Documentation for any 24-18 AWG Class 2 conductors per the exception"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_10",
+      "cite": "394.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_10",
+      "title": "Limit knob-and-tube to extensions or special permission",
+      "intent": "Restrict concealed knob-and-tube to existing extensions or special permission in permitted spaces.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_locations": [
+          "hollow_spaces_of_walls_and_ceilings",
+          "unfinished_attics_and_roof_spaces_per_394_23"
+        ],
+        "permitted_uses": [
+          "extensions_of_existing_installations",
+          "elsewhere_by_special_permission"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Documentation that work is an extension of an existing installation, or special permission record",
+        "Location detail confirming installation in permitted hollow spaces or per 394.23 attics"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_12",
+      "cite": "394.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_12",
+      "title": "Prohibit knob-and-tube in hazardous or insulated spaces (California HCD amendment)",
+      "intent": "Prevent knob-and-tube in commercial garages, theaters, studios, hazardous locations, and insulation-enveloped spaces, with a California survey/certification path for added insulation.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "in_commercial_garage": true
+            },
+            {
+              "in_theater_or_similar_location": true
+            },
+            {
+              "in_motion_picture_studio": true
+            },
+            {
+              "is_hazardous_classified_location": true
+            },
+            {
+              "in_space_insulated_by_material_enveloping_conductors": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "jurisdiction_california_hcd"
+            },
+            {
+              "predicate": "wiring_surveyed_and_certified_by_ca_licensed_electrical_contractor"
+            },
+            {
+              "predicate": "certification_filed_with_ahj_and_copy_to_owner"
+            },
+            {
+              "predicate": "accessible_insulated_areas_posted_bilingual_caution_notice"
+            },
+            {
+              "predicate": "insulation_noncombustible_per_california_building_code"
+            },
+            {
+              "predicate": "insulation_has_no_electrical_conductive_material"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Location classification confirming none of the prohibited occupancies/locations",
+        "CA-licensed electrical contractor survey/certification form filed with AHJ (HCD exception)",
+        "Bilingual caution notices posted in accessible insulated areas and noncombustible insulation documentation"
+      ],
+      "depends_on": [],
+      "amends": "NEC 394.12",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_17",
+      "cite": "394.17",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_17",
+      "title": "Protect knob-and-tube conductors through framing members",
+      "intent": "Protect conductors passing through framing with insulating tubes.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        },
+        {
+          "predicate": "conductors_pass_through_framing_members"
+        }
+      ],
+      "requires": {
+        "type": "physical_protection",
+        "comply_with_398_17_through_holes": true,
+        "noncombustible_nonabsorbent_insulating_tubes_through_wood_cross_members": true,
+        "tube_extension_beyond_member_in": 3,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing insulating tubes/bushings where conductors pass through framing per 398.17",
+        "Detail confirming tubes extend at least 3 in. beyond wood cross members in plastered partitions"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_19",
+      "cite": "394.19",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_19",
+      "title": "Maintain knob-and-tube conductor clearances",
+      "intent": "Maintain separation between conductors and from surfaces and other materials.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "min_clearance_between_conductors_in": 3,
+        "min_clearance_conductor_to_surface_in": 1,
+        "limited_space_conductors_enclosed_in_flexible_nonmetallic_tubing": true,
+        "comply_with_398_19_for_other_clearances": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing at least 3 in. between conductors and 1 in. to the surface",
+        "Detail showing flexible nonmetallic tubing where space is too limited (meters, panelboards, switch points)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_23",
+      "cite": "394.23",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_23",
+      "title": "Protect knob-and-tube conductors in accessible attics",
+      "intent": "Protect attic conductors with running boards where they could be damaged.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        },
+        {
+          "predicate": "in_unfinished_attic_or_roof_space"
+        }
+      ],
+      "requires": {
+        "type": "physical_protection",
+        "conductors_along_or_through_bored_holes_in_joists_studs_rafters": true,
+        "running_boards_required_below_7ft_through_bored_holes": true,
+        "running_board_extension_each_side_in": 1,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "building_completed_before_wiring_installed"
+            },
+            {
+              "predicate": "not_accessible_by_stairway_or_permanent_ladder"
+            },
+            {
+              "predicate": "attic_headroom_<_3ft_at_all_points"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Attic wiring detail showing running boards (1 in. each side) where conductors run through bored holes below 7 ft",
+        "Confirmation of attic accessibility (stairway/permanent ladder) and headroom for exception applicability"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_30",
+      "cite": "394.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_30",
+      "title": "Rigidly support knob-and-tube conductors",
+      "intent": "Support conductors on insulating materials at required intervals and near splices.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "supported_on_noncombustible_nonabsorbent_insulating_materials": true,
+        "support_within_in_of_each_tap_or_splice": 6,
+        "max_support_interval_ft": 4.5,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "impracticable_to_provide_supports"
+            },
+            {
+              "predicate": "fished_in_dry_locations_individually_enclosed_in_flexible_nonmetallic_tubing"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Support layout showing conductors on insulating supports within 6 in. of each tap/splice and at <= 4.5 ft intervals",
+        "Detail of flexible nonmetallic tubing where conductors are fished in dry locations"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_42",
+      "cite": "394.42",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_42",
+      "title": "Install knob-and-tube switches per 404 rules",
+      "intent": "Ensure switches comply with switch installation requirements.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        },
+        {
+          "predicate": "has_switches"
+        }
+      ],
+      "requires": {
+        "type": "device_installation",
+        "switches_comply_with": [
+          "404.4",
+          "404.10(B)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Switch installation detail demonstrating compliance with 404.4 and 404.10(B)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_394_56",
+      "cite": "394.56",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_394_56",
+      "title": "Solder knob-and-tube splices; prohibit in-line splices",
+      "intent": "Ensure mechanically and electrically sound splices in knob-and-tube wiring.",
+      "applies_when": [
+        {
+          "predicate": "is_concealed_knob_and_tube_wiring"
+        },
+        {
+          "predicate": "contains_splices_or_taps"
+        }
+      ],
+      "requires": {
+        "type": "splice_limit",
+        "splices_soldered_unless_approved_splicing_devices": true,
+        "in_line_or_strain_splices_prohibited": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Splice detail showing soldered connections or approved splicing devices",
+        "Confirmation no in-line or strain splices are used"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_396_10",
+      "cite": "396.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_10",
+      "title": "Limit messenger-supported wiring to permitted cable types",
+      "intent": "Restrict messenger-supported wiring to Table 396.10(A) cable types and require weather/sunlight-rated conductors where exposed.",
+      "applies_when": [
+        {
+          "predicate": "is_messenger_supported_wiring"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_cable_types_per": "table_396_10_a",
+        "weather_exposed_conductors_listed_for_wet_locations": true,
+        "sun_exposed_conductors_sunlight_resistant": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable schedule confirming only Table 396.10(A) cable types are used",
+        "Wet-location listing for conductors exposed to weather",
+        "Sunlight-resistance marking for sun-exposed conductors/cables"
+      ],
+      "depends_on": [
+        "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_table_396_10_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_396_12",
+      "cite": "396.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_12",
+      "title": "Prohibit messenger-supported wiring in hoistways or where damaged",
+      "intent": "Prevent use where physical damage or hoistway conditions are unsafe.",
+      "applies_when": [
+        {
+          "predicate": "is_messenger_supported_wiring"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "any_of": [
+            {
+              "in_hoistway": true
+            },
+            {
+              "subject_to_physical_damage": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Location detail confirming wiring is not in a hoistway and not subject to physical damage"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_396_30",
+      "cite": "396.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_30",
+      "title": "Support messenger to eliminate conductor tension",
+      "intent": "Ensure the messenger carries the load and conductors do not contact supports or structure.",
+      "applies_when": [
+        {
+          "predicate": "is_messenger_supported_wiring"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "messenger_supported_at_dead_ends_and_intermediate_locations": true,
+        "no_tension_on_conductors": true,
+        "conductors_not_contact_supports_or_structure": true,
+        "messenger_as_neutral_comply_with": [
+          "225.4",
+          "250.184(A)",
+          "250.184(B)(7)",
+          "250.187(B)"
+        ],
+        "messenger_as_egc_comply_with": [
+          "250.32(B)",
+          "250.118",
+          "250.184(B)(8)",
+          "250.187(D)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Support detail showing messenger supported at dead ends and intermediate locations with no conductor tension",
+        "Detail confirming conductors do not contact messenger supports, structural members, walls, or pipes",
+        "Documentation where messenger serves as neutral or EGC (compliance with cited grounding sections)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_396_60",
+      "cite": "396.60",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_396_60",
+      "title": "Ground the messenger",
+      "intent": "Ensure the messenger is grounded as required for enclosure grounding.",
+      "applies_when": [
+        {
+          "predicate": "is_messenger_supported_wiring"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "messenger_grounded_per": [
+          "250.80",
+          "250.86"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding detail showing the messenger grounded per 250.80 and 250.86"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_10",
+      "cite": "398.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_10",
+      "title": "Limit open wiring to industrial/agricultural 1000V systems",
+      "intent": "Restrict open wiring on insulators to industrial/agricultural establishments on systems of 1000 V or less.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "permitted_occupancies": [
+          "industrial_establishment",
+          "agricultural_establishment"
+        ],
+        "max_system_voltage_v": 1000,
+        "permitted_uses": [
+          "indoors_or_outdoors",
+          "wet_or_dry_locations",
+          "corrosive_vapors",
+          "services"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Occupancy classification confirming industrial or agricultural establishment",
+        "System voltage documentation confirming 1000 V nominal or less"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_12",
+      "cite": "398.12",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_12",
+      "title": "Prohibit concealed open wiring",
+      "intent": "Prevent open wiring on insulators from being concealed by building structure.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        }
+      ],
+      "requires": {
+        "type": "use_prohibition",
+        "prohibited_when": {
+          "concealed_by_building_structure": true
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Installation detail confirming open wiring is not concealed by the building structure"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_15",
+      "cite": "398.15",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_15",
+      "title": "Protect exposed open conductors from physical damage",
+      "intent": "Protect conductors within 7 ft of the floor and where crossing framing from physical damage.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        }
+      ],
+      "requires": {
+        "type": "physical_protection",
+        "conductors_within_7ft_of_floor_considered_exposed": true,
+        "protection_methods_where_exposed_to_damage": [
+          "guard_strips",
+          "running_board_with_side_protection",
+          "boxing",
+          "rmc_imc_rnc_or_emt"
+        ],
+        "dry_location_flexible_tubing_max_length_ft": 15,
+        "flexible_tubing_strap_interval_max_ft": 4.5,
+        "drip_loops_at_damp_wet_corrosive_entries": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail of physical-damage protection (guard strips/running board/boxing/conduit) for conductors crossing framing or within 7 ft of floor",
+        "Detail of drip loops where conductors enter damp/wet/corrosive locations",
+        "Flexible nonmetallic tubing detail (<= 15 ft lengths, straps <= 4.5 ft) in dry locations"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_17",
+      "cite": "398.17",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_17",
+      "title": "Separate open conductors through framing members",
+      "intent": "Keep conductors out of contact with framing using individual insulating tubes/bushings.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        },
+        {
+          "predicate": "conductors_pass_through_framing_members"
+        }
+      ],
+      "requires": {
+        "type": "physical_protection",
+        "separate_from_contact_by_noncombustible_nonabsorbent_tubes_or_bushings": true,
+        "each_conductor_through_separate_tube_or_sleeve": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Detail showing each conductor passing through a separate noncombustible insulating tube/sleeve",
+        "Detail of waterproof sleeve with insulating bushings where bushing is shorter than hole"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_19",
+      "cite": "398.19",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_19",
+      "title": "Maintain open conductor clearances from other materials",
+      "intent": "Maintain separation of open conductors from raceways, piping, and other conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "min_separation_from_metal_raceways_piping_conducting_material_in": 2,
+        "or_separated_by_continuous_firmly_fixed_nonconductor": true,
+        "conductors_pass_over_rather_than_under_piping_where_practicable": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Clearance detail showing at least 2 in. separation from metal raceways/piping/other conductors, or a fixed nonconductor barrier",
+        "Routing detail showing conductors passing over piping subject to leakage where practicable"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_23",
+      "cite": "398.23",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_23",
+      "title": "Protect open conductors in accessible attics",
+      "intent": "Protect attic open conductors with running boards where they could be damaged.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        },
+        {
+          "predicate": "in_unfinished_attic_or_roof_space"
+        }
+      ],
+      "requires": {
+        "type": "physical_protection",
+        "conductors_along_or_through_bored_holes_in_joists_studs_rafters": true,
+        "running_boards_required_below_7ft_through_bored_holes": true,
+        "running_board_extension_each_side_in": 1,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "building_completed_before_wiring_installed"
+            },
+            {
+              "predicate": "not_accessible_by_stairway_or_permanent_ladder"
+            },
+            {
+              "predicate": "attic_headroom_<_3ft_at_all_points"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Attic wiring detail showing running boards (1 in. each side) where conductors run through bored holes below 7 ft",
+        "Confirmation of attic accessibility and headroom for exception applicability"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_398_30",
+      "cite": "398.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_398_30",
+      "title": "Support open conductors by size at required intervals",
+      "intent": "Rigidly support open conductors on insulating materials at size-dependent intervals.",
+      "applies_when": [
+        {
+          "predicate": "is_open_wiring_on_insulators"
+        }
+      ],
+      "requires": {
+        "type": "support_spacing",
+        "conductors_smaller_than_8_awg_support_within_in_of_tap_or_splice": 6,
+        "conductors_smaller_than_8_awg_support_within_in_of_deadend_to_lampholder_or_receptacle": 12,
+        "conductors_smaller_than_8_awg_max_support_interval_ft": 4.5,
+        "conductors_8_awg_and_larger_max_support_interval_ft": 15,
+        "conductors_8_awg_and_larger_spacer_interval_ft": 4.5,
+        "conductors_8_awg_and_larger_min_separation_in": 2.5,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Support layout by conductor size (smaller than 8 AWG: within 6 in. of splice, 12 in. of dead-end, <= 4.5 ft intervals)",
+        "Detail for 8 AWG and larger across open spaces (<= 15 ft with spacers every 4.5 ft, >= 2.5 in. separation)",
+        "Support mounting hardware detail (nails/screws/cushion washers) per 398.30(D)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_399_10",
+      "cite": "399.10",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_399_10",
+      "title": "Limit outdoor overhead conductors to over-1000V outdoor systems",
+      "intent": "Restrict outdoor overhead conductors to systems rated over 1000 V installed outdoors in free air.",
+      "applies_when": [
+        {
+          "predicate": "is_outdoor_overhead_conductor_over_1000v"
+        }
+      ],
+      "requires": {
+        "type": "use_limitation",
+        "system_rating": "over_1000v_nominal",
+        "permitted_uses": [
+          "outdoors_in_free_air",
+          "service_conductors_feeders_or_branch_circuits"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "System rating documentation confirming over 1000 V nominal",
+        "Installation detail confirming outdoor free-air routing"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_399_30",
+      "cite": "399.30",
+      "section_node": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_399_30",
+      "title": "Provide engineered support documentation for overhead conductors",
+      "intent": "Ensure conductor spacing, support structures, and insulators are engineered and documented for the loading and voltage.",
+      "applies_when": [
+        {
+          "predicate": "is_outdoor_overhead_conductor_over_1000v"
+        }
+      ],
+      "requires": {
+        "type": "engineered_design",
+        "conductor_spacing_engineered_by_licensed_pe_documentation_available_to_ahj": true,
+        "support_structures_engineered_by_licensed_pe": true,
+        "insulators_rated_for": [
+          "applied_phase_to_phase_voltage",
+          "mechanical_strength",
+          "impulse_withstand_bil_per_table_490_24"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Licensed professional engineer documentation of conductor spacing considering voltage, conductor size, span, structure type, and wind/ice loading",
+        "Engineered design of each support structure (soil, foundations, loading, guying, hardware) available to the AHJ",
+        "Insulator ratings for phase-to-phase voltage, mechanical strength, and impulse withstand BIL per Table 490.24"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

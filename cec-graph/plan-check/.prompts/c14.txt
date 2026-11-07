@@ -1,0 +1,126 @@
+You are a plan-check rule extraction subagent. The graph community "Marinas & Motor Fuel Dispensing" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c14_marinas_motor_fuel_dispensing_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_1  555.1 Scope
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_10  555.10 Signage
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_11  555.11 Motor Fuel Dispensing Stations — Hazardous (Classifie
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_12  555.12 Repair Facilities — Hazardous (Classified) Locations
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_13  555.13 Bonding of Non-Current-Carrying Metal Parts
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_2  555.2 Definitions
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_3  555.3 Electrical Datum Plane Distances
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_30  555.30 Electrical Connections
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_31  555.31 Electrical Equipment Enclosures
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_32  555.32 Circuit Breakers, Switches, Panelboards, and Marina P
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_33  555.33 Receptacles
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_34  555.34 Wiring Methods and Installation
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_35  555.35 Ground-Fault Protection of Equipment (GFPE)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_36  555.36 Disconnecting Means for Shore Power Connection(s)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_37  555.37 Equipment Grounding Conductor
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_4  555.4 Location of Service Equipment
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_5  555.5 Maximum Voltage
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_50  555.50 Service Conductors (Floating Buildings)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_51  555.51 Feeder Conductors (Floating Buildings)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_52  555.52 Installation of Services and Feeders
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_53  555.53 Ground-Fault Protection (Floating Buildings)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_54  555.54 Grounding (Floating Buildings)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_55  555.55 Insulated Neutral
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_56  555.56 Equipment Grounding (Floating Buildings)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_6  555.6 Load Calculations for Service and Feeder Conductors
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_7  555.7 Transformers
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_8  555.8 Marine Hoists, Railways, Cranes, and Monorails
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_9  555.9 Boat Hoists
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_1  590.1 Scope
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_2  590.2 All Wiring Installations
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_3  590.3 Time Constraints
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_4  590.4 General
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_5  590.5 Listing of Decorative Lighting
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_6  590.6 Ground-Fault Protection for Personnel
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_7  590.7 Guarding
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_590_8  590.8 Overcurrent Protective Devices
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_table_400_4  Table 400.4 Flexible Cords and Cables
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_table_555_6  Table 555.6 Marina Demand Factors
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_boatyard  Boatyard
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_docking_facility  Commercial and Noncommercial Docking Facility
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_floating_building  Floating Building
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_holiday_lighting  Holiday/Decorative Lighting Installation
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_marina  Marina
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_motor_fuel_dispensing  Marina Motor Fuel Dispensing Station
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_pier  Pier (Fixed/Floating)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_repair_facility_marina  Marina Repair Facility
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_occupancy_temporary_installation  Temporary Installation
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_assured_grounding_program  Assured Equipment Grounding Conductor Program
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_boat_hoist  Boat Hoist
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_decorative_lighting  Decorative Lighting
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_electrical_datum_plane  Electrical Datum Plane
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_equipment_grounding_conductor  Equipment Grounding Conductor
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_gfci  GFCI Protection
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_gfpe  Ground-Fault Protection of Equipment (GFPE)
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_insulated_neutral  Insulated Neutral
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_marine_hoist  Marine Hoist / Crane / Monorail
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_overcurrent_protection  Overcurrent Protection
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_system_shore_power  Shore Power Connection
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_ref_ieee_1458  IEEE 1458-2017
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_ref_nema_ab4  NEMA AB 4-2017
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_ref_nema_gd1  NEMA GD 1-2016 Evaluating Water-Damaged Electrical Equipment
+  18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_ref_nfpa_70b  NFPA 70B-2019
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational_555_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Marinas & Motor Fuel Dispensing",
+  "community_id": 14,
+  "extracted_from_sections": ["18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 9-36 rules. After writing the file, just confirm "wrote c14_marinas_motor_fuel_dispensing_rules.json with N rules" and stop.

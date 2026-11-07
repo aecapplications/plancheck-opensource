@@ -1,0 +1,114 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 11B Accessibility To Public Buildings Public Accommo" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch11a_chapter_11a_housing_accessibility.md
+cbc-graph/chapters/ch11b_chapter_11b_accessibility_to_public_buildings_public_accommo.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c11_chapter_11b_accessibility_to_public_buildings_public_accommo_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_1109a_8_8                                                 1109A.8.8 Identification of Accessible Parking
+  sec_1124a                                                     1124A Elevators and Platform (Wheelchair) Lifts
+  sec_1124a_11                                                  1124A.11 Platform (Wheelchair) Lifts
+  sec_1127a_7                                                   1127A.7 Signs for Toilet and Bathing Facilities
+  sec_1143a                                                     1143A Signage
+  sec_11b_206                                                   11B-206 Accessible Routes
+  sec_11b_206_2                                                 11B-206.2 Where Required (Accessible Routes)
+  sec_11b_206_2_3                                               11B-206.2.3 Multistory Buildings and Facilities
+  sec_11b_206_4                                                 11B-206.4 Entrances
+  sec_11b_206_7                                                 11B-206.7 Platform Lifts
+  sec_11b_216                                                   11B-216 Signs
+  sec_11b_233                                                   11B-233 Public Housing Facilities
+  sec_11b_247                                                   11B-247 Detectable Warnings and Detectable Directional Textu
+  sec_11b_302                                                   11B-302 Floor or Ground Surfaces
+  sec_11b_303                                                   11B-303 Changes in Level
+  sec_11b_304                                                   11B-304 Turning Space
+  sec_11b_305                                                   11B-305 Clear Floor or Ground Space
+  sec_11b_306                                                   11B-306 Knee and Toe Clearance
+  sec_11b_308                                                   11B-308 Reach Ranges
+  sec_11b_309                                                   11B-309 Operable Parts
+  sec_11b_402                                                   11B-402 Accessible Routes
+  sec_11b_403                                                   11B-403 Walking Surfaces
+  sec_11b_404                                                   11B-404 Doors, Doorways and Gates
+  sec_11b_404_2_3                                               11B-404.2.3 Clear Width
+  sec_11b_405                                                   11B-405 Ramps
+  sec_11b_406                                                   11B-406 Curb Ramps, Blended Transitions and Islands
+  sec_11b_407                                                   11B-407 Elevators
+  sec_11b_408                                                   11B-408 Limited-Use/Limited-Application Elevators
+  sec_11b_410                                                   11B-410 Platform Lifts
+  sec_11b_411                                                   11B-411 Destination-Oriented Elevators
+  sec_11b_505                                                   11B-505 Handrails
+  sec_11b_703                                                   11B-703 Signs
+  sec_11b_705                                                   11B-705 Detectable Warnings
+  sec_11b_809                                                   11B-809 Residential Dwelling Units
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_1124a_3_2                                               Table 1124A.3.2 Elevator Car Dimensions
+  table_1143a_5                                                 Table 1143A.5 Visual Character Height
+  table_1143a_7_1                                               Table 1143A.7.1 Braille Dimensions
+  table_11b_407_4_1                                             Table 11B-407.4.1 Elevator Car Dimensions
+  concept_accessible_route                                      Concept: Accessible Route
+  concept_adaptable_features                                    Concept: Adaptable Features (Residential)
+  concept_international_symbol_of_accessibility                 Concept: International Symbol of Accessibility
+  concept_mobility_features                                     Concept: Mobility Features (Residential)
+  def_accessible_route                                          Defined Term: Accessible Route
+  def_detectable_warning                                        Defined Term: Detectable Warning
+  std_bhma_a156_10                                              BHMA A156.10 / ANSI/BHMA A156.10 Power Operated Pedestrian D
+  std_bhma_a156_19                                              BHMA A156.19 / ANSI/BHMA A156.19 Low Energy and Power Assist
+  std_title8_ccr                                                California Code of Regulations Title 8 Elevator Safety Order
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_asme_a17_1                                                ASME A17.1 Safety Code for Elevators and Escalators
+  std_asme_a18_1                                                ASME A18.1 Safety Standard for Platform Lifts and Stairway C
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_1109a_8_8>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 11B Accessibility To Public Buildings Public Accommo",
+  "community_id": 11,
+  "extracted_from_sections": ["ch11a_chapter_11a_housing_accessibility.md", "ch11b_chapter_11b_accessibility_to_public_buildings_public_accommo.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-34 rules. After writing the file, just confirm "wrote c11_chapter_11b_accessibility_to_public_buildings_public_accommo_rules.json with N rules" and stop.

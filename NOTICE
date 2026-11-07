@@ -1,0 +1,30 @@
+PlanCheck
+Copyright 2026 Kam Kasravi
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+-------------------------------------------------------------------------------
+Third-party material
+-------------------------------------------------------------------------------
+
+tests/parity-baseline/sample.pdf
+  "Marilyn's Farmhouse" (The Original Starter Farmhouse Plans) by Jay Osborne,
+  https://www.FreeFarmhouse.com
+  Licensed under Creative Commons Attribution-ShareAlike 4.0 International
+  (CC BY-SA 4.0), https://creativecommons.org/licenses/by-sa/4.0/
+  Included unmodified as a test fixture; it is not covered by the Apache
+  License. The drawings carry their own disclaimer: they are provided "as is"
+  for informational purposes only.
+
+-------------------------------------------------------------------------------
+California building codes
+-------------------------------------------------------------------------------
+
+This project references the California Code of Regulations, Title 24, and the
+model codes it adopts (including publications of the International Code
+Council and the National Fire Protection Association). No code text is
+distributed with this project: rule packs contain section citations and
+structured, paraphrased requirements. PlanCheck is not affiliated with or
+endorsed by the California Building Standards Commission, ICC, or NFPA, and
+its findings are not a substitute for review by the authority having
+jurisdiction or a licensed professional.

@@ -1,0 +1,1336 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Existing/Tiny/Emergency Housing",
+  "community_id": 6,
+  "extracted_from_sections": [
+    "appendix_af_radon_control_methods.md",
+    "appendix_aj_existing_buildings_and_structures.md",
+    "appendix_aq_tiny_houses.md",
+    "appendix_ar_light_straw_clay_construction.md",
+    "appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+    "appendix_az_emergency_housing.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_appendix_af_radon_control_methods",
+      "cite": "Appendix AF",
+      "section_node": "appendix_af_radon_control_methods",
+      "title": "Radon control appendix applicability scope",
+      "intent": "Trigger radon-resistant construction provisions only where the appendix has been adopted by the jurisdiction or where the project is in an EPA Zone 1 county.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "jurisdiction_has_adopted_appendix_af": true
+            },
+            {
+              "county_in_epa_radon_zone_1_per_table_af101_1": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "rule_pack_activated": "appendix_af_radon_control",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cover-sheet note identifying jurisdiction's adoption of Appendix AF or project county designation as EPA Radon Zone 1",
+        "Reference to Figure AF101.1 / Table AF101.1 with project county highlighted"
+      ],
+      "depends_on": [
+        "epa_radon_zone1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_af_101_scope",
+      "cite": "AF101",
+      "section_node": "af_101_scope",
+      "title": "Apply radon-resistant construction in adopted/Zone 1 jurisdictions",
+      "intent": "Limit AF103/AF104 radon construction and testing requirements to new construction where radon resistance is required by the local jurisdiction.",
+      "applies_when": [
+        {
+          "is_new_construction": true
+        },
+        {
+          "any_of": [
+            {
+              "jurisdiction_requires_radon_resistant_construction": true
+            },
+            {
+              "county_in_epa_radon_zone_1_per_table_af101_1": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "must_comply_with": [
+          "af_103_requirements",
+          "af_104_testing"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Building official determination letter or ordinance citation invoking Appendix AF",
+        "Site information identifying county and Zone 1 status"
+      ],
+      "depends_on": [
+        "epa_radon_zone1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_af_103_requirements",
+      "cite": "AF103",
+      "section_node": "af_103_requirements",
+      "title": "Radon-resistant construction package for new dwellings",
+      "intent": "Pre-install gas-permeable subfloor, soil-gas-retarder, sealed entry routes, passive vent pipe, and electrical rough-in so the dwelling can resist and, if needed, mitigate radon entry.",
+      "applies_when": [
+        {
+          "is_new_construction": true
+        },
+        {
+          "jurisdiction_requires_radon_resistant_construction": true
+        }
+      ],
+      "requires": {
+        "type": "construction_assembly",
+        "subfloor_gas_permeable_layer": {
+          "any_of": [
+            {
+              "clean_aggregate_thickness_>=4_in": true,
+              "passes_2_in_sieve_retained_by_1_4_in_sieve": true
+            },
+            {
+              "sand_thickness_>=4_in": true,
+              "geotextile_drainage_matting_overlain": true
+            },
+            {
+              "alternative_with_demonstrated_subfloor_depressurization_capability": true
+            }
+          ]
+        },
+        "soil_gas_retarder": {
+          "min_polyethylene_thickness_mil": 6,
+          "or_cross_laminated_thickness_mil": 3,
+          "lap_at_joints_>=12_in": true,
+          "fits_closely_around_penetrations": true,
+          "tears_and_punctures_sealed_or_covered": true
+        },
+        "entry_routes_sealed": {
+          "floor_openings_caulked_with_polyurethane_or_equivalent": true,
+          "concrete_joints_sealed_with_caulk_or_elastomeric_sealant": true,
+          "condensate_drains_trapped_or_routed_through_nonperforated_pipe_to_daylight": true,
+          "sumps_have_gasketed_or_sealed_lid": true,
+          "hollow_block_foundation_walls_capped_with_solid_course_or_grouted_or_concrete_beam": true,
+          "exterior_below_grade_concrete_masonry_walls_dampproofed_per_R406": true,
+          "crawl_space_air_handlers_sealed": true,
+          "subslab_or_crawl_space_ducts_sealed_per_M1601_4_1": true,
+          "crawl_space_floor_penetrations_caulked": true,
+          "basement_to_crawl_space_access_doors_gasketed": true
+        },
+        "passive_depressurization_system": {
+          "if_crawl_space_foundation": {
+            "submembrane_vent_pipe_diameter_in": [
+              3,
+              4
+            ],
+            "soil_gas_retarder_min_mil": 6,
+            "ground_cover_lapped_>=12_in": true,
+            "vent_pipe_terminates_>=12_in_above_roof": true,
+            "vent_pipe_>=10_ft_from_openings_<_2_ft_below_exhaust": true
+          },
+          "if_basement_or_slab_on_grade": {
+            "subslab_vent_pipe_min_diameter_in": 3,
+            "vent_pipe_material_any_of": [
+              "ABS",
+              "PVC",
+              "equivalent_gastight"
+            ],
+            "vent_pipe_terminates_>=12_in_above_roof": true,
+            "vent_pipe_>=10_ft_from_openings_<_2_ft_below_exhaust": true,
+            "multiple_subslab_zones_get_individual_vent_pipes": true
+          }
+        },
+        "vent_pipe_drainage_positive_to_subslab_or_retarder": true,
+        "vent_pipe_accessible_in_attic_or_outside_habitable_space_for_future_fan": true,
+        "vent_pipe_label_each_floor_and_attic": "Radon Reduction System",
+        "combination_foundations_each_zone_has_vent_pipe": true,
+        "duct_joints_in_unconditioned_spaces_meet_M1601": true,
+        "thermal_envelope_air_infiltration_meets_chapter_11": true,
+        "fireblocking_per_R302_11": true,
+        "future_fan_circuit_terminated_in_approved_box_in_attic_or_anticipated_location": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "crawl_space_has_approved_mechanical_ventilation_or_equivalent_system": true
+            }
+          ],
+          "effect": "passive_submembrane_depressurization_components_not_required"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "air_handler_factory_gasketed_or_manufacturer_sealed": true
+            }
+          ],
+          "effect": "field_sealing_of_air_handler_in_crawl_space_not_required"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "approved_roof_top_electrical_supply_provided_for_future_use": true
+            }
+          ],
+          "effect": "vent_pipe_need_not_be_accessible_in_attic"
+        }
+      ],
+      "evidence_required": [
+        "Foundation/slab section detail showing gas-permeable layer thickness, gradation, and 6-mil soil-gas-retarder with lap dimensions",
+        "Schedule of sealed penetrations, joints, sumps, and dampproofing per AF103.4 with sealant specifications",
+        "Plumbing/mechanical drawings showing passive vent pipe diameter, routing, roof termination clearances, and label locations",
+        "Electrical drawings showing future radon fan circuit terminated in approved box at attic/anticipated fan location",
+        "Manufacturer cut sheet for any factory-sealed crawl-space air handler used to claim AF103.4.7 exception"
+      ],
+      "depends_on": [
+        "m1601_ducts",
+        "r406_dampproofing",
+        "r408_ventilation_crawl",
+        "chapter_11_energy"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_af_104_testing",
+      "cite": "AF104",
+      "section_node": "af_104_testing",
+      "title": "Radon testing protocol and 4 pCi/L mitigation threshold",
+      "intent": "Verify radon-resistant construction performs within the EPA action level (<4 pCi/L) by prescribing test conditions, testers, duration, and corrective actions when the level is exceeded.",
+      "applies_when": [
+        {
+          "jurisdiction_requires_radon_resistant_construction": true
+        },
+        {
+          "is_new_construction": true
+        }
+      ],
+      "requires": {
+        "type": "testing_protocol",
+        "sequence": [
+          "test_after_dwelling_passes_air_tightness_test",
+          "test_after_radon_control_system_and_HVAC_complete_with_HVAC_operating",
+          "if_fan_installed_test_with_fan_running"
+        ],
+        "test_location": "lowest_occupied_floor_level_finished_or_not",
+        "exclude_test_locations": [
+          "closet",
+          "hallway",
+          "stairway",
+          "laundry_room",
+          "furnace_room",
+          "bathroom",
+          "kitchen"
+        ],
+        "separate_HVAC_zones_tested_separately": true,
+        "test_method_any_of": [
+          {
+            "commercially_available_radon_test_kit_with_two_tests_averaged": true
+          },
+          {
+            "approved_third_party_with_continuous_radon_monitor": true
+          }
+        ],
+        "closure_conditions": {
+          "windows_closed_during_test": true,
+          "exterior_doors_closed_except_for_entry_exit": true,
+          "windows_and_doors_closed_>=12_hours_before_test": true
+        },
+        "tested_by_any_of": [
+          "builder",
+          "registered_design_professional",
+          "approved_third_party"
+        ],
+        "test_duration_hours_min": 48,
+        "or_min_per_device_manufacturer_whichever_longer": true,
+        "report_delivery": {
+          "written_results_required": true,
+          "submit_to_code_official_when_<4_pCi_L": true
+        },
+        "if_result_>=4_pCi_L": [
+          "install_radon_vent_pipe_fan_per_AF103_9_and_AF103_12",
+          "modify_and_retest_until_result_<4_pCi_L"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "occupied_space_located_above_unenclosed_open_space": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Written radon test report stamped by tester showing location, duration, device, and pCi/L result",
+        "Closure log documenting >=12 hours of closed-house conditions prior to testing",
+        "If average >= 4 pCi/L: post-mitigation retest report demonstrating result < 4 pCi/L",
+        "Documentation that test was performed after blower-door test and with HVAC (and any installed radon fan) operating"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_aj_existing_buildings",
+      "cite": "Appendix AJ",
+      "section_node": "appendix_aj_existing_buildings",
+      "title": "Existing-building work classification scope",
+      "intent": "Classify any work in legally existing buildings into repair, renovation, alteration, or reconstruction so the appropriate stringency of provisions applies.",
+      "applies_when": [
+        {
+          "jurisdiction_has_adopted_appendix_aj": true
+        },
+        {
+          "is_existing_building": true
+        },
+        {
+          "any_of": [
+            {
+              "work_category": "repair"
+            },
+            {
+              "work_category": "renovation"
+            },
+            {
+              "work_category": "alteration"
+            },
+            {
+              "work_category": "reconstruction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "single_work_project_combines_related_work_within_12_months": true,
+        "more_stringent_category_governs_when_overlapping_work_areas": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Permit application classifying the scope of work as repair/renovation/alteration/reconstruction",
+        "Work-area drawings keyed to category designations"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_aj_102_compliance_a_general_safety",
+      "cite": "AJ102.1",
+      "section_node": "aj_102_compliance",
+      "title": "Existing-building work shall not reduce safety or compliance",
+      "intent": "Ensure that any repair/renovation/alteration/reconstruction does not make the structure unsafe or less code-compliant than before the work was undertaken.",
+      "applies_when": [
+        {
+          "is_existing_building": true
+        },
+        {
+          "any_of": [
+            {
+              "work_category": "repair"
+            },
+            {
+              "work_category": "renovation"
+            },
+            {
+              "work_category": "alteration"
+            },
+            {
+              "work_category": "reconstruction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "performance",
+        "shall_not_make_structure_unsafe": true,
+        "shall_not_make_mechanical_or_plumbing_unsafe_hazardous_insanitary_or_overloaded": true,
+        "shall_not_reduce_existing_compliance_or_previously_approved_alternatives": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "work_performed_per_california_existing_building_code": true
+            }
+          ],
+          "effect": "deemed_to_comply_with_appendix_aj"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "compliance_technically_infeasible_or_disproportionate_cost": true
+            },
+            {
+              "building_official_accepts_alternative": true
+            }
+          ],
+          "effect": "alternative_materials_design_or_operational_features_allowed"
+        }
+      ],
+      "evidence_required": [
+        "Statement from engineer of record that the work does not create or increase nonconformity",
+        "Comparison narrative of pre/post-work compliance status for affected systems",
+        "If invoking CEBC equivalence: cross-reference to applicable CEBC sections"
+      ],
+      "depends_on": [
+        "std_cebc"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aj_102_compliance_b_replacement_windows",
+      "cite": "AJ102.4",
+      "section_node": "aj_102_compliance",
+      "title": "Replacement window energy, safety glazing, EERO, and fall-prevention requirements",
+      "intent": "When existing windows or safety glazing are replaced, ensure the replacement meets current energy, safety glazing, emergency-escape, and fall-prevention rules without imposing a structural reframe.",
+      "applies_when": [
+        {
+          "is_existing_building": true
+        },
+        {
+          "existing_window_or_safety_glazing_replaced": true
+        }
+      ],
+      "requires": {
+        "type": "replacement_window",
+        "energy_efficiency_per_chapter_11": true,
+        "safety_glazing_in_hazardous_locations_per_R308": true,
+        "if_window_serves_emergency_escape_and_rescue_opening": {
+          "must_be_manufacturers_largest_standard_size_fitting_existing_frame_or_rough_opening": true,
+          "operating_style_equal_or_greater_opening_area": true,
+          "exempt_from_R310_2_and_R310_4_4_only_if_not_part_of_change_of_occupancy": true,
+          "window_opening_control_or_fall_prevention_devices_complying_with_ASTM_F2090_permitted": true,
+          "after_release_device_shall_not_reduce_net_clear_opening_area": true,
+          "operable_from_inside_without_keys_or_tools": true
+        },
+        "fall_prevention_required_when_all": {
+          "window_is_operable": true,
+          "any_of": [
+            {
+              "sash_and_frame_replaced": true
+            },
+            {
+              "sash_only_replaced_existing_frame_remains": true
+            }
+          ],
+          "bottom_of_clear_opening_<24_in_above_finished_floor": true,
+          "passes_4_in_sphere_at_largest_open_position": true,
+          "vertical_distance_from_sill_top_to_grade_or_surface_below_>72_in": true
+        },
+        "tested_per": [
+          "std_astm_f2090"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "NFRC label and energy compliance documentation for each replacement window",
+        "Hazardous-location plan showing safety-glazing locations per R308",
+        "EERO window schedule with manufacturer's largest standard size sized to existing rough opening",
+        "ASTM F2090 listing/certification for window opening control or fall prevention devices",
+        "Sill-height/grade-elevation detail demonstrating fall-prevention trigger evaluation"
+      ],
+      "depends_on": [
+        "chapter_11_energy",
+        "r308_glazing",
+        "r310_emergency_escape",
+        "std_astm_f2090"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aj_102_compliance_c_smoke_alarms_and_flood",
+      "cite": "AJ102.3, AJ102.5",
+      "section_node": "aj_102_compliance",
+      "title": "Smoke alarms and flood-hazard provisions trigger regardless of work category",
+      "intent": "Bring existing dwellings up to current smoke-alarm requirements when work is performed and ensure work in flood hazard areas is processed under R105.3.1.1.",
+      "applies_when": [
+        {
+          "is_existing_building": true
+        },
+        {
+          "any_of": [
+            {
+              "work_category": "repair"
+            },
+            {
+              "work_category": "renovation"
+            },
+            {
+              "work_category": "alteration"
+            },
+            {
+              "work_category": "reconstruction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "system_upgrade",
+        "smoke_detectors_per_R314_2_2": true,
+        "if_in_flood_hazard_area_per_table_R301_2": {
+          "subject_to_R105_3_1_1": true
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Smoke alarm plan showing units installed per R314.2.2 in all required locations",
+        "Flood hazard determination per Table R301.2 with permit routed under R105.3.1.1 if applicable",
+        "Elevation certificate or flood vent details when work is in a flood hazard area"
+      ],
+      "depends_on": [
+        "r314_smoke_alarms",
+        "r105_3_1_1_flood"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_aq_tiny_houses",
+      "cite": "Appendix AQ",
+      "section_node": "appendix_aq_tiny_houses",
+      "title": "Tiny-house appendix scope",
+      "intent": "Apply tiny-house relaxations only to single dwelling units that are 400 sq ft or less (excluding lofts) where the appendix has been adopted.",
+      "applies_when": [
+        {
+          "jurisdiction_has_adopted_appendix_aq": true
+        },
+        {
+          "is_single_dwelling_unit": true
+        },
+        {
+          "floor_area_excluding_lofts_<=400_sf": true
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "shall_comply_with_code_except_as_modified_by_appendix_aq": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor-area calculation excluding lofts on cover sheet",
+        "Use designation as single dwelling unit"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_aq_105_emergency_escape",
+      "cite": "AQ105",
+      "section_node": "aq_105_emergency_escape",
+      "title": "Tiny-house emergency escape and rescue, including egress roof access windows in lofts",
+      "intent": "Require tiny houses to meet R310 EERO rules while explicitly allowing egress roof access windows in sleeping lofts when sized and placed within reach.",
+      "applies_when": [
+        {
+          "is_tiny_house_per_AQ101": true
+        }
+      ],
+      "requires": {
+        "type": "egress",
+        "EERO_per_R310": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "loft_used_as_sleeping_room": true
+            },
+            {
+              "egress_opening_provided_by_egress_roof_access_window": true
+            },
+            {
+              "bottom_of_opening_<=44_in_above_loft_floor": true
+            },
+            {
+              "meets_R310_2_1_minimum_opening_area": true
+            }
+          ],
+          "effect": "egress_roof_access_window_deemed_to_satisfy_R310"
+        }
+      ],
+      "evidence_required": [
+        "EERO schedule showing each sleeping room compliance with R310",
+        "Section detail showing egress roof access window with bottom of opening dimension to loft floor",
+        "Manufacturer specification for skylight/roof window confirming R310.2.1 net clear opening area"
+      ],
+      "depends_on": [
+        "r310_emergency_escape"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aq_106_energy",
+      "cite": "AQ106",
+      "section_node": "aq_106_energy",
+      "title": "Tiny-house air leakage, mechanical ventilation, and alternative energy compliance",
+      "intent": "Cap envelope leakage at 0.30 cfm50 per sf of enclosure, require whole-house mechanical ventilation, and provide an alternative path to Chapter 11 / Energy Code compliance for tiny houses.",
+      "applies_when": [
+        {
+          "is_tiny_house_per_AQ101": true
+        }
+      ],
+      "requires": {
+        "type": "energy_envelope",
+        "air_leakage_rate_max_cfm50_per_sf_enclosure": 0.3,
+        "test_method_per_N1102_4_1_2": true,
+        "enclosure_area_definition": "sum_of_ceiling_floor_and_wall_areas_separating_conditioned_space_from_exterior_unconditioned_or_adjacent_units",
+        "if_complies_with_AQ106_1": {
+          "whole_house_mechanical_ventilation_per_M1505_4": true
+        },
+        "alternative_compliance_with_chapter_11_and_energy_code_R4_when_all": [
+          "insulation_and_fenestration_per_table_N1102_1_2",
+          "thermal_envelope_per_N1102_4_1_1_and_table_N1102_4_1_1",
+          "renewable_energy_supplies_>=90_percent_of_structure_energy_use",
+          "renewable_energy_supplies_>=90_percent_of_service_water_heating_energy",
+          "permanently_installed_lighting_per_N1104",
+          "mechanical_ventilation_per_M1505_with_no_operable_fenestration_credit"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Blower-door test report showing leakage <= 0.30 cfm50 per sf of enclosure area, with enclosure area calculation",
+        "M1505.4 whole-house mechanical ventilation schedule and fan specifications",
+        "Insulation and fenestration schedule referenced to Table N1102.1.2",
+        "Renewable energy production calculation demonstrating >=90% of total and DHW energy if claiming alternative compliance",
+        "Lighting compliance documentation per N1104"
+      ],
+      "depends_on": [
+        "chapter_11_energy",
+        "n1102_thermal_envelope",
+        "m1505_mechanical_ventilation"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ar_104_thermal_performance",
+      "cite": "AR104",
+      "section_node": "ar_104_thermal_performance",
+      "title": "Light straw-clay wall thermal classification and R-value",
+      "intent": "Classify dense (>=20 pcf) light straw-clay infill as a mass wall and lower-density (<20 pcf) infill as wood-frame for code R-value purposes, using the R-values from Table AR103.2.3.",
+      "applies_when": [
+        {
+          "is_light_straw_clay_infill_wall": true
+        },
+        {
+          "jurisdiction_has_adopted_appendix_ar": true
+        }
+      ],
+      "requires": {
+        "type": "thermal_envelope",
+        "if_density_>=20_pcf": {
+          "classified_as_mass_wall_per_N1102_2_5": true,
+          "R_value_per_table_N1102_1_3_mass_wall_column": true
+        },
+        "if_density_<20_pcf": {
+          "R_value_per_table_N1102_1_3_wood_frame_wall_column": true
+        },
+        "thermal_resistance_value_taken_from_table_AR103_2_3": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall assembly schedule listing light straw-clay density (pcf) for each wall type",
+        "R-value calculation sheet demonstrating compliance with the applicable column of Table N1102.1.3",
+        "Reference to Table AR103.2.3 for the assigned thermal resistance per inch"
+      ],
+      "depends_on": [
+        "n1102_thermal_envelope"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_ay_central_valley_flood",
+      "cite": "Appendix AY",
+      "section_node": "appendix_ay_central_valley_flood",
+      "title": "Central Valley Flood Protection Plan area scope",
+      "intent": "Apply Appendix AY to new construction, change of use, repair, and substantial improvement/restoration in CVFPP-protected areas where 200-year flood depth is anticipated to exceed 3 ft.",
+      "applies_when": [
+        {
+          "site_in_area_protected_by_CVFPP_per_table_R301_2": true
+        },
+        {
+          "WSEL200_above_lowest_floor_>3_ft": true
+        },
+        {
+          "any_of": [
+            {
+              "is_new_construction": true
+            },
+            {
+              "is_change_of_use": true
+            },
+            {
+              "is_repair": true
+            },
+            {
+              "is_substantial_improvement": true
+            },
+            {
+              "is_restoration_of_substantial_damage": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "construction_documents_include_WSEL200": true,
+        "construction_documents_include_floor_elevations_and_roof_elevations_or_slopes_as_applicable": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site map showing project parcel within CVFPP area per DWR data (water.ca.gov/BuildingCodes)",
+        "Construction documents listing WSEL200 and floor/roof elevations",
+        "Health & Safety Code 50465 area determination"
+      ],
+      "depends_on": [
+        "hsc_50465_cvfpp"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ay_104_evacuation_locations",
+      "cite": "AY104",
+      "section_node": "ay_104_evacuation_locations",
+      "title": "Evacuation location and route required in CVFPP areas",
+      "intent": "Provide an evacuation location at least one foot above WSEL200 with an unobstructed route so occupants below the 200-year flood level can shelter and be rescued.",
+      "applies_when": [
+        {
+          "site_in_area_protected_by_CVFPP_per_table_R301_2": true
+        },
+        {
+          "WSEL200_above_lowest_floor_>3_ft": true
+        }
+      ],
+      "requires": {
+        "type": "egress_evacuation",
+        "evacuation_location_finished_floor_>=1_ft_above_WSEL200": true,
+        "minimum_gross_floor_area_sf_per_occupant": 7,
+        "occupant_load_basis": "occupant_load_of_portions_below_WSEL200_plus_upper_levels",
+        "route": {
+          "permitted_through_intervening_rooms_or_spaces": true,
+          "doors_along_route_openable_without_key_lock_special_knowledge_or_effort": true
+        },
+        "if_evacuation_location_inside_building": {
+          "means_to_evacuate_out_any_of": [
+            "window_complying_with_R310_minimum_size_dimensions_and_operation",
+            "exterior_door_to_deck_balcony_or_porch_sized_per_R311",
+            "means_of_escape_to_rooftop_via_stairway_ramp_alternating_tread_device_fixed_ladder_or_other_approved"
+          ],
+          "number_of_windows_appropriate_for_occupancy_below_WSEL200": true
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "flood_vents_provided_per_figure_AY103_two_opposite_sides": true
+            }
+          ],
+          "effect": "structural_resistance_to_hydrostatic_loads_may_be_satisfied_by_flood_vents"
+        }
+      ],
+      "evidence_required": [
+        "Plan showing evacuation location with finished floor elevation > WSEL200 + 1 ft",
+        "Occupant-load calculation including portions below WSEL200 and area calculation at 7 sf/occupant",
+        "Egress path drawing showing doors openable without keys/tools",
+        "Means of escape detail (R310-compliant window, R311 exterior door, rooftop stair/ramp/ladder, etc.)",
+        "Hydrostatic load calculation per ASCE 7 Chapter 5 supporting evacuation-supporting structure design"
+      ],
+      "depends_on": [
+        "r310_emergency_escape",
+        "hsc_50465_cvfpp"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_appendix_az_emergency_housing",
+      "cite": "Appendix AZ",
+      "section_node": "appendix_az_emergency_housing",
+      "title": "Emergency housing appendix scope",
+      "intent": "Apply Appendix AZ to emergency sleeping cabins, emergency transportable housing units, membrane structures and tents only when occupied during a declared state/local emergency or shelter crisis.",
+      "applies_when": [
+        {
+          "jurisdiction_has_adopted_appendix_az": true
+        },
+        {
+          "any_of": [
+            {
+              "declaration_of_state_of_emergency_per_gov_code_8558": true
+            },
+            {
+              "declaration_of_local_emergency_per_gov_code_8558": true
+            },
+            {
+              "declaration_of_shelter_crisis_per_gov_code_8698": true
+            }
+          ]
+        },
+        {
+          "any_of": [
+            {
+              "structure_type": "emergency_sleeping_cabin"
+            },
+            {
+              "structure_type": "emergency_transportable_housing_unit"
+            },
+            {
+              "structure_type": "membrane_structure"
+            },
+            {
+              "structure_type": "tent"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "occupancy_limited_to_declared_emergency_period": true,
+        "permanently_constructed_buildings_per_CBSC_may_be_permanently_occupied_as_emergency_housing": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "existing_building_used_for_emergency_housing": true
+            }
+          ],
+          "effect": "may_be_exempt_from_california_energy_code_as_determined_by_enforcing_agency"
+        }
+      ],
+      "evidence_required": [
+        "Copy of formal declaration of state/local emergency or shelter crisis citing Gov. Code 8558 or 8698",
+        "Site plan listing structure types deployed (cabins, ETHUs, tents, membrane structures)",
+        "Enforcing agency authorization letter where exceptions are claimed"
+      ],
+      "depends_on": [
+        "gov_code_8558_emergency"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_az_104_emergency_sleeping_cabins",
+      "cite": "AZ104",
+      "section_node": "az_104_emergency_sleeping_cabins",
+      "title": "Emergency sleeping cabin construction, egress, electrical, and life-safety requirements",
+      "intent": "Set minimum floor area, structural live loads, ceiling heights, two remote egress paths, electrical service, and smoke/CO alarms for relocatable hard-sided emergency sleeping cabins.",
+      "applies_when": [
+        {
+          "structure_type": "emergency_sleeping_cabin"
+        },
+        {
+          "under_emergency_or_shelter_crisis_declaration": true
+        }
+      ],
+      "requires": {
+        "type": "dwelling_assembly",
+        "floor_area": {
+          "min_sf_for_one_occupant": 70,
+          "additional_sf_per_occupant_in_excess_of_one": 50,
+          "max_sf_excluding_lofts": 400,
+          "may_be_reduced_to_53_sf_for_single_occupancy_if_enforcing_agency_approves": true
+        },
+        "live_loads": {
+          "floor_psf_min": 40,
+          "horizontal_wall_and_roof_psf_min": 15,
+          "roof_psf_min": 20,
+          "snow_load_>20_psf_zone_design_for_actual_snow_load": true
+        },
+        "ceiling_height": {
+          "habitable_and_hallway_min_in": 80,
+          "bath_toilet_kitchen_min_in": 76,
+          "obstructions_shall_not_extend_below_minimums": true
+        },
+        "egress": {
+          "two_forms_remote_from_each_other": true,
+          "one_may_be_egress_window_per_AZ104_4_1": true,
+          "if_loft_provided_one_egress_window_in_loft": true,
+          "egress_window": {
+            "bottom_of_clear_opening_max_in_above_floor": 44,
+            "min_net_clear_opening_height_in": 24,
+            "min_net_clear_opening_width_in": 20,
+            "min_net_clear_opening_area_sf": 5
+          }
+        },
+        "electrical_per_california_electrical_code": {
+          "continuous_source_of_electricity_or_emergency_generator_or_renewable": true,
+          "at_least_one_interior_lighting_fixture": true,
+          "electrical_heating_equipment_listed_for_residential_with_dedicated_receptacle_unless_non_electrical_heat_provided": true,
+          "at_least_one_GFCI_protected_receptacle": true
+        },
+        "ventilation_natural_or_mechanical_adequate_per_enforcing_agency": true,
+        "smoke_alarms_per_R314": true,
+        "if_fuel_burning_appliance_or_fireplace_present": {
+          "carbon_monoxide_alarm_per_R315": true
+        },
+        "privacy_lock_on_each_entrance_door_and_all_windows": true,
+        "heating_in_sleeping_areas_adequate_per_enforcing_agency": true,
+        "if_plumbing_or_gas_service_present": {
+          "comply_with_california_plumbing_code_and_california_mechanical_code": true
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "non_electrical_heat_source_provided": true
+            }
+          ],
+          "effect": "electrical_heating_equipment_and_dedicated_receptacle_not_required"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "loft_provided_per_AZ108": true
+            }
+          ],
+          "effect": "loft_ceiling_heights_may_be_less_than_80_in"
+        }
+      ],
+      "evidence_required": [
+        "Floor plan with interior area calculation and occupant-count-based area schedule",
+        "Structural calcs documenting floor (40 psf), wall/roof (15 psf), and roof (20 psf) live loads (or higher snow load if applicable)",
+        "Section drawings showing 80 in habitable and 76 in bath/kitchen ceiling heights",
+        "Egress plan showing two remote egress paths and an egress window meeting AZ104.4.1 dimensions",
+        "Electrical riser/plan showing continuous power, interior lighting, listed heating equipment with dedicated outlet, and GFCI receptacle",
+        "Smoke alarm and (if applicable) carbon monoxide alarm plan referencing R314/R315"
+      ],
+      "depends_on": [
+        "r314_smoke_alarms",
+        "r315_carbon_monoxide",
+        "gov_code_8558_emergency"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_az_105_transportable_units",
+      "cite": "AZ105",
+      "section_node": "az_105_transportable_units",
+      "title": "Emergency transportable housing units must comply with HSC Div. 13 and Title 25",
+      "intent": "Defer construction standards for manufactured homes, mobilehomes, multifamily manufactured homes, commercial modulars, recreational vehicles, and park trailers used as emergency housing to existing California state housing law.",
+      "applies_when": [
+        {
+          "structure_type": "emergency_transportable_housing_unit"
+        },
+        {
+          "under_emergency_or_shelter_crisis_declaration": true
+        }
+      ],
+      "requires": {
+        "type": "regulatory_reference",
+        "comply_with_HSC_Division_13_Part_2": true,
+        "comply_with_Title_25_Division_1_Chapter_3_Subchapter_2": true,
+        "in_addition_to_appendix_AZ_requirements": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "HCD insignia or certification label for each unit (manufactured home, mobilehome, multifamily MH, park trailer, RV, or commercial modular)",
+        "Documentation of compliance with HSC Division 13 Part 2 and Title 25 Division 1 Chapter 3 Subchapter 2",
+        "Enforcing agency approval letter for any commercial modular used as ETHU"
+      ],
+      "depends_on": [
+        "gov_code_8558_emergency"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r105_3_1_1_flood",
+      "cite": "R105.3.1.1",
+      "section_node": "r105_3_1_1_flood",
+      "title": "Flood-hazard permit review for work in flood hazard areas",
+      "intent": "Route any work performed in existing buildings located in a flood hazard area through the special permit-review provisions of R105.3.1.1.",
+      "applies_when": [
+        {
+          "is_existing_building": true
+        },
+        {
+          "site_in_flood_hazard_area_per_table_R301_2": true
+        },
+        {
+          "any_of": [
+            {
+              "work_category": "repair"
+            },
+            {
+              "work_category": "renovation"
+            },
+            {
+              "work_category": "alteration"
+            },
+            {
+              "work_category": "reconstruction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "permit_review",
+        "subject_to_R105_3_1_1": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Flood hazard determination per Table R301.2 with FEMA panel reference",
+        "Permit application package routed through flood-hazard plan review under R105.3.1.1",
+        "Elevation certificate or equivalent documentation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r308_glazing",
+      "cite": "R308",
+      "section_node": "r308_glazing",
+      "title": "Replacement glazing in hazardous locations shall be safety glazing",
+      "intent": "Ensure that whenever an existing window or glazing is replaced, the replacement glazing in hazardous locations is rated as safety glazing under R308.",
+      "applies_when": [
+        {
+          "existing_window_or_safety_glazing_replaced": true
+        },
+        {
+          "glazing_in_hazardous_location_per_R308": true
+        }
+      ],
+      "requires": {
+        "type": "glazing",
+        "safety_glazing_per_R308": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Glazing schedule indicating each hazardous location and the corresponding safety-glazing label/rating",
+        "Manufacturer certification of safety glazing for replacement panes/sashes"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r310_emergency_escape",
+      "cite": "R310",
+      "section_node": "r310_emergency_escape",
+      "title": "Emergency escape and rescue openings required in sleeping rooms",
+      "intent": "Ensure each sleeping room and basement is served by an emergency escape and rescue opening that meets R310 minimum size, sill height, and operability so occupants can escape and rescuers can enter.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_sleeping_room": true
+            },
+            {
+              "is_basement_with_habitable_space": true
+            },
+            {
+              "is_tiny_house_per_AQ101": true
+            },
+            {
+              "all_of": [
+                {
+                  "structure_type": "emergency_sleeping_cabin"
+                },
+                {
+                  "egress_route_uses_egress_window": true
+                }
+              ]
+            },
+            {
+              "replacement_window_serves_emergency_escape_and_rescue_opening": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "egress",
+        "EERO_minimum_per_R310_2_and_R310_4_4": true,
+        "operable_from_inside_without_keys_tools_or_special_knowledge": true,
+        "tested_per": [
+          "std_astm_f2090"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "is_replacement_window": true
+            },
+            {
+              "replacement_window_is_manufacturers_largest_standard_size_fitting_existing_frame_or_rough_opening": true
+            },
+            {
+              "not_part_of_change_of_occupancy": true
+            }
+          ],
+          "effect": "exempt_from_R310_2_and_R310_4_4_per_AJ102_4_3"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "is_tiny_house_loft_used_as_sleeping_room": true
+            },
+            {
+              "egress_roof_access_window_meets_R310_2_1_and_bottom_<=44_in_above_loft_floor": true
+            }
+          ],
+          "effect": "egress_roof_access_window_deemed_to_satisfy_R310"
+        }
+      ],
+      "evidence_required": [
+        "EERO schedule for each sleeping room with net clear opening dimensions and sill height",
+        "Window opening control / fall prevention documentation per ASTM F2090 where applicable",
+        "Manufacturer specifications confirming R310.2.1 minimum opening area"
+      ],
+      "depends_on": [
+        "std_astm_f2090"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r314_smoke_alarms",
+      "cite": "R314",
+      "section_node": "r314_smoke_alarms",
+      "title": "Smoke alarms required regardless of work category and in emergency sleeping cabins",
+      "intent": "Provide working smoke alarms in existing dwellings whenever work is performed and in every emergency sleeping cabin so occupants are warned of fire.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_existing_building_with_any_work_category": true
+            },
+            {
+              "structure_type": "emergency_sleeping_cabin"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "alarm_system",
+        "smoke_alarms_installed_per_R314": true,
+        "minimum_count_per_emergency_sleeping_cabin": 1,
+        "interconnection_and_locations_per_R314_2_2_and_R314_3": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Smoke alarm location plan referenced to R314.3 (each sleeping room, outside sleeping rooms, on each story)",
+        "Listed-product cut sheets or model numbers complying with R314",
+        "Interconnection and power source documentation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r315_carbon_monoxide",
+      "cite": "R315",
+      "section_node": "r315_carbon_monoxide",
+      "title": "Carbon monoxide alarms required where fuel-burning appliances or fireplaces are present",
+      "intent": "Detect carbon monoxide in dwelling units that contain fuel-burning appliances or fireplaces, including emergency sleeping cabins.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "dwelling_unit_contains_fuel_burning_appliance": true
+            },
+            {
+              "dwelling_unit_contains_fireplace": true
+            },
+            {
+              "all_of": [
+                {
+                  "structure_type": "emergency_sleeping_cabin"
+                },
+                {
+                  "any_of": [
+                    {
+                      "cabin_contains_fuel_burning_appliance": true
+                    },
+                    {
+                      "cabin_contains_fireplace": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "alarm_system",
+        "carbon_monoxide_alarm_installed_per_R315": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mechanical/fireplace plans identifying fuel-burning appliances and fireplaces",
+        "CO alarm location plan referenced to R315 with listed-product cut sheets",
+        "Power source and interconnection documentation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r406_dampproofing",
+      "cite": "R406",
+      "section_node": "r406_dampproofing",
+      "title": "Below-grade concrete and masonry walls shall be dampproofed",
+      "intent": "Dampproof exterior surfaces of below-grade concrete and masonry block walls to limit water and soil-gas entry, including in radon-resistant assemblies.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "has_below_grade_concrete_wall": true
+            },
+            {
+              "has_below_grade_masonry_block_wall": true
+            }
+          ]
+        },
+        {
+          "any_of": [
+            {
+              "is_new_construction": true
+            },
+            {
+              "is_part_of_radon_resistant_construction_per_AF103_4_6": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "waterproofing",
+        "exterior_below_grade_surfaces_dampproofed_per_R406": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation wall section detail showing dampproofing material, application method, and extent below grade",
+        "Manufacturer product data sheet for the dampproofing material",
+        "Inspection record verifying dampproofing prior to backfill"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r408_ventilation_crawl",
+      "cite": "R408",
+      "section_node": "r408_ventilation_crawl",
+      "title": "Crawl space ventilation openings to exterior",
+      "intent": "Provide minimum net area of ventilation openings to the exterior in crawl spaces, including those used in passive submembrane radon depressurization systems.",
+      "applies_when": [
+        {
+          "has_crawl_space_foundation": true
+        },
+        {
+          "any_of": [
+            {
+              "is_new_construction": true
+            },
+            {
+              "is_radon_resistant_passive_submembrane_system_per_AF103_5": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ventilation",
+        "vents_to_exterior_provided": true,
+        "minimum_net_area_per_R408_1": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing crawl space vent locations, types, and net free area calculation",
+        "Crawl space ventilation calculation referencing R408.1",
+        "Manufacturer data for vent assemblies including net free-area rating"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

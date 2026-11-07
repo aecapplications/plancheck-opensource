@@ -1,0 +1,135 @@
+You are a plan-check rule extraction subagent. The graph community "California Energy Code — Article 89" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/01_article_89_general_code_provisions.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c11_california_energy_code_article_89_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  01_article_89_general_code_provisions_89_101_3                89.101.3 Scope
+  01_article_89_general_code_provisions_89_101_3_1              89.101.3.1 Nonstate-Regulated Buildings, Structures, and App
+  01_article_89_general_code_provisions_89_101_3_2              89.101.3.2 State-Regulated Buildings, Structures, and Applic
+  01_article_89_general_code_provisions_89_101_3_3              89.101.3.3 Exempted from This Code
+  01_article_89_general_code_provisions_89_101_4                89.101.4 Annexes
+  01_article_89_general_code_provisions_89_101_7_3_1            89.101.7.3.1 Detached One- and Two-Family Dwellings
+  01_article_89_general_code_provisions_code_crc                California Residential Code (CRC)
+  01_article_89_general_code_provisions_89_101_8                89.101.8 City, County, or City and County Amendments, Additi
+  01_article_89_general_code_provisions_89_101_8_1              89.101.8.1 Findings and Filings
+  01_article_89_general_code_provisions_89_101_8_2              89.101.8.2 California Energy Code Requirements for Locally A
+  01_article_89_general_code_provisions_code_cac                California Administrative Code (Title 24 Part 1)
+  01_article_89_general_code_provisions_89_102                  89.102 Building Standards Commission
+  01_article_89_general_code_provisions_89_103                  89.103 Reserved for Board of State and Community Corrections
+  01_article_89_general_code_provisions_89_104                  89.104 Reserved for the Department of Consumer Affairs
+  01_article_89_general_code_provisions_89_105                  89.105 Reserved for the California Energy Commission
+  01_article_89_general_code_provisions_89_106                  89.106 Reserved for the Department of Food and Agriculture
+  01_article_89_general_code_provisions_89_107                  89.107 California Department of Public Health
+  01_article_89_general_code_provisions_occ_organized_camps     Organized Camps
+  01_article_89_general_code_provisions_89_108                  89.108 Department of Housing and Community Development
+  01_article_89_general_code_provisions_89_108_2_1              89.108.2.1 General (HCD authority)
+  01_article_89_general_code_provisions_89_108_2_1_1            89.108.2.1.1 Housing Construction (HCD 1)
+  01_article_89_general_code_provisions_occ_factory_built_housing  Factory-Built Housing (occupancy)
+  01_article_89_general_code_provisions_89_108_2_1_2            89.108.2.1.2 Housing Accessibility (HCD 1-AC)
+  01_article_89_general_code_provisions_code_cbc                California Building Code (CBC) Title 24 Part 2
+  01_article_89_general_code_provisions_occ_covered_multifamily_dwelling  Covered Multifamily Dwelling
+  01_article_89_general_code_provisions_89_108_2_1_3            89.108.2.1.3 Permanent Buildings in Mobilehome Parks and Spe
+  01_article_89_general_code_provisions_occ_mobilehome_park     Mobilehome Park (occupancy)
+  01_article_89_general_code_provisions_occ_special_occupancy_park  Special Occupancy Park
+  01_article_89_general_code_provisions_89_108_3                89.108.3 Local Enforcing Agency
+  01_article_89_general_code_provisions_89_108_3_1              89.108.3.1 Duties and Powers
+  01_article_89_general_code_provisions_89_108_3_2              89.108.3.2 Laws, Rules, and Regulations
+  01_article_89_general_code_provisions_code_ccr_title25        California Code of Regulations Title 25
+  01_article_89_general_code_provisions_89_108_3_2_1            89.108.3.2.1 State Housing Law
+  01_article_89_general_code_provisions_89_108_3_2_2            89.108.3.2.2 Mobilehome Parks Act
+  01_article_89_general_code_provisions_89_108_3_2_3            89.108.3.2.3 Special Occupancy Parks Act
+  01_article_89_general_code_provisions_89_108_3_2_4            89.108.3.2.4 Employee Housing Act
+  01_article_89_general_code_provisions_occ_employee_housing    Employee Housing (occupancy)
+  01_article_89_general_code_provisions_89_108_3_2_5            89.108.3.2.5 Factory-Built Housing Law
+  01_article_89_general_code_provisions_89_108_5                89.108.5 Right of Entry for Enforcement
+  01_article_89_general_code_provisions_89_108_6                89.108.6 Local Modification by Ordinance or Regulation
+  01_article_89_general_code_provisions_89_108_6_1              89.108.6.1 General (Local Modifications)
+  01_article_89_general_code_provisions_89_108_6_2              89.108.6.2 Findings, Filings, and Rejections of Local Modifi
+  01_article_89_general_code_provisions_89_108_9                89.108.9 Unsafe Buildings or Structures
+  01_article_89_general_code_provisions_89_109                  89.109 Division of the State Architect
+  01_article_89_general_code_provisions_89_109_1                89.109.1 DSA-AC Access Compliance
+  01_article_89_general_code_provisions_89_109_2                89.109.2 DSA-SS Structural Safety
+  01_article_89_general_code_provisions_89_109_2_1              89.109.2.1 DSA-SS scope (schools, community colleges, essent
+  01_article_89_general_code_provisions_occ_public_schools      Public Elementary, Secondary Schools and Community Colleges
+  01_article_89_general_code_provisions_89_109_2_2              89.109.2.2 DSA-SS/CC Community Colleges
+  01_article_89_general_code_provisions_89_109_3                89.109.3 SHB State Historical Building Safety Board
+  01_article_89_general_code_provisions_code_chbc               California Historical Building Code (Title 24 Part 8)
+  01_article_89_general_code_provisions_occ_qualified_historical  Qualified Historical Building
+  01_article_89_general_code_provisions_89_110                  89.110 Office of Statewide Health Planning and Development
+  01_article_89_general_code_provisions_89_111                  89.111 Office of the State Fire Marshal
+  01_article_89_general_code_provisions_89_111_10               89.111.10 Unsafe Buildings, Structures and Equipment
+  01_article_89_general_code_provisions_89_111_3                89.111.3 Construction Documents
+  01_article_89_general_code_provisions_89_111_6                89.111.6 Certificate of Occupancy
+  01_article_89_general_code_provisions_89_111_7                89.111.7 Temporary Structures and Uses
+  01_article_89_general_code_provisions_89_111_8                89.111.8 Service Utilities
+  01_article_89_general_code_provisions_89_111_9                89.111.9 Stop Work Order
+  01_article_89_general_code_provisions_89_112                  89.112 Reserved for the State Librarian
+  01_article_89_general_code_provisions_89_113                  89.113 Reserved for the Department of Water Resources
+  01_article_89_general_code_provisions_89_114                  89.114 Reserved for the California State Lands Commission
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  01_article_89_general_code_provisions_term_covered_multifamily_dwellings  Covered Multifamily Dwellings (defined term)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  01_article_89_general_code_provisions_agency_bsc              California Building Standards Commission (BSC)
+  01_article_89_general_code_provisions_agency_dph              California Department of Public Health (DPH)
+  01_article_89_general_code_provisions_agency_dsa              Division of the State Architect (DSA)
+  01_article_89_general_code_provisions_agency_hcd              Department of Housing and Community Development (HCD)
+  01_article_89_general_code_provisions_agency_oshpd            Office of Statewide Health Planning and Development (OSHPD)
+  01_article_89_general_code_provisions_agency_sfm              Office of the State Fire Marshal (SFM / CSFM)
+  01_article_89_general_code_provisions_agency_shb              State Historical Building Safety Board (SHB)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 01_article_89_general_code_provisions_89_101_3>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "California Energy Code — Article 89",
+  "community_id": 11,
+  "extracted_from_sections": ["01_article_89_general_code_provisions.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 15-63 rules. After writing the file, just confirm "wrote c11_california_energy_code_article_89_rules.json with N rules" and stop.

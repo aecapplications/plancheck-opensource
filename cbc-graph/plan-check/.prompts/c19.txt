@@ -1,0 +1,89 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 7 Fire And Smoke Protection Features" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch7_chapter_7_fire_and_smoke_protection_features.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c19_chapter_7_fire_and_smoke_protection_features_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_703_2_1                                                   703.2.1 Tested Assemblies
+  sec_703_2_2                                                   703.2.2 Analytical Methods
+  sec_703_6                                                     703.6 Noncombustible Protection Time Contribution
+  sec_704_1                                                     704.1 Requirements — Fire Resistance of Structural Members
+  sec_704_12                                                    704.12 Seismic Isolation Systems
+  sec_705_11                                                    705.11 Parapets
+  sec_705_5                                                     705.5 Fire-Resistance Ratings — Exterior Walls
+  sec_705_7                                                     705.7 Unexposed Surface Temperature
+  sec_705_8                                                     705.8 Openings
+  sec_705_8_1                                                   705.8.1 Allowable Area of Openings
+  sec_715_3                                                     715.3 Fire-Resistance-Rated Assembly Intersections
+  sec_717_3                                                     717.3 Damper Testing, Ratings and Actuation
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_601                                                     Table 601
+  table_705_5                                                   Table 705.5 Fire-Resistance Rating Requirements for Exterior
+  table_705_8                                                   Table 705.8 Maximum Area of Exterior Wall Openings Based on 
+  table_717_3_2_1                                               Table 717.3.2.1 Fire Damper Rating
+  def_fire_separation_distance                                  Fire Separation Distance
+  def_opening_protective                                        Opening Protective
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_astm_e119                                                 ASTM E119
+  std_astm_e1966                                                ASTM E1966
+  std_ul_2079                                                   UL 2079
+  std_ul_263                                                    UL 263
+  std_ul_555                                                    UL 555
+  std_ul_555c                                                   UL 555C
+  std_ul_555s                                                   UL 555S
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_703_2_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 7 Fire And Smoke Protection Features",
+  "community_id": 19,
+  "extracted_from_sections": ["ch7_chapter_7_fire_and_smoke_protection_features.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-12 rules. After writing the file, just confirm "wrote c19_chapter_7_fire_and_smoke_protection_features_rules.json with N rules" and stop.

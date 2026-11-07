@@ -1,0 +1,2017 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Branch-Circuit Load Calculations",
+  "community_id": 24,
+  "extracted_from_sections": [
+    "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+    "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt",
+    "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_210_23",
+      "cite": "210.23",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23",
+      "title": "Limit multiple-outlet branch-circuit load to circuit ampere rating",
+      "intent": "Prevent overload of branch circuits that supply two or more outlets or receptacles by restricting permissible loads according to circuit size.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_supplies_two_or_more_outlets_or_receptacles"
+        }
+      ],
+      "requires": {
+        "type": "load_limit",
+        "constraints": [
+          "connected_load_<=_branch_circuit_ampere_rating",
+          "supplied_loads_limited_per_circuit_size_per_210_23_a_through_d"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule showing branch-circuit ratings and connected loads",
+        "Branch-circuit load calculations per outlet",
+        "One-line diagram identifying multiple-outlet circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_b",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_23_a",
+      "cite": "210.23(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a",
+      "title": "Restrict 15- and 20-ampere branch-circuit loads to permitted lighting and utilization equipment",
+      "intent": "Ensure general-purpose 15- and 20-ampere circuits supply only lighting and utilization equipment within the load subdivisions of 210.23(A)(1) and (A)(2).",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "branch_circuit_rating_=_15a"
+            },
+            {
+              "predicate": "branch_circuit_rating_=_20a"
+            }
+          ]
+        },
+        {
+          "predicate": "branch_circuit_supplies_two_or_more_outlets_or_receptacles"
+        }
+      ],
+      "requires": {
+        "type": "load_limit",
+        "constraints": [
+          "supplies_only_lighting_units_or_utilization_equipment_or_both",
+          "complies_with_210_23_a_1_and_a_2"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "is_small_appliance_branch_circuit_per_210_11_c_1"
+                },
+                {
+                  "predicate": "is_laundry_branch_circuit_per_210_11_c_2"
+                },
+                {
+                  "predicate": "is_bathroom_branch_circuit_per_210_11_c_3"
+                }
+              ]
+            }
+          ],
+          "effect": "circuit_shall_supply_only_the_receptacle_outlets_specified_in_210_11_c"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedule identifying 15- and 20-ampere multioutlet circuits",
+        "Fixture and equipment schedules with connected VA per circuit",
+        "Identification of dedicated small-appliance, laundry, and bathroom circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_23_a_1",
+      "cite": "210.23(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a_1",
+      "title": "Limit cord-and-plug equipment not fastened in place to 80 percent of circuit rating",
+      "intent": "Prevent a single portable cord-and-plug-connected appliance from monopolizing or overloading a shared 15- or 20-ampere branch circuit.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "branch_circuit_rating_=_15a"
+            },
+            {
+              "predicate": "branch_circuit_rating_=_20a"
+            }
+          ]
+        },
+        {
+          "predicate": "equipment_is_cord_and_plug_connected"
+        },
+        {
+          "predicate": "equipment_not_fastened_in_place"
+        }
+      ],
+      "requires": {
+        "type": "load_limit",
+        "constraints": [
+          "any_one_equipment_rating_<=_80_percent_of_branch_circuit_ampere_rating"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate ratings",
+        "Branch-circuit rating on panel schedule",
+        "Load calculation showing 80 percent check for cord-and-plug equipment"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_23_b",
+      "cite": "210.23(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_b",
+      "title": "Restrict 30-ampere branch-circuit loads",
+      "intent": "Limit 30-ampere multioutlet circuits to heavy-duty lampholder lighting in non-dwelling occupancies or utilization equipment, with an 80 percent cap on any one cord-and-plug load.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_rating_=_30a"
+        },
+        {
+          "predicate": "branch_circuit_supplies_two_or_more_outlets_or_receptacles"
+        }
+      ],
+      "requires": {
+        "type": "load_limit",
+        "constraints": [
+          "fixed_lighting_units_have_heavy_duty_lampholders",
+          {
+            "not": {
+              "predicate": "fixed_lighting_on_30a_circuit_in_dwelling_unit"
+            }
+          },
+          "any_one_cord_and_plug_equipment_rating_<=_80_percent_of_branch_circuit_ampere_rating"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule identifying 30-ampere circuits and served loads",
+        "Lampholder type (heavy-duty) documentation for fixed lighting",
+        "Equipment nameplate ratings versus 80 percent of circuit rating"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_23_c",
+      "cite": "210.23(C)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_c",
+      "title": "Restrict 40- and 50-ampere branch-circuit loads",
+      "intent": "Limit 40- and 50-ampere multioutlet circuits to fixed cooking appliances in any occupancy, and to fixed heavy-duty-lampholder lighting, infrared heating, or other utilization equipment only outside dwelling units.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "branch_circuit_rating_=_40a"
+            },
+            {
+              "predicate": "branch_circuit_rating_=_50a"
+            }
+          ]
+        },
+        {
+          "predicate": "branch_circuit_supplies_two_or_more_outlets_or_receptacles"
+        }
+      ],
+      "requires": {
+        "type": "load_limit",
+        "constraints": [
+          "cooking_appliances_supplied_are_fastened_in_place",
+          {
+            "all_of": [
+              "fixed_lighting_infrared_or_other_utilization_equipment_only_in_other_than_dwelling_units",
+              "fixed_lighting_units_have_heavy_duty_lampholders"
+            ]
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule identifying 40/50-ampere circuits and served equipment",
+        "Appliance schedule showing cooking appliances fastened in place",
+        "Occupancy classification on plans"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_50_a",
+      "cite": "210.50",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_50",
+      "title": "Install receptacle outlets where required by 210.52 through 210.65",
+      "intent": "Establish the general obligation to provide receptacle outlets, including outlets for flexible-cord connections and appliance receptacles within reach of the appliance location.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "receptacle_outlets_required_by_210_52_through_210_65"
+            },
+            {
+              "predicate": "flexible_cords_with_attachment_plugs_are_used"
+            },
+            {
+              "predicate": "dwelling_unit_appliance_receptacle_installed_for_specific_appliance"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "receptacle_outlets_installed_as_specified_in_210_52_through_210_65",
+          "receptacle_outlet_installed_wherever_flexible_cords_with_attachment_plugs_are_used",
+          "appliance_receptacle_within_1.8m_6ft_of_intended_appliance_location"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "flexible_cord_permitted_to_be_permanently_connected"
+            }
+          ],
+          "effect": "receptacle_permitted_to_be_omitted_for_such_cords"
+        }
+      ],
+      "evidence_required": [
+        "Floor plans with receptacle outlet locations",
+        "Appliance layout showing receptacle within 6 ft of each specific appliance",
+        "Electrical legend distinguishing receptacle outlet types"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_50_b",
+      "cite": "210.50(E)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_50",
+      "title": "Mount required receptacle outlets at least 12 inches above the floor [DPH]",
+      "intent": "California DPH amendment: keep required 15-, 20-, and 30-ampere receptacle outlets accessible by mounting their centers not less than 12 inches above the floor or working platform.",
+      "applies_when": [
+        {
+          "predicate": "receptacle_outlet_required_by_210_52_a_b_or_c"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "receptacle_rating_=_15a"
+            },
+            {
+              "predicate": "receptacle_rating_=_20a"
+            },
+            {
+              "predicate": "receptacle_rating_=_30a"
+            }
+          ]
+        },
+        {
+          "predicate": "occupancy_regulated_by_dph"
+        }
+      ],
+      "requires": {
+        "type": "mounting_height",
+        "constraints": [
+          "receptacle_outlet_center_height_>=_12in_above_floor_or_working_platform"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_is_part_of_permanently_installed_baseboard_heater"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "receptacle_in_floor_adjacent_to_sliding_panels_or_walls"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "baseboard_outlet_in_relocatable_partition"
+                },
+                {
+                  "predicate": "baseboard_outlet_in_window_wall"
+                },
+                {
+                  "predicate": "is_electrical_convenience_floor_outlet"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Interior elevations or mounting-height notes for receptacles",
+        "Floor plans identifying required 210.52(A), (B), (C) receptacles",
+        "Details for baseboard heater or floor outlet installations claimed under exceptions"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52"
+      ],
+      "amends": "210.50",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52",
+      "cite": "210.52",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52",
+      "title": "Provide required dwelling unit 125-volt, 15- and 20-ampere receptacle outlets",
+      "intent": "Scope rule: dwelling unit receptacle outlet requirements apply to 125-volt, 15- and 20-ampere receptacles, and required receptacles are in addition to certain non-countable receptacles.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "receptacle_outlet_is_125v_15a_or_20a"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "required_receptacles_in_addition_to_receptacle_part_of_luminaire_or_appliance",
+          "required_receptacles_in_addition_to_receptacle_controlled_by_listed_wall_mounted_control_device_per_210_70_a_1_ex1",
+          "required_receptacles_in_addition_to_receptacle_within_cabinets_or_cupboards",
+          "required_receptacles_in_addition_to_receptacle_located_more_than_1.7m_5.5ft_above_floor"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "permanently_installed_electric_baseboard_heater_with_factory_installed_receptacle_outlets"
+            }
+          ],
+          "effect": "heater_receptacles_permitted_as_required_outlets_for_wall_space_but_not_connected_to_heater_circuits"
+        }
+      ],
+      "evidence_required": [
+        "Dwelling unit floor plans with all receptacle outlets shown",
+        "Receptacle schedule distinguishing required versus non-countable receptacles",
+        "Baseboard heater product data where heater receptacles are counted"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_d",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_g_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_h"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_a",
+      "cite": "210.52(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a",
+      "title": "Install general-provision receptacle outlets in habitable rooms",
+      "intent": "Guarantee receptacle availability in every habitable room and similar area of a dwelling unit per the spacing, wall space, floor receptacle, and countertop-exclusion provisions.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "room_is_kitchen"
+            },
+            {
+              "predicate": "room_is_family_room"
+            },
+            {
+              "predicate": "room_is_dining_room"
+            },
+            {
+              "predicate": "room_is_living_room"
+            },
+            {
+              "predicate": "room_is_parlor_library_den_or_sunroom"
+            },
+            {
+              "predicate": "room_is_bedroom"
+            },
+            {
+              "predicate": "room_is_recreation_room_or_similar"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "receptacle_outlets_installed_per_210_52_a_1_through_a_4",
+          "floor_receptacles_counted_only_if_within_450mm_18in_of_wall",
+          "countertop_receptacles_per_210_52_c_not_counted_toward_210_52_a"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans with wall-space receptacle layout dimensions",
+        "Room schedule identifying habitable rooms",
+        "Notes excluding countertop receptacles from wall-space count"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_a_1",
+      "cite": "210.52(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a_1",
+      "title": "Space wall receptacles so no point is more than 6 feet from an outlet",
+      "intent": "Eliminate the need for extension cords by keeping every point along the floor line of wall space within 6 feet of a receptacle outlet.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "room_subject_to_210_52_a_general_provisions"
+        },
+        {
+          "predicate": "wall_space_width_>=_600mm_2ft"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_spacing",
+        "constraints": [
+          "max_horizontal_distance_along_floor_line_from_any_point_to_receptacle_<=_1.8m_6ft"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dimensioned floor plans showing receptacle spacing along walls",
+        "Wall-space takeoff including fixed panels and room dividers",
+        "Receptacle symbols legend"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_b",
+      "cite": "210.52(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b",
+      "title": "Serve kitchen countertop receptacles from at least two small-appliance circuits with no other outlets",
+      "intent": "Preserve dedicated 20-ampere small-appliance branch-circuit capacity for kitchen and dining area receptacle loads.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "receptacles_serve_kitchen_countertop_surfaces"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "constraints": [
+          "countertop_receptacles_supplied_by_>=_2_small_appliance_branch_circuits_20a",
+          "small_appliance_branch_circuits_have_no_other_outlets",
+          "no_small_appliance_branch_circuit_serves_more_than_one_kitchen"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_installed_solely_for_electric_clock_in_specified_rooms"
+            }
+          ],
+          "effect": "outlet_permitted_on_small_appliance_branch_circuit"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "receptacle_supplies_supplemental_equipment_and_lighting_on_gas_fired_ranges_ovens_or_counter_mounted_cooking_units"
+            }
+          ],
+          "effect": "outlet_permitted_on_small_appliance_branch_circuit"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedule showing two or more 20-ampere small-appliance circuits",
+        "Kitchen power plan with circuit numbers at countertop receptacles",
+        "Circuit directory confirming no other outlets on small-appliance circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_b_1",
+      "cite": "210.52(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b_1",
+      "title": "Serve all kitchen and dining area receptacle outlets from the small-appliance circuits",
+      "intent": "Route all wall, floor, countertop, and refrigeration receptacle outlets in kitchen and dining areas through the required 20-ampere small-appliance branch circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "room_is_kitchen"
+            },
+            {
+              "predicate": "room_is_pantry"
+            },
+            {
+              "predicate": "room_is_breakfast_room"
+            },
+            {
+              "predicate": "room_is_dining_room_or_similar_area"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "constraints": [
+          "two_or_more_20a_small_appliance_branch_circuits_per_210_11_c_1",
+          "circuits_serve_all_wall_and_floor_receptacle_outlets_per_210_52_a",
+          "circuits_serve_all_countertop_outlets_per_210_52_c",
+          "circuits_serve_receptacle_outlets_for_refrigeration_equipment"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "switched_receptacle_supplied_from_general_purpose_15a_or_20a_branch_circuit_per_210_70_a_1_ex1"
+            }
+          ],
+          "effect": "permitted_in_addition_to_required_receptacles"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "receptacle_outlet_serves_specific_appliance_on_individual_branch_circuit_rated_>=_15a"
+            }
+          ],
+          "effect": "permitted_in_addition_to_required_receptacles"
+        }
+      ],
+      "evidence_required": [
+        "Circuit directory mapping kitchen/dining receptacles to small-appliance circuits",
+        "Refrigeration receptacle circuiting on power plan",
+        "Individual branch-circuit identification for dedicated appliances"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_c",
+      "cite": "210.52(C)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c",
+      "title": "Provide receptacle outlets for countertops and work surfaces 12 inches or wider",
+      "intent": "Ensure countertop and work-surface appliance loads in kitchens and similar areas have dedicated, properly located receptacle outlets.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "room_is_kitchen"
+            },
+            {
+              "predicate": "room_is_pantry"
+            },
+            {
+              "predicate": "room_is_breakfast_room"
+            },
+            {
+              "predicate": "room_is_dining_room_or_similar_area"
+            }
+          ]
+        },
+        {
+          "predicate": "countertop_or_work_surface_width_>=_300mm_12in"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "receptacle_outlets_installed_per_210_52_c_1_through_c_3",
+          "countertop_receptacles_not_counted_toward_210_52_a",
+          "each_300mm_12in_of_multioutlet_assembly_with_two_or_more_receptacles_counted_as_one_receptacle_outlet"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Kitchen elevations/plans with countertop dimensions and receptacle locations",
+        "Multioutlet assembly product data and length takeoff where used",
+        "Receptacle count reconciliation against wall-space requirements"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_2",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_380_10",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_c_1",
+      "cite": "210.52(C)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_1",
+      "title": "Space countertop wall receptacles at maximum 24 inches from any point",
+      "intent": "Keep every point along the countertop wall line within cord reach of a receptacle outlet.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "countertop_wall_space_subject_to_210_52_c"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_spacing",
+        "constraints": [
+          "max_horizontal_distance_along_wall_line_from_any_point_to_receptacle_<=_600mm_24in"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "space_directly_behind_range_counter_mounted_cooking_unit_or_sink_per_figure_210_52_c_1"
+            }
+          ],
+          "effect": "receptacle_outlets_not_required_in_that_space"
+        }
+      ],
+      "evidence_required": [
+        "Dimensioned countertop plans with receptacle spacing",
+        "Location of ranges, cooking units, and sinks relative to counter wall line",
+        "Figure 210.52(C)(1) exemption geometry check where claimed"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_c_2",
+      "cite": "210.52(C)(2)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_2",
+      "title": "Provide island and peninsular countertop receptacles by surface area",
+      "intent": "Size the receptacle count for island and peninsular countertops/work surfaces by area and locate at least one outlet near the peninsular outer end.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "countertop_is_island"
+            },
+            {
+              "predicate": "countertop_is_peninsular"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_for_first_0.84m2_9ft2_or_fraction",
+          "one_additional_receptacle_per_additional_1.7m2_18ft2_or_fraction",
+          "peninsular_receptacle_within_600mm_2ft_of_outer_end",
+          "receptacle_locations_per_210_52_c_3"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Island/peninsula countertop area calculations",
+        "Plan locations of island/peninsular receptacles",
+        "Countertop-mounted receptacle assembly listings where used"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_d",
+      "cite": "210.52(D)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_d",
+      "title": "Provide a bathroom receptacle within 3 feet of each basin",
+      "intent": "Ensure grooming-appliance receptacles are within reach of each bathroom basin and properly located relative to the basin and countertop.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "room_is_bathroom"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_within_900mm_3ft_of_outside_edge_of_each_basin",
+          "receptacle_on_wall_or_partition_adjacent_to_basin_or_basin_countertop_or_on_countertop_or_on_side_or_face_of_basin_cabinet",
+          "receptacle_not_more_than_300mm_12in_below_top_of_basin_or_basin_countertop"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bathroom plans/elevations with receptacle-to-basin dimensions",
+        "Countertop receptacle assembly listing where installed in countertop",
+        "Panel schedule showing 20-ampere bathroom branch circuit"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_g"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_e",
+      "cite": "210.52(E)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e",
+      "title": "Install outdoor receptacle outlets per 210.52(E)(1) through (E)(3)",
+      "intent": "Scope rule: outdoor receptacle outlets at dwellings must satisfy the one/two-family, multifamily, and balcony/deck/porch provisions.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "receptacle_outlet_is_outdoors"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "outdoor_receptacle_outlets_installed_per_210_52_e_1_through_e_3"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site/exterior elevation plans showing outdoor receptacle locations",
+        "Dwelling type identification (one-family, two-family, multifamily)",
+        "Mounting heights above grade or walking surface"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_e_1",
+      "cite": "210.52(E)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_1",
+      "title": "Provide front and back outdoor receptacles at one- and two-family dwellings",
+      "intent": "Guarantee grade-accessible outdoor receptacles at both the front and back of each one-family dwelling and each grade-level two-family dwelling unit.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_one_family_dwelling"
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_unit_of_two_family_dwelling"
+                },
+                {
+                  "predicate": "dwelling_unit_at_grade_level"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_at_front_and_at_back_of_dwelling",
+          "receptacle_readily_accessible_from_grade",
+          "receptacle_height_<=_2.0m_6.5ft_above_grade"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Exterior elevations showing front and back receptacle locations and heights",
+        "Site plan confirming grade accessibility",
+        "GFCI protection device identification per 210.8(A)(3)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_e_3",
+      "cite": "210.52(E)(3)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_3",
+      "title": "Provide a receptacle at balconies, decks, and porches",
+      "intent": "Ensure dwelling balconies, decks, and porches adjacent to the unit have an accessible receptacle outlet at usable height.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "area_is_balcony"
+            },
+            {
+              "predicate": "area_is_deck"
+            },
+            {
+              "predicate": "area_is_porch"
+            }
+          ]
+        },
+        {
+          "predicate": "balcony_deck_or_porch_within_102mm_4in_horizontally_of_dwelling_unit"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_accessible_from_the_balcony_deck_or_porch",
+          "receptacle_height_<=_2.0m_6.5ft_above_walking_surface"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plans showing balcony/deck/porch receptacle locations",
+        "Detail showing horizontal proximity of balcony/deck/porch to dwelling",
+        "Mounting height above walking surface"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_g_1",
+      "cite": "210.52(G)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_g_1",
+      "title": "Provide a receptacle in each garage vehicle bay",
+      "intent": "Ensure each vehicle bay of attached garages and powered detached garages has its own receptacle outlet at accessible height.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_attached_garage_of_dwelling"
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_detached_garage_of_dwelling"
+                },
+                {
+                  "predicate": "garage_has_electric_power"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_outlet_in_each_vehicle_bay",
+          "receptacle_height_<=_1.7m_5.5ft_above_floor"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "garage_space_not_attached_to_individual_dwelling_unit_of_multifamily_dwelling"
+            }
+          ],
+          "effect": "receptacle_outlet_not_required_in_each_vehicle_bay"
+        }
+      ],
+      "evidence_required": [
+        "Garage plan showing receptacles per vehicle bay with mounting heights",
+        "Panel schedule showing 20-ampere garage branch circuit per 210.11(C)(4)",
+        "Identification of attached versus detached garage and power supply"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_52_h",
+      "cite": "210.52(H)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_h",
+      "title": "Provide a receptacle in hallways 10 feet or longer",
+      "intent": "Ensure long dwelling hallways have at least one receptacle outlet for cleaning and portable equipment.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "hallway_length_>=_3.0m_10ft_along_centerline_without_passing_through_doorway"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_placement",
+        "constraints": [
+          "at_least_one_receptacle_outlet_in_hallway"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plan with hallway centerline length dimension",
+        "Hallway receptacle location on power plan"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_210_70",
+      "cite": "210.70(A),(B),(C)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_70",
+      "title": "Install required lighting outlets with wall-mounted control",
+      "intent": "Ensure habitable rooms, kitchens, bathrooms, hallways, stairways, garages, outdoor entrances, guest rooms, and storage/equipment spaces have required, properly controlled lighting outlets; outlet boxes complying with 314.27(E) may serve as these lighting outlets.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_dwelling_unit"
+                },
+                {
+                  "predicate": "any_of",
+                  "of": [
+                    {
+                      "predicate": "room_is_habitable_room"
+                    },
+                    {
+                      "predicate": "room_is_kitchen"
+                    },
+                    {
+                      "predicate": "room_is_bathroom"
+                    },
+                    {
+                      "predicate": "area_is_hallway_stairway_or_garage"
+                    },
+                    {
+                      "predicate": "area_is_outdoor_entrance_or_exit_with_grade_level_access"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "predicate": "is_guest_room_or_guest_suite_of_hotel_or_motel"
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "area_is_attic_underfloor_space_utility_room_or_basement"
+                },
+                {
+                  "predicate": "space_used_for_storage_or_contains_equipment_requiring_servicing"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "lighting_outlet_provision",
+        "constraints": [
+          "at_least_one_lighting_outlet_controlled_by_listed_wall_mounted_control_device_in_every_habitable_room_kitchen_and_bathroom",
+          "wall_mounted_control_device_located_near_room_entrance_on_wall",
+          "interior_stairways_with_>=_6_risers_have_control_device_at_each_floor_and_landing_level_with_entryway",
+          "point_of_control_at_each_entry_for_attic_underfloor_utility_room_or_basement_spaces"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "room_is_other_than_kitchen_or_bathroom"
+            },
+            {
+              "predicate": "receptacles_controlled_by_listed_wall_mounted_control_device_provided"
+            }
+          ],
+          "effect": "switched_receptacles_permitted_in_lieu_of_lighting_outlets"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "occupancy_sensor_in_addition_to_listed_wall_mounted_control_device"
+                },
+                {
+                  "predicate": "occupancy_sensor_at_customary_wall_switch_location_with_manual_override"
+                }
+              ]
+            }
+          ],
+          "effect": "occupancy_sensor_control_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "location_is_hallway_stairway_or_outdoor_entrance"
+            },
+            {
+              "predicate": "remote_central_or_automatic_lighting_control_provided"
+            }
+          ],
+          "effect": "remote_central_or_automatic_control_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Lighting plans showing outlet and control device locations per room",
+        "Switching/control schedule (wall controls, occupancy sensors, overrides)",
+        "Stairway riser count and control locations at each level",
+        "Listing documentation for wall-mounted control devices"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_36_a",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_220_43_b",
+      "cite": "220.43(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_220_43_b",
+      "title": "Include 150 VA per 2 feet of lighting track in load calculations",
+      "intent": "Ensure feeder and service load calculations account for lighting track capacity in non-dwelling occupancies.",
+      "applies_when": [
+        {
+          "predicate": "lighting_track_installed"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "is_dwelling_unit"
+                },
+                {
+                  "predicate": "is_guest_room_or_guest_suite_of_hotel_or_motel"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "constraints": [
+          "additional_load_>=_150va_per_600mm_2ft_of_lighting_track_or_fraction",
+          "multicircuit_track_load_divided_equally_between_track_circuits"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "track_supplied_through_device_that_limits_current_to_track"
+            }
+          ],
+          "effect": "load_permitted_to_be_calculated_on_rating_of_current_limiting_device"
+        }
+      ],
+      "evidence_required": [
+        "Feeder/service load calculation including track lighting VA",
+        "Reflected ceiling plan with track lengths",
+        "Current-limiting device rating documentation where exception used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_151"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_240_5",
+      "cite": "240.5",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_240_5",
+      "title": "Protect flexible cords and fixture wires per 240.5",
+      "intent": "Ensure flexible cords, flexible cables, and fixture wires on branch circuits have overcurrent protection appropriate to their ampacity as required by 240.5.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "circuit_supplies_flexible_cord_or_flexible_cable"
+            },
+            {
+              "predicate": "circuit_supplies_fixture_wire"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "flexible_cords_and_fixture_wires_protected_in_accordance_with_240_5",
+          "fixture_wires_and_cords_smaller_than_14_awg_permitted_only_as_allowed_by_240_5"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Branch-circuit overcurrent device ratings on panel schedule",
+        "Cord and fixture wire sizes/types on fixture schedules",
+        "Tap and cord protection notes referencing 240.5"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_314_23",
+      "cite": "314.23",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_23",
+      "title": "Install luminaire-supporting outlet boxes as required by 314.23",
+      "intent": "Ensure outlet boxes and fittings that support luminaires are themselves supported and installed per the box support rules of 314.23.",
+      "applies_when": [
+        {
+          "predicate": "luminaire_supported_by_outlet_box_or_fitting"
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "constraints": [
+          "outlet_boxes_or_fittings_installed_as_required_by_314_23"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Box support/mounting details on drawings",
+        "Box listing and installation instructions",
+        "Ceiling framing attachment details"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_36_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_314_27",
+      "cite": "314.27",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27",
+      "title": "Use outlet boxes complying with 314.27 for luminaire and fan support",
+      "intent": "Ensure boxes supporting luminaires or ceiling-suspended (paddle) fans meet the applicable box provisions of 314.27, including fan-rated boxes and locking support and mounting receptacle systems.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "luminaire_supported_by_outlet_box"
+            },
+            {
+              "predicate": "ceiling_suspended_paddle_fan_supported_by_outlet_box_or_outlet_box_system"
+            },
+            {
+              "predicate": "locking_support_and_mounting_receptacle_used_for_equipment_support"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "constraints": [
+          "luminaire_outlet_boxes_or_fittings_comply_with_314_27_a_1_and_314_27_a_2",
+          "paddle_fan_boxes_listed_and_installed_per_314_27_c_or_314_27_e",
+          "locking_support_and_mounting_receptacles_used_per_314_27_e"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Box listing labels (fan-rated / luminaire weight rating)",
+        "Fixture and fan mounting details",
+        "Locking support and mounting receptacle product listing where used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_36_a",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_18",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_paddle_fan"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_380_10",
+      "cite": "380.10",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_380_10",
+      "title": "Install multioutlet assemblies per 380.10",
+      "intent": "Scope rule: where multioutlet assemblies are used to satisfy countertop receptacle requirements, their installation is governed by 380.10 (referenced from 210.52(C)(3)); the source text in this community contains only the cross-reference, so this rule captures the trigger for that subtree.",
+      "applies_when": [
+        {
+          "predicate": "multioutlet_assembly_installed"
+        },
+        {
+          "predicate": "multioutlet_assembly_used_toward_required_countertop_receptacle_outlets"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "multioutlet_assembly_installed_per_380_10",
+          "each_300mm_12in_with_two_or_more_receptacles_counted_as_one_receptacle_outlet_per_210_52_c"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Multioutlet assembly product data and listing",
+        "Plan/elevation showing assembly length and receptacle spacing",
+        "Receptacle-outlet count calculation using 12 in. per outlet"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_406_5",
+      "cite": "406.5",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5",
+      "title": "Mount receptacles in countertops and work surfaces per 406.5",
+      "intent": "Scope rule: receptacle mounting in countertops and work surfaces is governed by 406.5(E), (F), and (G); the source text in this community contains only the cross-reference, so this rule captures the trigger for that subtree.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "receptacle_installed_in_countertop"
+            },
+            {
+              "predicate": "receptacle_installed_in_work_surface"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "countertop_receptacle_installation_per_406_5_e_and_406_5_g",
+          "work_surface_receptacle_installation_per_406_5_f_and_406_5_g"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Countertop/work-surface receptacle assembly product listings",
+        "Installation details referencing 406.5(E), (F), (G)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_f",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_g"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_406_5_e",
+      "cite": "406.5(E)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e",
+      "title": "Use listed countertop receptacle outlet assemblies in countertops",
+      "intent": "Permit receptacles in countertops only where the receptacle outlet assembly is listed for use in countertops.",
+      "applies_when": [
+        {
+          "predicate": "receptacle_installed_in_countertop"
+        }
+      ],
+      "requires": {
+        "type": "listing",
+        "constraints": [
+          "receptacle_outlet_assembly_listed_for_use_in_countertops"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing label/product data for countertop receptacle assembly",
+        "Plan location of countertop-installed receptacles",
+        "Manufacturer installation instructions"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_406_5_f",
+      "cite": "406.5(F)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_f",
+      "title": "Use listed work-surface receptacle outlet assemblies in work surfaces",
+      "intent": "Permit receptacles in work surfaces only where the receptacle outlet assembly is listed for use in work surfaces, per the 406.5(F) cross-reference in 210.52(C)(3).",
+      "applies_when": [
+        {
+          "predicate": "receptacle_installed_in_work_surface"
+        }
+      ],
+      "requires": {
+        "type": "listing",
+        "constraints": [
+          "receptacle_outlet_assembly_listed_for_use_in_work_surfaces",
+          "installation_per_406_5_f"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing label/product data for work-surface receptacle assembly",
+        "Plan location of work-surface-installed receptacles"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_406_5_g",
+      "cite": "406.5(G)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_g",
+      "title": "Comply with 406.5(G) for receptacles in countertops and work surfaces",
+      "intent": "Scope rule: 406.5(G) governs installation of receptacles in both countertops and work surfaces (referenced from 210.52(C)(3) and 210.52(D)); the source text in this community contains only the cross-reference.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "receptacle_installed_in_countertop"
+            },
+            {
+              "predicate": "receptacle_installed_in_work_surface"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "receptacle_installation_complies_with_406_5_g"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Installation details for countertop/work-surface receptacles",
+        "Product listing documentation"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_f"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_410_10_d",
+      "cite": "410.10(D)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_10_d",
+      "title": "Keep suspended luminaires, track, pendants, and paddle fans out of the bathtub/shower zone",
+      "intent": "Prevent shock hazard by excluding cord-, chain-, or cable-suspended luminaires, lighting track, pendants, and ceiling-suspended (paddle) fans from the zone around bathtubs and showers, and by requiring damp/wet-location marking within the zone.",
+      "applies_when": [
+        {
+          "predicate": "luminaire_installed_in_bathtub_or_shower_area"
+        }
+      ],
+      "requires": {
+        "type": "location_restriction",
+        "constraints": [
+          "no_cord_connected_chain_cable_or_cord_suspended_luminaires_lighting_track_pendants_or_paddle_fans_within_zone_900mm_3ft_horizontal_and_2.5m_8ft_vertical_from_bathtub_rim_or_shower_threshold",
+          "zone_includes_space_directly_over_tub_or_shower_stall",
+          "luminaires_within_actual_outside_dimension_of_tub_or_shower_to_2.5m_8ft_marked_suitable_for_damp_locations_or_wet_locations",
+          "luminaires_subject_to_shower_spray_marked_suitable_for_wet_locations"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bathroom reflected ceiling plan with zone dimensions from tub rim/shower threshold",
+        "Luminaire schedule with damp/wet location markings",
+        "Fixture cut sheets showing suspension type"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_paddle_fan",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_151"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_151",
+      "cite": "410.151",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_151",
+      "title": "Install lighting track permanently, within its rating, and outside prohibited locations",
+      "intent": "Ensure lighting track is permanently installed and connected, loaded within its rating, supplied by a branch circuit not exceeding the track rating, and kept out of prohibited locations.",
+      "applies_when": [
+        {
+          "predicate": "lighting_track_installed"
+        }
+      ],
+      "requires": {
+        "type": "installation",
+        "constraints": [
+          "lighting_track_permanently_installed_and_permanently_connected_to_branch_circuit",
+          "only_lighting_track_fittings_installed_on_track",
+          "track_fittings_not_equipped_with_general_purpose_receptacles",
+          "connected_load_<=_track_rating",
+          "branch_circuit_rating_<=_track_rating",
+          {
+            "not": {
+              "any_of": [
+                {
+                  "predicate": "track_where_likely_subject_to_physical_damage"
+                },
+                {
+                  "predicate": "track_in_wet_or_damp_location"
+                },
+                {
+                  "predicate": "track_where_subject_to_corrosive_vapors"
+                },
+                {
+                  "predicate": "track_in_storage_battery_room"
+                },
+                {
+                  "predicate": "track_in_hazardous_classified_location"
+                },
+                {
+                  "predicate": "track_concealed"
+                },
+                {
+                  "predicate": "track_extended_through_walls_or_partitions"
+                },
+                {
+                  "predicate": "track_less_than_1.5m_5ft_above_finished_floor_unless_protected_or_<_30v_rms"
+                },
+                {
+                  "predicate": "track_in_bathtub_shower_zone_prohibited_by_410_10_d"
+                }
+              ]
+            }
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Track rating and branch-circuit rating comparison on panel schedule",
+        "Reflected ceiling plan showing track locations and mounting heights",
+        "Track and fitting listing documentation",
+        "Connected fixture load tabulation per track run"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_220_43_b",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_10_d"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_36_a",
+      "cite": "410.36(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_36_a",
+      "title": "Support luminaires by compliant outlet boxes or fittings",
+      "intent": "Ensure luminaires supported by outlet boxes use boxes installed per 314.23 that comply with 314.27, and recognize 314.27(E) boxes as required lighting outlets.",
+      "applies_when": [
+        {
+          "predicate": "luminaire_supported_by_outlet_box_or_fitting"
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "constraints": [
+          "outlet_boxes_or_fittings_installed_as_required_by_314_23",
+          "outlet_boxes_or_fittings_comply_with_314_27_a_1_and_314_27_a_2",
+          "support_per_314_27_e_permitted",
+          "boxes_complying_with_314_27_e_considered_lighting_outlets_required_by_210_70_a_b_c"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Box mounting and support details",
+        "Box listing showing luminaire support rating",
+        "Lighting plan cross-referencing required lighting outlets"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_23",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_70"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_62",
+      "cite": "410.62",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_62",
+      "title": "Meet cord-connection conditions for lampholders and luminaires",
+      "intent": "Ensure cord-connected lampholders and electric-discharge/LED luminaires are protected against cord damage and connected only under the permitted conditions.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "metal_lampholder_attached_to_flexible_cord"
+            },
+            {
+              "predicate": "electric_discharge_or_led_luminaire_is_cord_connected"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "installation",
+        "constraints": [
+          "metal_lampholder_inlet_equipped_with_insulating_bushing_not_smaller_than_trade_size_3_8_if_threaded",
+          "cord_connected_luminaire_located_directly_below_outlet_or_busway",
+          "cord_not_subject_to_strain_or_physical_damage",
+          "cord_visible_over_entire_length_except_at_terminations",
+          "mogul_base_screw_shell_luminaires_on_circuits_<=_50a_use_cords_complying_with_240_5",
+          "receptacles_and_attachment_plugs_rated_>=_125_percent_of_luminaire_full_load_current_where_lower_than_branch_circuit_rating"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Fixture cut sheets showing cord connection method and plug type",
+        "Field condition photos or details showing cord routing and visibility",
+        "Branch-circuit rating versus luminaire full-load current calculation"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_240_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_18",
+      "cite": "422.18",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_18",
+      "title": "Support ceiling-suspended (paddle) fans by listed means",
+      "intent": "Prevent falling fans by requiring support independent of an outlet box or by listed fan-rated boxes/box systems per 314.27(C) or listed locking support and mounting receptacle systems per 314.27(E).",
+      "applies_when": [
+        {
+          "predicate": "ceiling_suspended_paddle_fan_installed"
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "constraints": [
+          {
+            "any_of": [
+              "fan_supported_independently_of_outlet_box",
+              "fan_supported_by_listed_outlet_box_or_listed_outlet_box_system_identified_for_the_use_installed_per_314_27_c",
+              "fan_supported_by_listed_outlet_box_system_with_listed_locking_support_and_mounting_receptacle_and_compatible_factory_installed_attachment_fitting_per_314_27_e"
+            ]
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Fan-rated box listing labels or independent support details",
+        "Fan mounting installation instructions",
+        "Locking support and mounting receptacle listing where used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_paddle_fan"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_22",
+      "cite": "422.22",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_22",
+      "title": "Use listed locking support and mounting receptacles within their ratings",
+      "intent": "Allow appliances to be supported and connected by separable attachment fittings only where the locking support and mounting receptacle is listed, compatible, used within its ratings, and installed per 314.27(E).",
+      "applies_when": [
+        {
+          "predicate": "appliance_utilizes_separable_attachment_fitting"
+        },
+        {
+          "predicate": "locking_support_and_mounting_receptacle_used"
+        }
+      ],
+      "requires": {
+        "type": "installation",
+        "constraints": [
+          "locking_support_and_mounting_receptacle_is_listed",
+          "attachment_fitting_compatible_with_receptacle",
+          "combination_used_within_its_ratings",
+          "used_in_accordance_with_314_27_e"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing documentation for locking support and mounting receptacle",
+        "Appliance and fitting compatibility/rating data",
+        "Installation detail referencing 314.27(E)"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_paddle_fan"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_520_42",
+      "cite": "520.42",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_42",
+      "title": "Wire strip lights and connector strips with 125 degree C insulated conductors at 60 degree C ampacity",
+      "intent": "Protect stage strip-light and connector-strip wiring from heat degradation by mandating high-temperature insulation while limiting ampacity to 60 degree C values.",
+      "applies_when": [
+        {
+          "predicate": "is_theater_or_similar_location_per_article_520"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "equipment_is_footlight"
+            },
+            {
+              "predicate": "equipment_is_border_light"
+            },
+            {
+              "predicate": "equipment_is_proscenium_light"
+            },
+            {
+              "predicate": "equipment_is_portable_strip_light"
+            },
+            {
+              "predicate": "equipment_is_connector_strip"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_insulation",
+        "constraints": [
+          "conductor_insulation_temperature_rating_>=_125c_257f",
+          "conductor_ampacity_taken_as_60c_140f_conductor_ampacity",
+          "drops_from_connector_strips_are_90c_194f_wire_sized_to_60c_cord_and_cable_ampacity",
+          "conductor_extension_into_connector_strip_<=_150mm_6in",
+          "310_15_c_1_adjustment_not_applied"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor type and insulation temperature rating on wiring schedules",
+        "Ampacity calculation using 60 degree C column",
+        "Connector strip shop drawings showing drop wire type and length"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_64"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_520_64",
+      "cite": "520.64",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_64",
+      "title": "Construct portable strips like border lights and protect their supply cables",
+      "intent": "Ensure portable strip lights meet border-light construction requirements and that supply cables are bushed and strain-relieved.",
+      "applies_when": [
+        {
+          "predicate": "is_theater_or_similar_location_per_article_520"
+        },
+        {
+          "predicate": "equipment_is_portable_strip_light"
+        }
+      ],
+      "requires": {
+        "type": "construction",
+        "constraints": [
+          "portable_strips_constructed_per_border_light_and_proscenium_sidelight_requirements_of_520_44_a",
+          "supply_cable_protected_by_bushings_where_passing_through_metal",
+          "cable_arranged_so_tension_not_transmitted_to_connections"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Portable strip construction/shop drawings or listing data",
+        "Bushing and strain-relief details at cable entries",
+        "Cable type documentation (extra-hard usage where required)"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_42",
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_68"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_520_68",
+      "cite": "520.68",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_68",
+      "title": "Use listed extra-hard usage cords for portable stage equipment",
+      "intent": "Ensure flexible conductors supplying portable stage equipment are rated for the abuse of stage environments, with limited hard-usage allowances only under protected, 20-ampere-or-less conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_theater_or_similar_location_per_article_520"
+        },
+        {
+          "predicate": "flexible_conductors_supply_portable_stage_equipment"
+        }
+      ],
+      "requires": {
+        "type": "conductor_type",
+        "constraints": [
+          "cords_or_cables_listed_extra_hard_usage",
+          "conductor_ampacity_per_400_5_or_table_520_44_c_2_where_not_in_contact_with_heat_producing_equipment",
+          "overcurrent_protection_of_conductors_for_portables_complies_with_240_5"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "cord_protected_from_physical_damage_by_attachment_over_entire_length_to_substantial_support_structure"
+            },
+            {
+              "predicate": "branch_circuit_overcurrent_device_rating_<=_20a"
+            },
+            {
+              "predicate": "cord_length_<=_30m_100ft"
+            }
+          ],
+          "effect": "listed_hard_usage_junior_hard_service_cord_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "cord_supplies_stand_lamp"
+            },
+            {
+              "predicate": "cord_not_subject_to_physical_damage"
+            },
+            {
+              "predicate": "branch_circuit_overcurrent_device_rating_<=_20a"
+            }
+          ],
+          "effect": "listed_hard_usage_cord_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "supply_cord_length_<=_2.0m_6.6ft"
+            },
+            {
+              "predicate": "cord_attached_to_luminaire_or_luminaire_specific_listed_connector"
+            },
+            {
+              "predicate": "branch_circuit_overcurrent_device_rating_<=_20a"
+            },
+            {
+              "predicate": "luminaire_is_listed"
+            },
+            {
+              "predicate": "cord_not_subject_to_physical_damage"
+            }
+          ],
+          "effect": "listed_hard_usage_supply_cord_permitted_for_luminaires"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "special_assembly_of_conductors_in_glass_fiber_sleeving_<=_1.0m_3.3ft"
+            },
+            {
+              "predicate": "individual_wires_stranded_and_rated_>=_125c_257f"
+            }
+          ],
+          "effect": "special_high_temperature_assembly_permitted_in_lieu_of_flexible_cord"
+        },
+        {
+          "id": "ex5",
+          "applies_when": [
+            {
+              "predicate": "breakout_assembly_connects_multipole_connector_to_multiple_2_pole_3_wire_connectors"
+            },
+            {
+              "predicate": "longest_breakout_cord_<=_6.0m_20ft"
+            },
+            {
+              "predicate": "breakout_assembly_protected_by_attachment_to_substantial_support_structure"
+            },
+            {
+              "predicate": "all_feeding_branch_circuits_protected_at_<=_20a"
+            }
+          ],
+          "effect": "listed_hard_usage_junior_hard_service_cords_permitted_in_breakout_assemblies"
+        }
+      ],
+      "evidence_required": [
+        "Cord/cable listing and usage designation (extra-hard vs hard usage)",
+        "Branch-circuit overcurrent device ratings for portable equipment circuits",
+        "Cord routing/support details for protected applications",
+        "Ampacity determination per 400.5 or Table 520.44(C)(2)"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_240_5",
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_42"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

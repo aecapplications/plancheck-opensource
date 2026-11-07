@@ -1,0 +1,29 @@
+{
+  "project": {
+    "address": "500 Industrial Pkwy, Sacramento, CA 95814",
+    "type": "commercial tenant improvement",
+    "scope": "feeder and branch-circuit distribution in an exposed warehouse fit-out",
+    "occupancy": "F-1 / B",
+    "voltage_system": "480Y/277V, 3-phase"
+  },
+  "predicates": [
+    "is_nonmetallic_wireway",
+    "is_cable_tray",
+    "is_surface_metal_raceway",
+    "is_surface_nonmetallic_raceway",
+    "is_multioutlet_assembly",
+    "contains_splices_or_taps",
+    "is_exposed",
+    "in_dry_location"
+  ],
+  "false_predicates": [
+    "is_concealed_knob_and_tube_wiring",
+    "is_open_wiring_on_insulators",
+    "is_underfloor_raceway",
+    "is_low_voltage_suspended_ceiling_system",
+    "is_messenger_supported_wiring",
+    "in_wet_location",
+    "in_corrosive_environment"
+  ],
+  "_notes": "Smoke-test project for the CEC plan-check pipeline (Article 378 et al. — nonmetallic wireway, cable tray, surface raceways, multioutlet assembly, with field splices)."
+}

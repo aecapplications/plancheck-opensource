@@ -1,0 +1,154 @@
+You are a plan-check rule extraction subagent. The graph community "Motor Disconnects — Article 430" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c09_motor_disconnects_article_430_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_ext_110_25  110.25 Lockable Disconnects
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_ext_240_4  240.4 (Conductor Protection)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_1  430.1 Scope
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_102  430.102 Location (Disconnect)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_108  430.108 Every Disconnecting Means
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_109  430.109 Type (Disconnect)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_110  430.110 Ampere Rating and Interrupting Capacity
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_111  430.111 Switch or Circuit Breaker as Both Controller and Dis
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_112  430.112 Motors Served by Single Disconnecting Means
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_113  430.113 Energy from More Than One Source
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_120  430.120 General (Adjustable-Speed Drive Systems)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_122  430.122 Conductors — Minimum Size and Ampacity
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_124  430.124 Overload Protection (ASD)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_126  430.126 Motor Overtemperature Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_130  430.130 Branch-Circuit Short-Circuit and Ground-Fault Protec
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_131  430.131 Several Motors or Loads on One Branch Circuit Includ
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_17  430.17 Highest Rated or Smallest Rated Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_2  430.2 Definitions
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_22  430.22 Single Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_222  430.222 Marking on Controllers (>1000 V)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_227  430.227 Disconnecting Means (>1000 V)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_23  430.23 Wound-Rotor Secondary
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_24  430.24 Several Motors or a Motor(s) and Other Load(s)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_25  430.25 Multimotor and Combination-Load Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_27  430.27 Capacitors with Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_32  430.32 Continuous-Duty Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_33  430.33 Intermittent and Similar Duty
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_35  430.35 Shunting During Starting Period
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_37  430.37 Devices Other Than Fuses — In Which Conductor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_39  430.39 Motor Controller as Overload Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_4  430.4 Part-Winding Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_40  430.40 Overload Relays
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_42  430.42 Motors on General-Purpose Branch Circuits
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_43  430.43 Automatic Restarting
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_44  430.44 Orderly Shutdown
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_5  430.5 Other Articles
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_52  430.52 Rating or Setting for Individual Motor Circuit
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_53  430.53 Several Motors or Loads on One Branch Circuit
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_54  430.54 Multimotor and Combination-Load Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_55  430.55 Combined Overcurrent Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_56  430.56 Branch-Circuit Protective Devices — In Which Conducto
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_57  430.57 Size of Fuseholder
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_58  430.58 Rating of Circuit Breaker
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_6  430.6 Ampacity and Motor Rating Determination
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_62  430.62 Rating or Setting — Motor Load
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_63  430.63 Rating or Setting — Motor Load and Other Load(s)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_7  430.7 Marking on Motors and Multimotor Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_72  430.72 Overcurrent Protection (Control Circuit)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_8  430.8 Marking on Controllers
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_81  430.81 General (Motor Controllers)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_83  430.83 Ratings (Controller)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_87  430.87 Number of Motors Served by Each Controller
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_92  430.92 General (Motor Control Centers)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_430_94  430.94 Overcurrent Protection (MCC)
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_22_e  Table 430.22(E) Duty-Cycle Service
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_23_c  Table 430.23(C) Secondary Conductor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_247  Table 430.247 Full-Load Current, DC Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_248  Table 430.248 Full-Load Currents, Single-Phase AC Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_249  Table 430.249 Full-Load Current, Two-Phase AC Motors (4-Wire
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_250  Table 430.250 Full-Load Current, Three-Phase AC Motors
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_251_a  Table 430.251(A) Single-Phase Locked-Rotor Currents
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_251_b  Table 430.251(B) Polyphase Design B/C/D Locked-Rotor Current
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_37  Table 430.37 Overload Units
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_5  Table 430.5 Other Articles
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_52  Table 430.52 Maximum Rating or Setting of Motor Branch-Circu
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_72_b  Table 430.72(B) Maximum Rating of Overcurrent Protective Dev
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_table_430_7_b  Table 430.7(B) Locked-Rotor Indicating Code Letters
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_adjustable_speed_drive  Adjustable-Speed Drive System
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_design_b_energy_efficient_motor  Design B Energy-Efficient Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_electronically_protected_motor  Electronically Protected Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_industrial_machinery  Industrial Machinery
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_locked_rotor_current  Locked-Rotor Current
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_modular_data_center  Modular Data Center
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_branch_circuit  Motor Branch Circuit
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_control_center  Motor Control Center (MCC)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_control_circuit  Motor Control Circuit
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_controller  Motor Controller
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_disconnect  Motor Disconnecting Means
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_feeder_protection  Motor Feeder Short-Circuit and Ground-Fault Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_overload_protection  Motor Overload Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_short_circuit_ground_fault_protection  Motor Branch-Circuit Short-Circuit and Ground-Fault Protecti
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_motor_short_circuit_protector  Motor Short-Circuit Protector (MCP)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_part_winding_motor  Part-Winding Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_self_protected_combination_controller  Self-Protected Combination Controller
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_system_isolation_equipment  System Isolation Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_thermal_protector  Thermal Protector (Integral with Motor)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_torque_motor  Torque Motor
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_vam  Valve Actuator Motor (VAM) Assembly
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_wound_rotor_motor  Wound-Rotor AC Motor
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_ext_110_25>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Motor Disconnects — Article 430",
+  "community_id": 9,
+  "extracted_from_sections": ["12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 13-54 rules. After writing the file, just confirm "wrote c09_motor_disconnects_article_430_rules.json with N rules" and stop.

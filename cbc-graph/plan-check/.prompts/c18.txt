@@ -1,0 +1,97 @@
+You are a plan-check rule extraction subagent. The graph community "Appendix P Emergency Housing" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/appp_appendix_p_emergency_housing.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c18_appendix_p_emergency_housing_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_p101_1                                                    P101.1 Scope
+  sec_p102                                                      P102 Definitions
+  def_dependent_unit                                            Dependent Unit
+  def_emergency_housing                                         Emergency Housing
+  def_emergency_housing_facilities                              Emergency Housing Facilities
+  def_emergency_housing_site                                    Emergency Housing Site
+  def_emergency_sleeping_cabin                                  Emergency Sleeping Cabin
+  def_emergency_transportable_housing_unit                      Emergency Transportable Housing Unit
+  def_manufactured_home                                         Manufactured Home
+  def_membrane_structure                                        Membrane Structure
+  def_mobilehome                                                Mobilehome
+  def_park_trailer                                              Park Trailer
+  def_recreational_vehicle                                      Recreational Vehicle
+  def_tent                                                      Tent
+  std_hsc_18001_8                                               Health and Safety Code Section 18001.8 (Commercial Modulars)
+  std_hsc_19971                                                 Health and Safety Code Section 19971 (Factory-Built Housing)
+  std_hsc_18007                                                 Health and Safety Code Section 18007 (Manufactured Home)
+  std_hsc_18008                                                 Health and Safety Code Section 18008 (Mobilehome)
+  std_hsc_18009_3                                               Health and Safety Code Section 18009.3 (Park Trailer)
+  std_hsc_18010                                                 Health and Safety Code Section 18010 (Recreational Vehicle)
+  sec_p103_1                                                    P103.1 General
+  std_california_building_standards_code                        California Building Standards Code
+  sec_p103_3                                                    P103.3 Occupant Load
+  concept_occupant_load_floor_area                              Occupant Load Floor Area Requirements
+  sec_p104                                                      P104 Emergency Sleeping Cabins
+  sec_p104_1                                                    P104.1 General
+  sec_p105                                                      P105 Emergency Transportable Housing Units
+  sec_p106                                                      P106 Tents and Membrane Structures
+  sec_p106_1                                                    P106.1 General
+  sec_p109_1                                                    P109.1 Maintenance
+  sec_p110                                                      P110 Emergency Housing Facilities
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  (none)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_p101_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Appendix P Emergency Housing",
+  "community_id": 18,
+  "extracted_from_sections": ["appp_appendix_p_emergency_housing.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-31 rules. After writing the file, just confirm "wrote c18_appendix_p_emergency_housing_rules.json with N rules" and stop.

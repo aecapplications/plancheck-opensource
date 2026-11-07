@@ -1,0 +1,306 @@
+{
+  "_comment": "Regenerate chapters/ from your own copy of the code PDF: python tools/split_chapters.py build --book cec --pdf <path>. Pages are 1-based and inclusive. No code text is stored here.",
+  "source": {
+    "title": "2022 California Electrical Code (Title 24, Part 3)",
+    "filename": "2022_California_Electrical_Code.pdf",
+    "page_count": 1052
+  },
+  "chapters": [
+    {
+      "file": "01_article_89_general_code_provisions.txt",
+      "title": "Article 89 General Code Provisions",
+      "pages": [
+        27,
+        46
+      ]
+    },
+    {
+      "file": "02_article_90_introduction.txt",
+      "title": "Article 90 Introduction",
+      "pages": [
+        47,
+        52
+      ]
+    },
+    {
+      "file": "03_chapter_1_general.txt",
+      "title": "Chapter 1 General",
+      "pages": [
+        53,
+        86
+      ]
+    },
+    {
+      "file": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+      "title": "Chapter 2 Wiring and Protection",
+      "pages": [
+        87,
+        119
+      ]
+    },
+    {
+      "file": "05_chapter_2_wiring_and_protection_article_230_services_article_250_grounding_and_b.txt",
+      "title": "Chapter 2 Wiring and Protection",
+      "pages": [
+        120,
+        190
+      ]
+    },
+    {
+      "file": "06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri.txt",
+      "title": "Chapter 3 Wiring Methods and Materials",
+      "pages": [
+        191,
+        230
+      ]
+    },
+    {
+      "file": "07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met.txt",
+      "title": "Chapter 3 Wiring Methods and Materials",
+      "pages": [
+        231,
+        258
+      ]
+    },
+    {
+      "file": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt",
+      "title": "Chapter 3 Wiring Methods and Materials",
+      "pages": [
+        259,
+        286
+      ]
+    },
+    {
+      "file": "09_chapter_3_wiring_methods_and_materials_article_378_nonmetallic_wireways_article_.txt",
+      "title": "Chapter 3 Wiring Methods and Materials",
+      "pages": [
+        287,
+        314
+      ]
+    },
+    {
+      "file": "10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl.txt",
+      "title": "Chapter 4 Equipment for General Use",
+      "pages": [
+        315,
+        342
+      ]
+    },
+    {
+      "file": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt",
+      "title": "Chapter 4 Equipment for General Use",
+      "pages": [
+        343,
+        370
+      ]
+    },
+    {
+      "file": "12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a.txt",
+      "title": "Chapter 4 Equipment for General Use",
+      "pages": [
+        371,
+        405
+      ]
+    },
+    {
+      "file": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati.txt",
+      "title": "Chapter 4 Equipment for General Use",
+      "pages": [
+        406,
+        442
+      ]
+    },
+    {
+      "file": "14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes.txt",
+      "title": "Chapter 5 Special Occupancies",
+      "pages": [
+        443,
+        471
+      ]
+    },
+    {
+      "file": "15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511.txt",
+      "title": "Chapter 5 Special Occupancies",
+      "pages": [
+        472,
+        500
+      ]
+    },
+    {
+      "file": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca.txt",
+      "title": "Chapter 5 Special Occupancies",
+      "pages": [
+        501,
+        548
+      ]
+    },
+    {
+      "file": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt",
+      "title": "Chapter 5 Special Occupancies",
+      "pages": [
+        549,
+        579
+      ]
+    },
+    {
+      "file": "18_chapter_5_special_occupancies_article_551_recreational_vehicles_and_recreational.txt",
+      "title": "Chapter 5 Special Occupancies",
+      "pages": [
+        580,
+        618
+      ]
+    },
+    {
+      "file": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt",
+      "title": "Chapter 6 Special Equipment  — Article 600 Electric Signs and Outline Lighting → Article 625 Electric Vehicle Power Transfer System",
+      "pages": [
+        619,
+        648
+      ]
+    },
+    {
+      "file": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article.txt",
+      "title": "Chapter 6 Special Equipment  — Article 626 Electrified Truck Parking Spaces → Article 668 Electrolytic Cells",
+      "pages": [
+        649,
+        676
+      ]
+    },
+    {
+      "file": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt",
+      "title": "Chapter 6 Special Equipment  — Article 669 Electroplating → Article 690 Solar Photovoltaic (PV) Systems",
+      "pages": [
+        677,
+        712
+      ]
+    },
+    {
+      "file": "22_chapter_6_special_equipment_article_691_large_scale_photovoltaic_pv_electric_sup.txt",
+      "title": "Chapter 6 Special Equipment  — Article 691 Large-Scale Photovoltaic (PV) Electric Supply Stations",
+      "pages": [
+        713,
+        730
+      ]
+    },
+    {
+      "file": "23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo.txt",
+      "title": "Chapter 7 Special Conditions — Article 700 Emergency Systems → Article 710 Stand-Alone Systems",
+      "pages": [
+        731,
+        758
+      ]
+    },
+    {
+      "file": "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt",
+      "title": "Chapter 7 Special Conditions — Article 712 Direct Current Microgrids → Article 760 Fire Alarm Systems",
+      "pages": [
+        759,
+        786
+      ]
+    },
+    {
+      "file": "25_chapter_7_special_conditions_article_770_optical_fiber_cables_article_770_optica.txt",
+      "title": "Chapter 7 Special Conditions — Article 770 Optical Fiber Cables",
+      "pages": [
+        787,
+        798
+      ]
+    },
+    {
+      "file": "26_chapter_8_communications_systems.txt",
+      "title": "Chapter 8 Communications Systems",
+      "pages": [
+        799,
+        834
+      ]
+    },
+    {
+      "file": "27_chapter_9_tables.txt",
+      "title": "Chapter 9 Tables",
+      "pages": [
+        835,
+        852
+      ]
+    },
+    {
+      "file": "28_annex_a_product_safety_standards.txt",
+      "title": "Annex A Product Safety Standards",
+      "pages": [
+        853,
+        859
+      ]
+    },
+    {
+      "file": "29_annex_b_application_information_for_ampacity_calculation.txt",
+      "title": "Annex B Application Information for Ampacity Calculation",
+      "pages": [
+        860,
+        872
+      ]
+    },
+    {
+      "file": "30_annex_c_conduit_tubing_and_cable_tray_fill_tables_for_conductors_and_fixture_wir.txt",
+      "title": "Annex C Conduit, Tubing, and Cable Tray Fill Tables for Conductors  and Fixture Wires of the Same Size",
+      "pages": [
+        873,
+        957
+      ]
+    },
+    {
+      "file": "31_annex_d_examples.txt",
+      "title": "Annex D Examples",
+      "pages": [
+        958,
+        971
+      ]
+    },
+    {
+      "file": "32_annex_e_types_of_construction.txt",
+      "title": "Annex E Types of Construction",
+      "pages": [
+        972,
+        973
+      ]
+    },
+    {
+      "file": "33_annex_f_availability_for_critical_operations_power_systems_and_development_and_i.txt",
+      "title": "Annex F Availability for Critical Operations Power Systems; and Development and Implementation of Functional Performance Tests (FPTs) for Critical Operations Power Systems",
+      "pages": [
+        974,
+        975
+      ]
+    },
+    {
+      "file": "34_annex_g_supervisory_control_and_data_acquisition_scada.txt",
+      "title": "Annex G Supervisory Control and Data Acquisition (SCADA)",
+      "pages": [
+        976,
+        976
+      ]
+    },
+    {
+      "file": "35_annex_h_administration_and_enforcement.txt",
+      "title": "Annex H Administration and Enforcement",
+      "pages": [
+        977,
+        982
+      ]
+    },
+    {
+      "file": "36_annex_i_recommended_tightening_torque_tables_from_ul_standard_486a_486b.txt",
+      "title": "Annex I Recommended Tightening Torque Tables from UL Standard 486A-486B",
+      "pages": [
+        983,
+        984
+      ]
+    },
+    {
+      "file": "37_annex_j_ada_standards_for_accessible_design.txt",
+      "title": "Annex J ADA Standards for Accessible Design",
+      "pages": [
+        985,
+        988
+      ]
+    }
+  ]
+}

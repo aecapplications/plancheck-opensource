@@ -1,0 +1,603 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Foundation-to-Floor Anchorage",
+  "community_id": 15,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_c.md",
+    "chapter_4_foundations_a.md",
+    "chapter_4_foundations_b.md",
+    "chapter_5_floors.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r317_protection_of_wood_against_decay",
+      "cite": "R317.1",
+      "section_node": "section_r317",
+      "title": "Protect wood and wood-based products against decay at moisture-prone locations",
+      "intent": "Prevent biological decay of structural wood members by requiring naturally durable or preservative-treated wood at locations near grade, masonry/concrete contact, and exterior weather exposure.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "wood_joists_or_structural_floor_<_18_in_to_exposed_ground_in_crawl_space",
+              "source_loc": "R317.1(1)"
+            },
+            {
+              "predicate": "wood_girders_<_12_in_to_exposed_ground_in_crawl_space",
+              "source_loc": "R317.1(1)"
+            },
+            {
+              "predicate": "wood_columns_<_8_in_to_exposed_ground_in_crawl_space",
+              "source_loc": "R317.1(1)"
+            },
+            {
+              "predicate": "wood_framing_rests_on_concrete_or_masonry_exterior_foundation_wall_<_8_in_from_ground",
+              "source_loc": "R317.1(2)"
+            },
+            {
+              "predicate": "sills_or_sleepers_on_concrete_or_masonry_slab_in_direct_contact_with_ground_without_impervious_moisture_barrier",
+              "source_loc": "R317.1(3)"
+            },
+            {
+              "predicate": "ends_of_wood_girders_in_exterior_masonry_or_concrete_walls_with_clearance_<_0_5_in",
+              "source_loc": "R317.1(4)"
+            },
+            {
+              "predicate": "wood_siding_sheathing_or_wall_framing_<_6_in_from_ground_or_<_2_in_above_concrete_horizontal_surfaces",
+              "source_loc": "R317.1(5)"
+            },
+            {
+              "predicate": "wood_structural_members_supporting_moisture_permeable_floors_or_roofs_exposed_to_weather_without_impervious_moisture_barrier",
+              "source_loc": "R317.1(6)"
+            },
+            {
+              "predicate": "wood_furring_or_framing_attached_to_interior_of_exterior_masonry_or_concrete_walls_below_grade_without_approved_vapor_retarder",
+              "source_loc": "R317.1(7)"
+            },
+            {
+              "predicate": "wood_structural_members_form_supports_of_buildings_balconies_porches_exposed_to_weather_without_protection",
+              "source_loc": "R317.1(8)"
+            },
+            {
+              "predicate": "wood_columns_in_contact_with_basement_floor_slab_without_pier_or_pedestal_>=1_in",
+              "source_loc": "R317.1(9)"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "decay_protection",
+        "material_options": [
+          "naturally_durable_wood",
+          "preservative_treated_wood_per_AWPA_U1"
+        ],
+        "ground_contact_requirement": "approved pressure-preservative-treated wood suitable for ground contact use where embedded in concrete in direct contact with ground or in concrete exposed to weather supporting permanent occupiable structures (R317.1.2)",
+        "field_treatment": "field-cut ends, notches, and drilled holes treated per AWPA M4 (R317.1.1)",
+        "ventilation_under_balconies": "net-free cross-ventilation area not less than 1/150 of separate space area (R317.1.3)",
+        "fasteners_and_connectors": {
+          "general": "for preservative-treated wood: hot-dipped zinc-coated galvanized steel, stainless steel, silicon bronze, or copper; staples must be stainless steel (R317.3.1)",
+          "connector_coatings_default": "ASTM A653 G185 zinc-coated galvanized steel or equivalent absent manufacturer recommendation",
+          "zinc_coating_weights": "ASTM A153 for zinc-coated fasteners",
+          "stainless_steel_fasteners": "ASTM F1667",
+          "wood_foundations": "fastenings per AWC PWF (R317.3.2)"
+        },
+        "tested_per": [
+          "AWPA U1",
+          "AWPA M4",
+          "ASTM A153",
+          "ASTM A653",
+          "ASTM F1667",
+          "ASTM B695"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_sawn_lumber_in_climate_region_where_experience_demonstrates_no_decay_risk",
+              "source_loc": "R317.1(8) Exception"
+            }
+          ],
+          "effect": "naturally_durable_or_preservative_treated_wood_not_required_for_R317_1(8)"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "wood_used_entirely_below_groundwater_level_or_continuously_submerged_in_fresh_water",
+              "source_loc": "R317.1.2"
+            }
+          ],
+          "effect": "pressure_preservative_treatment_not_required"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "fastener_is_>=0_5_in_diameter_steel_bolt",
+              "source_loc": "R317.3.1 Exception 1"
+            }
+          ],
+          "effect": "general_corrosion_resistance_requirements_relaxed"
+        }
+      ],
+      "evidence_required": [
+        "Lumber/plywood quality marks identifying treating plant, preservative type, retention, end use, treating standard, and inspection agency (R317.2.1)",
+        "Foundation/sill plate cut sheets or invoices showing pressure-preservative treatment per AWPA U1",
+        "Plan details and sections showing required clearances (8 in / 12 in / 18 in / 6 in / 2 in) from grade or impervious moisture barriers under sills/sleepers",
+        "Fastener/connector spec sheets demonstrating compliance with ASTM A153, A653 G185, B695, or F1667 as applicable",
+        "Field-treatment specification note referencing AWPA M4 for cut ends and holes"
+      ],
+      "depends_on": [
+        "section_r318",
+        "std_awpa_u1",
+        "AWPA_M4",
+        "AWC_PWF"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r318_subterranean_termite_protection",
+      "cite": "R318.1",
+      "section_node": "section_r318",
+      "title": "Provide subterranean termite protection in termite-prone areas",
+      "intent": "Prevent termite damage to structural wood members in regions where Table R301.2 indicates termite hazard, by requiring chemical, physical, or material-based protection.",
+      "applies_when": [
+        {
+          "predicate": "in_area_subject_to_termite_damage_per_table_r301_2",
+          "source_loc": "R318.1"
+        }
+      ],
+      "requires": {
+        "type": "termite_protection",
+        "method_must_be_one_or_combination_of": [
+          "chemical_termiticide_treatment_per_R318_2",
+          "termite_baiting_system_installed_per_label",
+          "pressure_preservative_treated_wood_per_R317_1",
+          "naturally_durable_termite_resistant_wood",
+          "approved_physical_barriers_per_R318_3_at_locations_per_R317_1",
+          "cold_formed_steel_framing_per_R505_2_1_and_R603_2_1"
+        ],
+        "chemical_treatment_constraint": "concentration, application rate, and method strictly per termiticide label (R318.2)",
+        "shield_constraint": "shields placed on top of exterior foundation wall only allowed in combination with another method (R318.3)",
+        "foam_plastic_constraint_in_very_heavy_termite_areas": "extruded/expanded polystyrene, polyisocyanurate, and other foam plastics shall not be installed on exterior face or under interior or exterior foundation walls or slab foundations located below grade; above-grade foam shall maintain >=6 in clearance from exposed earth (R318.4)",
+        "tested_per": [
+          "table_R301_2",
+          "AWPA_U1"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "structural_members_of_walls_floors_ceilings_roofs_entirely_noncombustible_or_pressure_preservative_treated",
+              "source_loc": "R318.4 Exception 1"
+            }
+          ],
+          "effect": "foam_plastic_below_grade_restriction_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "approved_supplemental_method_protects_foam_and_structure_from_subterranean_termite_damage",
+              "source_loc": "R318.4 Exception 2"
+            }
+          ],
+          "effect": "foam_plastic_below_grade_restriction_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "foam_plastic_on_interior_side_of_basement_walls",
+              "source_loc": "R318.4 Exception 3"
+            }
+          ],
+          "effect": "foam_plastic_below_grade_restriction_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Plan note specifying which of the six termite-protection methods is being used (R318.1)",
+        "Termiticide product label, applicator certification, and treatment record where chemical treatment is used",
+        "Quality marks on pressure-preservative-treated lumber/plywood (R318.1.1) and field-treatment note for cut ends (R318.1.2 / AWPA M4)",
+        "Detail showing physical barrier installation (sheeting/collars) at penetrations and foundation interface",
+        "Where in 'very heavy' termite probability area: detail showing no foam plastic below grade or approved alternative protection per R318.4 exceptions"
+      ],
+      "depends_on": [
+        "section_r317",
+        "table_r301_2",
+        "std_awpa_u1",
+        "AWPA_M4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_6_foundation_anchorage",
+      "cite": "R403.1.6",
+      "section_node": "r403_1_6",
+      "title": "Anchor wood sill/sole plates to continuous foundations with minimum bolt size, spacing, embedment, and edge distance",
+      "intent": "Provide a positive load path from wood-framed walls to the foundation to resist lateral and uplift forces and prevent sill displacement.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "wood_sill_plate_supported_directly_on_continuous_foundation",
+              "source_loc": "R403.1.6"
+            },
+            {
+              "predicate": "wood_wall_supported_directly_on_continuous_foundation",
+              "source_loc": "R403.1.6"
+            },
+            {
+              "predicate": "wood_sole_plate_at_exterior_wall_on_monolithic_slab",
+              "source_loc": "R403.1.6"
+            },
+            {
+              "predicate": "wood_sole_plate_of_braced_wall_panel_at_interior_on_monolithic_slab",
+              "source_loc": "R403.1.6"
+            },
+            {
+              "predicate": "cold_formed_steel_framing_anchored_via_wood_sill_plate",
+              "source_loc": "R403.1.6"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foundation_anchorage",
+        "anchor_bolt_diameter_min_in": 0.5,
+        "anchor_bolt_spacing_max_ft": 6,
+        "anchor_bolt_embedment_min_in_concrete_or_grouted_cmu_in": 7,
+        "anchor_bolt_location": "middle third of plate width",
+        "nut_and_washer": "tightened on each anchor bolt",
+        "min_bolts_per_plate_section": 2,
+        "end_distance_max_in": 12,
+        "end_distance_min_bolt_diameters": 7,
+        "interior_bearing_wall_sole_plate_on_monolithic_slab_not_part_of_braced_wall_panel": "positively anchored with approved fasteners",
+        "decay_and_termite_protection": "sill and sole plates protected per Sections R317 and R318 where required",
+        "concrete_consolidation": "where anchor bolts impede consolidation, concrete shall be vibrated to ensure full contact",
+        "alternates_allowed": "approved anchors or anchor straps spaced to provide equivalent anchorage to 1/2-inch anchor bolts",
+        "tested_per": [
+          "AWC_PWF"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "wall_total_length_<=24_in_connecting_offset_braced_wall_panels",
+              "source_loc": "R403.1.6 Exception 1"
+            }
+          ],
+          "effect": "anchor_with_one_bolt_in_center_third_and_attach_to_adjacent_braced_wall_panels_per_table_R602_3_1_item_9"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "wall_total_length_<=12_in_connecting_offset_braced_wall_panels",
+              "source_loc": "R403.1.6 Exception 2"
+            }
+          ],
+          "effect": "no_anchor_bolts_required_when_attached_to_adjacent_braced_wall_panels_per_table_R602_3_1_item_9"
+        }
+      ],
+      "evidence_required": [
+        "Foundation plan showing anchor bolt diameter (>=1/2 in), spacing (<=6 ft o.c.), embedment (>=7 in), and middle-third location",
+        "Detail showing two-bolt minimum per plate section with one bolt within 12 in (and >=7 bolt diameters) of each end",
+        "Schedule of nuts and 3x3 plate washers at all anchor bolts within braced wall lines (per R403.1.6.1 in SDC C/D0/D1/D2)",
+        "Manufacturer cut sheet for any approved anchor straps used as equivalents",
+        "Note specifying decay/termite protection of sill and sole plates per R317 and R318"
+      ],
+      "depends_on": [
+        "section_r317",
+        "section_r318",
+        "r404_2",
+        "r404_3",
+        "r602_11",
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_6_1_foundation_anchorage_seismic",
+      "cite": "R403.1.6.1",
+      "section_node": "r403_1_6",
+      "title": "Augment foundation anchorage in Seismic Design Categories C, D0, D1, D2",
+      "intent": "Improve sill-to-foundation force transfer in higher seismic regions through plate washers, denser bolt spacing at interior braced/bearing walls, and tighter spacing for taller buildings.",
+      "applies_when": [
+        {
+          "predicate": "is_wood_light_frame_structure",
+          "source_loc": "R403.1.6.1"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "in_seismic_design_category_d0_d1_or_d2",
+              "source_loc": "R403.1.6.1"
+            },
+            {
+              "predicate": "is_wood_light_frame_townhouse_in_seismic_design_category_c",
+              "source_loc": "R403.1.6.1"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foundation_anchorage_seismic_supplement",
+        "plate_washers": "R602.11.1 plate washers on every anchor bolt along the full length of required braced wall lines unless approved anchor straps are used; ordinary cut washers of adequate size are acceptable in wall lines with no braced wall panels",
+        "interior_braced_wall_plate_anchor_bolt_spacing_max_ft": 6,
+        "interior_braced_wall_plate_end_distance_max_in": 12,
+        "interior_bearing_wall_sole_plate_anchor_bolt_spacing_max_ft": 6,
+        "interior_bearing_wall_sole_plate_end_distance_max_in": 12,
+        "max_anchor_bolt_spacing_for_buildings_>2_stories_ft": 4,
+        "stepped_cripple_walls": "conform to R602.11.2",
+        "wood_foundations_force_transfer": "where continuous wood foundations per Section R404.2 are used, force transfer capacity >= connections required by Section R602.11.1, or braced wall panel connected to wood foundations per braced wall panel-to-floor fastening requirements of Table R602.3(1)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Seismic Design Category determination from R301.2.2 referenced on the plans",
+        "Anchor bolt schedule showing 4 ft o.c. maximum where building is over two stories",
+        "Detail showing plate washers (per R602.11.1) at all anchor bolts within braced wall lines",
+        "Interior braced/bearing wall anchorage plan showing 6 ft o.c. max spacing and bolts within 12 in of plate ends",
+        "Where wood foundations are used: hold-down/connection calculation showing force transfer capacity matches R602.11.1 or braced-wall-panel-to-floor fastening per Table R602.3(1)"
+      ],
+      "depends_on": [
+        "r403_1_6",
+        "r404_2",
+        "section_r602_11_1",
+        "section_r602_11_2",
+        "table_r602_3_1"
+      ],
+      "amends": "r403_1_6",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404_2_wood_foundation_walls",
+      "cite": "R404.2",
+      "section_node": "r404_2",
+      "title": "Construct wood foundation walls per identification, sizing, backfill, drainage, and fastening requirements",
+      "intent": "Ensure wood foundation walls have verified structural-grade lumber, adequate stud sizing for soil pressure, controlled backfill height, proper drainage/dampproofing, and fastening matching engineered details.",
+      "applies_when": [
+        {
+          "predicate": "uses_wood_foundation_walls",
+          "source_loc": "R404.2"
+        }
+      ],
+      "requires": {
+        "type": "wood_foundation_wall_construction",
+        "identification": "load-bearing lumber identified by grade mark of accredited lumber grading or inspection agency complying with DOC PS 20, or accept certificate of inspection in lieu of grade mark; wood structural panels conform to DOC PS 1 or DOC PS 2 with grade mark or certificate (R404.2.1)",
+        "stud_size": {
+          "minimum_dimension_in": "2x6",
+          "spacing_16_in_oc_min_Fb_psi": 1250,
+          "spacing_12_in_oc_min_Fb_psi": 875,
+          "Fb_reference": "ANSI AWC NDS"
+        },
+        "backfill_height_max_ft_when_not_per_AWC_PWF": 4,
+        "plywood_sheathing_thickness_when_fill_>12_in_above_interior_grade": "per Table R404.2.3",
+        "backfilling_sequence": "backfill wood foundation walls only after the basement and first floors are built or the walls are braced; in crawl spaces, place interior backfill or bracing before any exterior backfill (R404.2.4)",
+        "drainage_and_dampproofing": "drained and dampproofed per Sections R405 and R406 (R404.2.5)",
+        "fastening": "wood structural panel foundation wall sheathing attached to framing per Table R602.3(1) and Section R402.1.1 (R404.2.6)",
+        "details_reference": "Figures R403.1(2) and R403.1(3)",
+        "tested_per": [
+          "AWC_PWF",
+          "DOC_PS_1",
+          "DOC_PS_2",
+          "DOC_PS_20",
+          "ANSI_AWC_NDS"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Lumber grade marks (or certificates of inspection) on load-bearing lumber and DOC PS 1/PS 2 marks on plywood",
+        "Stud schedule showing 2x6 members with Fb >= 1,250 psi (16 in o.c.) or Fb >= 875 psi (12 in o.c.)",
+        "Cross-section showing backfill height <=4 ft (or AWC PWF design) and plywood thickness per Table R404.2.3 where fill >12 in above interior grade",
+        "Construction sequence note prohibiting backfill until floor diaphragms or temporary bracing in place",
+        "Drainage and dampproofing details referencing R405 and R406; sheathing nailing schedule per Table R602.3(1)"
+      ],
+      "depends_on": [
+        "r403_1_6",
+        "table_R404_2_3",
+        "section_r405",
+        "section_r406",
+        "r402_1_1",
+        "table_r602_3_1",
+        "AWC_PWF"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404_3_wood_sill_plates",
+      "cite": "R404.3",
+      "section_node": "r404_3",
+      "title": "Provide minimum 2x4 wood sill plates and anchor per R403.1.6 and R602.11",
+      "intent": "Establish minimum sill-plate dimension and ensure sill anchorage rules govern attachment to the foundation.",
+      "applies_when": [
+        {
+          "predicate": "uses_wood_sill_plate_on_foundation",
+          "source_loc": "R404.3"
+        }
+      ],
+      "requires": {
+        "type": "wood_sill_plate",
+        "minimum_nominal_dimension": "2x4",
+        "anchorage_per": [
+          "r403_1_6",
+          "r602_11"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Sill plate schedule on plans calling out >=2x4 nominal lumber",
+        "Anchor bolt/strap detail referencing R403.1.6 (and R403.1.6.1 in SDC C/D0/D1/D2)",
+        "Cross-reference to R602.11 cripple wall/braced wall panel anchorage requirements",
+        "Decay/termite protection note for sill plates per R317 and R318"
+      ],
+      "depends_on": [
+        "r403_1_6",
+        "r602_11",
+        "section_r317",
+        "section_r318"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_2_floor_design_and_construction",
+      "cite": "R502.2",
+      "section_node": "r502_2",
+      "title": "Design and construct floors per Chapter 5, Figure R502.2, R317/R318, or ANSI AWC NDS",
+      "intent": "Ensure wood floor systems are designed and built using the prescriptive rules of Chapter 5 (with required decay/termite protection) or under engineered design per ANSI AWC NDS.",
+      "applies_when": [
+        {
+          "predicate": "is_wood_floor_system",
+          "source_loc": "R502.2"
+        }
+      ],
+      "requires": {
+        "type": "floor_design_and_construction",
+        "design_path_options": [
+          "prescriptive_per_Chapter_5_with_R317_and_R318",
+          "engineered_per_ANSI_AWC_NDS"
+        ],
+        "blocking_and_subflooring": {
+          "blocking_min_grade": "utility grade lumber",
+          "subflooring_min": "utility grade lumber, No. 4 common boards, or wood structural panels per R503.2",
+          "fireblocking_grade": "any grade lumber"
+        },
+        "details_reference": "Figure R502.2",
+        "tested_per": [
+          "ANSI_AWC_NDS"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor framing plan referencing Tables R502.3.1(1)/(2) or stamped engineering per ANSI AWC NDS",
+        "Section showing floor construction matching Figure R502.2 (sill, anchor bolts, joists, blocking, subfloor)",
+        "Decay/termite protection notes per R317 and R318 at sills and joist bearings near grade",
+        "Subfloor and blocking grade specifications per R502.2.2 and R503.2"
+      ],
+      "depends_on": [
+        "section_r317",
+        "section_r318",
+        "r503_2",
+        "ANSI_AWC_NDS"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_2_1_load_path_at_braced_wall_lines",
+      "cite": "R502.2.1",
+      "section_node": "r502_2_1",
+      "title": "Provide a continuous lateral load path between floor framing and braced wall panels above and below",
+      "intent": "Ensure lateral seismic and wind forces are transferred between braced wall panels and the floor diaphragm without interruption.",
+      "applies_when": [
+        {
+          "predicate": "floor_framing_adjacent_to_braced_wall_panels_above_or_below",
+          "source_loc": "R502.2.1"
+        }
+      ],
+      "requires": {
+        "type": "lateral_load_path",
+        "specification_reference": "Section R602.10.8",
+        "must_provide": "load path for lateral forces between floor framing and braced wall panels located above or below the floor",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Braced wall line plan identifying braced wall panels at each story",
+        "Section/detail showing connection of braced wall panel to floor framing (top and bottom plates, anchorage, blocking) per R602.10.8",
+        "Fastening schedule at rim joist/sill demonstrating continuous load path",
+        "Hold-down or strap details where required by R602.10.8"
+      ],
+      "depends_on": [
+        "section_r602_10_8",
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_6_joist_beam_girder_bearing",
+      "cite": "R502.6",
+      "section_node": "r502_6",
+      "title": "Provide minimum bearing length and sill-plate area for joists, beams, and girders",
+      "intent": "Ensure adequate bearing area at joist/beam/girder ends to prevent crushing of supports and provide stable load transfer to walls and foundations.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "joist_end_bears_on_wood_or_metal",
+              "source_loc": "R502.6"
+            },
+            {
+              "predicate": "joist_beam_or_girder_end_bears_on_masonry_or_concrete",
+              "source_loc": "R502.6"
+            },
+            {
+              "predicate": "joist_supported_on_ribbon_strip_and_nailed_to_adjacent_stud",
+              "source_loc": "R502.6"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "bearing",
+        "min_bearing_on_wood_or_metal_in": 1.5,
+        "min_bearing_on_masonry_or_concrete_in": 3,
+        "alternative_supports": [
+          "approved_joist_hangers",
+          "1x4_ribbon_strip_nailed_to_adjacent_stud"
+        ],
+        "sill_plate_under_joist_beam_or_girder_on_masonry_or_concrete": {
+          "min_nominal_thickness_in": 2,
+          "min_nominal_bearing_area_sq_in": 48
+        },
+        "lap_at_bearing_support": {
+          "min_lap_length_in": 3,
+          "fastening": "minimum three 10d face nails, or wood/metal splice with strength >= nailed lap (R502.6.1)"
+        },
+        "framing_into_side_of_wood_girder": "supported by approved framing anchors or on ledger strips not less than nominal 2x2 (R502.6.2)",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor framing plan/section showing >=1.5 in bearing on wood or metal supports and >=3 in bearing on masonry/concrete",
+        "Sill plate detail showing >=2 in nominal thickness and >=48 sq in bearing area where joists/beams/girders bear on masonry or concrete",
+        "Lap detail showing 3 in minimum lap with three 10d face nails, or approved metal splice",
+        "Joist hanger or framing-anchor schedule with manufacturer/model and ICC-ES report numbers",
+        "Detail of ledger strip (>=2x2 nominal) where joists frame into side of wood girder"
+      ],
+      "depends_on": [
+        "r502_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

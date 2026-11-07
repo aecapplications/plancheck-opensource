@@ -1,0 +1,146 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 15 Roof Assemblies And Rooftop Structures" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch15_chapter_15_roof_assemblies_and_rooftop_structures.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c02_chapter_15_roof_assemblies_and_rooftop_structures_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ch15_section_1202_2_attic_ventilation                         Section 1202.2 Attic Ventilation
+  ch15_section_1501_general                                     Section 1501 General Scope
+  ch15_section_1502_roof_drainage                               Section 1502 Roof Drainage
+  ch15_section_1503_weather_protection                          Section 1503 Weather Protection
+  ch15_section_1504_performance_requirements                    Section 1504 Performance Requirements
+  ch15_section_1505_fire_classification                         Section 1505 Fire Classification
+  ch15_section_1506_materials                                   Section 1506 Materials
+  ch15_section_1507_requirements_for_roof_coverings             Section 1507 Requirements for Roof Coverings
+  ch15_section_1508_roof_insulation                             Section 1508 Roof Insulation
+  ch15_section_1509_roof_coatings                               Section 1509 Roof Coatings
+  ch15_section_1510_radiant_barriers                            Section 1510 Radiant Barriers Installed Above Deck
+  ch15_section_1511_rooftop_structures                          Section 1511 Rooftop Structures
+  ch15_section_1512_reroofing                                   Section 1512 Reroofing
+  ch15_section_1513_seismic_anchorage                           Section 1513 Seismic Anchorage of Slate Shingle, Clay and Co
+  ch15_section_1609_wind_loads                                  Section 1609 Wind Loads
+  ch15_section_1611_rain_loads                                  Section 1611 Rain Loads
+  ch15_section_705_11_parapets                                  Section 705.11 Parapets
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  ch15_table_1504_2_shingle_classification                      Table 1504.2 Classification of Steep Slope Roof Shingles
+  ch15_table_1504_9_parapet_height_aggregate_roofs              Table 1504.9 Minimum Required Parapet Height for Aggregate S
+  ch15_table_1505_1_roof_covering_classification                Table 1505.1 Minimum Roof Covering Classification for Types 
+  ch15_table_1507_10_2_built_up_roofing_standards               Table 1507.10.2 Built-Up Roofing Material Standards
+  ch15_table_1507_12_2_single_ply_roofing_standards             Table 1507.12.2 Single-Ply Roofing Material Standards
+  ch15_table_1507_13_3_protective_coating_standards             Table 1507.13.3 Protective Coating Material Standards
+  ch15_table_1507_1_1_underlayment_types                        Table 1507.1.1 Underlayment Types, Application and Attachmen
+  ch15_table_1507_2_8_2_valley_lining_material                  Table 1507.2.8.2 Valley Lining Material
+  ch15_table_1507_3_7_tile_attachment                           Table 1507.3.7 Clay and Concrete Tile Attachment
+  ch15_table_1507_4_3_metal_roof_coverings                      Table 1507.4.3 Metal Roof Coverings and Corrosion Resistance
+  ch15_table_1507_7_6_slate_headlap                             Table 1507.7.6 Slate Shingle Headlap
+  ch15_table_1507_8_5_wood_shingle_material                     Table 1507.8.5 Wood Shingle Material Requirements
+  ch15_table_1507_8_7_wood_shingle_exposure                     Table 1507.8.7 Wood Shingle Weather Exposure and Roof Slope
+  ch15_table_1507_8_wood_shingle_shake_installation             Table 1507.8 Wood Shingle and Shake Installation
+  ch15_table_1507_9_6_wood_shake_material                       Table 1507.9.6 Wood Shake Material Requirements
+  ch15_table_1507_9_8_wood_shake_exposure                       Table 1507.9.8 Wood Shake Weather Exposure and Roof Slope
+  ch15_table_1508_2_roof_insulation_standards                   Table 1508.2 Material Standards for Roof Insulation
+  ch15_table_1509_2_roof_coating_standards                      Table 1509.2 Roof Coating Material Standards
+  ch15_table_601_fire_resistance_rating                         Table 601 Fire-Resistance Rating Requirements for Building E
+  ch15_asphalt_shingles                                         Asphalt Shingles
+  ch15_ballasted_low_slope_single_ply_roof_systems              Ballasted Low-Slope Single-Ply Roof Systems
+  ch15_bipv_products                                            Building-Integrated Photovoltaic (BIPV) Products
+  ch15_building_integrated_photovoltaic_roof_panels             Building-Integrated Photovoltaic Roof Panels
+  ch15_built_up_roofs                                           Built-Up Roofs
+  ch15_california_fire_code                                     California Fire Code
+  ch15_california_plumbing_code                                 California Plumbing Code
+  ch15_class_a_roof_assemblies                                  Class A Roof Assemblies
+  ch15_class_b_roof_assemblies                                  Class B Roof Assemblies
+  ch15_class_c_roof_assemblies                                  Class C Roof Assemblies
+  ch15_clay_and_concrete_tile                                   Clay and Concrete Tile
+  ch15_cooling_towers                                           Cooling Towers
+  ch15_crickets_and_saddles                                     Crickets and Saddles
+  ch15_fire_retardant_treated_wood_shingles_shakes              Fire-Retardant-Treated Wood Shingles and Shakes
+  ch15_fire_separation_distance                                 Fire Separation Distance
+  ch15_flashing                                                 Flashing
+  ch15_ice_barriers                                             Ice Barriers
+  ch15_impact_resistance                                        Impact Resistance
+  ch15_landscaped_roofs                                         Landscaped Roofs
+  ch15_liquid_applied_roofing                                   Liquid-Applied Roofing
+  ch15_mechanical_equipment_screens                             Mechanical Equipment Screens
+  ch15_metal_roof_panels                                        Metal Roof Panels
+  ch15_metal_roof_shingles                                      Metal Roof Shingles
+  ch15_mineral_surfaced_roll_roofing                            Mineral-Surfaced Roll Roofing
+  ch15_modified_bitumen_roofing                                 Modified Bitumen Roofing
+  ch15_other_rooftop_structures                                 Other Rooftop Structures
+  ch15_parapet_walls                                            Parapet Walls
+  ch15_penthouses                                               Penthouses
+  ch15_photovoltaic_shingles                                    Photovoltaic Shingles
+  ch15_roof_recover                                             Roof Recover
+  ch15_rooftop_mounted_pv_panel_systems                         Rooftop Mounted Photovoltaic (PV) Panel Systems
+  ch15_rooftop_tanks                                            Rooftop Tanks
+  ch15_secondary_overflow_drains_scuppers                       Secondary (Emergency Overflow) Drains or Scuppers
+  ch15_single_ply_roofing                                       Single-Ply Roofing
+  ch15_slate_shingles                                           Slate Shingles
+  ch15_sprayed_polyurethane_foam_roofing                        Sprayed Polyurethane Foam Roofing
+  ch15_structural_metal_panel_roof_systems                      Structural Metal Panel Roof Systems
+  ch15_towers_spires_domes_cupolas                              Towers, Spires, Domes and Cupolas
+  ch15_types_of_construction                                    Types of Construction (Type I-V)
+  ch15_underlayment                                             Underlayment
+  ch15_vegetative_roofs_and_landscaped_roofs                    Vegetative Roofs and Landscaped Roofs
+  ch15_wildland_urban_interface_fire_area                       Wildland-Urban Interface Fire Area
+  ch15_wind_resistance_of_roofs                                 Wind Resistance of Roofs
+  ch15_wood_shakes                                              Wood Shakes
+  ch15_wood_shingles                                            Wood Shingles
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. ch15_section_1202_2_attic_ventilation>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 15 Roof Assemblies And Rooftop Structures",
+  "community_id": 2,
+  "extracted_from_sections": ["ch15_chapter_15_roof_assemblies_and_rooftop_structures.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-17 rules. After writing the file, just confirm "wrote c02_chapter_15_roof_assemblies_and_rooftop_structures_rules.json with N rules" and stop.

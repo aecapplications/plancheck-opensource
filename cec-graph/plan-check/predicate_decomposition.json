@@ -1,0 +1,105 @@
+{
+  "schema_version": "0.1",
+  "description": "Predicate decomposition table (CEC / electrical domain). Each entry says how a composite predicate is implied by atomic facts. The decomposer expands a fact set by asserting any composite whose decomposition is satisfied. Re-author / extend as the extracted rule packs reveal which composites are actually referenced.",
+
+  "aliases": {
+    "_doc": "Equivalent spellings — declaring any one asserts all the others.",
+    "groups": [
+      ["in_wet_location", "is_wet_location", "location_wet"],
+      ["in_damp_location", "is_damp_location", "location_damp"],
+      ["in_dry_location", "is_dry_location", "location_dry"],
+      ["is_gfci_protected", "has_gfci_protection", "gfci_protected"],
+      ["is_afci_protected", "has_afci_protection", "afci_protected"],
+      ["is_dwelling_unit", "in_dwelling_unit", "is_dwelling"],
+      ["is_one_or_two_family_dwelling", "is_dwelling_unit_one_or_two_family"],
+      ["is_metallic_raceway", "is_metal_raceway", "raceway_metallic"],
+      ["is_nonmetallic_raceway", "is_non_metallic_raceway", "raceway_nonmetallic"],
+      ["is_grounded_conductor", "is_neutral_conductor"],
+      ["is_equipment_grounding_conductor", "is_egc"],
+      ["in_class_i_division_1", "is_class_i_division_1"],
+      ["in_class_i_division_2", "is_class_i_division_2"],
+      ["in_kitchen", "room_is_kitchen"],
+      ["in_bedroom", "room_is_bedroom", "is_bedroom"],
+      ["in_basement", "is_basement"],
+      ["in_crawl_space", "in_crawlspace"],
+      ["in_laundry_area", "in_laundry_room"],
+      ["in_garage", "in_attached_garage", "in_detached_garage"]
+    ]
+  },
+
+  "compounds": {
+    "_doc": "Composite predicates explicitly defined as a logical combination of atomics.",
+    "is_in_wet_or_damp_location": {
+      "any_of": ["in_wet_location", "in_damp_location"]
+    },
+    "is_hazardous_class_i": {
+      "any_of": ["in_class_i_division_1", "in_class_i_division_2"]
+    },
+    "is_hazardous_location": {
+      "any_of": ["in_class_i_division_1", "in_class_i_division_2",
+                 "in_class_ii_division_1", "in_class_ii_division_2",
+                 "in_class_iii_division_1", "in_class_iii_division_2"]
+    },
+    "requires_gfci_protection": {
+      "any_of": ["in_bathroom", "in_kitchen", "in_garage", "in_wet_location",
+                 "is_outdoor_receptacle"]
+    },
+    "is_dwelling_unit_receptacle": {
+      "all_of": ["is_dwelling_unit", "is_receptacle"]
+    },
+    "installed_outdoors": {
+      "any_of": ["is_outdoor_receptacle", "in_outdoor_location"]
+    },
+    "_doc_ratings": "Standard dwelling receptacles (ordinary 120V duplex on 15/20A branch circuits, read off panel schedules or receptacle symbols) satisfy the 210.8/210.52 rating preconditions.",
+    "receptacle_rating_125v_through_250v": {
+      "any_of": ["is_standard_dwelling_receptacle", "receptacle_rating_125v",
+                 "receptacle_rating_250v", "is_125v_15a_or_20a_receptacle"]
+    },
+    "single_phase_branch_circuit_rated_<=_150v_to_ground": {
+      "any_of": ["is_standard_dwelling_receptacle", "branch_circuit_120v",
+                 "single_phase_120_240v_service"]
+    },
+    "receptacle_outlet_is_125v_15a_or_20a": {
+      "any_of": ["is_standard_dwelling_receptacle", "is_125v_15a_or_20a_receptacle"]
+    },
+    "location_listed_in_210_8_a_1_through_a_11": {
+      "any_of": ["in_bathroom", "in_garage", "installed_outdoors",
+                 "in_crawl_space", "in_basement", "in_kitchen",
+                 "within_6ft_of_sink", "in_boathouse",
+                 "in_bathtub_or_shower_area", "in_laundry_area"]
+    },
+    "location_or_equipment_listed_in_210_8_a_through_f": {
+      "any_of": ["location_listed_in_210_8_a_1_through_a_11"]
+    }
+  },
+
+  "patterns": {
+    "_doc": "Regex-matched composite predicates. `match` is anchored at the start of the predicate; captures are referenced by group name in `decompose`.",
+    "rules": [
+      {
+        "_comment": "is_X_in_location_wet_or_damp → any_of[is_X_in_wet_location, is_X_in_damp_location]-style expansion via a token list.",
+        "name": "in_location_list",
+        "match": "^in_location_(?P<tokens>(?:wet|damp|dry)(?:_or_(?:wet|damp|dry))*)$",
+        "decompose": {
+          "any_of_capture": {
+            "group": "tokens",
+            "token_regex": "(wet|damp|dry)",
+            "template": "in_{}_location"
+          }
+        }
+      },
+      {
+        "_comment": "in_class_i_division_1_or_2 → any_of[in_class_i_division_1, in_class_i_division_2]",
+        "name": "class_i_division_list",
+        "match": "^in_class_i_division_(?P<tokens>[12](?:_or_[12])*)$",
+        "decompose": {
+          "any_of_capture": {
+            "group": "tokens",
+            "token_regex": "([12])",
+            "template": "in_class_i_division_{}"
+          }
+        }
+      }
+    ]
+  }
+}

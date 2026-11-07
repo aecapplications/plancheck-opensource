@@ -1,0 +1,23 @@
+{
+  "project": {
+    "name": "Single-family residence — electrical",
+    "type": "single_family_dwelling",
+    "scope": "new construction"
+  },
+  "_notes": "Residential branch-circuit / GFCI / receptacle sample, mirroring what live extraction emits from an architectural+electrical plan set (see webapp job facts) plus the standard-receptacle rating atomic read off a panel schedule. Exercises the Tier 1 packs (c07/c22/c24/c28/c31).",
+  "predicates": [
+    "is_dwelling_unit",
+    "is_one_or_two_family_dwelling",
+    "is_receptacle",
+    "is_standard_dwelling_receptacle",
+    "branch_circuit_120v",
+    "in_kitchen",
+    "in_bathroom",
+    "in_garage",
+    "is_outdoor_receptacle",
+    "has_receptacle_or_self_contained_device",
+    "has_switches",
+    "gfci_protected",
+    "requires_gfci_protection"
+  ]
+}

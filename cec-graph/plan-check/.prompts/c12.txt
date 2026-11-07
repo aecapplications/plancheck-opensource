@@ -1,0 +1,142 @@
+You are a plan-check rule extraction subagent. The graph community "General Installation Conditions" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/03_chapter_1_general.txt
+cec-graph/chapters/08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt
+cec-graph/chapters/13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati.txt
+cec-graph/chapters/16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca.txt
+cec-graph/chapters/17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt
+cec-graph/chapters/19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt
+cec-graph/chapters/21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt
+cec-graph/chapters/24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c12_general_installation_conditions_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_21  110.21
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_25  110.25
+  03_chapter_1_general_110_3                                    110.3
+  03_chapter_1_general_110_52                                   110.52
+  13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_240_4  240.4
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_250_130  250.130
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_300_17  300.17
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_300_21  300.21
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_300_22  300.22
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_300_7  300.7
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_8  300.8
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_372_12  372.12
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_374_12  374.12
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_392_22  392.22
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_430_109  430.109
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_430_72  430.72
+  13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_440_51  440.51
+  13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_450_3  450.3
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_501_10  501.10
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_503_10  503.10
+  16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_74  517.74
+  17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_530_12  530.12
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_12  600.12
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_12_a  600.12(A)
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_12_c  600.12(C)
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_12_c_1_2  600.12(C)(1)(2)
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_24  600.24
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_31  600.31
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_32  600.32
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_35  600.35
+  21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_600_6  600.6
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_600_7  600.7
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_610_31  610.31
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_610_32  610.32
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_23  620.23
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_52  620.52
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_53  620.53
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_54  620.54
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_55  620.55
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_91  620.91
+  21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_680_57  680.57
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_135  725.135
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_135_a  725.135(A)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_135_b  725.135(B)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_135_c  725.135(C)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_3  725.3
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_43  725.43
+  16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_725_49  725.49
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_725_51  725.51
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_727_1  727.1
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_727_4  727.4
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_727_6  727.6
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_124  760.124
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_130  760.130
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_133  760.133
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_135  760.135
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_135_a  760.135(A)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_135_b  760.135(B)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_135_c  760.135(C)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_136  760.136
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_145  760.145
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_3  760.3
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_46  760.46
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_49  760.49
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_51  760.51
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_53  760.53
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_53_a  760.53(A)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_53_a_1  760.53(A)(1)
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_53_b_1  760.53(B)(1)
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  (none)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_21>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "General Installation Conditions",
+  "community_id": 12,
+  "extracted_from_sections": ["03_chapter_1_general.txt", "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt", "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati.txt", "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca.txt", "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt", "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt", "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt", "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 17-69 rules. After writing the file, just confirm "wrote c12_general_installation_conditions_rules.json with N rules" and stop.

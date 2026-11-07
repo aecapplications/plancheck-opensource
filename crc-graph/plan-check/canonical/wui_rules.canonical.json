@@ -1,0 +1,1340 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "WUI Fire Compliance & PV Fire Class",
+  "community_id": 4,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_c.md",
+    "chapter_3_building_planning_d.md",
+    "chapter_9_roof_assemblies.md",
+    "chapter_44_referenced_standards.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r316_3_foam_plastic_surface_burning",
+      "cite": "R316.3",
+      "section_node": "r316_3",
+      "title": "Foam plastic surface burning characteristics",
+      "intent": "Limit flame spread and smoke development of foam plastic used in building construction so that it does not contribute to rapid interior fire growth.",
+      "applies_when": [
+        {
+          "predicate": "uses_foam_plastic_in_building_construction",
+          "source_loc": "R316.3"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "approved_under_section_r316_5",
+              "source_loc": "R316.3"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foam_plastic_surface_burning_characteristics",
+        "flame_spread_index_max": 75,
+        "smoke_developed_index_max": 450,
+        "tested_per": [
+          "std_astm_e84"
+        ],
+        "alternate_tested_per": [
+          "UL 723"
+        ],
+        "thickness_rules": {
+          "<=4_in": "test at maximum thickness and density intended for use",
+          ">4_in": "test at 4-inch thickness; end use approved per R316.6"
+        },
+        "loose_fill_treatment": "tested as board stock"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_spray_foam_plastic_insulation",
+              "source_loc": "R316.3 Exception 1"
+            },
+            {
+              "predicate": "thickness_>_4_in",
+              "source_loc": "R316.3 Exception 1"
+            }
+          ],
+          "effect": "alternative_thresholds: flame_spread_index_max=25, smoke_developed_index_max=450 at 4-inch test thickness; must be separated from interior by 1/2-inch gypsum or NFPA 275 tested material"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_polystyrene_foam_board",
+              "source_loc": "R316.3 Exception 2"
+            },
+            {
+              "predicate": "thickness_<=2_in",
+              "source_loc": "R316.3 Exception 2"
+            },
+            {
+              "predicate": "installed_below_concrete_slab_on_grade_>=3_5_in",
+              "source_loc": "R316.3 Exception 2"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Foam plastic product spec sheet listing flame spread index and smoke-developed index values",
+        "ASTM E84 or UL 723 test report at intended thickness and density",
+        "Manufacturer's listing showing thickness, density, and end-use configuration",
+        "If thicker than 4 in: R316.6 specific approval documentation"
+      ],
+      "depends_on": [
+        "std_astm_e84"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_4_2_pv_fire_classification",
+      "cite": "R324.4.2",
+      "section_node": "r324_4_2",
+      "title": "Rooftop PV fire classification matches roof assembly",
+      "intent": "Ensure rooftop-mounted photovoltaic systems do not degrade the fire classification of the roof they are installed on.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_rooftop_mounted",
+          "source_loc": "R324.4.2"
+        },
+        {
+          "predicate": "installed_on_or_above_roof_covering",
+          "source_loc": "R324.4"
+        }
+      ],
+      "requires": {
+        "type": "pv_fire_classification",
+        "must_match": "fire_classification_of_roof_assembly_per_r902",
+        "tested_per": [
+          "std_ul_2703"
+        ],
+        "depends_on_section": "section_r902"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV module/system listing showing UL 2703 fire classification (Class A, B, or C)",
+        "Roof assembly fire classification (Class A in FHSZ per R902.1.1)",
+        "Cross-check showing PV class is at least equal to roof class",
+        "Manufacturer installation instructions and product listing"
+      ],
+      "depends_on": [
+        "std_ul_2703",
+        "r902_1_1",
+        "section_r902"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_4_3_pv_roof_penetrations",
+      "cite": "R324.4.3",
+      "section_node": "r324_4_3",
+      "title": "Rooftop PV roof penetrations flashed and sealed",
+      "intent": "Prevent water intrusion and maintain roof assembly integrity at PV mounting penetrations.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_rooftop_mounted",
+          "source_loc": "R324.4.3"
+        },
+        {
+          "predicate": "creates_roof_penetration",
+          "source_loc": "R324.4.3"
+        }
+      ],
+      "requires": {
+        "type": "roof_penetration_flashing_and_sealing",
+        "must_comply_with": "Chapter 9"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mounting detail drawings showing flashing at every roof penetration",
+        "Manufacturer-approved flashing/sealant product cut sheets",
+        "Inspection sign-off for roof penetration weatherproofing"
+      ],
+      "depends_on": [
+        "section_r902"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_scope_wui_application",
+      "cite": "R337.1.1",
+      "section_node": "section_r337",
+      "title": "WUI exterior wildfire exposure scope (parent trigger)",
+      "intent": "Scope rule: triggers application of the entire R337 ignition-resistance rule subtree for new buildings located in WUI fire areas or Fire Hazard Severity Zones.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "in_wildland_urban_interface_fire_area",
+              "source_loc": "R337.1.1"
+            },
+            {
+              "predicate": "in_fire_hazard_severity_zone",
+              "source_loc": "R337.1.2"
+            }
+          ]
+        },
+        {
+          "predicate": "is_new_building",
+          "source_loc": "R337.1.3"
+        },
+        {
+          "predicate": "permit_application_date_>=_2008_07_01",
+          "source_loc": "R337.1.3.1"
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "activates_subtree": [
+          "r337_4",
+          "r337_5",
+          "r337_6",
+          "r337_7",
+          "r337_8",
+          "r337_9",
+          "r337_10"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_group_u_accessory_building",
+              "source_loc": "R337.1.3 Exception 1"
+            },
+            {
+              "predicate": "distance_from_applicable_building_>=50_ft",
+              "source_loc": "R337.1.3 Exception 1"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_group_u_agricultural_building",
+              "source_loc": "R337.1.3 Exception 2"
+            },
+            {
+              "predicate": "distance_from_applicable_building_>=50_ft",
+              "source_loc": "R337.1.3 Exception 2"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "is_addition_or_remodel_of_pre_2008_07_01_building",
+              "source_loc": "R337.1.3 Exception 5"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "FHSZ / WUI determination for project site (CAL FIRE map, jurisdictional declaration)",
+        "Building permit application date",
+        "Site plan showing distances between accessory and applicable buildings",
+        "Vegetation management compliance per California Fire Code 4906/4907 (R337.1.5)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_4_ignition_resistant_material",
+      "cite": "R337.4",
+      "section_node": "r337_4",
+      "title": "Ignition-resistant material requirements",
+      "intent": "Ensure exterior building materials used in WUI areas demonstrate ignition resistance through standardized fire testing or qualify as a recognized alternative (noncombustible, FRTW, FRT shingles).",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "material_required_to_be_ignition_resistant_per_r337",
+          "source_loc": "R337.4.1"
+        }
+      ],
+      "requires": {
+        "type": "ignition_resistant_material",
+        "any_of": [
+          {
+            "method": "tested_to_astm_e84_or_ul_723_extended",
+            "flame_spread_index_max": 25,
+            "extended_test_minutes": 30,
+            "extended_flame_front_progression_max_ft": 10.5,
+            "tested_per": [
+              "std_astm_e84"
+            ]
+          },
+          {
+            "method": "noncombustible_per_r202"
+          },
+          {
+            "method": "fire_retardant_treated_wood_per_cbc_2303_2"
+          },
+          {
+            "method": "frt_wood_shingles_shakes_class_b_per_cbc_1505_6"
+          }
+        ],
+        "wood_structural_panel_test_condition": "1/8-inch longitudinal gap"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Product listing showing ASTM E84 / UL 723 extended (30-min) flame spread index <= 25",
+        "Test report showing flame front did not progress > 10.5 ft beyond burner centerline",
+        "If FRTW: ASTM D2898 weathering test report and CBC 2303.2 compliance",
+        "State Fire Marshal listing or approved-agency evaluation report",
+        "Identification label on product (R337.3.4)"
+      ],
+      "depends_on": [
+        "std_astm_e84"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_5_1_wui_roofing_general",
+      "cite": "R337.5.1",
+      "section_node": "r337_5_1",
+      "title": "WUI roofing general \u2014 Class A in FHSZ",
+      "intent": "Require Class A roof assemblies in WUI Fire Hazard Severity Zones to resist burning ember and direct flame exposure on the roof.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "in_fire_hazard_severity_zone",
+          "source_loc": "R337.5.1"
+        }
+      ],
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "A",
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ],
+        "must_also_comply_with": [
+          "section_r902"
+        ],
+        "installation": "per listing and manufacturer's instructions"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+        "FHSZ determination for project address",
+        "Manufacturer installation instructions matched to permit drawings",
+        "Roofing assembly approval documentation"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790",
+        "section_r902",
+        "r337_5"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_5_2_wui_roof_coverings_airspace",
+      "cite": "R337.5.2",
+      "section_node": "r337_5_2",
+      "title": "WUI roof coverings \u2014 cap sheet under profiled roofing on combustible deck",
+      "intent": "Prevent ember intrusion under profiled (airspace) roof coverings on combustible decks by requiring an underlayment cap sheet, bird stops, and mudded hip/ridge caps.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "roof_profile_has_airspace_under_covering",
+          "source_loc": "R337.5.2"
+        },
+        {
+          "predicate": "installed_over_combustible_deck",
+          "source_loc": "R337.5.2"
+        }
+      ],
+      "requires": {
+        "type": "roof_underlayment_and_eave_treatment",
+        "cap_sheet_min_weight_lb_per_square": 72,
+        "cap_sheet_standard": "std_astm_d3909",
+        "bird_stops_at_eaves_when_profile_fits": true,
+        "hip_and_ridge_caps_mudded_in": true,
+        "alternate_method": {
+          "use_class_a_fire_rated_underlayment_tested_per": [
+            "std_astm_e108"
+          ]
+        }
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "noncombustible_separation_>=1_in_mineral_wool_or_equivalent",
+              "source_loc": "R337.5.2 Exception"
+            }
+          ],
+          "effect": "cap_sheet_not_required"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "sheathing_is_exterior_fire_retardant_treated_wood",
+              "source_loc": "R337.5.2"
+            }
+          ],
+          "effect": "underlayment_class_a_classification_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Roofing detail/section showing 72 lb cap sheet to ASTM D3909, or noncombustible separator",
+        "Bird stop product cut sheet and installation note at eaves",
+        "Spec note that hip and ridge caps are mudded in",
+        "Class A underlayment listing if alternate method used"
+      ],
+      "depends_on": [
+        "std_astm_d3909",
+        "std_astm_e108"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_5_3_wui_roof_valleys",
+      "cite": "R337.5.3",
+      "section_node": "r337_5_3",
+      "title": "WUI roof valley flashing",
+      "intent": "Provide a noncombustible, ember-resistant flashing assembly at valleys where debris and embers can accumulate.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "valley_flashing_installed",
+          "source_loc": "R337.5.3"
+        }
+      ],
+      "requires": {
+        "type": "roof_valley_flashing",
+        "min_thickness_in": 0.019,
+        "gauge": "No. 26 galvanized sheet",
+        "material": "corrosion_resistant_metal",
+        "underlayment_min_weight_lb_per_square": 72,
+        "underlayment_standard": "std_astm_d3909",
+        "min_width_in": 36,
+        "extent": "full length of the valley"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan and valley detail showing 36-inch wide flashing full length of valley",
+        "Material spec for No. 26 gauge (0.019 in) galvanized corrosion-resistant metal flashing",
+        "ASTM D3909 cap sheet underlayment cut sheet"
+      ],
+      "depends_on": [
+        "std_astm_d3909"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_7_scope_exterior_covering",
+      "cite": "R337.7",
+      "section_node": "r337_7",
+      "title": "WUI exterior covering scope (parent)",
+      "intent": "Scope rule: triggers exterior covering compliance for wall coverings/assemblies, eaves, soffits, porch ceilings, floor projections, and underfloor areas in WUI areas.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        }
+      ],
+      "requires": {
+        "type": "scope_trigger",
+        "covered_elements": [
+          "exterior_wall_coverings",
+          "exterior_wall_assemblies",
+          "exposed_underside_of_roof_eave_overhangs",
+          "exposed_underside_of_roof_eave_soffits",
+          "exposed_underside_of_exterior_porch_ceilings",
+          "exposed_underside_of_floor_projections",
+          "exterior_underfloor_areas"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_architectural_trim_or_fascia_or_gutter",
+              "source_loc": "R337.7.2 Exception 1"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_top_cornice_projection_or_similar",
+              "source_loc": "R337.7.2 Exception 2"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "is_deck_walking_surface",
+              "source_loc": "R337.7.2 Exception 3"
+            }
+          ],
+          "effect": "covered_under_r337_9_only"
+        }
+      ],
+      "evidence_required": [
+        "Building elevations identifying exterior covering material at each face",
+        "Schedule of exterior assemblies cross-referenced to R337.7.3 / R337.7.4 compliance"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_7_3_exterior_wall_coverings",
+      "cite": "R337.7.3",
+      "section_node": "r337_7_3",
+      "title": "WUI exterior wall coverings",
+      "intent": "Require exterior wall coverings in WUI areas to be noncombustible, ignition-resistant, or fire-retardant-treated wood so they resist short-term direct flame and ember exposure.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "applies_to_exterior_wall_covering",
+          "source_loc": "R337.7.3"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "wall_assembly_complies_with_r337_7_4",
+              "source_loc": "R337.7.3"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "exterior_wall_covering_material",
+        "any_of": [
+          {
+            "method": "noncombustible_material"
+          },
+          {
+            "method": "ignition_resistant_material_per_r337_4_2",
+            "must_be_labeled_for_exterior_use": true
+          },
+          {
+            "method": "fire_retardant_treated_wood_per_cbc_2303_2",
+            "must_be_labeled_for_exterior_use": true
+          }
+        ],
+        "extent": "from top of foundation to roof; terminate at 2-inch nominal solid wood blocking between rafters at all roof overhangs, or at the enclosure for enclosed eaves"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall covering product listing (noncombustible, ignition-resistant per R337.4.2, or FRTW)",
+        "Exterior-use labeling on product",
+        "Wall section showing covering extent from foundation to roof with proper termination",
+        "If FRTW: CBC 2303.2 compliance documentation"
+      ],
+      "depends_on": [
+        "r337_4",
+        "std_astm_e84"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_7_4_exterior_wall_assemblies",
+      "cite": "R337.7.4",
+      "section_node": "r337_7_4",
+      "title": "WUI exterior wall assemblies",
+      "intent": "Permit alternative compliance via fully tested exterior wall assemblies (tested for direct flame penetration or 1-hour fire resistance) instead of compliant individual coverings.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "applies_to_exterior_wall_assembly",
+          "source_loc": "R337.7.4"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "wall_covering_complies_with_r337_7_3",
+              "source_loc": "R337.7.4"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "exterior_wall_assembly",
+        "any_of": [
+          {
+            "method": "sawn_or_glulam_wood_min_4_in_smallest_dim_splined_or_tongue_groove"
+          },
+          {
+            "method": "log_wall_construction"
+          },
+          {
+            "method": "tested_per_astm_e2707_10_min_direct_flame",
+            "tested_per": [
+              "std_astm_e2707"
+            ],
+            "conditions": [
+              "no flame penetration",
+              "no glowing combustion at end of 70-minute test"
+            ]
+          },
+          {
+            "method": "tested_per_sfm_12_7a_1_10_min_direct_flame",
+            "tested_per": [
+              "std_sfm_12_7a_1"
+            ]
+          },
+          {
+            "method": "1_hour_fire_resistance_rated_exterior_per_astm_e119_or_ul_263"
+          },
+          {
+            "method": "5_8_in_type_x_gypsum_sheathing_behind_exterior_covering"
+          },
+          {
+            "method": "ga_fire_resistance_design_manual_1hr_assembly_per_astm_e119_or_ul_263"
+          }
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Tested wall assembly listing (ASTM E2707, SFM 12-7A-1, ASTM E119, or UL 263)",
+        "Wall section drawing matching the listed assembly",
+        "If gypsum option: 5/8-in Type X cut sheet and installation note",
+        "Conditions of acceptance per R337.7.4.1 verified in test report"
+      ],
+      "depends_on": [
+        "std_astm_e2707",
+        "std_sfm_12_7a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_8_exterior_glazing",
+      "cite": "R337.8",
+      "section_node": "r337_8",
+      "title": "WUI exterior windows, skylights, and exterior glazed doors",
+      "intent": "Require exterior glazing to resist breakage from radiant heat and direct flame so that fire and embers do not enter through window/skylight/door openings.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_exterior_window",
+              "source_loc": "R337.8.2"
+            },
+            {
+              "predicate": "is_exterior_glazed_door",
+              "source_loc": "R337.8.2"
+            },
+            {
+              "predicate": "is_skylight",
+              "source_loc": "R337.8.2"
+            },
+            {
+              "predicate": "is_glazed_opening_in_exterior_door",
+              "source_loc": "R337.8.2"
+            },
+            {
+              "predicate": "is_glazed_opening_in_exterior_garage_door",
+              "source_loc": "R337.8.2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "exterior_glazing_assembly",
+        "any_of": [
+          {
+            "method": "multipane_glazing_with_min_one_tempered_pane_per_r308"
+          },
+          {
+            "method": "glass_block_units"
+          },
+          {
+            "method": "fire_resistance_rated_>=20_min_per_nfpa_257",
+            "tested_per": [
+              "NFPA 257"
+            ]
+          },
+          {
+            "method": "tested_per_sfm_12_7a_2",
+            "tested_per": [
+              "std_sfm_12_7a_2"
+            ]
+          }
+        ],
+        "operable_skylights_must_have_noncombustible_mesh_max_opening_in": 0.125,
+        "exterior_doors_any_of": [
+          "noncombustible cladding",
+          "ignition-resistant cladding",
+          "solid core wood (stiles/rails >=1-3/8 in, panels >=1-1/4 in)",
+          "20-min fire-resistance per NFPA 252",
+          "cladding tested per ASTM E2707 to R337.7.3.1",
+          "cladding tested per SFM 12-7A-1"
+        ],
+        "garage_door_perimeter_gap_max_in": 0.125
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Window/skylight/door schedule showing complying option (tempered, glass block, NFPA 257, or SFM 12-7A-2)",
+        "Tempered glass certification (R308) or fire-resistance test report",
+        "Exterior door spec showing solid core dimensions or fire/test rating",
+        "Garage door weatherstrip product cut sheet showing ASTM D638 / G155 / UL 94 V-2 compliance",
+        "Skylight mesh detail with 1/8-in noncombustible mesh"
+      ],
+      "depends_on": [
+        "std_sfm_12_7a_2",
+        "std_sfm_12_7a_1",
+        "std_astm_e2707"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_9_decking",
+      "cite": "R337.9",
+      "section_node": "r337_9",
+      "title": "WUI decking walking surface within 10 ft of building",
+      "intent": "Prevent decks/porches/balconies/stairs near a building from igniting under burning brand exposure and contributing to building ignition.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "is_deck_porch_balcony_or_stair_walking_surface",
+          "source_loc": "R337.9.1"
+        },
+        {
+          "predicate": "any_portion_within_10_ft_of_building",
+          "source_loc": "R337.9.2"
+        }
+      ],
+      "requires": {
+        "type": "deck_walking_surface",
+        "any_of": [
+          {
+            "method": "tested_per_astm_e2632_and_astm_e2726_meeting_r337_9_4",
+            "tested_per": [
+              "std_astm_e2632",
+              "std_astm_e2726"
+            ],
+            "peak_heat_release_max_kw_per_ft2": 25
+          },
+          {
+            "method": "ignition_resistant_material_per_r337_9_4"
+          },
+          {
+            "method": "tested_per_sfm_12_7a_4_and_r337_4_3",
+            "tested_per": [
+              "std_sfm_12_7a_4"
+            ]
+          },
+          {
+            "method": "exterior_fire_retardant_treated_wood"
+          },
+          {
+            "method": "noncombustible_material"
+          },
+          {
+            "method": "tested_per_sfm_12_7a_4a_with_noncombustible_or_ir_walls"
+          },
+          {
+            "method": "tested_per_astm_e2632_with_noncombustible_or_ir_walls"
+          }
+        ],
+        "flashing_required_at_deck_to_wall": "min 6-inch (150 mm) metal flashing applied vertically"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "decking_meets_astm_e84_class_b",
+              "source_loc": "R337.9.3 Item 6 Exception"
+            }
+          ],
+          "effect": "wall_material_may_be_any_complying_chapter_material"
+        }
+      ],
+      "evidence_required": [
+        "Decking product test report (ASTM E2632 + ASTM E2726, SFM 12-7A-4, or alternates)",
+        "Conditions of acceptance verification (peak HRR <= 25 kW/ft^2; no sustained combustion)",
+        "Deck plan showing surfaces within 10 ft of building",
+        "Detail showing 6-inch vertical metal flashing at deck-to-wall intersections"
+      ],
+      "depends_on": [
+        "std_astm_e2632",
+        "std_astm_e2726",
+        "std_sfm_12_7a_4",
+        "std_astm_e84"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_10_accessory_buildings",
+      "cite": "R337.10",
+      "section_node": "r337_10",
+      "title": "WUI accessory buildings and miscellaneous structures",
+      "intent": "Apply ignition-resistance requirements to accessory buildings and miscellaneous permitted structures that pose a wildfire ignition exposure to applicable buildings.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R337.1.1"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_group_u_accessory_building",
+              "source_loc": "R337.10.1"
+            },
+            {
+              "predicate": "is_miscellaneous_permitted_structure",
+              "source_loc": "R337.10.2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "accessory_structure_construction",
+        "by_distance_from_applicable_building": [
+          {
+            "when": "distance_<_3_ft_or_attached",
+            "must_be": "noncombustible_or_ignition_resistant_per_r337_4_2",
+            "section": "R337.10.3.1"
+          },
+          {
+            "when": "size_>120_sf_AND_distance_>=3_ft_AND_<50_ft",
+            "must_be": "noncombustible_or_ignition_resistant_per_r337_4_2",
+            "section": "R337.10.3.2"
+          },
+          {
+            "when": "size_<=120_sf_AND_distance_>=3_ft_AND_<50_ft_AND_required_by_enforcing_agency",
+            "must_be": "noncombustible_or_ignition_resistant_per_r337_4_2",
+            "section": "R337.10.3.3"
+          },
+          {
+            "when": "is_misc_structure_AND_distance_>=3_ft_AND_<50_ft_AND_required_by_enforcing_agency",
+            "must_be": "noncombustible_or_ignition_resistant_per_r337_4_3",
+            "section": "R337.10.3.4"
+          },
+          {
+            "when": "distance_>=50_ft",
+            "no_requirement": true
+          }
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_deck",
+              "source_loc": "R337.10.2 Exception 1"
+            }
+          ],
+          "effect": "covered_under_r337_9"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_awning_or_canopy",
+              "source_loc": "R337.10.2 Exception 2"
+            }
+          ],
+          "effect": "covered_under_cbc_3105"
+        }
+      ],
+      "evidence_required": [
+        "Site plan with distance dimensions from accessory structure to applicable building",
+        "Floor area of accessory building",
+        "Material spec showing noncombustible or ignition-resistant compliance per R337.4.2/R337.4.3",
+        "Enforcing agency requirement letter (where applicable for <=120 sf or misc structures)"
+      ],
+      "depends_on": [
+        "r337_4"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r337_10_4_accessory_roof_construction",
+      "cite": "R337.10.4",
+      "section_node": "r337_10_4",
+      "title": "WUI accessory building roof \u2014 Class A in FHSZ",
+      "intent": "Extend Class A roof requirement to accessory buildings in WUI Fire Hazard Severity Zones to prevent ember-driven roof ignition.",
+      "applies_when": [
+        {
+          "predicate": "in_fire_hazard_severity_zone",
+          "source_loc": "R337.10.4"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_group_u_accessory_building_required_to_be_noncombustible_or_ir",
+              "source_loc": "R337.10.4"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "A",
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ],
+        "must_also_comply_with": [
+          "section_r337",
+          "section_r902"
+        ],
+        "installation": "per listing and manufacturer's instructions"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof covering listing (ASTM E108 or UL 790 Class A)",
+        "FHSZ determination",
+        "Manufacturer installation instructions",
+        "Site plan tying accessory building to FHSZ designation"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790",
+        "section_r902",
+        "section_r337"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_1_class_abc_roofing",
+      "cite": "R902.1",
+      "section_node": "section_r902",
+      "title": "Roof covering materials \u2014 Class A/B/C tested per ASTM E108 or UL 790",
+      "intent": "Establish baseline that all listed Class A/B/C roof coverings be qualified by accepted fire test methods and that minimum class apply where set forth or near lot lines.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "designated_by_section_r902_subsections",
+              "source_loc": "R902.1"
+            },
+            {
+              "predicate": "roof_edge_distance_from_lot_line_<_3_ft",
+              "source_loc": "R902.1"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "C",
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "covering_is_brick_masonry_or_exposed_concrete_deck",
+                  "source_loc": "R902.1 Exception 1"
+                },
+                {
+                  "predicate": "covering_is_metal_or_clay_or_concrete_or_slate_on_noncombustible_deck",
+                  "source_loc": "R902.1 Exception 2"
+                },
+                {
+                  "predicate": "covering_is_>=16_oz_per_sf_copper_on_combustible_deck",
+                  "source_loc": "R902.1 Exception 3"
+                },
+                {
+                  "predicate": "covering_is_slate_over_underlayment_on_combustible_deck",
+                  "source_loc": "R902.1 Exception 4"
+                }
+              ]
+            }
+          ],
+          "effect": "deemed_class_a"
+        }
+      ],
+      "evidence_required": [
+        "Roof covering listing showing ASTM E108 or UL 790 test class",
+        "Site plan/lot dimensions showing distance from roof edge to lot line",
+        "If using deemed-Class A: material spec for masonry/metal/tile/slate exception"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_1_1_class_a_in_fhsz",
+      "cite": "R902.1.1",
+      "section_node": "r902_1_1",
+      "title": "Class A roof required in Fire Hazard Severity Zones",
+      "intent": "Require Class A roof coverings on all new structures and substantial roof replacements within Fire Hazard Severity Zones to defend against ember and direct flame exposure.",
+      "applies_when": [
+        {
+          "predicate": "in_fire_hazard_severity_zone",
+          "source_loc": "R902.1.1"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_new_structure",
+              "source_loc": "R902.1.1"
+            },
+            {
+              "predicate": "roof_replacement_>50%_of_total_area_in_one_year",
+              "source_loc": "R902.1.1"
+            },
+            {
+              "predicate": "is_alteration_repair_or_replacement_of_existing_roof_covering",
+              "source_loc": "R902.1.1"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "A",
+        "fire_retardant": true,
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "jurisdiction_adopted_sfm_model_ordinance_gov_code_51189",
+              "source_loc": "R902.1.1 Exception"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "FHSZ determination for project address (CAL FIRE map screenshot or jurisdiction declaration)",
+        "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+        "For replacements: roof area calc showing % replaced in past 12 months",
+        "Confirmation jurisdiction has not adopted SFM model ordinance per Gov Code 51189"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_1_2_class_c_in_other_areas",
+      "cite": "R902.1.2",
+      "section_node": "r902_1_2",
+      "title": "Class C roof required in all other areas",
+      "intent": "Set baseline Class C fire-retardant roof covering requirement for new structures and substantial replacements outside FHSZ.",
+      "applies_when": [
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "in_fire_hazard_severity_zone",
+              "source_loc": "R902.1.2"
+            }
+          ]
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_new_structure",
+              "source_loc": "R902.1.2"
+            },
+            {
+              "predicate": "roof_replacement_>50%_of_total_area_in_one_year",
+              "source_loc": "R902.1.2"
+            },
+            {
+              "predicate": "is_alteration_repair_or_replacement_of_existing_roof_covering",
+              "source_loc": "R902.1.2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "C",
+        "fire_retardant": true,
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "FHSZ determination showing project is NOT in FHSZ",
+        "Roof covering listing showing ASTM E108 or UL 790 Class C (or higher) result",
+        "For replacements: roof area calc showing % replaced in past 12 months"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_1_3_wui_additional_compliance",
+      "cite": "R902.1.3",
+      "section_node": "section_r902_1_3",
+      "title": "WUI roofing additional compliance with R337.5",
+      "intent": "Layer WUI-specific roofing requirements (R337.5) on top of base roof fire-classification rules for buildings located in WUI fire areas.",
+      "applies_when": [
+        {
+          "predicate": "in_wildland_urban_interface_fire_area",
+          "source_loc": "R902.1.3"
+        }
+      ],
+      "requires": {
+        "type": "additional_section_compliance",
+        "must_also_comply_with": [
+          "r337_5",
+          "r337_5_1",
+          "r337_5_2",
+          "r337_5_3"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "WUI Fire Area determination for project address",
+        "Cross-reference to R337.5 compliance documentation (Class A roof, cap sheet, valley flashing)"
+      ],
+      "depends_on": [
+        "r337_5",
+        "r337_5_1",
+        "r337_5_2",
+        "r337_5_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_2_fire_retardant_treated_wood_shakes_shingles",
+      "cite": "R902.2",
+      "section_node": "r902_2",
+      "title": "Fire-retardant-treated wood shakes/shingles",
+      "intent": "Permit FRT wood shakes/shingles only when full-cell pressure-treated, qualified by UBC 15-2 for the required class, weather-tested, and labeled by an accredited agency.",
+      "applies_when": [
+        {
+          "predicate": "uses_wood_shakes_or_shingles_as_roof_covering",
+          "source_loc": "R902.2"
+        },
+        {
+          "predicate": "claims_fire_retardant_treatment_for_class_rating",
+          "source_loc": "R902.2"
+        }
+      ],
+      "requires": {
+        "type": "frt_wood_shakes_or_shingles",
+        "base_standards": [
+          "UBC 15-3",
+          "UBC 15-4"
+        ],
+        "treatment_method": "full-cell vacuum-pressure with fire-retardant chemicals",
+        "qualified_per": [
+          "std_ubc_15_2"
+        ],
+        "for_classes": [
+          "A",
+          "B",
+          "C"
+        ],
+        "weathering_compliance": "ICC-ES EG107 and Health and Safety Code Section 13132.7(j)",
+        "natural_weathering_test_min_years_passed": 5,
+        "labeling": "ICBO accredited quality control agency label on each bundle, identifying classification and EG107/H&SC 13132.7(j) compliance",
+        "approval_listing": "State Fire Marshal listing"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "State Fire Marshal listing for FRT wood shakes/shingles",
+        "ICC-ES EG107 evaluation report",
+        "Bundle labels showing UBC 15-2 qualification class and ICC-ES EG107 / 13132.7(j) compliance",
+        "Documentation of natural weathering test (>=5 years of 10-year test passed)",
+        "UBC 15-3 or 15-4 compliance certificate"
+      ],
+      "depends_on": [
+        "std_ubc_15_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_3_bipv_fire_classification",
+      "cite": "R902.3",
+      "section_node": "r902_3",
+      "title": "BIPV fire classification \u2014 UL 7103",
+      "intent": "Ensure building-integrated PV products serving as roof covering carry an equivalent UL 7103 fire classification matching the base roof requirements.",
+      "applies_when": [
+        {
+          "predicate": "is_bipv_system",
+          "source_loc": "R902.3"
+        },
+        {
+          "predicate": "installed_as_roof_covering",
+          "source_loc": "R902.3"
+        }
+      ],
+      "requires": {
+        "type": "bipv_fire_classification",
+        "tested_listed_labeled_per": [
+          "std_ul_7103"
+        ],
+        "must_match_class_per_sections": [
+          "r902_1_1",
+          "r902_1_2",
+          "section_r902_1_3"
+        ],
+        "lot_line_proximity_rule": "Class A, B, or C BIPV products shall be installed where the edge of the roof is less than 3 ft (914 mm) from a lot line"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "BIPV product UL 7103 listing showing fire classification",
+        "Site plan with lot line distance to roof edge",
+        "Cross-check that BIPV class meets R902.1.1 (FHSZ) or R902.1.2 baseline"
+      ],
+      "depends_on": [
+        "std_ul_7103",
+        "r902_1_1",
+        "r902_1_2",
+        "section_r902_1_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_4_rooftop_pv_ul_2703",
+      "cite": "R902.4",
+      "section_node": "r902_4",
+      "title": "Rooftop-mounted PV panel systems \u2014 UL 2703 fire classification",
+      "intent": "Require rooftop-mounted PV panel systems to be tested/listed/identified for a fire classification (UL 2703) and installed per their listing where the law or lot-line proximity requires it.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_rooftop_mounted",
+          "source_loc": "R902.4"
+        },
+        {
+          "predicate": "installed_on_or_above_roof_covering",
+          "source_loc": "R902.4"
+        }
+      ],
+      "requires": {
+        "type": "rooftop_pv_fire_classification",
+        "tested_listed_identified_per": [
+          "std_ul_2703"
+        ],
+        "installed_per": "manufacturer instructions and listing",
+        "class_required_when": "jurisdictions designated by law OR roof edge < 3 ft (914 mm) from a lot line",
+        "minimum_class": "C"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV system UL 2703 listing showing fire classification",
+        "Manufacturer's installation instructions and listing details",
+        "Site plan showing lot line distance to roof edge",
+        "Local jurisdiction PV-class requirement reference (if applicable)"
+      ],
+      "depends_on": [
+        "std_ul_2703"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

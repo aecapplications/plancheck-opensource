@@ -1,0 +1,81 @@
+You are a plan-check rule extraction subagent. The graph community "Alternative Wall Systems" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/appendix_ah_patio_covers.md
+crc-graph/chapters/appendix_ar_light_straw_clay_construction.md
+crc-graph/chapters/appendix_as_strawbale_construction.md
+crc-graph/chapters/appendix_au_cob_construction_monolithic_adobe.md
+crc-graph/chapters/appendix_aw_3d_printed_building_construction.md
+
+Output path: crc-graph/plan-check/c10_alternative_wall_systems_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ah_105_structural                         AH105 Structural Provisions
+  ar_103_construction                       AR103 Nonbearing Light Straw-Clay Construction
+  as_103_bales                              AS103 Bales
+  au_103_materials_mixing                   AU103 Materials, Mixing and Installation
+  au_105_cob_walls                          AU105 Cob Walls General
+  appendix_ar_light_straw_clay              Appendix AR Light Straw-Clay Construction
+  appendix_as_strawbale                     Appendix AS Strawbale Construction
+  appendix_au_cob_construction              Appendix AU Cob Construction (Monolithic Adobe)
+  appendix_aw_3d_printed                    Appendix AW 3D-Printed Building Construction
+  r104_11_alternative_methods               R104.11 Alternative Materials/Methods
+  r301_design_loads                         R301 Design Criteria
+  r506_concrete_floors                      R506 Concrete Slab on Ground Floors
+  r602_wood_wall_framing                    R602 Wood Wall Framing
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  (none)
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_astm_e2392                            ASTM E2392 Earthen Wall Building Systems
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Alternative Wall Systems",
+  "community_id": 10,
+  "extracted_from_sections": ["appendix_ah_patio_covers.md", "appendix_ar_light_straw_clay_construction.md", "appendix_as_strawbale_construction.md", "appendix_au_cob_construction_monolithic_adobe.md", "appendix_aw_3d_printed_building_construction.md"],
+  "rules": [ ... ]
+}
+
+Aim for 6-13 rules. After writing the file, just confirm "wrote c10_alternative_wall_systems_rules.json with N rules" and stop.

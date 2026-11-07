@@ -1,0 +1,102 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 19 Concrete" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch14_chapter_14_exterior_walls.md
+cbc-graph/chapters/ch16_chapter_16_structural_design.md
+cbc-graph/chapters/ch17a_chapter_17a_special_inspections_and_tests.md
+cbc-graph/chapters/ch18_chapter_18_soils_and_foundations.md
+cbc-graph/chapters/ch19_chapter_19_concrete.md
+cbc-graph/chapters/ch35_chapter_35_referenced_standards.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c17_chapter_19_concrete_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ch14_sec_1404_installation_of_wall_coverings                  Section 1404 Installation of Wall Coverings
+  ch14_sec_1404_10_adhered_masonry_veneer                       Section 1404.10 Adhered Masonry Veneer
+  ch14_sec_1404_14_vinyl_siding                                 Section 1404.14 Vinyl Siding
+  ch14_sec_1404_16_fiber_cement_siding                          Section 1404.16 Fiber-Cement Siding
+  ch14_sec_1404_3_vapor_retarders                               Section 1404.3 Vapor Retarders
+  ch14_sec_1404_6_anchored_masonry_veneer                       Section 1404.6 Anchored Masonry Veneer
+  ch14_sec_1410_anchored_adhered_veneer                         Section 1410 Additional Requirements for Anchored and Adhere
+  sec_1604_3_4                                                  1604.3.4 Masonry Deflection
+  sec_1705a_4                                                   Section 1705A.4 Masonry Construction Special Inspections (Ch
+  sec_1807_1_6_3                                                1807.1.6.3 Masonry Foundation Walls
+  ch19_sec_1901_general                                         Section 1901 General
+  ch19_sec_1901_3_anchoring_to_concrete                         Section 1901.3 Anchoring to Concrete
+  ch19_sec_1901_5_construction_documents                        Section 1901.5 Construction Documents
+  ch19_sec_1902_coordination_terminology                        Section 1902 Coordination of Terminology
+  ch19_sec_1903_specifications_tests_materials                  Section 1903 Specifications for Tests and Materials
+  ch19_sec_1903_3_glass_fiber_reinforced_concrete               Section 1903.3 Glass Fiber-Reinforced Concrete (GFRC)
+  ch19_sec_1904_durability_requirements                         Section 1904 Durability Requirements
+  ch19_sec_1906_footings_light_frame                            Section 1906 Footings for Light-Frame Construction
+  ch19_sec_1907_minimum_slab_provisions                         Section 1907 Minimum Slab Provisions
+  ch19_sec_1908_shotcrete                                       Section 1908 Shotcrete
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  ch14_table_1404_2_minimum_thickness_weather_coverings         Table 1404.2 Minimum Thickness of Weather Coverings
+  ch19_chapter_19_concrete                                      CBC Chapter 19 Concrete
+  ch19_detailed_plain_concrete_structural_wall                  Detailed Plain Concrete Structural Wall
+  ch19_special_structural_wall                                  Special Structural Wall
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  ch19_aci_318                                                  ACI 318 Building Code Requirements for Structural Concrete
+  ch19_sec_1905_modifications_to_aci_318                        Section 1905 Modifications to ACI 318
+  std_aci_117                                                   ACI 117-10 Specification for Tolerances for Concrete Constru
+  std_astm_c1186                                                ASTM C1186 / ISO 8336 Fiber-Cement
+  std_astm_c90                                                  ASTM C90
+  std_astm_d3679                                                ASTM D3679 Vinyl Siding
+  std_tms_402                                                   TMS 402 Building Code Requirements and Specification for Mas
+  std_tms_602                                                   TMS 602
+  xref_chapter_25_gypsum_plaster                                Chapter 25 Gypsum Board / Plaster
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. ch14_sec_1404_installation_of_wall_coverings>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 19 Concrete",
+  "community_id": 17,
+  "extracted_from_sections": ["ch14_chapter_14_exterior_walls.md", "ch16_chapter_16_structural_design.md", "ch17a_chapter_17a_special_inspections_and_tests.md", "ch18_chapter_18_soils_and_foundations.md", "ch19_chapter_19_concrete.md", "ch35_chapter_35_referenced_standards.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-20 rules. After writing the file, just confirm "wrote c17_chapter_19_concrete_rules.json with N rules" and stop.

@@ -1,0 +1,235 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "R602.10 Bracing Methods",
+  "community_id": 8,
+  "extracted_from_sections": [
+    "chapter_6_wall_construction_a.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r602_10_6",
+      "cite": "R602.10.6",
+      "section_node": "section_r602_10_6",
+      "title": "Construct Methods ABW, PFH, PFG, CS-PF and BV-WSP per Sections R602.10.6.1 through R602.10.6.5",
+      "intent": "Direct designers using any of the special prescriptive bracing methods (ABW, PFH, PFG, CS-PF, BV-WSP) to the controlling construction provisions so the panels develop the assumed lateral capacity.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "uses_method_abw"
+            },
+            {
+              "predicate": "uses_method_pfh"
+            },
+            {
+              "predicate": "uses_method_pfg"
+            },
+            {
+              "predicate": "uses_method_cs_pf"
+            },
+            {
+              "predicate": "uses_method_bv_wsp"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "construct_in_accordance_with_sections": [
+          "section_r602_10_6_1",
+          "section_r602_10_6_2",
+          "section_r602_10_6_3",
+          "section_r602_10_6_4",
+          "R602.10.6.5"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing schedule on plans identifying each panel by method (ABW, PFH, PFG, CS-PF, or BV-WSP)",
+        "Cross-references on the structural sheets pointing each method back to its governing subsection (R602.10.6.1 through R602.10.6.5)",
+        "Construction details consistent with the figures and tables called out in the relevant subsection"
+      ],
+      "depends_on": [
+        "method_abw",
+        "method_pfh",
+        "method_pfg",
+        "method_cs_pf"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_10_6_1",
+      "cite": "R602.10.6.1",
+      "section_node": "section_r602_10_6_1",
+      "title": "Method ABW alternate braced wall panels: build per Figure R602.10.6.1 with Table R602.10.6.1 hold-down forces",
+      "intent": "Ensure ABW panels achieve their prescribed lateral capacity by following the standard ABW construction figure and the tabulated hold-down forces that anchor uplift at the panel ends.",
+      "applies_when": [
+        {
+          "predicate": "uses_method_abw"
+        },
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_figure": "FIGURE R602.10.6.1",
+        "hold_down_force_per_table": "TABLE R602.10.6.1",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall panel detail matching Figure R602.10.6.1 (sheathing, fasteners, anchor bolts, panel length)",
+        "Hold-down schedule with manufacturer/model and design force taken from Table R602.10.6.1",
+        "Anchor bolt and foundation detail at each ABW panel end consistent with Figure R602.10.6.1",
+        "Identification of each ABW panel on the bracing plan with length and hold-down callout"
+      ],
+      "depends_on": [
+        "method_abw",
+        "table_r602_10_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_10_6_2",
+      "cite": "R602.10.6.2",
+      "section_node": "section_r602_10_6_2",
+      "title": "Method PFH portal frame with hold-downs: construct per Figure R602.10.6.2",
+      "intent": "Require PFH portal frame panels to follow the prescriptive figure that defines sheathing, framing, strap, and hold-down detailing necessary for the portal-frame load path.",
+      "applies_when": [
+        {
+          "predicate": "uses_method_pfh"
+        },
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_figure": "FIGURE R602.10.6.2",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Portal frame detail on plans matching Figure R602.10.6.2 (header size, strap, sheathing nailing, hold-downs)",
+        "Hold-down schedule and anchorage detail at each PFH panel",
+        "Bracing plan identifying each PFH panel location, header height (max 10 ft, 12 ft with pony wall), and panel length",
+        "Foundation/anchor bolt detail at the PFH panel base consistent with Figure R602.10.6.2"
+      ],
+      "depends_on": [
+        "method_pfh",
+        "table_r602_10_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_10_6_3",
+      "cite": "R602.10.6.3",
+      "section_node": "section_r602_10_6_3",
+      "title": "Method PFG portal frame at garage: permitted only in SDC A, B, C and only supporting a roof or one story plus roof",
+      "intent": "Limit the prescriptive PFG garage portal frame to the seismic and gravity conditions for which Figure R602.10.6.3 was developed, preventing its use in higher seismic categories or under stacked-story loading.",
+      "applies_when": [
+        {
+          "predicate": "uses_method_pfg"
+        },
+        {
+          "predicate": "is_braced_wall_panel_at_garage_door_opening"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_figure": "FIGURE R602.10.6.3",
+        "permitted_only_when": {
+          "all_of": [
+            {
+              "any_of": [
+                {
+                  "predicate": "in_seismic_design_category_a"
+                },
+                {
+                  "predicate": "in_seismic_design_category_b"
+                },
+                {
+                  "predicate": "in_seismic_design_category_c"
+                }
+              ]
+            },
+            {
+              "any_of": [
+                {
+                  "predicate": "supports_roof_only"
+                },
+                {
+                  "predicate": "supports_one_story_and_roof"
+                }
+              ]
+            }
+          ]
+        },
+        "permitted_location": "either_side_of_garage_door_opening",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Seismic Design Category determination for the project (must be A, B, or C for PFG use)",
+        "Story count documentation showing PFG panel supports at most one story plus roof",
+        "Portal frame detail at the garage opening matching Figure R602.10.6.3 (header, sheathing, strap, hold-down, anchorage)",
+        "Bracing plan locating each PFG panel adjacent to a garage door opening with header height (max 10 ft, 12 ft with pony wall) and panel length"
+      ],
+      "depends_on": [
+        "method_pfg",
+        "table_r602_10_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_10_6_4",
+      "cite": "R602.10.6.4",
+      "section_node": "section_r602_10_6_4",
+      "title": "Method CS-PF continuously sheathed portal frame: construct per Figure R602.10.6.4 and Table R602.10.6.4",
+      "intent": "Ensure CS-PF panels in continuously sheathed walls deliver their tabulated lateral capacity by following both the prescriptive construction figure and the geometric/length requirements of Table R602.10.6.4.",
+      "applies_when": [
+        {
+          "predicate": "uses_method_cs_pf"
+        },
+        {
+          "predicate": "is_continuous_sheathing_method"
+        },
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_figure": "FIGURE R602.10.6.4",
+        "dimensions_per_table": "TABLE R602.10.6.4",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Continuous sheathing demonstrated along the full braced wall line containing the CS-PF panel",
+        "Portal frame detail matching Figure R602.10.6.4 (header, sheathing, fasteners, strap, hold-downs, anchorage)",
+        "Panel length, header height (max 10 ft, 12 ft with pony wall), and adjacent opening dimensions taken from Table R602.10.6.4",
+        "Bracing plan identifying each CS-PF panel and demonstrating compliance with the contributing length rules of Table R602.10.5"
+      ],
+      "depends_on": [
+        "method_cs_pf",
+        "method_cs_wsp",
+        "table_r602_10_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

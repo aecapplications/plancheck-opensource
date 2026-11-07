@@ -1,0 +1,123 @@
+You are a plan-check rule extraction subagent. The graph community "Wind/Seismic Bracing & SDC Provisions" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/appendix_as_strawbale_construction.md
+crc-graph/chapters/appendix_au_cob_construction_monolithic_adobe.md
+crc-graph/chapters/chapter_2_definitions.md
+crc-graph/chapters/chapter_3_building_planning_a.md
+crc-graph/chapters/chapter_44_referenced_standards.md
+crc-graph/chapters/chapter_4_foundations_a.md
+crc-graph/chapters/chapter_4_foundations_b.md
+crc-graph/chapters/chapter_5_floors.md
+crc-graph/chapters/chapter_6_wall_construction_a.md
+crc-graph/chapters/chapter_6_wall_construction_b.md
+
+Output path: crc-graph/plan-check/c00_wind_seismic_bracing_sdc_provisions_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  as_106_13_braced_wall                     AS106.13 Strawbale Braced Wall Panels
+  au_106_11_braced_wall                     AU106.11 Cob Braced Wall Panels
+  section_r301_2_1_wind                     R301.2.1 Wind Design Criteria
+  section_r301_2_2_seismic                  R301.2.2 Seismic Provisions
+  section_r301_2_2_1                        R301.2.2.1 Determination of Seismic Design Category
+  section_r301_2_2_6                        R301.2.2.6 Irregular Buildings
+  r403_1_2                                  R403.1.2 Continuous footing in SDC D0/D1/D2
+  r403_1_3                                  R403.1.3 Footing/stem wall reinforcing in SDC D0/D1/D2
+  r403_1_6_1                                R403.1.6.1 Foundation anchorage SDC C/D0/D1/D2
+  r404_1_4                                  R404.1.4 Seismic Design Category D0/D1/D2
+  r502_3                                    R502.3 Allowable joist spans
+  r502_7                                    R502.7 Lateral restraint at supports
+  section_r602_10                           R602.10 Wall Bracing
+  section_r602_10_1                         R602.10.1 Braced Wall Lines
+  section_r602_10_1_3                       R602.10.1.3 Spacing of Braced Wall Lines
+  section_r602_10_10                        R602.10.10 Cripple Wall Bracing
+  section_r602_10_10_1                      R602.10.10.1 Cripple Wall Bracing SDC D0-D2
+  section_r602_10_2                         R602.10.2 Braced Wall Panels
+  section_r602_10_3                         R602.10.3 Required Length of Bracing
+  section_r602_10_4                         R602.10.4 Construction Methods for Braced Wall
+  section_r602_10_4_1                       R602.10.4.1 Mixing Methods
+  section_r602_10_4_2                       R602.10.4.2 Continuous Sheathing Methods
+  section_r602_10_6_5                       R602.10.6.5 Wall Bracing Stone Masonry Veneer
+  section_r602_10_7                         R602.10.7 Ends of Braced Wall Lines with Continuous Sheathing
+  section_r602_10_8_1                       R602.10.8.1 Braced Wall Panel Connections SDC C-D2
+  section_r602_10_9                         R602.10.9 Braced Wall Panel Support
+  section_r602_10_9_1                       R602.10.9.1 Braced Wall Panel Support SDC D0-D2
+  r602_11                                   R602.11 Plate Washers
+  section_r602_11_1                         R602.11.1 Wall Anchorage SDC C-D2
+  section_r602_11_2                         R602.11.2 Stepped Foundations SDC D0-D2
+  section_r602_12                           R602.12 Simplified Wall Bracing
+  section_r602_3_5                          R602.3.5 Braced Wall Panel Uplift Load Path
+  section_r602_9                            R602.9 Cripple Walls
+  section_r603_9                            R603.9 Structural Sheathing CFS
+  section_r603_9_2                          R603.9.2 Determination of Min Length of Full-Height Sheathing
+  section_r603_9_5                          R603.9.5 CFS Sheathing for Stone Masonry Veneer
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  def_basic_wind_speed                      Basic Wind Speed
+  def_braced_wall_line                      Braced Wall Line
+  def_braced_wall_panel                     Braced Wall Panel
+  def_cripple_wall                          Cripple Wall
+  figure_r301_2_2                           Figure R301.2(2) Ultimate Design Wind Speeds
+  figure_r403_1_3                           Figure R403.1.3 Reinforced Concrete Footings SDC D0/D1/D2
+  method_bv_wsp                             Method BV-WSP Stone Masonry Veneer WSP
+  def_seismic_design_category               Seismic Design Category
+  table_r602_10_1_3                         TABLE R602.10.1.3 Spacing of BWL
+  table_r602_10_3_1                         TABLE R602.10.3(1) Bracing Required for Wind
+  table_r602_10_3_2                         TABLE R602.10.3(2) Wind Adjustment Factors
+  table_r602_10_3_3                         TABLE R602.10.3(3) Bracing Required for Seismic
+  table_r602_10_3_4                         TABLE R602.10.3(4) Seismic Adjustment Factors
+  table_r502_3_1_1                          Table R502.3.1(1) Floor Joist Spans Sleeping Areas
+  table_r502_3_1_2                          Table R502.3.1(2) Floor Joist Spans Living Areas
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_aisi_s230                             AISI S230-19 CFS Prescriptive Method
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+  "community_id": 0,
+  "extracted_from_sections": ["appendix_as_strawbale_construction.md", "appendix_au_cob_construction_monolithic_adobe.md", "chapter_2_definitions.md", "chapter_3_building_planning_a.md", "chapter_44_referenced_standards.md", "chapter_4_foundations_a.md", "chapter_4_foundations_b.md", "chapter_5_floors.md", "chapter_6_wall_construction_a.md", "chapter_6_wall_construction_b.md"],
+  "rules": [ ... ]
+}
+
+Aim for 18-36 rules. After writing the file, just confirm "wrote c00_wind_seismic_bracing_sdc_provisions_rules.json with N rules" and stop.

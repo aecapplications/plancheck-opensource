@@ -1,0 +1,80 @@
+You are a plan-check rule extraction subagent. The graph community "Habitable Space & Fire Separation" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/chapter_2_definitions.md
+crc-graph/chapters/chapter_3_building_planning_a.md
+crc-graph/chapters/chapter_3_building_planning_b.md
+
+Output path: crc-graph/plan-check/c09_habitable_space_fire_separation_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  section_r300                              R300 Site Drainage
+  section_r302                              R302 Fire-Resistant Construction
+  section_r302_1_exterior_walls             R302.1 Exterior Walls
+  section_r302_11_fireblocking              R302.11 Fireblocking
+  section_r302_13_fire_protection_floors    R302.13 Fire Protection of Floors
+  section_r302_5_garage                     R302.5 Dwelling-Garage Opening Protection
+  section_r302_6_dwelling_garage_separation  R302.6 Dwelling-Garage Fire Separation
+  section_r302_9_flame_spread               R302.9 Flame Spread Index and Smoke-Developed Index
+  section_r303                              R303 Light, Ventilation and Heating
+  section_r303_1_habitable_rooms            R303.1 Habitable Rooms
+  section_r304                              R304 Minimum Room Areas
+  section_r305                              R305 Ceiling Height
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  california_green_building_standards_code  California Green Building Standards Code
+  chapter_3_building_planning_a             Chapter 3 Building Planning (a)
+  def_habitable_space                       Habitable Space
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — use standards from sister communities if cited)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Habitable Space & Fire Separation",
+  "community_id": 9,
+  "extracted_from_sections": ["chapter_2_definitions.md", "chapter_3_building_planning_a.md", "chapter_3_building_planning_b.md"],
+  "rules": [ ... ]
+}
+
+Aim for 6-12 rules. After writing the file, just confirm "wrote c09_habitable_space_fire_separation_rules.json with N rules" and stop.

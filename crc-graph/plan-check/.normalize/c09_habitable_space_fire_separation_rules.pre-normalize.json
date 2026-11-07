@@ -1,0 +1,1144 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Habitable Space & Fire Separation",
+  "community_id": 9,
+  "extracted_from_sections": [
+    "chapter_2_definitions.md",
+    "chapter_3_building_planning_a.md",
+    "chapter_3_building_planning_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r300_1_storm_water_drainage",
+      "cite": "R300.1",
+      "section_node": "section_r300",
+      "title": "Storm water drainage and retention during construction (small projects)",
+      "intent": "Prevent uncontrolled storm water runoff and erosion from small construction sites by requiring drainage management consistent with CALGreen Chapter 4, Division 4.1.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_construction_project": true
+            },
+            {
+              "site_disturbance_acres_<_1": true
+            },
+            {
+              "not": {
+                "is_part_of_common_plan_disturbing_>=_1_acre": true
+              }
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "construction_storm_water_management",
+        "compliance_with": "California Green Building Standards Code, Chapter 4, Division 4.1",
+        "scope": "manage storm water drainage during construction",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Construction storm water management plan referencing CALGreen Chapter 4 Division 4.1",
+        "Site plan showing temporary erosion and sediment controls",
+        "BMP specifications (silt fence, fiber rolls, inlet protection, stabilized construction entrance)",
+        "Designer/contractor declaration of soil disturbance area (acres)"
+      ],
+      "depends_on": [
+        "california_green_building_standards_code"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r300_2_grading_and_paving",
+      "cite": "R300.2",
+      "section_node": "section_r300",
+      "title": "Grading and paving must keep surface water out of buildings",
+      "intent": "Ensure permanent site grading and drainage direct surface water away from buildings to protect habitable space from water intrusion.",
+      "applies_when": [
+        {
+          "is_new_construction_or_addition_with_site_work": true
+        }
+      ],
+      "requires": {
+        "type": "site_grading_and_drainage",
+        "must_indicate_on_construction_plans": true,
+        "performance": "site grading or drainage system manages all surface water flows to keep water from entering buildings",
+        "compliance_with": "California Green Building Standards Code, Chapter 4, Division 4.1",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Civil/site grading plan showing finish grade slopes away from building foundations",
+        "Drainage system layout (swales, area drains, storm drain tie-ins) on construction plans",
+        "Spot elevations and slope arrows demonstrating positive drainage",
+        "Note on plans referencing CALGreen Chapter 4 Division 4.1 compliance"
+      ],
+      "depends_on": [
+        "california_green_building_standards_code"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_scope_fire_resistant_construction",
+      "cite": "R302",
+      "section_node": "section_r302",
+      "title": "Scope: Fire-resistant construction provisions for dwellings",
+      "intent": "Establishes the umbrella trigger for fire-resistant construction requirements covering exterior walls, dwelling-garage separation, fireblocking, floor protection, and finish flame-spread limits.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_dwelling": true
+            },
+            {
+              "is_accessory_building_to_dwelling": true
+            },
+            {
+              "is_townhouse_unit": true
+            },
+            {
+              "is_two_family_dwelling": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_pointer",
+        "subordinate_sections": [
+          "R302.1",
+          "R302.2",
+          "R302.3",
+          "R302.4",
+          "R302.5",
+          "R302.6",
+          "R302.7",
+          "R302.8",
+          "R302.9",
+          "R302.10",
+          "R302.11",
+          "R302.12",
+          "R302.13",
+          "R302.14"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Code analysis sheet identifying applicable R302 subsections for the project type",
+        "Occupancy classification confirming dwelling/accessory building scope"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_1_exterior_walls",
+      "cite": "R302.1",
+      "section_node": "section_r302_1_exterior_walls",
+      "title": "Exterior walls: fire-resistance and opening protection by fire separation distance",
+      "intent": "Limit fire spread between buildings on adjacent lots by requiring fire-resistance ratings, projection limits, and opening/penetration controls based on fire separation distance.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "any_of": [
+                {
+                  "is_dwelling": true
+                },
+                {
+                  "is_accessory_building_to_dwelling": true
+                }
+              ]
+            },
+            {
+              "has_exterior_wall_within_5_ft_of_lot_line": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "exterior_wall_fire_resistance",
+        "compliance_table": {
+          "without_sprinkler": "Table R302.1(1)",
+          "with_R313_sprinkler_throughout": "Table R302.1(2)"
+        },
+        "controlled_elements": [
+          "wall fire-resistance rating",
+          "projections beyond exterior wall",
+          "openings in walls (area limit)",
+          "penetrations (per R302.4)"
+        ],
+        "thresholds": {
+          "non_rated_wall_min_fire_separation_distance_ft": 5,
+          "non_rated_wall_min_FSD_with_sprinkler_ft": 3,
+          "projections_not_allowed_below_ft": 2,
+          "openings_not_allowed_below_ft": 3,
+          "openings_25pct_max_at_ft": 3,
+          "openings_unlimited_at_ft": 5
+        },
+        "tested_per": [
+          "ASTM E119",
+          "UL 263",
+          "California Building Code Section 703.3"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "wall_is_perpendicular_to_FSD_line": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "is_individual_dwelling_unit_or_accessory_on_same_lot": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_detached_tool_shed_storage_shed_playhouse_or_similar": true
+                },
+                {
+                  "is_exempted_from_permits": true
+                },
+                {
+                  "projection_extends_over_lot_line": false
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_detached_garage_accessory_to_dwelling": true
+                },
+                {
+                  "distance_to_lot_line_ft_<=_2": true
+                },
+                {
+                  "roof_eave_projection_in_<=_4": true
+                }
+              ]
+            }
+          ],
+          "effect": "projections_permitted"
+        },
+        {
+          "id": "ex5",
+          "applies_when": [
+            {
+              "is_foundation_vent_compliant_with_code": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Site plan with dimensioned fire separation distances from each exterior wall to lot lines",
+        "Wall assembly UL/GA listing or ASTM E119 test report for any 1-hour rated exterior wall",
+        "Door/window schedule showing opening areas with percentage of wall area for walls 3 to 5 ft from lot line",
+        "Note on plans identifying which Table (R302.1(1) or R302.1(2)) governs and whether NFPA 13D/R313 sprinklers are installed",
+        "Detail of eave/projection construction with fire-retardant-treated wood or 1-hour underside if applicable"
+      ],
+      "depends_on": [
+        "section_r302",
+        "section_r313"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_5_dwelling_garage_opening_protection",
+      "cite": "R302.5",
+      "section_node": "section_r302_5_garage",
+      "title": "Dwelling-garage opening and penetration protection",
+      "intent": "Prevent migration of fire, smoke, and combustion products from a private garage into the dwelling, especially into sleeping rooms.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "has_attached_or_communicating_private_garage": true
+            },
+            {
+              "has_opening_or_penetration_between_garage_and_dwelling": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "opening_and_penetration_protection",
+        "prohibition": "openings from a private garage directly into a room used for sleeping purposes are not permitted",
+        "door_options": [
+          {
+            "type": "solid_wood",
+            "min_thickness_in": 1.375
+          },
+          {
+            "type": "solid_or_honeycomb_core_steel",
+            "min_thickness_in": 1.375
+          },
+          {
+            "type": "fire_rated_door",
+            "min_rating_min": 20
+          }
+        ],
+        "door_hardware": [
+          "self-latching",
+          "self-closing or automatic-closing device"
+        ],
+        "duct_penetrations_per": "R302.5.2 (No. 26 gage sheet steel or other approved material; no openings into garage)",
+        "other_penetrations_per": "R302.5.3 / R302.11 Item 4",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "residence_and_garage_protected_by_R313_sprinklers": true
+                },
+                {
+                  "complies_with_R309_6": true
+                }
+              ]
+            }
+          ],
+          "effect": "doors_other_than_to_sleeping_rooms_only_need_self_closing_and_self_latching"
+        }
+      ],
+      "evidence_required": [
+        "Floor plan showing no door from garage opens directly into a bedroom",
+        "Door schedule listing thickness/type and 20-minute fire rating where applicable, with self-closing/self-latching hardware",
+        "Mechanical drawings showing duct gauge and routing through garage walls/ceiling with no openings into the garage",
+        "Penetration firestop details for piping/wiring through dwelling-garage separation"
+      ],
+      "depends_on": [
+        "section_r302_6_dwelling_garage_separation",
+        "section_r302_11_fireblocking",
+        "section_r313"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_6_dwelling_garage_separation",
+      "cite": "R302.6",
+      "section_node": "section_r302_6_dwelling_garage_separation",
+      "title": "Dwelling-garage and/or carport fire separation membrane",
+      "intent": "Provide a passive gypsum membrane separation between a private garage/carport and the dwelling to delay fire/smoke transfer into living and habitable space above.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "has_attached_private_garage": true
+            },
+            {
+              "has_attached_carport_with_enclosed_areas_above_or_not_open_on_two_sides": true
+            },
+            {
+              "has_detached_garage_within_3_ft_of_dwelling_unit_on_same_lot": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "separation_assembly",
+        "per_table": "Table R302.6",
+        "minimums": {
+          "from_residence_and_attics": "1/2-inch gypsum board or equivalent applied to the garage side",
+          "from_habitable_rooms_above_garage_or_carport": "5/8-inch Type X gypsum board or equivalent",
+          "structure_supporting_separation_assembly": "1/2-inch gypsum board or equivalent",
+          "garage_<_3_ft_from_dwelling_on_same_lot": "1/2-inch gypsum board or equivalent on interior side of exterior walls within this area"
+        },
+        "openings_per": "R302.5",
+        "gypsum_attachment_per": "Table R702.3.5",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "garage_wall_is_perpendicular_to_adjacent_dwelling_unit_wall": true
+            }
+          ],
+          "effect": "wall_separation_provisions_of_table_R302_6_do_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_carport": true
+                },
+                {
+                  "carport_open_on_two_or_more_sides": true
+                },
+                {
+                  "no_enclosed_areas_above_carport": true
+                }
+              ]
+            }
+          ],
+          "effect": "no_separation_required_between_dwelling_and_carport"
+        }
+      ],
+      "evidence_required": [
+        "Wall and ceiling assembly details for garage-to-dwelling separation calling out 1/2-inch (or 5/8-inch Type X where habitable space above) gypsum board",
+        "Floor plan and section identifying habitable rooms above the garage/carport",
+        "Site plan showing distance between detached garage and dwelling on same lot",
+        "Gypsum board fastener schedule referencing Table R702.3.5"
+      ],
+      "depends_on": [
+        "section_r302_5_garage",
+        "def_habitable_space"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_9_flame_spread_and_smoke_developed",
+      "cite": "R302.9",
+      "section_node": "section_r302_9_flame_spread",
+      "title": "Flame spread and smoke-developed indices for wall and ceiling finishes",
+      "intent": "Limit the contribution of interior wall and ceiling finishes to fire growth and smoke production within dwellings.",
+      "applies_when": [
+        {
+          "is_interior_wall_or_ceiling_finish_in_dwelling": true
+        }
+      ],
+      "requires": {
+        "type": "interior_finish_classification",
+        "max_flame_spread_index": 200,
+        "max_smoke_developed_index": 450,
+        "stability": "applied or fastened so that materials will not readily become detached at 200\u00b0F (93\u00b0C) for not less than 30 minutes",
+        "alternative_test": {
+          "standard": "NFPA 286",
+          "criteria": [
+            "during 40 kW exposure, flames shall not spread to the ceiling",
+            "flame shall not spread to the outer extremity of the sample on any wall or ceiling",
+            "no flashover (as defined in NFPA 286)",
+            "peak heat release rate <= 800 kW",
+            "total smoke released <= 1,000 m^2"
+          ]
+        },
+        "tested_per": [
+          "ASTM E84",
+          "UL 723",
+          "NFPA 286"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "is_trim_picture_mold_chair_rail_baseboard_or_handrail": true
+                },
+                {
+                  "is_door_window_or_frame": true
+                },
+                {
+                  "all_of": [
+                    {
+                      "material_thickness_in_<_1_28": true
+                    },
+                    {
+                      "is_cemented_to_wall_or_ceiling_surface": true
+                    },
+                    {
+                      "flame_spread_index_<=_paper_of_same_thickness_on_noncombustible_backing": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "flame_spread_index_requirements_do_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_HDPE_or_polypropylene_interior_finish": true
+                },
+                {
+                  "tested_per_NFPA_286_meeting_R302_9_4_criteria": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_compliance_path_satisfied"
+        }
+      ],
+      "evidence_required": [
+        "Manufacturer test reports per ASTM E84/UL 723 (or NFPA 286) for each interior wall/ceiling finish material with FSI and SDI values",
+        "Finish schedule listing each interior finish product, its FSI, SDI, and listing reference",
+        "Installation details/specs demonstrating stability at 200\u00b0F for 30 minutes (mechanical fastening or listed adhesive)",
+        "For HDPE/PP finishes: NFPA 286 test report demonstrating compliance with the five performance criteria"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_11_fireblocking",
+      "cite": "R302.11",
+      "section_node": "section_r302_11_fireblocking",
+      "title": "Fireblocking of concealed draft openings in combustible construction",
+      "intent": "Cut off concealed vertical and horizontal draft paths in combustible framing so that fire and hot gases cannot travel undetected between stories or between the top story and the roof space.",
+      "applies_when": [
+        {
+          "is_combustible_construction": true
+        }
+      ],
+      "requires": {
+        "type": "fireblocking_locations_and_materials",
+        "required_locations": [
+          "concealed spaces of stud walls and partitions (including furred and parallel/staggered stud spaces) vertically at ceiling and floor levels",
+          "concealed spaces of stud walls horizontally at intervals not exceeding 10 feet",
+          "interconnections between concealed vertical and horizontal spaces (soffits, drop ceilings, cove ceilings)",
+          "concealed spaces between stair stringers at top and bottom of run",
+          "openings around vents, pipes, ducts, cables and wires at ceiling and floor level (approved material to resist free passage of flame and combustion products)",
+          "chimneys and fireplaces per R1003.19",
+          "cornices of two-family dwellings at the line of dwelling unit separation"
+        ],
+        "approved_materials": [
+          "2-inch nominal lumber",
+          "two thicknesses of 1-inch nominal lumber with broken lap joints",
+          "23/32-inch wood structural panels with backed joints",
+          "3/4-inch particleboard with backed joints",
+          "1/2-inch gypsum board",
+          "1/4-inch cement-based millboard",
+          "batts/blankets of mineral wool or glass fiber (securely retained)",
+          "cellulose insulation tested per ASTM E119/UL 263 for the specific application"
+        ],
+        "integrity": "the integrity of fireblocks shall be maintained",
+        "tested_per": [
+          "ASTM E119",
+          "UL 263"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall, floor, and stair section details calling out fireblocking locations and material",
+        "Note on framing plans requiring 10-ft maximum horizontal fireblocking spacing in stud walls",
+        "Penetration detail showing approved material packed around vents/pipes/ducts/cables at floor and ceiling",
+        "Fireblocking material specification list (2x lumber, 1/2-inch gypsum, mineral wool batts, etc.)",
+        "Special inspection or framing inspection sign-off for fireblocking before close-in"
+      ],
+      "depends_on": [
+        "section_r302_7_under_stair_protection",
+        "section_r1003_19_chimneys"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_13_fire_protection_of_floors",
+      "cite": "R302.13",
+      "section_node": "section_r302_13_fire_protection_floors",
+      "title": "Fire protection membrane on underside of floor framing",
+      "intent": "Provide a minimum gypsum or wood structural panel membrane on the underside of floor framing to slow fire-induced collapse of engineered/light wood floor systems.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_floor_assembly": true
+            },
+            {
+              "not": {
+                "is_otherwise_required_to_be_fire_resistance_rated": true
+              }
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "membrane_protection",
+        "options": [
+          {
+            "material": "gypsum wallboard",
+            "min_thickness_in": 0.5
+          },
+          {
+            "material": "wood structural panel",
+            "min_thickness_in": 0.625
+          },
+          {
+            "material": "equivalent"
+          }
+        ],
+        "location": "underside of the floor framing member",
+        "permitted_penetrations": [
+          "ducts",
+          "vents",
+          "electrical outlets",
+          "lighting",
+          "devices",
+          "luminaires",
+          "wires",
+          "speakers",
+          "drainage",
+          "piping",
+          "similar openings or penetrations"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "space_below_protected_by_R313_automatic_sprinkler": true
+                },
+                {
+                  "space_below_protected_by_NFPA_13D_sprinkler": true
+                },
+                {
+                  "space_below_protected_by_other_approved_equivalent_sprinkler": true
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "floor_is_directly_over_crawl_space": true
+                },
+                {
+                  "crawl_space_not_intended_for_storage": true
+                },
+                {
+                  "no_fuel_fired_or_electric_powered_heating_appliances_in_crawl_space": true
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "aggregate_area_of_unprotected_portions_per_story_sq_ft_<=_80": true
+                },
+                {
+                  "fireblocking_per_R302_11_1_installed_along_perimeter_of_unprotected_portion": true
+                }
+              ]
+            }
+          ],
+          "effect": "portion_may_remain_unprotected"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "is_dimension_lumber_>=_2x10_nominal": true
+                },
+                {
+                  "is_structural_composite_lumber_>=_2x10_nominal_equivalent": true
+                },
+                {
+                  "is_other_approved_floor_assembly_with_equivalent_fire_performance": true
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Floor framing plan and section showing 1/2-inch gypsum or 5/8-inch wood structural panel membrane on underside of joists/trusses",
+        "Sprinkler shop drawings if relying on R313 / NFPA 13D exception",
+        "Joist/truss specification (size and species) if relying on 2x10 nominal exception",
+        "Detail showing perimeter fireblocking around any unprotected area <= 80 sq ft per story"
+      ],
+      "depends_on": [
+        "section_r302_11_fireblocking",
+        "section_r313"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r303_scope_light_ventilation_heating",
+      "cite": "R303",
+      "section_node": "section_r303",
+      "title": "Scope: Light, ventilation and heating for habitable space",
+      "intent": "Establishes the umbrella trigger for natural/mechanical light and ventilation and heating requirements applicable to habitable rooms and dwelling units.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_habitable_room": true
+            },
+            {
+              "is_dwelling_unit": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_pointer",
+        "subordinate_sections": [
+          "R303.1",
+          "R303.2",
+          "R303.3",
+          "R303.4",
+          "R303.5",
+          "R303.6",
+          "R303.7",
+          "R303.8",
+          "R303.9",
+          "R303.10"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Code analysis identifying which rooms are habitable per the Chapter 2 definition",
+        "Room finish/use schedule distinguishing habitable rooms from bathrooms, closets, halls, storage and utility spaces"
+      ],
+      "depends_on": [
+        "def_habitable_space"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r303_1_habitable_rooms_light_and_ventilation",
+      "cite": "R303.1",
+      "section_node": "section_r303_1_habitable_rooms",
+      "title": "Habitable rooms: minimum natural light and ventilation",
+      "intent": "Provide minimum natural daylighting and outdoor-air ventilation to each habitable room, or compensate with mechanical ventilation and artificial light meeting prescribed levels.",
+      "applies_when": [
+        {
+          "is_habitable_room": true
+        }
+      ],
+      "requires": {
+        "type": "natural_light_and_ventilation",
+        "min_aggregate_glazing_area_pct_of_floor_area": 8,
+        "min_openable_area_to_outdoors_pct_of_floor_area_being_ventilated": 4,
+        "ventilation_path": "windows, skylights, doors, louvers or other approved openings to the outdoor air",
+        "access": "ready access or readily controllable by the building occupants",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_habitable_room_other_than_kitchen": true
+                },
+                {
+                  "opening_not_required_by_R310_egress": true
+                },
+                {
+                  "any_of": [
+                    {
+                      "whole_house_mechanical_ventilation_per_california_mechanical_code": true
+                    },
+                    {
+                      "mechanical_ventilation_capable_of_0_35_air_changes_per_hour_in_habitable_rooms_per_california_mechanical_code": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "glazed_areas_need_not_be_openable"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_kitchen": true
+                },
+                {
+                  "opening_not_required_by_R310_egress": true
+                },
+                {
+                  "local_exhaust_system_per_california_mechanical_code": true
+                }
+              ]
+            }
+          ],
+          "effect": "glazed_areas_need_not_be_openable"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "exception_1_satisfied": true
+                },
+                {
+                  "artificial_light_provides_>=_6_footcandles_at_30_in_above_floor": true
+                }
+              ]
+            }
+          ],
+          "effect": "glazed_areas_need_not_be_installed"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_sunroom_or_patio_cover_per_R202": true
+                },
+                {
+                  "exterior_sunroom_walls_open_or_insect_screen_only_pct_>_40": true
+                }
+              ]
+            }
+          ],
+          "effect": "natural_ventilation_via_sunroom_permitted"
+        },
+        {
+          "id": "ex5",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "openings_open_into_passive_solar_energy_collector": true
+                },
+                {
+                  "ventilation_openings_to_outside_of_collector_increased_to_compensate": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_ventilation_path_permitted"
+        },
+        {
+          "id": "ex6",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "glazed_openings_open_into_passive_solar_energy_collector": true
+                },
+                {
+                  "exterior_glazed_opening_area_into_collector_increased_to_compensate": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_light_path_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Room-by-room schedule listing floor area, required glazing area (>=8%), and provided glazing area for each habitable room",
+        "Window/door schedule showing openable area (>=4% of floor area being ventilated)",
+        "Mechanical ventilation calculations and equipment cut sheets if relying on Exception 1 or 2 (whole-house ventilation or kitchen local exhaust)",
+        "Lighting calculation demonstrating >=6 footcandles at 30 in above floor where Exception 3 is used",
+        "Floor plan and section confirming room qualifies as 'habitable space' per Chapter 2 definition"
+      ],
+      "depends_on": [
+        "def_habitable_space",
+        "section_r310_egress",
+        "section_r304",
+        "section_r305"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r304_minimum_room_areas",
+      "cite": "R304",
+      "section_node": "section_r304",
+      "title": "Habitable rooms: minimum floor area and minimum horizontal dimension",
+      "intent": "Ensure each habitable room is large enough and proportioned to be usable for living, sleeping, eating or cooking.",
+      "applies_when": [
+        {
+          "is_habitable_room": true
+        }
+      ],
+      "requires": {
+        "type": "minimum_room_geometry",
+        "min_floor_area_sq_ft": 70,
+        "min_horizontal_dimension_ft": 7,
+        "low_height_area_exclusion": {
+          "sloping_ceiling_below_ft": 5,
+          "furred_ceiling_below_ft": 7,
+          "effect": "portions below these heights shall not be considered as contributing to the minimum required habitable area"
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1_min_area",
+          "applies_when": [
+            {
+              "is_kitchen": true
+            }
+          ],
+          "effect": "minimum_floor_area_does_not_apply"
+        },
+        {
+          "id": "ex1_min_dim",
+          "applies_when": [
+            {
+              "is_kitchen": true
+            }
+          ],
+          "effect": "minimum_horizontal_dimension_does_not_apply"
+        },
+        {
+          "id": "ex2_min_dim",
+          "applies_when": [
+            {
+              "is_limited_density_owner_built_rural_dwelling_per_R301_1_1_1": true
+            }
+          ],
+          "effect": "minimum_horizontal_dimension_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Floor plan with dimensioned habitable rooms showing area >= 70 sq ft and shortest horizontal dimension >= 7 ft",
+        "Building section indicating ceiling slope/furring with shaded exclusion of areas below the 5 ft (sloped) / 7 ft (furred) heights",
+        "Room schedule classifying each room as habitable vs. non-habitable per Chapter 2 definition",
+        "Tabulated calculation of qualifying habitable area (gross area minus low-height exclusions)"
+      ],
+      "depends_on": [
+        "def_habitable_space",
+        "section_r305"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r305_ceiling_height",
+      "cite": "R305.1",
+      "section_node": "section_r305",
+      "title": "Minimum ceiling height in habitable space and other rooms",
+      "intent": "Provide adequate vertical clearance in habitable rooms, hallways, and basements containing them, with reduced minimums for bathrooms, toilet rooms, laundry rooms, and obstruction zones.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_habitable_space": true
+            },
+            {
+              "is_hallway": true
+            },
+            {
+              "is_portion_of_basement_containing_habitable_space_or_hallway": true
+            },
+            {
+              "is_bathroom_toilet_room_or_laundry_room": true
+            },
+            {
+              "is_portion_of_basement_not_containing_habitable_space_or_hallway": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "minimum_ceiling_height",
+        "rules": [
+          {
+            "applies_to": "habitable space, hallways, and portions of basements containing these spaces",
+            "min_ceiling_height_ft_in": "7 ft (2134 mm)"
+          },
+          {
+            "applies_to": "bathrooms, toilet rooms, and laundry rooms",
+            "min_ceiling_height_ft_in": "6 ft 8 in (2032 mm)"
+          },
+          {
+            "applies_to": "portions of basements not containing habitable space or hallways (R305.1.1)",
+            "min_ceiling_height_ft_in": "6 ft 8 in (2032 mm)"
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "room_has_sloped_ceiling": true
+                },
+                {
+                  "min_ceiling_height_in_required_floor_area_ft_>=_5": true
+                },
+                {
+                  "pct_of_required_floor_area_with_ceiling_>=_7_ft_>=_50": true
+                }
+              ]
+            }
+          ],
+          "effect": "sloped_ceiling_compliance_path"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_above_bathroom_or_toilet_room_fixtures": true
+                },
+                {
+                  "fixture_is_capable_of_being_used_for_intended_purpose": true
+                },
+                {
+                  "any_of": [
+                    {
+                      "not": {
+                        "is_shower_or_tub_with_showerhead": true
+                      }
+                    },
+                    {
+                      "all_of": [
+                        {
+                          "is_shower_or_tub_with_showerhead": true
+                        },
+                        {
+                          "ceiling_height_above_30in_x_30in_at_showerhead_>=_6_ft_8_in": true
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "fixture_clearance_path"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_basement_with_habitable_space": true
+                },
+                {
+                  "obstruction_is_beam_girder_duct_or_similar": true
+                },
+                {
+                  "obstruction_clearance_to_finished_floor_ft_in_>=_6_4": true
+                }
+              ]
+            }
+          ],
+          "effect": "basement_obstruction_path"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "obstruction_is_beam_or_girder": true
+                },
+                {
+                  "clear_finished_width_between_beams_in_>=_36": true
+                },
+                {
+                  "projection_from_finished_floor_in_<=_78": true
+                }
+              ]
+            }
+          ],
+          "effect": "spaced_beam_path"
+        },
+        {
+          "id": "ex5_basement_obstructions",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_basement_without_habitable_space_or_hallways": true
+                },
+                {
+                  "obstruction_is_beam_girder_duct_or_similar": true
+                },
+                {
+                  "obstruction_clearance_to_finished_floor_ft_in_>=_6_4": true
+                }
+              ]
+            }
+          ],
+          "effect": "basement_obstruction_path_for_nonhabitable_basement"
+        }
+      ],
+      "evidence_required": [
+        "Building sections showing finished ceiling heights in habitable rooms (>=7 ft), bathrooms/toilet rooms/laundry (>=6 ft 8 in), and basements",
+        "Floor plan with ceiling height tags by room",
+        "Sloped-ceiling compliance diagram showing area with ceiling >=7 ft as a percentage of required floor area, and >=5 ft minimum",
+        "Detail at showerhead area showing 30 in x 30 in clear footprint with >=6 ft 8 in clearance",
+        "Section through basement showing duct/beam clearances meeting 6 ft 4 in or 78 in projection limits"
+      ],
+      "depends_on": [
+        "def_habitable_space",
+        "section_r304"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

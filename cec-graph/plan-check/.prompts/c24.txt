@@ -1,0 +1,107 @@
+You are a plan-check rule extraction subagent. The graph community "Branch-Circuit Load Calculations" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt
+cec-graph/chapters/11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt
+cec-graph/chapters/17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c24_branch_circuit_load_calculations_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23  210.23
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a  210.23(A)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_a_1  210.23(A)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_b  210.23(B)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23_c  210.23(C)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_50  210.50
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52  210.52
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a  210.52(A)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_a_1  210.52(A)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b  210.52(B)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_b_1  210.52(B)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c  210.52(C)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_1  210.52(C)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_c_2  210.52(C)(2)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_d  210.52(D)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e  210.52(E)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_1  210.52(E)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_e_3  210.52(E)(3)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_g_1  210.52(G)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_52_h  210.52(H)
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_70  210.70(A),(B),(C)
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_220_43_b  220.43(B)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_240_5  240.5
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_23  314.23
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_314_27  314.27
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_380_10  380.10
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5  406.5
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_e  406.5(E)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_f  406.5(F)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_406_5_g  406.5(G)
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_10_d  410.10(D) Bathtub and Shower Areas
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_151  410.151 Installation (Lighting Track)
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_36_a  410.36(A) Luminaires Supported By Outlet Boxes
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_62  410.62
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_18  422.18 Support of Ceiling-Suspended (Paddle) Fans
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_22  422.22 Utilizing Separable Attachment Fittings
+  17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_42  520.42
+  17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_64  520.64
+  17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_520_68  520.68
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_paddle_fan  Ceiling-Suspended (Paddle) Fan
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_23>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Branch-Circuit Load Calculations",
+  "community_id": 24,
+  "extracted_from_sections": ["04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt", "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt", "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 9-39 rules. After writing the file, just confirm "wrote c24_branch_circuit_load_calculations_rules.json with N rules" and stop.

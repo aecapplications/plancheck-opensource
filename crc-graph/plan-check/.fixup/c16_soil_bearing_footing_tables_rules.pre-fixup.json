@@ -1,0 +1,235 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Soil Bearing & Footing Tables",
+  "community_id": 16,
+  "extracted_from_sections": [
+    "chapter_4_foundations_a.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r401_4_1",
+      "cite": "R401.4.1",
+      "section_node": "section_r401_4_1",
+      "title": "Use Table R401.4.1 presumptive load-bearing values when no geotechnical evaluation is performed",
+      "intent": "Establish a default set of allowable soil bearing pressures so footings can be sized without a site-specific geotechnical investigation.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "fact": "is_residential_foundation_design"
+            },
+            {
+              "not": {
+                "fact": "complete_geotechnical_evaluation_performed"
+              }
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "presumptive_soil_bearing",
+        "table_reference": "table_r401_4_1",
+        "presumptive_load_bearing_values_psf": {
+          "crystalline_bedrock": 12000,
+          "sedimentary_and_foliated_rock": 4000,
+          "sandy_gravel_or_gravel_GW_GP": 3000,
+          "sand_silty_sand_clayey_sand_silty_gravel_clayey_gravel_SW_SP_SM_SC_GM_GC": 2000,
+          "clay_sandy_silty_clay_clayey_silt_silt_sandy_siltclay_CL_ML_MH_CH": 1500
+        },
+        "footnote_a": "Where soil tests are required by Section R401.4, the allowable bearing capacities shall be part of the recommendations.",
+        "footnote_b_trigger": {
+          "condition": "building_official_determines_in_place_soils_have_allowable_bearing_capacity_<_1500_psf",
+          "effect": "allowable_bearing_capacity_shall_be_determined_by_soils_investigation"
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Soil classification used for footing design noted on foundation plans or structural calculations",
+        "Allowable bearing pressure value (psf) cited in structural calculations referencing Table R401.4.1",
+        "If clay/silt soils (CL, ML, MH, CH) are assumed and building official suspects <1,500 psf capacity: soils investigation report with allowable bearing recommendation",
+        "Statement on plans confirming no geotechnical evaluation was performed (or reference to one if performed)"
+      ],
+      "depends_on": [
+        "table_r401_4_1",
+        "section_r401_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r401_4_1_1",
+      "cite": "R401.4.1.1",
+      "section_node": "section_r401_4_1_1",
+      "title": "HCD-regulated foundations and soils investigations shall conform to Health and Safety Code Sections 17953-17957",
+      "intent": "Ensure that for HCD-regulated residential applications, foundation and soils investigations follow the California statutory requirements for preliminary soil reports and lot-by-lot investigations.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "fact": "is_application_listed_in_section_1_8_2_1_1"
+            },
+            {
+              "fact": "is_regulated_by_HCD"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "regulatory_conformance",
+        "conformance_with": [
+          "California Health and Safety Code Section 17953",
+          "California Health and Safety Code Section 17954",
+          "California Health and Safety Code Section 17955",
+          "California Health and Safety Code Section 17956",
+          "California Health and Safety Code Section 17957"
+        ],
+        "summarized_procedures": [
+          {
+            "cite": "R401.4.1.1.1",
+            "requirement": "Each city, county, or city and county shall enact an ordinance requiring a preliminary soil report prepared by a state-registered civil engineer, based on adequate test borings or excavations, for every subdivision where a tentative and final map is required pursuant to Government Code Section 66426. Waiver allowed if local agency determines no preliminary analysis is necessary."
+          },
+          {
+            "cite": "R401.4.1.1.2",
+            "requirement": "If the preliminary report indicates critically expansive soils or other soil problems, ordinance shall require a soil investigation of each lot, prepared by a state-registered civil engineer, recommending corrective action."
+          },
+          {
+            "cite": "R401.4.1.1.3",
+            "requirement": "Building department shall approve the soil investigation if the recommended action is likely to prevent structural damage; approved corrective action shall be incorporated as a condition of the building permit."
+          },
+          {
+            "cite": "R401.4.1.1.5",
+            "requirement": "Governing body may enact an ordinance prescribing an alternate procedure equal to or more restrictive than R401.4.1.1.1, R401.4.1.1.2 and R401.1.1.3."
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "fact": "local_building_department_determined_preliminary_soil_report_unnecessary_due_to_known_soil_qualities"
+            }
+          ],
+          "effect": "preliminary_soil_report_may_be_waived"
+        }
+      ],
+      "evidence_required": [
+        "Preliminary soil report stamped by a California-registered civil engineer (or documented agency waiver)",
+        "Lot-specific soil investigation report with recommended corrective actions where critically expansive or problematic soils are identified",
+        "Building department approval letter for the soil investigation",
+        "Building permit conditions explicitly incorporating the approved corrective action into construction documents",
+        "Foundation plans/details showing implementation of the recommended corrective action"
+      ],
+      "depends_on": [
+        "section_r401_4_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_1",
+      "cite": "R403.1.1",
+      "section_node": "section_r403_1_1",
+      "title": "Minimum width, thickness, and projection for concrete footings",
+      "intent": "Ensure concrete footings are sized adequately for the load and soil bearing capacity, with prescriptive minimums to provide a baseline of structural safety.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "fact": "is_concrete_footing"
+            },
+            {
+              "any_of": [
+                {
+                  "fact": "supports_exterior_wall"
+                },
+                {
+                  "fact": "supports_pier_or_column"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "footing_geometry",
+        "width_W": {
+          "source_tables": [
+            "table_r403_1_1",
+            "table_r403_1_2",
+            "table_r403_1_3"
+          ],
+          "source_figures": [
+            "figure_r403_1_1",
+            "figure_r403_1_3"
+          ],
+          "minimum_in": 12,
+          "minimum_mm": 305,
+          "basis": "load-bearing value of soil per Table R401.4.1"
+        },
+        "thickness_T": {
+          "source_tables": [
+            "table_r403_1_1",
+            "table_r403_1_2",
+            "table_r403_1_3"
+          ],
+          "minimum_in": 6,
+          "minimum_mm": 152
+        },
+        "projection_P": {
+          "minimum_in": 2,
+          "minimum_mm": 51,
+          "maximum": "shall not exceed the thickness of the footing"
+        },
+        "pier_and_column_footings": {
+          "sizing_basis": "tributary load and allowable soil pressure per Table R401.4.1"
+        },
+        "fireplace_footings": {
+          "reference": "Section R1001.2"
+        },
+        "wood_foundation_footings": {
+          "reference": "Section R403.2",
+          "figures": [
+            "figure_r403_1_2",
+            "figure_r403_1_3"
+          ]
+        },
+        "precast_foundation_footings": {
+          "reference": "Section R403.4",
+          "table": "table_r403_4",
+          "figures": [
+            "figure_r403_4_1",
+            "figure_r403_4_2"
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing footing width W, thickness T, and projection P with dimensions",
+        "Structural calculation citing Table R403.1(1), R403.1(2), or R403.1(3) and the assumed soil bearing pressure from Table R401.4.1",
+        "Section detail demonstrating W >= 12 in, T >= 6 in, and 2 in <= P <= T",
+        "For pier/column footings: tributary area calculation and allowable soil pressure used for sizing",
+        "For fireplace footings: detail referencing Section R1001.2"
+      ],
+      "depends_on": [
+        "table_r401_4_1",
+        "table_r403_1_1",
+        "table_r403_1_2",
+        "table_r403_1_3",
+        "section_r403_1",
+        "section_r1001_2",
+        "section_r403_2",
+        "section_r403_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

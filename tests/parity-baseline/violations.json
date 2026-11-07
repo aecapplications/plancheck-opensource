@@ -1,0 +1,1791 @@
+{
+  "project": {
+    "address": "12345 Ridge Road, Truckee, CA",
+    "type": "single-family detached dwelling",
+    "scope": "new construction",
+    "stories": 2,
+    "occupancy": "R-3",
+    "design_wind_speed_mph": 110,
+    "ground_snow_load_psf": 50,
+    "seismic_design_category": "D1",
+    "soil_class": "Class 4 - sandy gravel",
+    "climate_zone": "16",
+    "fire_hazard_severity_zone": "Very High"
+  },
+  "rule_pack": "merged_all_communities",
+  "community_id": null,
+  "asserted_facts": [
+    "any_portion_within_10_ft_of_building",
+    "creates_roof_penetration",
+    "frost_line_depth_>=_36_in",
+    "garage_has_ev_charging",
+    "has_anchor_bolts",
+    "has_attached_garage",
+    "has_bedroom",
+    "has_braced_wall_lines",
+    "has_carbon_monoxide_alarm_required",
+    "has_continuous_footing",
+    "has_dwelling_garage_separation",
+    "has_emergency_escape_opening_in_bedroom",
+    "has_fuel_burning_appliance",
+    "has_habitable_attic",
+    "has_rooftop_pv",
+    "in_fhsz",
+    "in_fire_hazard_severity_zone",
+    "in_flood_hazard_area",
+    "in_sdc_c_d0_d1_or_d2",
+    "in_sdc_d0_d1",
+    "in_sdc_d0_d1_or_d2",
+    "in_sdc_d0_or_d1",
+    "in_sdc_d1",
+    "in_seismic_design_category_c_d0_d1_or_d2",
+    "in_seismic_design_category_d0_d1_or_d2",
+    "in_seismic_design_category_d0_or_d1",
+    "in_seismic_design_category_d1",
+    "in_wildland_urban_interface_fire_area",
+    "in_wui",
+    "in_wui_fire_area",
+    "installed_on_or_above_roof_covering",
+    "is_braced_wall_panel",
+    "is_concrete_foundation",
+    "is_deck_porch_balcony_or_stair_walking_surface",
+    "is_detached_dwelling",
+    "is_detached_one_or_two_family_dwelling",
+    "is_detached_one_or_two_family_dwelling_in_sdc_d0_d1_or_d2",
+    "is_in_seismic_design_category_d1",
+    "is_new_building",
+    "is_new_structure",
+    "is_one_or_two_family_dwelling",
+    "is_pv_rooftop_mounted",
+    "is_rooftop_mounted_pv_system",
+    "is_spray_foam_plastic_insulation",
+    "is_wood_framed",
+    "is_wood_light_frame",
+    "is_wood_light_frame_in_sdc_d0_d1_or_d2",
+    "is_wood_wall_framing",
+    "thickness_>_4_in",
+    "uses_foam_plastic_in_building_construction"
+  ],
+  "fires": [
+    {
+      "rule_id": "rule_section_r301_2_2_seismic",
+      "cite": "R301.2.2",
+      "section_node": "section_r301_2_2_seismic",
+      "title": "Apply IRC seismic provisions to townhouses and dwellings in SDC C/D0/D1/D2; SDC E uses the California Building Code",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_seismic_requirements_of": "this_code",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Seismic Design Category determination per Section R301.2.2.1",
+        "Identification of building type (detached 1-2 family dwelling vs. townhouse)",
+        "If SDC E: engineered design per California Building Code or reclassification documentation per R301.2.2.1.2",
+        "Statement that seismic provisions of this code are applied"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "matched_conditions": [
+        "any_of"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r403_1_6_1",
+      "cite": "R403.1.6.1",
+      "section_node": "r403_1_6_1",
+      "title": "In SDC C (townhouses) and SDC D0/D1/D2 add plate washers, tighter interior anchor-bolt spacing, and 4-ft anchor spacing >2 stories",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "anchorage",
+        "in_addition_to": "section_r403_1_6",
+        "plate_washers_per": "section_r602_11_1",
+        "plate_washers_required_along": "full_length_of_required_braced_wall_lines_unless_approved_anchor_straps_used",
+        "interior_braced_wall_plate_anchor_bolt_max_spacing_in": 72,
+        "interior_braced_wall_plate_anchor_within_in_of_plate_ends": 12,
+        "interior_bearing_wall_sole_plate_anchor_bolt_max_spacing_in": 72,
+        "interior_bearing_wall_sole_plate_anchor_within_in_of_plate_ends": 12,
+        "max_anchor_bolt_spacing_in_for_buildings_over_two_stories_in": 48,
+        "stepped_cripple_walls_per": "section_r602_11_2",
+        "continuous_wood_foundations_force_transfer_per": [
+          "section_r602_11_1",
+          "table_r602_3_1_braced_wall_panel_to_floor_fastening"
+        ],
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Anchor-bolt schedule with plate washers (3x3x0.229) called out along all required braced wall lines",
+        "Foundation plan showing interior braced wall and bearing-wall anchor bolt spacing <= 6 ft (or 4 ft if >2 stories) and within 12 in. of plate ends",
+        "Stepped cripple wall detail per R602.11.2 if applicable",
+        "Force-transfer detail at continuous wood foundations matching R602.11.1 capacity"
+      ],
+      "depends_on": [
+        "section_r602_11_1",
+        "section_r602_11_2",
+        "def_seismic_design_category"
+      ],
+      "matched_conditions": [
+        "any_of"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_10_2",
+      "cite": "R602.10.2",
+      "section_node": "section_r602_10_2",
+      "title": "Build braced wall panels as full-height segments without offsets and place them per Section R602.10",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "geometry",
+        "panel_full_height": true,
+        "no_vertical_or_horizontal_offsets": true,
+        "construction_methods_per_section": "section_r602_10_4",
+        "panel_locations_per_section": "section_r602_10_2_2",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Wall elevations showing each braced wall panel from top plate to bottom plate without offsets",
+        "Bracing plan citing Section R602.10.4 method for each panel",
+        "Confirmation that panel placement complies with R602.10.2.2 / R602.10.2.2.1"
+      ],
+      "depends_on": [
+        "def_braced_wall_panel"
+      ],
+      "matched_conditions": [
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_10_4",
+      "cite": "R602.10.4",
+      "section_node": "section_r602_10_4",
+      "title": "Construct intermittent and continuously sheathed braced wall panels per Table R602.10.4",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "construction_methods",
+        "methods_per_table": "table_r602_10_4",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Method label for each panel cross-referenced to Table R602.10.4 row",
+        "Sheathing/material thickness, fastener type and spacing on the wall details",
+        "Notes prohibiting adhesive attachment in SDC C, D0, D1 and D2 (per Table R602.10.4 note a)"
+      ],
+      "depends_on": [],
+      "matched_conditions": [
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_10_8_1",
+      "cite": "R602.10.8.1",
+      "section_node": "section_r602_10_8_1",
+      "title": "In SDC D0-D2 fasten braced wall panels to required foundations per R602.11.1 and use 8-16d top plate splice",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "connections",
+        "panel_to_required_foundation_per": "section_r602_11_1",
+        "top_plate_lap_splice_face_nails_each_side": 8,
+        "top_plate_lap_splice_nail_size": "16d",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Foundation anchorage detail at each braced wall panel matching R602.11.1 (plate washers, anchor bolts)",
+        "Top-plate splice detail showing 8-16d face nails on each side of the splice",
+        "Bracing plan note pointing to R602.10.8.1 in SDC D0/D1/D2"
+      ],
+      "depends_on": [
+        "section_r602_11_1"
+      ],
+      "matched_conditions": [
+        "in_seismic_design_category_d0_d1_or_d2",
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_10_9",
+      "cite": "R602.10.9",
+      "section_node": "section_r602_10_9",
+      "title": "Support braced wall panels on cantilevered joists, post/pier, or stem walls only as R602.10.9 permits",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "support",
+        "permitted_supports": [
+          "cantilevered_floor_joists_per_section_r502_3_3",
+          "raised_floor_post_or_pier_designed_per_accepted_engineering_practice",
+          "masonry_stem_walls_<=_48_in_long_reinforced_per_figure_r602_10_9",
+          "masonry_stem_walls_>_48_in_long_per_section_r403_1",
+          "concrete_stem_walls_<=_48_in_long_>_12_in_tall_<_6_in_thick_reinforced_per_figure_r602_10_9"
+        ],
+        "abw_or_pfh_to_masonry_stem_walls": "not_permitted",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Foundation/floor-framing detail at each braced wall panel matching one of the permitted support types",
+        "Engineered design for raised-floor post/pier supports",
+        "Reinforcement schedule per Figure R602.10.9 for short masonry/concrete stem walls",
+        "Statement that ABW and PFH panels are not attached to masonry stem walls"
+      ],
+      "depends_on": [],
+      "matched_conditions": [
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_10_9_1",
+      "cite": "R602.10.9.1",
+      "section_node": "section_r602_10_9_1",
+      "title": "In SDC D0-D2 braced wall panel footings shall meet Section R403.1.2",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "support",
+        "footing_per_section": "r403_1_2",
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Foundation plan showing every required braced wall panel supported on a continuous footing complying with R403.1.2",
+        "Plan note linking R602.10.9.1 to the foundation plan",
+        "Documentation of any R403.1.2 exception used (two-story with cripple wall <= 4 ft, etc.)"
+      ],
+      "depends_on": [
+        "r403_1_2"
+      ],
+      "matched_conditions": [
+        "in_seismic_design_category_d0_d1_or_d2",
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_section_r602_11_1",
+      "cite": "R602.11.1",
+      "section_node": "section_r602_11_1",
+      "title": "In SDC D0-D2 (and SDC C townhouses) provide 0.229 x 3 x 3 plate washers at all sill anchor bolts (slotted hole permitted within limits)",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "plate_washers",
+        "min_thickness_in": 0.229,
+        "min_size_in": "3 x 3",
+        "between_sill_plate_and_nut": true,
+        "approved_anchor_straps_alternative": true,
+        "diagonally_slotted_hole_max_extra_width_in": 0.1875,
+        "diagonally_slotted_hole_max_length_in": 1.75,
+        "standard_cut_washer_required_between_plate_washer_and_nut_when_slotted": true,
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Hardware schedule listing 3x3x0.229 plate washers (or approved anchor straps) at every required braced wall line anchor",
+        "Detail showing slot dimensions <= bolt+3/16\" wide and <= 1-3/4\" long with cut washer above plate washer",
+        "Plan note linking R602.11.1 to the SDC of the project",
+        "Manufacturer spec sheet for anchor straps if used as alternative"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "matched_conditions": [
+        "any_of"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r324_4_1_structural",
+      "cite": "R324.4.1",
+      "section_node": "r324_4_1",
+      "title": "Rooftop PV systems and their supporting roofs designed for applicable gravity loads",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "structural_design",
+        "pv_system_supports_itself_and_gravity_loads_per": "Chapter 3",
+        "supporting_roof_designed_per": "chapter_8"
+      },
+      "evidence_required": [
+        "Structural calculations for the PV racking/support system signed by a licensed engineer",
+        "Roof framing calculations or analysis demonstrating capacity to carry added PV dead load",
+        "Plan note referencing Chapter 3 (gravity loads) and Chapter 8 (roof-ceiling construction)"
+      ],
+      "depends_on": [
+        "chapter_8"
+      ],
+      "matched_conditions": [
+        "is_rooftop_mounted_pv_system"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r324_4_1_1_roof_load",
+      "cite": "R324.4.1.1",
+      "section_node": "r324_4_1_1",
+      "title": "Roof load cases for portions covered and not covered by PV",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "structural_load_cases",
+        "uncovered_roof_designed_for": [
+          "dead_load_per_R301_4",
+          "roof_load_per_R301_6"
+        ],
+        "pv_covered_roof_designed_for_load_cases": [
+          {
+            "case": 1,
+            "combination": "dead_load_including_pv_panel_weight + snow_load",
+            "snow_load_per": "table_r301_2"
+          },
+          {
+            "case": 2,
+            "combination": "dead_load_excluding_pv_panel_weight + greater_of(roof_live_load, snow_load)",
+            "live_or_snow_per": "R301.6"
+          }
+        ]
+      },
+      "evidence_required": [
+        "Structural calculations showing both load cases for PV-covered roof areas",
+        "Structural calculations showing dead + roof live/snow for non-PV-covered roof areas",
+        "Reference to Table R301.2 climatic snow load on plans"
+      ],
+      "depends_on": [
+        "table_r301_2"
+      ],
+      "matched_conditions": [
+        "is_rooftop_mounted_pv_system"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r324_4_1_2_wind_load",
+      "cite": "R324.4.1.2",
+      "section_node": "r324_4_1_2",
+      "title": "Rooftop PV designed for component-and-cladding wind loads",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "wind_load_design",
+        "component_and_cladding_loads_per": "table_r301_2_1_1",
+        "height_and_exposure_adjustment_per": "Table R301.2.1(2)"
+      },
+      "evidence_required": [
+        "Wind-load calculations for the PV array using Table R301.2.1(1) C&C loads",
+        "Site exposure category and mean roof height documented in calculations",
+        "Attachment / anchor capacity calculations stamped by an engineer"
+      ],
+      "depends_on": [
+        "table_r301_2_1_1"
+      ],
+      "matched_conditions": [
+        "is_rooftop_mounted_pv_system"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r902_4_rooftop_pv_fire_classification",
+      "cite": "R902.4",
+      "section_node": "r902_4",
+      "title": "Rooftop-mounted PV systems: tested and identified to UL 2703",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "fire_classification",
+        "tested_listed_and_identified_to": "std_ul_2703",
+        "install_per_manufacturer_and_listing": true,
+        "fire_classes_recognized": [
+          "A",
+          "B",
+          "C"
+        ],
+        "mandatory_class_a_b_or_c_when": {
+          "any_of": [
+            "jurisdiction_designated_by_law",
+            "edge_of_roof_<3_ft_from_lot_line"
+          ]
+        },
+        "tested_per": [
+          "std_ul_2703"
+        ]
+      },
+      "evidence_required": [
+        "PV system UL 2703 listing/label and fire-classification documentation",
+        "Manufacturer installation instructions consistent with the listing",
+        "Site plan dimensioning roof edge to lot lines",
+        "Plan note declaring jurisdictional fire class requirement, if any"
+      ],
+      "depends_on": [
+        "std_ul_2703"
+      ],
+      "matched_conditions": [
+        "is_rooftop_mounted_pv_system"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r602_10_8",
+      "cite": "R602.10.8",
+      "section_node": "section_r602_10_8",
+      "title": "Connect braced wall panels to floor framing or foundation with rim/blocking and Table R602.3(1) fastening",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "load_path_connection",
+        "case_joists_perpendicular_to_panel": {
+          "provide_along_entire_panel_length": "rim_joist_or_band_joist_or_blocking",
+          "per_figure": "FIGURE R602.10.8(1)",
+          "fasten_top_and_bottom_plates_to_framing_per_table": "TABLE R602.3(1)"
+        },
+        "case_joists_parallel_to_panel": {
+          "provide_directly_above_and_below_panel": "rim_joist_or_end_joist_or_other_parallel_framing_member",
+          "per_figure": "FIGURE R602.10.8(2)",
+          "if_parallel_member_cannot_be_located_directly_above_and_below": {
+            "provide": "full_depth_blocking_at_16_inch_spacing_between_parallel_members_each_side_of_panel",
+            "per_figure": "FIGURE R602.10.8(2)"
+          },
+          "fasten_blocking_and_wall_plates_per_table": "TABLE R602.3(1)"
+        },
+        "case_connection_to_concrete_or_masonry": {
+          "per_section": "R403.1.6"
+        },
+        "tested_per": []
+      },
+      "evidence_required": [
+        "Braced wall panel connection details showing rim joist, band joist, end joist, or blocking along the full panel length above and below",
+        "Plate-to-framing nailing call-outs taken from Table R602.3(1)",
+        "Where joists are parallel and a parallel member cannot be located above/below the panel, details of full-depth blocking at 16 inches o.c. on each side",
+        "For panels bearing on concrete or masonry, anchor bolt schedule and detail per Section R403.1.6"
+      ],
+      "depends_on": [
+        "table_r602_3_1"
+      ],
+      "matched_conditions": [
+        "is_braced_wall_panel"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r316_3_foam_plastic_surface_burning",
+      "cite": "R316.3",
+      "section_node": "r316_3",
+      "title": "Foam plastic surface burning characteristics",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "foam_plastic_surface_burning_characteristics",
+        "flame_spread_index_max": 75,
+        "smoke_developed_index_max": 450,
+        "tested_per": [
+          "std_astm_e84"
+        ],
+        "alternate_tested_per": [
+          "UL 723"
+        ],
+        "thickness_rules": {
+          "<=4_in": "test at maximum thickness and density intended for use",
+          ">4_in": "test at 4-inch thickness; end use approved per R316.6"
+        },
+        "loose_fill_treatment": "tested as board stock"
+      },
+      "evidence_required": [
+        "Foam plastic product spec sheet listing flame spread index and smoke-developed index values",
+        "ASTM E84 or UL 723 test report at intended thickness and density",
+        "Manufacturer's listing showing thickness, density, and end-use configuration",
+        "If thicker than 4 in: R316.6 specific approval documentation"
+      ],
+      "depends_on": [
+        "std_astm_e84"
+      ],
+      "matched_conditions": [
+        "uses_foam_plastic_in_building_construction",
+        "not"
+      ],
+      "partially_suppressed_by": [
+        {
+          "exception_id": "ex1",
+          "effect": "alternative_thresholds: flame_spread_index_max=25, smoke_developed_index_max=450 at 4-inch test thickness; must be separated from interior by 1/2-inch gypsum or NFPA 275 tested material"
+        }
+      ]
+    },
+    {
+      "rule_id": "rule_r324_4_2_pv_fire_classification",
+      "cite": "R324.4.2",
+      "section_node": "r324_4_2",
+      "title": "Rooftop PV fire classification matches roof assembly",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "pv_fire_classification",
+        "must_match": "fire_classification_of_roof_assembly_per_r902",
+        "tested_per": [
+          "std_ul_2703"
+        ],
+        "depends_on_section": "section_r902"
+      },
+      "evidence_required": [
+        "PV module/system listing showing UL 2703 fire classification (Class A, B, or C)",
+        "Roof assembly fire classification (Class A in FHSZ per R902.1.1)",
+        "Cross-check showing PV class is at least equal to roof class",
+        "Manufacturer installation instructions and product listing"
+      ],
+      "depends_on": [
+        "std_ul_2703",
+        "r902_1_1",
+        "section_r902"
+      ],
+      "matched_conditions": [
+        "is_pv_rooftop_mounted",
+        "installed_on_or_above_roof_covering"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r324_4_3_pv_roof_penetrations",
+      "cite": "R324.4.3",
+      "section_node": "r324_4_3",
+      "title": "Rooftop PV roof penetrations flashed and sealed",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "roof_penetration_flashing_and_sealing",
+        "must_comply_with": "Chapter 9"
+      },
+      "evidence_required": [
+        "Mounting detail drawings showing flashing at every roof penetration",
+        "Manufacturer-approved flashing/sealant product cut sheets",
+        "Inspection sign-off for roof penetration weatherproofing"
+      ],
+      "depends_on": [
+        "section_r902"
+      ],
+      "matched_conditions": [
+        "is_pv_rooftop_mounted",
+        "creates_roof_penetration"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r337_5_1_wui_roofing_general",
+      "cite": "R337.5.1",
+      "section_node": "r337_5_1",
+      "title": "WUI roofing general \u2014 Class A in FHSZ",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "A",
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ],
+        "must_also_comply_with": [
+          "section_r902"
+        ],
+        "installation": "per listing and manufacturer's instructions"
+      },
+      "evidence_required": [
+        "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+        "FHSZ determination for project address",
+        "Manufacturer installation instructions matched to permit drawings",
+        "Roofing assembly approval documentation"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790",
+        "section_r902",
+        "r337_5"
+      ],
+      "matched_conditions": [
+        "in_wildland_urban_interface_fire_area",
+        "in_fire_hazard_severity_zone"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r337_7_scope_exterior_covering",
+      "cite": "R337.7",
+      "section_node": "r337_7",
+      "title": "WUI exterior covering scope (parent)",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "scope_trigger",
+        "covered_elements": [
+          "exterior_wall_coverings",
+          "exterior_wall_assemblies",
+          "exposed_underside_of_roof_eave_overhangs",
+          "exposed_underside_of_roof_eave_soffits",
+          "exposed_underside_of_exterior_porch_ceilings",
+          "exposed_underside_of_floor_projections",
+          "exterior_underfloor_areas"
+        ]
+      },
+      "evidence_required": [
+        "Building elevations identifying exterior covering material at each face",
+        "Schedule of exterior assemblies cross-referenced to R337.7.3 / R337.7.4 compliance"
+      ],
+      "depends_on": [],
+      "matched_conditions": [
+        "in_wildland_urban_interface_fire_area"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r337_9_decking",
+      "cite": "R337.9",
+      "section_node": "r337_9",
+      "title": "WUI decking walking surface within 10 ft of building",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "deck_walking_surface",
+        "any_of": [
+          {
+            "method": "tested_per_astm_e2632_and_astm_e2726_meeting_r337_9_4",
+            "tested_per": [
+              "std_astm_e2632",
+              "std_astm_e2726"
+            ],
+            "peak_heat_release_max_kw_per_ft2": 25
+          },
+          {
+            "method": "ignition_resistant_material_per_r337_9_4"
+          },
+          {
+            "method": "tested_per_sfm_12_7a_4_and_r337_4_3",
+            "tested_per": [
+              "std_sfm_12_7a_4"
+            ]
+          },
+          {
+            "method": "exterior_fire_retardant_treated_wood"
+          },
+          {
+            "method": "noncombustible_material"
+          },
+          {
+            "method": "tested_per_sfm_12_7a_4a_with_noncombustible_or_ir_walls"
+          },
+          {
+            "method": "tested_per_astm_e2632_with_noncombustible_or_ir_walls"
+          }
+        ],
+        "flashing_required_at_deck_to_wall": "min 6-inch (150 mm) metal flashing applied vertically"
+      },
+      "evidence_required": [
+        "Decking product test report (ASTM E2632 + ASTM E2726, SFM 12-7A-4, or alternates)",
+        "Conditions of acceptance verification (peak HRR <= 25 kW/ft^2; no sustained combustion)",
+        "Deck plan showing surfaces within 10 ft of building",
+        "Detail showing 6-inch vertical metal flashing at deck-to-wall intersections"
+      ],
+      "depends_on": [
+        "std_astm_e2632",
+        "std_astm_e2726",
+        "std_sfm_12_7a_4",
+        "std_astm_e84"
+      ],
+      "matched_conditions": [
+        "in_wildland_urban_interface_fire_area",
+        "is_deck_porch_balcony_or_stair_walking_surface",
+        "any_portion_within_10_ft_of_building"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r902_1_1_class_a_in_fhsz",
+      "cite": "R902.1.1",
+      "section_node": "r902_1_1",
+      "title": "Class A roof required in Fire Hazard Severity Zones",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "fire_rated_roof_covering",
+        "minimum_class": "A",
+        "fire_retardant": true,
+        "tested_per": [
+          "std_astm_e108",
+          "std_ul_790"
+        ]
+      },
+      "evidence_required": [
+        "FHSZ determination for project address (CAL FIRE map screenshot or jurisdiction declaration)",
+        "Roof covering listing showing ASTM E108 or UL 790 Class A result",
+        "For replacements: roof area calc showing % replaced in past 12 months",
+        "Confirmation jurisdiction has not adopted SFM model ordinance per Gov Code 51189"
+      ],
+      "depends_on": [
+        "std_astm_e108",
+        "std_ul_790"
+      ],
+      "matched_conditions": [
+        "in_fire_hazard_severity_zone",
+        "any_of"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r902_1_3_wui_additional_compliance",
+      "cite": "R902.1.3",
+      "section_node": "section_r902_1_3",
+      "title": "WUI roofing additional compliance with R337.5",
+      "severity": "required",
+      "jurisdiction": "California",
+      "verbatim": null,
+      "requires": {
+        "type": "additional_section_compliance",
+        "must_also_comply_with": [
+          "r337_5",
+          "r337_5_1",
+          "r337_5_2",
+          "r337_5_3"
+        ]
+      },
+      "evidence_required": [
+        "WUI Fire Area determination for project address",
+        "Cross-reference to R337.5 compliance documentation (Class A roof, cap sheet, valley flashing)"
+      ],
+      "depends_on": [
+        "r337_5",
+        "r337_5_1",
+        "r337_5_2",
+        "r337_5_3"
+      ],
+      "matched_conditions": [
+        "in_wildland_urban_interface_fire_area"
+      ],
+      "partially_suppressed_by": []
+    },
+    {
+      "rule_id": "rule_r902_4_rooftop_pv_ul_2703",
+      "cite": "R902.4",
+      "section_node": "r902_4",
+      "title": "Rooftop-mounted PV panel systems \u2014 UL 2703 fire classification",
+      "severity": "required",
+      "jurisdiction": "model_IRC",
+      "verbatim": null,
+      "requires": {
+        "type": "rooftop_pv_fire_classification",
+        "tested_listed_identified_per": [
+          "std_ul_2703"
+        ],
+        "installed_per": "manufacturer instructions and listing",
+        "class_required_when": "jurisdictions designated by law OR roof edge < 3 ft (914 mm) from a lot line",
+        "minimum_class": "C"
+      },
+      "evidence_required": [
+        "PV system UL 2703 listing showing fire classification",
+        "Manufacturer's installation instructions and listing details",
+        "Site plan showing lot line distance to roof edge",
+        "Local jurisdiction PV-class requirement reference (if applicable)"
+      ],
+      "depends_on": [
+        "std_ul_2703"
+      ],
+      "matched_conditions": [
+        "is_pv_rooftop_mounted",
+        "installed_on_or_above_roof_covering"
+      ],
+      "partially_suppressed_by": []
+    }
+  ],
+  "does_not_apply": [
+    {
+      "rule_id": "rule_as_106_13_braced_wall",
+      "cite": "AS106.13"
+    },
+    {
+      "rule_id": "rule_au_106_11_braced_wall",
+      "cite": "AU106.11"
+    },
+    {
+      "rule_id": "rule_section_r301_2_1_wind",
+      "cite": "R301.2.1"
+    },
+    {
+      "rule_id": "rule_section_r301_2_2_1",
+      "cite": "R301.2.2.1"
+    },
+    {
+      "rule_id": "rule_section_r301_2_2_6",
+      "cite": "R301.2.2.6"
+    },
+    {
+      "rule_id": "rule_r403_1_2",
+      "cite": "R403.1.2"
+    },
+    {
+      "rule_id": "rule_r403_1_3",
+      "cite": "R403.1.3"
+    },
+    {
+      "rule_id": "rule_r404_1_4",
+      "cite": "R404.1.4"
+    },
+    {
+      "rule_id": "rule_r502_3",
+      "cite": "R502.3"
+    },
+    {
+      "rule_id": "rule_r502_7",
+      "cite": "R502.7"
+    },
+    {
+      "rule_id": "rule_section_r602_10",
+      "cite": "R602.10"
+    },
+    {
+      "rule_id": "rule_section_r602_10_1",
+      "cite": "R602.10.1"
+    },
+    {
+      "rule_id": "rule_section_r602_10_1_3",
+      "cite": "R602.10.1.3"
+    },
+    {
+      "rule_id": "rule_section_r602_10_3",
+      "cite": "R602.10.3"
+    },
+    {
+      "rule_id": "rule_section_r602_10_4_1",
+      "cite": "R602.10.4.1"
+    },
+    {
+      "rule_id": "rule_section_r602_10_4_2",
+      "cite": "R602.10.4.2"
+    },
+    {
+      "rule_id": "rule_section_r602_10_6_5",
+      "cite": "R602.10.6.5"
+    },
+    {
+      "rule_id": "rule_section_r602_10_7",
+      "cite": "R602.10.7"
+    },
+    {
+      "rule_id": "rule_section_r602_10_10",
+      "cite": "R602.10.10"
+    },
+    {
+      "rule_id": "rule_section_r602_10_10_1",
+      "cite": "R602.10.10.1"
+    },
+    {
+      "rule_id": "rule_r602_11",
+      "cite": "R602.11"
+    },
+    {
+      "rule_id": "rule_section_r602_11_2",
+      "cite": "R602.11.2"
+    },
+    {
+      "rule_id": "rule_section_r602_12",
+      "cite": "R602.12"
+    },
+    {
+      "rule_id": "rule_section_r602_3_5",
+      "cite": "R602.3.5"
+    },
+    {
+      "rule_id": "rule_section_r602_9",
+      "cite": "R602.9"
+    },
+    {
+      "rule_id": "rule_section_r603_9",
+      "cite": "R603.9"
+    },
+    {
+      "rule_id": "rule_section_r603_9_2",
+      "cite": "R603.9.2"
+    },
+    {
+      "rule_id": "rule_section_r603_9_5",
+      "cite": "R603.9.5"
+    },
+    {
+      "rule_id": "rule_r301_2",
+      "cite": "R301.2"
+    },
+    {
+      "rule_id": "rule_r317_1",
+      "cite": "R317.1"
+    },
+    {
+      "rule_id": "rule_r318_1",
+      "cite": "R318.1"
+    },
+    {
+      "rule_id": "rule_r322",
+      "cite": "R322"
+    },
+    {
+      "rule_id": "rule_r401",
+      "cite": "R401"
+    },
+    {
+      "rule_id": "rule_r401_1",
+      "cite": "R401.1"
+    },
+    {
+      "rule_id": "rule_r402_2",
+      "cite": "R402.2"
+    },
+    {
+      "rule_id": "rule_r403",
+      "cite": "R403"
+    },
+    {
+      "rule_id": "rule_r403_1_4",
+      "cite": "R403.1.4"
+    },
+    {
+      "rule_id": "rule_r403_1_4_1",
+      "cite": "R403.1.4.1"
+    },
+    {
+      "rule_id": "rule_r403_3",
+      "cite": "R403.3"
+    },
+    {
+      "rule_id": "rule_r404",
+      "cite": "R404"
+    },
+    {
+      "rule_id": "rule_r408_7",
+      "cite": "R408.7"
+    },
+    {
+      "rule_id": "rule_r505_2_1",
+      "cite": "R505.2.1"
+    },
+    {
+      "rule_id": "rule_r507_3",
+      "cite": "R507.3"
+    },
+    {
+      "rule_id": "rule_r601",
+      "cite": "R601"
+    },
+    {
+      "rule_id": "rule_r602",
+      "cite": "R602"
+    },
+    {
+      "rule_id": "rule_r602_1_11",
+      "cite": "R602.1.11"
+    },
+    {
+      "rule_id": "rule_r602_11",
+      "cite": "R602.11"
+    },
+    {
+      "rule_id": "rule_r603",
+      "cite": "R603"
+    },
+    {
+      "rule_id": "rule_r606",
+      "cite": "R606"
+    },
+    {
+      "rule_id": "rule_r606_11",
+      "cite": "R606.11"
+    },
+    {
+      "rule_id": "rule_r606_12",
+      "cite": "R606.12"
+    },
+    {
+      "rule_id": "rule_r606_12_2",
+      "cite": "R606.12.2"
+    },
+    {
+      "rule_id": "rule_r606_12_3",
+      "cite": "R606.12.3"
+    },
+    {
+      "rule_id": "rule_r606_12_4",
+      "cite": "R606.12.4"
+    },
+    {
+      "rule_id": "rule_r606_13",
+      "cite": "R606.13"
+    },
+    {
+      "rule_id": "rule_r608",
+      "cite": "R608"
+    },
+    {
+      "rule_id": "rule_r608_2",
+      "cite": "R608.2"
+    },
+    {
+      "rule_id": "rule_r608_3",
+      "cite": "R608.3"
+    },
+    {
+      "rule_id": "rule_r608_3_1",
+      "cite": "R608.3.1"
+    },
+    {
+      "rule_id": "rule_r608_3_2",
+      "cite": "R608.3.2"
+    },
+    {
+      "rule_id": "rule_r608_3_3",
+      "cite": "R608.3.3"
+    },
+    {
+      "rule_id": "rule_r608_4",
+      "cite": "R608.4"
+    },
+    {
+      "rule_id": "rule_r608_9",
+      "cite": "R608.9"
+    },
+    {
+      "rule_id": "rule_r610",
+      "cite": "R610"
+    },
+    {
+      "rule_id": "rule_ay_103_structural_stability",
+      "cite": "AY103"
+    },
+    {
+      "rule_id": "rule_section_r201_general",
+      "cite": "R201"
+    },
+    {
+      "rule_id": "rule_section_r301",
+      "cite": "R301.1"
+    },
+    {
+      "rule_id": "rule_section_r301_1_alternative_provisions",
+      "cite": "R301.1.1"
+    },
+    {
+      "rule_id": "rule_section_r301_1_3_engineered_design",
+      "cite": "R301.1.3"
+    },
+    {
+      "rule_id": "rule_section_r301_1_4_intermodal",
+      "cite": "R301.1.4"
+    },
+    {
+      "rule_id": "rule_section_r301_2_1_1_wind_limits",
+      "cite": "R301.2.1.1"
+    },
+    {
+      "rule_id": "rule_section_r301_2_1_2_protection",
+      "cite": "R301.2.1.2"
+    },
+    {
+      "rule_id": "rule_section_r301_4_dead_load",
+      "cite": "R301.4"
+    },
+    {
+      "rule_id": "rule_section_r301_5_live_load",
+      "cite": "R301.5"
+    },
+    {
+      "rule_id": "rule_section_r408",
+      "cite": "R408.1"
+    },
+    {
+      "rule_id": "rule_section_r501",
+      "cite": "R501.2"
+    },
+    {
+      "rule_id": "rule_section_r502",
+      "cite": "R502.1"
+    },
+    {
+      "rule_id": "rule_r502_12",
+      "cite": "R502.12"
+    },
+    {
+      "rule_id": "rule_section_r609_6",
+      "cite": "R609.6"
+    },
+    {
+      "rule_id": "rule_r324_scope",
+      "cite": "R324"
+    },
+    {
+      "rule_id": "rule_r324_3_pv_systems",
+      "cite": "R324.3"
+    },
+    {
+      "rule_id": "rule_r324_3_1_equipment_listings",
+      "cite": "R324.3.1"
+    },
+    {
+      "rule_id": "rule_r324_5_bipv_systems",
+      "cite": "R324.5"
+    },
+    {
+      "rule_id": "rule_r324_5_1_pv_shingles",
+      "cite": "R324.5.1"
+    },
+    {
+      "rule_id": "rule_r324_5_2_bipv_fire_class",
+      "cite": "R324.5.2"
+    },
+    {
+      "rule_id": "rule_r324_5_3_bipv_roof_panels",
+      "cite": "R324.5.3"
+    },
+    {
+      "rule_id": "rule_r324_7_ground_mounted",
+      "cite": "R324.7"
+    },
+    {
+      "rule_id": "rule_r324_8_elevated_pv_scope",
+      "cite": "R324.8"
+    },
+    {
+      "rule_id": "rule_r324_8_1_elevated_pv_open_grid",
+      "cite": "R324.8.1"
+    },
+    {
+      "rule_id": "rule_r324_8_2_elevated_pv_over_roof",
+      "cite": "R324.8.2"
+    },
+    {
+      "rule_id": "rule_r703_2_water_resistive_barrier",
+      "cite": "R703.2"
+    },
+    {
+      "rule_id": "rule_r901_scope",
+      "cite": "R901"
+    },
+    {
+      "rule_id": "rule_r902_3_bipv_fire_classification",
+      "cite": "R902.3"
+    },
+    {
+      "rule_id": "rule_r903_weather_protection",
+      "cite": "R903"
+    },
+    {
+      "rule_id": "rule_r904_materials",
+      "cite": "R904"
+    },
+    {
+      "rule_id": "rule_r905_requirements_scope",
+      "cite": "R905"
+    },
+    {
+      "rule_id": "rule_r905_1_underlayment",
+      "cite": "R905.1.1"
+    },
+    {
+      "rule_id": "rule_r905_16_pv_shingles",
+      "cite": "R905.16"
+    },
+    {
+      "rule_id": "rule_appendix_af_radon_control_methods",
+      "cite": "Appendix AF"
+    },
+    {
+      "rule_id": "rule_af_101_scope",
+      "cite": "AF101"
+    },
+    {
+      "rule_id": "rule_af_103_requirements",
+      "cite": "AF103"
+    },
+    {
+      "rule_id": "rule_af_104_testing",
+      "cite": "AF104"
+    },
+    {
+      "rule_id": "rule_appendix_aj_existing_buildings",
+      "cite": "Appendix AJ"
+    },
+    {
+      "rule_id": "rule_aj_102_compliance_a_general_safety",
+      "cite": "AJ102.1"
+    },
+    {
+      "rule_id": "rule_aj_102_compliance_b_replacement_windows",
+      "cite": "AJ102.4"
+    },
+    {
+      "rule_id": "rule_aj_102_compliance_c_smoke_alarms_and_flood",
+      "cite": "AJ102.3, AJ102.5"
+    },
+    {
+      "rule_id": "rule_appendix_aq_tiny_houses",
+      "cite": "Appendix AQ"
+    },
+    {
+      "rule_id": "rule_aq_105_emergency_escape",
+      "cite": "AQ105"
+    },
+    {
+      "rule_id": "rule_aq_106_energy",
+      "cite": "AQ106"
+    },
+    {
+      "rule_id": "rule_ar_104_thermal_performance",
+      "cite": "AR104"
+    },
+    {
+      "rule_id": "rule_appendix_ay_central_valley_flood",
+      "cite": "Appendix AY"
+    },
+    {
+      "rule_id": "rule_ay_104_evacuation_locations",
+      "cite": "AY104"
+    },
+    {
+      "rule_id": "rule_appendix_az_emergency_housing",
+      "cite": "Appendix AZ"
+    },
+    {
+      "rule_id": "rule_az_104_emergency_sleeping_cabins",
+      "cite": "AZ104"
+    },
+    {
+      "rule_id": "rule_az_105_transportable_units",
+      "cite": "AZ105"
+    },
+    {
+      "rule_id": "rule_r105_3_1_1_flood",
+      "cite": "R105.3.1.1"
+    },
+    {
+      "rule_id": "rule_r308_glazing",
+      "cite": "R308"
+    },
+    {
+      "rule_id": "rule_r310_emergency_escape",
+      "cite": "R310"
+    },
+    {
+      "rule_id": "rule_r314_smoke_alarms",
+      "cite": "R314"
+    },
+    {
+      "rule_id": "rule_r315_carbon_monoxide",
+      "cite": "R315"
+    },
+    {
+      "rule_id": "rule_r406_dampproofing",
+      "cite": "R406"
+    },
+    {
+      "rule_id": "rule_r408_ventilation_crawl",
+      "cite": "R408"
+    },
+    {
+      "rule_id": "rule_r337_6",
+      "cite": "R337.6"
+    },
+    {
+      "rule_id": "rule_section_r905_2",
+      "cite": "R905.2"
+    },
+    {
+      "rule_id": "rule_section_r905_3",
+      "cite": "R905.3"
+    },
+    {
+      "rule_id": "rule_section_r905_4",
+      "cite": "R905.4"
+    },
+    {
+      "rule_id": "rule_section_r905_10",
+      "cite": "R905.10"
+    },
+    {
+      "rule_id": "rule_r602_10_6",
+      "cite": "R602.10.6"
+    },
+    {
+      "rule_id": "rule_r602_10_6_1",
+      "cite": "R602.10.6.1"
+    },
+    {
+      "rule_id": "rule_r602_10_6_2",
+      "cite": "R602.10.6.2"
+    },
+    {
+      "rule_id": "rule_r602_10_6_3",
+      "cite": "R602.10.6.3"
+    },
+    {
+      "rule_id": "rule_r602_10_6_4",
+      "cite": "R602.10.6.4"
+    },
+    {
+      "rule_id": "rule_r300_1_storm_water_drainage",
+      "cite": "R300.1"
+    },
+    {
+      "rule_id": "rule_r300_2_grading_and_paving",
+      "cite": "R300.2"
+    },
+    {
+      "rule_id": "rule_r302_scope_fire_resistant_construction",
+      "cite": "R302"
+    },
+    {
+      "rule_id": "rule_r302_1_exterior_walls",
+      "cite": "R302.1"
+    },
+    {
+      "rule_id": "rule_r302_5_dwelling_garage_opening_protection",
+      "cite": "R302.5"
+    },
+    {
+      "rule_id": "rule_r302_6_dwelling_garage_separation",
+      "cite": "R302.6"
+    },
+    {
+      "rule_id": "rule_r302_9_flame_spread_and_smoke_developed",
+      "cite": "R302.9"
+    },
+    {
+      "rule_id": "rule_r302_11_fireblocking",
+      "cite": "R302.11"
+    },
+    {
+      "rule_id": "rule_r302_13_fire_protection_of_floors",
+      "cite": "R302.13"
+    },
+    {
+      "rule_id": "rule_r303_scope_light_ventilation_heating",
+      "cite": "R303"
+    },
+    {
+      "rule_id": "rule_r303_1_habitable_rooms_light_and_ventilation",
+      "cite": "R303.1"
+    },
+    {
+      "rule_id": "rule_r304_minimum_room_areas",
+      "cite": "R304"
+    },
+    {
+      "rule_id": "rule_r305_ceiling_height",
+      "cite": "R305.1"
+    },
+    {
+      "rule_id": "rule_ah_105_structural_a",
+      "cite": "AH105.1"
+    },
+    {
+      "rule_id": "rule_ah_105_structural_b",
+      "cite": "AH105.2"
+    },
+    {
+      "rule_id": "rule_ar_103_construction",
+      "cite": "AR103"
+    },
+    {
+      "rule_id": "rule_as_103_bales",
+      "cite": "AS103"
+    },
+    {
+      "rule_id": "rule_au_103_materials_mixing",
+      "cite": "AU103"
+    },
+    {
+      "rule_id": "rule_au_105_cob_walls",
+      "cite": "AU105"
+    },
+    {
+      "rule_id": "rule_appendix_ar_light_straw_clay",
+      "cite": "AR101.1"
+    },
+    {
+      "rule_id": "rule_appendix_as_strawbale",
+      "cite": "AS101.1"
+    },
+    {
+      "rule_id": "rule_appendix_au_cob_construction",
+      "cite": "AU101.1"
+    },
+    {
+      "rule_id": "rule_appendix_aw_3d_printed",
+      "cite": "AW101.1"
+    },
+    {
+      "rule_id": "rule_r104_11_alternative_methods",
+      "cite": "R104.11"
+    },
+    {
+      "rule_id": "rule_r301_design_loads",
+      "cite": "R301"
+    },
+    {
+      "rule_id": "rule_r506_concrete_floors",
+      "cite": "R506"
+    },
+    {
+      "rule_id": "rule_r602_wood_wall_framing",
+      "cite": "R602"
+    },
+    {
+      "rule_id": "rule_r502_5",
+      "cite": "R502.5"
+    },
+    {
+      "rule_id": "rule_r502_9",
+      "cite": "R502.9"
+    },
+    {
+      "rule_id": "rule_r602_3",
+      "cite": "R602.3"
+    },
+    {
+      "rule_id": "rule_r603_3",
+      "cite": "R603.3"
+    },
+    {
+      "rule_id": "rule_r603_3_1",
+      "cite": "R603.3.1"
+    },
+    {
+      "rule_id": "rule_r603_3_2",
+      "cite": "R603.3.2"
+    },
+    {
+      "rule_id": "rule_r604",
+      "cite": "R604"
+    },
+    {
+      "rule_id": "rule_r1001_masonry_fireplaces",
+      "cite": "R1001"
+    },
+    {
+      "rule_id": "rule_r1003_masonry_chimneys",
+      "cite": "R1003"
+    },
+    {
+      "rule_id": "rule_r1004_factory_built_fireplaces",
+      "cite": "R1004"
+    },
+    {
+      "rule_id": "rule_r1005_factory_built_chimneys",
+      "cite": "R1005"
+    },
+    {
+      "rule_id": "rule_appendix_ah_patio_covers",
+      "cite": "AH (Appendix)"
+    },
+    {
+      "rule_id": "rule_ah_101_scope",
+      "cite": "AH101"
+    },
+    {
+      "rule_id": "rule_ah_106_screen_enclosures",
+      "cite": "AH106"
+    },
+    {
+      "rule_id": "rule_aj_108_renovations",
+      "cite": "AJ108"
+    },
+    {
+      "rule_id": "rule_aj_110_reconstruction",
+      "cite": "AJ110"
+    },
+    {
+      "rule_id": "rule_aq_104_lofts",
+      "cite": "AQ104"
+    },
+    {
+      "rule_id": "rule_ay_107_rooftop_evacuation",
+      "cite": "AY107"
+    },
+    {
+      "rule_id": "rule_r302_fire_safety",
+      "cite": "R302"
+    },
+    {
+      "rule_id": "rule_r311_means_of_egress",
+      "cite": "R311"
+    },
+    {
+      "rule_id": "rule_r312_guards",
+      "cite": "R312"
+    },
+    {
+      "rule_id": "rule_r317_protection_of_wood_against_decay",
+      "cite": "R317.1"
+    },
+    {
+      "rule_id": "rule_r318_subterranean_termite_protection",
+      "cite": "R318.1"
+    },
+    {
+      "rule_id": "rule_r403_1_6_foundation_anchorage",
+      "cite": "R403.1.6"
+    },
+    {
+      "rule_id": "rule_r403_1_6_1_foundation_anchorage_seismic",
+      "cite": "R403.1.6.1"
+    },
+    {
+      "rule_id": "rule_r404_2_wood_foundation_walls",
+      "cite": "R404.2"
+    },
+    {
+      "rule_id": "rule_r404_3_wood_sill_plates",
+      "cite": "R404.3"
+    },
+    {
+      "rule_id": "rule_r502_2_floor_design_and_construction",
+      "cite": "R502.2"
+    },
+    {
+      "rule_id": "rule_r502_2_1_load_path_at_braced_wall_lines",
+      "cite": "R502.2.1"
+    },
+    {
+      "rule_id": "rule_r502_6_joist_beam_girder_bearing",
+      "cite": "R502.6"
+    },
+    {
+      "rule_id": "rule_r401_4_1",
+      "cite": "R401.4.1"
+    },
+    {
+      "rule_id": "rule_r401_4_1_1",
+      "cite": "R401.4.1.1"
+    },
+    {
+      "rule_id": "rule_r403_1_1",
+      "cite": "R403.1.1"
+    },
+    {
+      "rule_id": "rule_r322_1",
+      "cite": "R322.1"
+    },
+    {
+      "rule_id": "rule_r322_2",
+      "cite": "R322.2"
+    },
+    {
+      "rule_id": "rule_r322_3",
+      "cite": "R322.3"
+    },
+    {
+      "rule_id": "rule_r401_4",
+      "cite": "R401.4"
+    },
+    {
+      "rule_id": "rule_r401_4_1_1_ca",
+      "cite": "R401.4.1.1"
+    },
+    {
+      "rule_id": "rule_r403_1_8",
+      "cite": "R403.1.8"
+    },
+    {
+      "rule_id": "rule_r404_4",
+      "cite": "R404.4"
+    },
+    {
+      "rule_id": "rule_r309_scope",
+      "cite": "R309"
+    },
+    {
+      "rule_id": "rule_r309_8_ev_infrastructure",
+      "cite": "R309.8"
+    },
+    {
+      "rule_id": "rule_1_1_5_referenced_codes",
+      "cite": "1.1.5"
+    },
+    {
+      "rule_id": "rule_1_1_11_format",
+      "cite": "1.1.11"
+    },
+    {
+      "rule_id": "rule_r402_3",
+      "cite": "R402.3"
+    },
+    {
+      "rule_id": "rule_r403_4",
+      "cite": "R403.4"
+    },
+    {
+      "rule_id": "rule_r403_4_a_crushed_stone",
+      "cite": "R403.4.1"
+    },
+    {
+      "rule_id": "rule_r403_4_b_concrete_footing",
+      "cite": "R403.4.2"
+    },
+    {
+      "rule_id": "rule_r404_5",
+      "cite": "R404.5"
+    },
+    {
+      "rule_id": "rule_r404_5_1",
+      "cite": "R404.5.1"
+    },
+    {
+      "rule_id": "rule_r608_5",
+      "cite": "R608.5"
+    },
+    {
+      "rule_id": "rule_r608_5_4",
+      "cite": "R608.5.4"
+    },
+    {
+      "rule_id": "rule_r608_6",
+      "cite": "R608.6"
+    },
+    {
+      "rule_id": "rule_r608_7",
+      "cite": "R608.7"
+    },
+    {
+      "rule_id": "rule_r608_8",
+      "cite": "R608.8"
+    },
+    {
+      "rule_id": "rule_r905_12_a_slope",
+      "cite": "R905.12.1"
+    },
+    {
+      "rule_id": "rule_r905_12_b_material",
+      "cite": "R905.12.2"
+    },
+    {
+      "rule_id": "rule_r905_12_c_application",
+      "cite": "R905.12.3"
+    },
+    {
+      "rule_id": "rule_r905_13_a_slope",
+      "cite": "R905.13.1"
+    },
+    {
+      "rule_id": "rule_r905_13_b_material",
+      "cite": "R905.13.2"
+    },
+    {
+      "rule_id": "rule_r905_13_c_application",
+      "cite": "R905.13.3"
+    },
+    {
+      "rule_id": "rule_r315_2",
+      "cite": "R315.2"
+    },
+    {
+      "rule_id": "rule_r315_3",
+      "cite": "R315.3"
+    },
+    {
+      "rule_id": "rule_r315_5",
+      "cite": "R315.5"
+    },
+    {
+      "rule_id": "rule_r315_6",
+      "cite": "R315.6"
+    },
+    {
+      "rule_id": "rule_r316_4",
+      "cite": "R316.4"
+    },
+    {
+      "rule_id": "rule_r316_5_3",
+      "cite": "R316.5.3"
+    },
+    {
+      "rule_id": "rule_r316_5_4",
+      "cite": "R316.5.4"
+    },
+    {
+      "rule_id": "rule_r408_4",
+      "cite": "R408.4"
+    },
+    {
+      "rule_id": "rule_r337_scope_wui_application",
+      "cite": "R337.1.1"
+    },
+    {
+      "rule_id": "rule_r337_4_ignition_resistant_material",
+      "cite": "R337.4"
+    },
+    {
+      "rule_id": "rule_r337_5_2_wui_roof_coverings_airspace",
+      "cite": "R337.5.2"
+    },
+    {
+      "rule_id": "rule_r337_5_3_wui_roof_valleys",
+      "cite": "R337.5.3"
+    },
+    {
+      "rule_id": "rule_r337_7_3_exterior_wall_coverings",
+      "cite": "R337.7.3"
+    },
+    {
+      "rule_id": "rule_r337_7_4_exterior_wall_assemblies",
+      "cite": "R337.7.4"
+    },
+    {
+      "rule_id": "rule_r337_8_exterior_glazing",
+      "cite": "R337.8"
+    },
+    {
+      "rule_id": "rule_r337_10_accessory_buildings",
+      "cite": "R337.10"
+    },
+    {
+      "rule_id": "rule_r337_10_4_accessory_roof_construction",
+      "cite": "R337.10.4"
+    },
+    {
+      "rule_id": "rule_r902_1_class_abc_roofing",
+      "cite": "R902.1"
+    },
+    {
+      "rule_id": "rule_r902_1_2_class_c_in_other_areas",
+      "cite": "R902.1.2"
+    },
+    {
+      "rule_id": "rule_r902_2_fire_retardant_treated_wood_shakes_shingles",
+      "cite": "R902.2"
+    },
+    {
+      "rule_id": "rule_r902_3_bipv_fire_classification",
+      "cite": "R902.3"
+    }
+  ],
+  "summary": {
+    "rules_evaluated": 263,
+    "rules_fired": 22,
+    "rules_skipped": 241,
+    "evidence_items_required": 76
+  }
+}

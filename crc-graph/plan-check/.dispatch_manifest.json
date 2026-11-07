@@ -1,0 +1,1699 @@
+{
+  "0": {
+    "label": "Wind/Seismic Bracing & SDC Provisions",
+    "files": [
+      "chapters/appendix_as_strawbale_construction.md",
+      "chapters/appendix_au_cob_construction_monolithic_adobe.md",
+      "chapters/chapter_2_definitions.md",
+      "chapters/chapter_3_building_planning_a.md",
+      "chapters/chapter_44_referenced_standards.md",
+      "chapters/chapter_4_foundations_a.md",
+      "chapters/chapter_4_foundations_b.md",
+      "chapters/chapter_5_floors.md",
+      "chapters/chapter_6_wall_construction_a.md",
+      "chapters/chapter_6_wall_construction_b.md"
+    ],
+    "sections": [
+      [
+        "as_106_13_braced_wall",
+        "AS106.13 Strawbale Braced Wall Panels"
+      ],
+      [
+        "au_106_11_braced_wall",
+        "AU106.11 Cob Braced Wall Panels"
+      ],
+      [
+        "section_r301_2_1_wind",
+        "R301.2.1 Wind Design Criteria"
+      ],
+      [
+        "section_r301_2_2_seismic",
+        "R301.2.2 Seismic Provisions"
+      ],
+      [
+        "section_r301_2_2_1",
+        "R301.2.2.1 Determination of Seismic Design Category"
+      ],
+      [
+        "section_r301_2_2_6",
+        "R301.2.2.6 Irregular Buildings"
+      ],
+      [
+        "r403_1_2",
+        "R403.1.2 Continuous footing in SDC D0/D1/D2"
+      ],
+      [
+        "r403_1_3",
+        "R403.1.3 Footing/stem wall reinforcing in SDC D0/D1/D2"
+      ],
+      [
+        "r403_1_6_1",
+        "R403.1.6.1 Foundation anchorage SDC C/D0/D1/D2"
+      ],
+      [
+        "r404_1_4",
+        "R404.1.4 Seismic Design Category D0/D1/D2"
+      ],
+      [
+        "r502_3",
+        "R502.3 Allowable joist spans"
+      ],
+      [
+        "r502_7",
+        "R502.7 Lateral restraint at supports"
+      ],
+      [
+        "section_r602_10",
+        "R602.10 Wall Bracing"
+      ],
+      [
+        "section_r602_10_1",
+        "R602.10.1 Braced Wall Lines"
+      ],
+      [
+        "section_r602_10_1_3",
+        "R602.10.1.3 Spacing of Braced Wall Lines"
+      ],
+      [
+        "section_r602_10_10",
+        "R602.10.10 Cripple Wall Bracing"
+      ],
+      [
+        "section_r602_10_10_1",
+        "R602.10.10.1 Cripple Wall Bracing SDC D0-D2"
+      ],
+      [
+        "section_r602_10_2",
+        "R602.10.2 Braced Wall Panels"
+      ],
+      [
+        "section_r602_10_3",
+        "R602.10.3 Required Length of Bracing"
+      ],
+      [
+        "section_r602_10_4",
+        "R602.10.4 Construction Methods for Braced Wall"
+      ],
+      [
+        "section_r602_10_4_1",
+        "R602.10.4.1 Mixing Methods"
+      ],
+      [
+        "section_r602_10_4_2",
+        "R602.10.4.2 Continuous Sheathing Methods"
+      ],
+      [
+        "section_r602_10_6_5",
+        "R602.10.6.5 Wall Bracing Stone Masonry Veneer"
+      ],
+      [
+        "section_r602_10_7",
+        "R602.10.7 Ends of Braced Wall Lines with Continuous Sheathing"
+      ],
+      [
+        "section_r602_10_8_1",
+        "R602.10.8.1 Braced Wall Panel Connections SDC C-D2"
+      ],
+      [
+        "section_r602_10_9",
+        "R602.10.9 Braced Wall Panel Support"
+      ],
+      [
+        "section_r602_10_9_1",
+        "R602.10.9.1 Braced Wall Panel Support SDC D0-D2"
+      ],
+      [
+        "r602_11",
+        "R602.11 Plate Washers"
+      ],
+      [
+        "section_r602_11_1",
+        "R602.11.1 Wall Anchorage SDC C-D2"
+      ],
+      [
+        "section_r602_11_2",
+        "R602.11.2 Stepped Foundations SDC D0-D2"
+      ],
+      [
+        "section_r602_12",
+        "R602.12 Simplified Wall Bracing"
+      ],
+      [
+        "section_r602_3_5",
+        "R602.3.5 Braced Wall Panel Uplift Load Path"
+      ],
+      [
+        "section_r602_9",
+        "R602.9 Cripple Walls"
+      ],
+      [
+        "section_r603_9",
+        "R603.9 Structural Sheathing CFS"
+      ],
+      [
+        "section_r603_9_2",
+        "R603.9.2 Determination of Min Length of Full-Height Sheathing"
+      ],
+      [
+        "section_r603_9_5",
+        "R603.9.5 CFS Sheathing for Stone Masonry Veneer"
+      ]
+    ],
+    "standards": [
+      [
+        "std_aisi_s230",
+        "AISI S230-19 CFS Prescriptive Method"
+      ]
+    ],
+    "others": [
+      [
+        "def_basic_wind_speed",
+        "Basic Wind Speed"
+      ],
+      [
+        "def_braced_wall_line",
+        "Braced Wall Line"
+      ],
+      [
+        "def_braced_wall_panel",
+        "Braced Wall Panel"
+      ],
+      [
+        "def_cripple_wall",
+        "Cripple Wall"
+      ],
+      [
+        "figure_r301_2_2",
+        "Figure R301.2(2) Ultimate Design Wind Speeds"
+      ],
+      [
+        "figure_r403_1_3",
+        "Figure R403.1.3 Reinforced Concrete Footings SDC D0/D1/D2"
+      ],
+      [
+        "method_bv_wsp",
+        "Method BV-WSP Stone Masonry Veneer WSP"
+      ],
+      [
+        "def_seismic_design_category",
+        "Seismic Design Category"
+      ],
+      [
+        "table_r602_10_1_3",
+        "TABLE R602.10.1.3 Spacing of BWL"
+      ],
+      [
+        "table_r602_10_3_1",
+        "TABLE R602.10.3(1) Bracing Required for Wind"
+      ],
+      [
+        "table_r602_10_3_2",
+        "TABLE R602.10.3(2) Wind Adjustment Factors"
+      ],
+      [
+        "table_r602_10_3_3",
+        "TABLE R602.10.3(3) Bracing Required for Seismic"
+      ],
+      [
+        "table_r602_10_3_4",
+        "TABLE R602.10.3(4) Seismic Adjustment Factors"
+      ],
+      [
+        "table_r502_3_1_1",
+        "Table R502.3.1(1) Floor Joist Spans Sleeping Areas"
+      ],
+      [
+        "table_r502_3_1_2",
+        "Table R502.3.1(2) Floor Joist Spans Living Areas"
+      ]
+    ]
+  },
+  "2": {
+    "label": "Climate Criteria & Foundations",
+    "files": [
+      "chapters/chapter_2_definitions.md",
+      "chapters/chapter_3_building_planning_a.md",
+      "chapters/chapter_3_building_planning_c.md",
+      "chapters/chapter_4_foundations_a.md",
+      "chapters/chapter_4_foundations_b.md",
+      "chapters/chapter_5_floors.md",
+      "chapters/chapter_6_wall_construction_a.md",
+      "chapters/chapter_6_wall_construction_b.md",
+      "chapters/chapter_6_wall_construction_c.md",
+      "chapters/chapter_6_wall_construction_d.md"
+    ],
+    "sections": [
+      [
+        "section_r301_2",
+        "R301.2 Climatic and Geographic Design Criteria"
+      ],
+      [
+        "r317_1",
+        "R317.1 Location required"
+      ],
+      [
+        "r318_1",
+        "R318.1 Subterranean termite control methods"
+      ],
+      [
+        "section_r322",
+        "R322 Flood-Resistant Construction"
+      ],
+      [
+        "section_r401",
+        "R401 General Foundations"
+      ],
+      [
+        "r401_1",
+        "R401.1 Application"
+      ],
+      [
+        "r402_2",
+        "R402.2 Concrete"
+      ],
+      [
+        "section_r403",
+        "R403 Footings"
+      ],
+      [
+        "r403_1_4",
+        "R403.1.4 Minimum depth"
+      ],
+      [
+        "r403_1_4_1",
+        "R403.1.4.1 Frost protection"
+      ],
+      [
+        "r403_3",
+        "R403.3 Frost-protected shallow foundations"
+      ],
+      [
+        "section_r404",
+        "R404 Foundation and Retaining Walls"
+      ],
+      [
+        "r408_7",
+        "R408.7 Flood resistance under-floor"
+      ],
+      [
+        "r505_2_1",
+        "R505.2.1 CFS Material"
+      ],
+      [
+        "r507_3",
+        "R507.3 Deck Footings"
+      ],
+      [
+        "section_r601",
+        "R601 General Wall Construction"
+      ],
+      [
+        "section_r602",
+        "R602 Wood Wall Framing"
+      ],
+      [
+        "section_r602_1_11",
+        "R602.1.11 Structural Insulated Panels"
+      ],
+      [
+        "section_r602_11",
+        "R602.11 Wall Anchorage"
+      ],
+      [
+        "section_r603",
+        "R603 Cold-Formed Steel Wall Framing"
+      ],
+      [
+        "section_r606",
+        "R606 General Masonry Construction"
+      ],
+      [
+        "section_r606_11",
+        "R606.11 Masonry Anchorage"
+      ],
+      [
+        "section_r606_12",
+        "R606.12 Masonry Seismic Requirements"
+      ],
+      [
+        "section_r606_12_2",
+        "R606.12.2 Masonry SDC C"
+      ],
+      [
+        "section_r606_12_3",
+        "R606.12.3 Masonry SDC D0 D1"
+      ],
+      [
+        "section_r606_12_4",
+        "R606.12.4 Masonry SDC D2"
+      ],
+      [
+        "section_r606_13",
+        "R606.13 Multiple-Wythe Masonry"
+      ],
+      [
+        "section_r608",
+        "R608 Concrete Wall Construction"
+      ],
+      [
+        "section_r608_2",
+        "R608.2 Concrete Applicability Limits"
+      ],
+      [
+        "section_r608_3",
+        "R608.3 Concrete Wall Systems"
+      ],
+      [
+        "section_r608_3_1",
+        "R608.3.1 Flat Wall Systems"
+      ],
+      [
+        "section_r608_3_2",
+        "R608.3.2 Waffle-Grid Wall Systems"
+      ],
+      [
+        "section_r608_3_3",
+        "R608.3.3 Screen-Grid Wall Systems"
+      ],
+      [
+        "section_r608_4",
+        "R608.4 Stay-In-Place Forms"
+      ],
+      [
+        "section_r608_9",
+        "R608.9 Concrete Wall Connections"
+      ],
+      [
+        "section_r610",
+        "R610 Structural Insulated Panels"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "def_design_flood_elevation",
+        "Defined: Design Flood Elevation"
+      ],
+      [
+        "def_flood_hazard_area",
+        "Defined: Flood Hazard Area"
+      ],
+      [
+        "def_shear_wall",
+        "Shear Wall"
+      ],
+      [
+        "table_r402_2",
+        "Table R402.2 Min Specified Compressive Strength of Concrete"
+      ],
+      [
+        "table_r403_3_1",
+        "Table R403.3(1) Min Footing Depth and Insulation FPSF"
+      ]
+    ]
+  },
+  "3": {
+    "label": "California HCD Admin & Reference Codes",
+    "files": [
+      "chapters/appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+      "chapters/chapter_1_scope_and_application.md",
+      "chapters/chapter_2_definitions.md",
+      "chapters/chapter_3_building_planning_a.md",
+      "chapters/chapter_44_referenced_standards.md",
+      "chapters/chapter_4_foundations_b.md",
+      "chapters/chapter_5_floors.md",
+      "chapters/chapter_6_wall_construction_e.md"
+    ],
+    "sections": [
+      [
+        "ay_103_structural_stability",
+        "AY103 Structural Stability for Flood"
+      ],
+      [
+        "section_r201_general",
+        "R201 General"
+      ],
+      [
+        "section_r301",
+        "R301 Design Criteria"
+      ],
+      [
+        "section_r301_1_alternative_provisions",
+        "R301.1.1 Alternative Provisions"
+      ],
+      [
+        "section_r301_1_3_engineered_design",
+        "R301.1.3 Engineered Design"
+      ],
+      [
+        "section_r301_1_4_intermodal",
+        "R301.1.4 Intermodal Shipping Containers"
+      ],
+      [
+        "section_r301_2_1_1_wind_limits",
+        "R301.2.1.1 Wind Limitations"
+      ],
+      [
+        "section_r301_2_1_2_protection",
+        "R301.2.1.2 Protection of Openings"
+      ],
+      [
+        "section_r301_4_dead_load",
+        "R301.4 Dead Load"
+      ],
+      [
+        "section_r301_5_live_load",
+        "R301.5 Live Load"
+      ],
+      [
+        "section_r408",
+        "R408 Under-floor Space"
+      ],
+      [
+        "section_r501",
+        "R501 General Floors"
+      ],
+      [
+        "section_r502",
+        "R502 Wood Floor Framing"
+      ],
+      [
+        "r502_12",
+        "R502.12 Draftstopping required"
+      ],
+      [
+        "section_r609_6",
+        "R609.6 Windborne Debris Protection"
+      ]
+    ],
+    "standards": [
+      [
+        "aisi_s230",
+        "AISI S230 Cold-Formed Steel Framing"
+      ],
+      [
+        "asce_7",
+        "ASCE 7 Minimum Design Loads"
+      ],
+      [
+        "std_asce_7",
+        "ASCE 7-16 Minimum Design Loads"
+      ],
+      [
+        "awc_wfcm",
+        "AWC Wood Frame Construction Manual"
+      ],
+      [
+        "icc_400",
+        "ICC 400 Log Structures"
+      ]
+    ],
+    "others": [
+      [
+        "section_1_1_3_scope",
+        "1.1.3 Scope"
+      ],
+      [
+        "section_1_1_3_1_classification",
+        "1.1.3.1 Classification"
+      ],
+      [
+        "section_1_1_4_appendices",
+        "1.1.4 Appendices"
+      ],
+      [
+        "section_1_1_7_order_of_precedence",
+        "1.1.7 Order of Precedence"
+      ],
+      [
+        "section_1_1_8_local_amendments",
+        "1.1.8 Local Amendments"
+      ],
+      [
+        "section_1_8_2_authority",
+        "1.8.2 Authority and Abbreviations"
+      ],
+      [
+        "section_1_8_2_1_1_housing_construction",
+        "1.8.2.1.1 Housing Construction"
+      ],
+      [
+        "section_1_8_2_1_2_housing_accessibility",
+        "1.8.2.1.2 Housing Accessibility"
+      ],
+      [
+        "section_1_8_2_1_3_mobilehome_parks",
+        "1.8.2.1.3 Permanent Buildings in Mobilehome Parks"
+      ],
+      [
+        "california_building_code",
+        "California Building Code"
+      ],
+      [
+        "chapter_1_scope_and_application",
+        "Chapter 1 Scope and Application"
+      ],
+      [
+        "chapter_2_definitions",
+        "Chapter 2 Definitions"
+      ],
+      [
+        "figure_r301_2_1_1",
+        "Figure R301.2.1.1 Wind Design Required"
+      ],
+      [
+        "def_intermodal_shipping_container",
+        "Intermodal Shipping Container"
+      ],
+      [
+        "def_limited_density_owner_built_rural_dwelling",
+        "Limited-Density Owner-Built Rural Dwelling"
+      ],
+      [
+        "section_1_1_general",
+        "Section 1.1 General"
+      ],
+      [
+        "section_1_8_hcd",
+        "Section 1.8 HCD"
+      ],
+      [
+        "def_sunroom",
+        "Sunroom"
+      ]
+    ]
+  },
+  "5": {
+    "label": "PV Systems & Roof Coverings",
+    "files": [
+      "chapters/chapter_3_building_planning_a.md",
+      "chapters/chapter_3_building_planning_c.md",
+      "chapters/chapter_44_referenced_standards.md",
+      "chapters/chapter_7_wall_covering.md",
+      "chapters/chapter_9_roof_assemblies.md"
+    ],
+    "sections": [
+      [
+        "section_r324",
+        "R324 Solar Energy Systems"
+      ],
+      [
+        "r324_3",
+        "R324.3 Photovoltaic systems"
+      ],
+      [
+        "r324_3_1",
+        "R324.3.1 Equipment Listings"
+      ],
+      [
+        "r324_4_1",
+        "R324.4.1 Structural Requirements (Rooftop PV)"
+      ],
+      [
+        "r324_4_1_1",
+        "R324.4.1.1 Roof Load (Rooftop PV)"
+      ],
+      [
+        "r324_4_1_2",
+        "R324.4.1.2 Wind Load (Rooftop PV)"
+      ],
+      [
+        "r324_5",
+        "R324.5 Building-integrated Photovoltaic Systems"
+      ],
+      [
+        "r324_5_1",
+        "R324.5.1 Photovoltaic Shingles"
+      ],
+      [
+        "r324_5_2",
+        "R324.5.2 BIPV Fire Classification"
+      ],
+      [
+        "r324_5_3",
+        "R324.5.3 BIPV Roof Panels"
+      ],
+      [
+        "r324_7",
+        "R324.7 Ground-mounted PV systems"
+      ],
+      [
+        "r324_8",
+        "R324.8 Elevated PV Support Structures"
+      ],
+      [
+        "r324_8_1",
+        "R324.8.1 PV Panels over Open Grid Framing or Noncombustible Deck"
+      ],
+      [
+        "r324_8_2",
+        "R324.8.2 PV Panels over a Roof Assembly"
+      ],
+      [
+        "section_r703_2",
+        "R703.2 Water-resistive Barrier"
+      ],
+      [
+        "section_r901",
+        "R901 Roof Assembly Scope"
+      ],
+      [
+        "r902_3",
+        "R902.3 Building-integrated Photovoltaic Product"
+      ],
+      [
+        "r902_4",
+        "R902.4 Rooftop-mounted Photovoltaic (PV) Panel Systems"
+      ],
+      [
+        "section_r903",
+        "R903 Weather Protection"
+      ],
+      [
+        "section_r904",
+        "R904 Materials"
+      ],
+      [
+        "section_r905",
+        "R905 Requirements for Roof Coverings"
+      ],
+      [
+        "section_r905_1",
+        "R905.1 Roof Covering Application"
+      ],
+      [
+        "section_r905_16",
+        "R905.16 Photovoltaic Shingles"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_d1970",
+        "ASTM D1970 Self-adhering Polymer Modified Bitumen Underlayment"
+      ],
+      [
+        "std_astm_d226",
+        "ASTM D226 Asphalt-saturated Organic Felt"
+      ],
+      [
+        "std_astm_d4869",
+        "ASTM D4869 Asphalt-saturated Underlayment Steep Slope"
+      ],
+      [
+        "std_ul_1703",
+        "UL 1703 Flat-plate Photovoltaic Modules"
+      ],
+      [
+        "std_ul_1741",
+        "UL 1741 Inverters, Converters, Controllers and Interconnection System Equipment"
+      ],
+      [
+        "std_ul_2703",
+        "UL 2703 PV Mounting Systems and Rooftop Fire Classification"
+      ],
+      [
+        "std_ul_61730_1",
+        "UL 61730-1 PV Module Safety Qualification - Construction"
+      ],
+      [
+        "std_ul_61730_2",
+        "UL 61730-2 PV Module Safety Qualification - Testing"
+      ],
+      [
+        "std_ul_7103",
+        "UL 7103 Building-Integrated PV Roof Covering"
+      ]
+    ],
+    "others": [
+      [
+        "chapter_8",
+        "Chapter 8 Roof-Ceiling Construction"
+      ],
+      [
+        "table_r301_2",
+        "Table R301.2 Climatic and Geographic Design Criteria"
+      ],
+      [
+        "table_r301_2_1_1",
+        "Table R301.2.1(1) Component and Cladding Loads"
+      ],
+      [
+        "table_r905_1_1",
+        "Table R905.1.1 Underlayment Application"
+      ]
+    ]
+  },
+  "6": {
+    "label": "Existing/Tiny/Emergency Housing",
+    "files": [
+      "chapters/appendix_af_radon_control_methods.md",
+      "chapters/appendix_aj_existing_buildings_and_structures.md",
+      "chapters/appendix_aq_tiny_houses.md",
+      "chapters/appendix_ar_light_straw_clay_construction.md",
+      "chapters/appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+      "chapters/appendix_az_emergency_housing.md",
+      "external/main_code"
+    ],
+    "sections": [
+      [
+        "af_101_scope",
+        "AF101 Scope"
+      ],
+      [
+        "af_103_requirements",
+        "AF103 Radon-Resistant Construction Requirements"
+      ],
+      [
+        "af_104_testing",
+        "AF104 Radon Testing"
+      ],
+      [
+        "aj_102_compliance",
+        "AJ102 Compliance"
+      ],
+      [
+        "aq_105_emergency_escape",
+        "AQ105 Emergency Escape and Rescue"
+      ],
+      [
+        "aq_106_energy",
+        "AQ106 Tiny House Energy Conservation"
+      ],
+      [
+        "ar_104_thermal_performance",
+        "AR104 Thermal Performance"
+      ],
+      [
+        "ay_104_evacuation_locations",
+        "AY104 Evacuation Locations"
+      ],
+      [
+        "az_104_emergency_sleeping_cabins",
+        "AZ104 Emergency Sleeping Cabins"
+      ],
+      [
+        "az_105_transportable_units",
+        "AZ105 Emergency Transportable Housing Units"
+      ],
+      [
+        "appendix_af_radon_control_methods",
+        "Appendix AF Radon Control Methods"
+      ],
+      [
+        "appendix_aj_existing_buildings",
+        "Appendix AJ Existing Buildings and Structures"
+      ],
+      [
+        "appendix_aq_tiny_houses",
+        "Appendix AQ Tiny Houses"
+      ],
+      [
+        "appendix_ay_central_valley_flood",
+        "Appendix AY Central Valley Flood Protection"
+      ],
+      [
+        "appendix_az_emergency_housing",
+        "Appendix AZ Emergency Housing"
+      ],
+      [
+        "r105_3_1_1_flood",
+        "R105.3.1.1 Flood Hazard Permit"
+      ],
+      [
+        "r308_glazing",
+        "R308 Glazing"
+      ],
+      [
+        "r310_emergency_escape",
+        "R310 Emergency Escape and Rescue Openings"
+      ],
+      [
+        "r314_smoke_alarms",
+        "R314 Smoke Alarms"
+      ],
+      [
+        "r315_carbon_monoxide",
+        "R315 Carbon Monoxide Alarms"
+      ],
+      [
+        "r406_dampproofing",
+        "R406 Foundation Waterproofing/Dampproofing"
+      ],
+      [
+        "r408_ventilation_crawl",
+        "R408 Under-Floor Crawl Space Ventilation"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_f2090",
+        "ASTM F2090 Window Fall Prevention"
+      ]
+    ],
+    "others": [
+      [
+        "std_cebc",
+        "California Existing Building Code"
+      ],
+      [
+        "chapter_11_energy",
+        "Chapter 11 Energy Efficiency"
+      ],
+      [
+        "epa_radon_zone1",
+        "EPA Map of Radon Zones (Zone 1)"
+      ],
+      [
+        "gov_code_8558_emergency",
+        "Government Code 8558 State/Local Emergency"
+      ],
+      [
+        "hsc_50465_cvfpp",
+        "Health and Safety Code 50465"
+      ],
+      [
+        "m1505_mechanical_ventilation",
+        "M1505 Whole-House Mechanical Ventilation"
+      ],
+      [
+        "m1601_ducts",
+        "M1601 Duct Construction"
+      ],
+      [
+        "n1102_thermal_envelope",
+        "N1102 Building Thermal Envelope"
+      ]
+    ]
+  },
+  "7": {
+    "label": "Roof Coverings (Asphalt/Tile/Metal)",
+    "files": [
+      "chapters/chapter_3_building_planning_d.md",
+      "chapters/chapter_44_referenced_standards.md",
+      "chapters/chapter_9_roof_assemblies.md"
+    ],
+    "sections": [
+      [
+        "r337_6",
+        "R337.6 Vents"
+      ],
+      [
+        "section_r905_10",
+        "R905.10 Metal Roof Panels"
+      ],
+      [
+        "section_r905_2",
+        "R905.2 Asphalt Shingles"
+      ],
+      [
+        "section_r905_3",
+        "R905.3 Clay and Concrete Tile"
+      ],
+      [
+        "section_r905_4",
+        "R905.4 Metal Roof Shingles"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_a653",
+        "ASTM A653 Galvanized Steel Sheet"
+      ],
+      [
+        "std_astm_a792",
+        "ASTM A792/A792M Aluminum-zinc Alloy Steel Sheet"
+      ],
+      [
+        "std_astm_b101",
+        "ASTM B101 Lead-coated Copper Sheet"
+      ],
+      [
+        "std_astm_b370",
+        "ASTM B370 Copper Sheet for Building Construction"
+      ],
+      [
+        "std_astm_c1167",
+        "ASTM C1167 Clay Roof Tiles"
+      ],
+      [
+        "std_astm_c1492",
+        "ASTM C1492 Concrete Roof Tile"
+      ],
+      [
+        "std_astm_d3161",
+        "ASTM D3161 Wind-Resistance of Asphalt Shingles (Fan Method)"
+      ],
+      [
+        "std_astm_d3462",
+        "ASTM D3462 Asphalt Shingles from Glass Felt"
+      ],
+      [
+        "std_astm_d7158",
+        "ASTM D7158 Wind Resistance of Asphalt Shingles (Uplift)"
+      ],
+      [
+        "std_astm_e2886",
+        "ASTM E2886 Exterior Vent Ember Resistance"
+      ],
+      [
+        "std_astm_f1667",
+        "ASTM F1667 Driven Fasteners Nails Spikes Staples"
+      ],
+      [
+        "std_cbc_22",
+        "CBC-22 California Building Code"
+      ],
+      [
+        "std_fm_4474",
+        "FM 4474-2011 Wind Uplift Resistance Roof Assemblies"
+      ],
+      [
+        "std_ul_1897",
+        "UL 1897 Uplift Tests for Roof Covering Systems"
+      ],
+      [
+        "std_ul_580",
+        "UL 580 Test for Uplift Resistance of Roof Assemblies"
+      ]
+    ],
+    "others": [
+      [
+        "table_r905_2_4_1",
+        "Table R905.2.4.1 Asphalt Shingle Wind Classification"
+      ]
+    ]
+  },
+  "8": {
+    "label": "R602.10 Bracing Methods",
+    "files": [
+      "chapters/chapter_6_wall_construction_a.md"
+    ],
+    "sections": [
+      [
+        "section_r602_10_6",
+        "R602.10.6 Construction of ABW PFH PFG CS-PF"
+      ],
+      [
+        "section_r602_10_6_1",
+        "R602.10.6.1 Method ABW Alternate Braced Wall"
+      ],
+      [
+        "section_r602_10_6_2",
+        "R602.10.6.2 Method PFH Portal Frame Hold-down"
+      ],
+      [
+        "section_r602_10_6_3",
+        "R602.10.6.3 Method PFG Portal Frame at Garage"
+      ],
+      [
+        "section_r602_10_6_4",
+        "R602.10.6.4 Method CS-PF Continuously Sheathed Portal"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "method_abw",
+        "Method ABW Alternate Braced Wall"
+      ],
+      [
+        "method_cs_g",
+        "Method CS-G Continuously Sheathed Garage"
+      ],
+      [
+        "method_cs_pf",
+        "Method CS-PF Continuously Sheathed Portal Frame"
+      ],
+      [
+        "method_cs_sfb",
+        "Method CS-SFB Continuously Sheathed Structural Fiberboard"
+      ],
+      [
+        "method_cs_wsp",
+        "Method CS-WSP Continuously Sheathed WSP"
+      ],
+      [
+        "method_dwb",
+        "Method DWB Diagonal Wood Boards"
+      ],
+      [
+        "method_gb",
+        "Method GB Gypsum Board"
+      ],
+      [
+        "method_lib",
+        "Method LIB Let-In Bracing"
+      ],
+      [
+        "method_pfg",
+        "Method PFG Portal Frame Garage"
+      ],
+      [
+        "method_pfh",
+        "Method PFH Portal Frame Hold-Down"
+      ],
+      [
+        "method_wsp",
+        "Method WSP Wood Structural Panel"
+      ],
+      [
+        "table_r602_10_4",
+        "TABLE R602.10.4 Bracing Methods"
+      ]
+    ]
+  },
+  "9": {
+    "label": "Habitable Space & Fire Separation",
+    "files": [
+      "chapters/chapter_2_definitions.md",
+      "chapters/chapter_3_building_planning_a.md",
+      "chapters/chapter_3_building_planning_b.md"
+    ],
+    "sections": [
+      [
+        "section_r300",
+        "R300 Site Drainage"
+      ],
+      [
+        "section_r302",
+        "R302 Fire-Resistant Construction"
+      ],
+      [
+        "section_r302_1_exterior_walls",
+        "R302.1 Exterior Walls"
+      ],
+      [
+        "section_r302_11_fireblocking",
+        "R302.11 Fireblocking"
+      ],
+      [
+        "section_r302_13_fire_protection_floors",
+        "R302.13 Fire Protection of Floors"
+      ],
+      [
+        "section_r302_5_garage",
+        "R302.5 Dwelling-Garage Opening Protection"
+      ],
+      [
+        "section_r302_6_dwelling_garage_separation",
+        "R302.6 Dwelling-Garage Fire Separation"
+      ],
+      [
+        "section_r302_9_flame_spread",
+        "R302.9 Flame Spread Index and Smoke-Developed Index"
+      ],
+      [
+        "section_r303",
+        "R303 Light, Ventilation and Heating"
+      ],
+      [
+        "section_r303_1_habitable_rooms",
+        "R303.1 Habitable Rooms"
+      ],
+      [
+        "section_r304",
+        "R304 Minimum Room Areas"
+      ],
+      [
+        "section_r305",
+        "R305 Ceiling Height"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "california_green_building_standards_code",
+        "California Green Building Standards Code"
+      ],
+      [
+        "chapter_3_building_planning_a",
+        "Chapter 3 Building Planning (a)"
+      ],
+      [
+        "def_habitable_space",
+        "Habitable Space"
+      ]
+    ]
+  },
+  "10": {
+    "label": "Alternative Wall Systems",
+    "files": [
+      "chapters/appendix_ah_patio_covers.md",
+      "chapters/appendix_ar_light_straw_clay_construction.md",
+      "chapters/appendix_as_strawbale_construction.md",
+      "chapters/appendix_au_cob_construction_monolithic_adobe.md",
+      "chapters/appendix_aw_3d_printed_building_construction.md",
+      "external/main_code"
+    ],
+    "sections": [
+      [
+        "ah_105_structural",
+        "AH105 Structural Provisions"
+      ],
+      [
+        "ar_103_construction",
+        "AR103 Nonbearing Light Straw-Clay Construction"
+      ],
+      [
+        "as_103_bales",
+        "AS103 Bales"
+      ],
+      [
+        "au_103_materials_mixing",
+        "AU103 Materials, Mixing and Installation"
+      ],
+      [
+        "au_105_cob_walls",
+        "AU105 Cob Walls General"
+      ],
+      [
+        "appendix_ar_light_straw_clay",
+        "Appendix AR Light Straw-Clay Construction"
+      ],
+      [
+        "appendix_as_strawbale",
+        "Appendix AS Strawbale Construction"
+      ],
+      [
+        "appendix_au_cob_construction",
+        "Appendix AU Cob Construction (Monolithic Adobe)"
+      ],
+      [
+        "appendix_aw_3d_printed",
+        "Appendix AW 3D-Printed Building Construction"
+      ],
+      [
+        "r104_11_alternative_methods",
+        "R104.11 Alternative Materials/Methods"
+      ],
+      [
+        "r301_design_loads",
+        "R301 Design Criteria"
+      ],
+      [
+        "r506_concrete_floors",
+        "R506 Concrete Slab on Ground Floors"
+      ],
+      [
+        "r602_wood_wall_framing",
+        "R602 Wood Wall Framing"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_e2392",
+        "ASTM E2392 Earthen Wall Building Systems"
+      ]
+    ],
+    "others": []
+  },
+  "12": {
+    "label": "Wood Wall Fastening & Stud Sizing",
+    "files": [
+      "chapters/chapter_5_floors.md",
+      "chapters/chapter_6_wall_construction_a.md",
+      "chapters/chapter_6_wall_construction_b.md"
+    ],
+    "sections": [
+      [
+        "r502_5",
+        "R502.5 Allowable girder and header spans"
+      ],
+      [
+        "r502_9",
+        "R502.9 Fastening"
+      ],
+      [
+        "section_r602_10_8",
+        "R602.10.8 Braced Wall Panel Connections"
+      ],
+      [
+        "section_r602_3",
+        "R602.3 Wood Wall Design and Construction"
+      ],
+      [
+        "section_r603_3",
+        "R603.3 CFS Wall Construction"
+      ],
+      [
+        "section_r603_3_1",
+        "R603.3.1 CFS Wall to Foundation Connection"
+      ],
+      [
+        "section_r603_3_2",
+        "R603.3.2 Minimum CFS Stud Sizes"
+      ],
+      [
+        "section_r604",
+        "R604 Wood Structural Panels"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "table_r602_3_1",
+        "TABLE R602.3(1) Fastening Schedule"
+      ],
+      [
+        "table_r602_3_5",
+        "TABLE R602.3(5) Stud Sizing"
+      ]
+    ]
+  },
+  "13": {
+    "label": "Fireplaces & Chimneys",
+    "files": [
+      "chapters/chapter_10_chimneys_and_fireplaces.md",
+      "chapters/chapter_44_referenced_standards.md"
+    ],
+    "sections": [
+      [
+        "section_r1001",
+        "R1001 Masonry Fireplaces"
+      ],
+      [
+        "section_r1003",
+        "R1003 Masonry Chimneys"
+      ],
+      [
+        "section_r1004",
+        "R1004 Factory-built Fireplaces"
+      ],
+      [
+        "section_r1005",
+        "R1005 Factory-built Chimneys"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_c1261",
+        "ASTM C1261 Firebox Brick for Residential Fireplaces"
+      ],
+      [
+        "std_astm_c1283",
+        "ASTM C1283 Practice for Installing Clay Flue Lining"
+      ],
+      [
+        "std_astm_c315",
+        "ASTM C315 Clay Flue Liners and Chimney Pots"
+      ],
+      [
+        "std_ul_103",
+        "UL 103 Factory-built Chimneys"
+      ],
+      [
+        "std_ul_127",
+        "UL 127 Factory-built Fireplaces"
+      ],
+      [
+        "std_ul_1777",
+        "UL 1777 Chimney Liners"
+      ]
+    ],
+    "others": []
+  },
+  "14": {
+    "label": "Patio Covers & Renovations",
+    "files": [
+      "chapters/appendix_ah_patio_covers.md",
+      "chapters/appendix_aj_existing_buildings_and_structures.md",
+      "chapters/appendix_aq_tiny_houses.md",
+      "chapters/appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+      "external/main_code"
+    ],
+    "sections": [
+      [
+        "ah_101_scope",
+        "AH101 Patio Cover Scope"
+      ],
+      [
+        "ah_106_screen_enclosures",
+        "AH106 Aluminum Screen Enclosures Hurricane-Prone"
+      ],
+      [
+        "aj_108_renovations",
+        "AJ108 Renovations"
+      ],
+      [
+        "aj_110_reconstruction",
+        "AJ110 Reconstruction"
+      ],
+      [
+        "aq_104_lofts",
+        "AQ104 Lofts"
+      ],
+      [
+        "ay_107_rooftop_evacuation",
+        "AY107 Rooftop Evacuation Locations"
+      ],
+      [
+        "appendix_ah_patio_covers",
+        "Appendix AH Patio Covers"
+      ],
+      [
+        "r302_fire_safety",
+        "R302 Fire-Resistant Construction"
+      ],
+      [
+        "r311_means_of_egress",
+        "R311 Means of Egress"
+      ],
+      [
+        "r312_guards",
+        "R312 Guards and Window Fall Protection"
+      ]
+    ],
+    "standards": [],
+    "others": []
+  },
+  "15": {
+    "label": "Foundation-to-Floor Anchorage",
+    "files": [
+      "chapters/chapter_3_building_planning_c.md",
+      "chapters/chapter_4_foundations_a.md",
+      "chapters/chapter_4_foundations_b.md",
+      "chapters/chapter_5_floors.md"
+    ],
+    "sections": [
+      [
+        "section_r317",
+        "R317 Protection of Wood Against Decay"
+      ],
+      [
+        "section_r318",
+        "R318 Protection Against Subterranean Termites"
+      ],
+      [
+        "r403_1_6",
+        "R403.1.6 Foundation anchorage"
+      ],
+      [
+        "r404_2",
+        "R404.2 Wood foundation walls"
+      ],
+      [
+        "r404_3",
+        "R404.3 Wood sill plates"
+      ],
+      [
+        "r502_2",
+        "R502.2 Design and construction"
+      ],
+      [
+        "r502_2_1",
+        "R502.2.1 Framing at braced wall lines"
+      ],
+      [
+        "r502_6",
+        "R502.6 Bearing"
+      ]
+    ],
+    "standards": [],
+    "others": []
+  },
+  "16": {
+    "label": "Soil Bearing & Footing Tables",
+    "files": [
+      "chapters/chapter_4_foundations_a.md"
+    ],
+    "sections": [
+      [
+        "r401_4_1",
+        "R401.4.1 Geotechnical evaluation"
+      ],
+      [
+        "r401_4_1_1",
+        "R401.4.1.1 HCD foundation/soils investigations"
+      ],
+      [
+        "r403_1_1",
+        "R403.1.1 Minimum size"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "table_r401_4_1",
+        "Table R401.4.1 Presumptive Load-Bearing Values"
+      ],
+      [
+        "table_r403_1_1",
+        "Table R403.1(1) Min Width and Thickness for Concrete Footings (light-frame)"
+      ],
+      [
+        "table_r403_1_2",
+        "Table R403.1(2) Min Width/Thickness Concrete Footings (brick veneer)"
+      ],
+      [
+        "table_r403_1_3",
+        "Table R403.1(3) Min Width/Thickness Concrete Footings (CMU/Concrete walls)"
+      ]
+    ]
+  },
+  "17": {
+    "label": "Flood & Expansive Soil Foundations",
+    "files": [
+      "chapters/chapter_3_building_planning_c.md",
+      "chapters/chapter_4_foundations_a.md",
+      "chapters/chapter_4_foundations_b.md"
+    ],
+    "sections": [
+      [
+        "r322_1",
+        "R322.1 General Flood"
+      ],
+      [
+        "r322_2",
+        "R322.2 Flood hazard areas (A Zones)"
+      ],
+      [
+        "r322_3",
+        "R322.3 Coastal high-hazard areas"
+      ],
+      [
+        "r401_4",
+        "R401.4 Soil tests"
+      ],
+      [
+        "r403_1_8",
+        "R403.1.8 Foundations on expansive soils"
+      ],
+      [
+        "r404_4",
+        "R404.4 Retaining walls"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "def_expansive_soil",
+        "Defined: Expansive Soil"
+      ]
+    ]
+  },
+  "18": {
+    "label": "Referenced Codes & EV Charging",
+    "files": [
+      "chapters/chapter_1_scope_and_application.md",
+      "chapters/chapter_3_building_planning_b.md"
+    ],
+    "sections": [
+      [
+        "section_r309",
+        "R309 Garages and Carports"
+      ],
+      [
+        "section_r309_8_ev",
+        "R309.8 Electric Vehicle Charging Infrastructure"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "section_1_1_11_format",
+        "1.1.11 Format"
+      ],
+      [
+        "section_1_1_5_referenced_codes",
+        "1.1.5 Referenced Codes"
+      ],
+      [
+        "international_residential_code_2021",
+        "2021 International Residential Code"
+      ]
+    ]
+  },
+  "19": {
+    "label": "Precast Concrete Foundations",
+    "files": [
+      "chapters/chapter_4_foundations_a.md",
+      "chapters/chapter_4_foundations_b.md"
+    ],
+    "sections": [
+      [
+        "r402_3",
+        "R402.3 Precast concrete"
+      ],
+      [
+        "r403_4",
+        "R403.4 Footings for precast concrete foundations"
+      ],
+      [
+        "r404_5",
+        "R404.5 Precast concrete foundation walls"
+      ],
+      [
+        "r404_5_1",
+        "R404.5.1 Precast concrete foundation design"
+      ]
+    ],
+    "standards": [],
+    "others": [
+      [
+        "table_r403_4",
+        "Table R403.4 Min Depth/Width Crushed Stone Footings"
+      ]
+    ]
+  },
+  "20": {
+    "label": "Concrete Wall Reinforcement",
+    "files": [
+      "chapters/chapter_6_wall_construction_d.md"
+    ],
+    "sections": [
+      [
+        "section_r608_5",
+        "R608.5 Concrete Materials"
+      ],
+      [
+        "section_r608_5_4",
+        "R608.5.4 Reinforcement Installation"
+      ],
+      [
+        "section_r608_6",
+        "R608.6 Above-Grade Wall Requirements"
+      ],
+      [
+        "section_r608_7",
+        "R608.7 Solid Walls Lateral Forces"
+      ],
+      [
+        "section_r608_8",
+        "R608.8 Concrete Lintels and Reinforcement"
+      ]
+    ],
+    "standards": [],
+    "others": []
+  },
+  "21": {
+    "label": "Single-Ply Membrane Roofing",
+    "files": [
+      "chapters/chapter_44_referenced_standards.md",
+      "chapters/chapter_9_roof_assemblies.md"
+    ],
+    "sections": [
+      [
+        "section_r905_12",
+        "R905.12 EPDM Single-ply Roofing"
+      ],
+      [
+        "section_r905_13",
+        "R905.13 TPO/PVC Single-ply Roofing"
+      ]
+    ],
+    "standards": [
+      [
+        "std_astm_d4434",
+        "ASTM D4434 PVC Sheet Roofing"
+      ],
+      [
+        "std_astm_d4637",
+        "ASTM D4637 EPDM Sheet Single-ply Roofing"
+      ],
+      [
+        "std_astm_d6878",
+        "ASTM D6878 Thermoplastic-polyolefin (TPO) Sheet Roofing"
+      ]
+    ],
+    "others": []
+  },
+  "22": {
+    "label": "Existing Building Permits",
+    "files": [
+      "chapters/chapter_1_scope_and_application.md"
+    ],
+    "sections": [],
+    "standards": [],
+    "others": [
+      [
+        "section_1_8_3_local_enforcing_agency",
+        "1.8.3 Local Enforcing Agency"
+      ],
+      [
+        "section_1_8_4_permits",
+        "1.8.4 Permits, Fees, Applications and Inspections"
+      ],
+      [
+        "section_1_8_7_alternates",
+        "1.8.7 Alternate Materials, Designs, Tests, Methods"
+      ],
+      [
+        "california_existing_building_code",
+        "California Existing Building Code"
+      ]
+    ]
+  },
+  "23": {
+    "label": "Carbon Monoxide Alarms",
+    "files": [
+      "chapters/chapter_3_building_planning_c.md"
+    ],
+    "sections": [
+      [
+        "r315_2",
+        "R315.2 Where required"
+      ],
+      [
+        "r315_3",
+        "R315.3 Location"
+      ],
+      [
+        "r315_5",
+        "R315.5 Interconnectivity"
+      ],
+      [
+        "r315_6",
+        "R315.6 Power source"
+      ]
+    ],
+    "standards": [],
+    "others": []
+  },
+  "24": {
+    "label": "Foam Plastic Protection",
+    "files": [
+      "chapters/chapter_3_building_planning_c.md",
+      "chapters/chapter_4_foundations_b.md"
+    ],
+    "sections": [
+      [
+        "r316_4",
+        "R316.4 Thermal barrier"
+      ],
+      [
+        "r316_5_3",
+        "R316.5.3 Attics"
+      ],
+      [
+        "r316_5_4",
+        "R316.5.4 Crawl spaces"
+      ],
+      [
+        "r408_4",
+        "R408.4 Crawl space access"
+      ]
+    ],
+    "standards": [],
+    "others": []
+  }
+}

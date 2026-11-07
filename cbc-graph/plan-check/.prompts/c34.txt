@@ -1,0 +1,77 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 7 Fire And Smoke Protection Features" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch7_chapter_7_fire_and_smoke_protection_features.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c34_chapter_7_fire_and_smoke_protection_features_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_716_1                                                     716.1 General — Opening Protectives
+  sec_716_2_1_1                                                 716.2.1.1 Side-Hinged or Pivoted Swinging Doors
+  sec_716_3                                                     716.3 Fire Window Assemblies
+  sec_716_4                                                     716.4 Fire Protective Curtain Assembly
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_716_1_1                                                 Table 716.1(1) Marking Fire-Rated Glazing Assemblies
+  table_716_1_3                                                 Table 716.1(3) Fire Window Assembly Fire Protection Ratings
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_nfpa_252                                                  NFPA 252
+  std_nfpa_257                                                  NFPA 257
+  std_nfpa_80                                                   NFPA 80
+  std_ul_10b                                                    UL 10B
+  std_ul_10c                                                    UL 10C
+  std_ul_10d                                                    UL 10D
+  std_ul_9                                                      UL 9
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_716_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 7 Fire And Smoke Protection Features",
+  "community_id": 34,
+  "extracted_from_sections": ["ch7_chapter_7_fire_and_smoke_protection_features.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-12 rules. After writing the file, just confirm "wrote c34_chapter_7_fire_and_smoke_protection_features_rules.json with N rules" and stop.

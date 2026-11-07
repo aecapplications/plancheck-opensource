@@ -1,0 +1,120 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 16A Structural Design" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch16a_chapter_16a_structural_design.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c09_chapter_16a_structural_design_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ch16a_section_1601a_general                                   Section 1601A General
+  ch16a_section_1602a_notations                                 Section 1602A Notations
+  ch16a_section_1603a_construction_documents                    Section 1603A Construction Documents
+  ch16a_section_1604a_general_design_requirements               Section 1604A General Design Requirements
+  ch16a_section_1604a_3_serviceability                          Section 1604A.3 Serviceability and Deflections
+  ch16a_section_1604a_5_risk_category                           Section 1604A.5 Risk Category
+  ch16a_section_1604a_8_anchorage                               Section 1604A.8 Anchorage
+  ch16a_section_1605a_load_combinations                         Section 1605A Load Combinations
+  ch16a_section_1605a_2_alternative_asd_load_combinations       Section 1605A.2 Alternative Allowable Stress Design Load Com
+  ch16a_section_1606a_dead_loads                                Section 1606A Dead Loads
+  ch16a_section_1607a_live_loads                                Section 1607A Live Loads
+  ch16a_section_1607a_12_live_load_reduction                    Section 1607A.12 Reduction in Uniform Live Loads
+  ch16a_section_1607a_14_roof_loads                             Section 1607A.14 Roof Loads
+  ch16a_section_1607a_15_crane_loads                            Section 1607A.15 Crane Loads
+  ch16a_section_1607a_9_handrails_guards                        Section 1607A.9 Loads on Handrails, Guards, Grab Bars and Se
+  ch16a_section_1608a_snow_loads                                Section 1608A Snow Loads
+  ch16a_section_1609a_wind_loads                                Section 1609A Wind Loads
+  ch16a_section_1609a_3_basic_design_wind_speed                 Section 1609A.3 Basic Design Wind Speed
+  ch16a_section_1609a_3_1_wind_speed_conversion                 Section 1609A.3.1 Wind Speed Conversion
+  ch16a_section_1609a_4_exposure_category                       Section 1609A.4 Exposure Category
+  ch16a_section_1609a_5_3_rigid_tile                            Section 1609A.5.3 Rigid Tile Roof Wind Loads
+  ch16a_section_1611a_rain_loads                                Section 1611A Rain Loads
+  ch16a_section_1612a_flood_loads                               Section 1612A Flood Loads
+  ch16a_section_1612a_3_flood_hazard_areas                      Section 1612A.3 Establishment of Flood Hazard Areas
+  ch16a_section_1613a_earthquake_loads                          Section 1613A Earthquake Loads
+  ch16a_section_1613a_2_seismic_ground_motion                   Section 1613A.2 Seismic Ground Motion Values
+  ch16a_section_1613a_2_5_seismic_design_category               Section 1613A.2.5 Determination of Seismic Design Category
+  ch16a_section_1614a_atmospheric_ice_loads                     Section 1614A Atmospheric Ice Loads
+  ch16a_section_1615a_tsunami_loads                             Section 1615A Tsunami Loads
+  ch16a_section_1616a_structural_integrity                      Section 1616A Structural Integrity
+  ch16a_section_1705a_special_inspection                        Section 1705A Special Inspection
+  ch16a_section_1807a_2_3_retaining_wall_stability              Section 1807A.2.3 Retaining Wall Stability
+  ch16a_2020_nehrp_provisions                                   2020 NEHRP Provisions
+  ch16a_section_2308_conventional_light_frame                   Section 2308 Conventional Light-Frame Construction
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  ch16a_table_1604a_3_deflection_limits                         Table 1604A.3 Deflection Limits
+  ch16a_table_1604a_4_diaphragm_span_depth                      Table 1604A.4 Maximum Horizontal Diaphragm Span and Span-Dep
+  ch16a_table_1604a_5_risk_category                             Table 1604A.5 Risk Category of Buildings and Other Structure
+  ch16a_table_1607a_12_1_live_load_element_factor               Table 1607A.12.1 Live Load Element Factor K_LL
+  ch16a_table_1607a_1_minimum_live_loads                        Table 1607A.1 Minimum Uniformly Distributed and Concentrated
+  ch16a_table_1609a_2_windborne_debris_fastening                Table 1609A.2 Windborne Debris Protection Fastening Schedule
+  ch16a_table_1609a_3_1_wind_speed_conversions                  Table 1609A.3.1 Wind Speed Conversions
+  ch16a_table_1613a_2_3_1_site_coefficient_fa                   Table 1613A.2.3(1) Values of Site Coefficient Fa
+  ch16a_table_1613a_2_3_2_site_coefficient_fv                   Table 1613A.2.3(2) Values of Site Coefficient Fv
+  ch16a_aa_adm                                                  AA ADM Aluminum Design Manual
+  ch16a_california_administrative_code                          California Administrative Code (Title 24 Part 1)
+  ch16a_icc_300                                                 ICC 300 Standard on Bleachers, Folding and Telescopic Seatin
+  ch16a_icc_500                                                 ICC 500 Standard for Storm Shelters
+  ch16a_icc_600                                                 ICC 600 Standard for Residential Construction in High-Wind R
+  ch16a_oshpd                                                   Office of Statewide Health Planning and Development (OSHPD)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  ch16a_aci_318                                                 ACI 318 Building Code Requirements for Structural Concrete
+  ch16a_aisc_360                                                AISC 360 Specification for Structural Steel Buildings
+  ch16a_asce_24                                                 ASCE 24 Flood Resistant Design and Construction
+  ch16a_asce_7                                                  ASCE 7 Minimum Design Loads
+  ch16a_astm_e1996                                              ASTM E1996 Performance of Exterior Windows Under Windborne D
+  ch16a_section_1617a_modifications_to_asce_7                   Section 1617A Modifications to ASCE 7
+  ch16a_tms_402                                                 TMS 402 Building Code Requirements for Masonry Structures
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. ch16a_section_1601a_general>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 16A Structural Design",
+  "community_id": 9,
+  "extracted_from_sections": ["ch16a_chapter_16a_structural_design.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-34 rules. After writing the file, just confirm "wrote c09_chapter_16a_structural_design_rules.json with N rules" and stop.

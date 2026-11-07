@@ -1,0 +1,121 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 3 Occupancy Classification And Use" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch21a_chapter_21a_masonry.md
+cbc-graph/chapters/ch3_chapter_3_occupancy_classification_and_use.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c10_chapter_3_occupancy_classification_and_use_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ch21a_section_2101a_general                                   Section 2101A General (Masonry Scope/Design Methods)
+  ch21a_section_2102a_notations                                 Section 2102A Notations
+  ch21a_section_2103a_construction_materials                    Section 2103A Masonry Construction Materials
+  ch21a_section_2104a_construction                              Section 2104A Construction
+  ch21a_section_2105a_quality_assurance                         Section 2105A Quality Assurance
+  ch21a_section_2106a_seismic_design                            Section 2106A Seismic Design
+  ch21a_section_2107a_allowable_stress_design                   Section 2107A Allowable Stress Design
+  ch21a_section_2108a_strength_design                           Section 2108A Strength Design of Masonry
+  ch21a_section_2109a_empirical_adobe                           Section 2109A Empirical Design of Adobe Masonry
+  ch21a_section_2110a_glass_unit_masonry                        Section 2110A Glass Unit Masonry
+  ch21a_section_2111a_masonry_fireplaces                        Section 2111A Masonry Fireplaces
+  ch21a_section_2112a_masonry_heaters                           Section 2112A Masonry Heaters
+  ch21a_section_2113a_masonry_chimneys                          Section 2113A Masonry Chimneys
+  ch21a_section_2114a_dry_stack_masonry                         Section 2114A Dry-Stack Masonry
+  ch3_section_301_scope                                         Section 301 Scope
+  ch3_section_302_occupancy_classification                      Section 302 Occupancy Classification and Use Designation
+  ch3_section_303_assembly_group_a                              Section 303 Assembly Group A
+  ch3_section_304_business_group_b                              Section 304 Business Group B
+  ch3_section_305_educational_group_e                           Section 305 Educational Group E
+  ch3_section_306_factory_group_f                               Section 306 Factory Industrial Group F
+  ch3_section_307_high_hazard_group_h                           Section 307 High-Hazard Group H
+  ch3_section_308_institutional_group_i                         Section 308 Institutional Group I
+  ch3_section_309_mercantile_group_m                            Section 309 Mercantile Group M
+  ch3_section_310_residential_group_r                           Section 310 Residential Group R
+  ch3_section_311_storage_group_s                               Section 311 Storage Group S
+  ch3_section_312_utility_group_u                               Section 312 Utility and Miscellaneous Group U
+  ch3_section_313_laboratories_group_l                          Section 313 Laboratories Group L [SFM]
+  ch3_section_314_organized_camps_group_c                       Section 314 Organized Camps Group C [SFM]
+  ch3_section_414_hazardous_materials                           Section 414 Hazardous Materials (referenced)
+  ch3_section_508_mixed_use                                     Section 508 Mixed Use and Occupancy (referenced)
+  ch3_section_903_3_sprinkler                                   Section 903.3 Automatic Sprinkler System (referenced)
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  ch21a_table_2103a_2_3_ceramic_tile_mortar                     Table 2103A.2.3 Ceramic Tile Mortar Compositions
+  ch21a_table_2113a_16_flue_sizes                               Tables 2113A.16(1) & 2113A.16(2) Flue Cross-Sectional Areas
+  ch21a_table_2114a_4_dry_stack_stress                          Table 2114A.4 Allowable Stress for Dry-Stack Masonry
+  ch21a_table_705_5_fire_resistance                             Table 705.5 Fire-Resistance Rating (referenced)
+  ch21a_table_8_3_4_4_min_wall_thickness                        Table 8.3.4.4 Minimum Thickness of Masonry Walls
+  ch3_table_307_1_1_physical_hazard                             Table 307.1(1) Max Allowable Quantity per Control Area - Phy
+  ch3_table_307_1_2_health_hazard                               Table 307.1(2) Max Allowable Quantity per Control Area - Hea
+  ch21a_oshpd                                                   Office of Statewide Health Planning and Development (OSHPD)
+  ch21a_seismic_design_category                                 Seismic Design Category
+  ch3_california_fire_code                                      California Fire Code (referenced)
+  ch3_california_residential_code                               California Residential Code (referenced)
+  ch3_group_a                                                   Assembly Group A (A-1, A-2, A-3, A-4, A-5)
+  ch3_group_b                                                   Business Group B
+  ch3_group_c                                                   Organized Camps Group C
+  ch3_group_e                                                   Educational Group E
+  ch3_group_f                                                   Factory Industrial Group F (F-1, F-2)
+  ch3_group_h                                                   High-Hazard Group H (H-1, H-2, H-3, H-4, H-5)
+  ch3_group_i                                                   Institutional Group I (I-2, I-2.1, I-3, I-4)
+  ch3_group_l                                                   Laboratories Group L
+  ch3_group_m                                                   Mercantile Group M
+  ch3_group_r                                                   Residential Group R (R-1, R-2, R-2.1, R-3, R-3.1, R-4)
+  ch3_group_s                                                   Storage Group S (S-1, S-2)
+  ch3_group_u                                                   Utility and Miscellaneous Group U
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  ch21a_tms_402                                                 TMS 402 (Masonry Design Standard)
+  ch21a_tms_602                                                 TMS 602 (Masonry Specification)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. ch21a_section_2101a_general>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 3 Occupancy Classification And Use",
+  "community_id": 10,
+  "extracted_from_sections": ["ch21a_chapter_21a_masonry.md", "ch3_chapter_3_occupancy_classification_and_use.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-31 rules. After writing the file, just confirm "wrote c10_chapter_3_occupancy_classification_and_use_rules.json with N rules" and stop.

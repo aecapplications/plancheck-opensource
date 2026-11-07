@@ -1,0 +1,177 @@
+You are a plan-check rule extraction subagent. The graph community "Hazardous Equipment Suitability (500.8)" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c05_hazardous_equipment_suitability_500_8_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_250_102  250.102 (Bonding Jumpers)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_250_122  250.122 (EGC Sizing)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_336_10  336.10 (Type TC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_337_10  337.10 (Type P Cable)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_400_23  400.23 (EGC for Flexible Cords)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_450_41_48  450.41-450.48 (Transformer Vaults)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8  500.8 Equipment
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_a  500.8(A) Suitability
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_b  500.8(B) Approval for Class and Properties
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_c  500.8(C) Marking
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_d  500.8(D) Temperature
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_e  500.8(E) Threading
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_f  500.8(F) Optical Fiber Cables
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_500_8_g  500.8(G) Equipment Involving Optical Radiation
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_1  501.1 Scope (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_10  501.10 Wiring Methods
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_10_a  501.10(A) Class I, Division 1 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_10_b  501.10(B) Class I, Division 2 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_100  501.100 Transformers and Capacitors (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_105  501.105 Meters, Instruments, and Relays (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_115  501.115 Switches, Circuit Breakers, Motor Controllers, Fuses
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_120  501.120 Control Transformers and Resistors (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_125  501.125 Motors and Generators (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_130  501.130 Luminaires (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_135  501.135 Utilization Equipment (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_140  501.140 Flexible Cords (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_145  501.145 Receptacles and Attachment Plugs (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15  501.15 Sealing and Drainage
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_a  501.15(A) Conduit Seals, Class I, Division 1
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_b  501.15(B) Conduit Seals, Class I, Division 2
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_c  501.15(C) Class I Divisions 1 and 2 Seal Specs
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_d  501.15(D) Cable Seals, Class I, Division 1
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_e  501.15(E) Cable Seals, Class I, Division 2
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_15_f  501.15(F) Drainage
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_150  501.150 Signaling, Alarm, Remote-Control, Comms (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_17  501.17 Process Sealing
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_20  501.20 Conductor Insulation, Class I
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_30  501.30 Grounding and Bonding, Class I
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_35  501.35 Surge Protection (Class I)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_501_5  501.5 Zone Equipment
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_1  502.1 Scope (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_10  502.10 Wiring Methods (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_10_a  502.10(A) Class II, Division 1 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_10_b  502.10(B) Class II, Division 2 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_100  502.100 Transformers and Capacitors (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_115  502.115 Switches, Circuit Breakers, Motor Controllers, Fuses
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_120  502.120 Control Transformers and Resistors (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_125  502.125 Motors and Generators (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_128  502.128 Ventilating Piping (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_130  502.130 Luminaires (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_135  502.135 Utilization Equipment (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_140  502.140 Flexible Cords (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_145  502.145 Receptacles and Attachment Plugs (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_15  502.15 Sealing, Class II
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_150  502.150 Signaling, Alarm, Remote-Control, Comms (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_30  502.30 Grounding and Bonding (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_35  502.35 Surge Protection (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_5  502.5 Explosionproof Equipment (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_502_6  502.6 Zone Equipment (Class II)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_1  503.1 Scope (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_10  503.10 Wiring Methods (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_10_a  503.10(A) Class III, Division 1 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_10_b  503.10(B) Class III, Division 2 Wiring
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_100  503.100 Transformers and Capacitors (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_115  503.115 Switches, Circuit Breakers, Motor Controllers, Fuses
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_120  503.120 Control Transformers and Resistors (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_125  503.125 Motors and Generators (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_128  503.128 Ventilating Piping (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_130  503.130 Luminaires (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_135  503.135 Utilization Equipment (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_140  503.140 Flexible Cords (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_145  503.145 Receptacles and Attachment Plugs (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_150  503.150 Signaling, Alarm, Remote-Control, Loudspeaker (Class
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_30  503.30 Grounding and Bonding (Class III)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_5  503.5 General — Surface Temp Limits 165C/120C
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_503_6  503.6 Zone Equipment (Class III)
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_table_500_8_c  Table 500.8(C) Classification of Maximum Surface Temperature
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_table_400_4  Table 400.4 (Flexible Cords)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_concept_autoignition_temperature  Autoignition Temperature (80% threshold)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_concept_boundary_seal_10ft  10-foot (3.05 m) boundary seal placement
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_concept_seal_18in  18-inch (450 mm) seal proximity rule
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_motor_inert_gas_filled  Totally Enclosed Inert-Gas-Filled Motor
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_motor_te_pressurized  Totally Enclosed Motor with Positive-Pressure Ventilation
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_pendant_luminaire  Pendant Luminaire
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_sealing_fitting  Sealing Fitting (conduit/cable seal)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_squirrel_cage_motor  Squirrel-Cage Induction Motor
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_surge_arrester  Surge Arrester / SPD
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_te_fan_cooled  Totally Enclosed Fan-Cooled Machine
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_eq_te_pipe_ventilated  Totally Enclosed Pipe-Ventilated Machine
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_cablebus  Cablebus
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_dusttight_wireway  Dusttight Wireways
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_elevator_cable  Elevator Cable Type EO/ETP/ETT
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_emt  Electrical Metallic Tubing (Type EMT)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_flex_cord  Flexible Cord (extra-hard usage)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_hdpe  Type HDPE Conduit (encased)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_imc  Threaded Intermediate Metal Conduit (Type IMC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_itc  Types ITC and ITC-ER Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_itc_hl_cable  Type ITC-HL Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_lfmc  Liquidtight Flexible Metal Conduit (LFMC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_lfnc  Liquidtight Flexible Nonmetallic Conduit (LFNC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_mc_cable  Type MC Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_mc_hl_cable  Type MC-HL Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_mi_cable  Type MI Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_mv_cable  Type MV Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_optical_fiber  Optical Fiber Cables (OFNP/OFCP/OFNR/OFCR/OFNG/OFCG/OFN/OFC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_pltc  Types PLTC and PLTC-ER Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_pvc_conduit  Type PVC Conduit
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_rmc  Threaded Rigid Metal Conduit (Type RMC)
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_rtrc  Type RTRC Conduit
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_tc_cable  Type TC / TC-ER Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_tc_er_hl_cable  Type TC-ER-HL Cable
+  14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_wm_type_p_cable  Type P Cable
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes_xref_250_102>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Hazardous Equipment Suitability (500.8)",
+  "community_id": 5,
+  "extracted_from_sections": ["14_chapter_5_special_occupancies_article_500_hazardous_classified_locations_classes.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 19-76 rules. After writing the file, just confirm "wrote c05_hazardous_equipment_suitability_500_8_rules.json with N rules" and stop.

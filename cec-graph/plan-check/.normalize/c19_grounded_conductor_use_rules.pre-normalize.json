@@ -1,0 +1,2474 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Grounded Conductor Use",
+  "community_id": 19,
+  "extracted_from_sections": [
+    "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+    "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt",
+    "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati.txt",
+    "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca.txt",
+    "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_200_2",
+      "cite": "200.2",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_2",
+      "title": "Provide compliant insulation and independent continuity for grounded conductors",
+      "intent": "Ensure the grounded (neutral) conductor is insulated equivalently to ungrounded conductors and remains continuous without relying on metallic enclosures, so the return path is never interrupted by hardware changes.",
+      "applies_when": [
+        {
+          "predicate": "has_grounded_conductor_in_premises_wiring"
+        }
+      ],
+      "requires": {
+        "type": "conductor_insulation_and_continuity",
+        "insulation": {
+          "if_insulated": true,
+          "any_of": [
+            {
+              "predicate": "insulation_suitable_for_ungrounded_conductor_of_same_circuit",
+              "applies_when": [
+                {
+                  "any_of": [
+                    {
+                      "predicate": "system_voltage_<=_1000v"
+                    },
+                    {
+                      "predicate": "is_impedance_grounded_neutral_system_>_1000v"
+                    }
+                  ]
+                }
+              ],
+              "note": "suitability is other than color"
+            },
+            {
+              "predicate": "insulation_rating_>=_600v",
+              "applies_when": [
+                {
+                  "predicate": "is_solidly_grounded_neutral_system_>_1000v"
+                }
+              ]
+            }
+          ]
+        },
+        "continuity": "continuity_of_grounded_conductor_shall_not_depend_on_connection_to_metallic_enclosure_raceway_or_cable_armor"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor schedule or panel schedule showing grounded conductor insulation type and voltage rating",
+        "One-line diagram identifying system grounding (solidly grounded vs. impedance grounded) and system voltage",
+        "Wiring details showing grounded conductor spliced/terminated independent of enclosures, raceways, or cable armor"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_184",
+        "cec_300_13"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_200_10",
+      "cite": "200.10",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_10",
+      "title": "Identify grounded-conductor terminals on devices, receptacles, plugs, and screw shells",
+      "intent": "Prevent reversed polarity by making the terminal intended for the grounded conductor visually identifiable on wiring devices.",
+      "applies_when": [
+        {
+          "predicate": "is_device_with_terminals_for_conductor_attachment"
+        },
+        {
+          "predicate": "intended_for_connection_to_more_than_one_side_of_circuit"
+        },
+        {
+          "not": {
+            "predicate": "is_panelboard"
+          }
+        }
+      ],
+      "requires": {
+        "type": "terminal_identification",
+        "device_terminals": "terminals_properly_marked_for_identification_unless_grounded_terminal_connection_clearly_evident",
+        "receptacles_plugs_connectors": {
+          "grounded_terminal_identification_any_of": [
+            "metal_or_metal_coating_substantially_white_or_silver",
+            "word_white_or_letter_w_adjacent_to_terminal",
+            "conductor_entrance_hole_colored_white_or_marked_white_or_w_if_terminal_not_visible"
+          ]
+        },
+        "screw_shells": "terminal_for_grounded_conductor_shall_be_the_screw_shell",
+        "screw_shell_devices_with_leads": "conductor_attached_to_screw_shell_shall_have_white_or_gray_finish",
+        "appliances": "means_to_identify_grounded_circuit_conductor_terminal_where_single_pole_switch_or_overcurrent_device_in_line"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "device_normal_current_rating_>_30a"
+            },
+            {
+              "not": {
+                "any_of": [
+                  {
+                    "predicate": "is_polarized_attachment_plug"
+                  },
+                  {
+                    "predicate": "is_polarized_receptacle_for_attachment_plug"
+                  }
+                ]
+              }
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Device and receptacle cut sheets showing white/silver grounded-terminal identification or 'W' marking",
+        "Fixture/lampholder details showing screw shell wired to the grounded conductor",
+        "Appliance listing documentation identifying the grounded circuit conductor terminal"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_126"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_4",
+      "cite": "210.4",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_4",
+      "title": "Install multiwire branch circuits with common origin, simultaneous disconnect, line-to-neutral loads, and grouping",
+      "intent": "Prevent shock and open-neutral overvoltage hazards on shared-neutral circuits by ensuring all ungrounded conductors disconnect together and conductors are identifiable.",
+      "applies_when": [
+        {
+          "predicate": "is_multiwire_branch_circuit"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_configuration",
+        "constraints": [
+          "all_conductors_originate_from_same_panelboard_or_distribution_equipment",
+          "means_to_simultaneously_disconnect_all_ungrounded_conductors_at_circuit_origin",
+          "supplies_only_line_to_neutral_loads",
+          "ungrounded_and_grounded_conductors_grouped_per_200_4_b"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "circuit_supplies_only_one_utilization_equipment"
+            }
+          ],
+          "effect": "line_to_neutral_load_restriction_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "all_ungrounded_conductors_opened_simultaneously_by_branch_circuit_overcurrent_device"
+            }
+          ],
+          "effect": "line_to_neutral_load_restriction_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedules showing multiwire circuits with common panelboard origin",
+        "Breaker layout showing multipole breakers or identified handle ties on multiwire circuits",
+        "Circuit directory/load list confirming line-to-neutral loads only",
+        "Wiring detail or note requiring grouping of multiwire circuit conductors in enclosures"
+      ],
+      "depends_on": [
+        "cec_240_15",
+        "cec_300_13"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_10",
+      "cite": "215.10",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_10",
+      "title": "Provide ground-fault protection of equipment on large feeder disconnects",
+      "intent": "Protect equipment from destructive arcing ground faults on high-capacity solidly grounded wye feeders.",
+      "applies_when": [
+        {
+          "predicate": "feeder_disconnect_rating_>=_1000a"
+        },
+        {
+          "predicate": "is_solidly_grounded_wye_system"
+        },
+        {
+          "predicate": "voltage_to_ground_>_150v"
+        },
+        {
+          "predicate": "voltage_phase_to_phase_<=_600v"
+        }
+      ],
+      "requires": {
+        "type": "ground_fault_protection_of_equipment",
+        "constraints": [
+          "gfpe_provided_in_accordance_with_230_95"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_continuous_industrial_process_where_nonorderly_shutdown_increases_hazard"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "gfpe_provided_on_supply_side_of_feeder"
+            },
+            {
+              "predicate": "gfpe_provided_on_load_side_of_any_transformer_supplying_feeder"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "is_temporary_feeder_connecting_generator_for_repair_maintenance_or_emergency"
+            },
+            {
+              "predicate": "duration_<=_90_days"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "One-line diagram showing feeder disconnect ampere ratings and system grounding configuration",
+        "GFPE device specifications and settings for each feeder disconnect rated 1000 A or more",
+        "Voltage system documentation (e.g., 480Y/277 V) confirming applicability"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_230_95"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_2_ees_feeders",
+      "cite": "215.2 (as applied by 517.31(D))",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_215_2",
+      "title": "Size essential electrical system feeders per 215.2 and Article 220 Part III",
+      "intent": "Ensure essential electrical system feeders in health care facilities have ampacity for the maximum actual demand.",
+      "applies_when": [
+        {
+          "predicate": "is_health_care_facility"
+        },
+        {
+          "predicate": "has_essential_electrical_system"
+        },
+        {
+          "predicate": "is_feeder"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraints": [
+          "feeder_sized_in_accordance_with_215_2",
+          "feeder_load_calculated_per_article_220_part_iii",
+          "system_capacity_meets_maximum_actual_demand_of_connected_load"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder load calculations per Article 220 Part III",
+        "Feeder schedule showing conductor sizes and ampacities",
+        "Essential electrical system demand calculation and connected load summary"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_31"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_230_95_additional_level",
+      "cite": "230.95 (as applied by 517.17(B))",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_230_95",
+      "title": "Add a downstream level of ground-fault protection in health care facilities where service/feeder GFPE is provided",
+      "intent": "Localize ground-fault trips so a fault does not black out an entire health care facility serving critical care patients.",
+      "applies_when": [
+        {
+          "predicate": "is_health_care_facility_with_category_1_spaces_or_electrical_life_support_equipment"
+        },
+        {
+          "predicate": "gfpe_provided_on_service_or_feeder_disconnecting_means_per_230_95_or_215_10"
+        }
+      ],
+      "requires": {
+        "type": "ground_fault_protection_of_equipment",
+        "constraints": [
+          "additional_step_of_gfpe_in_all_next_level_feeder_disconnecting_means_downstream_toward_load",
+          "protection_consists_of_overcurrent_devices_and_current_transformers_or_other_protective_equipment_that_opens_feeder_disconnect",
+          "additional_gfpe_levels_not_installed_on_load_side_of_essential_electrical_system_transfer_switch"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line diagram showing GFPE at service/feeder disconnect and at each next-level downstream feeder disconnect",
+        "GFPE relay/CT specifications for the downstream level",
+        "Riser diagram showing GFPE devices located upstream of essential electrical system transfer switches"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_17",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_240_15_scope",
+      "cite": "240.15(B) (as referenced by 210.4(B))",
+      "section_node": "cec_240_15",
+      "title": "Scope: 240.15(B) governs use of single-pole circuit breakers as multiwire disconnecting means",
+      "intent": "Flag that the permissibility of single-pole breakers (with identified handle ties) as the simultaneous disconnecting means for multiwire branch circuits is governed by 240.15(B).",
+      "applies_when": [
+        {
+          "predicate": "is_multiwire_branch_circuit"
+        },
+        {
+          "predicate": "single_pole_circuit_breakers_used_as_disconnecting_means"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "verify_single_pole_breaker_use_complies_with_240_15_b"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panelboard breaker schedule identifying handle ties or multipole breakers on multiwire circuits",
+        "Manufacturer documentation for identified handle ties"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_250_102_boiler_bonding",
+      "cite": "250.102 (as applied by 490.74)",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_250_102",
+      "title": "Bond electrode-type boiler metal parts per 250.102 with full-ampacity bonding jumper",
+      "intent": "Ensure exposed metal of high-voltage electrode boilers is bonded so fault/neutral current has a path at least as robust as the neutral conductor.",
+      "applies_when": [
+        {
+          "predicate": "is_electrode_type_boiler"
+        },
+        {
+          "predicate": "operating_voltage_>_1000v"
+        }
+      ],
+      "requires": {
+        "type": "bonding",
+        "constraints": [
+          "exposed_non_current_carrying_metal_parts_bonded_to_pressure_vessel_or_connected_neutral_conductor",
+          "bonding_in_accordance_with_250_102",
+          "bonding_jumper_ampacity_>=_neutral_conductor_ampacity"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Boiler installation drawings showing bonding jumpers to pressure vessel/neutral",
+        "Bonding jumper size calculation compared to neutral conductor ampacity",
+        "Grounded neutral conductor specification (insulated 1000 V minimum, run with ungrounded conductors)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_118_flexible_raceways",
+      "cite": "250.118 (as applied by 348.60, 350.60, 360.60)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_118",
+      "title": "Use flexible metal raceways as equipment grounding conductors only per 250.118 conditions",
+      "intent": "Limit reliance on FMC/LFMC/FMT as the fault-current path to the length, size, and fitting conditions of 250.118.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "wiring_method_is_fmc"
+            },
+            {
+              "predicate": "wiring_method_is_lfmc"
+            },
+            {
+              "predicate": "wiring_method_is_fmt"
+            }
+          ]
+        },
+        {
+          "predicate": "raceway_relied_on_as_equipment_grounding_conductor"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "flexibility_not_required_after_installation",
+          "fmc_installed_in_accordance_with_250_118_item_5",
+          "lfmc_installed_in_accordance_with_250_118_item_6",
+          "fmt_installed_in_accordance_with_250_118_item_7",
+          "otherwise_separate_equipment_grounding_conductor_installed"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method schedule identifying where FMC/LFMC/FMT is used as the EGC",
+        "Circuit data (overcurrent device rating, raceway trade size, total length) demonstrating 250.118(5)/(6)/(7) conditions",
+        "Detail showing wire-type EGC where flexibility is required after installation"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_60",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_350_60"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_118_patient_care",
+      "cite": "250.118 (as applied by 517.13(A))",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_118",
+      "title": "Verify patient care space wiring methods qualify as equipment grounding conductors per 250.118",
+      "intent": "Guarantee the metallic raceway/cable armor serving patient care spaces is itself a recognized effective ground-fault current path.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit_serving_patient_care_space"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "metal_raceway_system_or_metallic_cable_armor_or_sheath_qualifies_as_equipment_grounding_conductor_per_250_118"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method specification for patient care branch circuits (e.g., EMT, IMC, RMC, listed MC-HCF/AC with qualifying armor)",
+        "Cable listing documentation showing armor/sheath qualifies as an EGC per 250.118",
+        "Floor plans identifying patient care spaces served"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_122_egc_sizing",
+      "cite": "250.122 (as applied by 517.13(B)(2))",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_122",
+      "title": "Size equipment grounding conductors and bonding jumpers per 250.122",
+      "intent": "Ensure EGCs and bonding jumpers in patient care wiring can carry fault current long enough for the overcurrent device to clear.",
+      "applies_when": [
+        {
+          "predicate": "has_equipment_grounding_conductor_or_equipment_bonding_jumper"
+        },
+        {
+          "predicate": "is_patient_care_space_wiring"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraints": [
+          "equipment_grounding_conductors_sized_per_250_122",
+          "equipment_bonding_jumpers_sized_per_250_122",
+          "receptacle_grounding_terminal_egc_sized_per_table_250_122"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Circuit schedule listing overcurrent device rating and corresponding EGC size per Table 250.122",
+        "Feeder bonding jumper sizes on one-line diagram",
+        "Specification requiring insulated copper EGCs in patient care spaces"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_b_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_126_scope",
+      "cite": "250.126 (as referenced by 200.10(B))",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_126",
+      "title": "Scope: 250.126 governs identification of wiring device equipment grounding conductor terminals",
+      "intent": "Flag that grounding-terminal identification on wiring devices (green/hexagonal terminal) is governed by 250.126, complementing grounded-terminal identification in 200.10.",
+      "applies_when": [
+        {
+          "predicate": "is_wiring_device_with_equipment_grounding_terminal"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "verify_equipment_grounding_terminal_identification_complies_with_250_126"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Device cut sheets showing green-identified equipment grounding terminals",
+        "Receptacle specification referencing 250.126 terminal identification"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_250_134_egc_installation",
+      "cite": "250.134 (as applied by 348.60, 350.60, 352.60, 353.60, 355.60, 356.60)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+      "title": "Install required equipment grounding conductors in accordance with 250.134",
+      "intent": "Keep the equipment grounding conductor with the circuit conductors so the fault-return path has low impedance, permitting separate runs only where 250.134 exceptions allow.",
+      "applies_when": [
+        {
+          "predicate": "equipment_grounding_conductor_required_or_installed"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "wiring_method_is_fmc"
+            },
+            {
+              "predicate": "wiring_method_is_lfmc"
+            },
+            {
+              "predicate": "wiring_method_is_nonmetallic_conduit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "equipment_grounding_conductors_installed_in_accordance_with_250_134"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_separately_run_equipment_grounding_conductor_permitted_by_250_134_exception_1"
+            }
+          ],
+          "effect": "egc_permitted_to_run_separate_from_raceway"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_dc_circuit_per_250_134_exception_2"
+            }
+          ],
+          "effect": "egc_permitted_to_run_separate_from_raceway"
+        }
+      ],
+      "evidence_required": [
+        "Conduit fill/circuit schedules showing EGC routed with circuit conductors",
+        "Grounding notes invoking 250.134 for flexible and nonmetallic raceway systems",
+        "Justification for any separately run EGC citing the applicable 250.134 exception"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_60",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_60"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_142_grounded_conductor_use",
+      "cite": "250.142 (as referenced by 352.60 Exc. 2, 366.60, 368.60)",
+      "section_node": "cec_250_142",
+      "title": "Use the grounded circuit conductor to ground equipment only where 250.142 permits",
+      "intent": "Prevent objectionable neutral current on equipment enclosures by restricting neutral-as-ground connections to the limited supply-side cases 250.142 allows.",
+      "applies_when": [
+        {
+          "predicate": "grounded_conductor_used_to_ground_equipment_enclosure"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "grounded_conductor_connection_permitted_or_required_by_250_142",
+          "otherwise_connect_to_equipment_grounding_conductor_or_equipment_bonding_jumper"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding detail identifying any enclosure (busway, auxiliary gutter, service equipment) grounded via the grounded conductor",
+        "One-line diagram showing the connection is on the supply side of the service disconnecting means or otherwise within 250.142 permissions",
+        "Neutral-to-ground bonding location documentation"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_60",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_353_60",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_60",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_60"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_184_hv_grounded_conductor",
+      "cite": "250.184(A) (as referenced by 200.2(A))",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_184",
+      "title": "Rate insulated grounded conductors of solidly grounded systems over 1000 V at not less than 600 V",
+      "intent": "Ensure the grounded neutral of medium-voltage solidly grounded systems has adequate insulation as described in 250.184(A).",
+      "applies_when": [
+        {
+          "predicate": "is_solidly_grounded_neutral_system"
+        },
+        {
+          "predicate": "system_voltage_>_1000v"
+        },
+        {
+          "predicate": "grounded_conductor_is_insulated"
+        }
+      ],
+      "requires": {
+        "type": "conductor_insulation",
+        "constraints": [
+          "grounded_conductor_insulation_rating_>=_600v",
+          "as_described_in_250_184_a"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Medium-voltage cable schedule showing neutral conductor insulation rating",
+        "One-line diagram identifying the solidly grounded neutral system over 1000 V"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_8_egc_connections",
+      "cite": "250.8 (as applied by 368.56(A) and 376.70)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_8",
+      "title": "Make equipment grounding conductor connections to busways and wireways per 250.8",
+      "intent": "Ensure EGC terminations at busway branches and wireway extensions use listed connection means that maintain the fault path.",
+      "applies_when": [
+        {
+          "predicate": "separate_equipment_grounding_conductor_used"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "connection_to_busway"
+            },
+            {
+              "predicate": "connection_to_metal_wireway"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "grounding_connection",
+        "constraints": [
+          "egc_connection_complies_with_250_8",
+          "egc_connection_complies_with_250_12"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Busway/wireway branch connection details showing listed lugs, pressure connectors, or machine-screw connections per 250.8",
+        "Notes requiring removal of nonconductive coatings at connection points per 250.12"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_368_56",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_376_70"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_300_13_scope",
+      "cite": "300.13(B) (as referenced by 200.2(B) and 210.4(A))",
+      "section_node": "cec_300_13",
+      "title": "Scope: 300.13(B) governs device-independent continuity of multiwire grounded conductors",
+      "intent": "Flag that on multiwire branch circuits, the grounded conductor continuity must not depend on device connections, per 300.13(B).",
+      "applies_when": [
+        {
+          "predicate": "is_multiwire_branch_circuit"
+        },
+        {
+          "predicate": "has_grounded_conductor"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "verify_grounded_conductor_continuity_on_multiwire_circuits_complies_with_300_13_b"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring detail showing pigtailed grounded conductors at devices on multiwire circuits",
+        "Specification note invoking 300.13(B) for multiwire branch circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_2",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_348_60",
+      "cite": "348.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_60",
+      "title": "Ground and bond flexible metal conduit (FMC) installations",
+      "intent": "Ensure FMC used for vibration or movement carries a wire-type EGC, since flexing joints cannot be relied on as the fault path.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_fmc"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "equipment_grounding_conductor_installed_where_flexibility_necessary_for_vibration_or_movement_after_installation",
+          "fmc_as_egc_only_where_flexibility_not_required_and_installed_per_250_118_item_5",
+          "equipment_grounding_conductors_installed_per_250_134",
+          "equipment_bonding_jumpers_installed_per_250_102"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Equipment connection details (motors, transformers) showing wire-type EGC in FMC whips",
+        "Circuit schedule demonstrating 250.118(5) conditions where FMC serves as the EGC",
+        "Bonding jumper sizes per 250.102 where installed"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_118",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_250_102"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_350_60",
+      "cite": "350.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_350_60",
+      "title": "Ground and bond liquidtight flexible metal conduit (LFMC) installations",
+      "intent": "Ensure LFMC used for vibration or movement carries a wire-type EGC and relies on the conduit as EGC only within 250.118(6) limits.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfmc"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "equipment_grounding_conductor_installed_where_flexibility_necessary_for_vibration_or_movement_after_installation",
+          "lfmc_as_egc_only_where_flexibility_not_required_and_installed_per_250_118_item_6",
+          "equipment_grounding_conductors_installed_per_250_134",
+          "equipment_bonding_jumpers_installed_per_250_102"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mechanical equipment connection details showing wire-type EGC in LFMC whips",
+        "Circuit schedule demonstrating 250.118(6) conditions where LFMC serves as the EGC",
+        "Hazardous-location grounding notes referencing 501.30/505.25 where applicable"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_118",
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_250_102"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_352_60",
+      "cite": "352.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_60",
+      "title": "Install a separate equipment grounding conductor in PVC conduit",
+      "intent": "Provide a wire-type fault-current path because PVC conduit is nonmetallic and cannot serve as an equipment grounding conductor.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_pvc"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "separate_equipment_grounding_conductor_installed_in_conduit"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_dc_circuit_per_250_134_exception_2"
+                },
+                {
+                  "predicate": "is_separately_run_equipment_grounding_conductor_permitted_by_250_134_exception_1"
+                }
+              ]
+            }
+          ],
+          "effect": "egc_permitted_outside_conduit"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_used_to_ground_equipment_as_permitted_in_250_142"
+            }
+          ],
+          "effect": "separate_egc_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Conduit fill schedule showing EGC included in each PVC conduit run",
+        "EGC size per Table 250.122 on circuit schedules",
+        "Justification citing 250.134 or 250.142 for any run without an internal EGC"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "cec_250_142"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_353_60",
+      "cite": "353.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_353_60",
+      "title": "Install a separate equipment grounding conductor in HDPE conduit",
+      "intent": "Provide a wire-type fault-current path because HDPE conduit is nonmetallic and cannot serve as an equipment grounding conductor.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_hdpe"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "separate_equipment_grounding_conductor_installed_in_conduit"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_dc_circuit_per_250_134_exception_2"
+                },
+                {
+                  "predicate": "is_separately_run_equipment_grounding_conductor_permitted_by_250_134_exception_1"
+                }
+              ]
+            }
+          ],
+          "effect": "egc_permitted_outside_conduit"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_used_to_ground_equipment_as_permitted_in_250_142"
+            }
+          ],
+          "effect": "separate_egc_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Conduit fill schedule showing EGC included in each HDPE conduit run",
+        "EGC size per Table 250.122 on circuit schedules",
+        "Justification citing 250.134 or 250.142 for any run without an internal EGC"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "cec_250_142"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_355_100",
+      "cite": "355.100",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_100",
+      "title": "Use RTRC and fittings constructed of suitable resistant nonmetallic material",
+      "intent": "Ensure reinforced thermosetting resin conduit withstands its environment (moisture, chemicals, impact, sunlight, burial loading).",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_rtrc"
+        }
+      ],
+      "requires": {
+        "type": "material_construction",
+        "constraints": [
+          "material_resistant_to_moisture_and_chemical_atmospheres",
+          "aboveground_use_flame_retardant_and_resistant_to_impact_crushing_heat_distortion_low_temperature_and_sunlight",
+          "underground_use_resistant_to_moisture_and_corrosive_agents_and_of_sufficient_strength_against_impact_and_crushing",
+          "direct_burial_without_concrete_encasement_capable_of_withstanding_continued_loading"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "RTRC product listing/labels (e.g., Type XW where exposed to damage)",
+        "Marking documentation per 355.120 (material type, sunlight resistance)",
+        "Installation specification matching conduit type to aboveground/underground use"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_60"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_355_60",
+      "cite": "355.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_60",
+      "title": "Install a separate equipment grounding conductor in RTRC conduit",
+      "intent": "Provide a wire-type fault-current path because RTRC conduit is nonmetallic and cannot serve as an equipment grounding conductor.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_rtrc"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "separate_equipment_grounding_conductor_installed_in_conduit"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_dc_circuit_per_250_134_exception_2"
+                },
+                {
+                  "predicate": "is_separately_run_equipment_grounding_conductor_permitted_by_250_134_exception_1"
+                }
+              ]
+            }
+          ],
+          "effect": "egc_permitted_outside_conduit"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_used_to_ground_equipment_as_permitted_in_250_142"
+            }
+          ],
+          "effect": "separate_egc_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Conduit fill schedule showing EGC included in each RTRC conduit run",
+        "EGC size per Table 250.122 on circuit schedules",
+        "Justification citing 250.134 or 250.142 for any run without an internal EGC"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "cec_250_142"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_356_60",
+      "cite": "356.60",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_60",
+      "title": "Install a separate equipment grounding conductor in LFNC conduit",
+      "intent": "Provide a wire-type fault-current path because LFNC conduit is nonmetallic and cannot serve as an equipment grounding conductor.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_lfnc"
+        },
+        {
+          "predicate": "equipment_grounding_required"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "separate_equipment_grounding_conductor_installed_in_conduit"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_dc_circuit_per_250_134_exception_2"
+                },
+                {
+                  "predicate": "is_separately_run_equipment_grounding_conductor_permitted_by_250_134_exception_1"
+                }
+              ]
+            }
+          ],
+          "effect": "egc_permitted_outside_conduit"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_used_to_ground_equipment_as_permitted_in_250_142"
+            }
+          ],
+          "effect": "separate_egc_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Conduit fill schedule showing EGC included in each LFNC conduit run",
+        "EGC size per Table 250.122 on circuit schedules",
+        "Justification citing 250.134 or 250.142 for any run without an internal EGC"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_134",
+        "cec_250_142"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_368_56",
+      "cite": "368.56",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_368_56",
+      "title": "Make branches from busways with permitted wiring methods and compliant grounding connections",
+      "intent": "Ensure busway branch circuits use recognized wiring methods and that separate EGCs are properly connected to the busway.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_from_busway"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "permitted_wiring_methods": [
+          "AC",
+          "MC",
+          "MI",
+          "IMC",
+          "RMC",
+          "FMC",
+          "LFMC",
+          "PVC",
+          "RTRC",
+          "LFNC",
+          "EMT",
+          "ENT",
+          "busways",
+          "strut_type_channel_raceway",
+          "surface_metal_raceway",
+          "surface_nonmetallic_raceway"
+        ],
+        "constraints": [
+          "separate_egc_connection_to_busway_complies_with_250_8_and_250_12",
+          "cord_and_cable_assemblies_identified_for_hard_or_extra_hard_usage_or_listed_bus_drop_cable",
+          "cord_attached_to_building_by_approved_means",
+          "cord_length_busway_plug_in_device_to_tension_take_up_support_<=_1.8m_6ft",
+          "cord_installed_as_vertical_riser_from_take_up_support_to_equipment",
+          "strain_relief_cable_grips_at_plug_in_device_and_equipment_terminations"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_industrial_establishment_with_qualified_maintenance"
+            },
+            {
+              "predicate": "cord_supported_at_intervals_<=_2.5m_8ft"
+            }
+          ],
+          "effect": "cord_length_>_1.8m_permitted_between_plug_in_device_and_take_up_support"
+        }
+      ],
+      "evidence_required": [
+        "Busway layout showing branch tap devices and wiring methods",
+        "Bus drop cable listing and support/strain-relief details",
+        "EGC connection detail at busway per 250.8/250.12"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_376_70",
+      "cite": "376.70",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_376_70",
+      "title": "Make extensions from metal wireways with grounding-capable wiring methods",
+      "intent": "Preserve the equipment grounding path when circuits leave a metal wireway.",
+      "applies_when": [
+        {
+          "predicate": "is_extension_from_metal_wireway"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "constraints": [
+          "extension_made_with_cord_pendants_per_400_14_or_chapter_3_wiring_method_that_includes_means_for_equipment_grounding",
+          "separate_egc_connection_to_wireway_complies_with_250_8_and_250_12"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wireway layout showing extension wiring methods",
+        "EGC termination detail at the wireway per 250.8/250.12"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_250_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_501_10_rtrc_class_i",
+      "cite": "501.10(B)(1)(6) (as referenced by 355.12(A)(2))",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_501_10",
+      "title": "Restrict RTRC in Class I, Division 2 locations to installations permitted by 501.10(B)(1)(6)",
+      "intent": "Prevent nonmetallic conduit from being used in classified locations except where the Class I, Division 2 wiring method rules specifically allow it.",
+      "applies_when": [
+        {
+          "predicate": "is_class_i_division_2"
+        },
+        {
+          "predicate": "wiring_method_is_rtrc"
+        }
+      ],
+      "requires": {
+        "type": "hazardous_location_wiring_method",
+        "constraints": [
+          "rtrc_use_limited_to_installations_permitted_in_501_10_b_1_6"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hazardous area classification drawings identifying Class I, Division 2 boundaries",
+        "Wiring method schedule for classified areas citing 501.10(B)(1)(6) permission",
+        "RTRC listing documentation for the classified-location use"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_100"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_501_30_class_i_grounding",
+      "cite": "501.30 (as applied by 511.16(B), 513.16(A), 514.16, 515.16, 516.16, 517.62)",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30",
+      "title": "Comply with 501.30 grounding and bonding in Class I locations",
+      "intent": "Ensure bonding-type fittings and grounding continuity in classified areas so fault current cannot arc at loose raceway joints and ignite flammable atmospheres.",
+      "applies_when": [
+        {
+          "predicate": "is_class_i_location"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "grounding_and_bonding_complies_with_501_30_for_class_i_division_1_and_2",
+          "grounding_and_bonding_complies_with_505_25_for_zone_0_1_2_where_zone_system_used"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hazardous area classification plan",
+        "Bonding details showing bonding-type fittings/jumpers through the classified area back to the supply grounding point",
+        "Wire-type EGC specification for flexible raceways within the classified area"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_511_16",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_514_16",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_516_16",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_62"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_511_16",
+      "cite": "511.16",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_511_16",
+      "title": "Ground and bond all metal wiring and equipment in commercial garages",
+      "intent": "Eliminate shock and ignition hazards in repair garages by grounding all metal wiring components and portable equipment regardless of voltage.",
+      "applies_when": [
+        {
+          "predicate": "is_commercial_garage_repair_or_storage"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "all_metal_raceways_cable_armor_sheaths_and_non_current_carrying_metal_parts_grounded_regardless_of_voltage",
+          "grounding_in_class_i_locations_complies_with_501_30",
+          "circuits_supplying_portables_or_pendants_with_grounded_conductor_use_grounding_type_receptacles_plugs_and_connectors",
+          "grounded_conductor_of_flexible_cord_connected_to_screw_shell_of_lampholder_or_grounded_terminal_of_utilization_equipment",
+          "approved_means_to_maintain_egc_continuity_between_fixed_wiring_and_pendant_or_portable_equipment"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Garage area classification plan per 511.3",
+        "Grounding/bonding notes covering raceways, cable armor, and portable equipment",
+        "Receptacle schedule showing grounding-type devices for portable/pendant circuits"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_514_1_scope",
+      "cite": "514.1",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_514_1",
+      "title": "Scope: apply Article 514 to motor fuel dispensing facilities",
+      "intent": "Trigger Article 514 classification, wiring, sealing, disconnect, and grounding rules wherever motor fuels are dispensed.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_motor_fuel_dispensing_facility"
+            },
+            {
+              "predicate": "is_marine_motor_fuel_dispensing_facility"
+            },
+            {
+              "predicate": "is_motor_fuel_dispensing_facility_inside_building"
+            },
+            {
+              "predicate": "is_fleet_vehicle_motor_fuel_dispensing_facility"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "apply_article_514_requirements_including_area_classification_wiring_sealing_disconnects_and_grounding"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "ahj_determines_flammable_liquids_flash_point_<_38c_not_handled"
+            }
+          ],
+          "effect": "location_not_required_to_be_classified"
+        }
+      ],
+      "evidence_required": [
+        "Site plan identifying dispensing devices, tanks, and vents",
+        "Hazardous area classification drawings per Table 514.3(B)(1)/(B)(2)",
+        "AHJ determination letter where unclassified status is claimed"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_514_16"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_514_16",
+      "cite": "514.16",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_514_16",
+      "title": "Ground and bond all metal wiring and equipment at motor fuel dispensing facilities",
+      "intent": "Prevent static/fault ignition sources at fuel dispensers by grounding and bonding all metal parts regardless of voltage.",
+      "applies_when": [
+        {
+          "predicate": "is_motor_fuel_dispensing_facility"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "all_metal_raceways_cable_armor_sheaths_and_non_current_carrying_metal_parts_grounded_and_bonded_regardless_of_voltage",
+          "grounding_and_bonding_in_class_i_locations_complies_with_501_30"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding and bonding plan for dispenser islands and canopy circuits",
+        "Threaded metal conduit and bonding fitting details within classified areas",
+        "EGC continuity documentation for underground nonmetallic conduit runs"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_514_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_516_16",
+      "cite": "516.16",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_516_16",
+      "title": "Ground and bond all metal wiring and equipment in spray/dipping/coating process areas",
+      "intent": "Remove ignition sources in finishing process areas by grounding and bonding all metal parts per the applicable classified-location rules.",
+      "applies_when": [
+        {
+          "predicate": "is_spray_application_dipping_coating_or_printing_process_area"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "all_metal_raceways_cable_armor_sheaths_and_non_current_carrying_metal_parts_grounded_and_bonded_regardless_of_voltage",
+          "grounding_and_bonding_complies_with_501_30_502_30_or_505_25_as_applicable"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Process area classification plan per 516.4/516.5",
+        "Grounding/bonding details for booths, ducts, conveyors, and containers",
+        "Static grounding provisions for conductive objects in the spray area"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_13",
+      "cite": "517.13",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13",
+      "title": "Provide redundant equipment grounding for patient care space wiring",
+      "intent": "Ensure two independent ground-fault current paths (metallic wiring method plus insulated copper EGC) protect patients from potential differences.",
+      "applies_when": [
+        {
+          "predicate": "is_patient_care_space"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "wiring_complies_with_517_13_a",
+          "wiring_complies_with_517_13_b"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans designating patient care space categories",
+        "Branch circuit wiring method specification showing both metallic raceway/armor and insulated copper EGC",
+        "Typical receptacle grounding detail for patient care spaces"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_a",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_b_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_13_a",
+      "cite": "517.13(A)",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_a",
+      "title": "Install patient care branch circuits in metal raceway or metallic-armored cable qualifying as an EGC",
+      "intent": "Provide the first (mechanical) ground-fault current path for patient care branch circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit_serving_patient_care_space"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "constraints": [
+          "installation_in_metal_raceway_system_or_cable_with_metallic_armor_or_sheath_assembly",
+          "raceway_or_armor_itself_qualifies_as_equipment_grounding_conductor_per_250_118"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method schedule for patient care branch circuits",
+        "Cable listing (e.g., Type MC-HCF/AC) showing armor qualifies as an EGC",
+        "Raceway specifications (EMT/IMC/RMC) for patient care areas"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_118"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_13_b_1",
+      "cite": "517.13(B)(1)",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_b_1",
+      "title": "Connect patient care receptacles, boxes, and fixed equipment to an insulated green copper EGC",
+      "intent": "Provide the second (wire-type) redundant grounding path in patient care spaces.",
+      "applies_when": [
+        {
+          "predicate": "is_patient_care_space"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "connect_to_insulated_copper_egc_green_identified_full_length": [
+          "grounding_terminals_of_all_receptacles_other_than_isolated_ground_receptacles",
+          "metal_outlet_boxes_metal_device_boxes_or_metal_enclosures",
+          "non_current_carrying_conductive_surfaces_of_fixed_electrical_equipment_likely_to_become_energized_subject_to_personal_contact_operating_>_100v",
+          "metal_faceplates_via_metal_mounting_screw_to_metal_yoke_or_metal_outlet_box"
+        ],
+        "constraints": [
+          "egc_installed_with_branch_circuit_conductors_in_wiring_methods_per_517_13_a"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "insulated_equipment_bonding_jumper_directly_connects_to_egc"
+            },
+            {
+              "not": {
+                "predicate": "is_isolated_ground_receptacle"
+              }
+            }
+          ],
+          "effect": "bonding_jumper_permitted_to_connect_box_and_receptacle_to_egc"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "luminaire_mounting_height_>_2.3m_7_5ft_above_floor"
+                },
+                {
+                  "predicate": "switch_located_outside_patient_care_vicinity"
+                }
+              ]
+            }
+          ],
+          "effect": "permitted_to_use_grounding_return_path_complying_with_517_13_a_or_b"
+        }
+      ],
+      "evidence_required": [
+        "Typical patient care receptacle wiring detail showing insulated green copper EGC",
+        "Specification requiring green insulation along the EGC's entire length",
+        "EGC sizing per 250.122 on circuit schedules"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_a",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_122"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_13_b_1_2",
+      "cite": "517.13(B)(1)(2) (as applied by 517.16(B)(2))",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_b_1_2",
+      "title": "Keep the required patient-care EGC connected to boxes/enclosures, not to isolated ground receptacle terminals",
+      "intent": "Preserve the redundant grounding of boxes and fixed equipment when isolated ground receptacles are used outside the patient care vicinity.",
+      "applies_when": [
+        {
+          "predicate": "isolated_ground_receptacle_installed_in_patient_care_space"
+        },
+        {
+          "predicate": "location_outside_patient_care_vicinity"
+        }
+      ],
+      "requires": {
+        "type": "equipment_grounding",
+        "constraints": [
+          "required_insulated_egc_identified_green_with_no_yellow_stripes",
+          "required_insulated_egc_not_connected_to_isolated_ground_receptacle_grounding_terminals",
+          "required_insulated_egc_connected_to_box_or_enclosure_per_517_13_b_1_2",
+          "required_insulated_egc_connected_to_fixed_equipment_surfaces_per_517_13_b_1_3",
+          "isolated_ground_receptacle_egc_identified_green_with_yellow_stripes_and_connected_per_250_146_d"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Isolated ground receptacle wiring detail showing two EGCs (green and green/yellow-stripe)",
+        "Receptacle schedule confirming no isolated ground receptacles within patient care vicinities",
+        "Conductor identification specification for IG circuits"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_b_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_160",
+      "cite": "517.160",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_160",
+      "title": "Design and install isolated power systems with per-conductor disconnection, isolation, and identification",
+      "intent": "Limit first-fault current in critical and wet/anesthetizing spaces by keeping the secondary ungrounded, protected, and identifiable.",
+      "applies_when": [
+        {
+          "predicate": "isolated_power_system_installed"
+        }
+      ],
+      "requires": {
+        "type": "isolated_power_system",
+        "constraints": [
+          "each_isolated_circuit_controlled_by_switch_or_breaker_with_disconnecting_pole_in_each_isolated_conductor",
+          "isolation_by_isolation_transformers_generator_sets_or_electrically_isolated_batteries",
+          "isolated_circuit_conductors_not_installed_with_conductors_of_another_system",
+          "primary_circuit_voltage_<=_600v_with_overcurrent_protection",
+          "secondary_voltage_<=_600v_ungrounded_with_approved_overcurrent_device_in_each_conductor",
+          "electrostatic_shield_connected_to_reference_grounding_point_if_present",
+          "isolating_equipment_and_overcurrent_devices_not_installed_in_hazardous_classified_locations",
+          "isolation_transformer_serves_not_more_than_one_operating_room",
+          "conductor_identification_orange_and_brown_with_distinctive_stripe_yellow_for_third_phase"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "induction_room_serves_more_than_one_operating_room"
+            }
+          ],
+          "effect": "induction_room_isolated_circuits_permitted_from_any_served_operating_room_transformer"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "receptacles_reserved_for_equipment_>=_150v_such_as_portable_xray"
+            },
+            {
+              "predicate": "receptacles_not_interchangeable_with_local_isolated_power_receptacles"
+            }
+          ],
+          "effect": "isolation_transformer_permitted_to_serve_single_receptacles_in_several_patient_areas"
+        }
+      ],
+      "evidence_required": [
+        "Isolated power panel listing documentation (listed isolated power equipment)",
+        "Single-line diagram of the isolated power system showing transformer, LIM, and per-conductor OCP",
+        "Conductor identification schedule (orange/brown/yellow with stripes)",
+        "Room assignments showing one isolation transformer per operating room"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_20",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_61"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_17",
+      "cite": "517.17",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_17",
+      "title": "Make health care ground-fault protection fully selective and performance test each level",
+      "intent": "Guarantee that a downstream ground fault opens only the feeder device, keeping the rest of the critical-care facility energized.",
+      "applies_when": [
+        {
+          "predicate": "is_health_care_facility_with_category_1_spaces_or_electrical_life_support_equipment"
+        },
+        {
+          "predicate": "gfpe_provided_on_service_or_feeder_disconnecting_means"
+        }
+      ],
+      "requires": {
+        "type": "ground_fault_protection_of_equipment",
+        "constraints": [
+          "gfpe_fully_selective_feeder_device_opens_but_not_service_device_for_load_side_faults",
+          "time_current_separation_per_manufacturer_recommendations_achieving_100_percent_selectivity",
+          "each_level_performance_tested_when_first_installed_by_qualified_person",
+          "written_test_record_available_to_ahj"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "GFPE selectivity coordination study with time-current curves",
+        "Manufacturer setting recommendations and applied settings",
+        "Field performance test report for each GFPE level, signed and dated"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_230_95",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_18",
+      "cite": "517.18",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_18",
+      "title": "Wire Category 2 (general care) patient bed locations with dual-source circuits and eight hospital-grade receptacles",
+      "intent": "Provide power redundancy and grounded, durable receptacles at general care patient beds.",
+      "applies_when": [
+        {
+          "predicate": "is_category_2_general_care_space"
+        },
+        {
+          "predicate": "is_patient_bed_location"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuits_and_receptacles",
+        "constraints": [
+          "at_least_two_branch_circuits_one_critical_branch_one_normal_system",
+          "all_normal_system_branch_circuits_originate_in_same_panelboard",
+          "critical_branch_receptacles_or_coverplates_distinctively_marked_with_panelboard_and_circuit_number",
+          "branch_circuits_serving_patient_bed_locations_not_part_of_multiwire_branch_circuit",
+          "receptacle_count_per_patient_bed_location_>=_8",
+          "receptacles_listed_hospital_grade_and_identified",
+          "receptacle_grounding_terminal_connected_to_insulated_copper_egc_sized_per_table_250_122",
+          "pediatric_location_receptacles_listed_tamper_resistant_or_with_listed_tamper_resistant_cover"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "branch_circuit_serves_only_special_purpose_outlets_such_as_portable_xray"
+            }
+          ],
+          "effect": "same_distribution_panel_requirement_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_clinic_medical_dental_office_or_outpatient_facility"
+                },
+                {
+                  "predicate": "is_psychiatric_substance_abuse_or_rehabilitation_hospital"
+                },
+                {
+                  "predicate": "is_nursing_home_sleeping_room_or_limited_care_facility_per_517_10_b_2"
+                }
+              ]
+            }
+          ],
+          "effect": "dual_source_branch_circuit_requirement_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "bed_location_served_from_two_separate_critical_branch_transfer_switches"
+            }
+          ],
+          "effect": "normal_system_circuit_not_required"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "is_type_2_essential_electrical_system"
+            }
+          ],
+          "effect": "circuits_permitted_from_equipment_branch"
+        },
+        {
+          "id": "ex5_oshpd",
+          "applies_when": [
+            {
+              "predicate": "is_nursing_home_patient_sleeping_area_oshpd_1_2_4_5"
+            }
+          ],
+          "effect": "hospital_grade_receptacles_not_required"
+        },
+        {
+          "id": "ex6_oshpd",
+          "applies_when": [
+            {
+              "predicate": "is_psychiatric_patient_bedroom_oshpd_1_5"
+            }
+          ],
+          "effect": "receptacles_not_required_if_installed_tamper_resistant_switch_controlled_and_gfci_protected"
+        }
+      ],
+      "evidence_required": [
+        "Patient room power plans showing critical branch and normal system circuits per bed",
+        "Panel schedules confirming common normal-system panelboard and no multiwire circuits",
+        "Receptacle count per bed location and hospital-grade listing",
+        "Receptacle/coverplate color-coding and circuit identification schedule"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_122"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_19",
+      "cite": "517.19",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_19",
+      "title": "Wire Category 1 (critical care) bed locations with dedicated critical-branch circuits, 14 receptacles, and reference-point grounding",
+      "intent": "Maximize power availability and grounding integrity where equipment failure is likely to cause major injury or death.",
+      "applies_when": [
+        {
+          "predicate": "is_category_1_critical_care_space"
+        },
+        {
+          "predicate": "is_patient_bed_location"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuits_and_receptacles",
+        "constraints": [
+          "at_least_two_branch_circuits_one_or_more_critical_branch_and_one_or_more_normal_system",
+          "at_least_one_critical_branch_circuit_supplies_outlets_only_at_that_bed_location",
+          "life_safety_and_critical_branch_receptacles_or_coverplates_distinctively_identified",
+          "normal_system_branch_circuits_from_single_panelboard",
+          "branch_circuits_not_part_of_multiwire_branch_circuit",
+          "receptacle_count_per_patient_bed_location_>=_14",
+          "at_least_one_receptacle_on_normal_system_circuit_or_separate_critical_branch_transfer_switch",
+          "operating_room_receptacle_count_>=_36_divided_between_at_least_two_branch_circuits_with_12_to_24_on_normal_or_alternate_transfer_switch_source",
+          "receptacles_listed_hospital_grade_grounding_terminal_connected_to_reference_grounding_point_via_insulated_copper_egc",
+          "metal_feeder_raceway_or_mc_mi_cable_terminations_bonded_by_grounding_bushing_with_copper_jumper_sized_per_250_122_threaded_hubs_or_approved_bonding_devices"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "branch_circuit_serves_only_special_purpose_receptacles_or_equipment"
+            }
+          ],
+          "effect": "other_panelboards_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "space_served_from_two_separate_critical_branch_transfer_switches"
+            }
+          ],
+          "effect": "normal_system_circuits_not_required"
+        },
+        {
+          "id": "ex3_oshpd",
+          "applies_when": [
+            {
+              "predicate": "beds_subject_to_517_40_b_oshpd_1_2_4_5"
+            }
+          ],
+          "effect": "minimum_receptacle_count_reduced_to_8"
+        }
+      ],
+      "evidence_required": [
+        "Critical care room power plans with per-bed circuit and receptacle counts",
+        "Operating room receptacle schedule (36 minimum, source split documented)",
+        "Grounding detail showing insulated copper EGC to the reference grounding point",
+        "Feeder raceway bonding details (grounding bushings/jumpers per 250.122)"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_122",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_118"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_20",
+      "cite": "517.20",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_20",
+      "title": "Provide special shock protection in wet procedure locations",
+      "intent": "Protect patients and staff in wet procedure areas by limiting first-fault ground current or interrupting power at GFCI thresholds.",
+      "applies_when": [
+        {
+          "predicate": "is_wet_procedure_location"
+        }
+      ],
+      "requires": {
+        "type": "shock_protection",
+        "any_of": [
+          "power_distribution_system_inherently_limits_first_fault_ground_current_to_low_value_without_interrupting_supply",
+          "power_supply_interrupted_if_ground_fault_current_exceeds_class_a_gfci_trip_value"
+        ],
+        "constraints": [
+          "isolated_power_equipment_listed_and_installed_per_517_160_where_isolated_power_used"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "branch_circuits_supply_only_listed_fixed_therapeutic_and_diagnostic_equipment"
+            },
+            {
+              "predicate": "grounded_and_isolated_circuit_wiring_not_in_same_raceway"
+            },
+            {
+              "predicate": "all_conductive_surfaces_connected_to_insulated_copper_egc"
+            }
+          ],
+          "effect": "grounded_service_supply_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Wet procedure location risk assessment/designation by the governing body",
+        "Isolated power system design or GFCI protection schedule for the space",
+        "Listing documentation for isolated power equipment where used"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_160"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_26",
+      "cite": "517.26",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_26",
+      "title": "Apply Article 700 to the essential electrical system branches except as amended by Article 517",
+      "intent": "Anchor the essential electrical system to emergency-system installation rules while recognizing the health care amendments.",
+      "applies_when": [
+        {
+          "predicate": "is_health_care_facility"
+        },
+        {
+          "predicate": "has_essential_electrical_system"
+        }
+      ],
+      "requires": {
+        "type": "system_compliance",
+        "constraints": [
+          "life_safety_critical_and_equipment_branches_meet_article_700_except_as_amended_by_article_517",
+          "section_700_4_does_not_apply",
+          "section_700_10_d_does_not_apply",
+          "section_700_17_replaced_emergency_lighting_branch_circuits_served_from_source_complying_with_700_12",
+          "section_700_32_does_not_apply"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Essential electrical system design narrative citing Article 700 compliance with 517.26 modifications",
+        "Emergency lighting circuiting showing supply from a 700.12-compliant source",
+        "Transfer switch and branch separation documentation"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_700_12",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_31"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_29",
+      "cite": "517.29",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_29",
+      "title": "Serve Category 1 (critical care) spaces from a Type 1 essential electrical system",
+      "intent": "Ensure the highest-reliability three-branch EES backs up spaces where power failure is likely to cause major injury or death.",
+      "applies_when": [
+        {
+          "predicate": "is_category_1_critical_care_space"
+        }
+      ],
+      "requires": {
+        "type": "essential_electrical_system",
+        "constraints": [
+          "served_by_type_1_essential_electrical_system",
+          "not_served_by_type_2_essential_electrical_system",
+          "requirements_of_517_29_through_517_35_applied"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "EES classification statement (Type 1) on drawings",
+        "Space category designations by the facility governing body",
+        "Single-line diagram of the three-branch Type 1 EES"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_30",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_31"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_30",
+      "cite": "517.30",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_30",
+      "title": "Provide two independent power sources with protected locations and separated feeders for the EES",
+      "intent": "Guarantee an alternate source and physically separated distribution so one event cannot interrupt both normal and alternate power.",
+      "applies_when": [
+        {
+          "predicate": "has_essential_electrical_system"
+        },
+        {
+          "predicate": "is_type_1_essential_electrical_system"
+        }
+      ],
+      "requires": {
+        "type": "power_sources",
+        "constraints": [
+          "minimum_two_independent_sources_normal_plus_one_or_more_alternate",
+          "alternate_source_generator_other_generating_set_or_external_utility_fuel_cell_or_battery_system_per_517_30_b",
+          "fuel_cell_systems_provide_n_plus_1_units_assume_load_within_10_seconds_and_have_onsite_fuel",
+          "portable_diesel_generator_connection_where_life_safety_and_critical_portions_served_by_fuel_cell_or_battery_alternate_source",
+          "components_located_to_minimize_interruptions_from_natural_forces",
+          "alternate_source_feeders_physically_separated_from_normal_source_feeders",
+          "onsite_sources_meet_700_12_stored_fuel_or_battery_energy_requirements_oshpd"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line diagram showing normal and alternate sources",
+        "Generator/fuel-cell/battery specifications with 10-second start capability and on-site fuel storage",
+        "Site plan showing physical separation of normal and alternate feeders",
+        "Flood/seismic siting documentation for EES components"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_700_12",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_29"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_31",
+      "cite": "517.31",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_31",
+      "title": "Configure the Type 1 EES with three branches, independent protected wiring, adequate capacity, and coordinated OCPDs",
+      "intent": "Keep life safety and critical power available and isolated from failures in other wiring during loss of normal power.",
+      "applies_when": [
+        {
+          "predicate": "is_type_1_essential_electrical_system"
+        }
+      ],
+      "requires": {
+        "type": "essential_electrical_system_configuration",
+        "constraints": [
+          "three_separate_branches_life_safety_critical_and_equipment",
+          "division_between_branches_at_transfer_switches_where_more_than_one_required",
+          "one_or_more_transfer_switches_per_branch_or_single_transfer_switch_where_continuous_load_<=_150kva",
+          "automatic_transfer_switches_with_bypass_isolation_and_in_phase_monitor_relay_oshpd",
+          "life_safety_and_critical_branch_wiring_kept_independent_of_all_other_wiring_and_equipment",
+          "ees_raceways_boxes_enclosures_identified_and_raceways_cables_marked_at_intervals_<=_7.6m_25ft",
+          "life_safety_and_critical_branch_wiring_mechanically_protected_by_permitted_raceways_nonflexible_metal_raceway_mi_rtrc_xw_or_schedule_80_pvc",
+          "nonmetallic_raceways_not_used_for_branch_circuits_supplying_patient_care_areas",
+          "schedule_40_pvc_or_flexible_raceways_permitted_where_encased_in_>=_50mm_2in_concrete",
+          "listed_flexible_metal_raceways_and_metal_sheathed_cables_limited_to_headwalls_office_furnishings_fished_locations_and_flexible_equipment_connections",
+          "system_capacity_and_rating_meet_maximum_actual_demand",
+          "feeders_sized_per_215_2_and_article_220_part_iii",
+          "receptacle_and_switch_coverplates_on_life_safety_and_critical_branches_distinctively_identified",
+          "single_feeder_from_alternate_source_permitted_to_point_where_branches_separate",
+          "overcurrent_protective_devices_coordinated_for_fault_durations_>_0.1_second"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "coordination_between_transformer_primary_and_secondary_ocpd_with_single_secondary_device"
+            }
+          ],
+          "effect": "coordination_requirement_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "ocpds_of_same_ampere_rating_in_series"
+            }
+          ],
+          "effect": "coordination_requirement_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "EES single-line diagram showing life safety, critical, and equipment branches with transfer switches",
+        "Wiring method specification for life safety/critical branch raceways",
+        "EES identification/marking plan (25 ft interval labeling)",
+        "Selective coordination study for OCPDs beyond 0.1 second",
+        "Demand calculation for EES capacity and feeder sizing"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_215_2",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13_a",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_118",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_30"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_40",
+      "cite": "517.40",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_40",
+      "title": "Apply Type 2 EES requirements to nursing home and limited care Category 2 spaces",
+      "intent": "Scope the Type 2 essential electrical system rules to general care spaces in nursing homes, limited care facilities, and CA correctional/psychiatric facilities.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_nursing_home"
+            },
+            {
+              "predicate": "is_limited_care_facility"
+            },
+            {
+              "predicate": "is_correctional_treatment_center_or_acute_psychiatric_hospital_oshpd"
+            }
+          ]
+        },
+        {
+          "predicate": "is_category_2_general_care_space"
+        }
+      ],
+      "requires": {
+        "type": "essential_electrical_system",
+        "constraints": [
+          "requirements_of_517_40_c_through_517_44_applied",
+          "facilities_admitting_patients_sustained_by_electrical_life_support_comply_with_517_29_through_517_35_from_source_to_treatment_area",
+          "contiguous_or_same_site_facilities_permitted_to_be_supplied_by_hospital_ees"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_freestanding_nursing_home_or_limited_care_facility"
+            },
+            {
+              "predicate": "admitting_policies_preclude_patients_needing_electrical_life_support"
+            },
+            {
+              "predicate": "no_surgical_treatment_requiring_general_anesthesia"
+            },
+            {
+              "predicate": "automatic_battery_system_>=_1.5_hours_per_700_12_supplying_exit_egress_nursing_station_and_alarm_loads"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Facility licensing/occupancy documentation (nursing home, limited care)",
+        "EES classification (Type 2) and coverage plan",
+        "Admitting/discharge policy where the freestanding exception is claimed",
+        "Battery system capacity calculation (1.5 hours) for the exception"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_29",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_700_12",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_42"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_42",
+      "cite": "517.42",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_42",
+      "title": "Divide the Type 2 EES into life safety and equipment branches kept independent of other wiring",
+      "intent": "Preserve life-safety power integrity in nursing homes and limited care facilities by branch separation and identification.",
+      "applies_when": [
+        {
+          "predicate": "is_type_2_essential_electrical_system"
+        }
+      ],
+      "requires": {
+        "type": "essential_electrical_system_configuration",
+        "constraints": [
+          "system_divided_into_life_safety_branch_and_equipment_branch",
+          "division_between_branches_at_transfer_switches_where_more_than_one_required",
+          "one_or_more_transfer_switches_per_branch_or_single_transfer_switch_where_continuous_load_<=_150kva",
+          "system_capacity_meets_demand_of_all_functions_and_equipment_served_by_each_branch_at_one_time",
+          "life_safety_and_equipment_branch_wiring_kept_entirely_independent_of_all_other_wiring_and_equipment",
+          "branch_circuits_not_in_same_raceways_boxes_or_cabinets_with_other_wiring_except_in_transfer_switches_and_two_source_exit_or_emergency_luminaires",
+          "receptacles_and_switches_or_coverplates_on_life_safety_or_equipment_branches_distinctively_identified",
+          "skilled_nursing_facility_transfer_switches_per_517_40_b_comply_with_517_31_b_3_oshpd"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Type 2 EES single-line diagram with life safety and equipment branches",
+        "Transfer switch schedule with continuous load calculations",
+        "Raceway separation notes and identification/color-coding scheme"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_40",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_31"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_43",
+      "cite": "517.43",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_43",
+      "title": "Restore Type 2 EES life safety and equipment branch functions automatically within 10 seconds",
+      "intent": "Ensure egress lighting, alarms, and essential equipment return quickly after normal power loss, and keep the life safety branch limited to listed functions.",
+      "applies_when": [
+        {
+          "predicate": "is_type_2_essential_electrical_system"
+        }
+      ],
+      "requires": {
+        "type": "automatic_connection",
+        "constraints": [
+          "life_safety_and_equipment_branch_functions_automatically_restored_within_10_seconds_of_normal_source_interruption",
+          "life_safety_branch_limited_to_functions_in_517_43_a_through_g",
+          "life_safety_branch_supplies_egress_illumination_exit_signs_alarms_medical_gas_alarms_emergency_communications_generator_set_location_loads_elevator_cab_lighting_and_nondelayed_generator_accessories"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Transfer switch timing documentation (10-second restoration)",
+        "Life safety branch load schedule limited to 517.43(A)-(G) functions",
+        "Generator start and load-acceptance test report"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_42",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_44"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_44",
+      "cite": "517.44",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_44",
+      "title": "Connect the equipment branch for delayed automatic restoration at time-lag intervals",
+      "intent": "Stage equipment loads onto the alternate source after life safety loads to avoid overloading the generator.",
+      "applies_when": [
+        {
+          "predicate": "is_type_2_essential_electrical_system"
+        },
+        {
+          "predicate": "is_equipment_branch"
+        }
+      ],
+      "requires": {
+        "type": "automatic_connection",
+        "constraints": [
+          "equipment_branch_automatically_restored_at_appropriate_time_lag_intervals_following_life_safety_branch_energization",
+          "delayed_automatic_connection_loads_per_517_44_a_task_illumination_ventilation_sump_pumps_smoke_control_kitchen_hoods_nurse_call",
+          "delayed_automatic_or_manual_connection_loads_per_517_44_b_heating_elevators_optional_loads"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "essential_electrical_system_rating_<_150kva"
+            }
+          ],
+          "effect": "time_lag_interval_feature_may_be_deleted"
+        }
+      ],
+      "evidence_required": [
+        "Load-shed/step-load sequence documentation for the equipment branch",
+        "Equipment branch load schedule mapped to 517.44(A)/(B) categories",
+        "Generator sizing calculation supporting staged connection"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_43"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_61",
+      "cite": "517.61",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_61",
+      "title": "Install anesthetizing-location wiring and equipment per hazardous, above-hazardous, and unclassified rules",
+      "intent": "Prevent ignition of flammable anesthetics and maintain grounding integrity for wiring within, above, and outside classified anesthetizing locations.",
+      "applies_when": [
+        {
+          "predicate": "is_inhalation_anesthetizing_location"
+        }
+      ],
+      "requires": {
+        "type": "hazardous_location_wiring_method",
+        "within_hazardous_classified_location": [
+          "each_power_circuit_isolated_by_isolated_power_system_per_517_160_except_as_permitted",
+          "fixed_and_portable_equipment_>_10v_between_conductors_complies_with_class_i_division_1_requirements_of_article_501",
+          "receptacles_and_plugs_listed_class_i_group_c_with_egc_provision",
+          "flexible_cords_extra_hard_usage_with_additional_egc_and_storage_bend_radius_>=_75mm_3in"
+        ],
+        "above_hazardous_classified_location": [
+          "wiring_in_rmc_emt_imc_type_mi_or_type_mc_with_continuous_gas_vaportight_metal_sheath",
+          "arcing_equipment_totally_enclosed_or_constructed_to_prevent_escape_of_sparks",
+          "listed_seals_per_501_15_at_horizontal_and_vertical_boundaries",
+          "receptacles_and_plugs_listed_for_hospital_use"
+        ],
+        "unclassified_location": [
+          "wiring_in_metal_raceway_or_cable_assembly_qualifying_as_egc_per_250_118",
+          "receptacles_and_plugs_listed_hospital_grade"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "pendant_receptacle_uses_listed_sjo_or_equivalent_hard_usage_cord_suspended_>=_1.8m_6ft_above_floor"
+            }
+          ],
+          "effect": "metal_raceway_or_cable_assembly_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Anesthetizing location classification determination (flammable vs. nonflammable agents)",
+        "Isolated power system design for flammable anesthetizing locations",
+        "Wiring method schedule for within/above/unclassified zones",
+        "Hospital-grade and Class I Group C receptacle listings"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_160",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_250_118",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_62",
+      "cite": "517.62",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_62",
+      "title": "Ground all metal raceways and fixed equipment in anesthetizing areas",
+      "intent": "Equalize potential on all conductive surfaces around anesthetized patients and satisfy Class I grounding where flammable agents are used.",
+      "applies_when": [
+        {
+          "predicate": "is_anesthetizing_area"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "all_metal_raceways_metal_sheathed_cables_and_non_current_carrying_conductive_portions_of_fixed_equipment_connected_to_egc",
+          "grounding_and_bonding_in_class_i_locations_complies_with_501_30"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "equipment_operates_at_<=_10v_between_conductors"
+            }
+          ],
+          "effect": "egc_connection_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Grounding plan for anesthetizing areas",
+        "EGC termination details for fixed equipment and raceways",
+        "Equipment voltage documentation for any low-voltage exception claims"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_501_30"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_517_82",
+      "cite": "517.82",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_82",
+      "title": "Prevent hazardous grounding interconnection in signal transmission between patient appliances",
+      "intent": "Stop ground loops through patient-connected appliances located in different grounding environments.",
+      "applies_when": [
+        {
+          "predicate": "permanently_installed_signal_cabling_from_appliance_in_patient_location_to_remote_appliances"
+        }
+      ],
+      "requires": {
+        "type": "signal_system_isolation",
+        "constraints": [
+          "signal_transmission_system_prevents_hazardous_grounding_interconnection_of_appliances",
+          "common_signal_grounding_wires_only_between_appliances_within_patient_care_vicinity_served_from_same_reference_grounding_point"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Signal/data cabling riser showing isolation devices between patient location and remote appliances",
+        "Reference grounding point documentation for interconnected patient care vicinity appliances"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_13"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_620_42",
+      "cite": "620.42",
+      "section_node": "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_42",
+      "title": "Use hazardous-location-approved traveling cables in classified locations",
+      "intent": "Ensure elevator traveling cables in classified locations are of types the hazardous-location articles permit.",
+      "applies_when": [
+        {
+          "predicate": "is_elevator_or_dumbwaiter_traveling_cable"
+        },
+        {
+          "predicate": "is_hazardous_classified_location"
+        }
+      ],
+      "requires": {
+        "type": "hazardous_location_wiring_method",
+        "constraints": [
+          "traveling_cable_type_approved_for_hazardous_locations_as_permitted_in_501_10_b_2_7_502_10_b_2_6_503_10_a_3_6_505_15_c_2_or_506_15_a_6"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hazardous area classification drawings for the hoistway/garage",
+        "Traveling cable listing documentation for the applicable class/division or zone",
+        "Elevator wiring specification citing the permitting hazardous-location section"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_501_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_700_12_emergency_source",
+      "cite": "700.12 (as applied by 517.26(3) and 517.30)",
+      "section_node": "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_700_12",
+      "title": "Supply health care emergency lighting and on-premises alternate sources per 700.12",
+      "intent": "Ensure emergency lighting in health care facilities transfers to a code-compliant emergency source and that on-premises sources meet stored-energy requirements.",
+      "applies_when": [
+        {
+          "predicate": "is_health_care_facility"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "branch_circuit_supplies_emergency_lighting"
+            },
+            {
+              "predicate": "is_on_premises_alternate_power_source"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "emergency_power_source",
+        "constraints": [
+          "emergency_lighting_branch_circuits_served_from_source_complying_with_700_12_on_loss_of_normal_lighting_supply",
+          "on_premises_sources_meet_700_12_fuel_or_battery_stored_energy_requirements",
+          "freestanding_nursing_home_exception_battery_systems_effective_>=_1.5_hours_per_700_12"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Emergency lighting circuit schedule showing transfer to the alternate source",
+        "Generator fuel storage or battery capacity calculations per 700.12",
+        "Transfer switch documentation for emergency lighting circuits"
+      ],
+      "depends_on": [
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_26",
+        "16_chapter_5_special_occupancies_article_513_aircraft_hangars_article_517_health_ca_517_30"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

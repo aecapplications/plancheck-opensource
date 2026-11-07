@@ -1,0 +1,369 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Foam Plastic Protection",
+  "community_id": 24,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_c.md",
+    "chapter_4_foundations_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r316_4",
+      "cite": "R316.4",
+      "section_node": "section_r316_4",
+      "title": "Separate foam plastic from interior with an approved thermal barrier",
+      "intent": "Limit fire growth and protect occupants by interposing a code-approved thermal barrier between any interior space and foam plastic insulation.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "material_is_foam_plastic"
+            },
+            {
+              "predicate": "foam_plastic_faces_building_interior"
+            },
+            {
+              "not": {
+                "predicate": "exemption_under_r316_5_applies"
+              }
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "thermal_barrier_separation",
+        "any_of": [
+          {
+            "barrier": "gypsum_wallboard",
+            "min_thickness_in": 0.5
+          },
+          {
+            "barrier": "wood_structural_panel",
+            "min_thickness_in": 0.71875
+          },
+          {
+            "barrier": "tested_material",
+            "criteria": "passes_temperature_transmission_fire_test_AND_integrity_fire_test"
+          }
+        ],
+        "tested_per": [
+          "std_nfpa_275"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "exemption_under_r316_5_applies"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Wall/ceiling/floor section drawings showing the thermal barrier layer and its thickness",
+        "Manufacturer specification sheet identifying the gypsum wallboard, wood structural panel, or tested barrier product",
+        "If alternative material: NFPA 275 test report demonstrating compliance with both Temperature Transmission Fire Test and Integrity Fire Test",
+        "Material schedule on the construction documents calling out the approved thermal barrier"
+      ],
+      "depends_on": [
+        "section_r316_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r316_5_3",
+      "cite": "R316.5.3",
+      "section_node": "section_r316_5_3",
+      "title": "Attic foam plastic must have an ignition barrier or be tested when thermal barrier is omitted",
+      "intent": "Where the R316.4 thermal barrier is omitted in attics, fire-ignition risk is mitigated by limiting attic entry to maintenance and protecting foam plastic with an approved ignition barrier or equivalent fire test.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "location_is_attic"
+            },
+            {
+              "predicate": "foam_plastic_insulation_present"
+            },
+            {
+              "predicate": "thermal_barrier_per_r316_4_omitted"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ignition_barrier_or_tested_assembly",
+        "all_of": [
+          {
+            "predicate": "attic_access_required_per_r807_1"
+          },
+          {
+            "predicate": "attic_entry_limited_to_repairs_or_maintenance"
+          },
+          {
+            "any_of": [
+              {
+                "predicate": "foam_plastic_tested_per_r316_6"
+              },
+              {
+                "ignition_barrier_any_of": [
+                  {
+                    "material": "mineral_fiber_insulation",
+                    "min_thickness_in": 1.5
+                  },
+                  {
+                    "material": "wood_structural_panels",
+                    "min_thickness_in": 0.25
+                  },
+                  {
+                    "material": "particleboard",
+                    "min_thickness_in": 0.375
+                  },
+                  {
+                    "material": "hardboard",
+                    "min_thickness_in": 0.25
+                  },
+                  {
+                    "material": "gypsum_board",
+                    "min_thickness_in": 0.375
+                  },
+                  {
+                    "material": "corrosion_resistant_steel",
+                    "min_base_metal_thickness_in": 0.016
+                  },
+                  {
+                    "material": "cellulose_insulation",
+                    "min_thickness_in": 1.5
+                  },
+                  {
+                    "material": "fiber_cement_panel_or_soffit_or_backer_board",
+                    "min_thickness_in": 0.25
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tested_per": [
+          "std_r316_6"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "foam_plastic_tested_per_r316_6"
+            }
+          ],
+          "effect": "ignition_barrier_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Attic detail drawings showing foam plastic location and the proposed ignition barrier (material and thickness called out)",
+        "Confirmation that an attic access opening complying with R807.1 is provided on the plans",
+        "Note on plans restricting attic entry to repairs or maintenance only",
+        "If foregoing the ignition barrier: third-party test report demonstrating the foam plastic was tested in accordance with R316.6",
+        "Manufacturer product data for the ignition barrier material confirming the listed thickness/base-metal thickness"
+      ],
+      "depends_on": [
+        "section_r316_4",
+        "section_r316_6",
+        "section_r807_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r316_5_4",
+      "cite": "R316.5.4",
+      "section_node": "section_r316_5_4",
+      "title": "Crawl space foam plastic must have an ignition barrier or be tested when thermal barrier is omitted",
+      "intent": "Where the R316.4 thermal barrier is omitted in crawl spaces, fire-ignition risk is mitigated by limiting entry to maintenance and protecting foam plastic with an approved ignition barrier or equivalent fire test.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "location_is_crawl_space"
+            },
+            {
+              "predicate": "foam_plastic_insulation_present"
+            },
+            {
+              "predicate": "thermal_barrier_per_r316_4_omitted"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ignition_barrier_or_tested_assembly",
+        "all_of": [
+          {
+            "predicate": "crawl_space_access_required_per_r408_4"
+          },
+          {
+            "predicate": "crawl_space_entry_limited_to_repairs_or_maintenance"
+          },
+          {
+            "any_of": [
+              {
+                "predicate": "foam_plastic_tested_per_r316_6"
+              },
+              {
+                "ignition_barrier_any_of": [
+                  {
+                    "material": "mineral_fiber_insulation",
+                    "min_thickness_in": 1.5
+                  },
+                  {
+                    "material": "wood_structural_panels",
+                    "min_thickness_in": 0.25
+                  },
+                  {
+                    "material": "particleboard",
+                    "min_thickness_in": 0.375
+                  },
+                  {
+                    "material": "hardboard",
+                    "min_thickness_in": 0.25
+                  },
+                  {
+                    "material": "gypsum_board",
+                    "min_thickness_in": 0.375
+                  },
+                  {
+                    "material": "corrosion_resistant_steel",
+                    "min_base_metal_thickness_in": 0.016
+                  },
+                  {
+                    "material": "fiber_cement_panel_or_soffit_or_backer_board",
+                    "min_thickness_in": 0.25
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "tested_per": [
+          "std_r316_6"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "foam_plastic_tested_per_r316_6"
+            }
+          ],
+          "effect": "ignition_barrier_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Crawl space section/detail drawings showing foam plastic location and ignition barrier material and thickness",
+        "Confirmation on plans that crawl space access is provided per R408.4",
+        "Note on plans restricting crawl space entry to repairs or maintenance only",
+        "If foregoing the ignition barrier: third-party test report demonstrating the foam plastic was tested in accordance with R316.6",
+        "Manufacturer product data for the chosen ignition barrier material confirming compliance with the listed thickness"
+      ],
+      "depends_on": [
+        "section_r316_4",
+        "section_r316_6",
+        "section_r408_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r408_4",
+      "cite": "R408.4",
+      "section_node": "section_r408_4",
+      "title": "Provide minimum-sized access openings to all under-floor (crawl) spaces",
+      "intent": "Ensure under-floor spaces are physically accessible for inspection, maintenance, and repair through a code-sized access opening, and to support the R316.5.4 ignition-barrier exemption that depends on this access.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "building_has_under_floor_space"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "access_opening_dimensions",
+        "all_of": [
+          {
+            "predicate": "access_provided_to_all_under_floor_spaces"
+          },
+          {
+            "any_of": [
+              {
+                "opening_type": "through_floor",
+                "min_clear_width_in": 18,
+                "min_clear_height_in": 24
+              },
+              {
+                "opening_type": "through_perimeter_wall",
+                "min_clear_width_in": 16,
+                "min_clear_height_in": 24
+              }
+            ]
+          },
+          {
+            "if": {
+              "predicate": "any_portion_of_through_wall_access_is_below_grade"
+            },
+            "then": {
+              "all_of": [
+                {
+                  "areaway_min_size_in": [
+                    16,
+                    24
+                  ]
+                },
+                {
+                  "predicate": "areaway_bottom_below_threshold_of_access_opening"
+                }
+              ]
+            }
+          },
+          {
+            "not": {
+              "predicate": "through_wall_access_located_under_door_to_residence"
+            }
+          },
+          {
+            "if": {
+              "predicate": "mechanical_equipment_located_under_floor"
+            },
+            "then": {
+              "reference": "california_mechanical_code_access_requirements"
+            }
+          }
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation/floor plan showing location and clear dimensions of every under-floor access opening",
+        "Detail confirming through-floor openings are at least 18 in x 24 in or through-wall openings are at least 16 in x 24 in",
+        "Areaway detail (size and depth) where any portion of a through-wall access is below grade, showing areaway bottom below the access threshold",
+        "Plan note confirming through-wall access is not located beneath any door to the residence",
+        "Cross-reference to California Mechanical Code access provisions where mechanical equipment is under-floor"
+      ],
+      "depends_on": [
+        "section_r316_5_4",
+        "std_california_mechanical_code"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

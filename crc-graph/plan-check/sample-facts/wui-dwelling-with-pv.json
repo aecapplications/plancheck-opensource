@@ -1,0 +1,35 @@
+{
+  "project": {
+    "address": "12345 Ridge Road, Truckee, CA",
+    "type": "single-family detached dwelling",
+    "scope": "new construction",
+    "stories": 2,
+    "occupancy": "R-3"
+  },
+  "predicates": [
+    "in_wildland_urban_interface_fire_area",
+    "in_fire_hazard_severity_zone",
+    "is_new_structure",
+    "is_new_building",
+    "is_pv_rooftop_mounted",
+    "installed_on_or_above_roof_covering",
+    "creates_roof_penetration",
+    "is_deck_porch_balcony_or_stair_walking_surface",
+    "any_portion_within_10_ft_of_building",
+    "uses_foam_plastic_in_building_construction",
+    "is_spray_foam_plastic_insulation",
+    "thickness_>_4_in"
+  ],
+  "false_predicates": [
+    "jurisdiction_adopted_sfm_model_ordinance_gov_code_51189",
+    "is_group_u_accessory_building",
+    "decking_meets_astm_e84_class_b"
+  ],
+  "submittal": {
+    "drawings": ["A-1.0 Site", "A-2.0 Floor", "A-3.0 Roof Plan", "A-4.0 Elevations"],
+    "specs": ["08-Roof.pdf", "16-PV.pdf"],
+    "_listings_provided": [],
+    "_test_reports_provided": []
+  },
+  "_notes": "Intentional gaps: no listings or test reports attached, so the engine will flag every required-evidence item. Fire Hazard Severity Zone declared (Truckee is in Very High FHSZ). Two intentional triggers for foam plastic >4in spray insulation."
+}

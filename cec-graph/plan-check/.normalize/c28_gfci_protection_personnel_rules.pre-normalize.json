@@ -1,0 +1,611 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "GFCI Protection \u2014 Personnel",
+  "community_id": 28,
+  "extracted_from_sections": [
+    "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_xref_210_8",
+      "cite": "210.8",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_8",
+      "title": "Apply 210.8 branch-circuit outlet GFCI protection in addition to equipment-specific GFCI rules",
+      "intent": "Ensure that equipment-level GFCI requirements in Articles 422 and 424 are applied on top of, not instead of, the branch-circuit outlet GFCI protection required by 210.8 for covered locations.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_heating_cable_in_concrete_or_poured_masonry_floor",
+            "is_heating_cable_under_floor_covering",
+            "is_heating_panel_under_floor_covering",
+            "is_appliance_covered_by_422_5"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraint": "branch_circuit_outlet_gfci_protection_per_210_8_applies_in_addition_to_equipment_specific_gfci_requirements",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule identifying GFCI-protected branch circuits serving covered locations",
+        "Floor plan showing receptacle and equipment outlet locations relative to 210.8 covered areas (bathrooms, kitchens, etc.)",
+        "One-line or circuit diagram showing GFCI device placement for each covered outlet"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_184",
+      "cite": "410.184",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_184",
+      "title": "Provide listed GFCI protection for cord-connected horticultural lighting equipment",
+      "intent": "Protect personnel from ground faults on horticultural lighting equipment that uses flexible cords, which is commonly handled and used in damp growing environments.",
+      "applies_when": [
+        "is_lighting_equipment_identified_for_horticultural_use",
+        "employs_flexible_cord_with_one_or_more_conductors"
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "supplied_by": "lighting_outlets_protected_by_listed_gfci",
+        "device_listed": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire schedule identifying horticultural lighting equipment and its listing",
+        "Circuit/panel schedule showing GFCI protection on lighting outlets supplying the horticultural equipment",
+        "Cut sheets or listing labels for the GFCI device",
+        "Wiring plan showing flexible cord connections to the protected lighting outlets"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_411_1",
+      "cite": "411.1",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_411_1",
+      "title": "Classify lighting systems under Article 411 by voltage and wet-contact limits",
+      "intent": "Establish which lighting systems fall under the low-voltage lighting rules of Article 411 so the correct requirement subtree is applied.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                "is_lighting_system_or_associated_component",
+                {
+                  "any_of": [
+                    "operating_voltage_<=_30v_ac",
+                    "operating_voltage_<=_60v_dc"
+                  ]
+                }
+              ]
+            },
+            {
+              "all_of": [
+                "is_lighting_system_or_associated_component",
+                "wet_contact_likely",
+                {
+                  "any_of": [
+                    "operating_voltage_<=_15v_ac",
+                    "operating_voltage_<=_30v_dc"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraint": "system_within_article_411_scope_and_subject_to_article_411_requirements",
+        "voltage_limit_dry": "30v_ac_or_60v_dc",
+        "voltage_limit_wet_contact": "15v_ac_or_30v_dc",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Lighting system cut sheets showing operating voltage (ac/dc)",
+        "Plans identifying locations where wet contact is likely",
+        "Power supply/transformer specifications for the low-voltage system"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_411_5_a",
+      "cite": "411.5(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_411_5",
+      "title": "Install concealed or through-structure low-voltage lighting conductors by Chapter 3 methods or Class 2 wiring per 725.130",
+      "intent": "Ensure low-voltage lighting conductors hidden in building construction are installed with recognized wiring methods so they remain safe and inspectable.",
+      "applies_when": [
+        "is_article_411_low_voltage_lighting_system",
+        {
+          "any_of": [
+            "conductors_concealed_in_wall_floor_or_ceiling",
+            "conductors_extended_through_wall_floor_or_ceiling"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "any_of": [
+          "chapter_3_wiring_method",
+          "wiring_supplied_by_listed_class_2_power_source_installed_per_725_130"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring plan showing routing of concealed low-voltage lighting conductors",
+        "Specification of the wiring method used (Chapter 3 method or Class 2 cable type)",
+        "Listing documentation for the Class 2 power source where option (2) is used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_chapter_3",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_725_130"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_411_5_b",
+      "cite": "411.5(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_411_5",
+      "title": "Keep low-voltage lighting systems at least 10 ft horizontally from pool, spa, or fountain water",
+      "intent": "Prevent shock hazard from low-voltage lighting systems installed near bodies of water unless the stricter rules of Article 680 permit closer installation.",
+      "applies_when": [
+        "is_article_411_low_voltage_lighting_system",
+        {
+          "any_of": [
+            "near_pool",
+            "near_spa",
+            "near_fountain",
+            "near_similar_body_of_water"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "min_horizontal_distance_from_nearest_water_edge_mm": 3000,
+        "min_horizontal_distance_from_nearest_water_edge_ft": 10,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "installation_permitted_by_article_680"
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Site or floor plan dimensioning lighting system locations from the nearest water edge",
+        "Luminaire schedule identifying the low-voltage lighting system components",
+        "Article 680 compliance documentation where systems are closer than 10 ft"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_5",
+      "cite": "422.5(A), 422.5(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_5",
+      "title": "Provide Class A GFCI protection for listed appliance categories rated 150 V or less to ground and 60 A or less",
+      "intent": "Protect personnel from electrocution by ground faults on appliance categories with elevated shock risk, using a readily accessible, listed Class A GFCI.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_automotive_vacuum_machine",
+            "is_drinking_water_cooler_or_bottle_fill_station",
+            "is_cord_and_plug_connected_high_pressure_spray_washing_machine",
+            "is_tire_inflation_machine",
+            "is_vending_machine",
+            "is_sump_pump",
+            "is_dishwasher"
+          ]
+        },
+        "voltage_to_ground_<=_150v",
+        "appliance_rating_<=_60a",
+        {
+          "any_of": [
+            "is_single_phase",
+            "is_3_phase"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "gfci_protection",
+        "gfci_class": "class_a",
+        "device_listed": true,
+        "readily_accessible": true,
+        "location_any_of": [
+          "within_branch_circuit_overcurrent_device",
+          "device_or_outlet_within_supply_circuit",
+          "integral_part_of_attachment_plug",
+          "within_supply_cord_not_more_than_300mm_12in_from_attachment_plug",
+          "factory_installed_within_appliance"
+        ],
+        "multiple_gfci_devices": "permitted_but_not_required",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance schedule with voltage-to-ground and ampere ratings for each covered appliance",
+        "Panel schedule or circuit diagram showing the Class A GFCI device and its location in the supply path",
+        "Listing labels or cut sheets for the GFCI device (or factory-installed appliance GFCI)",
+        "Plan notes demonstrating the GFCI is readily accessible"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_dishwasher",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_16_a",
+      "cite": "422.16(B)(1)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_16",
+      "title": "Meet cord length, receptacle, and grounding conditions for cord-and-plug-connected in-sink waste disposers",
+      "intent": "Allow flexible-cord connection of in-sink waste disposers only when the cord and receptacle arrangement keeps the cord protected, accessible, and grounded.",
+      "applies_when": [
+        "is_electrically_operated_in_sink_waste_disposer",
+        "is_cord_and_plug_connected"
+      ],
+      "requires": {
+        "type": "flexible_cord_connection",
+        "cord_identified_suitable_in_manufacturer_installation_instructions": true,
+        "cord_length_min_mm": 450,
+        "cord_length_max_mm": 900,
+        "receptacle_located_to_protect_cord_from_physical_damage": true,
+        "receptacle_accessible": true,
+        "cord_has_equipment_grounding_conductor": true,
+        "terminated_with_grounding_type_attachment_plug": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_listed_appliance_distinctly_marked_double_insulated"
+          ],
+          "effect": "grounding_type_attachment_plug_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Appliance cut sheet and manufacturer installation instructions identifying the suitable cord",
+        "Kitchen plan/detail showing receptacle location relative to the disposer",
+        "Cord specification showing length between 18 in. and 36 in. and equipment grounding conductor",
+        "Listing label documentation where double-insulation exception is claimed"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_in_sink_disposer"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_16_b",
+      "cite": "422.16(B)(2)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_16",
+      "title": "Meet cord length, receptacle location, and grounding conditions for built-in dishwashers and trash compactors",
+      "intent": "Allow flexible-cord connection of built-in dishwashers and trash compactors only when cord length, receptacle placement, and grounding keep the installation safe and serviceable.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_built_in_dishwasher",
+            "is_trash_compactor"
+          ]
+        },
+        "is_cord_and_plug_connected"
+      ],
+      "requires": {
+        "type": "flexible_cord_connection",
+        "cord_identified_suitable_in_manufacturer_installation_instructions": true,
+        "trash_compactor_cord_length_range_m": [
+          0.9,
+          1.2
+        ],
+        "built_in_dishwasher_cord_length_range_m": [
+          0.9,
+          2.0
+        ],
+        "cord_length_measured_from": "face_of_attachment_plug_to_plane_of_rear_of_appliance",
+        "receptacle_located_to_protect_cord_from_physical_damage": true,
+        "trash_compactor_receptacle_location": "in_space_occupied_by_appliance_or_adjacent",
+        "dishwasher_receptacle_location": "in_space_adjacent_to_space_occupied_by_dishwasher",
+        "cord_through_opening_protected_by_bushing_grommet_or_approved_means": true,
+        "receptacle_accessible": true,
+        "cord_has_equipment_grounding_conductor": true,
+        "terminated_with_grounding_type_attachment_plug": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_listed_appliance_distinctly_marked_double_insulated"
+          ],
+          "effect": "grounding_type_attachment_plug_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Manufacturer installation instructions identifying the suitable flexible cord",
+        "Kitchen plan/detail showing receptacle located in the adjacent space (dishwasher) or occupied/adjacent space (compactor)",
+        "Cord specification showing length within 3-6.5 ft (dishwasher) or 3-4 ft (compactor) with equipment grounding conductor",
+        "Detail of bushing or grommet protection where the cord passes through an opening"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_dishwasher",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_trash_compactor"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_16_c",
+      "cite": "422.16(B)(3)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_16",
+      "title": "Identify oven/cooking-unit supply connectors for the temperature of the space",
+      "intent": "Ensure separable connectors or plug-and-receptacle combinations serving wall-mounted ovens and counter-mounted cooking units withstand the heat of their installed location.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_wall_mounted_oven",
+            "is_counter_mounted_cooking_unit"
+          ]
+        },
+        {
+          "any_of": [
+            "supply_uses_separable_connector",
+            "supply_uses_plug_and_receptacle_combination"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "equipment_identification",
+        "connector_identified_for_temperature_of_space": true,
+        "cord_identified_suitable_in_manufacturer_installation_instructions": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance installation instructions identifying cord/connector suitability",
+        "Cut sheet or listing label for the connector showing its temperature rating",
+        "Detail showing the connector location relative to the oven or cooking unit"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_wall_mounted_oven"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_16_d",
+      "cite": "422.16(B)(4)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_16",
+      "title": "Meet cord, receptacle, and individual-branch-circuit conditions for range hoods and microwave/range hood combinations",
+      "intent": "Allow flexible-cord connection of range hoods and over-the-range microwave/hood combinations only when the cord is protected, grounded, and supplied by an accessible receptacle on an individual branch circuit.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_range_hood",
+            "is_over_the_range_microwave_with_integral_range_hood"
+          ]
+        },
+        "is_cord_and_plug_connected"
+      ],
+      "requires": {
+        "type": "flexible_cord_connection",
+        "cord_identified_suitable_for_range_hoods_in_manufacturer_installation_instructions": true,
+        "cord_length_min_mm": 450,
+        "cord_length_max_m": 1.2,
+        "receptacle_located_to_protect_cord_from_physical_damage": true,
+        "receptacle_supplied_by_individual_branch_circuit": true,
+        "receptacle_accessible": true,
+        "cord_has_equipment_grounding_conductor": true,
+        "terminated_with_grounding_type_attachment_plug": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_listed_appliance_distinctly_marked_double_insulated"
+          ],
+          "effect": "grounding_type_attachment_plug_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedule showing the individual branch circuit dedicated to the range hood receptacle",
+        "Manufacturer installation instructions identifying the suitable cord for range hood use",
+        "Kitchen elevation/detail showing accessible receptacle placement protecting the cord",
+        "Cord specification showing length within 18 in. to 4 ft with equipment grounding conductor"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_range_hood"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_44",
+      "cite": "424.44",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_44",
+      "title": "Secure, protect, and GFCI-protect heating cables installed in concrete or poured masonry floors",
+      "intent": "Prevent damage to embedded floor-heating cables and protect occupants of wet-prone rooms from ground faults in electrically heated floors.",
+      "applies_when": [
+        "is_electric_space_heating_cable",
+        "installed_in_concrete_or_poured_masonry_floor"
+      ],
+      "requires": {
+        "type": "gfci_protection_and_installation",
+        "all_of": [
+          "adjacent_runs_installed_per_manufacturer_instructions",
+          "cables_secured_by_nonmetallic_frames_spreaders_or_other_approved_means_while_finish_applied",
+          "leads_protected_leaving_floor_by_rmc_imc_rigid_nonmetallic_conduit_emt_or_other_approved_means",
+          "bushings_or_approved_fittings_where_leads_emerge_within_floor_slab"
+        ],
+        "gfci_protection_for_personnel_in_addition_to_210_8": {
+          "required_where_any_of": [
+            "electrically_heated_floor_in_bathroom",
+            "electrically_heated_floor_in_kitchen",
+            "electrically_heated_floor_in_hydromassage_bathtub_location"
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor heating layout plan showing cable runs, securing method, and lead exit points",
+        "Conduit/raceway specification for leads leaving the floor (RMC, IMC, rigid nonmetallic conduit, or EMT)",
+        "Panel schedule showing GFCI protection on circuits serving heated floors in bathrooms, kitchens, and hydromassage tub locations",
+        "Manufacturer installation instructions for adjacent run spacing"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_45",
+      "cite": "424.45",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_45",
+      "title": "Identify, anchor, ground, and GFCI-protect heating cables installed under floor coverings",
+      "intent": "Ensure under-floor-covering heating cables are suitable for the application, mechanically secure, provided with a grounding path, and GFCI-protected against ground faults.",
+      "applies_when": [
+        "is_electric_space_heating_cable",
+        "installed_under_floor_covering"
+      ],
+      "requires": {
+        "type": "gfci_protection_and_installation",
+        "all_of": [
+          "cable_identified_as_suitable_for_installation_under_floor_covering",
+          "not_bridging_expansion_joints_unless_provided_with_expansion_and_contraction_fittings",
+          "connected_to_branch_circuit_and_supply_wiring_by_methods_in_installation_instructions",
+          "positioned_and_secured_under_floor_covering_per_manufacturer_instructions",
+          "grounding_means_such_as_copper_braid_or_metal_sheath_provided_as_part_of_heated_length"
+        ],
+        "gfci_protection_for_personnel_in_addition_to_210_8": {
+          "required": true
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cut sheet/listing showing the cable is identified for under-floor-covering installation",
+        "Panel schedule showing GFCI protection for personnel on the supplying branch circuit",
+        "Floor heating layout showing expansion joints and any expansion/contraction fittings",
+        "Product data showing integral grounding braid or metal sheath over the heated length"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_99",
+      "cite": "424.99",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_99",
+      "title": "Identify, anchor, ground, and GFCI-protect heating panels and panel sets installed under floor coverings",
+      "intent": "Ensure radiant heating panels and panel sets under floor coverings are suitable for the application, properly installed with recognized wiring methods, grounded, and GFCI-protected.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_radiant_heating_panel",
+            "is_heating_panel_set"
+          ]
+        },
+        "installed_under_floor_covering"
+      ],
+      "requires": {
+        "type": "gfci_protection_and_installation",
+        "all_of": [
+          "panel_or_panel_set_identified_as_suitable_for_installation_under_floor_covering",
+          "listed_and_installed_on_smooth_flat_surfaces_per_manufacturer_instructions",
+          "not_bridging_expansion_joints_unless_protected_from_expansion_and_contraction",
+          "connected_to_branch_circuit_and_supply_wiring_by_chapter_3_wiring_methods",
+          "firmly_anchored_to_floor_using_adhesive_or_anchoring_system_identified_for_this_use",
+          "covered_only_by_floor_covering_identified_by_heater_manufacturer_as_suitable",
+          "grounding_means_such_as_copper_braid_or_metal_sheath_provided_with_or_integral_to_panel_excluding_nonheating_leads"
+        ],
+        "gfci_protection_for_personnel_in_addition_to_210_8": {
+          "required": true,
+          "on": "branch_circuits_supplying_heating_panel_or_panel_sets"
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing documentation showing panels/panel sets identified for under-floor-covering installation",
+        "Panel schedule showing GFCI protection for personnel on branch circuits supplying the panels",
+        "Wiring plan showing Chapter 3 wiring method connections to branch-circuit and supply wiring",
+        "Manufacturer instructions and floor covering suitability identification",
+        "Product data showing integral grounding braid or metal sheath"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_8",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_chapter_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_725_130",
+      "cite": "725.130",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_725_130",
+      "title": "Install Class 2 supplied low-voltage lighting wiring in accordance with 725.130",
+      "intent": "Route the Class 2 wiring option for concealed low-voltage lighting conductors to the installation requirements of 725.130.",
+      "applies_when": [
+        "is_article_411_low_voltage_lighting_system",
+        "wiring_supplied_by_listed_class_2_power_source",
+        {
+          "any_of": [
+            "conductors_concealed_in_wall_floor_or_ceiling",
+            "conductors_extended_through_wall_floor_or_ceiling"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraint": "class_2_wiring_installed_in_accordance_with_725_130",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Listing documentation for the Class 2 power source",
+        "Wiring plan identifying the Class 2 circuit routing and cable type",
+        "Installation notes citing compliance with 725.130 wiring methods"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_411_5"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

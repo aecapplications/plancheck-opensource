@@ -1,0 +1,1668 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Wind/Seismic Bracing & SDC Provisions",
+  "community_id": 0,
+  "extracted_from_sections": [
+    "appendix_as_strawbale_construction.md",
+    "appendix_au_cob_construction_monolithic_adobe.md",
+    "chapter_2_definitions.md",
+    "chapter_3_building_planning_a.md",
+    "chapter_44_referenced_standards.md",
+    "chapter_4_foundations_a.md",
+    "chapter_4_foundations_b.md",
+    "chapter_5_floors.md",
+    "chapter_6_wall_construction_a.md",
+    "chapter_6_wall_construction_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_as_106_13_braced_wall",
+      "cite": "AS106.13",
+      "section_node": "as_106_13_braced_wall",
+      "title": "Plastered strawbale braced wall panels in one-story buildings shall comply with R602.10 and Tables AS106.13(1)-(3)",
+      "intent": "Ensure plastered strawbale walls used as lateral bracing meet the same wall-bracing framework as conventional wood-frame construction with thickness, sill plate, and anchor-bolt detailing tuned to plastered bale assemblies.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        },
+        {
+          "predicate": "uses_plastered_strawbale_wall"
+        },
+        {
+          "predicate": "is_one_story_building"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_section": "section_r602_10",
+        "panel_types_per_tables": [
+          "AS106.13(1)",
+          "AS106.13(2)",
+          "AS106.13(3)"
+        ],
+        "wind_design_per_section": "section_r301_2_1",
+        "seismic_design_per_section": "section_r301_2_2",
+        "minimum_bale_thickness_without_plaster_in": 15,
+        "sill_plates_per_table": "AS106.13(1)",
+        "sill_plate_anchor_bolt_min_diameter_in": 0.625,
+        "sill_plate_anchor_bolt_min_embedment_in": 7,
+        "sill_plate_washer_size_in": "3 x 3 x 3/16 steel",
+        "engineered_design_required_when": [
+          "located_in_special_wind_region",
+          "wind_design_required_per_figure_r301_2_2"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing schedule identifying each strawbale panel by Type (A1-E) per Table AS106.13(1)",
+        "Detail showing minimum 15-inch unplastered bale thickness",
+        "Sill-plate anchor bolt schedule (5/8\" dia., 7\" embed., 3x3x3/16 washer) at the spacing shown in Table AS106.13(1)",
+        "Wind/seismic site-criteria summary referencing Section R301.2.1 and R301.2.2",
+        "Approved engineered design where the building is in a special wind region or where wind design is required per Figure R301.2(2)"
+      ],
+      "depends_on": [
+        "section_r602_10",
+        "section_r301_2_1",
+        "section_r301_2_2",
+        "figure_r301_2_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_au_106_11_braced_wall",
+      "cite": "AU106.11",
+      "section_node": "au_106_11_braced_wall",
+      "title": "Cob braced wall panels shall comply with R602.10 and Tables AU106.11(1)-(5) with prescribed wind/seismic criteria",
+      "intent": "Bring monolithic-adobe (cob) walls used for lateral bracing into the prescriptive wall-bracing system with cob-specific tables for panel types, spacing and length.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        },
+        {
+          "predicate": "uses_cob_wall"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "construct_per_section": "section_r602_10",
+        "panel_types_per_tables": [
+          "AU106.11(1)",
+          "AU106.11(2)",
+          "AU106.11(3)",
+          "AU106.11(4)",
+          "AU106.11(5)"
+        ],
+        "wind_design_per_section": "section_r301_2_1",
+        "seismic_design_per_section": "section_r301_2_2",
+        "engineered_design_required_when": [
+          "located_in_special_wind_region",
+          "wind_design_required_per_figure_r301_2_1_1"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing plan identifying each cob panel by Type per Table AU106.11(1)",
+        "Spacing and length tables (AU106.11(2)-(5)) cross-referenced for wind and seismic design",
+        "Approved engineered design where in special wind region or where wind design is required per Figure R301.2.1.1",
+        "Wind/seismic site criteria summary",
+        "Reinforcement and anchorage details for each cob panel type"
+      ],
+      "depends_on": [
+        "section_r602_10",
+        "section_r301_2_1",
+        "section_r301_2_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_1_wind",
+      "cite": "R301.2.1",
+      "section_node": "section_r301_2_1_wind",
+      "title": "Design wind loads using the ultimate design wind speed from Figure R301.2(2) and provide a continuous load path",
+      "intent": "Establish the wind loading basis (Vult from Figure R301.2(2), exposure adjustments) and require a continuous uplift load path so wind forces transfer from roof to foundation.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_irc"
+        }
+      ],
+      "requires": {
+        "type": "design_basis",
+        "ultimate_design_wind_speed_from": "figure_r301_2_2",
+        "wind_load_table": "Table R301.2.1(1)",
+        "height_exposure_adjustment_table": "Table R301.2.1(2)",
+        "continuous_uplift_load_path_required": true,
+        "uplift_force_per_section": "R802.11",
+        "lowest_prescriptive_speed_floor": "Where Vult < lowest prescriptive code wind speed, use the lowest prescriptive code wind speed",
+        "asphalt_shingle_design_per": "R905.2.4",
+        "metal_roof_shingle_design_per": "R905.4.4",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "wind_design_required_per_section_r301_2_1_1"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "Where wind design is required per R301.2.1.1, the prescriptive structural wind provisions of this code are not permitted."
+        }
+      ],
+      "evidence_required": [
+        "Site-specific Vult from Figure R301.2(2) with citation",
+        "Exposure category determination per R301.2.1.4",
+        "Wall covering / glazing / roof covering wind pressures from Table R301.2.1(1) adjusted by Table R301.2.1(2)",
+        "Continuous uplift load path detail from roof to foundation per Section R802.11",
+        "Statement that prescriptive lowest wind speed is used where Vult is below the lowest tabulated value"
+      ],
+      "depends_on": [
+        "figure_r301_2_2",
+        "def_basic_wind_speed"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_2_seismic",
+      "cite": "R301.2.2",
+      "section_node": "section_r301_2_2_seismic",
+      "title": "Apply IRC seismic provisions to townhouses and dwellings in SDC C/D0/D1/D2; SDC E uses the California Building Code",
+      "intent": "Define which buildings are bound by the IRC seismic provisions and require engineered (CBC) design for SDC E unless reclassified.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_townhouse_in_sdc_c_d0_d1_or_d2"
+            },
+            {
+              "predicate": "is_detached_one_or_two_family_dwelling_in_sdc_d0_d1_or_d2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_seismic_requirements_of": "this_code",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "in_seismic_design_category_e"
+            }
+          ],
+          "effect": "use_california_building_code_for_seismic_design_unless_reclassified_per_r301_2_2_1"
+        }
+      ],
+      "evidence_required": [
+        "Seismic Design Category determination per Section R301.2.2.1",
+        "Identification of building type (detached 1-2 family dwelling vs. townhouse)",
+        "If SDC E: engineered design per California Building Code or reclassification documentation per R301.2.2.1.2",
+        "Statement that seismic provisions of this code are applied"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_2_1",
+      "cite": "R301.2.2.1",
+      "section_node": "section_r301_2_2_1",
+      "title": "Assign Seismic Design Category from Figures R301.2.2.1(1) through (6)",
+      "intent": "Force every IRC project to obtain its SDC from the prescribed maps before any other seismic provision applies.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_irc"
+        }
+      ],
+      "requires": {
+        "type": "design_basis",
+        "seismic_design_category_assigned_from": [
+          "Figure R301.2.2.1(1)",
+          "Figure R301.2.2.1(2)",
+          "Figure R301.2.2.1(3)",
+          "Figure R301.2.2.1(4)",
+          "Figure R301.2.2.1(5)",
+          "Figure R301.2.2.1(6)"
+        ],
+        "alternate_methods_permitted": [
+          "Section R301.2.2.1.1 (Site Class A, B, or D using Figures R301.2.2.1.1(1)-(6) or CBC 1613.2)",
+          "Section R301.2.2.1.2 (Reclassify SDC E to D2 under stated restrictions)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site coordinates with mapped SDC pulled from the applicable Figure R301.2.2.1(1)-(6)",
+        "If alternate method used: site class report and SDS calculation per CBC 1613.2 with SDC from Table R301.2.2.1.1",
+        "If reclassifying SDC E to D2: documentation under R301.2.2.1.2 including R301.2.2.6 regularity check"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_2_6",
+      "cite": "R301.2.2.6",
+      "section_node": "section_r301_2_2_6",
+      "title": "Irregular buildings in SDC C/D0/D1/D2 shall not use IRC seismic provisions; design per accepted engineering practice",
+      "intent": "Prevent prescriptive seismic provisions from being applied to plan/configuration irregularities they were not calibrated for; require engineering for the irregular feature and any forces it generates.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_c_d0_d1_or_d2"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "has_shear_or_braced_wall_offset_out_of_plane"
+            },
+            {
+              "predicate": "floor_or_roof_section_not_laterally_supported_on_all_edges"
+            },
+            {
+              "predicate": "has_braced_wall_offset_in_plane_more_than_1_ft_past_opening"
+            },
+            {
+              "predicate": "floor_or_roof_opening_exceeds_lesser_of_12_ft_or_50_percent_of_least_dim"
+            },
+            {
+              "predicate": "has_floor_level_offset"
+            },
+            {
+              "predicate": "shear_or_braced_walls_not_in_two_perpendicular_directions"
+            },
+            {
+              "predicate": "story_braced_by_wood_or_cfs_includes_masonry_or_concrete"
+            },
+            {
+              "predicate": "is_hillside_light_frame_construction_per_r301_2_2_6_item_8"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "engineered_design",
+        "design_per": "accepted_engineering_practice",
+        "scope": "irregular_features_and_remaining_system_affected_by_them",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex_offset_out_of_plane",
+          "applies_when": [
+            {
+              "predicate": "is_wood_light_frame_with_floor_cantilever_or_setback_<=_4x_joist_depth"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "Subject to all five conditions of the R301.2.2.6 Item 1 exception (joist size/spacing, backspan ratio, doubled joists, rim-joist tie, gravity load limits)."
+        },
+        {
+          "id": "ex_lateral_support",
+          "applies_when": [
+            {
+              "predicate": "floor_extends_<=_6_ft_beyond_braced_wall_line_and_supports_no_walls_or_roof"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex_offset_in_plane_with_header",
+          "applies_when": [
+            {
+              "predicate": "is_wood_light_frame_wall"
+            },
+            {
+              "predicate": "opening_below_<=_8_ft_with_header_per_item_3_exception"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex_floor_offset_continuous_perimeter_foundation",
+          "applies_when": [
+            {
+              "predicate": "framing_supported_directly_by_continuous_perimeter_foundation"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex_hillside_concrete_or_masonry_walls",
+          "applies_when": [
+            {
+              "predicate": "lowest_framed_floor_supported_directly_on_concrete_or_masonry_walls_full_length_except_downhill"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Plan and elevation showing whether any of the eight irregularity conditions of R301.2.2.6 occur",
+        "Engineered design (calculations and details) for the irregular feature and remaining system if applicable",
+        "Hillside-construction structural design for floor above cripple walls and connections down to and including the foundation, if Item 8 applies"
+      ],
+      "depends_on": [
+        "def_seismic_design_category",
+        "def_braced_wall_panel"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_2",
+      "cite": "R403.1.2",
+      "section_node": "r403_1_2",
+      "title": "In SDC D0/D1/D2 support exterior walls (and required interior braced wall panels in long buildings) on continuous footings",
+      "intent": "Provide a continuous, stiff foundation diaphragm in higher seismic categories so braced wall panel forces transfer reliably to the soil.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "is_exterior_wall"
+            },
+            {
+              "predicate": "is_required_interior_braced_wall_panel"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foundation_continuity",
+        "foundation_material_options": [
+          "continuous_solid_masonry",
+          "fully_grouted_masonry",
+          "continuous_concrete"
+        ],
+        "applies_to_interior_braced_wall_panels_when": "plan_dimension_>_50_ft_per_section_r403_1_3_4",
+        "two_story_sdc_d2_special_rule": "all_braced_wall_panels_interior_and_exterior_shall_be_supported_on_continuous_foundations",
+        "engineered_alternative": "Other footing materials or systems shall be designed in accordance with accepted engineering practice.",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex_two_story_50ft_intervals",
+          "applies_when": [
+            {
+              "predicate": "is_two_story_building"
+            },
+            {
+              "predicate": "cripple_wall_height_<=_4_ft"
+            },
+            {
+              "predicate": "first_floor_braced_wall_panels_supported_on_doubled_joists_continuous_blocking_or_floor_beams"
+            },
+            {
+              "predicate": "distance_between_bracing_lines_<=_2x_building_width_parallel_to_braced_wall_line"
+            }
+          ],
+          "effect": "interior_braced_wall_panels_may_be_supported_on_continuous_foundations_at_intervals_<=_50_ft"
+        }
+      ],
+      "evidence_required": [
+        "Foundation plan showing continuous concrete or fully-grouted masonry footings under exterior walls",
+        "Plan dimensions noted to confirm whether interior braced wall panels require continuous footings (>50 ft trigger)",
+        "Two-story SDC D2 confirmation that all braced wall panels (interior and exterior) sit on continuous foundations",
+        "If exception is used: cripple-wall height, first-floor support detail, and bracing-line spacing dimensioned on plans"
+      ],
+      "depends_on": [
+        "def_seismic_design_category",
+        "def_braced_wall_panel"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_3",
+      "cite": "R403.1.3",
+      "section_node": "r403_1_3",
+      "title": "Reinforce footings and stem walls in SDC D0/D1/D2 per Section R403.1.3 and Figure R403.1.3",
+      "intent": "Add minimum reinforcement to concrete footings and stem walls so the foundation behaves as a ductile, continuous element under seismic demand.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "predicate": "is_concrete_footing_or_stem_wall"
+        }
+      ],
+      "requires": {
+        "type": "reinforcement",
+        "minimum_reinforcement_per": "section_r403_1_3",
+        "detail_per_figure": "figure_r403_1_3",
+        "support_and_cover_per": "section_r403_1_3_5",
+        "subsections_apply": [
+          "R403.1.3.1 concrete stem walls with concrete footings",
+          "R403.1.3.2 masonry stem walls with concrete footings",
+          "R403.1.3.3 slabs-on-ground with turned-down footings",
+          "R403.1.3.4 interior bearing and braced wall panel footings",
+          "R403.1.3.5 reinforcement support/cover/lap",
+          "R403.1.3.6 isolated concrete footings"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation reinforcement schedule and section details consistent with Figure R403.1.3",
+        "Reinforcement size, lap-splice length and cover dimensions per R403.1.3.5",
+        "Compressive strength of concrete (f'c) called out per Table R402.2",
+        "Hooked dowels into stem walls per R403.1.3.1/2 and turned-down footing detail per R403.1.3.3 where applicable"
+      ],
+      "depends_on": [
+        "def_seismic_design_category",
+        "figure_r403_1_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_6_1",
+      "cite": "R403.1.6.1",
+      "section_node": "r403_1_6_1",
+      "title": "In SDC C (townhouses) and SDC D0/D1/D2 add plate washers, tighter interior anchor-bolt spacing, and 4-ft anchor spacing >2 stories",
+      "intent": "Provide hold-down-grade sill anchorage so braced wall panel sills transfer seismic shear to the foundation without splitting and so multi-story buildings get extra anchor density.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_wood_light_frame_townhouse_in_sdc_c"
+            },
+            {
+              "predicate": "is_wood_light_frame_in_sdc_d0_d1_or_d2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "anchorage",
+        "in_addition_to": "section_r403_1_6",
+        "plate_washers_per": "section_r602_11_1",
+        "plate_washers_required_along": "full_length_of_required_braced_wall_lines_unless_approved_anchor_straps_used",
+        "interior_braced_wall_plate_anchor_bolt_max_spacing_in": 72,
+        "interior_braced_wall_plate_anchor_within_in_of_plate_ends": 12,
+        "interior_bearing_wall_sole_plate_anchor_bolt_max_spacing_in": 72,
+        "interior_bearing_wall_sole_plate_anchor_within_in_of_plate_ends": 12,
+        "max_anchor_bolt_spacing_in_for_buildings_over_two_stories_in": 48,
+        "stepped_cripple_walls_per": "section_r602_11_2",
+        "continuous_wood_foundations_force_transfer_per": [
+          "section_r602_11_1",
+          "table_r602_3_1_braced_wall_panel_to_floor_fastening"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Anchor-bolt schedule with plate washers (3x3x0.229) called out along all required braced wall lines",
+        "Foundation plan showing interior braced wall and bearing-wall anchor bolt spacing <= 6 ft (or 4 ft if >2 stories) and within 12 in. of plate ends",
+        "Stepped cripple wall detail per R602.11.2 if applicable",
+        "Force-transfer detail at continuous wood foundations matching R602.11.1 capacity"
+      ],
+      "depends_on": [
+        "section_r602_11_1",
+        "section_r602_11_2",
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404_1_4",
+      "cite": "R404.1.4",
+      "section_node": "r404_1_4",
+      "title": "Foundation walls in SDC D0/D1/D2: limit height/backfill, set minimum thicknesses, and add prescribed reinforcement",
+      "intent": "Cap unreinforced foundation-wall demand and require minimum reinforcement so plain masonry/concrete walls do not become brittle weak links in higher seismic categories.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "any_of": [
+            {
+              "predicate": "is_masonry_foundation_wall"
+            },
+            {
+              "predicate": "is_concrete_foundation_wall_supporting_light_frame"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "plain_masonry_foundation_wall_limits": {
+          "max_wall_height_ft": 8,
+          "max_unbalanced_backfill_ft": 4,
+          "min_nominal_thickness_in": 8,
+          "stem_wall_vertical_reinforcement": "minimum_one_no_4_bar_at_<=_4_ft_oc_in_grouted_cells_tied_to_footing_horizontal_reinforcement",
+          "top_horizontal_reinforcement": "two_no_4_bars_in_upper_12_in_of_wall"
+        },
+        "plain_concrete_foundation_wall_limits": {
+          "max_wall_height_ft": 8,
+          "max_unbalanced_backfill_ft": 4,
+          "min_thickness_in": 7.5,
+          "exception_min_thickness_in": 6,
+          "exception_max_wall_height_ft": 4.5
+        },
+        "tables_for_walls_outside_limits": [
+          "Table R404.1.1(2)",
+          "Table R404.1.1(3)",
+          "Table R404.1.1(4)",
+          "Table R404.1.2(1)-(8)"
+        ],
+        "concrete_walls_supporting_above_grade_concrete_walls_per": [
+          "ACI 318",
+          "ACI 332",
+          "PCA 100"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation wall section showing height <= 8 ft and unbalanced backfill <= 4 ft, or applicable engineered design table reference",
+        "Reinforcement schedule (No. 4 vertical at <= 48\" o.c., two No. 4 horizontal in top 12 in.) for masonry walls",
+        "Concrete-wall thickness >= 7.5 in. (or 6 in. with wall height <= 4'-6\")",
+        "Vertical/horizontal bar layout per Table R404.1.2 where plain concrete is used outside limits"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_3",
+      "cite": "R502.3",
+      "section_node": "r502_3",
+      "title": "Size floor joists from Tables R502.3.1(1) and R502.3.1(2) (or AWC STJR for other species/loads)",
+      "intent": "Bound the gravity-load span of floor joists prescriptively so floor diaphragms remain stiff enough to transfer lateral loads to the bracing system.",
+      "applies_when": [
+        {
+          "predicate": "is_floor_joist"
+        }
+      ],
+      "requires": {
+        "type": "span_table",
+        "tables": [
+          "table_r502_3_1_1",
+          "table_r502_3_1_2"
+        ],
+        "alternative_for_other_grades_species_or_loads": "AWC STJR",
+        "sleeping_areas_and_attic_joists_table": "table_r502_3_1_1",
+        "sleeping_area_max_design_live_load_psf": 30,
+        "sleeping_area_max_design_dead_load_psf": 20,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor framing plan calling out joist size, species, grade and spacing",
+        "Span table reference (R502.3.1(1) for sleeping/attic, R502.3.1(2) for living areas)",
+        "Live/dead load assumptions noted on plans (e.g., 30 psf LL, 20 psf DL for sleeping areas)",
+        "If species/loads are outside the table: AWC STJR calculation"
+      ],
+      "depends_on": [
+        "table_r502_3_1_1",
+        "table_r502_3_1_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_7",
+      "cite": "R502.7",
+      "section_node": "r502_7",
+      "title": "Restrain joists against rotation at supports and (in SDC D0-D2) at each intermediate support",
+      "intent": "Keep floor joists from rolling or twisting where they bear so the floor diaphragm and braced wall panel-to-floor connection stay effective.",
+      "applies_when": [
+        {
+          "predicate": "is_floor_joist"
+        }
+      ],
+      "requires": {
+        "type": "lateral_restraint",
+        "options_at_ends": [
+          "full_depth_solid_blocking_>=_2_in_nominal",
+          "attachment_to_full_depth_header_band_or_rim_joist",
+          "attachment_to_adjoining_stud",
+          "other_means_to_prevent_rotation"
+        ],
+        "intermediate_support_restraint_required_when": "in_seismic_design_category_d0_d1_or_d2",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex_engineered_lumber",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_truss"
+                },
+                {
+                  "predicate": "is_structural_composite_lumber"
+                },
+                {
+                  "predicate": "is_glulam"
+                },
+                {
+                  "predicate": "is_i_joist"
+                }
+              ]
+            }
+          ],
+          "effect": "lateral_support_per_manufacturer_recommendations"
+        }
+      ],
+      "evidence_required": [
+        "Detail showing solid blocking, rim/band joist or stud attachment at each joist end",
+        "If SDC D0/D1/D2: blocking detail at every intermediate support",
+        "Manufacturer's lateral-bracing instructions for trusses, SCL, glulam or I-joists",
+        "Floor framing plan note referencing R502.7"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10",
+      "cite": "R602.10",
+      "section_node": "section_r602_10",
+      "title": "Brace buildings per Section R602.10 (or R602.12 simplified bracing where applicable); engineer non-conforming portions",
+      "intent": "Make wall bracing the primary lateral system for IRC buildings and require engineering wherever the prescriptive rules cannot be met.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_irc"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_section": "section_r602_10",
+        "alternative": "section_r602_12_when_applicable",
+        "non_conforming_portions_designed_per": "section_r301_1",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing plan citing Section R602.10 (or R602.12 simplified bracing) on each story",
+        "List of any wall lines designed per Section R301.1 instead of R602.10",
+        "Engineer-of-record stamp for any portion that does not comply with R602.10"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_1",
+      "cite": "R602.10.1",
+      "section_node": "section_r602_10_1",
+      "title": "Designate braced wall lines as straight lines in plan, with offsets <= 4 ft from the designated line",
+      "intent": "Force the bracing geometry to be discretized into well-defined orthogonal lines so the prescriptive bracing tables and panel-location rules can be applied unambiguously.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_irc"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "braced_wall_lines_designated_as": "straight_lines_in_plan",
+        "max_panel_offset_from_designated_line_ft": 4,
+        "max_two_thirds_of_required_panel_length_on_one_side_of_line": true,
+        "exterior_walls_parallel_offset_max_ft": 4,
+        "interior_walls_used_as_bracing_offset_max_ft": 4,
+        "length_of_braced_wall_line_ends_at": [
+          "intersection_with_perpendicular_braced_wall_line",
+          "angled_braced_wall_line_per_r602_10_1_4",
+          "exterior_wall"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing plan with braced wall lines drawn as straight lines and labeled",
+        "Dimensions showing all panel offsets <= 4 ft from designated lines",
+        "Calculation that no more than 2/3 of required braced wall panel length lies on one side of any line",
+        "Identification of braced wall line ends per Figure R602.10.1.1"
+      ],
+      "depends_on": [
+        "def_braced_wall_line",
+        "def_braced_wall_panel"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_1_3",
+      "cite": "R602.10.1.3",
+      "section_node": "section_r602_10_1_3",
+      "title": "Space parallel braced wall lines per Table R602.10.1.3 (60 ft wind; 35 ft SDC C townhouse; 25 ft SDC D0-D2)",
+      "intent": "Cap the diaphragm span between bracing lines so floor and roof diaphragms can deliver wind and seismic loads to the bracing without excessive flexibility.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_irc"
+        }
+      ],
+      "requires": {
+        "type": "spacing",
+        "spacing_table": "table_r602_10_1_3",
+        "wind_max_spacing_ft_when_vult_lt_140": 60,
+        "seismic_townhouse_sdc_c_max_spacing_ft": 35,
+        "seismic_townhouse_sdc_c_exception_max_ft": 50,
+        "seismic_sdc_d0_d1_d2_max_spacing_ft": 25,
+        "seismic_sdc_d0_d1_d2_exception_max_ft": 35,
+        "intermediate_braced_wall_lines_through_interior_permitted": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex_single_room_900sf",
+          "applies_when": [
+            {
+              "predicate": "in_seismic_design_category_d0_d1_or_d2"
+            },
+            {
+              "predicate": "spacing_increase_used_for_single_room_<=_900_sf"
+            }
+          ],
+          "effect": "spacing_may_be_increased_to_35_ft_for_that_single_room_only"
+        },
+        {
+          "id": "ex_table_adjustment",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "is_townhouse_in_sdc_c"
+                },
+                {
+                  "predicate": "in_seismic_design_category_d0_d1_or_d2"
+                }
+              ]
+            },
+            {
+              "predicate": "bracing_length_adjusted_per_table_r602_10_3_4"
+            }
+          ],
+          "effect": "spacing_may_be_increased_per_table_r602_10_1_3"
+        }
+      ],
+      "evidence_required": [
+        "Bracing plan with parallel braced wall line spacing dimensioned",
+        "Vult, SDC and building type shown to confirm correct row of Table R602.10.1.3",
+        "If exception used: documented adjustment per Table R602.10.3(4)",
+        "Single-room area calculation if 35-ft spacing exception is invoked in SDC D0-D2"
+      ],
+      "depends_on": [
+        "table_r602_10_1_3",
+        "table_r602_10_3_3",
+        "table_r602_10_3_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_2",
+      "cite": "R602.10.2",
+      "section_node": "section_r602_10_2",
+      "title": "Build braced wall panels as full-height segments without offsets and place them per Section R602.10",
+      "intent": "Guarantee each braced wall panel is a continuous full-height shear element so the prescriptive lengths and capacities apply.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "panel_full_height": true,
+        "no_vertical_or_horizontal_offsets": true,
+        "construction_methods_per_section": "section_r602_10_4",
+        "panel_locations_per_section": "section_r602_10_2_2",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall elevations showing each braced wall panel from top plate to bottom plate without offsets",
+        "Bracing plan citing Section R602.10.4 method for each panel",
+        "Confirmation that panel placement complies with R602.10.2.2 / R602.10.2.2.1"
+      ],
+      "depends_on": [
+        "def_braced_wall_panel"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_3",
+      "cite": "R602.10.3",
+      "section_node": "section_r602_10_3",
+      "title": "Compute required length of bracing along each braced wall line from Tables R602.10.3(1)/(3) with adjustment factors (2)/(4)",
+      "intent": "Make the design length of bracing a deterministic function of wind speed, SDC, story, building geometry and adjustment factors so plan checkers can re-derive it from the plans.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_line"
+        }
+      ],
+      "requires": {
+        "type": "bracing_length_calc",
+        "wind_table": "table_r602_10_3_1",
+        "wind_adjustment_table": "table_r602_10_3_2",
+        "seismic_table": "table_r602_10_3_3",
+        "seismic_adjustment_table": "table_r602_10_3_4",
+        "selection_rules": [
+          "sdc_a_or_b_use_wind_table_r602_10_3_1_with_factors_r602_10_3_2",
+          "detached_in_sdc_c_use_wind_table_r602_10_3_1_with_factors_r602_10_3_2",
+          "townhouse_in_sdc_c_use_greater_of_r602_10_3_1_or_r602_10_3_3_with_factors_r602_10_3_2_or_r602_10_3_4",
+          "sdc_d0_d1_d2_all_buildings_use_greater_of_r602_10_3_1_or_r602_10_3_3_with_factors_r602_10_3_2_or_r602_10_3_4"
+        ],
+        "only_panels_parallel_to_line_count": true,
+        "angled_walls_contribution": "projected_length_per_figure_r602_10_1_4",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex_stone_masonry_veneer_d0_d1_d2",
+          "applies_when": [
+            {
+              "predicate": "in_seismic_design_category_d0_d1_or_d2"
+            },
+            {
+              "predicate": "has_stone_or_masonry_veneer_per_r703_8_exceeding_first_story_height"
+            }
+          ],
+          "effect": "use_section_r602_10_6_5_for_required_bracing_length"
+        }
+      ],
+      "evidence_required": [
+        "Per-line bracing calculation showing Vult, SDC, story, line spacing and required length from Table R602.10.3(1) and/or (3)",
+        "Adjustment factors from Table R602.10.3(2) and/or (4) applied (e.g., wall height, mean roof height, eave-to-ridge, gypsum, blocking)",
+        "Tally of provided bracing length per line vs. required",
+        "If angled walls used: projected length calculation per Figure R602.10.1.4"
+      ],
+      "depends_on": [
+        "table_r602_10_3_1",
+        "table_r602_10_3_2",
+        "table_r602_10_3_3",
+        "table_r602_10_3_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_4",
+      "cite": "R602.10.4",
+      "section_node": "section_r602_10_4",
+      "title": "Construct intermittent and continuously sheathed braced wall panels per Table R602.10.4",
+      "intent": "Bind each prescriptive method (LIB, DWB, WSP, SFB, GB, PBS, PCP, HPS, ABW, PFH, PFG, BV-WSP, CS-WSP, CS-G, CS-PF, CS-SFB) to a specific material, thickness and fastening so the assumed lateral capacity is realized.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "construction_methods",
+        "methods_per_table": "table_r602_10_4",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Method label for each panel cross-referenced to Table R602.10.4 row",
+        "Sheathing/material thickness, fastener type and spacing on the wall details",
+        "Notes prohibiting adhesive attachment in SDC C, D0, D1 and D2 (per Table R602.10.4 note a)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_4_1",
+      "cite": "R602.10.4.1",
+      "section_node": "section_r602_10_4_1",
+      "title": "Mix bracing methods only as Section R602.10.4.1 permits, using the highest required length when mixing within a wall line",
+      "intent": "Allow practical mixing of bracing methods without diluting the required total bracing length; cap mixing within a single wall line to lower-seismic conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_line"
+        },
+        {
+          "predicate": "mixes_bracing_methods"
+        }
+      ],
+      "requires": {
+        "type": "mixing_rules",
+        "story_to_story_intermittent_and_continuous_mixing": "permitted",
+        "line_to_line_intermittent_method_mixing_within_a_story": "permitted",
+        "line_to_line_intermittent_and_continuous_mixing_when": "in_sdc_a_b_or_c_and_vult_<=_130_mph",
+        "along_a_line_intermittent_method_mixing_when": "in_sdc_a_b_or_detached_in_sdc_c_using_highest_required_length",
+        "continuous_method_cs_wsp_cs_g_cs_pf_mixing_along_a_line": "permitted",
+        "abw_pfh_pfg_used_with_continuous_methods": "permitted_using_highest_required_length",
+        "interior_intermittent_with_exterior_continuous_mixing_along_same_line_when": "in_sdc_a_b_or_detached_in_sdc_c_with_r602_10_7_at_each_continuous_end",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Bracing plan annotating which methods are mixed and at what level (story, line, or along a line)",
+        "Bracing-length calculation using the highest required length when mixing along a line",
+        "SDC and Vult shown to confirm mixing scenario is permitted",
+        "R602.10.7 end conditions shown for any continuously sheathed segment"
+      ],
+      "depends_on": [
+        "table_r602_10_3_1",
+        "table_r602_10_3_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_4_2",
+      "cite": "R602.10.4.2",
+      "section_node": "section_r602_10_4_2",
+      "title": "Continuous sheathing methods require structural panels on every sheathable surface of one side of the wall line",
+      "intent": "Make 'continuous sheathing' literal: the entire one-sided sheathing field (above/below openings and gable ends) acts as the bracing system, so end conditions and length tables can rely on it.",
+      "applies_when": [
+        {
+          "predicate": "uses_continuous_sheathing_method"
+        }
+      ],
+      "requires": {
+        "type": "sheathing_continuity",
+        "structural_panel_on_all_sheathable_surfaces_one_side_of_line": true,
+        "includes_areas_above_and_below_openings": true,
+        "includes_gable_end_walls": true,
+        "comply_with_ends_per_section": "section_r602_10_7",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall elevations showing structural sheathing on all sheathable areas (above/below openings, gable ends) along the continuously sheathed wall line",
+        "Cross-reference to Section R602.10.7 end-condition figure for each end of the line",
+        "Method (CS-WSP, CS-G, CS-PF or CS-SFB) called out per panel"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_6_5",
+      "cite": "R602.10.6.5",
+      "section_node": "section_r602_10_6_5",
+      "title": "In SDC D0-D2 with stone/masonry veneer per R703.8, brace exterior and supporting interior walls per Section R602.10.6.5",
+      "intent": "Account for the extra mass and overturning that veneer adds in higher seismic categories by triggering Method BV-WSP, hold-down rules and continuous-foundation requirements.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "predicate": "has_stone_or_masonry_veneer_installed_per_r703_8"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "townhouses_in_sdc_d0_d1_d2_with_veneer_exceeding_first_story_height": "designed_per_accepted_engineering_practice",
+        "one_or_two_family_in_sdc_d2_exceeding_two_stories_with_veneer": "designed_per_accepted_engineering_practice",
+        "veneer_first_story_only_use_section": "section_r602_10",
+        "veneer_exceeding_first_story_height_method": "method_bv_wsp",
+        "limited_veneer_exceeding_first_story_alt_methods": [
+          "method_wsp",
+          "method_cs_wsp"
+        ],
+        "limited_veneer_bracing_length_factor": 1.2,
+        "cripple_walls_when_veneer_exceeds_first_story_height": "not_permitted",
+        "interior_braced_wall_lines_required_to_be_supported_on": "continuous_foundations",
+        "length_of_bracing_per_section": "section_r602_10_6_5_4",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plan note identifying veneer extent (first story only / exceeds first story / limited per R602.10.6.5.3)",
+        "Method BV-WSP details (Figure R602.10.6.5.2) where veneer exceeds first story height",
+        "Hold-down schedule per Table R602.10.6.5.4",
+        "If townhouse with veneer exceeds first story or 1-2 family in D2 exceeds two stories: engineered design",
+        "Confirmation that no cripple walls exist where veneer exceeds first-story height"
+      ],
+      "depends_on": [
+        "method_bv_wsp",
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_7",
+      "cite": "R602.10.7",
+      "section_node": "section_r602_10_7",
+      "title": "Each end of a continuously sheathed braced wall line shall match one of the conditions in Figure R602.10.7",
+      "intent": "Provide a defined corner detail (return panel, hold-down, or full-height return) at the end of a continuous-sheathing line so the line can develop the assumed lateral capacity.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_line"
+        },
+        {
+          "predicate": "uses_continuous_sheathing_method"
+        }
+      ],
+      "requires": {
+        "type": "end_condition",
+        "end_condition_per_figure": "FIGURE R602.10.7",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Each end of every continuously sheathed line detailed per Figure R602.10.7 (one of End Conditions 1-5)",
+        "If End Condition 4: 24-inch return panel applied to each side of the corner",
+        "If End Condition 5: 1,800-lb hold-down at the panel-end stud and to foundation/framing below"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_8_1",
+      "cite": "R602.10.8.1",
+      "section_node": "section_r602_10_8_1",
+      "title": "In SDC D0-D2 fasten braced wall panels to required foundations per R602.11.1 and use 8-16d top plate splice",
+      "intent": "Tie braced wall panels into the foundation with the higher-seismic anchorage and preserve top plate continuity to act as a chord/collector.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "connections",
+        "panel_to_required_foundation_per": "section_r602_11_1",
+        "top_plate_lap_splice_face_nails_each_side": 8,
+        "top_plate_lap_splice_nail_size": "16d",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation anchorage detail at each braced wall panel matching R602.11.1 (plate washers, anchor bolts)",
+        "Top-plate splice detail showing 8-16d face nails on each side of the splice",
+        "Bracing plan note pointing to R602.10.8.1 in SDC D0/D1/D2"
+      ],
+      "depends_on": [
+        "section_r602_11_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_9",
+      "cite": "R602.10.9",
+      "section_node": "section_r602_10_9",
+      "title": "Support braced wall panels on cantilevered joists, post/pier, or stem walls only as R602.10.9 permits",
+      "intent": "Restrict the kinds of substructure that can carry a braced wall panel so the panel's overturning and shear can be resisted by the supporting element.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "permitted_supports": [
+          "cantilevered_floor_joists_per_section_r502_3_3",
+          "raised_floor_post_or_pier_designed_per_accepted_engineering_practice",
+          "masonry_stem_walls_<=_48_in_long_reinforced_per_figure_r602_10_9",
+          "masonry_stem_walls_>_48_in_long_per_section_r403_1",
+          "concrete_stem_walls_<=_48_in_long_>_12_in_tall_<_6_in_thick_reinforced_per_figure_r602_10_9"
+        ],
+        "abw_or_pfh_to_masonry_stem_walls": "not_permitted",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation/floor-framing detail at each braced wall panel matching one of the permitted support types",
+        "Engineered design for raised-floor post/pier supports",
+        "Reinforcement schedule per Figure R602.10.9 for short masonry/concrete stem walls",
+        "Statement that ABW and PFH panels are not attached to masonry stem walls"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_9_1",
+      "cite": "R602.10.9.1",
+      "section_node": "section_r602_10_9_1",
+      "title": "In SDC D0-D2 braced wall panel footings shall meet Section R403.1.2",
+      "intent": "Force the higher-seismic continuous-foundation rule to the panel level so each braced wall panel sits on a continuous concrete or fully grouted masonry footing.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "support",
+        "footing_per_section": "r403_1_2",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing every required braced wall panel supported on a continuous footing complying with R403.1.2",
+        "Plan note linking R602.10.9.1 to the foundation plan",
+        "Documentation of any R403.1.2 exception used (two-story with cripple wall <= 4 ft, etc.)"
+      ],
+      "depends_on": [
+        "r403_1_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_10",
+      "cite": "R602.10.10",
+      "section_node": "section_r602_10_10",
+      "title": "Brace cripple walls with the same length and method as the wall above, multiplied by 1.15",
+      "intent": "Compensate for the soft-story potential of cripple walls by increasing the bracing demand 15% above what the wall above requires.",
+      "applies_when": [
+        {
+          "predicate": "is_cripple_wall"
+        }
+      ],
+      "requires": {
+        "type": "bracing_length_calc",
+        "framing_per_section": "section_r602_9",
+        "method_and_length_match_wall_above_using_tables": [
+          "table_r602_10_3_1",
+          "table_r602_10_3_3"
+        ],
+        "adjustment_factors": [
+          "table_r602_10_3_2",
+          "table_r602_10_3_4"
+        ],
+        "cripple_wall_length_multiplier": 1.15,
+        "if_no_gypsum_inside": "apply_gypsum_elimination_adjustment_in_addition_to_1_15",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cripple wall bracing calculation showing wall-above method and length multiplied by 1.15",
+        "Adjustment factors applied per Tables R602.10.3(2)/(4)",
+        "If gypsum board is omitted on the inside of the cripple wall, the gypsum-elimination factor is also applied",
+        "Cripple wall framing detail per R602.9 (stud size and continuous foundation support)"
+      ],
+      "depends_on": [
+        "def_cripple_wall",
+        "table_r602_10_3_1",
+        "table_r602_10_3_3",
+        "table_r602_10_3_2",
+        "table_r602_10_3_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_10_10_1",
+      "cite": "R602.10.10.1",
+      "section_node": "section_r602_10_10_1",
+      "title": "In SDC D0/D1 (and SDC C townhouses) limit cripple wall bracing to WSP/CS-WSP with 14-ft max panel spacing",
+      "intent": "Restrict cripple-wall bracing to the most reliable wood-structural-panel methods and tighten panel spacing where the soft-story risk is highest.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_townhouse_in_sdc_c"
+            },
+            {
+              "predicate": "in_seismic_design_category_d0_or_d1"
+            }
+          ]
+        },
+        {
+          "predicate": "is_cripple_wall"
+        }
+      ],
+      "requires": {
+        "type": "bracing_methods",
+        "permitted_methods": [
+          "method_wsp",
+          "method_cs_wsp"
+        ],
+        "max_distance_between_adjacent_panel_edges_ft": 14,
+        "interior_walls_not_on_continuous_foundation_factor": 1.5,
+        "if_insufficient_length_panel_edge_fastener_spacing_in": 4,
+        "fastener_spacing_adjustment_factor_when_4_in_oc": 0.7,
+        "if_still_insufficient": "design_per_accepted_engineering_practice",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cripple wall plan limiting methods to WSP or CS-WSP",
+        "Dimensioned spacing showing distance between adjacent panel edges <= 14 ft",
+        "If interior braced wall line not on continuous foundation: parallel cripple wall bracing length increased by 1.5",
+        "If 4-in. edge nailing used: 0.7 length factor and engineered design fallback noted"
+      ],
+      "depends_on": [
+        "def_cripple_wall",
+        "table_r602_10_3_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_11",
+      "cite": "R602.11",
+      "section_node": "r602_11",
+      "title": "Anchor braced wall line sills to concrete or masonry foundations per R403.1.6 and R602.11.1",
+      "intent": "Make sill anchorage to the foundation an explicit, named requirement at every braced wall line sill so it is not skipped by reference only.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_line"
+        },
+        {
+          "predicate": "has_sill_on_concrete_or_masonry_foundation"
+        }
+      ],
+      "requires": {
+        "type": "anchorage",
+        "comply_with_sections": [
+          "section_r403_1_6",
+          "section_r602_11_1"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Anchor-bolt schedule along every braced wall line sill citing R403.1.6 (size, spacing, embedment) and R602.11.1 (plate washer)",
+        "Foundation plan showing each sill with anchor bolts dimensioned",
+        "Plate washer note (3x3x0.229 in.) at each anchor bolt"
+      ],
+      "depends_on": [
+        "section_r602_11_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_11_1",
+      "cite": "R602.11.1",
+      "section_node": "section_r602_11_1",
+      "title": "In SDC D0-D2 (and SDC C townhouses) provide 0.229 x 3 x 3 plate washers at all sill anchor bolts (slotted hole permitted within limits)",
+      "intent": "Spread the anchor-bolt clamp force across the sill plate so it does not split or shear, and allow practical slotted holes only within strict size limits.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_townhouse_in_sdc_c"
+            },
+            {
+              "predicate": "in_seismic_design_category_d0_d1_or_d2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "plate_washers",
+        "min_thickness_in": 0.229,
+        "min_size_in": "3 x 3",
+        "between_sill_plate_and_nut": true,
+        "approved_anchor_straps_alternative": true,
+        "diagonally_slotted_hole_max_extra_width_in": 0.1875,
+        "diagonally_slotted_hole_max_length_in": 1.75,
+        "standard_cut_washer_required_between_plate_washer_and_nut_when_slotted": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hardware schedule listing 3x3x0.229 plate washers (or approved anchor straps) at every required braced wall line anchor",
+        "Detail showing slot dimensions <= bolt+3/16\" wide and <= 1-3/4\" long with cut washer above plate washer",
+        "Plan note linking R602.11.1 to the SDC of the project",
+        "Manufacturer spec sheet for anchor straps if used as alternative"
+      ],
+      "depends_on": [
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_11_2",
+      "cite": "R602.11.2",
+      "section_node": "section_r602_11_2",
+      "title": "In SDC D0-D2 stepped-foundation braced wall lines shall follow the three R602.11.2 cases",
+      "intent": "Provide explicit prescriptive details for the difficult stepped-foundation condition so the line above the step still functions as a braced wall line.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_d1_or_d2"
+        },
+        {
+          "predicate": "braced_wall_line_height_from_foundation_to_floor_above_varies_more_than_4_ft"
+        }
+      ],
+      "requires": {
+        "type": "stepped_foundation",
+        "case_1_lowest_floor_on_sill_bolted_to_foundation_>=_8_ft": "considered_braced; double_top_plate_splice_4_ft_along_foundation; anchor_bolts_within_1_ft_and_3_ft_of_step",
+        "case_2_cripple_walls_between_top_of_foundation_and_lowest_floor_framing": "apply_R602_10_10_R602_10_10_1_R602_10_10_2",
+        "case_3_only_bottom_of_foundation_stepped_lowest_floor_on_sill_bolted_to_foundation": "apply_R403_1_6_and_R602_11_1",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation step detail labeled as Case 1, 2 or 3 of R602.11.2 (matching Figure R602.11.2)",
+        "Top plate splice and anchor-bolt placement (within 1 ft and 3 ft of step) for Case 1",
+        "Cripple-wall bracing calculation per R602.10.10/.1/.2 for Case 2",
+        "R403.1.6 and R602.11.1 anchorage detail for Case 3"
+      ],
+      "depends_on": [
+        "section_r602_10_10",
+        "section_r602_10_10_1",
+        "section_r602_11_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_12",
+      "cite": "R602.12",
+      "section_node": "section_r602_12",
+      "title": "Use simplified wall bracing only when all eight R602.12 prerequisites are satisfied",
+      "intent": "Restrict the simplified bracing alternative to small, low-wind, low-seismic, regular buildings where the simplified rectangle method is reliable.",
+      "applies_when": [
+        {
+          "predicate": "uses_simplified_wall_bracing_per_r602_12"
+        }
+      ],
+      "requires": {
+        "type": "scope_eligibility",
+        "all_of_the_following_required": [
+          "stories_above_concrete_or_masonry_foundation_<=_3_and_no_permanent_wood_foundation",
+          "floor_cantilever_<=_24_in_beyond_foundation_or_bearing_wall_below",
+          "wall_height_<=_10_ft",
+          "roof_eave_to_ridge_height_<=_15_ft",
+          "exterior_walls_have_>=_1_2_in_gypsum_on_interior_per_r702_3_5",
+          "vult_<=_130_mph_and_exposure_b_or_c",
+          "sdc_a_b_or_c_for_detached_or_sdc_a_or_b_for_townhouse",
+          "no_cripple_walls_in_three_story_buildings"
+        ],
+        "circumscribed_rectangle_per": "section_r602_12_1",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Eligibility checklist confirming all eight R602.12 conditions",
+        "Vult and exposure category from Figure R301.2(2) and R301.2.1.4",
+        "SDC determination from R301.2.2.1",
+        "Circumscribed-rectangle diagram per R602.12.1 (max 60 ft side, max 3:1 aspect ratio)",
+        "Statement that other R602.10 bracing provisions are not used (except as expressly cited in R602.12)"
+      ],
+      "depends_on": [
+        "def_seismic_design_category",
+        "figure_r301_2_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_3_5",
+      "cite": "R602.3.5",
+      "section_node": "section_r602_3_5",
+      "title": "Provide a braced wall panel uplift load path at exterior walls supporting roof framing per one of three options",
+      "intent": "Guarantee that wind uplift at the roof reaches the foundation by either fastening per Table R602.3(1) within stated limits, dedicated uplift connectors, or engineered combined uplift/shear sheathing.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        },
+        {
+          "predicate": "is_exterior_wall_supporting_rafters_or_trusses"
+        }
+      ],
+      "requires": {
+        "type": "uplift_load_path",
+        "options_any_of": [
+          {
+            "option": "table_r602_3_1_fastening",
+            "any_of": [
+              {
+                "all_of": [
+                  "vult_<=_115_mph",
+                  "exposure_b",
+                  "roof_pitch_>=_5_12",
+                  "roof_span_<=_32_ft"
+                ]
+              },
+              {
+                "all_of": [
+                  "net_uplift_at_top_of_wall_<=_100_plf_per_section_r802_11",
+                  "may_subtract_60_plf_per_full_wall_above"
+                ]
+              }
+            ]
+          },
+          {
+            "option": "approved_uplift_framing_connectors_when_net_uplift_>_100_plf",
+            "continuous_load_path": "from_top_of_wall_to_foundation_or_to_a_point_where_uplift_<=_100_plf"
+          },
+          {
+            "option": "wall_sheathing_and_fasteners_designed_for_combined_uplift_and_shear_per_accepted_engineering_practice"
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Uplift calculation per Section R802.11 at the top of each exterior wall supporting roof framing",
+        "If Option 1: documentation of Vult, exposure, roof pitch and span limits",
+        "If Option 2: hold-down/strap schedule from top plate to foundation with continuous load path",
+        "If Option 3: engineer's combined uplift+shear sheathing/fastener calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r602_9",
+      "cite": "R602.9",
+      "section_node": "section_r602_9",
+      "title": "Frame cripple walls with studs sized for an additional story when over 4 ft tall, sheathe short cripple walls, and support all on continuous foundations",
+      "intent": "Treat cripple walls as a real (potentially extra) story for stud sizing, and require continuous sheathing or solid blocking at very short cripple walls so they do not become a soft band.",
+      "applies_when": [
+        {
+          "predicate": "is_cripple_wall"
+        }
+      ],
+      "requires": {
+        "type": "framing",
+        "min_stud_size": "not_smaller_than_studding_above",
+        "stud_size_for_an_additional_story_when_height_gt_4_ft": true,
+        "exterior_cripple_wall_<_14_in_studs": "continuously_sheathed_one_side_with_wood_structural_panels_per_table_r602_3_1_or_constructed_of_solid_blocking",
+        "supported_on_continuous_foundations": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cripple wall framing detail showing stud size (and a story increase if height > 4 ft)",
+        "Solid blocking or WSP-sheathed detail when stud height < 14 in.",
+        "Foundation plan showing continuous foundation under all cripple walls",
+        "Cripple-wall height dimension on building section"
+      ],
+      "depends_on": [
+        "def_cripple_wall"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r603_9",
+      "cite": "R603.9",
+      "section_node": "section_r603_9",
+      "title": "Install cold-formed steel structural sheathing on all sheathable exterior wall surfaces per Figure R603.9",
+      "intent": "Make CFS structural sheathing continuous (including above and below openings) so the wall acts as a single shear element analogous to wood continuous sheathing.",
+      "applies_when": [
+        {
+          "predicate": "is_cold_formed_steel_light_frame_wall"
+        }
+      ],
+      "requires": {
+        "type": "sheathing",
+        "install_per_figure": "FIGURE R603.9",
+        "applies_to": "all_sheathable_exterior_wall_surfaces_including_above_and_below_openings",
+        "min_thickness_options": [
+          "7_16_in_oriented_strand_board",
+          "15_32_in_plywood"
+        ],
+        "tested_per": [
+          "std_aisi_s230"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "CFS wall elevation showing structural sheathing on every sheathable surface (including above/below openings)",
+        "Sheathing material spec (>= 7/16 in. OSB or 15/32 in. plywood)",
+        "Fastening pattern matching Figure R603.9 and Table R603.3.2(1)",
+        "Reference to AISI S230 prescriptive method"
+      ],
+      "depends_on": [
+        "std_aisi_s230"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r603_9_2",
+      "cite": "R603.9.2",
+      "section_node": "section_r603_9_2",
+      "title": "Determine minimum length of full-height CFS sheathing from Tables R603.9.2(1) and R603.9.2(2), with 20% floor",
+      "intent": "Compute a CFS-specific bracing length tied to wind speed/exposure, roof slope, story location and plan aspect ratio, while floor-stopping at 20% of line length so very short bracing is impossible.",
+      "applies_when": [
+        {
+          "predicate": "is_cold_formed_steel_light_frame_wall"
+        },
+        {
+          "predicate": "is_braced_wall_line"
+        }
+      ],
+      "requires": {
+        "type": "bracing_length_calc",
+        "min_length_full_height_sheathing_formula": "braced_wall_line_length * percentage_from_table_r603_9_2_1 * factors_from_table_r603_9_2_2",
+        "absolute_minimum_pct_of_line_length": 20,
+        "full_height_definition": "extends_from_bottom_to_top_of_wall_without_interruption_by_openings_and_>=_48_in_wide",
+        "wall_height_factor_9_ft": 1.1,
+        "wall_height_factor_10_ft": 1.2,
+        "lowest_story_factor_with_holddowns_per_r603_9_4_2": 0.6,
+        "panel_install_orientation": "long_dimension_parallel_to_studs_or_blocked_perpendicular_per_item_2",
+        "blocking_thickness_min_mil": 33,
+        "blocking_panel_fastener_no_8_screws_in_oc": 6,
+        "minimum_48_in_panel_at_each_corner_of_each_exterior_wall": true,
+        "tested_per": [
+          "std_aisi_s230"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex_veneer_to_section_r603_9_5",
+          "applies_when": [
+            {
+              "predicate": "has_stone_or_masonry_veneer_installed_per_r703_8"
+            }
+          ],
+          "effect": "use_section_r603_9_5_for_required_length_and_overturning_anchorage"
+        }
+      ],
+      "evidence_required": [
+        "Per-line CFS bracing calculation: line length × Table R603.9.2(1) percentage × Table R603.9.2(2) factor",
+        "Confirmation that minimum percentage >= 20% of line length",
+        "Wall-height factor (1.10 for 9-ft, 1.20 for 10-ft) applied as appropriate",
+        "Hold-down anchors per R603.9.4.2 if 0.6 lowest-story factor is used",
+        "48-in. corner panels and blocking detail (>= 33 mil) per Item 2 where applicable"
+      ],
+      "depends_on": [
+        "std_aisi_s230"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r603_9_5",
+      "cite": "R603.9.5",
+      "section_node": "section_r603_9_5",
+      "title": "CFS walls with stone/masonry veneer per R703.8: determine sheathing length per R603.9.5 (per SDC)",
+      "intent": "Account for veneer mass and overturning when computing CFS sheathing length and overturning anchorage, varying the rule by SDC.",
+      "applies_when": [
+        {
+          "predicate": "is_cold_formed_steel_light_frame_wall"
+        },
+        {
+          "predicate": "has_stone_or_masonry_veneer_installed_per_r703_8"
+        }
+      ],
+      "requires": {
+        "type": "bracing_length_calc",
+        "applies_to": "exterior_and_interior_wall_lines_backing_or_perpendicular_to_and_supporting_walls_with_veneer",
+        "sdc_c_rule": "use_greater_of_amounts_required_by_section_r603_9_2_except_section_r603_9_2_2_permitted",
+        "sdc_d0_d1_d2_rule": "determine_length_and_overturning_anchorage_per_tables_r603_9_5_1_through_r603_9_5_4",
+        "overturning_anchorage_location": "doubled_studs_at_end_of_each_full_height_wall_segment",
+        "tested_per": [
+          "std_aisi_s230"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Identification of all walls 'backing or perpendicular to and laterally supporting' veneered walls",
+        "If SDC C: greater length of R603.9.2 (R603.9.2.2 still permitted)",
+        "If SDC D0/D1/D2: length and overturning anchor schedule from Tables R603.9.5(1)-(4)",
+        "Hold-down detail at doubled studs at the end of each full-height wall segment"
+      ],
+      "depends_on": [
+        "std_aisi_s230",
+        "def_seismic_design_category"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,788 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Patio Covers & Renovations",
+  "community_id": 14,
+  "extracted_from_sections": [
+    "appendix_ah_patio_covers.md",
+    "appendix_aj_existing_buildings_and_structures.md",
+    "appendix_aq_tiny_houses.md",
+    "appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_appendix_ah_patio_covers",
+      "cite": "AH (Appendix)",
+      "section_node": "appendix_ah_patio_covers",
+      "title": "Appendix AH applies only when adopted; governs patio cover relaxations",
+      "intent": "Establish the gating condition under which Appendix AH provisions become enforceable for patio covers, including permitted uses, walls, height, structural design, and footings.",
+      "applies_when": [
+        {
+          "predicate": "all_of",
+          "of": [
+            {
+              "predicate": "is_patio_cover"
+            },
+            {
+              "predicate": "any_of",
+              "of": [
+                {
+                  "predicate": "appendix_ah_adopted_by_state_agency"
+                },
+                {
+                  "predicate": "appendix_ah_referenced_in_adopting_ordinance"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_gate",
+        "effect": "appendix_ah_provisions_apply",
+        "covered_topics": [
+          "permitted_uses",
+          "exterior_wall_insect_screens",
+          "glazing_and_translucent_or_transparent_plastic",
+          "light_ventilation_and_emergency_egress",
+          "height",
+          "structural_design_loads",
+          "footings",
+          "hurricane_prone_screen_enclosures"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Adopting ordinance or state agency adoption citation showing Appendix AH is in force in the jurisdiction",
+        "Plan-set note identifying the structure as a patio cover under AH102.1"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ah_101_scope",
+      "cite": "AH101",
+      "section_node": "ah_101_scope",
+      "title": "Patio covers must conform to AH101-AH106 and only be used for recreational outdoor living",
+      "intent": "Limit the scope of patio covers to non-habitable, non-storage outdoor recreational use and bind them to the full AH101-AH106 provisions.",
+      "applies_when": [
+        {
+          "predicate": "is_patio_cover"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "patio_cover_attached_to_dwelling"
+            },
+            {
+              "predicate": "patio_cover_detached_from_dwelling"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "use_and_scope",
+        "must_conform_to_sections": [
+          "AH101",
+          "AH102",
+          "AH103",
+          "AH104",
+          "AH105",
+          "AH106"
+        ],
+        "permitted_uses": [
+          "recreational",
+          "outdoor_living"
+        ],
+        "prohibited_uses": [
+          "carport",
+          "garage",
+          "storage_room",
+          "habitable_room"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Architectural plans labeling the structure as a patio cover with intended use noted",
+        "Use restriction note on plans excluding carport/garage/storage/habitable use",
+        "Cross-reference checklist showing compliance with AH103 (walls), AH104 (height), AH105 (structural), AH106 (if hurricane-prone)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ah_106_screen_enclosures",
+      "cite": "AH106",
+      "section_node": "ah_106_screen_enclosures",
+      "title": "Aluminum screen enclosures in hurricane-prone regions: ceiling, member, mesh, wind, deflection, and footing requirements",
+      "intent": "Ensure aluminum screen enclosures built in hurricane-prone regions resist design wind loads, have minimum ceiling height, adequate member thickness, and bounded deflection for life-safety performance.",
+      "applies_when": [
+        {
+          "predicate": "is_screen_enclosure"
+        },
+        {
+          "predicate": "in_hurricane_prone_region"
+        }
+      ],
+      "requires": {
+        "type": "compound_structural_and_dimensional",
+        "habitable_classification": "not_habitable_space",
+        "min_ceiling_height_ft": 7,
+        "min_extruded_aluminum_wall_thickness_in": 0.04,
+        "max_screen_density_threads_per_in_x_threads_per_in": "20x20",
+        "wind_design": {
+          "design_pressure_table_primary": "AH106.4.1(1)",
+          "height_exposure_adjustment_table": "AH106.4.1(2)",
+          "ultimate_design_wind_speed_source": "Figure AH106.4.1",
+          "min_design_pressure_psf": 10
+        },
+        "deflection_limit_for_screen_supporting_members": "L/60",
+        "max_solid_flexible_finish_percent_of_screen_surface": 25,
+        "min_roof_live_load_psf": 10,
+        "footing_relief_when_frostline_depth_zero": {
+          "min_slab_thickness_in": 3.5,
+          "slab_must_conform_to_section": "R506",
+          "max_column_load_lb": 750
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "screen_mesh_density_eq_18x14x0_013"
+            }
+          ],
+          "effect": "screen_surface_pressures_may_be_multiplied_by_0_88"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "screen_mesh_density_greater_than_eq_20x20x0_013"
+            }
+          ],
+          "effect": "use_enclosed_building_pressures_instead_of_table_AH106_4_1_1"
+        }
+      ],
+      "evidence_required": [
+        "Structural calculations demonstrating MWFRS pressures from Tables AH106.4.1(1) and AH106.4.1(2) using Vult from Figure AH106.4.1",
+        "Aluminum extrusion shop drawings or specs showing wall thickness >= 0.040 in",
+        "Screen mesh specification (threads/in and wire diameter)",
+        "Deflection check showing supporting members <= L/60",
+        "Foundation/slab detail showing >= 3.5 in slab thickness and column load <= 750 lb (when frostline depth is zero)"
+      ],
+      "depends_on": [
+        "section_r506",
+        "table_ah106_4_1_1",
+        "table_ah106_4_1_2",
+        "figure_ah106_4_1"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aj_108_renovations",
+      "cite": "AJ108",
+      "section_node": "aj_108_renovations",
+      "title": "Renovations: comply with materials/methods, interior-finish flame spread, and seismic parapet bracing on URM at reroof",
+      "intent": "Ensure renovation work meets current materials and methods requirements, controls interior finish flame spread, and triggers seismic parapet bracing on unreinforced masonry buildings at reroofing in high seismic zones.",
+      "applies_when": [
+        {
+          "predicate": "work_category_eq_renovation"
+        }
+      ],
+      "requires": {
+        "type": "compound_renovation",
+        "materials_and_methods_compliance": true,
+        "minor_door_window_clear_opening_reduction_allowed": true,
+        "interior_finish_flame_spread_per_section": "R302.9",
+        "interior_finish_materials_covered": [
+          "wood_paneling",
+          "textile_wall_coverings"
+        ],
+        "structural_seismic_trigger": {
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_unreinforced_masonry_building": true
+                },
+                {
+                  "in_seismic_design_category_d2_or_e": true
+                },
+                {
+                  "reroofing_permit_issued": true
+                }
+              ]
+            }
+          ],
+          "must_install": [
+            "parapet_bracing_at_roofline",
+            "wall_anchors_at_roofline"
+          ],
+          "design_must_be": "approved"
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Specification or product data for interior finish materials demonstrating compliance with R302.9 flame spread",
+        "Structural drawings/details for parapet bracing and wall anchors when URM building in SDC D2/E undergoes reroof",
+        "Approval letter or stamp from registered design professional for parapet bracing/anchor design",
+        "Permit application identifying scope as renovation under AJ108"
+      ],
+      "depends_on": [
+        "section_r302_9",
+        "r302_fire_safety"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aj_110_reconstruction",
+      "cite": "AJ110",
+      "section_node": "aj_110_reconstruction",
+      "title": "Reconstruction: stair illumination, handrails, guards, fire-rated finishes, dwelling separation, and basement ceiling heights",
+      "intent": "Bring reconstructed work areas up to current life-safety standards for egress (stairs, handrails, guards), interior finish flame spread, dwelling-unit fire separation continuity, and minimum habitable basement ceiling heights.",
+      "applies_when": [
+        {
+          "predicate": "work_category_eq_reconstruction"
+        }
+      ],
+      "requires": {
+        "type": "compound_reconstruction",
+        "stairway_illumination_per_section": "R303.7",
+        "handrails": {
+          "trigger": {
+            "all_of": [
+              {
+                "is_required_exit_stairway": true
+              },
+              {
+                "riser_count_>=": 4
+              },
+              {
+                "part_of_means_of_egress_for_work_area": true
+              },
+              {
+                "any_of": [
+                  {
+                    "existing_handrail_count_<": 1
+                  },
+                  {
+                    "existing_handrails_in_danger_of_collapse": true
+                  }
+                ]
+              }
+            ]
+          },
+          "must_install_per_section": "R311",
+          "min_sides": 1,
+          "extent": "full_length_of_run"
+        },
+        "guards": {
+          "trigger": {
+            "all_of": [
+              {
+                "open_portion_of_stair_landing_or_balcony": true
+              },
+              {
+                "height_above_floor_or_grade_below_in": ">30"
+              },
+              {
+                "part_of_egress_path_for_work_area": true
+              },
+              {
+                "any_of": [
+                  {
+                    "no_existing_guards": true
+                  },
+                  {
+                    "existing_guards_in_danger_of_collapse": true
+                  }
+                ]
+              }
+            ]
+          },
+          "must_install_per_section": "R312"
+        },
+        "wall_and_ceiling_finish_in_work_area_per_section": "R302.9",
+        "noncompliant_existing_finish_remedy": [
+          "remove",
+          "treat_with_approved_fire_retardant_coating"
+        ],
+        "dwelling_separation_walls": {
+          "trigger": {
+            "all_of": [
+              {
+                "work_area_in_attached_dwelling_unit": true
+              },
+              {
+                "separation_wall_continuous_foundation_to_underside_of_roof_sheathing": false
+              }
+            ]
+          },
+          "must_provide": "continuous_fire_separation",
+          "scope_of_work": "only_on_work_area_side"
+        },
+        "basement_habitable_ceiling_height_min_ft_in": "6'8\"",
+        "basement_habitable_ceiling_at_obstructions_min_ft_in": "6'4\"",
+        "existing_nonhabitable_basement_ceiling_height": "shall_not_be_reduced",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Egress plan identifying work area, exit stairways, riser counts, and existing handrail/guard conditions",
+        "Stair, handrail, and guard details referencing R311 and R312",
+        "Fire-rated interior finish specification or fire-retardant coating manufacturer instructions per R302.9",
+        "Section/details showing continuous fire separation between attached dwelling units from foundation to roof sheathing",
+        "Basement ceiling-height callouts on plans confirming 6'8\" (6'4\" at obstructions) for habitable spaces"
+      ],
+      "depends_on": [
+        "section_r303_7",
+        "r311_means_of_egress",
+        "r312_guards",
+        "r302_fire_safety"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_aq_104_lofts",
+      "cite": "AQ104",
+      "section_node": "aq_104_lofts",
+      "title": "Tiny-house lofts: minimum area, dimensions, access stairs/ladders, and loft guards",
+      "intent": "Provide life-safe minimum dimensions, access, and fall protection for sleeping/living lofts in tiny houses, where reduced ceiling heights and compact circulation are permitted.",
+      "applies_when": [
+        {
+          "predicate": "is_tiny_house"
+        },
+        {
+          "predicate": "has_loft_used_as_sleeping_or_living_space"
+        }
+      ],
+      "requires": {
+        "type": "compound_loft",
+        "min_loft_floor_area_sqft": 35,
+        "min_loft_horizontal_dimension_ft": 5,
+        "sloped_ceiling_area_exclusion_below_ft": 3,
+        "stairway_option": {
+          "min_clear_width_at_or_above_handrail_in": 17,
+          "min_clear_width_below_handrail_in": 20,
+          "min_headroom_in": 74,
+          "riser_height_in_range": [
+            7,
+            12
+          ],
+          "tread_riser_formula_options": [
+            "tread_depth_in = 20 - (4/3)*riser_height_in",
+            "riser_height_in = 15 - (3/4)*tread_depth_in"
+          ],
+          "landing_min_depth_in_direction_of_travel_in": 24,
+          "landing_platform_required_when_loft_ceiling_height_lt_in": 74,
+          "landing_platform_min_width_and_depth_in": 20,
+          "landing_platform_riser_height_to_loft_floor_in_range": [
+            16,
+            18
+          ],
+          "handrails_per_section": "R311.7.8",
+          "stairway_guards_per_section": "R312.1"
+        },
+        "ladder_option": {
+          "min_rung_width_in": 12,
+          "rung_spacing_in_range": [
+            10,
+            14
+          ],
+          "min_rung_load_capacity_lb": 300,
+          "rung_spacing_uniformity_in": 0.375,
+          "incline_from_horizontal_deg_range": [
+            70,
+            80
+          ]
+        },
+        "alternating_tread_or_ships_ladder_min_clear_width_at_and_below_handrails_in": 20,
+        "loft_guards": {
+          "min_height_in": 36,
+          "or_one_half_clear_height_to_ceiling_whichever_less": true,
+          "must_comply_with_section": "R312.1.3",
+          "must_comply_with_table": "R301.5"
+        },
+        "loft_access_must_meet_loft_where_ceiling_height_at_least_ft": 3,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "under_gable_roof"
+            },
+            {
+              "predicate": "roof_slope_>=_eq_6_in_12"
+            }
+          ],
+          "effect": "sloped_ceiling_below_16_in_excluded_from_required_loft_area_instead_of_36_in"
+        }
+      ],
+      "evidence_required": [
+        "Loft floor plan with dimensioned area >= 35 sqft and minimum 5 ft horizontal dimension",
+        "Loft ceiling section showing height limits and exclusion zones (3 ft default or 16 in under qualifying gable)",
+        "Stair, ladder, alternating-tread, or ship's-ladder details with widths, headroom, riser/tread, and incline",
+        "Loft guard detail with height calculation and reference to R312.1.3 / Table R301.5",
+        "Landing-platform detail when loft ceiling at stair < 6'2\""
+      ],
+      "depends_on": [
+        "section_r311_7_6",
+        "section_r311_7_8_handrails",
+        "section_r311_7_11_1",
+        "section_r311_7_11_2",
+        "section_r311_7_12_1",
+        "section_r311_7_12_2",
+        "section_r312_1",
+        "section_r312_1_3",
+        "table_r301_5",
+        "r311_means_of_egress",
+        "r312_guards"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_ay_107_rooftop_evacuation",
+      "cite": "AY107",
+      "section_node": "ay_107_rooftop_evacuation",
+      "title": "Rooftop evacuation locations in CVFPP areas: elevation, platforms, live load, perimeter protection, and utility buffer",
+      "intent": "Provide a safe rooftop evacuation location above the 200-year flood elevation in jurisdictions protected by the Central Valley Flood Protection Plan, with adequate access, fall protection, and separation from utilities.",
+      "applies_when": [
+        {
+          "predicate": "in_area_protected_by_central_valley_flood_protection_plan_with_flood_levels_>3ft_for_200yr_event"
+        },
+        {
+          "predicate": "rooftop_used_as_evacuation_location"
+        }
+      ],
+      "requires": {
+        "type": "compound_evacuation_location",
+        "min_elevation_above_wsel200_ft": 1,
+        "min_horizontal_distance_between_access_point_lower_edge_and_evacuation_lower_perimeter_ft": 3,
+        "rooftop_platform_required_when": {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "roof_covering_in": [
+                    "clay_tile",
+                    "concrete_tile",
+                    "slate_shingle",
+                    "wood_shingle",
+                    "wood_shake"
+                  ]
+                },
+                {
+                  "roof_slope_>=": "3_in_12"
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "roof_covering_in": [
+                    "metal_roof_panel",
+                    "metal_roof_shingle"
+                  ]
+                },
+                {
+                  "roof_slope_>=": "1_in_12"
+                }
+              ]
+            }
+          ]
+        },
+        "roof_live_load_per": "CBC_Table_1607.2",
+        "evacuation_route_options": [
+          "stairway",
+          "ramp",
+          "alternating_tread_device",
+          "fixed_ladder",
+          "other_means_approved_by_building_official"
+        ],
+        "perimeter_protection": {
+          "if_rooftop_platform_provided": "guards_per_section_R312",
+          "if_sloped_roof_provided": "railing_min_height_in_12"
+        },
+        "utility_buffer": {
+          "min_separation_in_between_evacuation_location_and_mechanical_equipment_pv_utility_drop_or_utility_line": 48,
+          "electrical_service_lines_over_evacuation_location": "prohibited"
+        },
+        "tested_per": [
+          "std_asce_7"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site/roof plan showing evacuation location elevation referenced to WSEL200 (>= 1 ft above)",
+        "Roof plan and section identifying rooftop platform per AY107.1 triggers (covering type and slope)",
+        "Structural calculations for roof live load per CBC Table 1607.2 at evacuation location",
+        "Guard detail per R312 (or 12-inch railing for sloped roofs) along evacuation perimeter",
+        "Utility/mechanical/PV/service-drop site plan showing 48-inch buffer and absence of electrical service over the evacuation location"
+      ],
+      "depends_on": [
+        "r312_guards",
+        "cbc_table_1607_2",
+        "section_ay102_definitions",
+        "section_ay103_structural_stability",
+        "wsel200"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r302_fire_safety",
+      "cite": "R302",
+      "section_node": "r302_fire_safety",
+      "title": "Fire-resistant construction (R302) governs interior finish flame spread referenced from AJ108/AJ110",
+      "intent": "Ensure interior finishes (wood paneling, textile wall coverings) and wall/ceiling finishes in renovated and reconstructed work areas meet R302.9 flame-spread requirements as referenced by Appendix AJ.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "work_category_eq_renovation"
+            },
+            {
+              "predicate": "work_category_eq_reconstruction"
+            }
+          ]
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "installs_wood_paneling_as_interior_finish"
+            },
+            {
+              "predicate": "installs_textile_wall_coverings_as_interior_finish"
+            },
+            {
+              "predicate": "any_wall_or_ceiling_finish_in_work_area"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "interior_finish_flame_spread",
+        "must_comply_with_section": "R302.9",
+        "remedy_for_existing_noncompliant_finish": [
+          "remove",
+          "treat_with_approved_fire_retardant_coating_per_manufacturer_instructions"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer flame-spread/smoke-developed indices for proposed interior finish materials",
+        "Application instructions and product data sheet for any approved fire-retardant coating used on existing finishes",
+        "Plan-set notes identifying which work-area surfaces receive new finish vs. coated existing finish"
+      ],
+      "depends_on": [
+        "section_r302_9"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r311_means_of_egress",
+      "cite": "R311",
+      "section_node": "r311_means_of_egress",
+      "title": "Means of egress (R311) governs patio-cover dwelling exits, reconstruction handrails, and tiny-house loft stair handrails/landings",
+      "intent": "Ensure exits from dwelling units, required handrails on reconstructed exit stairs, and loft stair landings/handrails in tiny houses meet R311 means-of-egress requirements as referenced by AH103.2, AJ110.1.2, and AQ104.2.1.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_patio_cover"
+                },
+                {
+                  "predicate": "exterior_opening_serves_as_exit_from_dwelling_unit"
+                },
+                {
+                  "predicate": "patio_structure_is_enclosed"
+                }
+              ]
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "work_category_eq_reconstruction"
+                },
+                {
+                  "predicate": "is_required_exit_stairway"
+                },
+                {
+                  "predicate": "riser_count_>=_eq_4"
+                },
+                {
+                  "predicate": "part_of_means_of_egress_for_work_area"
+                }
+              ]
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_tiny_house"
+                },
+                {
+                  "predicate": "has_loft_stairway"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "means_of_egress",
+        "patio_cover_exit_requirement": "exits_conforming_to_R311_when_patio_structure_serves_as_exit_and_is_enclosed",
+        "reconstruction_handrails_per_section": "R311",
+        "tiny_house_loft_stair_landings_per_section": "R311.7.6_with_min_24in_in_direction_of_travel",
+        "tiny_house_loft_stair_handrails_per_section": "R311.7.8",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_patio_cover"
+            },
+            {
+              "predicate": "patio_structure_is_unenclosed"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Egress plan showing dwelling-unit exit path through any enclosed patio structure with R311-compliant exits",
+        "Stair/handrail details for reconstruction exit stairways referencing R311",
+        "Tiny-house loft stair landing detail with >= 24 in depth in direction of travel and handrails per R311.7.8"
+      ],
+      "depends_on": [
+        "section_r311_7_6",
+        "section_r311_7_8_handrails"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r312_guards",
+      "cite": "R312",
+      "section_node": "r312_guards",
+      "title": "Guards (R312) govern reconstruction egress-path guards, tiny-house loft and stair guards, and CVFPP rooftop platform perimeters",
+      "intent": "Provide R312-compliant fall protection on open stair, landing, and balcony portions in reconstruction work; on stairways, landings, landing platforms, and lofts in tiny houses; and on rooftop evacuation platforms in CVFPP areas.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "work_category_eq_reconstruction"
+                },
+                {
+                  "predicate": "open_portion_of_stair_landing_or_balcony"
+                },
+                {
+                  "predicate": "height_above_floor_or_grade_below_in_eq_30"
+                },
+                {
+                  "predicate": "part_of_egress_path_for_work_area"
+                }
+              ]
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_tiny_house"
+                },
+                {
+                  "predicate": "any_of",
+                  "of": [
+                    {
+                      "predicate": "has_loft"
+                    },
+                    {
+                      "predicate": "has_loft_stairway_or_landing_or_landing_platform"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "in_area_protected_by_central_valley_flood_protection_plan_with_flood_levels_>3ft_for_200yr_event"
+                },
+                {
+                  "predicate": "rooftop_platform_provided_as_evacuation_location"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "guards",
+        "reconstruction_guards_per_section": "R312",
+        "tiny_house_stairway_guards_per_section": "R312.1",
+        "tiny_house_loft_guards": {
+          "min_height_in": 36,
+          "or_one_half_clear_height_to_ceiling_whichever_less": true,
+          "components_per_section": "R312.1.3",
+          "components_per_table": "R301.5"
+        },
+        "rooftop_platform_perimeter_guards_per_section": "R312",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Guard detail and elevations for reconstruction work-area egress paths above 30 in",
+        "Loft guard detail showing height calculation and reference to R312.1.3 / Table R301.5",
+        "Rooftop platform perimeter guard detail per R312 in CVFPP-protected area"
+      ],
+      "depends_on": [
+        "section_r312_1",
+        "section_r312_1_3",
+        "table_r301_5"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+You are a plan-check rule extraction subagent. The graph community "Intrinsically Safe Systems — Article 504" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c01_intrinsically_safe_systems_article_504_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_1  504.1 Scope
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_10  504.10 Equipment Installation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_10_A  504.10(A) Control Drawing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_10_B  504.10(B) Location
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_10_C  504.10(C) Enclosures
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_10_D  504.10(D) Simple Apparatus
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_20  504.20 Wiring Methods
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_3  504.3 Application of Other Articles
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_30  504.30 Separation of Intrinsically Safe Conductors
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_30_A  504.30(A) From Nonintrinsically Safe Circuit Conductors
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_30_B  504.30(B) From Different Intrinsically Safe Circuit Conducto
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_30_C  504.30(C) From Grounded Metal
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_4  504.4 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_50  504.50 Grounding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_60  504.60 Bonding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_70  504.70 Sealing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_80  504.80 Identification
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_80_A  504.80(A) Terminals
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_80_B  504.80(B) Wiring
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_80_C  504.80(C) Color Coding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_1  505.1 Scope
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_15  505.15 Wiring Methods
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_15_A  505.15(A) Zone 0
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_15_B  505.15(B) Zone 1
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_15_C  505.15(C) Zone 2
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16  505.16 Sealing and Drainage
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16_A  505.16(A) Zone 0
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16_B  505.16(B) Zone 1
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16_C  505.16(C) Zone 2
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16_D  505.16(D) Zones 0,1,2 Seals
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_16_E  505.16(E) Drainage
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_17  505.17 Flexible Cables, Cords and Connections
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_18  505.18 Conductors and Conductor Insulation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_19  505.19 Uninsulated Exposed Parts
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_20  505.20 Equipment Requirements
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_20_A  505.20(A) Zone 0 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_20_B  505.20(B) Zone 1 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_20_C  505.20(C) Zone 2 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_20_D  505.20(D) Materials Group equivalence
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_22  505.22 Increased Safety 'e' Motors and Generators
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_25  505.25 Grounding and Bonding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_25_A  505.25(A) Bonding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_25_B  505.25(B) Types of Equipment Grounding Conductors
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_26  505.26 Process Sealing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_3  505.3 Other Articles
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_4  505.4 Documentation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_5  505.5 Classifications of Locations
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_5_B_1  505.5(B)(1) Zone 0
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_5_B_2  505.5(B)(2) Zone 1
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_5_B_3  505.5(B)(3) Zone 2
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_6  505.6 Material Groups
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_6_A  505.6(A) Group IIC
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_6_B  505.6(B) Group IIB
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_6_C  505.6(C) Group IIA
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_7  505.7 Special Precaution
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8  505.8 Protection Techniques
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_A  505.8(A) Flameproof Enclosure 'd'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_B  505.8(B) Pressurized Enclosure 'p'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_C  505.8(C) Intrinsic Safety 'i'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_D  505.8(D) Type of Protection 'n'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_E  505.8(E) Liquid Immersion 'o'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_F  505.8(F) Increased Safety 'e'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_G  505.8(G) Encapsulation 'm'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_H  505.8(H) Powder Filling 'q'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_I  505.8(I) Combustible Gas Detection System
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_J  505.8(J) Electrical Resistance Trace Heating '60079-30-1'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_K  505.8(K) Inherently Safe Optical Radiation 'op is'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_L  505.8(L) Protected Optical Radiation 'op pr'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_M  505.8(M) Optical System with Interlock 'op sh'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_8_N  505.8(N) Skin Effect Trace Heating 'IEEE 844.1'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9  505.9 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_A  505.9(A) Suitability
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_B  505.9(B) Listing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_C  505.9(C) Marking
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_D  505.9(D) Class I Temperature
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_E  505.9(E) Threading
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_F  505.9(F) Optical Fiber Cables
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_505_9_G  505.9(G) Equipment Involving Optical Radiation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_1  506.1 Scope
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_15  506.15 Wiring Methods
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_15_A  506.15(A) Zone 20
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_15_B  506.15(B) Zone 21
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_15_C  506.15(C) Zone 22
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_16  506.16 Sealing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_17  506.17 Flexible Cords
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_20  506.20 Equipment Installation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_25  506.25 Grounding and Bonding
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_3  506.3 Other Articles
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_4  506.4 Documentation
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_5  506.5 Classification of Locations
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_5_B_1  506.5(B)(1) Zone 20
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_5_B_2  506.5(B)(2) Zone 21
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_5_B_3  506.5(B)(3) Zone 22
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_6  506.6 Material Groups
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_6_A  506.6(A) Group IIIC (combustible metal dust)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_6_B  506.6(B) Group IIIB
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_6_C  506.6(C) Group IIIA
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_7  506.7 Special Precaution
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8  506.8 Protection Techniques
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_A  506.8(A) Dust Ignitionproof
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_B  506.8(B) Pressurized
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_C  506.8(C) Intrinsic Safety
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_D  506.8(D) Dusttight
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_E  506.8(E) Encapsulation 'm'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_F  506.8(F) Nonincendive Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_G  506.8(G) Protection by Enclosure 't'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_H  506.8(H) Pressurized Enclosure 'p'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_I  506.8(I) Intrinsic Safety 'i'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_J  506.8(J) Trace Heating '60079-30-1'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_K  506.8(K) Inherently Safe Optical Radiation 'op is'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_L  506.8(L) Protected Optical Radiation 'op pr'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_M  506.8(M) Optical System with Interlock 'op sh'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_8_N  506.8(N) Skin Effect Trace Heating 'IEEE 844.1'
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_9  506.9 Equipment Requirements
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_9_C  506.9(C) Marking
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_9_D  506.9(D) Temperature Classifications
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_506_9_E  506.9(E) Threading
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_510_1  510.1 Scope
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_510_2  510.2 General
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_1  511.1 Scope
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3  511.3 Area Classification, General
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3_A  511.3(A) Parking Garages
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3_B  511.3(B) Repair Garages, with Dispensing
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3_C  511.3(C) Repair Garages, Major and Minor
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3_D  511.3(D) Repair Garages, Major (lighter-than-air)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_3_E  511.3(E) Modifications to Classification
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_4  511.4 Wiring and Equipment in Class I Locations
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_511_7  511.7 Wiring and Equipment Installed Above Class I Locations
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_504_10_D  Table 504.10(D) Assessment for T4 Classification
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_505_9_C_1_2  Table 505.9(C)(1)(2) Material Groups
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_505_9_C_2_4  Table 505.9(C)(2)(4) Equipment Suitability
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_505_9_D_1  Table 505.9(D)(1) Max Surface Temperature for Group II Equip
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_506_9_C_2_3  Table 506.9(C)(2)(3) Equipment Suitability (Zone 20/21/22)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_511_3_C  Table 511.3(C) Heavier-Than-Air Fuel Repair Garages
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_511_3_D  Table 511.3(D) Lighter-Than-Air Fuel Major Repair Garages
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_table_514_3_B_1  Table 514.3(B)(1) (cross-referenced from 511.3)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_aex_marking  AEx Marking System
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_associated_apparatus  Associated Apparatus
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_combustible_gas_detection_system  Combustible Gas Detection System
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_control_drawing  Control Drawing (intrinsic safety)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_fuel_dispensing_unit  Fuel-Dispensing Unit
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iia  Group IIA (gas group, equiv Class I Group D)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iib  Group IIB (gas group, equiv Class I Group C)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iic  Group IIC (gas group, equiv Class I Groups A+B)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iiia  Group IIIA (combustible flyings)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iiib  Group IIIB (non-metal combustible dust)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_group_iiic  Group IIIC (combustible metal dust)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_increased_safety_e_motor  Increased Safety 'e' Motor/Generator
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_intrinsically_safe_apparatus  Intrinsically Safe Apparatus
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_major_repair_garage  Major Repair Garage
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_minor_repair_garage  Minor Repair Garage
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_parking_garage  Parking Garage (unclassified)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_portable_lighting_equipment  Portable Lighting Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_process_seal  Process Seal
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_simple_apparatus  Simple Apparatus
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_t_code  Temperature Class (T Code) T1-T6
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_250_102  Reference: 250.102
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_250_122  Reference: 250.122
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_250_30_A_4  Reference: 250.30(A)(4)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_250_32_B  Reference: 250.32(B)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_250_52_A  Reference: 250.52(A)(1)-(A)(8)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_330  Reference: Article 330 (Type MC)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_332  Reference: Article 332 (Type MI)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_336_10  Reference: 336.10
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_337_10  Reference: 337.10
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_400_10  Reference: 400.10
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_400_23  Reference: 400.23
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_400_4  Reference: Table 400.4
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_430_32_C  Reference: 430.32(C)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_430_44  Reference: 430.44
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_430_part_iii  Reference: Article 430 Part III
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_500_5  Reference: 500.5
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_500_5_B_2  Reference: 500.5(B)(2)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_500_6  Reference: 500.6
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_500_8_C  Reference: 500.8(C)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_500_through_516  Reference: Articles 500-516 (intrinsic safety scope)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_501_10_B_3  Reference: 501.10(B)(3)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_501_15  Reference: 501.15
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_501_30_A  Reference: 501.30(A)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_502_10_B_3  Reference: 502.10(B)(3)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_502_15  Reference: 502.15
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_502_30_A  Reference: 502.30(A)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_503_10_A_4  Reference: 503.10(A)(4)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_503_30_A  Reference: 503.30(A)
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_514  Reference: Article 514
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_517  Reference: Article 517
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_725  Reference: Article 725
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_xref_727_4  Reference: 727.4
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_zone_0_equipment  Zone 0 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_zone_1_equipment  Zone 1 Equipment
+  15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_zone_2_equipment  Zone 2 Equipment
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511_504_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Intrinsically Safe Systems — Article 504",
+  "community_id": 1,
+  "extracted_from_sections": ["15_chapter_5_special_occupancies_article_504_intrinsically_safe_systems_article_511.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 32-128 rules. After writing the file, just confirm "wrote c01_intrinsically_safe_systems_article_504_rules.json with N rules" and stop.

@@ -1,0 +1,141 @@
+You are a plan-check rule extraction subagent. The graph community "Appendix G Flood Resistant Construction" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/appd_appendix_d_fire_districts.md
+cbc-graph/chapters/appg_appendix_g_flood_resistant_construction.md
+cbc-graph/chapters/apph_appendix_h_signs.md
+cbc-graph/chapters/appj_appendix_j_grading.md
+cbc-graph/chapters/appk_appendix_k_group_r_3_and_group_r_3_1_occupancies_protected_b.md
+cbc-graph/chapters/appn_appendix_n_replicable_buildings.md
+cbc-graph/chapters/ch20_chapter_20_aluminum.md
+cbc-graph/chapters/ch27_chapter_27_electrical.md
+cbc-graph/chapters/ch33_chapter_33_safeguards_during_construction.md
+cbc-graph/chapters/ch6_chapter_6_types_of_construction.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c04_appendix_g_flood_resistant_construction_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  appg_section_1612_flood_loads                                 Section 1612 Flood Loads (referenced)
+  ch20_testing_inspection                                       Section 2003 Aluminum Testing and Inspection (per Chapter 17
+  apph_section_2611_plastic                                     Section 2611 Plastics for Signs (referenced)
+  ch27_emergency_standby_power                                  Section 2702 Emergency and Standby Power Systems
+  ch27_critical_circuits                                        Section 2702.3 Critical Circuit Protection
+  ch33_demolition                                               Section 3303 Demolition
+  ch33_site_work_excavation                                     Section 3304 Site Work / Excavation and Fill
+  ch33_protection_of_pedestrians                                Section 3306 Protection of Pedestrians (Table 3306.1)
+  ch33_protection_adjoining_property                            Section 3307 Protection of Adjoining Property
+  ch33_means_of_egress_construction                             Section 3310 Means of Egress During Construction
+  ch33_standpipes_during_construction                           Section 3311 Standpipes During Construction
+  ch33_water_supply_fire_protection                             Section 3313 Water Supply for Fire Protection
+  ch33_fire_watch                                               Section 3314 Fire Watch During Construction
+  ch6_section_603_combustible_types_i_ii                        Section 603 Combustible Material in Types I and II
+  ch6_section_703_2_fire_resistance                             Section 703.2 Fire-Resistance Rating Determination (referenc
+  appd_section_d101_general                                     Section D101 General (Fire District Scope/Establishment)
+  appd_section_d102_building_restrictions                       Section D102 Building Restrictions
+  appd_section_d106_referenced_standards                        Section D106 Referenced Standards (Appendix D)
+  appg_section_g106_variances                                   Section G106 Variances
+  apph_design_and_construction                                  Section H105 Sign Design and Construction (wind/seismic load
+  apph_electrical_signs                                         Section H106 Electrical / Illuminated Signs
+  apph_combustible_materials                                    Section H107 Combustible Materials in Signs (plastics)
+  apph_roof_signs                                               Section H110 Roof Signs
+  appj_grading_permits                                          Section J103 Grading Permits Required
+  appj_excavations_slopes                                       Section J106 Excavations / Maximum Slope
+  appj_fills                                                    Section J107 Fills (compaction, benching)
+  appj_drainage_terracing                                       Section J109 Drainage and Terracing
+  appj_erosion_control                                          Section J110 Erosion Control
+  appk_structural_stability                                     Section K103 Structural Stability (hydrostatic loads, ASCE 7
+  appk_rooftop_evacuation                                       Section K107 Rooftop Evacuation Locations
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  appd_table_601_exterior_walls                                 Table 601 Fire-Resistance for Exterior Walls (ref by D102)
+  ch6_table_601                                                 Table 601 Fire-Resistance Rating Requirements for Building E
+  appd_group_h_prohibited                                       Group H Occupancies Prohibited in Fire District
+  appd_types_of_construction_permitted                          Types of Construction Permitted in Fire District (Type I-IV)
+  appg_crc_r322                                                 California Residential Code Section R322 (referenced)
+  appg_design_flood_elevation                                   Design Flood Elevation
+  appg_fema                                                     Federal Emergency Management Agency (FEMA) / FIRM
+  appg_flood_hazard_area                                        Flood Hazard Area (per Section 1612)
+  appg_floodplain_administrator                                 Floodplain Administrator
+  appg_floodway_encroachment                                    Floodway Encroachment Requirements
+  appg_manufactured_homes                                       Manufactured Homes in Flood Hazard Areas (G109)
+  appg_nfip                                                     National Flood Insurance Program (NFIP)
+  appg_recreational_vehicles                                    Recreational Vehicles in Flood Hazard Areas (G110)
+  apph_sign_definitions                                         Sign Definitions (combination, pole, projecting, roof, wall,
+  appj_geotechnical_report                                      Geotechnical Report (J104.3)
+  appj_liquefaction_study                                       Liquefaction Study (J104.4, per Section 1613)
+  appk_central_valley_flood_protection_plan                     Central Valley Flood Protection Plan / Facilities
+  appk_dwr                                                      California Department of Water Resources (DWR)
+  appk_evacuation_location                                      Evacuation Location
+  appk_group_r3_r31                                             Group R-3 and R-3.1 Occupancies
+  appk_wsel200                                                  WSEL200 (200-Year Flood Water Surface Elevation)
+  appn_replicable_design                                        Replicable Design / Prototypical Construction Documents
+  appn_site_specific_application                                Site-Specific Application of Replicable Design (N106-N107)
+  ch20_aa_adm                                                   AA ADM Aluminum Design Manual
+  ch20_aa_asm_35                                                AA ASM 35 Aluminum Sheet Metal Work
+  ch20_aws_d12                                                  AWS D1.2 Aluminum Welding Standard
+  ch27_california_electrical_code                               California Electrical Code (NFPA 70)
+  ch27_california_fire_code                                     California Fire Code (referenced)
+  ch6_cross_laminated_timber                                    Cross-Laminated Timber / Mass Timber (ANSI/APA PRG 320, Sect
+  ch6_fire_retardant_treated_wood                               Fire-Retardant-Treated Wood (Section 2303.2)
+  ch6_type_iii                                                  Type III Construction
+  ch6_type_iv_mass_timber                                       Type IV Construction (Mass Timber: IV-A, IV-B, IV-C, IV-HT)
+  ch6_type_v                                                    Type V Construction
+  ch6_types_i_ii                                                Types I and II Construction (noncombustible)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  appg_asce_24                                                  ASCE 24 Flood Resistant Design and Construction
+  appj_astm_d1557                                               ASTM D1557 Modified Proctor Compaction (J107.5)
+  appn_approved_agency_review                                   Review and Approval by Approved Agency (N105)
+  ch27_nfpa_110_111                                             NFPA 110 / NFPA 111 (Emergency/Standby Power)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. appg_section_1612_flood_loads>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Appendix G Flood Resistant Construction",
+  "community_id": 4,
+  "extracted_from_sections": ["appd_appendix_d_fire_districts.md", "appg_appendix_g_flood_resistant_construction.md", "apph_appendix_h_signs.md", "appj_appendix_j_grading.md", "appk_appendix_k_group_r_3_and_group_r_3_1_occupancies_protected_b.md", "appn_appendix_n_replicable_buildings.md", "ch20_chapter_20_aluminum.md", "ch27_chapter_27_electrical.md", "ch33_chapter_33_safeguards_during_construction.md", "ch6_chapter_6_types_of_construction.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-30 rules. After writing the file, just confirm "wrote c04_appendix_g_flood_resistant_construction_rules.json with N rules" and stop.

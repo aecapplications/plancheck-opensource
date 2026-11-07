@@ -1,0 +1,107 @@
+You are a plan-check rule extraction subagent. The graph community "California HCD Admin & Reference Codes" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md
+crc-graph/chapters/chapter_1_scope_and_application.md
+crc-graph/chapters/chapter_2_definitions.md
+crc-graph/chapters/chapter_3_building_planning_a.md
+crc-graph/chapters/chapter_44_referenced_standards.md
+crc-graph/chapters/chapter_4_foundations_b.md
+crc-graph/chapters/chapter_5_floors.md
+crc-graph/chapters/chapter_6_wall_construction_e.md
+
+Output path: crc-graph/plan-check/c03_california_hcd_admin_reference_codes_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ay_103_structural_stability               AY103 Structural Stability for Flood
+  section_r201_general                      R201 General
+  section_r301                              R301 Design Criteria
+  section_r301_1_alternative_provisions     R301.1.1 Alternative Provisions
+  section_r301_1_3_engineered_design        R301.1.3 Engineered Design
+  section_r301_1_4_intermodal               R301.1.4 Intermodal Shipping Containers
+  section_r301_2_1_1_wind_limits            R301.2.1.1 Wind Limitations
+  section_r301_2_1_2_protection             R301.2.1.2 Protection of Openings
+  section_r301_4_dead_load                  R301.4 Dead Load
+  section_r301_5_live_load                  R301.5 Live Load
+  section_r408                              R408 Under-floor Space
+  section_r501                              R501 General Floors
+  section_r502                              R502 Wood Floor Framing
+  r502_12                                   R502.12 Draftstopping required
+  section_r609_6                            R609.6 Windborne Debris Protection
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  section_1_1_3_scope                       1.1.3 Scope
+  section_1_1_3_1_classification            1.1.3.1 Classification
+  section_1_1_4_appendices                  1.1.4 Appendices
+  section_1_1_7_order_of_precedence         1.1.7 Order of Precedence
+  section_1_1_8_local_amendments            1.1.8 Local Amendments
+  section_1_8_2_authority                   1.8.2 Authority and Abbreviations
+  section_1_8_2_1_1_housing_construction    1.8.2.1.1 Housing Construction
+  section_1_8_2_1_2_housing_accessibility   1.8.2.1.2 Housing Accessibility
+  section_1_8_2_1_3_mobilehome_parks        1.8.2.1.3 Permanent Buildings in Mobilehome Parks
+  california_building_code                  California Building Code
+  chapter_1_scope_and_application           Chapter 1 Scope and Application
+  chapter_2_definitions                     Chapter 2 Definitions
+  figure_r301_2_1_1                         Figure R301.2.1.1 Wind Design Required
+  def_intermodal_shipping_container         Intermodal Shipping Container
+  def_limited_density_owner_built_rural_dwelling  Limited-Density Owner-Built Rural Dwelling
+  section_1_1_general                       Section 1.1 General
+  section_1_8_hcd                           Section 1.8 HCD
+  def_sunroom                               Sunroom
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  aisi_s230                                 AISI S230 Cold-Formed Steel Framing
+  asce_7                                    ASCE 7 Minimum Design Loads
+  std_asce_7                                ASCE 7-16 Minimum Design Loads
+  awc_wfcm                                  AWC Wood Frame Construction Manual
+  icc_400                                   ICC 400 Log Structures
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "California HCD Admin & Reference Codes",
+  "community_id": 3,
+  "extracted_from_sections": ["appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md", "chapter_1_scope_and_application.md", "chapter_2_definitions.md", "chapter_3_building_planning_a.md", "chapter_44_referenced_standards.md", "chapter_4_foundations_b.md", "chapter_5_floors.md", "chapter_6_wall_construction_e.md"],
+  "rules": [ ... ]
+}
+
+Aim for 7-15 rules. After writing the file, just confirm "wrote c03_california_hcd_admin_reference_codes_rules.json with N rules" and stop.

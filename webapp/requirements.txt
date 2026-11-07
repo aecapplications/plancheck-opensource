@@ -1,0 +1,7 @@
+fastapi
+uvicorn[standard]
+python-multipart
+anthropic
+pydantic>=2
+pymupdf
+networkx

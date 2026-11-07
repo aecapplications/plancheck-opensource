@@ -1,0 +1,98 @@
+You are a plan-check rule extraction subagent. The graph community "Existing/Tiny/Emergency Housing" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/appendix_af_radon_control_methods.md
+crc-graph/chapters/appendix_aj_existing_buildings_and_structures.md
+crc-graph/chapters/appendix_aq_tiny_houses.md
+crc-graph/chapters/appendix_ar_light_straw_clay_construction.md
+crc-graph/chapters/appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md
+crc-graph/chapters/appendix_az_emergency_housing.md
+
+Output path: crc-graph/plan-check/c06_existing_tiny_emergency_housing_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  af_101_scope                              AF101 Scope
+  af_103_requirements                       AF103 Radon-Resistant Construction Requirements
+  af_104_testing                            AF104 Radon Testing
+  aj_102_compliance                         AJ102 Compliance
+  aq_105_emergency_escape                   AQ105 Emergency Escape and Rescue
+  aq_106_energy                             AQ106 Tiny House Energy Conservation
+  ar_104_thermal_performance                AR104 Thermal Performance
+  ay_104_evacuation_locations               AY104 Evacuation Locations
+  az_104_emergency_sleeping_cabins          AZ104 Emergency Sleeping Cabins
+  az_105_transportable_units                AZ105 Emergency Transportable Housing Units
+  appendix_af_radon_control_methods         Appendix AF Radon Control Methods
+  appendix_aj_existing_buildings            Appendix AJ Existing Buildings and Structures
+  appendix_aq_tiny_houses                   Appendix AQ Tiny Houses
+  appendix_ay_central_valley_flood          Appendix AY Central Valley Flood Protection
+  appendix_az_emergency_housing             Appendix AZ Emergency Housing
+  r105_3_1_1_flood                          R105.3.1.1 Flood Hazard Permit
+  r308_glazing                              R308 Glazing
+  r310_emergency_escape                     R310 Emergency Escape and Rescue Openings
+  r314_smoke_alarms                         R314 Smoke Alarms
+  r315_carbon_monoxide                      R315 Carbon Monoxide Alarms
+  r406_dampproofing                         R406 Foundation Waterproofing/Dampproofing
+  r408_ventilation_crawl                    R408 Under-Floor Crawl Space Ventilation
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  std_cebc                                  California Existing Building Code
+  chapter_11_energy                         Chapter 11 Energy Efficiency
+  epa_radon_zone1                           EPA Map of Radon Zones (Zone 1)
+  gov_code_8558_emergency                   Government Code 8558 State/Local Emergency
+  hsc_50465_cvfpp                           Health and Safety Code 50465
+  m1505_mechanical_ventilation              M1505 Whole-House Mechanical Ventilation
+  m1601_ducts                               M1601 Duct Construction
+  n1102_thermal_envelope                    N1102 Building Thermal Envelope
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_astm_f2090                            ASTM F2090 Window Fall Prevention
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Existing/Tiny/Emergency Housing",
+  "community_id": 6,
+  "extracted_from_sections": ["appendix_af_radon_control_methods.md", "appendix_aj_existing_buildings_and_structures.md", "appendix_aq_tiny_houses.md", "appendix_ar_light_straw_clay_construction.md", "appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md", "appendix_az_emergency_housing.md"],
+  "rules": [ ... ]
+}
+
+Aim for 11-22 rules. After writing the file, just confirm "wrote c06_existing_tiny_emergency_housing_rules.json with N rules" and stop.

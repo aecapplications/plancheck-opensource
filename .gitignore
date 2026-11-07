@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Webapp runtime artifacts (per-job uploads, page images, results)
+webapp/jobs/
+
+# Source code PDFs are copyrighted and never committed
+*-graph/*.pdf
+chapters_pdf/
+
+# Bulky graphify side-outputs (regenerable; only graph.json, GRAPH_REPORT.md,
+# cost.json, and .graphify_labels.json are versioned)
+*-graph/graphify-out/obsidian/
+*-graph/graphify-out/cache/
+*-graph/graphify-out/graph.html
+*-graph/graphify-out/manifest.json
+*-graph/graphify-out/chunk_*.json
+*-graph/graphify-out/graph.json.before-*
+*-graph/graphify-out/.graphify_python
+*-graph/graphify-out/.graphify_extract.json
+*-graph/graphify-out/.graphify_analysis.json
+*-graph/graphify-out/.graphify_detect.json
+*-graph/graphify-out/_convert.log
+
+# Local Claude settings (project skills under .claude/skills/ ARE versioned)
+.claude/settings.local.json
+
+# OS noise
+.DS_Store
+
+# Licensed code-book text is never distributed (see README "Code-book text")
+*-graph/chapters/

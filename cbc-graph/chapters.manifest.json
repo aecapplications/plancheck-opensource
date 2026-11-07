@@ -1,0 +1,530 @@
+{
+  "_comment": "Regenerate chapters/ from your own copy of the code PDF: python tools/split_chapters.py build --book cbc --pdf <path>. Pages are 1-based and inclusive. No code text is stored here.",
+  "source": {
+    "title": "2022 California Building Code (Title 24, Part 2), Volumes 1-2, 1st printing (revised)",
+    "filename": "2022_ca_building_code_volumes_1_2_1st_ptg_rev.pdf",
+    "page_count": 1723
+  },
+  "chapters": [
+    {
+      "file": "appa_appendix_a_employee_qualifications.md",
+      "title": "APPENDIX A EMPLOYEE QUALIFICATIONS",
+      "pages": [
+        1620,
+        1621
+      ]
+    },
+    {
+      "file": "appb_appendix_b_board_of_appeals.md",
+      "title": "APPENDIX B BOARD OF APPEALS",
+      "pages": [
+        1622,
+        1623
+      ]
+    },
+    {
+      "file": "appc_appendix_c_group_u_agricultural_buildings.md",
+      "title": "APPENDIX C GROUP U—AGRICULTURAL BUILDINGS",
+      "pages": [
+        1624,
+        1625
+      ]
+    },
+    {
+      "file": "appd_appendix_d_fire_districts.md",
+      "title": "APPENDIX D FIRE DISTRICTS",
+      "pages": [
+        1626,
+        1629
+      ]
+    },
+    {
+      "file": "appe_appendix_e_reserved.md",
+      "title": "APPENDIX E RESERVED",
+      "pages": [
+        1630,
+        1631
+      ]
+    },
+    {
+      "file": "appf_appendix_f_rodentproofing.md",
+      "title": "APPENDIX F RODENTPROOFING",
+      "pages": [
+        1632,
+        1633
+      ]
+    },
+    {
+      "file": "appg_appendix_g_flood_resistant_construction.md",
+      "title": "APPENDIX G FLOOD-RESISTANT CONSTRUCTION",
+      "pages": [
+        1634,
+        1641
+      ]
+    },
+    {
+      "file": "apph_appendix_h_signs.md",
+      "title": "APPENDIX H SIGNS",
+      "pages": [
+        1642,
+        1647
+      ]
+    },
+    {
+      "file": "appi_appendix_i_patio_covers.md",
+      "title": "APPENDIX I PATIO COVERS",
+      "pages": [
+        1648,
+        1649
+      ]
+    },
+    {
+      "file": "appj_appendix_j_grading.md",
+      "title": "APPENDIX J GRADING",
+      "pages": [
+        1650,
+        1655
+      ]
+    },
+    {
+      "file": "appk_appendix_k_group_r_3_and_group_r_3_1_occupancies_protected_b.md",
+      "title": "APPENDIX K GROUP R-3 AND GROUP R-3.1 OCCUPANCIES PROTECTED BY THE FACILITIES OF THE CENTRAL VALLEY FLOOD PROTECTION PLAN",
+      "pages": [
+        1656,
+        1661
+      ]
+    },
+    {
+      "file": "appl_appendix_l_earthquake_recording_instrumentation.md",
+      "title": "APPENDIX L EARTHQUAKE RECORDING INSTRUMENTATION",
+      "pages": [
+        1662,
+        1663
+      ]
+    },
+    {
+      "file": "appm_appendix_m_tsunami_generated_flood_hazards.md",
+      "title": "APPENDIX M TSUNAMI-GENERATED FLOOD HAZARDS",
+      "pages": [
+        1664,
+        1665
+      ]
+    },
+    {
+      "file": "appn_appendix_n_replicable_buildings.md",
+      "title": "APPENDIX N REPLICABLE BUILDINGS",
+      "pages": [
+        1666,
+        1671
+      ]
+    },
+    {
+      "file": "appp_appendix_p_emergency_housing.md",
+      "title": "APPENDIX P EMERGENCY HOUSING",
+      "pages": [
+        1672,
+        1723
+      ]
+    },
+    {
+      "file": "ch10_chapter_10_means_of_egress.md",
+      "title": "CHAPTER 10 MEANS OF EGRESS",
+      "pages": [
+        435,
+        490
+      ]
+    },
+    {
+      "file": "ch11_chapter_11_reserved.md",
+      "title": "CHAPTER 11 RESERVED",
+      "pages": [
+        491,
+        494
+      ]
+    },
+    {
+      "file": "ch11a_chapter_11a_housing_accessibility.md",
+      "title": "CHAPTER 11A HOUSING ACCESSIBILITY",
+      "pages": [
+        495,
+        592
+      ]
+    },
+    {
+      "file": "ch11b_chapter_11b_accessibility_to_public_buildings_public_accommo.md",
+      "title": "CHAPTER 11B ACCESSIBILITY TO PUBLIC BUILDINGS,PUBLIC ACCOMMODATIONS, COMMERCIAL BUILDINGS AND PUBLIC HOUSING",
+      "pages": [
+        593,
+        724
+      ]
+    },
+    {
+      "file": "ch12_chapter_12_interior_environment.md",
+      "title": "CHAPTER 12 INTERIOR ENVIRONMENT",
+      "pages": [
+        725,
+        834
+      ]
+    },
+    {
+      "file": "ch13_chapter_13_energy_efficiency.md",
+      "title": "CHAPTER 13 ENERGY EFFICIENCY",
+      "pages": [
+        835,
+        838
+      ]
+    },
+    {
+      "file": "ch14_chapter_14_exterior_walls.md",
+      "title": "CHAPTER 14 EXTERIOR WALLS",
+      "pages": [
+        839,
+        852
+      ]
+    },
+    {
+      "file": "ch15_chapter_15_roof_assemblies_and_rooftop_structures.md",
+      "title": "CHAPTER 15 ROOF ASSEMBLIES AND ROOFTOP STRUCTURES",
+      "pages": [
+        853,
+        963
+      ]
+    },
+    {
+      "file": "ch16_chapter_16_structural_design.md",
+      "title": "CHAPTER 16 STRUCTURAL DESIGN",
+      "pages": [
+        964,
+        1019
+      ]
+    },
+    {
+      "file": "ch16a_chapter_16a_structural_design.md",
+      "title": "CHAPTER 16A STRUCTURAL DESIGN",
+      "pages": [
+        1020,
+        1069
+      ]
+    },
+    {
+      "file": "ch17_chapter_17_special_inspections_and_tests.md",
+      "title": "CHAPTER 17 SPECIAL INSPECTIONS AND TESTS",
+      "pages": [
+        1070,
+        1091
+      ]
+    },
+    {
+      "file": "ch17a_chapter_17a_special_inspections_and_tests.md",
+      "title": "CHAPTER 17A SPECIAL INSPECTIONS AND TESTS",
+      "pages": [
+        1092,
+        1113
+      ]
+    },
+    {
+      "file": "ch18_chapter_18_soils_and_foundations.md",
+      "title": "CHAPTER 18 SOILS AND FOUNDATIONS",
+      "pages": [
+        1114,
+        1151
+      ]
+    },
+    {
+      "file": "ch18a_chapter_18a_soils_and_foundations.md",
+      "title": "CHAPTER 18A SOILS AND FOUNDATIONS",
+      "pages": [
+        1152,
+        1181
+      ]
+    },
+    {
+      "file": "ch19_chapter_19_concrete.md",
+      "title": "CHAPTER 19 CONCRETE",
+      "pages": [
+        1182,
+        1197
+      ]
+    },
+    {
+      "file": "ch19a_chapter_19a_concrete.md",
+      "title": "CHAPTER 19A CONCRETE",
+      "pages": [
+        1198,
+        1209
+      ]
+    },
+    {
+      "file": "ch1_chapter_1_scope_and_administration.md",
+      "title": "CHAPTER 1 SCOPE AND ADMINISTRATION",
+      "pages": [
+        47,
+        88
+      ]
+    },
+    {
+      "file": "ch20_chapter_20_aluminum.md",
+      "title": "CHAPTER 20 ALUMINUM",
+      "pages": [
+        1210,
+        1213
+      ]
+    },
+    {
+      "file": "ch21_chapter_21_masonry.md",
+      "title": "CHAPTER 21 MASONRY",
+      "pages": [
+        1214,
+        1235
+      ]
+    },
+    {
+      "file": "ch21a_chapter_21a_masonry.md",
+      "title": "CHAPTER 21A MASONRY",
+      "pages": [
+        1236,
+        1253
+      ]
+    },
+    {
+      "file": "ch22_chapter_22_steel.md",
+      "title": "CHAPTER 22 STEEL",
+      "pages": [
+        1254,
+        1263
+      ]
+    },
+    {
+      "file": "ch22a_chapter_22a_steel.md",
+      "title": "CHAPTER 22A STEEL",
+      "pages": [
+        1264,
+        1273
+      ]
+    },
+    {
+      "file": "ch23_chapter_23_wood.md",
+      "title": "CHAPTER 23 WOOD",
+      "pages": [
+        1274,
+        1353
+      ]
+    },
+    {
+      "file": "ch24_chapter_24_glass_and_glazing.md",
+      "title": "CHAPTER 24 GLASS AND GLAZING",
+      "pages": [
+        1354,
+        1367
+      ]
+    },
+    {
+      "file": "ch25_chapter_25_gypsum_board_gypsum_panel_products_and_plaster.md",
+      "title": "CHAPTER 25 GYPSUM BOARD, GYPSUM PANEL PRODUCTS AND PLASTER",
+      "pages": [
+        1368,
+        1377
+      ]
+    },
+    {
+      "file": "ch26_chapter_26_plastic.md",
+      "title": "CHAPTER 26 PLASTIC",
+      "pages": [
+        1378,
+        1393
+      ]
+    },
+    {
+      "file": "ch27_chapter_27_electrical.md",
+      "title": "CHAPTER 27 ELECTRICAL",
+      "pages": [
+        1394,
+        1397
+      ]
+    },
+    {
+      "file": "ch28_chapter_28_mechanical_systems.md",
+      "title": "CHAPTER 28 MECHANICAL SYSTEMS",
+      "pages": [
+        1398,
+        1399
+      ]
+    },
+    {
+      "file": "ch29_chapter_29_plumbing_systems.md",
+      "title": "CHAPTER 29 PLUMBING SYSTEMS",
+      "pages": [
+        1400,
+        1407
+      ]
+    },
+    {
+      "file": "ch2_chapter_2_definitions.md",
+      "title": "CHAPTER 2 DEFINITIONS",
+      "pages": [
+        89,
+        140
+      ]
+    },
+    {
+      "file": "ch30_chapter_30_elevators_and_conveying_systems.md",
+      "title": "CHAPTER 30 ELEVATORS AND CONVEYING SYSTEMS",
+      "pages": [
+        1408,
+        1419
+      ]
+    },
+    {
+      "file": "ch31_chapter_31_special_construction.md",
+      "title": "CHAPTER 31 SPECIAL CONSTRUCTION",
+      "pages": [
+        1420,
+        1433
+      ]
+    },
+    {
+      "file": "ch31a_chapter_31a_systems_for_window_cleaning_or_exterior_building.md",
+      "title": "CHAPTER 31A SYSTEMS FOR WINDOW CLEANING OR EXTERIOR BUILDING MAINTENANCE",
+      "pages": [
+        1434,
+        1437
+      ]
+    },
+    {
+      "file": "ch31b_chapter_31b_dph_public_pools.md",
+      "title": "CHAPTER 31B [DPH] PUBLIC POOLS",
+      "pages": [
+        1438,
+        1463
+      ]
+    },
+    {
+      "file": "ch31c_chapter_31c_dph_radiation.md",
+      "title": "CHAPTER 31C [DPH] RADIATION",
+      "pages": [
+        1464,
+        1467
+      ]
+    },
+    {
+      "file": "ch31d_chapter_31d_dph_food_establishments.md",
+      "title": "CHAPTER 31D [DPH] FOOD ESTABLISHMENTS",
+      "pages": [
+        1468,
+        1469
+      ]
+    },
+    {
+      "file": "ch31e_chapter_31e_reserved.md",
+      "title": "CHAPTER 31E RESERVED",
+      "pages": [
+        1470,
+        1473
+      ]
+    },
+    {
+      "file": "ch31f_chapter_31f_slc_marine_oil_terminals.md",
+      "title": "CHAPTER 31F [SLC] MARINE OIL TERMINALS",
+      "pages": [
+        1474,
+        1557
+      ]
+    },
+    {
+      "file": "ch32_chapter_32_encroachments_into_the_public_right_of_way.md",
+      "title": "CHAPTER 32 ENCROACHMENTS INTO THE PUBLIC RIGHT-OF-WAY",
+      "pages": [
+        1558,
+        1561
+      ]
+    },
+    {
+      "file": "ch33_chapter_33_safeguards_during_construction.md",
+      "title": "CHAPTER 33 SAFEGUARDS DURING CONSTRUCTION",
+      "pages": [
+        1562,
+        1567
+      ]
+    },
+    {
+      "file": "ch34_chapter_34_reserved.md",
+      "title": "CHAPTER 34 RESERVED",
+      "pages": [
+        1568,
+        1573
+      ]
+    },
+    {
+      "file": "ch35_chapter_35_referenced_standards.md",
+      "title": "CHAPTER 35 REFERENCED STANDARDS",
+      "pages": [
+        1574,
+        1619
+      ]
+    },
+    {
+      "file": "ch3_chapter_3_occupancy_classification_and_use.md",
+      "title": "CHAPTER 3 OCCUPANCY CLASSIFICATION AND USE",
+      "pages": [
+        141,
+        158
+      ]
+    },
+    {
+      "file": "ch4_chapter_4_special_detailed_requirements_based_on_occupancy_a.md",
+      "title": "CHAPTER 4 SPECIAL DETAILED REQUIREMENTS BASED ON OCCUPANCY AND USE",
+      "pages": [
+        159,
+        226
+      ]
+    },
+    {
+      "file": "ch5_chapter_5_general_building_heights_and_areas.md",
+      "title": "CHAPTER 5 GENERAL BUILDING HEIGHTS AND AREAS",
+      "pages": [
+        227,
+        248
+      ]
+    },
+    {
+      "file": "ch6_chapter_6_types_of_construction.md",
+      "title": "CHAPTER 6 TYPES OF CONSTRUCTION",
+      "pages": [
+        249,
+        256
+      ]
+    },
+    {
+      "file": "ch7_chapter_7_fire_and_smoke_protection_features.md",
+      "title": "CHAPTER 7 FIRE AND SMOKE PROTECTION FEATURES",
+      "pages": [
+        257,
+        352
+      ]
+    },
+    {
+      "file": "ch7a_chapter_7a_sfm_materials_and_construction_methods_for_exteri.md",
+      "title": "CHAPTER 7A [SFM] MATERIALS AND CONSTRUCTION METHODS FOR EXTERIOR WILDFIRE EXPOSURE",
+      "pages": [
+        353,
+        364
+      ]
+    },
+    {
+      "file": "ch8_chapter_8_interior_finishes.md",
+      "title": "CHAPTER 8 INTERIOR FINISHES",
+      "pages": [
+        365,
+        376
+      ]
+    },
+    {
+      "file": "ch9_chapter_9_fire_protection_and_life_safety_systems.md",
+      "title": "CHAPTER 9 FIRE PROTECTION AND LIFE SAFETY SYSTEMS",
+      "pages": [
+        377,
+        434
+      ]
+    }
+  ]
+}

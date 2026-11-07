@@ -1,0 +1,91 @@
+You are a plan-check rule extraction subagent. The graph community "Cable Substitution Hierarchy (Chapter 8)" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/26_chapter_8_communications_systems.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c27_cable_substitution_hierarchy_chapter_8_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  26_chapter_8_communications_systems_800_179                   800.179 Plenum, Riser, General-Purpose, and Limited Use Cabl
+  26_chapter_8_communications_systems_805_154                   805.154 Substitutions of Listed Communications Wires/Cables/
+  26_chapter_8_communications_systems_820_154                   820.154 Substitutions of Listed CATV Cables
+  26_chapter_8_communications_systems_830_154                   830.154 Substitutions of NPB System Cables
+  26_chapter_8_communications_systems_830_179                   830.179 NPB Equipment and Cables - Listing
+  26_chapter_8_communications_systems_830_40                    830.40 Entrance Cables
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  26_chapter_8_communications_systems_table_805_154             Table 805.154 Cable Substitutions (Communications)
+  26_chapter_8_communications_systems_table_820_154             Table 820.154 Coaxial Cable Uses and Permitted Substitutions
+  26_chapter_8_communications_systems_table_830_154             Table 830.154 Cable Substitutions (NPB)
+  26_chapter_8_communications_systems_cable_bl                  Type BL - NPB low-power general-purpose cable
+  26_chapter_8_communications_systems_cable_blp                 Type BLP - NPB low-power plenum cable
+  26_chapter_8_communications_systems_cable_blr                 Type BLR - NPB low-power riser cable
+  26_chapter_8_communications_systems_cable_blu                 Type BLU - NPB low-power outdoor underground cable
+  26_chapter_8_communications_systems_cable_blx                 Type BLX - NPB low-power limited-use cable
+  26_chapter_8_communications_systems_cable_bm                  Type BM - NPB medium-power general-purpose cable
+  26_chapter_8_communications_systems_cable_bmr                 Type BMR - NPB medium-power riser cable
+  26_chapter_8_communications_systems_cable_bmu                 Type BMU - NPB medium-power outdoor underground cable
+  26_chapter_8_communications_systems_cable_catv                Type CATV - CATV coaxial cable
+  26_chapter_8_communications_systems_cable_catvp               Type CATVP - CATV plenum coaxial cable
+  26_chapter_8_communications_systems_cable_catvr               Type CATVR - CATV riser coaxial cable
+  26_chapter_8_communications_systems_cable_catvx               Type CATVX - CATV coaxial cable, limited use
+  26_chapter_8_communications_systems_cable_cm                  Type CM - Communications general-purpose cable
+  26_chapter_8_communications_systems_cable_cmg                 Type CMG - Communications general-purpose cable
+  26_chapter_8_communications_systems_cable_cmp                 Type CMP - Communications plenum cable
+  26_chapter_8_communications_systems_cable_cmr                 Type CMR - Communications riser cable
+  26_chapter_8_communications_systems_cable_cmx                 Type CMX - Communications cable, limited use
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 26_chapter_8_communications_systems_800_179>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Cable Substitution Hierarchy (Chapter 8)",
+  "community_id": 27,
+  "extracted_from_sections": ["26_chapter_8_communications_systems.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 8-12 rules. After writing the file, just confirm "wrote c27_cable_substitution_hierarchy_chapter_8_rules.json with N rules" and stop.

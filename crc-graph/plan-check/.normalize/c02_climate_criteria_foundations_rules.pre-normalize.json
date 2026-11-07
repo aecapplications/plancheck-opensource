@@ -1,0 +1,1629 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Climate Criteria & Foundations",
+  "community_id": 2,
+  "extracted_from_sections": [
+    "chapter_2_definitions.md",
+    "chapter_3_building_planning_a.md",
+    "chapter_3_building_planning_c.md",
+    "chapter_4_foundations_a.md",
+    "chapter_4_foundations_b.md",
+    "chapter_5_floors.md",
+    "chapter_6_wall_construction_a.md",
+    "chapter_6_wall_construction_b.md",
+    "chapter_6_wall_construction_c.md",
+    "chapter_6_wall_construction_d.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r301_2",
+      "cite": "R301.2",
+      "section_node": "section_r301_2",
+      "title": "Construct buildings to the climatic and geographic design criteria established for the jurisdiction in Table R301.2",
+      "intent": "Anchor every structural design parameter (wind speed, seismic design category, frost line depth, flood hazard, ground snow, weathering, termite, etc.) to the values the local jurisdiction has filled in on Table R301.2 so the prescriptive provisions of the code are applied with the correct site conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_crc"
+        }
+      ],
+      "requires": {
+        "type": "site_design_criteria",
+        "use_jurisdiction_values_from_table": "TABLE R301.2",
+        "criteria_required": [
+          "ground_snow_load",
+          "ultimate_design_wind_speed_Vult",
+          "wind_topographic_effects",
+          "special_wind_region",
+          "windborne_debris_zone",
+          "seismic_design_category",
+          "weathering_index",
+          "frost_line_depth",
+          "termite_risk",
+          "ice_barrier_underlayment",
+          "flood_hazards",
+          "air_freezing_index",
+          "mean_annual_temperature",
+          "manual_J_design_criteria"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Title sheet or general notes listing the Table R301.2 values (wind, seismic, frost, termite, flood, snow) for the project address",
+        "Citation of the source figures (Figures R301.2(1)-(4), R301.2.1.1, R403.3(2), R318.4) used to establish each value",
+        "Geotechnical or jurisdictional letter confirming values where the jurisdiction has not pre-filled the table"
+      ],
+      "depends_on": [
+        "table_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r317_1",
+      "cite": "R317.1",
+      "section_node": "r317_1",
+      "title": "Use naturally durable wood or AWPA U1 preservative-treated wood at all locations exposed to decay",
+      "intent": "Prevent rot and structural failure of wood members in contact with concrete, masonry, the ground, or weather by requiring decay-resistant material at the eight specifically called-out exposure conditions.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "wood_joists_within_18in_of_exposed_ground_in_crawlspace"
+            },
+            {
+              "predicate": "wood_girders_within_12in_of_exposed_ground_in_crawlspace"
+            },
+            {
+              "predicate": "wood_columns_within_8in_of_exposed_ground_in_crawlspace"
+            },
+            {
+              "predicate": "wood_framing_on_concrete_or_masonry_exterior_foundation_wall_<8in_from_grade"
+            },
+            {
+              "predicate": "sills_or_sleepers_on_slab_in_direct_ground_contact_without_moisture_barrier"
+            },
+            {
+              "predicate": "wood_girder_ends_in_masonry_or_concrete_walls_with_<0.5in_clearance"
+            },
+            {
+              "predicate": "wood_siding_sheathing_or_wall_framing_<6in_from_ground_or_<2in_above_horizontal_concrete"
+            },
+            {
+              "predicate": "wood_supports_for_moisture_permeable_floor_or_roof_without_moisture_barrier"
+            },
+            {
+              "predicate": "wood_furring_or_framing_attached_to_below_grade_masonry_or_concrete_wall_without_vapor_retarder"
+            },
+            {
+              "predicate": "wood_structural_supports_of_balconies_porches_or_appurtenances_exposed_to_weather"
+            },
+            {
+              "predicate": "wood_columns_in_contact_with_basement_floor_slab_without_pier_or_pedestal"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "material_options": [
+          "naturally_durable_wood",
+          "preservative_treated_wood_per_AWPA_U1"
+        ],
+        "tested_per": [
+          "AWPA_U1"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "weather_exposed_sawn_lumber"
+            },
+            {
+              "predicate": "in_climate_region_where_experience_shows_decay_protection_unnecessary"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Foundation/framing plans showing clearances of wood members from grade and concrete contact",
+        "Wood species/grade and treatment specification (AWPA U1) on the structural notes",
+        "Quality mark / treatment label on lumber per Section R317.2",
+        "Detail showing pier or metal pedestal with moisture barrier for any wood column in contact with basement floor"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r318_1",
+      "cite": "R318.1",
+      "section_node": "r318_1",
+      "title": "In termite-prone areas, protect the structure by one or a combination of the six accepted termite-control methods",
+      "intent": "Prevent subterranean termite damage in jurisdictions identified as termite-risk areas on Table R301.2 by requiring at least one approved control method.",
+      "applies_when": [
+        {
+          "predicate": "site_is_termite_risk_area_per_table_r301_2"
+        }
+      ],
+      "requires": {
+        "type": "termite_protection",
+        "method_options_any_of": [
+          "chemical_termiticide_per_R318_2",
+          "termite_baiting_system_installed_per_label",
+          "pressure_preservative_treated_wood_per_R317_1",
+          "naturally_durable_termite_resistant_wood",
+          "physical_barrier_per_R318_3",
+          "cold_formed_steel_framing_per_R505_2_1_and_R603_2_1"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Termite designation from the jurisdiction's Table R301.2 entry",
+        "Specification on plans of the selected method(s) (chemical product, bait system, treated lumber, barrier detail, or steel framing schedule)",
+        "Manufacturer label/data sheet for any baiting system or physical barrier used",
+        "Treatment certificate for chemical termiticide work"
+      ],
+      "depends_on": [
+        "table_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r322",
+      "cite": "R322",
+      "section_node": "section_r322",
+      "title": "Design and construct buildings in flood hazard areas per Section R322 (or ASCE 24)",
+      "intent": "Make sure any building in whole or part within a flood hazard area is designed, anchored, elevated, materially specified and detailed to resist flotation, collapse, lateral movement, and water damage from the design flood.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "building_in_flood_hazard_area_per_table_r301_2"
+            },
+            {
+              "predicate": "building_in_a_zone"
+            },
+            {
+              "predicate": "building_in_v_zone"
+            },
+            {
+              "predicate": "building_in_coastal_a_zone"
+            },
+            {
+              "predicate": "is_substantial_improvement_or_substantial_damage_repair_in_flood_hazard_area"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "flood_resistant_construction",
+        "design_basis": "design_flood_elevation",
+        "structural_system_must": "resist_flotation_collapse_and_permanent_lateral_movement_at_DFE",
+        "lowest_floor_elevation_per": [
+          "section_r322_2_1",
+          "section_r322_3_2"
+        ],
+        "enclosed_areas_below_DFE_per": "section_r322_2_2",
+        "materials_below_DFE_per": "FEMA_TB-2",
+        "MEP_protection_per": "section_r322_1_6",
+        "as_built_documentation_required": true,
+        "alternative": "design_per_ASCE_24",
+        "floodway_design_per": "ASCE_24",
+        "tested_per": [
+          "ASCE_24",
+          "FEMA_TB-2"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "designed_per_ASCE_24"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "ASCE 24 may be used in lieu of Section R322 subject to the limits of both."
+        }
+      ],
+      "evidence_required": [
+        "Flood Insurance Rate Map (FIRM) panel and base flood elevation for the site",
+        "Elevation Certificate prepared and sealed by a registered design professional documenting the as-built lowest-floor elevation",
+        "Foundation, flood-opening and break-away wall details per Section R322.2 or R322.3",
+        "Specification list of flood-damage-resistant materials below the DFE referencing FEMA TB-2",
+        "Anchorage calculation for any underground or above-ground tank"
+      ],
+      "depends_on": [
+        "def_design_flood_elevation",
+        "def_flood_hazard_area"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r401",
+      "cite": "R401",
+      "section_node": "section_r401",
+      "title": "Scope: Chapter 4 controls foundation design and construction; foundations in flood hazard areas must also meet R322",
+      "intent": "Establish the trigger for the entire foundation rule pack and require Section R322 compliance whenever the site is in a flood hazard area.",
+      "applies_when": [
+        {
+          "predicate": "is_residential_building_under_crc"
+        },
+        {
+          "predicate": "scope_is_foundation_design_and_construction"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_chapter_4": true,
+        "additionally_comply_with_section_r322_when_in_flood_hazard_area": true,
+        "wood_foundations_per": "AWC_PWF",
+        "tested_per": [
+          "AWC_PWF"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan and details referencing the Chapter 4 prescriptive section used (R403, R404, etc.)",
+        "If wood foundations: AWC PWF design package",
+        "Flood-zone determination on title sheet and cross-reference to Section R322 where applicable"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r401_1",
+      "cite": "R401.1",
+      "section_node": "r401_1",
+      "title": "Limit prescriptive wood foundations to two-story buildings with interior walls at \u226450 ft and engineer them in SDC D0/D1/D2",
+      "intent": "Bound the use of prescriptive wood foundations to building configurations the code's tabulated limits actually cover, and require engineering when seismic demand is high.",
+      "applies_when": [
+        {
+          "predicate": "uses_wood_foundation"
+        }
+      ],
+      "requires": {
+        "type": "applicability_limits",
+        "max_floors_above_grade": 2,
+        "plus_roof": true,
+        "max_interval_between_interior_basement_or_foundation_walls_ft": 50,
+        "in_seismic_design_category_d0_d1_or_d2": "design_per_accepted_engineering_practice",
+        "tested_per": [
+          "AWC_PWF"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing building has \u22642 floors and a roof, with interior basement/foundation walls at \u226450 ft on center",
+        "Seismic Design Category from Table R301.2 on the title sheet",
+        "If SDC D0/D1/D2: stamped engineering calculations for the wood foundation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r402_2",
+      "cite": "R402.2",
+      "section_node": "r402_2",
+      "title": "Provide concrete with the minimum f'c from Table R402.2 and air-entrain it where the weathering potential is moderate or severe",
+      "intent": "Match concrete strength and air entrainment to the freeze-thaw and exposure environment so foundations, slabs and exterior flatwork do not spall or fail in service.",
+      "applies_when": [
+        {
+          "predicate": "concrete_used_in_residential_construction_under_crc"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "minimum_specified_compressive_strength_f_c_per_table": "TABLE R402.2",
+        "air_entrainment_required_when": "weathering_index_is_moderate_or_severe_per_table_r301_2",
+        "max_supplementary_cementitious_materials_for_garage_floor_porch_carport_steps_exposed_to_deicers_per": "ACI_318_19_3_3_4",
+        "materials_and_testing_per": [
+          "ACI_318_chapters_19_and_20",
+          "ACI_332"
+        ],
+        "tested_per": [
+          "ACI_318",
+          "ACI_332"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Concrete mix design submittal listing f'c, air content, and SCM percentages",
+        "Weathering index taken from Figure R301.2(1) / Table R301.2 cited on plans",
+        "Batch tickets and 28-day compressive-strength test reports per ASTM C39",
+        "Where air entrainment is required: confirmation of total air content within 5\u20137% (or 3% min for steel-troweled garage floors at f'c \u22654000 psi)"
+      ],
+      "depends_on": [
+        "table_r402_2",
+        "table_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403",
+      "cite": "R403",
+      "section_node": "section_r403",
+      "title": "Support all exterior walls on continuous footings (concrete, fully-grouted masonry, crushed stone, wood, or other approved system) sized for the loads",
+      "intent": "Ensure every exterior wall has a continuous load path to undisturbed soil or engineered fill, designed by Section R403 or ACI 332.",
+      "applies_when": [
+        {
+          "predicate": "is_exterior_wall_of_residential_building"
+        }
+      ],
+      "requires": {
+        "type": "footing_general",
+        "footing_options": [
+          "continuous_solid_masonry",
+          "fully_grouted_masonry",
+          "concrete",
+          "crushed_stone",
+          "wood_foundation",
+          "other_approved_structural_system"
+        ],
+        "must_be_supported_on": "undisturbed_natural_soil_or_engineered_fill",
+        "concrete_footings_designed_per": [
+          "section_r403",
+          "ACI_332"
+        ],
+        "tested_per": [
+          "ACI_332"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing continuous footing under every exterior wall",
+        "Allowable soil-bearing value (Section R401.4 / Table R401.4.1 or geotechnical report) called out on plans",
+        "Section detail showing footing on undisturbed soil or engineered fill",
+        "Calculations or table reference establishing footing width and thickness"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_4",
+      "cite": "R403.1.4",
+      "section_node": "r403_1_4",
+      "title": "Place exterior footings at least 12 inches below undisturbed grade (and to frost depth where applicable)",
+      "intent": "Keep footings below seasonal soil-disturbance depth and out of frost-heave zones.",
+      "applies_when": [
+        {
+          "predicate": "is_exterior_footing"
+        },
+        {
+          "not": {
+            "predicate": "is_deck_footing"
+          }
+        }
+      ],
+      "requires": {
+        "type": "footing_depth",
+        "min_depth_below_undisturbed_grade_in": 12,
+        "additionally_comply_with": "section_r403_1_4_1",
+        "deck_footings_per": "section_r507_3",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation section detail dimensioning footing bottom \u226512 in below undisturbed grade",
+        "Frost-line depth from Table R301.2 cited and shown on detail",
+        "Soils report or note that footing bears on undisturbed natural soil or engineered fill"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_1_4_1",
+      "cite": "R403.1.4.1",
+      "section_node": "r403_1_4_1",
+      "title": "Protect foundation walls, piers and other permanent supports from frost by one of four approved methods",
+      "intent": "Eliminate frost-heave damage by extending footings below the frost line, using a frost-protected shallow foundation, designing per ASCE 32, or founding on solid rock.",
+      "applies_when": [
+        {
+          "predicate": "is_foundation_wall_pier_or_permanent_support"
+        },
+        {
+          "predicate": "site_is_subject_to_frost_per_table_r301_2"
+        }
+      ],
+      "requires": {
+        "type": "frost_protection",
+        "method_options_any_of": [
+          "extended_below_frost_line_per_table_r301_2",
+          "frost_protected_shallow_foundation_per_section_r403_3",
+          "designed_per_ASCE_32",
+          "erected_on_solid_rock"
+        ],
+        "no_bearing_on_frozen_soil_unless_permanent": true,
+        "tested_per": [
+          "ASCE_32"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_freestanding_accessory_structure"
+            },
+            {
+              "predicate": "area_<=_600_sf"
+            },
+            {
+              "predicate": "is_light_frame_construction"
+            },
+            {
+              "predicate": "eave_height_<=_10_ft"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_freestanding_accessory_structure"
+            },
+            {
+              "predicate": "area_<=_400_sf"
+            },
+            {
+              "predicate": "not_light_frame_construction"
+            },
+            {
+              "predicate": "eave_height_<=_10_ft"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Frost-line depth from Table R301.2 on the title sheet",
+        "Foundation section detail showing footing bottom at or below the frost line, OR FPSF detail per R403.3, OR ASCE 32 stamped design, OR rock-bearing detail",
+        "Soils note prohibiting placement on frozen soil"
+      ],
+      "depends_on": [
+        "table_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r403_3",
+      "cite": "R403.3",
+      "section_node": "r403_3",
+      "title": "Frost-protected shallow foundations are allowed only for heated buildings (\u226564\u00b0F monthly mean) per Figure R403.3(1) and Table R403.3(1)",
+      "intent": "Allow shallow foundations in cold climates only where building heat keeps the soil from freezing, and require ASTM C578-labeled below-grade insulation to provide that thermal envelope.",
+      "applies_when": [
+        {
+          "predicate": "uses_frost_protected_shallow_foundation"
+        }
+      ],
+      "requires": {
+        "type": "frost_protected_shallow_foundation",
+        "minimum_monthly_mean_indoor_temperature_F": 64,
+        "insulation_per_figure": "FIGURE R403.3(1)",
+        "depth_and_R_values_per_table": "TABLE R403.3(1)",
+        "below_grade_insulation_label": "ASTM_C578",
+        "prohibited_for": [
+          "unheated_porches",
+          "unheated_utility_rooms",
+          "unheated_garages",
+          "unheated_carports",
+          "basements_or_crawlspaces_below_64F"
+        ],
+        "tested_per": [
+          "ASTM_C578"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mechanical schedule confirming building is heated to monthly mean \u226564\u00b0F",
+        "Foundation detail matching Figure R403.3(1) with vertical and horizontal insulation dimensioned",
+        "Insulation product data sheet showing ASTM C578 compliance and the R-value and thickness from Table R403.3(1)",
+        "Air-Freezing Index for the site from Figure R403.3(2) or Table R403.3(2)"
+      ],
+      "depends_on": [
+        "table_r403_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r404",
+      "cite": "R404",
+      "section_node": "section_r404",
+      "title": "Select and design concrete or masonry foundation walls per R404.1.2/R404.1.3; engineer walls under hydrostatic head or >48 in unbalanced backfill",
+      "intent": "Route foundation walls into either the prescriptive tables or accepted engineering practice depending on the height of unbalanced backfill and the presence of groundwater.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "is_concrete_foundation_wall"
+            },
+            {
+              "predicate": "is_masonry_foundation_wall"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "foundation_wall_design",
+        "concrete_walls_per": "section_r404_1_3",
+        "masonry_walls_per": "section_r404_1_2_or_TMS_402",
+        "engineered_design_required_when_any_of": [
+          "wall_subject_to_hydrostatic_pressure_from_groundwater",
+          "wall_supports_more_than_48_in_unbalanced_backfill_without_permanent_lateral_support_top_or_bottom"
+        ],
+        "tested_per": [
+          "TMS_402",
+          "ACI_318",
+          "ACI_332",
+          "PCA_100"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation wall reinforcing plan and section keyed to Tables R404.1.1, R404.1.2(1)\u2013(8) (and R404.1.2(9) for flat basement walls)",
+        "Soils report stating groundwater elevation and backfill height",
+        "Where groundwater or unbalanced backfill >48 in: engineer's stamped calculations for the wall",
+        "Lateral support detail at top and bottom of wall"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r408_7",
+      "cite": "R408.7",
+      "section_node": "r408_7",
+      "title": "In flood hazard areas, provide flood openings in under-floor walls and place finished ground level under-floor at or above outside grade on at least one side",
+      "intent": "Equalize hydrostatic pressure on under-floor enclosure walls and ensure under-floor space drains to grade so foundation walls are not blown out by floodwaters.",
+      "applies_when": [
+        {
+          "predicate": "building_in_flood_hazard_area_per_table_r301_2"
+        },
+        {
+          "predicate": "has_under_floor_space"
+        }
+      ],
+      "requires": {
+        "type": "flood_resistance_under_floor",
+        "walls_enclosing_under_floor_must_have_flood_openings_per": "section_r322_2_2",
+        "finished_ground_level_under_floor_at_or_above_outside_grade_on_at_least_one_side": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "under_floor_space_meets_FEMA_TB_11-1"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Foundation plan showing flood opening locations, sizes, and bottom-of-opening elevations meeting R322.2.2",
+        "Site/grading plan demonstrating interior under-floor finished grade is \u2265 outside finished grade on at least one side",
+        "FEMA TB 11-1 compliance documentation if relying on the exception"
+      ],
+      "depends_on": [
+        "def_flood_hazard_area"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r505_2_1",
+      "cite": "R505.2.1",
+      "section_node": "r505_2_1",
+      "title": "Cold-formed steel floor framing must be cold-formed from structural-quality sheet steel meeting AISI S240 Section A3",
+      "intent": "Guarantee that load-bearing CFS floor members are produced from structural-grade material with documented mechanical properties.",
+      "applies_when": [
+        {
+          "predicate": "is_load_bearing_cold_formed_steel_floor_framing_member"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "shape_method": "cold_formed",
+        "material": "structural_quality_sheet_steel",
+        "compliance_with": "AISI_S240_section_A3",
+        "tested_per": [
+          "AISI_S240"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mill certificate or AISI S240 product identification mark on each CFS floor member",
+        "Structural notes citing AISI S240 Section A3 for material",
+        "Member schedule listing dimensions, thickness and material grade per AISI S230 Section A4.3/A4.4"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r507_3",
+      "cite": "R507.3",
+      "section_node": "r507_3",
+      "title": "Support decks on concrete footings (or other approved system) sized for the imposed loads",
+      "intent": "Transfer all gravity, live and lateral loads from elevated decks to ground via footings of correct size, depth and frost protection.",
+      "applies_when": [
+        {
+          "predicate": "is_deck"
+        }
+      ],
+      "requires": {
+        "type": "deck_footings",
+        "footing_options": [
+          "concrete_footing",
+          "other_approved_structural_system"
+        ],
+        "size_per_table": "TABLE R507.3.1",
+        "minimum_depth_below_undisturbed_grade_in": 12,
+        "frost_protection_methods_any_of": [
+          "extended_below_frost_line_per_table_r301_2",
+          "erected_on_solid_rock",
+          "other_approved_method"
+        ],
+        "loads_per_section": "section_r301",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_freestanding_deck"
+            },
+            {
+              "predicate": "joists_directly_supported_on_grade_over_entire_length"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_freestanding_deck"
+            },
+            {
+              "predicate": "joists_bear_on_precast_concrete_pier_blocks_at_grade_without_beams_or_posts"
+            },
+            {
+              "predicate": "deck_area_<=_200_sf"
+            },
+            {
+              "predicate": "walking_surface_<=_20_in_above_grade_within_36_in_horizontally"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Deck plan showing footing locations and tributary areas",
+        "Footing schedule sized from Table R507.3.1 against allowable soil-bearing pressure (Table R401.4.1)",
+        "Section showing footing \u226512 in below undisturbed grade and frost-line compliance",
+        "Where attached to a frost-protected structure: detail of the frost-protection method"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r601",
+      "cite": "R601",
+      "section_node": "section_r601",
+      "title": "Scope: Chapter 6 controls wall and partition design and construction; walls must transmit loads to supports",
+      "intent": "Anchor every wall-construction rule to the load-path requirement of Section R301 so wind, seismic, gravity and lateral loads reach the foundation through compliant assemblies.",
+      "applies_when": [
+        {
+          "predicate": "is_wall_or_partition_in_residential_building"
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_chapter_6": true,
+        "loads_per_section_r301": true,
+        "must_transmit_loads_to_supporting_structural_elements": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural drawings showing each wall framing system and supporting element",
+        "Load path diagram from roof to foundation",
+        "Reference to Section R301 design loads on title sheet"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602",
+      "cite": "R602",
+      "section_node": "section_r602",
+      "title": "Use only conforming wood products and grades for load-bearing wood wall framing",
+      "intent": "Make sure every load-supporting wood element in a wood-framed wall has documented structural properties from a recognized standard or grading agency.",
+      "applies_when": [
+        {
+          "predicate": "uses_wood_wall_framing"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "stud_grade_minimum": "No_3_or_standard_or_stud_grade",
+        "product_standards_any_applicable": [
+          "DOC_PS_20_for_sawn_lumber",
+          "ANSI_A190_1_for_glulam",
+          "ICC_400_for_log_members",
+          "ASTM_D5456_for_SCL",
+          "ANSI_APA_PRG_320_for_CLT",
+          "ANSI_APA_PRR_410_or_ASTM_D7672_for_rim_board",
+          "DOC_PS_1_PS_2_CSA_O325_or_O437_for_wood_structural_panels",
+          "ANSI_A208_1_for_particleboard",
+          "ASTM_C208_for_fiberboard",
+          "ANSI_APA_PRS_610_1_for_SIPs"
+        ],
+        "exterior_walls_designed_per": "AWC_NDS_or_chapter_6",
+        "fastening_per_tables": [
+          "TABLE R602.3(1)",
+          "TABLE R602.3(2)",
+          "TABLE R602.3(3)",
+          "TABLE R602.3(4)"
+        ],
+        "tested_per": [
+          "AWC_NDS"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_bearing_stud_not_supporting_floors"
+            },
+            {
+              "predicate": "stud_spacing_per_table_r602_3_5"
+            }
+          ],
+          "effect": "utility_grade_lumber_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Lumber grade marks on framing or certification of inspection",
+        "Structural notes specifying species, grade and stud size/spacing per Table R602.3(5)",
+        "Fastening schedule referencing Tables R602.3(1)\u2013(4)",
+        "Wood structural panel sheathing identification (PS 1/PS 2/CSA O325/O437)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_1_11",
+      "cite": "R602.1.11",
+      "section_node": "section_r602_1_11",
+      "title": "Structural insulated panels in wood walls must be manufactured and identified per ANSI/APA PRS 610.1",
+      "intent": "Ensure SIPs used as wall-framing elements have documented structural performance and a conforming grade mark.",
+      "applies_when": [
+        {
+          "predicate": "uses_structural_insulated_panel_in_wall_framing"
+        }
+      ],
+      "requires": {
+        "type": "material_specification",
+        "manufactured_and_identified_per": "ANSI_APA_PRS_610_1",
+        "tested_per": [
+          "ANSI_APA_PRS_610_1"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "ANSI/APA PRS 610.1 grade mark or certificate of inspection on each panel",
+        "Manufacturer data sheet citing ANSI/APA PRS 610.1",
+        "Structural notes specifying SIP designation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_11",
+      "cite": "R602.11",
+      "section_node": "section_r602_11",
+      "title": "Anchor braced-wall-line sills to concrete or masonry foundations per R403.1.6 and R602.11.1",
+      "intent": "Provide a continuous load path from the braced wall line into the foundation so wind and seismic shears do not pull the structure off its foundation.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_line_sill"
+        },
+        {
+          "predicate": "supported_on_concrete_or_masonry_foundation"
+        }
+      ],
+      "requires": {
+        "type": "wall_anchorage",
+        "anchorage_per_sections": [
+          "section_r403_1_6",
+          "section_r602_11_1"
+        ],
+        "plate_washers_in_sdc_d0_d1_d2_or_townhouses_in_sdc_c": {
+          "min_size_in": "0.229 x 3 x 3",
+          "between_sill_and_nut": true,
+          "slotted_hole_allowed": "up_to_3/16_in_oversize_x_1-3/4_in_long_with_standard_cut_washer"
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation plan showing anchor bolt size, spacing and embedment per Section R403.1.6",
+        "Sill detail with plate washer dimensions where SDC D0/D1/D2 (or SDC C townhouse) applies",
+        "Stepped-foundation detail per R602.11.2 if foundation height varies more than 4 ft"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r603",
+      "cite": "R603",
+      "section_node": "section_r603",
+      "title": "Use prescriptive cold-formed steel wall framing only within the size, wind, exposure and snow limits of R603.1.1",
+      "intent": "Bound the prescriptive CFS wall provisions to building geometries and environmental loads the underlying tables actually cover.",
+      "applies_when": [
+        {
+          "predicate": "uses_cold_formed_steel_wall_framing"
+        },
+        {
+          "predicate": "uses_prescriptive_section_r603"
+        }
+      ],
+      "requires": {
+        "type": "applicability_limits",
+        "max_length_perpendicular_to_joist_or_truss_span_ft": 60,
+        "max_width_parallel_to_joist_or_truss_span_ft": 40,
+        "max_stories_above_grade_plane": 3,
+        "max_ultimate_design_wind_speed_mph": 140,
+        "exposure_category": "B_or_C",
+        "max_ground_snow_load_psf": 70,
+        "members_must_meet": "AISI_S240_section_A3",
+        "alternate_design_path_for_buildings_outside_limits": "AISI_S230",
+        "tested_per": [
+          "AISI_S240",
+          "AISI_S230"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Building dimensions on plan within 60 ft x 40 ft envelope",
+        "Wind speed (\u2264140 mph), exposure category and ground snow load called out from Table R301.2",
+        "Stories above grade noted on framing plans",
+        "If outside limits: AISI S230 design package",
+        "Mill certificate / AISI S240 product mark on each member"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606",
+      "cite": "R606",
+      "section_node": "section_r606",
+      "title": "Design and construct masonry per Section R606, TMS 402, TMS 403 or TMS 404; California requires architect/engineer stamping",
+      "intent": "Route every masonry assembly into a recognized design standard and ensure California-licensed professional review (Business and Professions Code 5537.1 and 6737.1).",
+      "applies_when": [
+        {
+          "predicate": "uses_masonry_construction"
+        }
+      ],
+      "requires": {
+        "type": "design_basis",
+        "design_per_any_of": [
+          "section_r606",
+          "TMS_402",
+          "TMS_403",
+          "TMS_404"
+        ],
+        "construction_documents_must_be_stamped_by_california_licensed_architect_or_engineer": true,
+        "tested_per": [
+          "TMS_402",
+          "TMS_403",
+          "TMS_404"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Stamped and signed structural drawings from a California-licensed architect or engineer",
+        "Reference to TMS 402/403/404 or Section R606 on the design basis sheet",
+        "Masonry unit and mortar specifications complying with R606.2"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_11",
+      "cite": "R606.11",
+      "section_node": "section_r606_11",
+      "title": "Anchor masonry walls to floors and roofs per Figure R606.11(1)\u2013(3); footings may serve as points of lateral support",
+      "intent": "Provide a positive tie between masonry walls and the diaphragms that brace them, completing the lateral load path.",
+      "applies_when": [
+        {
+          "predicate": "is_masonry_wall"
+        }
+      ],
+      "requires": {
+        "type": "wall_anchorage",
+        "anchorage_per_figures_any_applicable": [
+          "FIGURE R606.11(1)",
+          "FIGURE R606.11(2)",
+          "FIGURE R606.11(3)"
+        ],
+        "footings_may_be_points_of_lateral_support": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Connection details at floor and roof matching Figure R606.11(1), (2) or (3) as appropriate to the SDC and wind environment",
+        "Anchor schedule with size, embedment and spacing",
+        "Diaphragm sheathing/blocking detail per R606.12.1.1 where applicable"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_12",
+      "cite": "R606.12",
+      "section_node": "section_r606_12",
+      "title": "Apply Section R606.12 seismic provisions to all masonry in SDC D0, D1, D2 (and to townhouses in SDC C)",
+      "intent": "Trigger the seismic detailing rules for masonry only where the seismic environment requires them, exempting glass unit masonry and veneers governed by their own sections.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "in_seismic_design_category_d0_d1_or_d2"
+            },
+            {
+              "all_of": [
+                {
+                  "predicate": "is_townhouse"
+                },
+                {
+                  "predicate": "in_seismic_design_category_c"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "predicate": "uses_masonry_construction"
+        },
+        {
+          "not": {
+            "any_of": [
+              {
+                "predicate": "is_glass_unit_masonry_per_r607"
+              },
+              {
+                "predicate": "is_anchored_masonry_veneer_per_r703_8"
+              },
+              {
+                "predicate": "is_adhered_masonry_veneer_per_r703_12"
+              }
+            ]
+          }
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "comply_with_one_of": [
+          "section_r606_12_2",
+          "section_r606_12_3",
+          "section_r606_12_4"
+        ],
+        "alternate_design": [
+          "TMS_402",
+          "TMS_403"
+        ],
+        "diaphragm_construction_per": "section_r606_12_1_1",
+        "tested_per": [
+          "TMS_402",
+          "TMS_403"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Seismic Design Category from Table R301.2 on the title sheet",
+        "Cross-reference on plans to applicable subsection (R606.12.2, .3 or .4)",
+        "Diaphragm fastener schedule per R606.12.1.1 (4-in OC perimeter where width-to-thickness >2:1)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_12_2",
+      "cite": "R606.12.2",
+      "section_node": "section_r606_12_2",
+      "title": "Townhouse masonry in SDC C: provide minimum solid wall length per Table R606.12.2.1 and reinforce per R606.12.2.2/R606.12.2.3",
+      "intent": "Force townhouses with masonry exterior walls in SDC C to have enough solid wall and minimum reinforcement to resist seismic forces.",
+      "applies_when": [
+        {
+          "predicate": "is_townhouse"
+        },
+        {
+          "predicate": "in_seismic_design_category_c"
+        },
+        {
+          "predicate": "uses_masonry_exterior_wall"
+        }
+      ],
+      "requires": {
+        "type": "seismic_detailing",
+        "minimum_solid_wall_length_percent_per_table": "TABLE R606.12.2.1",
+        "max_clear_distance_between_qualifying_solid_segments_ft": 18,
+        "minimum_solid_segment_length_ft": 3,
+        "elements_not_in_LFRS_per": "section_r606_12_2_2",
+        "elements_in_LFRS_per": "section_r606_12_2_3",
+        "shear_wall_connectors_min_lbf_per_ft": 200,
+        "max_connector_spacing_ft": 4,
+        "tested_per": [
+          "TMS_402"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall elevation showing each qualifying solid wall segment \u22653 ft long and gaps \u226418 ft",
+        "Calculation of percent solid wall vs. inscribing rectangle dimension along each direction",
+        "Reinforcing schedule for partitions/screen walls per R606.12.2.2.3 and shear walls per R606.12.2.3.3",
+        "Connector schedule providing \u2265200 plf at \u22644 ft on center to floor and roof"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_12_3",
+      "cite": "R606.12.3",
+      "section_node": "section_r606_12_3",
+      "title": "Masonry in SDC D0/D1: meet R606.12.2 plus added reinforcement (\u22650.002 A_g total, 0.0007 A_g each direction); no AAC in LFRS",
+      "intent": "Add minimum two-way reinforcement and material restrictions to masonry assemblies that must resist higher seismic demand.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d0_or_d1"
+        },
+        {
+          "predicate": "uses_masonry_construction"
+        }
+      ],
+      "requires": {
+        "type": "seismic_detailing",
+        "comply_with": "section_r606_12_2",
+        "design_per": "TMS_402_chapters_1_to_7_and_8_1_and_8_3",
+        "min_total_reinforcement_ratio_x_gross_area": 0.002,
+        "min_each_direction_ratio_x_gross_area": 0.0007,
+        "max_reinforcement_spacing_in": {
+          "solid_grouted_hollow_open_end_or_2_wythe_solid": 48,
+          "all_other_masonry": 24
+        },
+        "shear_wall_max_spacing": "smaller_of_one_third_length_one_third_height_or_48_in",
+        "AAC_masonry_prohibited_in_lateral_force_resisting_system": true,
+        "type_N_mortar_or_masonry_cement_prohibited_in_LFRS": true,
+        "lateral_tie_anchorage_hooks": [
+          "135_degree_standard_hook",
+          "180_degree_standard_hook"
+        ],
+        "tested_per": [
+          "TMS_402"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "masonry_wall_one_story"
+            },
+            {
+              "predicate": "lateral_support_spacing_<=_9_ft"
+            }
+          ],
+          "effect": "design_calculation_not_required_if_min_reinforcement_per_R606_12_3_2_provided"
+        }
+      ],
+      "evidence_required": [
+        "Reinforcing schedule meeting 0.002 total / 0.0007 each-direction ratios per Table R606.12.3.2",
+        "Mortar specification confirming Type M or S Portland-cement-lime / mortar cement (no Type N or masonry cement in LFRS)",
+        "Lateral tie detail with 135\u00b0 or 180\u00b0 standard hook anchorage",
+        "Note prohibiting AAC masonry in the lateral force resisting system"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_12_4",
+      "cite": "R606.12.4",
+      "section_node": "section_r606_12_4",
+      "title": "Masonry in SDC D2: meet D1 plus stricter stack-bond reinforcement (\u22650.0015 A_g not in LFRS, \u22650.0025 A_g in LFRS)",
+      "intent": "Provide the highest-seismic detailing requirements for stack-bond masonry, including tighter spacing and solid grouting.",
+      "applies_when": [
+        {
+          "predicate": "in_seismic_design_category_d2"
+        },
+        {
+          "predicate": "uses_masonry_construction"
+        }
+      ],
+      "requires": {
+        "type": "seismic_detailing",
+        "comply_with": "section_r606_12_3",
+        "stack_bond_not_in_LFRS": {
+          "min_horizontal_reinforcement_ratio_x_gross_area": 0.0015,
+          "max_horizontal_spacing_in": 24,
+          "construction": [
+            "solid_grouted_hollow_open_end_units",
+            "two_wythes_of_solid_units"
+          ]
+        },
+        "stack_bond_in_LFRS": {
+          "min_horizontal_reinforcement_ratio_x_gross_area": 0.0025,
+          "max_horizontal_spacing_in": 16,
+          "construction": [
+            "solid_grouted_hollow_open_end_units",
+            "two_wythes_of_solid_units"
+          ]
+        },
+        "tested_per": [
+          "TMS_402"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Reinforcing schedule for stack-bond walls keyed to Tables R606.12.4.1 and R606.12.4.2 with bar size by wall thickness",
+        "Specification for solid grouting and use of hollow open-end units or two wythes of solid units",
+        "Compliance with all D1 requirements (R606.12.3) by reference"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r606_13",
+      "cite": "R606.13",
+      "section_node": "section_r606_13",
+      "title": "Bond multiple-wythe masonry walls by headers, wall ties/joint reinforcement, or natural/cast stone bonders",
+      "intent": "Make sure facing and backing wythes act compositely and resist out-of-plane loads, with cavity wall geometry kept within tested limits.",
+      "applies_when": [
+        {
+          "predicate": "is_multiple_wythe_masonry_wall"
+        }
+      ],
+      "requires": {
+        "type": "bonding",
+        "bonding_method_one_of": [
+          "masonry_headers_per_R606_13_1",
+          "wall_ties_or_joint_reinforcement_per_R606_13_2",
+          "natural_or_cast_stone_per_R606_13_3"
+        ],
+        "cavity_wall_facing_and_backing_each_min_thickness_in_nominal": 3,
+        "cavity_max_width_in_nominal": 4,
+        "backing_thickness_>=_facing_thickness": true,
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "tie_size_and_spacing_established_by_calculation"
+            }
+          ],
+          "effect": "cavity_may_exceed_4_in_nominal"
+        }
+      ],
+      "evidence_required": [
+        "Wall section showing wythe thicknesses and cavity dimension",
+        "Bonder/header layout or wall-tie schedule meeting R606.13.1, .2 or .3",
+        "Calculations supporting any cavity wider than 4 in",
+        "Ashlar/rubble bonder layout drawings where natural stone is used"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608",
+      "cite": "R608",
+      "section_node": "section_r608",
+      "title": "Design exterior concrete walls per Section R608, PCA 100, ACI 318 or ACI 332; require California stamped documents",
+      "intent": "Force concrete-wall designs into a recognized standard and require California-licensed professional sign-off on the construction documents.",
+      "applies_when": [
+        {
+          "predicate": "is_exterior_concrete_wall"
+        }
+      ],
+      "requires": {
+        "type": "design_basis",
+        "design_per_any_of": [
+          "section_r608",
+          "PCA_100",
+          "ACI_318",
+          "ACI_332"
+        ],
+        "construction_documents_stamped_by_california_licensed_architect_or_engineer": true,
+        "tested_per": [
+          "PCA_100",
+          "ACI_318",
+          "ACI_332"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Stamped structural drawings naming PCA 100, ACI 318, ACI 332 or Section R608 as the design basis",
+        "Concrete wall sections and reinforcement schedules",
+        "Mix design submittal per R608.5"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_2",
+      "cite": "R608.2",
+      "section_node": "section_r608_2",
+      "title": "Use the prescriptive concrete-wall provisions only within the geometric, load, wind and seismic limits of R608.2",
+      "intent": "Bound the prescriptive concrete-wall path to building configurations the tables actually cover; everything else goes to PCA 100 / ACI 318.",
+      "applies_when": [
+        {
+          "predicate": "uses_prescriptive_section_r608"
+        }
+      ],
+      "requires": {
+        "type": "applicability_limits",
+        "max_plan_dimension_ft": 60,
+        "max_floor_clear_span_ft": 32,
+        "max_roof_clear_span_ft": 40,
+        "max_mean_roof_height_ft": 35,
+        "max_stories_above_grade": 2,
+        "max_floor_ceiling_DL_psf": 10,
+        "max_roof_ceiling_DL_psf": 15,
+        "max_attic_LL_psf": 20,
+        "max_roof_overhang_ft": 2,
+        "max_overhang_DL_psf": 8,
+        "max_design_wind_speed_mph": {
+          "exposure_B": 160,
+          "exposure_C": 136,
+          "exposure_D": 125
+        },
+        "seismic_design_category_limits": {
+          "detached_one_and_two_family_dwellings": "A_B_or_C",
+          "townhouses": "A_or_B"
+        },
+        "alternate_design_for_buildings_outside_limits": [
+          "PCA_100",
+          "ACI_318"
+        ],
+        "tested_per": [
+          "PCA_100",
+          "ACI_318"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Building dimensions, mean roof height and story count on plans within R608.2 limits",
+        "Wind speed, exposure and SDC from Table R301.2 on title sheet",
+        "Dead-load calculations for floor/ceiling, roof and overhang",
+        "If outside limits: PCA 100 or ACI 318 stamped design package"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_3",
+      "cite": "R608.3",
+      "section_node": "section_r608_3",
+      "title": "Concrete walls must comply with the shapes and minimum cross-sectional dimensions of Table R608.3",
+      "intent": "Ensure prescriptive concrete walls have the section properties the design tables assumed.",
+      "applies_when": [
+        {
+          "predicate": "uses_prescriptive_section_r608"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "shapes_and_min_dimensions_per_table": "TABLE R608.3",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall sections dimensioned to match the shape and thickness in Table R608.3",
+        "Note identifying wall type (flat / waffle-grid / screen-grid)",
+        "Concrete wall weight calculation for verification against tabulated maximum"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_3_1",
+      "cite": "R608.3.1",
+      "section_node": "section_r608_3_1",
+      "title": "Flat concrete walls: minimum 4 in nominal thickness and comply with Table R608.3 / Figure R608.3(1)",
+      "intent": "Set the minimum thickness for flat-formed concrete walls to maintain assumed flexural and shear capacity.",
+      "applies_when": [
+        {
+          "predicate": "is_flat_concrete_wall_system"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "min_nominal_thickness_in": 4,
+        "comply_with": [
+          "TABLE R608.3",
+          "FIGURE R608.3(1)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall section showing nominal thickness \u22654 in",
+        "Plans key sections to Figure R608.3(1)",
+        "Construction tolerance note: as-built thickness within \u22121/2 in to +1/4 in of nominal"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_3_2",
+      "cite": "R608.3.2",
+      "section_node": "section_r608_3_2",
+      "title": "Waffle-grid concrete walls: minimum 6 in nominal core thickness, comply with Table R608.3 / Figure R608.3(2)",
+      "intent": "Maintain core dimensions in waffle-grid ICF walls so the prescriptive design assumptions hold.",
+      "applies_when": [
+        {
+          "predicate": "is_waffle_grid_concrete_wall_system"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "min_nominal_core_thickness_in": 6,
+        "comply_with": [
+          "TABLE R608.3",
+          "FIGURE R608.3(2)"
+        ],
+        "max_wall_weight_per_table": "TABLE R608.3",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall section keyed to Figure R608.3(2) showing horizontal and vertical core thickness \u22656 in",
+        "Manufacturer ICF data sheet listing core W and T compliant with Table R608.3",
+        "Wall weight check vs. tabulated maximum"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_3_3",
+      "cite": "R608.3.3",
+      "section_node": "section_r608_3_3",
+      "title": "Screen-grid concrete walls: minimum 6 in nominal core thickness, comply with Table R608.3 / Figure R608.3(3)",
+      "intent": "Maintain core dimensions in screen-grid ICF walls so the prescriptive design assumptions hold.",
+      "applies_when": [
+        {
+          "predicate": "is_screen_grid_concrete_wall_system"
+        }
+      ],
+      "requires": {
+        "type": "geometry",
+        "min_nominal_core_thickness_in": 6,
+        "comply_with": [
+          "TABLE R608.3",
+          "FIGURE R608.3(3)"
+        ],
+        "max_wall_weight_per_table": "TABLE R608.3",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wall section keyed to Figure R608.3(3) showing core thickness \u22656 in",
+        "Manufacturer ICF data sheet listing core dimensions compliant with Table R608.3",
+        "Wall weight check vs. tabulated maximum"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_4",
+      "cite": "R608.4",
+      "section_node": "section_r608_4",
+      "title": "Stay-in-place concrete forms must meet flame-spread, interior-covering, exterior-covering and (for flat ICF) ASTM E2634 requirements",
+      "intent": "Treat ICF foam not just as a form but as combustible insulation that must be ignition-protected, weather-protected, and conformant to ASTM E2634 for flat systems.",
+      "applies_when": [
+        {
+          "predicate": "uses_stay_in_place_concrete_forms"
+        }
+      ],
+      "requires": {
+        "type": "form_protection",
+        "surface_burning_other_materials_per": "section_r302_9",
+        "surface_burning_foam_plastic_per": "section_r316_3",
+        "interior_protection_for_rigid_foam_plastic_forms_per": [
+          "section_r316_4",
+          "section_r702_3_4"
+        ],
+        "interior_gypsum_attachment": "mechanical_fasteners_required_adhesives_optional_addition",
+        "exterior_wall_covering_required": "approved_exterior_wall_covering_complying_with_code",
+        "flat_ICF_form_standard": "ASTM_E2634",
+        "tested_per": [
+          "ASTM_E2634"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer documentation showing surface burning indices per R302.9 / R316.3",
+        "Detail of mechanically fastened gypsum board on the interior face of the ICF",
+        "Exterior cladding specification for the ICF face",
+        "ASTM E2634 listing for flat ICF forms"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r608_9",
+      "cite": "R608.9",
+      "section_node": "section_r608_9",
+      "title": "Connect concrete walls to footings, floors, ceilings and roofs per Section R608.9 (and R608.9.2/R608.9.3)",
+      "intent": "Provide a closed lateral and uplift load path between concrete walls and the diaphragms above and the foundation below.",
+      "applies_when": [
+        {
+          "predicate": "is_concrete_wall_to_diaphragm_or_footing_connection"
+        }
+      ],
+      "requires": {
+        "type": "wall_connections",
+        "comply_with_sections": [
+          "section_r608_9_1",
+          "section_r608_9_2",
+          "section_r608_9_3"
+        ],
+        "anchor_bolts_must_have_heads_or_double_threaded_with_nut_embedded": true,
+        "j_or_l_hook_anchor_bolts_prohibited_with_prescriptive_figures": true,
+        "anchor_bolts_per": "section_r608_5_2_2",
+        "connection_options": [
+          "prescriptive_figures_R608_9(1)_through_(12)_with_supporting_tables",
+          "proprietary_connectors_designed_per_PCA_100",
+          "engineered_design_per_PCA_100_or_ASCE_7_ACI_318_AWC_NDS_AISI_S100"
+        ],
+        "tested_per": [
+          "PCA_100",
+          "ACI_318",
+          "ASCE_7",
+          "AWC_NDS",
+          "AISI_S100"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "vapor_retarder_or_other_material_<=_1/16_in_thick_between_ledger_and_concrete"
+            }
+          ],
+          "effect": "permitted_between_wood_or_steel_ledger_and_concrete"
+        }
+      ],
+      "evidence_required": [
+        "Connection details at every wall-to-floor, wall-to-ceiling and wall-to-roof interface keyed to Figures R608.9(1)\u2013(12) or to a stamped engineering design",
+        "Anchor bolt schedule with embedment, spacing and tension-tie size per the applicable Table R608.9(n)",
+        "Specification prohibiting J/L-hook anchor bolts where prescriptive figures are used",
+        "Hole-size detail for face-mounted ledger bolts through stay-in-place forms (\u22654 in dia or 4 in square)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r610",
+      "cite": "R610",
+      "section_node": "section_r610",
+      "title": "Design SIP walls per Section R610 within the size, wind, snow and seismic limits, with California-stamped documents",
+      "intent": "Limit prescriptive SIP wall design to building configurations the underlying tables cover and require licensed-professional review under California law.",
+      "applies_when": [
+        {
+          "predicate": "uses_structural_insulated_panel_wall_construction"
+        }
+      ],
+      "requires": {
+        "type": "applicability_limits",
+        "design_per": "section_r610",
+        "construction_documents_stamped_by_california_licensed_architect_or_engineer": true,
+        "max_length_perpendicular_to_joist_or_truss_span_ft": 60,
+        "max_width_parallel_to_joist_or_truss_span_ft": 40,
+        "max_stories": 2,
+        "max_wall_height_ft": 10,
+        "max_ultimate_design_wind_speed_mph": {
+          "exposure_B": 155,
+          "exposure_C": 140
+        },
+        "max_ground_snow_load_psf": 70,
+        "seismic_design_category_limits": "A_B_or_C",
+        "panels_must_comply_with": "ANSI_APA_PRS_610_1",
+        "tested_per": [
+          "ANSI_APA_PRS_610_1"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Stamped structural drawings from a California-licensed architect or engineer",
+        "Building plan dimensions and wall heights within R610.2 limits",
+        "Wind speed, exposure, ground snow load and SDC from Table R301.2",
+        "ANSI/APA PRS 610.1 grade mark or certificate of inspection for each SIP",
+        "Connection details per Tables R610.5(1)/(2) and Figures R610.5(1)\u2013(5)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

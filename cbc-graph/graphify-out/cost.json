@@ -1,0 +1,13 @@
+{
+  "runs": [
+    {
+      "date": "2026-06-07T02:29:09.319783+00:00",
+      "note": "resumed run: 11 of 26 extraction chunks (15 reused from disk)",
+      "subagent_tokens_combined": 1418903,
+      "files": 65
+    }
+  ],
+  "total_input_tokens": 0,
+  "total_output_tokens": 0,
+  "total_subagent_tokens_combined": 1418903
+}

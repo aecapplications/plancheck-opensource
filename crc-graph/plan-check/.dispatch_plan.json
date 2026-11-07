@@ -1,0 +1,191 @@
+[
+  {
+    "cid": 0,
+    "label": "Wind/Seismic Bracing & SDC Provisions",
+    "out_filename": "c00_wind_seismic_bracing_sdc_provisions_rules.json",
+    "n_sections": 36,
+    "n_files": 10,
+    "prompt_path": "plan-check/.prompts/c00.txt",
+    "description": "Extract rules for c0: Wind/Seismic Bracing & SDC Provisio"
+  },
+  {
+    "cid": 2,
+    "label": "Climate Criteria & Foundations",
+    "out_filename": "c02_climate_criteria_foundations_rules.json",
+    "n_sections": 36,
+    "n_files": 10,
+    "prompt_path": "plan-check/.prompts/c02.txt",
+    "description": "Extract rules for c2: Climate Criteria & Foundations"
+  },
+  {
+    "cid": 3,
+    "label": "California HCD Admin & Reference Codes",
+    "out_filename": "c03_california_hcd_admin_reference_codes_rules.json",
+    "n_sections": 15,
+    "n_files": 8,
+    "prompt_path": "plan-check/.prompts/c03.txt",
+    "description": "Extract rules for c3: California HCD Admin & Reference Co"
+  },
+  {
+    "cid": 5,
+    "label": "PV Systems & Roof Coverings",
+    "out_filename": "c05_pv_systems_roof_coverings_rules.json",
+    "n_sections": 23,
+    "n_files": 5,
+    "prompt_path": "plan-check/.prompts/c05.txt",
+    "description": "Extract rules for c5: PV Systems & Roof Coverings"
+  },
+  {
+    "cid": 6,
+    "label": "Existing/Tiny/Emergency Housing",
+    "out_filename": "c06_existing_tiny_emergency_housing_rules.json",
+    "n_sections": 22,
+    "n_files": 6,
+    "prompt_path": "plan-check/.prompts/c06.txt",
+    "description": "Extract rules for c6: Existing/Tiny/Emergency Housing"
+  },
+  {
+    "cid": 7,
+    "label": "Roof Coverings (Asphalt/Tile/Metal)",
+    "out_filename": "c07_roof_coverings_asphalt_tile_metal_rules.json",
+    "n_sections": 5,
+    "n_files": 3,
+    "prompt_path": "plan-check/.prompts/c07.txt",
+    "description": "Extract rules for c7: Roof Coverings (Asphalt/Tile/Metal)"
+  },
+  {
+    "cid": 8,
+    "label": "R602.10 Bracing Methods",
+    "out_filename": "c08_r602_10_bracing_methods_rules.json",
+    "n_sections": 5,
+    "n_files": 1,
+    "prompt_path": "plan-check/.prompts/c08.txt",
+    "description": "Extract rules for c8: R602.10 Bracing Methods"
+  },
+  {
+    "cid": 9,
+    "label": "Habitable Space & Fire Separation",
+    "out_filename": "c09_habitable_space_fire_separation_rules.json",
+    "n_sections": 12,
+    "n_files": 3,
+    "prompt_path": "plan-check/.prompts/c09.txt",
+    "description": "Extract rules for c9: Habitable Space & Fire Separation"
+  },
+  {
+    "cid": 10,
+    "label": "Alternative Wall Systems",
+    "out_filename": "c10_alternative_wall_systems_rules.json",
+    "n_sections": 13,
+    "n_files": 5,
+    "prompt_path": "plan-check/.prompts/c10.txt",
+    "description": "Extract rules for c10: Alternative Wall Systems"
+  },
+  {
+    "cid": 12,
+    "label": "Wood Wall Fastening & Stud Sizing",
+    "out_filename": "c12_wood_wall_fastening_stud_sizing_rules.json",
+    "n_sections": 8,
+    "n_files": 3,
+    "prompt_path": "plan-check/.prompts/c12.txt",
+    "description": "Extract rules for c12: Wood Wall Fastening & Stud Sizing"
+  },
+  {
+    "cid": 13,
+    "label": "Fireplaces & Chimneys",
+    "out_filename": "c13_fireplaces_chimneys_rules.json",
+    "n_sections": 4,
+    "n_files": 2,
+    "prompt_path": "plan-check/.prompts/c13.txt",
+    "description": "Extract rules for c13: Fireplaces & Chimneys"
+  },
+  {
+    "cid": 14,
+    "label": "Patio Covers & Renovations",
+    "out_filename": "c14_patio_covers_renovations_rules.json",
+    "n_sections": 10,
+    "n_files": 4,
+    "prompt_path": "plan-check/.prompts/c14.txt",
+    "description": "Extract rules for c14: Patio Covers & Renovations"
+  },
+  {
+    "cid": 15,
+    "label": "Foundation-to-Floor Anchorage",
+    "out_filename": "c15_foundation_to_floor_anchorage_rules.json",
+    "n_sections": 8,
+    "n_files": 4,
+    "prompt_path": "plan-check/.prompts/c15.txt",
+    "description": "Extract rules for c15: Foundation-to-Floor Anchorage"
+  },
+  {
+    "cid": 16,
+    "label": "Soil Bearing & Footing Tables",
+    "out_filename": "c16_soil_bearing_footing_tables_rules.json",
+    "n_sections": 3,
+    "n_files": 1,
+    "prompt_path": "plan-check/.prompts/c16.txt",
+    "description": "Extract rules for c16: Soil Bearing & Footing Tables"
+  },
+  {
+    "cid": 17,
+    "label": "Flood & Expansive Soil Foundations",
+    "out_filename": "c17_flood_expansive_soil_foundations_rules.json",
+    "n_sections": 6,
+    "n_files": 3,
+    "prompt_path": "plan-check/.prompts/c17.txt",
+    "description": "Extract rules for c17: Flood & Expansive Soil Foundations"
+  },
+  {
+    "cid": 18,
+    "label": "Referenced Codes & EV Charging",
+    "out_filename": "c18_referenced_codes_ev_charging_rules.json",
+    "n_sections": 2,
+    "n_files": 2,
+    "prompt_path": "plan-check/.prompts/c18.txt",
+    "description": "Extract rules for c18: Referenced Codes & EV Charging"
+  },
+  {
+    "cid": 19,
+    "label": "Precast Concrete Foundations",
+    "out_filename": "c19_precast_concrete_foundations_rules.json",
+    "n_sections": 4,
+    "n_files": 2,
+    "prompt_path": "plan-check/.prompts/c19.txt",
+    "description": "Extract rules for c19: Precast Concrete Foundations"
+  },
+  {
+    "cid": 20,
+    "label": "Concrete Wall Reinforcement",
+    "out_filename": "c20_concrete_wall_reinforcement_rules.json",
+    "n_sections": 5,
+    "n_files": 1,
+    "prompt_path": "plan-check/.prompts/c20.txt",
+    "description": "Extract rules for c20: Concrete Wall Reinforcement"
+  },
+  {
+    "cid": 21,
+    "label": "Single-Ply Membrane Roofing",
+    "out_filename": "c21_single_ply_membrane_roofing_rules.json",
+    "n_sections": 2,
+    "n_files": 2,
+    "prompt_path": "plan-check/.prompts/c21.txt",
+    "description": "Extract rules for c21: Single-Ply Membrane Roofing"
+  },
+  {
+    "cid": 23,
+    "label": "Carbon Monoxide Alarms",
+    "out_filename": "c23_carbon_monoxide_alarms_rules.json",
+    "n_sections": 4,
+    "n_files": 1,
+    "prompt_path": "plan-check/.prompts/c23.txt",
+    "description": "Extract rules for c23: Carbon Monoxide Alarms"
+  },
+  {
+    "cid": 24,
+    "label": "Foam Plastic Protection",
+    "out_filename": "c24_foam_plastic_protection_rules.json",
+    "n_sections": 4,
+    "n_files": 2,
+    "prompt_path": "plan-check/.prompts/c24.txt",
+    "description": "Extract rules for c24: Foam Plastic Protection"
+  }
+]

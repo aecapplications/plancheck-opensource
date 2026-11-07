@@ -1,0 +1,108 @@
+You are a plan-check rule extraction subagent. The graph community "Outdoor Deicing/Snow-Melting — Article 426" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c23_outdoor_deicing_snow_melting_article_426_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_1  426.1 Scope
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_10  426.10 General
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_12  426.12 Thermal Protection
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_13  426.13 Identification
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_2  426.2 Definitions
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_20  426.20 Embedded Deicing and Snow-Melting Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_21  426.21 Exposed Deicing and Snow-Melting Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_22  426.22 Installation of Nonheating Leads for Embedded Equipme
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_27  426.27 Grounding Braid or Sheath
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_28  426.28 Ground-Fault Protection of Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_3  426.3 Application of Other Articles
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_31  426.31 Isolation Transformer
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_32  426.32 Voltage Limitations
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_4  426.4 Continuous Load
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_40  426.40 Conductor Ampacity (Skin-Effect)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_50  426.50 Disconnecting Means
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_51  426.51 Controllers
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_54  426.54 Cord-and-Plug-Connected Deicing and Snow-Melting Equi
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_1  427.1 Scope
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_2  427.2 Definitions
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_22  427.22 Ground-Fault Protection of Equipment
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_23  427.23 Grounded Conductive Covering
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_25  427.25 Personnel Protection (Impedance)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_26  427.26 Isolation Transformer
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_27  427.27 Voltage Limitations
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_3  427.3 Application of Other Articles
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_30  427.30 Secondary Conductor Sizing
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_35  427.35 Scope (Induction Heating)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_4  427.4 Continuous Load
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_45  427.45 Conductor Ampacity (Skin-Effect)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_55  427.55 Disconnecting Means
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_56  427.56 Controls
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_427_57  427.57 Overcurrent Protection
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_ext_table_310_16  Table 310.16 (Conductor Ampacity)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_continuous_load  Continuous Load (Heating)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_deicing_cable  Deicing Cable / Heating Element
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_ground_fault_protection_equipment  Ground-Fault Protection of Equipment (GFPE)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_impedance_heating_system  Impedance Heating System
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_induction_heating_system  Induction Heating System
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_isolation_transformer  Isolation Transformer (Heating)
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_pipeline_heating  Pipeline Heating
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_resistance_heating_element  Resistance Heating Element
+  12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_concept_skin_effect_heating_system  Skin-Effect Heating System
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a_426_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Outdoor Deicing/Snow-Melting — Article 426",
+  "community_id": 23,
+  "extracted_from_sections": ["12_chapter_4_equipment_for_general_use_article_426_fixed_outdoor_electric_deicing_a.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 8-33 rules. After writing the file, just confirm "wrote c23_outdoor_deicing_snow_melting_article_426_rules.json with N rules" and stop.

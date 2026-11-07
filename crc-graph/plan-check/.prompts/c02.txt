@@ -1,0 +1,113 @@
+You are a plan-check rule extraction subagent. The graph community "Climate Criteria & Foundations" has been identified as a coherent rule pack from the 2022 California Residential Code (Title 24 Part 2.5). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+crc-graph/chapters/chapter_2_definitions.md
+crc-graph/chapters/chapter_3_building_planning_a.md
+crc-graph/chapters/chapter_3_building_planning_c.md
+crc-graph/chapters/chapter_4_foundations_a.md
+crc-graph/chapters/chapter_4_foundations_b.md
+crc-graph/chapters/chapter_5_floors.md
+crc-graph/chapters/chapter_6_wall_construction_a.md
+crc-graph/chapters/chapter_6_wall_construction_b.md
+crc-graph/chapters/chapter_6_wall_construction_c.md
+crc-graph/chapters/chapter_6_wall_construction_d.md
+
+Output path: crc-graph/plan-check/c02_climate_criteria_foundations_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  section_r301_2                            R301.2 Climatic and Geographic Design Criteria
+  r317_1                                    R317.1 Location required
+  r318_1                                    R318.1 Subterranean termite control methods
+  section_r322                              R322 Flood-Resistant Construction
+  section_r401                              R401 General Foundations
+  r401_1                                    R401.1 Application
+  r402_2                                    R402.2 Concrete
+  section_r403                              R403 Footings
+  r403_1_4                                  R403.1.4 Minimum depth
+  r403_1_4_1                                R403.1.4.1 Frost protection
+  r403_3                                    R403.3 Frost-protected shallow foundations
+  section_r404                              R404 Foundation and Retaining Walls
+  r408_7                                    R408.7 Flood resistance under-floor
+  r505_2_1                                  R505.2.1 CFS Material
+  r507_3                                    R507.3 Deck Footings
+  section_r601                              R601 General Wall Construction
+  section_r602                              R602 Wood Wall Framing
+  section_r602_1_11                         R602.1.11 Structural Insulated Panels
+  section_r602_11                           R602.11 Wall Anchorage
+  section_r603                              R603 Cold-Formed Steel Wall Framing
+  section_r606                              R606 General Masonry Construction
+  section_r606_11                           R606.11 Masonry Anchorage
+  section_r606_12                           R606.12 Masonry Seismic Requirements
+  section_r606_12_2                         R606.12.2 Masonry SDC C
+  section_r606_12_3                         R606.12.3 Masonry SDC D0 D1
+  section_r606_12_4                         R606.12.4 Masonry SDC D2
+  section_r606_13                           R606.13 Multiple-Wythe Masonry
+  section_r608                              R608 Concrete Wall Construction
+  section_r608_2                            R608.2 Concrete Applicability Limits
+  section_r608_3                            R608.3 Concrete Wall Systems
+  section_r608_3_1                          R608.3.1 Flat Wall Systems
+  section_r608_3_2                          R608.3.2 Waffle-Grid Wall Systems
+  section_r608_3_3                          R608.3.3 Screen-Grid Wall Systems
+  section_r608_4                            R608.4 Stay-In-Place Forms
+  section_r608_9                            R608.9 Concrete Wall Connections
+  section_r610                              R610 Structural Insulated Panels
+
+Other graph nodes in this community (definitions, tables, methods — DO NOT generate standalone rules for these, but reference them in `applies_when` or `requires` when the source text cites them):
+  def_design_flood_elevation                Defined: Design Flood Elevation
+  def_flood_hazard_area                     Defined: Flood Hazard Area
+  def_shear_wall                            Shear Wall
+  table_r402_2                              Table R402.2 Min Specified Compressive Strength of Concrete
+  table_r403_3_1                            Table R403.3(1) Min Footing Depth and Insulation FPSF
+
+Standards available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — use standards from sister communities if cited)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "R602.10.3",
+  "section_node": "section_r602_10_3",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["std_..."] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IRC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions:
+- snake_case
+- Specific over generic: `in_seismic_design_category_d0_d1_or_d2` not `in_high_seismic_zone`
+- Numeric thresholds inline: `bldg_height_>=2_stories`, `wind_speed_>_130_mph`
+- Boolean facts: `is_braced_wall_panel`, `is_continuous_sheathing_method`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use existing graph node IDs (provided above) for `section_node`, `tested_per`, `depends_on`.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim`.
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (calculations, specs, test reports, drawing details, certifications).
+6. California amendments: set `jurisdiction: "California"` (HCD/SFM marked or California-specific section).
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Climate Criteria & Foundations",
+  "community_id": 2,
+  "extracted_from_sections": ["chapter_2_definitions.md", "chapter_3_building_planning_a.md", "chapter_3_building_planning_c.md", "chapter_4_foundations_a.md", "chapter_4_foundations_b.md", "chapter_5_floors.md", "chapter_6_wall_construction_a.md", "chapter_6_wall_construction_b.md", "chapter_6_wall_construction_c.md", "chapter_6_wall_construction_d.md"],
+  "rules": [ ... ]
+}
+
+Aim for 18-36 rules. After writing the file, just confirm "wrote c02_climate_criteria_foundations_rules.json with N rules" and stop.

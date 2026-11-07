@@ -1,0 +1,827 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Working Space — 110.26",
+  "community_id": 29,
+  "extracted_from_sections": [
+    "03_chapter_1_general.txt",
+    "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+    "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article.txt",
+    "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_110_26",
+      "cite": "110.26",
+      "section_node": "03_chapter_1_general_110_26",
+      "title": "Provide and maintain access and working space about all electrical equipment",
+      "intent": "Ensure workers can operate and maintain electrical equipment readily and safely without obstruction.",
+      "applies_when": [
+        "is_electrical_equipment"
+      ],
+      "requires": {
+        "type": "clearance",
+        "access_and_working_space_provided": true,
+        "access_and_working_space_maintained": true,
+        "permits_ready_and_safe_operation_and_maintenance": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans showing clear working space dimensions at each piece of electrical equipment",
+        "Equipment layout / electrical room plan with clearances dimensioned",
+        "Notes on plans prohibiting storage in required working space"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_a",
+        "03_chapter_1_general_110_26_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26_a",
+      "cite": "110.26(A)",
+      "section_node": "03_chapter_1_general_110_26_a",
+      "title": "Provide dimensioned working space at equipment likely to be serviced while energized",
+      "intent": "Guarantee minimum working-space dimensions around equipment operating at 1000 volts or less that may be examined, adjusted, or serviced while energized.",
+      "applies_when": [
+        {
+          "all_of": [
+            "equipment_voltage_to_ground_<=_1000v",
+            "likely_to_require_examination_adjustment_servicing_or_maintenance_while_energized"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "working_space_complies_with": [
+          "110.26(A)(1) depth",
+          "110.26(A)(2) width",
+          "110.26(A)(3) height",
+          "110.26(A)(4) limited access"
+        ],
+        "alternative": "as required or permitted elsewhere in this Code"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Electrical room and equipment layout plans with working space depth, width, and height dimensioned",
+        "Panel schedules and equipment schedules identifying nominal voltage to ground",
+        "Elevation details showing 90-degree door/hinged-panel opening clearance"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26",
+        "03_chapter_1_general_110_26_a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26_a_1",
+      "cite": "110.26(A)(1)",
+      "section_node": "03_chapter_1_general_110_26_a_1",
+      "title": "Maintain minimum working-space depth per Table 110.26(A)(1)",
+      "intent": "Keep enough clear depth in front of live parts for a worker to safely service energized equipment.",
+      "applies_when": [
+        {
+          "all_of": [
+            "equipment_voltage_to_ground_<=_1000v",
+            "likely_to_require_examination_adjustment_servicing_or_maintenance_while_energized"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "min_depth_by_voltage_and_condition": {
+          "voltage_to_ground_0_150v": {
+            "condition_1": "900 mm (3 ft)",
+            "condition_2": "900 mm (3 ft)",
+            "condition_3": "900 mm (3 ft)"
+          },
+          "voltage_to_ground_151_600v": {
+            "condition_1": "900 mm (3 ft)",
+            "condition_2": "1.0 m (3 ft 6 in.)",
+            "condition_3": "1.2 m (4 ft)"
+          },
+          "voltage_to_ground_601_1000v": {
+            "condition_1": "900 mm (3 ft)",
+            "condition_2": "1.2 m (4 ft)",
+            "condition_3": "1.5 m (5 ft)"
+          }
+        },
+        "measured_from": "exposed live parts, or from the enclosure or opening if the live parts are enclosed"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                "is_dead_front_assembly",
+                "all_connections_and_renewable_parts_accessible_from_other_than_back_or_sides"
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "Working space not required in back or sides; where rear access is required for nonelectrical parts, a minimum horizontal working space of 762 mm (30 in.) shall be provided."
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                "has_special_permission",
+                "exposed_live_parts_<=_30v_rms_or_42v_peak_or_60v_dc"
+              ]
+            }
+          ],
+          "effect": "smaller_working_spaces_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "all_of": [
+                "in_existing_building",
+                "equipment_being_replaced",
+                "written_procedures_prohibit_opening_equipment_on_both_sides_of_aisle_simultaneously",
+                "serviced_only_by_authorized_qualified_persons"
+              ]
+            }
+          ],
+          "effect": "condition_2_clearance_permitted_between_dead_front_equipment_across_aisle"
+        }
+      ],
+      "evidence_required": [
+        "Dimensioned plan showing depth of working space in the direction of live parts at each equipment location",
+        "Identification of working-space Condition (1, 2, or 3) for each equipment location (grounded walls, opposing live parts)",
+        "Equipment schedules with nominal voltage to ground",
+        "For Exception No. 3: written operating procedures and qualified-person maintenance documentation"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26_c_2",
+      "cite": "110.26(C)(2)",
+      "section_node": "03_chapter_1_general_110_26_c_2",
+      "title": "Provide egress at each end of working space for large equipment",
+      "intent": "Ensure workers can escape from the working space of large equipment during an electrical incident.",
+      "applies_when": [
+        {
+          "all_of": [
+            "equipment_contains_overcurrent_switching_or_control_devices",
+            {
+              "any_of": [
+                {
+                  "all_of": [
+                    "equipment_rating_>=_1200a",
+                    "equipment_width_>_1_8m_6ft"
+                  ]
+                },
+                {
+                  "all_of": [
+                    "is_service_disconnecting_means_per_230_71",
+                    "combined_ampere_rating_>=_1200a",
+                    "equipment_width_>_1_8m_6ft"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "egress",
+        "entrance_egress_at_each_end_of_working_space": true,
+        "min_entrance_width": "610 mm (24 in.)",
+        "min_entrance_height": "2.0 m (6 1/2 ft)",
+        "open_equipment_doors_shall_not_impede_entry_or_egress": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "location_permits_continuous_unobstructed_way_of_egress_travel"
+          ],
+          "effect": "single_entrance_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                "working_space_depth_>=_2x_table_110_26_a_1",
+                "distance_from_equipment_to_nearest_edge_of_entrance_>=_table_110_26_a_1_min_clear_distance"
+              ]
+            }
+          ],
+          "effect": "single_entrance_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Electrical room floor plan showing entrance/egress locations and dimensions at each end of the working space",
+        "Equipment schedule or one-line diagram showing equipment ampere ratings and physical widths",
+        "Door swing details demonstrating open equipment doors do not impede egress",
+        "For single-entrance option: dimensioned plan demonstrating unobstructed egress or doubled working-space depth"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26_e",
+      "cite": "110.26(E)",
+      "section_node": "03_chapter_1_general_110_26_e",
+      "title": "Locate switchboards, switchgear, panelboards, and motor control centers in dedicated spaces",
+      "intent": "Protect major distribution equipment from damage and preserve space for the electrical installation.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_switchboard",
+            "is_switchgear",
+            "is_panelboard",
+            "is_motor_control_center"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "location",
+        "located_in_dedicated_space": true,
+        "protected_from_damage": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_control_equipment_required_to_be_adjacent_to_or_within_sight_of_operating_machinery"
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Floor plans showing dedicated space at each switchboard, switchgear, panelboard, and motor control center",
+        "Reflected ceiling and mechanical/plumbing coordination drawings showing no foreign systems in the dedicated zone",
+        "Details of physical protection where equipment is subject to damage"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26",
+        "03_chapter_1_general_110_26_e_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26_e_1",
+      "cite": "110.26(E)(1)",
+      "section_node": "03_chapter_1_general_110_26_e_1",
+      "title": "Keep indoor dedicated electrical space clear of foreign systems",
+      "intent": "Reserve the zone above and around indoor distribution equipment for the electrical installation and prevent damage from foreign systems.",
+      "applies_when": [
+        {
+          "all_of": [
+            "is_indoor_installation",
+            {
+              "any_of": [
+                "is_switchboard",
+                "is_switchgear",
+                "is_panelboard",
+                "is_motor_control_center"
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "clearance",
+        "dedicated_space_footprint": "width and depth of the equipment",
+        "dedicated_space_vertical_extent": "floor to 1.8 m (6 ft) above the equipment or to the structural ceiling, whichever is lower",
+        "no_foreign_piping_ducts_leak_protection_or_other_foreign_equipment_in_zone": true,
+        "foreign_systems_above_dedicated_space": "permitted only where protection is installed to avoid damage from condensation, leaks, or breaks",
+        "sprinkler_protection": "permitted for the dedicated space where the piping complies with this section",
+        "dropped_or_suspended_ceiling_not_structural_ceiling": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_suspended_ceiling_with_removable_panels"
+          ],
+          "effect": "permitted_within_1_8m_zone"
+        }
+      ],
+      "evidence_required": [
+        "Coordinated plan/section showing the dedicated zone from floor to 6 ft above equipment (or structural ceiling) free of foreign systems",
+        "Mechanical, plumbing, and fire sprinkler drawings overlaid at electrical equipment locations",
+        "Details of drip protection where foreign systems are located above the dedicated space"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_27",
+      "cite": "110.27",
+      "section_node": "03_chapter_1_general_110_27",
+      "title": "Guard live parts against accidental contact, protect equipment from damage, and post warning signs",
+      "intent": "Prevent accidental contact with energized parts and warn unqualified persons away from exposed live parts.",
+      "applies_when": [
+        {
+          "all_of": [
+            "has_live_parts",
+            "voltage_50v_to_1000v_nominal"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "guarding",
+        "guarded_by_approved_enclosures_or_one_of": [
+          "location in a room, vault, or similar enclosure accessible only to qualified persons",
+          "permanent, substantial partitions or screens with openings sized/located to prevent accidental contact",
+          "location on a balcony, gallery, or platform elevated and arranged to exclude unqualified persons",
+          "elevation above floor: >= 2.5 m (8 ft) for 50-300 V; >= 2.6 m (8 ft 6 in.) for 301-600 V; >= 2.62 m (8 ft 7 in.) for 601-1000 V between ungrounded conductors"
+        ],
+        "physical_damage_protection": "in locations where equipment is likely to be exposed to physical damage, enclosures or guards shall be arranged and of such strength as to prevent such damage",
+        "warning_signs": "entrances to rooms and other guarded locations containing exposed live parts shall be marked with conspicuous warning signs forbidding unqualified persons to enter, meeting 110.21(B)"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "otherwise_required_or_permitted_elsewhere_in_code"
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Plans identifying rooms/vaults/enclosures restricting access to qualified persons",
+        "Details of partitions, screens, or elevation dimensions guarding exposed live parts",
+        "Enclosure or guard details at locations subject to physical damage",
+        "Warning sign schedule and mounting locations complying with 110.21(B)"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_63",
+      "cite": "210.63",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_63",
+      "title": "Install a service receptacle within 25 ft of equipment requiring servicing",
+      "intent": "Give service personnel a power source for tools and instruments near equipment they must maintain.",
+      "applies_when": [
+        {
+          "any_of": [
+            "is_heating_air_conditioning_or_refrigeration_equipment",
+            {
+              "all_of": [
+                "not_one_or_two_family_dwelling",
+                {
+                  "any_of": [
+                    "is_indoor_service_equipment",
+                    "is_indoor_equipment_requiring_dedicated_equipment_space_per_110_26_e"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "receptacle",
+        "receptacle_rating": "125-volt, single-phase, 15- or 20-ampere",
+        "max_distance_from_equipment": "7.5 m (25 ft)",
+        "location": "accessible; for HACR equipment on the same level as the equipment; for indoor service equipment within the same room or area as the service equipment; for indoor equipment requiring dedicated equipment space within the same room or area as the electrical equipment",
+        "not_connected_to_load_side_of_equipment_branch_circuit_disconnecting_means": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                "is_one_or_two_family_dwelling",
+                "equipment_is_evaporative_cooler"
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Power plan showing 125 V, 15- or 20-A receptacle within 25 ft of each HVAC/refrigeration unit and on the same level",
+        "Receptacle location within the same room or area as indoor service equipment and dedicated-space equipment",
+        "Panel schedule showing the service receptacle circuit is not fed from the load side of the equipment disconnecting means"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_e"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_70",
+      "cite": "210.70",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_70",
+      "title": "Install required lighting outlets, including at spaces containing equipment requiring servicing",
+      "intent": "Provide illumination for occupants and for personnel servicing equipment in dwellings, guest rooms, and utility spaces.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                "is_dwelling_unit",
+                {
+                  "any_of": [
+                    "is_habitable_room",
+                    "is_kitchen",
+                    "is_bathroom",
+                    "is_hallway",
+                    "is_stairway",
+                    "is_attached_or_detached_garage_with_electric_power",
+                    "is_outdoor_entrance_or_exit_with_grade_level_access"
+                  ]
+                }
+              ]
+            },
+            {
+              "all_of": [
+                "is_hotel_motel_guest_room_or_guest_suite",
+                {
+                  "any_of": [
+                    "is_habitable_room",
+                    "is_bathroom"
+                  ]
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "any_of": [
+                    "is_attic",
+                    "is_underfloor_space",
+                    "is_utility_room",
+                    "is_basement"
+                  ]
+                },
+                {
+                  "any_of": [
+                    "used_for_storage",
+                    "contains_equipment_requiring_servicing"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "lighting_outlet",
+        "dwelling_habitable_rooms": "at least one lighting outlet controlled by a listed wall-mounted control device in every habitable room, kitchen, and bathroom; control device located near an entrance on a wall",
+        "all_occupancies_storage_and_equipment_spaces": "at least one lighting outlet containing a switch or controlled by a wall switch or listed wall-mounted control device; a point of control at each entry; lighting outlet at or near equipment requiring servicing",
+        "interior_stairways_six_or_more_risers": "listed wall-mounted control device at each floor level and landing level that includes an entryway"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                "is_dwelling_unit_or_guest_room",
+                "not_kitchen",
+                "not_bathroom"
+              ]
+            }
+          ],
+          "effect": "switched_receptacles_permitted_in_lieu_of_lighting_outlets"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "any_of": [
+                "occupancy_sensor_in_addition_to_listed_wall_mounted_control_device",
+                "occupancy_sensor_at_customary_wall_switch_location_with_manual_override"
+              ]
+            }
+          ],
+          "effect": "occupancy_sensor_control_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "any_of": [
+                "is_hallway",
+                "is_stairway",
+                "is_outdoor_entrance"
+              ]
+            }
+          ],
+          "effect": "remote_central_or_automatic_control_of_lighting_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Lighting plans showing lighting outlets and wall-mounted control devices in each required room and space",
+        "Lighting outlet shown at or near equipment requiring servicing in attics, underfloor spaces, utility rooms, and basements",
+        "Switching diagram for interior stairways with six or more risers showing control at each floor and landing level with entryway"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_63"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_1",
+      "cite": "215.1",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_1",
+      "title": "Apply Article 215 to feeder installation, overcurrent protection, sizing, and ampacity",
+      "intent": "Establish the scope of feeder requirements so plans for feeders are checked against Article 215.",
+      "applies_when": [
+        "is_feeder"
+      ],
+      "requires": {
+        "type": "scope",
+        "covered_topics": [
+          "installation requirements",
+          "overcurrent protection requirements",
+          "minimum size",
+          "ampacity of conductors for feeders"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            "is_feeder_for_electrolytic_cells_covered_in_668_3_c_1_and_c_4"
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "One-line diagram identifying all feeders",
+        "Feeder schedule with conductor sizes, ampacities, and overcurrent protection",
+        "Identification of any electrolytic cell line feeders claimed under the 668.3(C) exception"
+      ],
+      "depends_on": [
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_480_10",
+      "cite": "480.10(D)",
+      "section_node": "03_chapter_1_general_480_10",
+      "title": "Apply 480.10(D) top clearance to battery systems on open racks",
+      "intent": "Route working-space height compliance for open-rack battery systems to the battery-specific top-clearance provision instead of the general 110.26(A)(3) height rule.",
+      "applies_when": [
+        {
+          "all_of": [
+            "is_battery_system",
+            "mounted_on_open_racks"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "top_clearance_governed_by": "480.10(D)",
+        "note": "Scope rule: Article 480 text is not contained in the source files for this community; this trigger is extracted from 110.26(A)(3) Exception No. 1, which defers open-rack battery top clearance to 480.10(D)."
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Battery system layout drawings showing rack type (open rack) and top clearance dimensions",
+        "Manufacturer installation instructions for the battery racks",
+        "Working space plan referencing 480.10(D) clearance at the battery installation"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_668_3",
+      "cite": "668.3",
+      "section_node": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_3",
+      "title": "Apply Chapters 1-4 to electrolytic cell lines except as amended by 668.3(C)",
+      "intent": "Define which general Code requirements (including Article 110 working space) apply, or are relaxed, within electrolytic cell line installations.",
+      "applies_when": [
+        "is_electrolytic_cell_line_installation"
+      ],
+      "requires": {
+        "type": "scope",
+        "chapters_1_through_4_apply_to": "services, feeders, branch circuits, and apparatus supplying lighting, ventilating, material handling, and the like outside the electrolytic cell line working zone",
+        "systems_not_electrically_connected_to_cell_supply": "shall comply with all applicable sections of this Code",
+        "cell_lines_comply_with_chapters_1_through_4_except": [
+          "668.3(C)(1): cell line conductors not required to comply with Articles 110, 210, 215, 220, and 225 (see 668.12)",
+          "668.3(C)(2): overcurrent protection of electrolytic cell dc process power circuits not required to comply with Article 240",
+          "668.3(C)(3): equipment within the cell line working zone or associated with cell line dc power circuits not required to comply with Article 250 except as required by Article 668",
+          "668.3(C)(4): cells, cell line attachments, and wiring of auxiliary equipment within the working zone not required to comply with Articles 110, 210, 215, 220, and 225 (see 668.30)"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site plan delineating the electrolytic cell line working zone boundary",
+        "One-line diagram separating cell line dc process circuits from general lighting/ventilating/material-handling circuits",
+        "Documentation identifying which circuits claim the 668.3(C) exemptions from Articles 110/210/215/220/225/240/250"
+      ],
+      "depends_on": [
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_12",
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_30",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_1",
+        "03_chapter_1_general_110_26"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_668_12",
+      "cite": "668.12",
+      "section_node": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_12",
+      "title": "Construct cell line conductors of suitable material, adequate size, and approved connections",
+      "intent": "Ensure cell line conductors, which are exempt from general conductor articles, are still safe under maximum load and ambient conditions.",
+      "applies_when": [
+        "is_electrolytic_cell_line_conductor"
+      ],
+      "requires": {
+        "type": "conductor",
+        "insulation_and_material": "bare, covered, or insulated; copper, aluminum, copper-clad aluminum, steel, or other suitable material",
+        "sizing_criterion": "cross-sectional area such that temperature rise under maximum load conditions and at maximum ambient does not exceed the safe operating temperature of the conductor insulation or the material of the conductor supports",
+        "connections": "joined by bolted, welded, clamped, or compression connectors"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cell line conductor specifications (material, cross-sectional area, insulation/covering)",
+        "Temperature-rise calculation at maximum load and maximum ambient",
+        "Connection details showing bolted, welded, clamped, or compression connectors"
+      ],
+      "depends_on": [
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_668_15",
+      "cite": "668.15",
+      "section_node": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_15",
+      "title": "Ground required cell line equipment via a local grounding electrode system",
+      "intent": "Provide a compliant grounding electrode system for cell line equipment that Article 668 requires to be grounded.",
+      "applies_when": [
+        {
+          "all_of": [
+            "is_electrolytic_cell_line_installation",
+            "equipment_apparatus_or_structural_component_required_to_be_grounded_by_article_668"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "grounding_per": "Article 250, Part III, for a local grounding electrode system",
+        "water_pipe_electrode_required": false,
+        "permitted_electrodes": "any electrode or combination of electrodes described in 250.52"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Grounding electrode system plan and details for the cell line area",
+        "Electrode type(s) identified per 250.52",
+        "Grounding and bonding one-line or riser diagram for equipment required to be grounded by Article 668"
+      ],
+      "depends_on": [
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_668_30",
+      "cite": "668.30",
+      "section_node": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_30",
+      "title": "Wire and bond fixed and portable equipment in the cell line working zone",
+      "intent": "Prevent hazardous potential differences when auxiliary electrical equipment is mounted on energized cell line surfaces.",
+      "applies_when": [
+        {
+          "all_of": [
+            "is_within_cell_line_working_zone",
+            "is_auxiliary_electrical_equipment_mounted_on_electrolytic_cell_or_energized_surface"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "connection_to_premises_wiring_by_one_of": [
+          "multiconductor hard usage cord",
+          "wire or cable in suitable raceways or metal or nonmetallic cable trays; metallic systems installed with insulating breaks so they do not cause a potentially hazardous electrical condition"
+        ],
+        "bonding": "where fixed electrical equipment is mounted on an energized conductive surface, it shall be bonded to that surface",
+        "grounding_relaxations": [
+          "ac systems supplying fixed and portable equipment within the working zone not required to be grounded",
+          "exposed conductive surfaces within the working zone not required to be grounded",
+          "circuit protection not required for control and instrumentation totally within the working zone"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring method specifications for auxiliary equipment mounted on cells (hard usage cord or raceway/cable tray with insulating breaks)",
+        "Insulating break details on metallic raceway, cable tray, or armored cable entering the working zone",
+        "Bonding details for fixed equipment mounted on energized conductive surfaces"
+      ],
+      "depends_on": [
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_3",
+        "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_668_15"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_669_6",
+      "cite": "669.6",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_669_6",
+      "title": "Use compliant wiring methods between electrolyte tank equipment and conversion equipment",
+      "intent": "Ensure electroplating process conductors are protected from damage and accidental contact, with stricter guarding above 60 volts dc.",
+      "applies_when": [
+        {
+          "all_of": [
+            "is_electroplating_anodizing_electropolishing_or_electrostripping_installation",
+            "conductor_connects_electrolyte_tank_equipment_to_conversion_equipment"
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "systems_dc_voltage_<=_60v": "insulated conductors permitted without insulated support provided they are protected from physical damage; bare copper or aluminum conductors permitted where supported on insulators",
+        "systems_dc_voltage_>_60v": "insulated conductors permitted on insulated supports provided they are protected from physical damage; bare copper or aluminum conductors permitted where supported on insulators and guarded against accidental contact up to the point of termination in accordance with 110.27"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wiring plan for conductors between electrolyte tanks and conversion equipment with system dc voltage identified",
+        "Support and insulator details for bare or insulated conductors",
+        "Guarding details per 110.27 for bare conductors on systems exceeding 60 volts dc",
+        "Warning sign locations for bare conductors (per 669.7)"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_27"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_670_1",
+      "cite": "670.1",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_670_1",
+      "title": "Apply Article 670 to industrial machinery supply conductors, nameplate data, and overcurrent protection",
+      "intent": "Establish the scope of industrial machinery requirements, whose supply-terminal equipment workspace is governed by 110.26.",
+      "applies_when": [
+        "is_industrial_machinery"
+      ],
+      "requires": {
+        "type": "scope",
+        "covered_topics": [
+          "definition of industrial machinery",
+          "nameplate data",
+          "size and overcurrent protection of supply conductors to industrial machinery"
+        ],
+        "workspace_reference": "Informational Note No. 2 points to 110.26 for workspace requirements for equipment containing supply conductor terminals"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Machine nameplate data (supply voltage, phases, frequency, full-load current, SCCR)",
+        "Supply conductor sizing and overcurrent protection calculations",
+        "Equipment layout showing workspace at supply conductor terminal equipment per 110.26"
+      ],
+      "depends_on": [
+        "03_chapter_1_general_110_26"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,468 @@
+{
+  "ACI_318": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c19_precast_concrete_foundations_rules::rule_r404_5_1"
+    ]
+  },
+  "ANSI_AWC_NDS": {
+    "kind": "standard",
+    "rule_count": 1,
+    "sample_rules": [
+      "c15_foundation_to_floor_anchorage_rules::rule_r502_2_floor_design_and_construction"
+    ]
+  },
+  "AWC_PWF": {
+    "kind": "standard",
+    "rule_count": 2,
+    "sample_rules": [
+      "c15_foundation_to_floor_anchorage_rules::rule_r317_protection_of_wood_against_decay",
+      "c15_foundation_to_floor_anchorage_rules::rule_r404_2_wood_foundation_walls"
+    ]
+  },
+  "AWPA_M4": {
+    "kind": "standard",
+    "rule_count": 2,
+    "sample_rules": [
+      "c15_foundation_to_floor_anchorage_rules::rule_r317_protection_of_wood_against_decay",
+      "c15_foundation_to_floor_anchorage_rules::rule_r318_subterranean_termite_protection"
+    ]
+  },
+  "cbc_1808_6": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r403_1_8"
+    ]
+  },
+  "figure_ah106_4_1": {
+    "kind": "figure",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_ah_106_screen_enclosures"
+    ]
+  },
+  "r402_1_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c15_foundation_to_floor_anchorage_rules::rule_r404_2_wood_foundation_walls"
+    ]
+  },
+  "section_ah_105_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_ah_105_structural_a"
+    ]
+  },
+  "section_ah_105_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_ah_105_structural_b"
+    ]
+  },
+  "section_appendix_ar": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_appendix_ar_light_straw_clay"
+    ]
+  },
+  "section_appendix_au": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_appendix_au_cob_construction"
+    ]
+  },
+  "section_appendix_aw": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_appendix_aw_3d_printed"
+    ]
+  },
+  "section_au_103": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_au_103_materials_mixing"
+    ]
+  },
+  "section_au_105": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_au_105_cob_walls"
+    ]
+  },
+  "section_au_106": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_au_105_cob_walls"
+    ]
+  },
+  "section_au_106_6": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_au_103_materials_mixing"
+    ]
+  },
+  "section_au_106_7": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_au_103_materials_mixing"
+    ]
+  },
+  "section_ay102_definitions": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_ay_107_rooftop_evacuation"
+    ]
+  },
+  "section_ay103_structural_stability": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_ay_107_rooftop_evacuation"
+    ]
+  },
+  "section_r1001_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c16_soil_bearing_footing_tables_rules::rule_r403_1_1"
+    ]
+  },
+  "section_r1003_19_chimneys": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c09_habitable_space_fire_separation_rules::rule_r302_11_fireblocking"
+    ]
+  },
+  "section_r104_11": {
+    "kind": "section",
+    "rule_count": 4,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_appendix_as_strawbale",
+      "c10_alternative_wall_systems_rules::rule_appendix_au_cob_construction",
+      "c10_alternative_wall_systems_rules::rule_appendix_aw_3d_printed"
+    ]
+  },
+  "section_r301_1_3": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c10_alternative_wall_systems_rules::rule_ar_103_construction",
+      "c10_alternative_wall_systems_rules::rule_appendix_ar_light_straw_clay"
+    ]
+  },
+  "section_r302_7_under_stair_protection": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c09_habitable_space_fire_separation_rules::rule_r302_11_fireblocking"
+    ]
+  },
+  "section_r302_9": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aj_108_renovations",
+      "c14_patio_covers_renovations_rules::rule_r302_fire_safety"
+    ]
+  },
+  "section_r303_7": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aj_110_reconstruction"
+    ]
+  },
+  "section_r310_egress": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c09_habitable_space_fire_separation_rules::rule_r303_1_habitable_rooms_light_and_ventilation"
+    ]
+  },
+  "section_r311_7_11_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts"
+    ]
+  },
+  "section_r311_7_11_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts"
+    ]
+  },
+  "section_r311_7_12_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts"
+    ]
+  },
+  "section_r311_7_12_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts"
+    ]
+  },
+  "section_r311_7_6": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts",
+      "c14_patio_covers_renovations_rules::rule_r311_means_of_egress"
+    ]
+  },
+  "section_r312_1": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts",
+      "c14_patio_covers_renovations_rules::rule_r312_guards"
+    ]
+  },
+  "section_r312_1_3": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts",
+      "c14_patio_covers_renovations_rules::rule_r312_guards"
+    ]
+  },
+  "section_r315_2_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c23_carbon_monoxide_alarms_rules::rule_r315_6"
+    ]
+  },
+  "section_r322_1_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_1"
+    ]
+  },
+  "section_r322_2_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_2"
+    ]
+  },
+  "section_r322_2_2": {
+    "kind": "section",
+    "rule_count": 2,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_2",
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_2_2_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_2"
+    ]
+  },
+  "section_r322_2_3": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_2"
+    ]
+  },
+  "section_r322_2_4": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_2"
+    ]
+  },
+  "section_r322_3_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_10": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_3": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_4": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_5": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_6": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_7": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_8": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r322_3_9": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r322_3"
+    ]
+  },
+  "section_r401_4_1_1_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r401_4_1_1_ca"
+    ]
+  },
+  "section_r401_4_1_1_2": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r401_4_1_1_ca"
+    ]
+  },
+  "section_r401_4_1_1_3": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r401_4_1_1_ca"
+    ]
+  },
+  "section_r401_4_1_1_5": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r401_4_1_1_ca"
+    ]
+  },
+  "section_r403_1_8_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c17_flood_expansive_soil_foundations_rules::rule_r403_1_8"
+    ]
+  },
+  "section_r807_1": {
+    "kind": "section",
+    "rule_count": 1,
+    "sample_rules": [
+      "c24_foam_plastic_protection_rules::rule_r316_5_3"
+    ]
+  },
+  "std_california_mechanical_code": {
+    "kind": "standard",
+    "rule_count": 1,
+    "sample_rules": [
+      "c24_foam_plastic_protection_rules::rule_r408_4"
+    ]
+  },
+  "std_nfpa_72": {
+    "kind": "standard",
+    "rule_count": 1,
+    "sample_rules": [
+      "c23_carbon_monoxide_alarms_rules::rule_r315_6"
+    ]
+  },
+  "std_ul_2034": {
+    "kind": "standard",
+    "rule_count": 1,
+    "sample_rules": [
+      "c23_carbon_monoxide_alarms_rules::rule_r315_2"
+    ]
+  },
+  "std_ul_217": {
+    "kind": "standard",
+    "rule_count": 1,
+    "sample_rules": [
+      "c23_carbon_monoxide_alarms_rules::rule_r315_2"
+    ]
+  },
+  "table_R404_2_3": {
+    "kind": "table",
+    "rule_count": 1,
+    "sample_rules": [
+      "c15_foundation_to_floor_anchorage_rules::rule_r404_2_wood_foundation_walls"
+    ]
+  },
+  "table_ah106_4_1_1": {
+    "kind": "table",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_ah_106_screen_enclosures"
+    ]
+  },
+  "table_ah106_4_1_2": {
+    "kind": "table",
+    "rule_count": 1,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_ah_106_screen_enclosures"
+    ]
+  },
+  "table_r301_5": {
+    "kind": "table",
+    "rule_count": 2,
+    "sample_rules": [
+      "c14_patio_covers_renovations_rules::rule_aq_104_lofts",
+      "c14_patio_covers_renovations_rules::rule_r312_guards"
+    ]
+  }
+}

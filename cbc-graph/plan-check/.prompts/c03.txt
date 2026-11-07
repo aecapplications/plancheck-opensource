@@ -1,0 +1,152 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 16 Structural Design" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch16_chapter_16_structural_design.md
+cbc-graph/chapters/ch17a_chapter_17a_special_inspections_and_tests.md
+cbc-graph/chapters/ch18_chapter_18_soils_and_foundations.md
+cbc-graph/chapters/ch18a_chapter_18a_soils_and_foundations.md
+cbc-graph/chapters/ch23_chapter_23_wood.md
+cbc-graph/chapters/ch35_chapter_35_referenced_standards.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c03_chapter_16_structural_design_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  sec_1604_4                                                    1604.4 Analysis
+  sec_1604_5                                                    1604.5 Risk Category
+  sec_1604_8                                                    1604.8 Anchorage
+  sec_1604_9                                                    1604.9 Wind and Seismic Detailing
+  sec_1605_1                                                    1605.1 Load Combinations General
+  sec_1605_1_1                                                  1605.1.1 Stability
+  sec_1605_2                                                    1605.2 Alternative ASD Load Combinations
+  sec_1607_14                                                   1607.14 Roof Loads
+  sec_1608_1                                                    1608.1 Snow Loads General
+  sec_1608_2                                                    1608.2 Ground Snow Loads
+  sec_1608_3                                                    1608.3 Ponding Instability
+  sec_1609_1                                                    1609.1 Wind Loads Applications
+  sec_1609_3                                                    1609.3 Basic Design Wind Speed
+  sec_1611_1                                                    1611.1 Design Rain Loads
+  sec_1611_2                                                    1611.2 Ponding Instability
+  sec_1612_1                                                    1612.1 Flood Loads General
+  sec_1613_1                                                    1613.1 Earthquake Loads Scope
+  sec_1613_2_2                                                  1613.2.2 Site Class Definitions
+  sec_1613_2_3                                                  1613.2.3 Site Coefficients and MCE Spectral Accelerations
+  sec_1613_2_5                                                  1613.2.5 Determination of Seismic Design Category
+  sec_1614_1                                                    1614.1 Atmospheric Ice Loads
+  sec_1615_1                                                    1615.1 Tsunami Loads
+  sec_1616_1                                                    1616.1 Structural Integrity General
+  sec_1616_2                                                    1616.2 Frame Structures Integrity
+  sec_1616_3                                                    1616.3 Bearing Wall Structures Integrity
+  sec_1617_11                                                   1617.11 Modifications to ASCE 7 [DSA-SS/CC]
+  sec_1617_9                                                    1617.9 Earthquake Loads [DSA-SS/CC]
+  sec_1705a_14_3                                                Section 1705A.14.3 Special Seismic Certification (Ch 17A)
+  sec_1705a_14_4                                                Section 1705A.14.4 Seismic Isolation and Damping Systems Tes
+  sec_1802_1                                                    1802.1 General - Design Basis
+  sec_1802a                                                     1802A Design Basis
+  sec_1803a_5_11                                                1803A.5.11 Seismic Design Categories C through F
+  sec_1803a_5_12                                                1803A.5.12 Seismic Design Categories D through F
+  sec_1806a_1                                                   1806A.1 Load Combinations
+  sec_1807a_2_5                                                 1807A.2.5 Freestanding Cantilever Walls
+  sec_1809_13                                                   1809.13 Footing Seismic Ties
+  sec_1809a_13                                                  1809A.13 Footing Seismic Ties
+  sec_1810_3_10                                                 1810.3.10 Micropiles
+  sec_1810_3_9                                                  1810.3.9 Cast-in-Place Deep Foundations
+  sec_1810a_3_10_2                                              1810A.3.10.2 Materials
+  sec_1811_1                                                    1811.1 General - Prestressed Rock and Soil Foundation Anchor
+  sec_1811a_4                                                   1811A.4 Structural Requirements
+  sec_1812_1                                                    1812.1 General - Earth Retaining Shoring
+  sec_2302                                                      2302 Design Requirements
+  sec_2308                                                      2308 Conventional Light-Frame Construction
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  table_1604_5                                                  Table 1604.5 Risk Category of Buildings
+  table_1608_2                                                  Table 1608.2 Ground Snow Loads for Alaskan Locations
+  table_1613_2_3_1                                              Table 1613.2.3(1) Site Coefficient Fa
+  table_1613_2_3_2                                              Table 1613.2.3(2) Site Coefficient Fv
+  table_1613_2_5_1                                              Table 1613.2.5(1) SDC Based on Short-Period Acceleration
+  table_1613_2_5_2                                              Table 1613.2.5(2) SDC Based on 1-Second Period Acceleration
+  table_2308_2_1                                                Table 2308.2.1 Allowable Story Height for Conventional Light
+  concept_allowable_stress_design                               Allowable Stress Design (ASD)
+  concept_conventional_light_frame                              Conventional Light-Frame Construction
+  concept_load_combinations                                     Load Combinations
+  concept_lrfd                                                  Load and Resistance Factor Design (LRFD)
+  concept_micropiles                                            Micropiles
+  concept_ponding                                               Ponding
+  concept_seismic_certification                                 Special Seismic Certification — shake-table or analysis base
+  concept_structural_integrity                                  Structural Integrity
+  def_basic_design_wind_speed                                   Basic Design Wind Speed (V)
+  def_dead_load                                                 Dead Load
+  def_earthquake_load                                           Earthquake Load
+  def_live_load                                                 Live Load
+  def_risk_category                                             Risk Category
+  def_seismic_design_category                                   Seismic Design Category (SDC)
+  def_site_class                                                Site Class
+  def_snow_load                                                 Snow Load
+  def_wind_load                                                 Wind Load
+  std_aisi_s230                                                 AISI S230 Standard for Cold-Formed Steel Framing
+  std_icc_400                                                   ICC 400 - Design and Construction of Log Structures
+  std_icc_500                                                   ICC 500 Standard for the Design and Construction of Storm Sh
+  std_icc_600                                                   ICC 600 Standard for Residential Construction in High Wind R
+  std_icc_es_ac156                                              ICC-ES AC 156-21 Acceptance Criteria for Seismic Certificati
+  std_iso_9001                                                  ISO 9001-15 Quality Management Systems - Requirements
+  std_pti_rock_soil                                             PTI Recommendations for Prestressed Rock and Soil Anchors
+  std_tia_222                                                   TIA-222 Structural Standard for Antenna Supporting Structure
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  std_asce_49                                                   ASCE 49 Wind Tunnel Testing for Buildings and Other Structur
+  std_asce_7                                                    ASCE 7 Minimum Design Loads for Buildings and Other Structur
+  std_astm_a615                                                 ASTM A615
+  std_astm_a722                                                 ASTM A722
+  std_astm_e580                                                 ASTM E580 Practice for Installation of Ceiling Suspension Sy
+  std_awc_wfcm                                                  AWC WFCM - Wood Frame Construction Manual
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. sec_1604_4>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 16 Structural Design",
+  "community_id": 3,
+  "extracted_from_sections": ["ch16_chapter_16_structural_design.md", "ch17a_chapter_17a_special_inspections_and_tests.md", "ch18_chapter_18_soils_and_foundations.md", "ch18a_chapter_18a_soils_and_foundations.md", "ch23_chapter_23_wood.md", "ch35_chapter_35_referenced_standards.md"],
+  "rules": [ ... ]
+}
+
+Aim for 11-45 rules. After writing the file, just confirm "wrote c03_chapter_16_structural_design_rules.json with N rules" and stop.

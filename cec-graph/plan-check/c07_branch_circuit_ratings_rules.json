@@ -1,0 +1,3468 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Branch-Circuit Ratings",
+  "community_id": 7,
+  "extracted_from_sections": [
+    "03_chapter_1_general.txt",
+    "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt",
+    "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt",
+    "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati.txt",
+    "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article.txt",
+    "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt",
+    "31_annex_d_examples.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_110_14",
+      "cite": "110.14",
+      "section_node": "03_chapter_1_general_110_14",
+      "title": "Use connectors identified for the conductor material",
+      "intent": "Prevent overheating and failure of terminations caused by dissimilar-metal contact or unsuitable connection devices.",
+      "applies_when": [
+        {
+          "predicate": "has_conductor_terminations_or_splices"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "uses_pressure_terminal_or_splicing_connectors"
+            },
+            {
+              "predicate": "uses_soldering_lugs"
+            },
+            {
+              "predicate": "intermixes_dissimilar_conductor_metals"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "termination_material_compatibility",
+        "connector_identified_for_conductor_material": true,
+        "dissimilar_metals_not_intermixed_in_same_connector_unless_identified": true,
+        "fine_stranded_conductors_use_connectors_identified_for_class": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "device_identified_for_intermixed_conductors_and_conditions_of_use"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Conductor material callouts (Cu/Al) on plans and panel schedules",
+        "Connector/lug catalog cuts showing AL/CU or CU-only identification",
+        "Listing labels for splicing devices on fine-stranded conductors"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_14_c",
+      "cite": "110.14(C)",
+      "section_node": "03_chapter_1_general_110_14",
+      "title": "Coordinate conductor ampacity with termination temperature ratings",
+      "intent": "Ensure the conductor ampacity used in sizing never exceeds what the lowest-rated termination can safely carry.",
+      "applies_when": [
+        {
+          "predicate": "conductor_connected_to_equipment_termination"
+        }
+      ],
+      "requires": {
+        "type": "termination_temperature_limitation",
+        "ampacity_based_on_lowest_termination_temperature_rating": true,
+        "circuits_<=_100a_or_14_awg_through_1_awg_use_60c_ampacity_unless_listed_otherwise": true,
+        "circuits_>_100a_or_larger_than_1_awg_use_75c_ampacity_unless_listed_otherwise": true,
+        "higher_rated_conductors_permitted_for_adjustment_and_correction_only": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "equipment_listed_and_identified_for_higher_temperature_conductors"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Conductor schedule showing insulation type and ampacity column used (60C/75C)",
+        "Equipment termination temperature markings or listing data",
+        "Feeder/branch-circuit sizing calculations referencing Table 310.16"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_110_14"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_25",
+      "cite": "110.25",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_25",
+      "title": "Provide permanent lockable-open provisions on required lockable disconnects",
+      "intent": "Guarantee that a disconnecting means required to be lockable open can be secured for safe servicing at all times.",
+      "applies_when": [
+        {
+          "predicate": "disconnecting_means_required_lockable_open_elsewhere_in_code"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "capable_of_being_locked_open": true,
+        "locking_provisions_remain_in_place_without_lock": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_cord_and_plug_connection"
+            }
+          ],
+          "effect": "locking_provisions_not_required_to_remain_in_place_without_lock"
+        }
+      ],
+      "evidence_required": [
+        "Disconnect schedule identifying lockable-open devices",
+        "Manufacturer cut sheets showing permanent locking provisions",
+        "One-line diagram locating each remote or lockable disconnect"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_26",
+      "cite": "110.26",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_26",
+      "title": "Provide and maintain working space about electrical equipment",
+      "intent": "Preserve safe access for operation and maintenance of energized equipment, including battery systems.",
+      "applies_when": [
+        {
+          "predicate": "equipment_likely_to_require_examination_while_energized"
+        },
+        {
+          "predicate": "voltage_to_ground_<=_1000v"
+        }
+      ],
+      "requires": {
+        "type": "working_space",
+        "depth_min_per_table_110_26_a_1_mm": 900,
+        "width_min_mm": 762,
+        "height_min_m": 2.0,
+        "working_space_not_used_for_storage": true,
+        "battery_system_space_measured_from_cabinet_rack_or_tray_edge": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_dead_front_assembly_with_no_rear_access_required"
+            }
+          ],
+          "effect": "rear_and_side_working_space_not_required"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "special_permission_and_exposed_live_parts_<=_30v_rms_42v_peak_60v_dc"
+            }
+          ],
+          "effect": "smaller_working_space_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Equipment room plans with dimensioned working clearances",
+        "Elevation views showing 2.0 m headroom and dedicated space",
+        "Battery room layout showing clearance from rack/cabinet edges"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_110_27",
+      "cite": "110.27",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_27",
+      "title": "Guard live parts operating at 50 to 1000 volts against accidental contact",
+      "intent": "Prevent shock and arc injury from exposed live parts, including battery system live parts required to comply with 110.27.",
+      "applies_when": [
+        {
+          "predicate": "live_parts_operating_50v_to_1000v"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "guarding_otherwise_required_or_permitted_elsewhere_in_code"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "guarding",
+        "guarded_by_approved_enclosure_or_room_partition_balcony_or_elevation": true,
+        "elevation_min_m_50v_to_300v": 2.5,
+        "elevation_min_m_301v_to_600v": 2.6,
+        "elevation_min_m_601v_to_1000v": 2.62,
+        "warning_signs_at_entrances_to_guarded_locations": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Enclosure or barrier details for exposed live parts",
+        "Room access control notes limiting entry to qualified persons",
+        "Warning sign schedule per 110.21(B)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_11",
+      "cite": "210.11",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11",
+      "title": "Provide branch circuits sufficient for the calculated load",
+      "intent": "Ensure the branch-circuit count and ratings can serve the loads computed under Article 220.",
+      "applies_when": [
+        {
+          "predicate": "has_lighting_or_appliance_loads"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "circuits_supply_loads_calculated_per_220_10": true,
+        "number_of_circuits_sufficient_for_load_served": true,
+        "load_on_any_circuit_not_exceeding_220_18_maximum": true,
+        "va_per_area_loads_evenly_proportioned_among_multioutlet_circuits": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedules with per-circuit connected loads",
+        "Article 220 load calculation summary",
+        "Floor plans keyed to branch-circuit numbers"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_11_c",
+      "cite": "210.11(C)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c",
+      "title": "Scope: required dedicated branch circuits in dwelling units",
+      "intent": "Trigger the dwelling-unit dedicated circuit requirements of 210.11(C)(1) through (C)(4).",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "dedicated_circuits_required_per_210_11_c_1_through_c_4": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule identifying small-appliance, laundry, bathroom, and garage circuits",
+        "Dwelling unit floor plan with receptacle circuiting"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_11_c_1",
+      "cite": "210.11(C)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_1",
+      "title": "Provide two or more 20-ampere small-appliance branch circuits",
+      "intent": "Reserve adequate capacity for kitchen and dining small-appliance receptacle loads in dwellings.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "has_receptacle_outlets_specified_by_210_52_b"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "small_appliance_circuit_count_>=_2": true,
+        "circuit_rating_a": 20,
+        "serves_only_210_52_b_receptacle_outlets": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule showing two or more 20 A small-appliance circuits",
+        "Kitchen/dining receptacle circuiting on floor plans"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_11_c_4",
+      "cite": "210.11(C)(4)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_4",
+      "title": "Provide a dedicated 20-ampere garage branch circuit",
+      "intent": "Ensure garage receptacles in dwellings have dedicated capacity for typical equipment loads.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "has_attached_garage"
+            },
+            {
+              "predicate": "has_detached_garage_with_electric_power"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "circuit_count_>=_1": true,
+        "circuit_voltage_v": 120,
+        "circuit_rating_a": 20,
+        "no_other_outlets_on_circuit": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "outlet_is_readily_accessible_outdoor_receptacle"
+            }
+          ],
+          "effect": "outlet_permitted_on_garage_circuit"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedule showing dedicated garage circuit",
+        "Garage receptacle layout per 210.52(G)(1)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_19",
+      "cite": "210.19",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19",
+      "title": "Scope: branch-circuit conductor minimum ampacity and size",
+      "intent": "Route branch-circuit conductor sizing to the applicable subsection based on circuit voltage and load type.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "circuits_<=_600v_sized_per_210_19_a": true,
+        "circuits_>_600v_sized_per_210_19_b": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Branch-circuit conductor schedule",
+        "Voltage class identification on one-line diagram"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_210_19_a_1",
+      "cite": "210.19(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_a_1",
+      "title": "Size branch-circuit conductors for 125 percent of continuous load",
+      "intent": "Prevent conductor overheating under sustained loading and at equipment terminations.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        },
+        {
+          "predicate": "circuit_voltage_<=_600v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_noncontinuous_load_plus_125_percent_continuous_load": true,
+        "ampacity_>=_max_load_after_adjustment_and_correction_factors_per_310_15": true,
+        "terminations_comply_with_110_14_c": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "assembly_including_ocpd_listed_for_100_percent_rating"
+            }
+          ],
+          "effect": "ampacity_>=_continuous_plus_noncontinuous_load_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "portion_connected_both_ends_to_separately_installed_pressure_connections_per_110_14_c_2"
+            }
+          ],
+          "effect": "allowable_ampacity_>=_continuous_plus_noncontinuous_load_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Branch-circuit load calculations distinguishing continuous vs noncontinuous loads",
+        "Conductor schedule with ampacity after adjustment/correction",
+        "Equipment termination temperature ratings"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_110_14",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_19_a_3",
+      "cite": "210.19(A)(3)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_a_3",
+      "title": "Size household range and cooking appliance branch-circuit conductors",
+      "intent": "Ensure cooking appliance circuits carry both the circuit rating and the maximum demand load.",
+      "applies_when": [
+        {
+          "predicate": "supplies_household_range_oven_or_cooking_unit"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_branch_circuit_rating": true,
+        "ampacity_>=_maximum_load_to_be_served": true,
+        "min_circuit_rating_a_for_range_>=_8_75_kw": 40
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "tap_conductors_from_circuit_<=_50a_supplying_cooking_units"
+            }
+          ],
+          "effect": "tap_ampacity_>=_20a_and_sufficient_for_load_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "neutral_of_3_wire_range_circuit_with_demand_per_table_220_55_column_c"
+            }
+          ],
+          "effect": "neutral_>=_70_percent_of_circuit_rating_and_>=_10_awg_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Appliance nameplate ratings (kW) on plans",
+        "Range circuit conductor and OCPD sizes on panel schedule",
+        "Table 220.55 demand calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_19_b",
+      "cite": "210.19(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_b",
+      "title": "Size over-600-volt branch-circuit conductors per 310.14 and 311.60",
+      "intent": "Apply the correct ampacity tables and sizing method to medium-voltage branch circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        },
+        {
+          "predicate": "circuit_voltage_>_600v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_per_310_14_and_311_60": true,
+        "sized_per_210_19_b_1_or_b_2": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Medium-voltage conductor schedule with ampacity basis",
+        "One-line diagram showing over-600 V branch circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_310_14",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_b_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_19_b_1",
+      "cite": "210.19(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_b_1",
+      "title": "Provide 125 percent ampacity for over-600-volt branch circuits",
+      "intent": "Give medium-voltage branch circuits margin for simultaneously operated utilization equipment.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        },
+        {
+          "predicate": "circuit_voltage_>_600v"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_supervised_installation_per_210_19_b_2"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_125_percent_of_designed_potential_simultaneous_load": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Designed potential load calculation for simultaneously operated equipment",
+        "Conductor ampacity selection worksheet"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_20",
+      "cite": "210.20",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_20",
+      "title": "Rate branch-circuit overcurrent devices for 125 percent of continuous load",
+      "intent": "Protect branch-circuit conductors and equipment against sustained overcurrent.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "ocpd_rating_>=_noncontinuous_load_plus_125_percent_continuous_load": true,
+        "conductors_protected_per_240_4": true,
+        "equipment_ocpd_rating_not_exceeding_table_240_3_articles": true,
+        "outlet_device_rating_per_210_21": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "assembly_including_ocpd_listed_for_100_percent_rating"
+            }
+          ],
+          "effect": "ocpd_rating_>=_continuous_plus_noncontinuous_load_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Panel schedules with OCPD ratings and calculated loads",
+        "Continuous load identification (lighting, EVSE, etc.)",
+        "Conductor protection coordination per 240.4"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_210_24",
+      "cite": "210.24",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_24",
+      "title": "Verify multioutlet branch circuits against the Table 210.24 summary",
+      "intent": "Cross-check circuit rating, conductor size, OCPD, and permissible loads for multioutlet circuits.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_has_two_or_more_outlets_or_receptacles"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_210_11_c_1_c_2_or_c_3_receptacle_circuit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "circuit_conforms_to_table_210_24_summary": true,
+        "specific_requirements_verified_per_210_19_210_20_and_210_21": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedules with circuit ratings 15/20/30/40/50 A",
+        "Conductor and OCPD sizes cross-checked to Table 210.24"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_215_2",
+      "cite": "215.2",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2",
+      "title": "Scope: feeder minimum rating and size",
+      "intent": "Route feeder conductor sizing to the correct subsection by voltage class.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "feeders_<=_1000v_sized_per_215_2_a": true,
+        "feeders_>_1000v_sized_per_215_2_b": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder schedule with voltage class",
+        "One-line diagram identifying all feeders"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_215_2_a",
+      "cite": "215.2(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_a",
+      "title": "Feeder ampacity not less than 55-ampere-or-less service conductors",
+      "intent": "Prevent a feeder that carries the entire service load from being smaller than the service conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "feeder_carries_total_load_of_service_conductors"
+        },
+        {
+          "predicate": "service_conductor_ampacity_<=_55a"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "feeder_ampacity_>=_service_conductor_ampacity": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Service conductor size and ampacity on one-line diagram",
+        "Feeder conductor schedule"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_2_a_1",
+      "cite": "215.2(A)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_a_1",
+      "title": "Size feeder conductors for 125 percent of continuous load",
+      "intent": "Prevent feeder conductor overheating under sustained loading.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "feeder_voltage_<=_1000v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_noncontinuous_load_plus_125_percent_continuous_load": true,
+        "ampacity_>=_max_load_after_adjustment_and_correction_factors_per_310_14": true,
+        "terminations_comply_with_110_14_c": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "assembly_including_ocpd_listed_for_100_percent_rating"
+            }
+          ],
+          "effect": "ampacity_>=_continuous_plus_noncontinuous_load_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "portion_connected_both_ends_to_separately_installed_pressure_connections_per_110_14_c_2"
+            }
+          ],
+          "effect": "ampacity_>=_continuous_plus_noncontinuous_load_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductor_not_connected_to_overcurrent_device"
+            }
+          ],
+          "effect": "sizing_at_100_percent_of_continuous_and_noncontinuous_load_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Feeder load calculation with continuous/noncontinuous breakdown",
+        "Feeder conductor schedule with ampacity basis",
+        "Termination temperature rating data"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_2_b",
+      "cite": "215.2(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_b",
+      "title": "Size over-1000-volt feeder conductors per 310.14 and 311.60",
+      "intent": "Apply correct ampacity method and grounded conductor sizing to medium-voltage feeders.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "feeder_voltage_>_1000v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_per_310_14_and_311_60": true,
+        "grounded_conductor_>=_250_122_size": true,
+        "sized_per_215_2_b_1_b_2_or_b_3": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Medium-voltage feeder schedule",
+        "Grounded conductor sizing calculation per 250.122"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_122",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_310_14"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_215_2_b_1",
+      "cite": "215.2(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_b_1",
+      "title": "Size transformer-only feeders for the sum of transformer nameplates",
+      "intent": "Ensure medium-voltage feeders supplying only transformers can carry their full nameplate load.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "feeder_voltage_>_1000v"
+        },
+        {
+          "predicate": "feeder_supplies_only_transformers"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_sum_of_transformer_nameplate_ratings": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Transformer nameplate kVA ratings on one-line diagram",
+        "Feeder ampacity calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_10",
+      "cite": "220.10",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_10",
+      "title": "Calculate branch-circuit loads per 220.12, 220.14, and 220.16",
+      "intent": "Establish the required calculation method for all branch-circuit loads.",
+      "applies_when": [
+        {
+          "predicate": "is_branch_circuit"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "lighting_loads_per_220_12": true,
+        "other_loads_per_220_14": true,
+        "additions_to_existing_installations_per_220_16": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Branch-circuit load calculation sheets",
+        "Occupancy classification supporting unit lighting loads"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_16"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14",
+      "cite": "220.14",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14",
+      "title": "Calculate minimum outlet loads for all occupancies",
+      "intent": "Set the floor value for each non-lighting outlet load in branch-circuit calculations.",
+      "applies_when": [
+        {
+          "predicate": "has_general_use_receptacles_or_non_illumination_outlets"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "outlet_minimum_load_per_220_14_a_through_m": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "outlet_serves_switchboards_or_switching_frames_in_telephone_exchanges"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Outlet-by-outlet load tabulation",
+        "Panel schedules with VA per outlet"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_a",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_i"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_a",
+      "cite": "220.14(A)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_a",
+      "title": "Calculate specific appliance outlets at the appliance ampere rating",
+      "intent": "Ensure dedicated appliance outlets are counted at their full rating in load calculations.",
+      "applies_when": [
+        {
+          "predicate": "outlet_serves_specific_appliance_or_load_not_covered_by_220_14_b_through_m"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "outlet_load_based_on_ampere_rating_of_appliance_served": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate or specification ratings",
+        "Load calculation line items for dedicated outlets"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_b",
+      "cite": "220.14(B)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_b",
+      "title": "Calculate dryer and cooking appliance outlets per 220.54 and 220.55",
+      "intent": "Permit standardized demand-based loads for household dryers and cooking appliances.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "outlet_serves_household_electric_dryer"
+            },
+            {
+              "predicate": "outlet_serves_household_electric_cooking_appliance"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "dryer_load_per_220_54": true,
+        "cooking_appliance_load_per_220_55": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dryer and range nameplate ratings",
+        "Demand calculation per Tables 220.54 and 220.55"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_54"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_g",
+      "cite": "220.14(G)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_g",
+      "title": "Calculate show-window outlets at unit load or 200 VA per linear foot",
+      "intent": "Reserve branch-circuit capacity for show-window lighting loads.",
+      "applies_when": [
+        {
+          "predicate": "outlet_serves_show_window"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "method_1_unit_load_per_outlet": true,
+        "method_2_va_per_linear_foot": 200
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Show-window linear footage on floor plans",
+        "Load calculation showing method used"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_h",
+      "cite": "220.14(H)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_h",
+      "title": "Calculate fixed multioutlet assemblies at 180 VA per section",
+      "intent": "Account for plug-strip loads based on likelihood of simultaneous use.",
+      "applies_when": [
+        {
+          "predicate": "has_fixed_multioutlet_assembly"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_dwelling_unit_or_hotel_guest_room"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "not_simultaneous_use_va_per_5_ft": 180,
+        "simultaneous_use_va_per_1_ft": 180
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Multioutlet assembly lengths on plans",
+        "Simultaneous-use determination in load calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_i",
+      "cite": "220.14(I)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_i",
+      "title": "Calculate receptacle outlets at 180 VA per yoke",
+      "intent": "Establish the standard receptacle unit load for non-dwelling occupancies.",
+      "applies_when": [
+        {
+          "predicate": "has_receptacle_outlets"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "receptacle_covered_by_220_14_j_or_k"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "va_per_single_or_multiple_receptacle_on_one_yoke": 180,
+        "va_per_receptacle_for_4_or_more_receptacle_device": 90
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_on_210_11_c_1_or_c_2_circuit"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Receptacle counts by area",
+        "Receptacle load line items in feeder/service calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_j",
+      "cite": "220.14(J)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_j",
+      "title": "Use 3 VA per square foot minimum unit load for dwellings",
+      "intent": "Set the general lighting and receptacle unit load for dwelling load calculations.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_one_family_dwelling"
+            },
+            {
+              "predicate": "is_two_family_dwelling"
+            },
+            {
+              "predicate": "is_multifamily_dwelling"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "min_unit_load_va_per_ft2": 3,
+        "general_use_receptacles_and_210_52_e_g_outlets_included_in_unit_load": true,
+        "floor_area_determined_per_220_11": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dwelling floor area takeoff excluding porches/garages/unfinished spaces",
+        "General lighting load line item at 3 VA/ft2"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_14_m_1",
+      "cite": "220.14(M)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_14_m_1",
+      "title": "Include hotel guest room general-use receptacles in the unit load",
+      "intent": "Avoid double-counting guest room receptacle loads already covered by Table 220.12 unit loads.",
+      "applies_when": [
+        {
+          "predicate": "is_hotel_or_motel_guest_room_or_suite"
+        },
+        {
+          "predicate": "has_general_use_receptacle_outlets_<=_20a"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "receptacles_included_in_table_220_12_unit_load": true,
+        "no_additional_load_calculation_for_such_outlets": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hotel/motel load calculation using Table 220.12 unit load",
+        "Guest room receptacle circuiting plans"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_16",
+      "cite": "220.16",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_16",
+      "title": "Calculate loads for additions to existing installations per 220.12/220.14",
+      "intent": "Ensure remodel and addition loads are computed by the same standard methods as new work.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_structural_addition_to_existing_dwelling"
+            },
+            {
+              "predicate": "is_new_or_extended_circuit_in_existing_building"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "dwelling_additions_calculated_per_220_14": true,
+        "non_dwelling_new_or_extended_circuits_per_220_12_or_220_14": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Existing panel load documentation",
+        "Addition/remodel load calculation per 220.14"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_42",
+      "cite": "220.42",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_42",
+      "title": "Apply Table 220.42 lighting demand factors only to feeder/service loads",
+      "intent": "Permit lighting demand reduction for feeders and services while preserving full branch-circuit counts.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder_or_service_load_calculation"
+        },
+        {
+          "predicate": "includes_general_illumination_load"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "demand_factors_per_table_220_42": true,
+        "demand_factors_not_used_to_determine_branch_circuit_count": true,
+        "dwelling_first_3000_va_at_100_percent": true,
+        "dwelling_3001_to_120000_va_at_35_percent": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder/service calculation showing Table 220.42 tiers",
+        "Separate branch-circuit count based on undiminished load"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_42_ca",
+      "cite": "220.42 [OSHPD 1]",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_42",
+      "title": "Do not apply lighting demand factors in OSHPD 1 critical hospital areas",
+      "intent": "Keep full lighting capacity available in California hospital areas essential to patient care.",
+      "applies_when": [
+        {
+          "predicate": "is_oshpd_1_facility"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "area_is_surgery_suite_including_recovery"
+            },
+            {
+              "predicate": "area_is_emergency_department"
+            },
+            {
+              "predicate": "area_is_kitchen_food_service_or_dining"
+            },
+            {
+              "predicate": "area_is_critical_care_per_article_517"
+            },
+            {
+              "predicate": "area_is_elevator_lobby_corridor_or_inpatient_nurse_station"
+            },
+            {
+              "predicate": "load_on_life_safety_or_critical_branch"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "table_220_42_demand_factors_prohibited": true,
+        "administrative_areas_use_all_others_occupancy_type": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Hospital area classification plan",
+        "Essential electrical system branch assignments",
+        "Feeder calculation showing 100 percent lighting load in listed areas"
+      ],
+      "depends_on": [],
+      "amends": "220.42",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_43",
+      "cite": "220.43",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_43",
+      "title": "Include show-window and track lighting loads in feeder calculations",
+      "intent": "Reserve feeder capacity for show-window and track lighting.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "has_show_window"
+            },
+            {
+              "predicate": "has_track_lighting_in_other_than_dwelling_or_guest_room"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "show_window_va_per_linear_foot_>=_200": true,
+        "track_lighting_va_per_2_ft_of_track": 150
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "track_supplied_through_current_limiting_device"
+            }
+          ],
+          "effect": "load_calculated_at_device_rating_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Show-window length measured horizontally along its base",
+        "Track lighting lengths and circuiting",
+        "Feeder calculation line items"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_44",
+      "cite": "220.44",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_44",
+      "title": "Apply receptacle demand factors for non-dwelling receptacle loads",
+      "intent": "Permit realistic diversity on large non-dwelling receptacle loads.",
+      "applies_when": [
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_dwelling_unit"
+            }
+          ]
+        },
+        {
+          "predicate": "receptacle_loads_calculated_per_220_14_h_or_i"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "demand_per_table_220_42_or_table_220_44_permitted": true,
+        "first_10_kva_at_100_percent": true,
+        "remainder_over_10_kva_at_50_percent": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Receptacle VA subtotal before demand",
+        "Feeder calculation applying Table 220.44 tiers"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_52",
+      "cite": "220.52",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_52",
+      "title": "Include 1500 VA per small-appliance and laundry circuit in dwelling calculations",
+      "intent": "Reserve feeder/service capacity for required dwelling small-appliance and laundry circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "is_feeder_or_service_load_calculation"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "va_per_2_wire_small_appliance_circuit": 1500,
+        "va_per_2_wire_laundry_circuit": 1500,
+        "permitted_to_include_with_general_lighting_and_apply_table_220_42": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "individual_refrigeration_circuit_per_210_52_b_1_exception_2"
+            }
+          ],
+          "effect": "circuit_permitted_to_be_excluded_from_calculation"
+        }
+      ],
+      "evidence_required": [
+        "Dwelling service calculation with 1500 VA line items",
+        "Panel schedule identifying small-appliance and laundry circuits"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_54",
+      "cite": "220.54",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_54",
+      "title": "Calculate dwelling dryer load at 5000 VA or nameplate, whichever is larger",
+      "intent": "Prevent undersizing of feeders and services serving household clothes dryers.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "has_household_electric_clothes_dryer"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "dryer_load_va_>=_max_of_5000_or_nameplate": true,
+        "table_220_54_demand_factors_permitted": true,
+        "three_phase_load_based_on_twice_max_dryers_between_any_two_phases": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dryer nameplate rating",
+        "Service calculation dryer line item with demand factor"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_61",
+      "cite": "220.61",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61",
+      "title": "Size the feeder or service neutral for the maximum unbalanced load",
+      "intent": "Ensure the neutral can carry the worst-case unbalance between phases.",
+      "applies_when": [
+        {
+          "predicate": "feeder_or_service_includes_neutral_conductor"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "neutral_load_=_max_net_calculated_load_between_neutral_and_any_ungrounded_conductor": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_3_wire_2_phase_or_5_wire_2_phase_system"
+            }
+          ],
+          "effect": "maximum_unbalanced_load_multiplied_by_140_percent"
+        }
+      ],
+      "evidence_required": [
+        "Neutral load calculation",
+        "Feeder schedule showing neutral conductor size"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_b_1",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_c_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_61_b_1",
+      "cite": "220.61(B)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_b_1",
+      "title": "Permit 70 percent neutral demand for range and dryer loads",
+      "intent": "Allow neutral reduction where range/dryer unbalanced loads were determined by demand tables.",
+      "applies_when": [
+        {
+          "predicate": "feeder_or_service_supplies_household_ranges_ovens_cooking_units_or_dryers"
+        },
+        {
+          "predicate": "max_unbalanced_load_determined_per_table_220_55_or_220_54"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "additional_neutral_demand_factor_percent": 70
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Range/dryer demand per Tables 220.55 and 220.54",
+        "Neutral calculation applying 70 percent factor"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_61_b_2",
+      "cite": "220.61(B)(2)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_b_2",
+      "title": "Permit 70 percent neutral demand on unbalanced load above 200 amperes",
+      "intent": "Allow neutral reduction on large systems where full unbalance above 200 A is unlikely.",
+      "applies_when": [
+        {
+          "predicate": "unbalanced_load_>_200a"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_3_wire_dc_or_single_phase_ac_system"
+            },
+            {
+              "predicate": "is_4_wire_3_phase_system"
+            },
+            {
+              "predicate": "is_3_wire_2_phase_system"
+            },
+            {
+              "predicate": "is_5_wire_2_phase_system"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "first_200a_at_100_percent": true,
+        "portion_above_200a_neutral_demand_factor_percent": 70
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Neutral demand calculation with 200 A breakpoint",
+        "System configuration on one-line diagram"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_220_61_c_1",
+      "cite": "220.61(C)(1)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_c_1",
+      "title": "Prohibit neutral reduction on 3-wire circuits from 4-wire wye systems",
+      "intent": "Prevent undersized neutrals where harmonic and unbalance currents can equal phase current.",
+      "applies_when": [
+        {
+          "predicate": "circuit_portion_is_3_wire_with_2_ungrounded_and_neutral_from_4_wire_3_phase_wye"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "neutral_capacity_reduction_prohibited": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "System configuration on one-line diagram",
+        "Neutral sizing at 100 percent of computed unbalance"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_225_5",
+      "cite": "225.5",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_225_5",
+      "title": "Size outdoor branch-circuit and feeder conductors per 310.14",
+      "intent": "Apply standard ampacity and Article 220 loads to outside branch circuits and feeders at 1000 V or less.",
+      "applies_when": [
+        {
+          "predicate": "is_outdoor_branch_circuit_or_feeder"
+        },
+        {
+          "predicate": "circuit_voltage_<=_1000v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_per_310_14": true,
+        "loads_determined_per_220_10_and_article_220_part_iii": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site plan showing outdoor circuits/feeders",
+        "Load calculation and conductor ampacity selection"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_310_14"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_225_50",
+      "cite": "225.50",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_225_50",
+      "title": "Size over-1000-volt outside conductors per 210.19(B) and 215.2(B)",
+      "intent": "Apply the medium-voltage sizing rules to outside branch circuits and feeders over 1000 V.",
+      "applies_when": [
+        {
+          "predicate": "is_outdoor_branch_circuit_or_feeder"
+        },
+        {
+          "predicate": "circuit_voltage_>_1000v"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "branch_circuits_sized_per_210_19_b": true,
+        "feeders_sized_per_215_2_b": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Medium-voltage outside distribution one-line diagram",
+        "Conductor sizing calculations"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_19_b",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_122_xref",
+      "cite": "215.2(A)(2)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_122",
+      "title": "Size feeder grounded conductor not smaller than 250.122 requires",
+      "intent": "Ensure the grounded conductor can safely carry fault current back to the source.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder"
+        },
+        {
+          "predicate": "feeder_includes_grounded_conductor"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "grounded_conductor_>=_250_122_size": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "grounded_conductors_run_in_parallel"
+            }
+          ],
+          "effect": "250_122_f_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Feeder schedule showing grounded conductor size",
+        "OCPD rating used to enter Table 250.122"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_250_32_xref",
+      "cite": "215.6",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_250_32",
+      "title": "Apply 250.32 where a feeder supplies a separate building or structure",
+      "intent": "Ensure grounding and bonding at separate buildings supplied by feeders.",
+      "applies_when": [
+        {
+          "predicate": "feeder_supplies_separate_building_or_structure"
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "requirements_of_250_32_apply": true,
+        "feeder_includes_or_provides_equipment_grounding_conductor": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site plan showing separate buildings and feeders",
+        "Grounding electrode and EGC details at each building"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_14_xref",
+      "cite": "215.2(A)(1)(b)",
+      "section_node": "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_310_14",
+      "title": "Verify conductor ampacity after adjustment and correction per 310.14",
+      "intent": "Ensure conductor selection reflects real conditions of use, not just table values.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder_or_branch_circuit_conductor"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_max_load_after_adjustment_and_correction_factors_per_310_14": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Ambient temperature and conduit fill adjustment worksheet",
+        "Conductor schedule with corrected ampacities"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2_a_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_15_xref",
+      "cite": "376.22(B)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_310_15",
+      "title": "Apply 310.15 ampacity adjustment to raceway and gutter conductors",
+      "intent": "Account for mutual heating of grouped current-carrying conductors in wireways and gutters.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "conductors_in_metal_wireway"
+            },
+            {
+              "predicate": "conductors_in_auxiliary_gutter"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ampacity_adjustment",
+        "adjustment_per_310_15_c_1_where_current_carrying_conductors_>_30": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wireway/gutter cross-section conductor counts",
+        "Ampacity adjustment calculation"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_376_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_15_c_xref",
+      "cite": "372.23 / 374.23",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_310_15_c",
+      "title": "Apply 310.15(C) adjustment factors to cellular floor raceway conductors",
+      "intent": "Prevent overheating of conductors grouped in cellular concrete and cellular metal floor raceways.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "conductors_in_cellular_concrete_floor_raceway"
+            },
+            {
+              "predicate": "conductors_in_cellular_metal_floor_raceway"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "ampacity_adjustment",
+        "adjustment_factors_per_310_15_c_applied": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cellular raceway conductor fill schedule",
+        "Adjusted ampacity calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_15_c_1_xref",
+      "cite": "366.23(A)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_310_15_c_1",
+      "title": "Apply 310.15(C)(1) adjustment where gutter conductors exceed 30",
+      "intent": "Trigger conductor derating in sheet metal auxiliary gutters only above 30 current-carrying conductors.",
+      "applies_when": [
+        {
+          "predicate": "conductors_in_sheet_metal_auxiliary_gutter"
+        },
+        {
+          "predicate": "current_carrying_conductors_at_cross_section_>_30"
+        }
+      ],
+      "requires": {
+        "type": "ampacity_adjustment",
+        "adjustment_per_310_15_c_1": true,
+        "signaling_and_motor_starting_conductors_not_counted": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Gutter cross-section conductor count",
+        "Derated ampacity calculation"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_366_23"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_310_15_e_xref",
+      "cite": "310.15(E)",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_310_15_e",
+      "title": "Count neutrals classified as current-carrying under 310.15(E)",
+      "intent": "Ensure derating counts include neutrals that actually carry current (e.g., nonlinear loads).",
+      "applies_when": [
+        {
+          "predicate": "raceway_or_gutter_contains_neutral_conductors"
+        },
+        {
+          "predicate": "neutral_classified_as_current_carrying_per_310_15_e"
+        }
+      ],
+      "requires": {
+        "type": "ampacity_adjustment",
+        "neutral_included_in_current_carrying_conductor_count": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Load type identification (nonlinear/harmonic content)",
+        "Conductor count used in adjustment calculation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_340_80",
+      "cite": "340.80",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_340_80",
+      "title": "Use 60C ampacity for Type UF cable",
+      "intent": "Limit UF cable loading to its 60C insulation system regardless of conductor rating.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_type_uf_cable"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_based_on_60c_conductors_per_310_14": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cable schedule identifying UF runs",
+        "Ampacity selection from 60C column of Table 310.16"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_366_23",
+      "cite": "366.23",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_366_23",
+      "title": "Limit auxiliary gutter conductor and busbar current",
+      "intent": "Prevent overheating of conductors and bare bars in auxiliary gutters.",
+      "applies_when": [
+        {
+          "predicate": "conductors_in_auxiliary_gutter"
+        }
+      ],
+      "requires": {
+        "type": "ampacity_adjustment",
+        "adjustment_per_310_15_c_1_where_current_carrying_conductors_>_30": true,
+        "bare_copper_bar_max_amperes_per_in2": 1000,
+        "bare_aluminum_bar_max_amperes_per_in2": 700,
+        "nonmetallic_gutter_adjustment_applies_up_to_20_percent_fill": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Gutter conductor/busbar cross-section data",
+        "Current calculations for bare bars"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_366_56",
+      "cite": "366.56",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_366_56",
+      "title": "Control splices and taps in auxiliary gutters",
+      "intent": "Keep gutter splices accessible, identified, within fill limits, and protected against overcurrent.",
+      "applies_when": [
+        {
+          "predicate": "splices_or_taps_in_auxiliary_gutter"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "splices_accessible_via_removable_covers_or_doors": true,
+        "fill_including_splices_<=_75_percent_of_area": true,
+        "taps_identified_as_to_circuit_or_equipment_supplied": true,
+        "tap_overcurrent_protection_per_240_21": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Gutter fill calculation including splices/taps",
+        "Tap identification labeling detail",
+        "Tap OCPD locations on one-line diagram"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_368_17",
+      "cite": "368.17",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_368_17",
+      "title": "Protect busways against overcurrent at their current rating",
+      "intent": "Ensure busway feeders and branch circuits are protected consistent with busway ratings.",
+      "applies_when": [
+        {
+          "predicate": "wiring_method_is_busway"
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "feeder_busway_protected_at_busway_current_rating": true,
+        "ocp_required_where_busway_ampacity_reduced": true,
+        "plug_in_tap_devices_contain_required_ocpd": true,
+        "branch_circuit_busway_protected_per_210_20": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "applicable_provisions_of_240_4_used"
+            }
+          ],
+          "effect": "alternate_feeder_protection_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_industrial_establishment"
+            },
+            {
+              "predicate": "reduced_busway_length_<=_50_ft"
+            },
+            {
+              "predicate": "reduced_busway_ampacity_>=_one_third_upstream_ocpd_rating"
+            },
+            {
+              "predicate": "busway_free_from_contact_with_combustible_material"
+            }
+          ],
+          "effect": "ocp_at_ampacity_reduction_point_omission_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Busway ratings and OCPD coordination on one-line diagram",
+        "Plug-in unit schedules with OCPD ratings",
+        "Length and rating of any reduced-ampacity busway segments"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_376_22",
+      "cite": "376.22",
+      "section_node": "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_376_22",
+      "title": "Limit metal wireway fill to 20 percent and derate above 30 conductors",
+      "intent": "Control heating and physical crowding of conductors in metal wireways.",
+      "applies_when": [
+        {
+          "predicate": "conductors_in_metal_wireway"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "conductor_fill_<=_20_percent_of_interior_cross_section": true,
+        "adjustment_per_310_15_c_1_where_current_carrying_conductors_>_30": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wireway fill calculation",
+        "Conductor count at worst-case cross section"
+      ],
+      "depends_on": [
+        "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_310_15_c_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_240_21_xref",
+      "cite": "445.13(B)",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_240_21",
+      "title": "Tap generator conductors only per 240.21(B)",
+      "intent": "Ensure taps from protected generator terminals follow the feeder tap rules.",
+      "applies_when": [
+        {
+          "predicate": "generator_equipped_with_listed_ocpd_or_ct_and_overcurrent_relay"
+        },
+        {
+          "predicate": "conductors_tapped_from_load_side_of_protected_terminals"
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "tap_conductors_comply_with_240_21_b": true,
+        "taps_not_permitted_for_portable_generators_<=_15kw_without_accessible_terminals": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Generator OCPD documentation",
+        "Tap conductor size and length versus 240.21(B) limits"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_445_13"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_440_13",
+      "cite": "440.13",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_440_13",
+      "title": "Permit plug and receptacle as disconnect for cord-connected AC/refrigeration equipment",
+      "intent": "Recognize the attachment plug as a safe disconnecting means for portable cooling appliances.",
+      "applies_when": [
+        {
+          "predicate": "is_cord_connected_air_conditioning_or_refrigerating_equipment"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "separable_connector_or_attachment_plug_and_receptacle_permitted_as_disconnect": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Equipment schedule identifying cord-connected units",
+        "Receptacle locations relative to equipment"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_440_63",
+      "cite": "440.63",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_440_63",
+      "title": "Room air-conditioner disconnecting means conditions",
+      "intent": "Ensure a room air conditioner can be safely de-energized by an accessible means.",
+      "applies_when": [
+        {
+          "predicate": "is_single_phase_room_air_conditioner"
+        },
+        {
+          "predicate": "equipment_voltage_<=_250v"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "plug_and_receptacle_permitted_if_manual_controls_readily_accessible_within_6_ft_of_floor": true,
+        "or_approved_manually_operable_disconnect_readily_accessible_within_sight": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Unit mounting height and control accessibility details",
+        "Disconnect or receptacle location on plans"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_440_13"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_445_13",
+      "cite": "445.13",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_445_13",
+      "title": "Size generator output conductors at 115 percent of nameplate current",
+      "intent": "Protect generator leads that operate without upstream overcurrent protection.",
+      "applies_when": [
+        {
+          "predicate": "conductors_from_generator_output_terminals_to_first_ocpd_device"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "ampacity_>=_115_percent_of_generator_nameplate_current": true,
+        "neutral_sizing_per_220_61_permitted": true,
+        "ground_fault_carrying_conductors_>=_250_30_a_size": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "generator_design_and_operation_prevent_overloading"
+            }
+          ],
+          "effect": "ampacity_>=_100_percent_of_nameplate_current_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Generator nameplate current rating",
+        "Feeder conductor sizing calculation from generator terminals",
+        "One-line diagram showing first OCPD location"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_450_14",
+      "cite": "450.14",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_450_14",
+      "title": "Provide a transformer disconnecting means, lockable if remote",
+      "intent": "Allow safe isolation of transformers for maintenance.",
+      "applies_when": [
+        {
+          "predicate": "is_transformer"
+        },
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_class_2_or_class_3_transformer"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "disconnect_in_sight_of_transformer_or_remote": true,
+        "remote_disconnect_lockable_open_per_110_25": true,
+        "remote_disconnect_location_field_marked_on_transformer": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Transformer schedule with disconnect locations",
+        "Field marking note for remote disconnects",
+        "Lockable disconnect specifications"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_25"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_480_7",
+      "cite": "480.7",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_480_7",
+      "title": "Provide dc disconnecting means for stationary battery systems over 60 volts",
+      "intent": "Allow safe isolation of battery system ungrounded conductors for service and emergencies.",
+      "applies_when": [
+        {
+          "predicate": "is_stationary_battery_system"
+        },
+        {
+          "predicate": "system_voltage_>_60v_dc"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "disconnect_for_all_ungrounded_conductors": true,
+        "readily_accessible_and_within_sight_of_battery_system": true,
+        "dwelling_emergency_disconnect_outside_building_labeled_emergency_disconnect": true,
+        "series_strings_>_240v_dc_segmentable_to_<=_240v_dc": true,
+        "remote_actuation_disconnect_lockable_open_per_110_25": true,
+        "field_marking_with_nominal_voltage_and_available_fault_current": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_one_or_two_family_dwelling"
+            }
+          ],
+          "effect": "fault_current_arc_flash_and_date_marking_items_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Battery system one-line diagram with disconnect locations",
+        "Emergency disconnect label detail for dwellings",
+        "Available fault current documentation from battery supplier"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_25",
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_240_21"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_480_10",
+      "cite": "480.10",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_480_10",
+      "title": "Battery location requirements: ventilation, guarding, spaces, egress, illumination",
+      "intent": "Mitigate explosion, shock, and egress hazards in battery installations.",
+      "applies_when": [
+        {
+          "predicate": "has_battery_installation"
+        }
+      ],
+      "requires": {
+        "type": "battery_location",
+        "ventilation_appropriate_to_battery_technology_preventing_explosive_mixture": true,
+        "live_parts_guarded_per_110_27": true,
+        "working_spaces_per_110_26_and_110_34_measured_from_cabinet_rack_or_tray_edge": true,
+        "battery_room_personnel_doors_open_in_egress_direction_with_listed_panic_hardware": true,
+        "no_gas_piping_in_dedicated_battery_rooms": true,
+        "illumination_not_controlled_by_automatic_means_only": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Battery room ventilation design or technology justification",
+        "Room layout with working clearances and door hardware schedule",
+        "Luminaire layout relative to battery equipment"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_26",
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_27"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_480_13",
+      "cite": "480.13",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_480_13",
+      "title": "Require ground-fault detection on ungrounded battery circuits over 100 volts",
+      "intent": "Detect the first ground fault on ungrounded battery circuits before a second fault creates a hazard.",
+      "applies_when": [
+        {
+          "predicate": "battery_circuit_voltage_>_100v_between_conductors_or_to_ground"
+        },
+        {
+          "predicate": "circuit_operates_with_ungrounded_conductors"
+        }
+      ],
+      "requires": {
+        "type": "ground_fault_detection",
+        "ground_fault_detector_and_indicator_installed": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Ground-fault detector specification and location",
+        "Battery system one-line diagram showing grounding scheme"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_490_44",
+      "cite": "490.44",
+      "section_node": "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_490_44",
+      "title": "Fused interrupter switch construction and operation safeguards",
+      "intent": "Protect operators of high-voltage fused interrupter switches from energized parts.",
+      "applies_when": [
+        {
+          "predicate": "is_fused_interrupter_switch_over_1000v"
+        }
+      ],
+      "requires": {
+        "type": "equipment_construction",
+        "supply_terminals_at_top_of_enclosure_or_barriers_installed": true,
+        "backfeed_hazard_sign_on_enclosure_door_where_fuses_can_be_backfed": true,
+        "switching_mechanism_operable_from_outside_enclosure": true,
+        "opens_all_ungrounded_conductors_simultaneously": true,
+        "switch_lockable_open_per_110_25": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Switchgear elevation/section drawings showing terminal locations and barriers",
+        "Backfeed warning sign detail",
+        "Switch operating mechanism specifications"
+      ],
+      "depends_on": [
+        "13_chapter_4_equipment_for_general_use_article_440_air_conditioning_and_refrigerati_110_25"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_630_11",
+      "cite": "630.11",
+      "section_node": "20_chapter_6_special_equipment_article_626_electrified_truck_parking_spaces_article_630_11",
+      "title": "Size arc welder supply conductors by I1eff or duty-cycle factors",
+      "intent": "Match welder circuit conductors to effective supply current including duty cycle.",
+      "applies_when": [
+        {
+          "predicate": "supplies_arc_welder"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "individual_welder_ampacity_>=_i1eff_rating_plate_value": true,
+        "alternative_ampacity_>=_rated_primary_current_times_table_630_11_a_factor": true,
+        "group_ampacity_>=_100_percent_two_largest_plus_85_percent_third_plus_70_percent_fourth_plus_60_percent_remaining": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "work_makes_high_operating_duty_cycle_impossible"
+            }
+          ],
+          "effect": "lower_group_percentage_values_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Welder rating plate data (I1eff or primary current and duty cycle)",
+        "Group welder conductor sizing calculation",
+        "Panel schedule for welder circuits"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_675_10",
+      "cite": "675.10",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_675_10",
+      "title": "Conditions for several motors on one irrigation machine branch circuit",
+      "intent": "Permit grouped small motors on one circuit only with overload protection and limited taps.",
+      "applies_when": [
+        {
+          "predicate": "is_irrigation_machine_circuit"
+        },
+        {
+          "predicate": "circuit_supplies_several_motors_each_<=_2_hp"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "circuit_protected_at_<=_30a": true,
+        "circuit_voltage_<=_1000v": true,
+        "each_motor_full_load_rating_<=_6a": true,
+        "individual_overload_protection_per_430_32": true,
+        "taps_>=_14_awg_copper_and_<=_25_ft": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor schedule with hp and FLA",
+        "Overload protection device schedule",
+        "Tap conductor sizes and lengths"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_31",
+      "cite": "690.31",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31",
+      "title": "Scope: permitted PV wiring methods",
+      "intent": "Establish which wiring systems may be used for PV circuits and route to subsection requirements.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_system_circuit"
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "code_raceway_and_cable_methods_or_listed_pv_wiring_systems_permitted": true,
+        "sufficient_cable_length_at_integral_enclosure_devices_for_replacement": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV wiring method callouts on plans",
+        "Listing documentation for PV-specific wiring systems"
+      ],
+      "depends_on": [
+        "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_a",
+        "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_690_31_a",
+      "cite": "690.31(A)",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_a",
+      "title": "Guard readily accessible PV circuits over 30 volts",
+      "intent": "Protect people from contact with energized PV source and output conductors.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_source_or_output_circuit"
+        },
+        {
+          "predicate": "circuit_voltage_>_30v"
+        },
+        {
+          "predicate": "installed_in_readily_accessible_location"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "conductors_guarded_or_in_type_mc_cable_or_raceway": true,
+        "105c_and_125c_conductor_ampacity_per_table_690_31_a_b": true,
+        "ambient_>_30c_corrected_per_table_690_31_a_a": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Array wiring plan showing guarding or raceway/MC methods",
+        "Conductor ampacity and temperature correction calculations"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_31_b_1",
+      "cite": "690.31(B)(1)",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_b_1",
+      "title": "Identify PV dc circuit conductors at all terminations, connections, and splices",
+      "intent": "Prevent polarity errors and misconnection of PV dc circuits.",
+      "applies_when": [
+        {
+          "predicate": "is_pv_system_dc_circuit_conductor"
+        }
+      ],
+      "requires": {
+        "type": "identification",
+        "identified_at_all_termination_connection_and_splice_points": true,
+        "nonsolidly_grounded_positive_marked_plus_or_positive_not_green_white_gray": true,
+        "nonsolidly_grounded_negative_marked_minus_or_negative_not_green_white_gray_red": true,
+        "only_solidly_grounded_dc_conductors_marked_per_200_6": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "identification_evident_by_spacing_or_arrangement"
+            }
+          ],
+          "effect": "further_identification_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Conductor identification schedule/legend",
+        "Labeling or sleeving specifications for polarity marking"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_31_c",
+      "cite": "690.31(C)",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_c",
+      "title": "Use listed PV wire and DG cable; support exposed single-conductor cable",
+      "intent": "Ensure PV cables are listed for the application and secured against damage.",
+      "applies_when": [
+        {
+          "predicate": "uses_pv_wire_or_dg_cable"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "pv_wire_and_dg_cable_listed": true,
+        "exposed_single_conductor_cable_is_pv_wire_or_use_2_rhw_2_sunlight_resistant": true,
+        "exposed_cables_supported_and_secured_at_intervals_<=_24_in": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "pv_system_meets_691_4_engineered_design"
+            }
+          ],
+          "effect": "support_and_securement_intervals_per_engineered_design_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Cable listing documentation (UL 4703 / UL 3003)",
+        "Support and securement details for exposed array wiring"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_31_c_4",
+      "cite": "690.31(C)(4)",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_c_4",
+      "title": "Use hard-service flexible cords on tracking PV arrays",
+      "intent": "Ensure moving-array connections survive flexing, weather, and sunlight.",
+      "applies_when": [
+        {
+          "predicate": "flexible_cords_or_cables_connected_to_moving_parts_of_tracking_pv_array"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "complies_with_article_400": true,
+        "identified_as_hard_service_cord_or_portable_power_cable": true,
+        "suitable_for_extra_hard_usage_listed_outdoor_water_and_sunlight_resistant": true,
+        "ampacity_per_400_5": true,
+        "stranded_pv_wire_strand_count_per_table_690_31_c_4": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cord/cable type designations on plans",
+        "Listing labels for outdoor and sunlight resistance"
+      ],
+      "depends_on": [
+        "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_690_31_d_1",
+      "cite": "690.31(D)(1)",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_690_31_d_1",
+      "title": "Protect small flexible PV wiring crossing ceilings or floor joists",
+      "intent": "Guard concealed small-diameter PV raceways and cables from physical damage inside buildings.",
+      "applies_when": [
+        {
+          "predicate": "pv_power_circuit_in_fmc_smaller_than_trade_size_3_4_or_mc_cable_smaller_than_1_in"
+        },
+        {
+          "predicate": "installed_across_ceilings_or_floor_joists"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "protected_by_substantial_guard_strips_at_least_as_high_as_raceway_or_cable": true,
+        "exposed_runs_closely_follow_building_surface_or_protected_from_damage": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Interior PV routing plans",
+        "Guard strip installation detail"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_annex_d_210_11_a",
+      "cite": "Annex D, Example D1(a) [210.11(A)]",
+      "section_node": "31_annex_d_examples_210_11_a",
+      "title": "Example method: minimum number of branch circuits from calculated load",
+      "intent": "Illustrate dividing the general lighting load by circuit voltage and rating to obtain the circuit count.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_service_or_feeder_design"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "circuit_count_derived_from_total_calculated_load_and_circuit_rating": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "General lighting VA and circuit count worksheet",
+        "Panel schedule matching computed circuit count"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_210_11",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_210_11_b",
+      "cite": "Annex D, Example D3 [210.11(B)]",
+      "section_node": "31_annex_d_examples_210_11_b",
+      "title": "Example method: install branch circuits only for the actual connected load",
+      "intent": "Illustrate that circuit count may follow actual connected load while feeder capacity reflects the full calculated load.",
+      "applies_when": [
+        {
+          "predicate": "load_calculated_on_va_per_area_basis"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "branch_circuits_installed_to_serve_actual_connected_load": true,
+        "feeder_and_panelboard_capacity_reflect_full_calculated_load": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Actual connected lighting load documentation",
+        "Feeder calculation at full Table 220.12 load"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_210_11_c_1",
+      "cite": "Annex D, Example D1(a) [210.11(C)(1)-(C)(3)]",
+      "section_node": "31_annex_d_examples_210_11_c_1",
+      "title": "Example method: dwelling small-appliance, laundry, and bathroom circuits",
+      "intent": "Illustrate the required dedicated dwelling circuits assumed in the Annex D examples.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_service_or_feeder_design"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "two_20a_small_appliance_circuits_included": true,
+        "one_20a_laundry_circuit_included": true,
+        "one_20a_bathroom_circuit_included_no_additional_load_calc": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule listing the dedicated dwelling circuits",
+        "Service calculation with 1500 VA per small-appliance/laundry circuit"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_210_11_c_2",
+        "31_annex_d_examples_210_11_c_3",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_11_c_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_215_2",
+      "cite": "Annex D, Example D3 [215.2]",
+      "section_node": "31_annex_d_examples_215_2",
+      "title": "Example method: minimum feeder or service conductor size from total load",
+      "intent": "Illustrate converting the total calculated load to amperes and selecting conductors per Table 310.16.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder_or_service_load_calculation"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "conductor_selected_from_total_va_divided_by_system_voltage": true,
+        "conductor_selected_per_table_310_16_at_75c_terminations": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Feeder sizing worksheet showing VA-to-amperes conversion",
+        "Conductor selection from Table 310.16"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_215_3",
+      "cite": "Annex D, Example D3(a) [215.3]",
+      "section_node": "31_annex_d_examples_215_3",
+      "title": "Example method: feeder overcurrent device at 125 percent of continuous load",
+      "intent": "Illustrate sizing feeder overcurrent protection for continuous plus noncontinuous loads.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder_ocpd_selection"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "ocpd_>=_noncontinuous_load_plus_125_percent_continuous_load": true,
+        "next_standard_size_selected_per_240_6": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "ocpd_assembly_listed_for_100_percent_rating"
+            }
+          ],
+          "effect": "125_percent_multiplier_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Continuous/noncontinuous load breakdown",
+        "OCPD selection worksheet with standard rating chosen"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_240_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_40",
+      "cite": "Annex D, Example D1(a) [220.40]",
+      "section_node": "31_annex_d_examples_220_40",
+      "title": "Example method: feeder/service load equals sum of branch loads after demand",
+      "intent": "Illustrate assembling the net calculated load from component loads and demand factors.",
+      "applies_when": [
+        {
+          "predicate": "is_feeder_or_service_load_calculation"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "net_calculated_load_sums_lighting_small_appliance_laundry_range_and_dryer_after_demand": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Line-by-line service calculation matching Annex D format",
+        "Demand factor citations for each load category"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_44",
+      "cite": "Annex D, Example D3 [220.44]",
+      "section_node": "31_annex_d_examples_220_44",
+      "title": "Example method: non-dwelling receptacle demand at 100/50 percent",
+      "intent": "Illustrate applying Table 220.44 to a store receptacle load.",
+      "applies_when": [
+        {
+          "predicate": "not",
+          "of": [
+            {
+              "predicate": "is_dwelling_unit"
+            }
+          ]
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "receptacles_at_180_va_each": true,
+        "first_10_kva_at_100_percent": true,
+        "remainder_at_50_percent": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Receptacle count and VA subtotal",
+        "Demand tier calculation"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_44"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_5",
+      "cite": "Annex D, Example D3 [220.5(B)]",
+      "section_node": "31_annex_d_examples_220_5",
+      "title": "Example method: round calculations to the nearest whole ampere",
+      "intent": "Illustrate the permitted rounding convention for load calculations.",
+      "applies_when": [
+        {
+          "predicate": "performing_article_220_load_calculation"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "fractions_smaller_than_0_5_a_permitted_to_be_dropped": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Calculation sheets showing rounding convention"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_51",
+      "cite": "Annex D, Example D4(b) [220.51]",
+      "section_node": "31_annex_d_examples_220_51",
+      "title": "Example method: fixed space heating at 100 percent of connected load",
+      "intent": "Illustrate including fixed electric space heating at full connected load in feeder calculations.",
+      "applies_when": [
+        {
+          "predicate": "has_fixed_electric_space_heating"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "space_heating_at_100_percent_of_connected_load": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Space heating connected load schedule",
+        "Feeder calculation line item"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_55",
+      "cite": "Annex D, Example D6 [220.55]",
+      "section_node": "31_annex_d_examples_220_55",
+      "title": "Example method: range demand per Table 220.55 including over-12 kW notes",
+      "intent": "Illustrate maximum demand for range loads, including the 5 percent-per-kW increase above 12 kW.",
+      "applies_when": [
+        {
+          "predicate": "has_household_electric_ranges"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "column_c_used_for_ranges_<=_12_kw": true,
+        "demand_increased_5_percent_per_kw_above_12_kw_per_note_1": true,
+        "unequal_ratings_averaged_per_note_2": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Range schedule with kW ratings",
+        "Table 220.55 demand worksheet with notes applied"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_61",
+      "cite": "Annex D, Example D1(a) [220.61]",
+      "section_node": "31_annex_d_examples_220_61",
+      "title": "Example method: neutral load with 70 percent range and dryer demand",
+      "intent": "Illustrate computing the feeder/service neutral using the permitted 70 percent factors.",
+      "applies_when": [
+        {
+          "predicate": "computing_feeder_or_service_neutral"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "range_neutral_at_70_percent_of_demand": true,
+        "dryer_neutral_at_70_percent_of_demand": true,
+        "neutral_amperes_=_total_va_divided_by_system_voltage": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Neutral calculation worksheet",
+        "Feeder schedule showing neutral size"
+      ],
+      "depends_on": [
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_b_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_82",
+      "cite": "Annex D, Example D2(a) [220.82]",
+      "section_node": "31_annex_d_examples_220_82",
+      "title": "Example method: dwelling optional calculation, heating larger than air conditioning",
+      "intent": "Illustrate the 220.82 optional method with first 10 kVA at 100 percent and remainder at 40 percent.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "using_optional_calculation_220_82"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "first_10_kva_general_load_at_100_percent": true,
+        "remainder_general_load_at_40_percent": true,
+        "separately_controlled_electric_heat_at_40_percent_where_ac_smaller": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Optional method worksheet per 220.82(B)/(C)",
+        "Heating and cooling equipment ratings"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_82_b"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_82_c",
+      "cite": "Annex D, Example D2(b) [220.82(A), 220.82(C)]",
+      "section_node": "31_annex_d_examples_220_82_c",
+      "title": "Example method: optional calculation with air conditioning larger than heating",
+      "intent": "Illustrate selecting the larger of AC or heating loads under 220.82(C) and omitting the smaller.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "using_optional_calculation_220_82"
+        },
+        {
+          "predicate": "air_conditioning_load_compared_to_heating_load"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "air_conditioning_included_at_100_percent_where_larger": true,
+        "smaller_of_ac_or_heat_omitted_per_220_82_c": true,
+        "service_ampacity_>=_100a_for_optional_method": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "AC vs heating kVA comparison worksheet",
+        "Optional method service calculation"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_82_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_220_84",
+      "cite": "Annex D, Example D4(b) [220.84]",
+      "section_node": "31_annex_d_examples_220_84",
+      "title": "Example method: multifamily optional calculation demand factors",
+      "intent": "Illustrate applying Table 220.84 unit-count demand factors to multifamily services and feeders.",
+      "applies_when": [
+        {
+          "predicate": "is_multifamily_dwelling"
+        },
+        {
+          "predicate": "units_have_electric_cooking_and_space_conditioning"
+        },
+        {
+          "predicate": "using_optional_calculation_220_84"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "total_connected_load_multiplied_by_table_220_84_factor": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Per-unit connected load tabulation",
+        "Table 220.84 demand factor application"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_240_4",
+      "cite": "Annex D, Example D3(a) [240.4]",
+      "section_node": "31_annex_d_examples_240_4",
+      "title": "Example method: OCPD must protect feeder conductors at their adjusted ampacity",
+      "intent": "Illustrate verifying conductor protection after ambient and fill derating, using next-higher-size allowance.",
+      "applies_when": [
+        {
+          "predicate": "feeder_conductors_subject_to_adjustment_and_correction"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "ocpd_protects_conductors_at_adjusted_ampacity": true,
+        "next_higher_standard_ocpd_permitted_per_240_4_b": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Adjusted ampacity calculation (ambient, conductor count)",
+        "OCPD-to-conductor coordination check"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_240_6"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_240_6",
+      "cite": "Annex D, Example D3(a) [240.6]",
+      "section_node": "31_annex_d_examples_240_6",
+      "title": "Example method: select the next standard OCPD rating per 240.6",
+      "intent": "Illustrate rounding computed protection values to standard ampere ratings.",
+      "applies_when": [
+        {
+          "predicate": "computed_ocpd_value_not_a_standard_rating"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "standard_ampere_rating_selected_per_240_6": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "OCPD selection worksheet showing standard rating"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_430_24",
+      "cite": "Annex D, Example D3(a) [430.24]",
+      "section_node": "31_annex_d_examples_430_24",
+      "title": "Example method: motor feeder load at 125 percent of largest motor plus others",
+      "intent": "Illustrate combining motor loads with other loads for feeder sizing.",
+      "applies_when": [
+        {
+          "predicate": "feeder_supplies_multiple_motors_or_motors_plus_other_loads"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "largest_motor_additional_25_percent_included": true,
+        "motor_full_load_currents_from_table_430_250": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor schedule with table full-load currents",
+        "Feeder calculation including 25 percent largest-motor adder"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_430_32",
+      "cite": "Annex D, Example D8 [430.32]",
+      "section_node": "31_annex_d_examples_430_32",
+      "title": "Example method: motor overload protection at 125 percent of nameplate current",
+      "intent": "Illustrate setting separate overload devices from motor nameplate full-load current.",
+      "applies_when": [
+        {
+          "predicate": "motor_protected_by_separate_overload_device"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "overload_trip_<=_125_percent_of_nameplate_full_load_current": true,
+        "increase_per_430_32_c_permitted_if_insufficient_to_start": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor nameplate data",
+        "Overload device settings schedule"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_430_52",
+      "cite": "Annex D, Example D8 [430.52]",
+      "section_node": "31_annex_d_examples_430_52",
+      "title": "Example method: motor branch-circuit short-circuit protection per Table 430.52",
+      "intent": "Illustrate selecting fuse or breaker ratings by motor and device type percentages.",
+      "applies_when": [
+        {
+          "predicate": "sizing_motor_branch_circuit_short_circuit_ground_fault_protection"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "device_rating_percentages_per_table_430_52": true,
+        "next_larger_standard_size_permitted_per_exceptions": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor protective device selection worksheet",
+        "Table 430.52 percentage applied per device type"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_550_18",
+      "cite": "Annex D, Example D11 [550.18]",
+      "section_node": "31_annex_d_examples_550_18",
+      "title": "Example method: mobile home load calculation and supply cord rating",
+      "intent": "Illustrate the per-leg mobile home calculation used to select the supply cord or feeder rating.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_home"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "lighting_small_appliance_laundry_at_3_va_per_ft2_plus_1500_va_circuits": true,
+        "first_3000_va_at_100_percent_remainder_at_35_percent": true,
+        "supply_rating_based_on_higher_calculated_leg_current": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Mobile home floor area and appliance schedule",
+        "Per-leg ampere tabulation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_552_47",
+      "cite": "Annex D, Example D12 [552.47]",
+      "section_node": "31_annex_d_examples_552_47",
+      "title": "Example method: park trailer load calculation and supply cord rating",
+      "intent": "Illustrate the per-leg park trailer calculation used to select the supply cord rating.",
+      "applies_when": [
+        {
+          "predicate": "is_park_trailer"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "lighting_small_appliance_laundry_at_3_va_per_ft2_plus_1500_va_circuits": true,
+        "first_3000_va_at_100_percent_remainder_at_35_percent": true,
+        "supply_rating_based_on_higher_calculated_leg_current": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Park trailer floor area and appliance schedule",
+        "Per-leg ampere tabulation"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_620_13_d",
+      "cite": "Annex D, Examples D9/D10 [620.13(D)]",
+      "section_node": "31_annex_d_examples_620_13_d",
+      "title": "Example method: elevator feeder conductor ampacity as sum of all currents",
+      "intent": "Illustrate sizing elevator feeder conductors from the sum of motor/drive currents before demand reduction.",
+      "applies_when": [
+        {
+          "predicate": "feeder_supplies_group_of_elevators"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "feeder_conductor_ampacity_=_sum_of_all_elevator_currents": true,
+        "controller_continuous_current_at_125_percent_added": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Elevator drive/motor current schedule",
+        "Feeder ampacity summation worksheet"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_620_13",
+        "31_annex_d_examples_620_13_a",
+        "31_annex_d_examples_620_13_b",
+        "31_annex_d_examples_620_13_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_620_14",
+      "cite": "Annex D, Examples D9/D10 [620.14]",
+      "section_node": "31_annex_d_examples_620_14",
+      "title": "Example method: elevator feeder demand factor per Table 620.14",
+      "intent": "Illustrate reducing elevator feeder ampacity with the multi-car demand factor, excluding constant loads.",
+      "applies_when": [
+        {
+          "predicate": "feeder_supplies_group_of_elevators"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "demand_factor_per_table_620_14_applied_to_diverse_loads": true,
+        "constant_loads_excluded_from_demand_reduction": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Elevator count and Table 620.14 factor used",
+        "Feeder ampacity calculation with demand applied"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_620_61",
+      "cite": "Annex D, Example D9 [620.61(B)(1)]",
+      "section_node": "31_annex_d_examples_620_61",
+      "title": "Example method: intermittent-duty elevator motors at 140 percent of nameplate",
+      "intent": "Illustrate using Table 430.22(E) duty-cycle percentages for elevator motor conductor sizing.",
+      "applies_when": [
+        {
+          "predicate": "elevator_motor_is_intermittent_duty"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "conductor_current_=_140_percent_of_nameplate_for_continuous_rated_motor_on_intermittent_duty": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Motor nameplate currents",
+        "Table 430.22(E) percentage application"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_620_13_d"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_13_1",
+      "cite": "Annex D, Example D2(b) [Table 220.55 note]",
+      "section_node": "31_annex_d_examples_13_1",
+      "title": "Example figure: 13.1 kVA combined oven/cooking-unit load at 55 percent demand",
+      "intent": "Illustrate the Table 220.55 demand factor applied to combined wall ovens and a cooking unit in Example D2(b).",
+      "applies_when": [
+        {
+          "predicate": "dwelling_has_multiple_wall_ovens_and_cooking_units_on_feeder"
+        },
+        {
+          "predicate": "using_annex_d_example_method"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "combined_cooking_load_demand_factor_percent": 55,
+        "neutral_at_70_percent_of_demand_load": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cooking appliance schedule",
+        "Table 220.55 demand and neutral worksheet"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_55"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_145_25",
+      "cite": "Annex D, Example D7 [310.12]",
+      "section_node": "31_annex_d_examples_145_25",
+      "title": "Example figure: dwelling service conductors at 83 percent of service rating",
+      "intent": "Illustrate the 310.12 dwelling service/feeder sizing method (rating times 0.83).",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_service_or_feeder_design"
+        },
+        {
+          "predicate": "sizing_per_310_12_permitted"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "conductor_ampacity_>=_service_rating_times_0_83": true,
+        "temperature_correction_applied_where_ambient_exceeds_30c": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Service rating selection",
+        "310.12 conductor sizing worksheet with any correction factors"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_200_0",
+      "cite": "Annex D, Example D5(a) [220.61(B)]",
+      "section_node": "31_annex_d_examples_200_0",
+      "title": "Example figure: neutral demand breakpoint at 200 amperes",
+      "intent": "Illustrate the further neutral demand factor with the first 200 A at 100 percent and the excess at 70 percent.",
+      "applies_when": [
+        {
+          "predicate": "computing_feeder_or_service_neutral"
+        },
+        {
+          "predicate": "neutral_unbalanced_load_>_200a"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "first_200a_at_100_percent": true,
+        "excess_over_200a_at_70_percent": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Neutral demand calculation with 200 A breakpoint"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_61",
+        "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_220_61_b_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_21_48",
+      "cite": "Annex D, Example D2(a) [220.82]",
+      "section_node": "31_annex_d_examples_21_48",
+      "title": "Example figure: 21.48 kVA optional-method load yields 100-ampere minimum service",
+      "intent": "Illustrate converting the optional-method calculated load to amperes and selecting the minimum service rating.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "using_optional_calculation_220_82"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "service_amperes_=_calculated_va_divided_by_240v": true,
+        "minimum_service_rating_per_230_42_and_230_79": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Optional method total kVA",
+        "Service rating selection worksheet"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_82"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_annex_d_34_79",
+      "cite": "Annex D, Example D2(c) [220.82]",
+      "section_node": "31_annex_d_examples_34_79",
+      "title": "Example figure: 34.79 kVA heat pump dwelling load served by 150-ampere service",
+      "intent": "Illustrate the optional-method result for a dwelling with heat pump and supplementary heat.",
+      "applies_when": [
+        {
+          "predicate": "is_dwelling_unit"
+        },
+        {
+          "predicate": "has_heat_pump_with_supplementary_heat"
+        },
+        {
+          "predicate": "using_optional_calculation_220_82"
+        }
+      ],
+      "requires": {
+        "type": "example_calculation",
+        "heat_pump_plus_65_percent_supplementary_heat_included": true,
+        "service_amperes_=_calculated_va_divided_by_240v": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "supplementary_heat_interlocked_off_during_heat_pump_operation"
+            }
+          ],
+          "effect": "heat_pump_kva_not_added_to_total"
+        }
+      ],
+      "evidence_required": [
+        "Heat pump and backup heat ratings",
+        "Optional method worksheet and service selection"
+      ],
+      "depends_on": [
+        "31_annex_d_examples_220_82_c"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    }
+  ]
+}

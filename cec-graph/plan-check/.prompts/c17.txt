@@ -1,0 +1,115 @@
+You are a plan-check rule extraction subagent. The graph community "Type AC/MC/AC-equivalent Cable" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c17_type_ac_mc_ac_equivalent_cable_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_17  314.17 Conductors Entering Boxes, Conduit Bodies, or Fitting
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_10  320.10 Uses Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_100  320.100 Construction
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_12  320.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_24  320.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_30  320.30 Securing and Supporting
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_320_80  320.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_10  330.10 Uses Permitted (Type MC)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_12  330.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_130  330.130 Hazardous Locations (MC-HL)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_24  330.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_30  330.30 Securing and Supporting
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_330_80  330.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_332_10  332.10 Uses Permitted (Type MI)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_332_12  332.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_332_24  332.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_332_30  332.30 Securing and Supporting
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_332_80  332.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_10  334.10 Uses Permitted (NM/NMC)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_12  334.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_15  334.15 Exposed Work
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_24  334.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_30  334.30 Securing and Supporting
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_334_80  334.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_336_10  336.10 Uses Permitted (Type TC)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_336_12  336.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_336_130  336.130 Hazardous Location Cable (TC-ER-HL)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_336_24  336.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_336_80  336.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_337_10  337.10 Uses Permitted (Type P)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_337_12  337.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_337_80  337.80 Ampacity
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_338_10  338.10 Uses Permitted (SE/USE)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_338_100  338.100 Construction
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_338_12  338.12 Uses Not Permitted
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_338_24  338.24 Bending Radius
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_340_10  340.10 Uses Permitted (Type UF)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_340_12  340.12 Uses Not Permitted
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_310_15_c_1  Table 310.15(C)(1) Ampacity Adjustment
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_table_402_5  Table 402.5 Ampacity (small AWG)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_ac  Type AC (Armored Cable)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_mc  Type MC (Metal-Clad Cable)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_mi  Type MI (Mineral-Insulated, Metal-Sheathed)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_nm  Type NM (Nonmetallic-Sheathed)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_nmc  Type NMC (Nonmetallic-Sheathed corrosion-resistant)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_p  Type P Cable
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_se  Type SE (Service-Entrance)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_tc  Type TC (Power and Control Tray Cable)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_uf  Type UF (Underground Feeder/Branch-Circuit)
+  07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_cable_type_use  Type USE (Underground Service-Entrance)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met_314_17>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Type AC/MC/AC-equivalent Cable",
+  "community_id": 17,
+  "extracted_from_sections": ["07_chapter_3_wiring_methods_and_materials_article_312_cabinets_cutout_boxes_and_met.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 9-38 rules. After writing the file, just confirm "wrote c17_type_ac_mc_ac_equivalent_cable_rules.json with N rules" and stop.

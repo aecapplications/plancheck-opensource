@@ -1,0 +1,718 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Community 31",
+  "community_id": 31,
+  "extracted_from_sections": [
+    "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt",
+    "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_250_32_grounding_at_separate_structures",
+      "cite": "250.32 (as invoked by 550.32(A) and 547.9(B)(3))",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_250_32",
+      "title": "Ground and bond feeder-supplied buildings or structures per 250.32",
+      "intent": "Ensure a building or structure supplied by a feeder or branch circuit (including mobile home service disconnects and agricultural buildings fed from a distribution point) has proper grounding and bonding so fault current has a low-impedance return path.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_mobile_home_service_disconnecting_means"
+            },
+            {
+              "predicate": "is_agricultural_building_supplied_from_distribution_point"
+            },
+            {
+              "predicate": "is_building_or_structure_supplied_by_feeder_or_branch_circuit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "grounding_at_disconnecting_means_per": "250.32",
+        "agricultural_supplement": [
+          "equipment_grounding_conductor_not_smaller_than_largest_supply_conductor_same_material_or_adjusted_per_table_250_122",
+          "equipment_grounding_conductor_connected_to_grounded_conductor_and_site_isolating_device_enclosure_at_distribution_point"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_existing_agricultural_building_for_other_than_livestock"
+            },
+            {
+              "predicate": "qualifies_under_250_32_b_1_exception_1"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "One-line diagram showing grounding electrode system at each separately supplied building or structure",
+        "Feeder schedule showing equipment grounding conductor size vs Table 250.122",
+        "Grounding/bonding detail at the mobile home service disconnect or site-isolating device",
+        "Site plan identifying distribution point and buildings served"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_404_14_snap_switch_rating_scope",
+      "cite": "404.14 (as invoked by 410.139 and 550.15(G)(2))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_404_14",
+      "title": "Apply 404.14 rating rules to snap switches controlling lighting and motor loads",
+      "intent": "Scope rule: snap switches serving luminaire circuits (410.139) and mobile home motor or other loads (550.15(G)(2)) must be rated and applied in accordance with 404.14 so the switch is suitable for the load it controls.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_snap_switch_in_electric_discharge_lighting_system_<=_1000v"
+            },
+            {
+              "predicate": "is_mobile_home_switch_for_motor_or_other_loads"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "device_rating",
+        "switch_rating_and_use_per": "404.14",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Switch schedule with ampere and voltage ratings",
+        "Connected load per switched circuit (lighting or motor nameplate)",
+        "Manufacturer cut sheets showing switch type (ac general-use, ac-dc, etc.)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_404_9_metal_faceplate_grounding_mobile_home",
+      "cite": "550.15(D) invoking 404.9(B)",
+      "section_node": "cec_404_9",
+      "title": "Install metal faceplates in mobile homes per 404.9(B)",
+      "intent": "Ensure metal faceplates on switches in mobile and manufactured homes are effectively grounded so they cannot remain energized under fault conditions.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "has_metal_faceplates"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_installation",
+        "faceplate_installation_per": [
+          "404.9(B)",
+          "406.6(B)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Device and faceplate schedule identifying metal faceplates",
+        "Wiring detail showing equipment grounding conductor termination at switch/receptacle yokes",
+        "Listing information for grounding-type devices used with metal faceplates"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_15"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_406_9_outdoor_receptacles_mobile_home",
+      "cite": "550.20(A) invoking 406.9",
+      "section_node": "cec_406_9",
+      "title": "Provide outdoor receptacles at mobile homes complying with 406.9",
+      "intent": "Ensure receptacles installed outdoors at mobile and manufactured homes have covers and enclosures suitable for damp or wet locations per 406.9.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "receptacle_installed_outdoors"
+        }
+      ],
+      "requires": {
+        "type": "receptacle_installation",
+        "outdoor_receptacle_per": "406.9",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Receptacle schedule identifying outdoor receptacle locations",
+        "Cut sheets for weather-resistant receptacles and in-use (extra-duty) covers",
+        "Elevation/plan showing receptacle mounting height and exposure"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_20"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_139_snap_switches_for_luminaires",
+      "cite": "410.139",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_139",
+      "title": "Snap switches in electric-discharge lighting systems shall comply with 404.14",
+      "intent": "Ensure snap switches used in electric-discharge lighting systems of 1000 volts or less are rated for the lighting load they control.",
+      "applies_when": [
+        {
+          "predicate": "is_electric_discharge_lighting_system_open_circuit_voltage_<=_1000v"
+        },
+        {
+          "predicate": "uses_snap_switch"
+        }
+      ],
+      "requires": {
+        "type": "device_rating",
+        "snap_switch_compliance_per": "404.14",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Lighting control schedule identifying snap switches and controlled loads",
+        "Switch ratings (amperes, volts) vs connected ballast/driver load",
+        "Manufacturer listing data for switches"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_404_14"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_2_definitions_scope",
+      "cite": "550.2",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_2",
+      "title": "Apply Article 550 definitions to classify mobile and manufactured homes",
+      "intent": "Scope rule: establish which structures are mobile homes or manufactured homes so that Article 550 requirements trigger; the manufactured home definition applies throughout the Code.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "all_of",
+              "of": [
+                {
+                  "predicate": "is_transportable_structure_on_permanent_chassis"
+                },
+                {
+                  "predicate": "any_of",
+                  "of": [
+                    {
+                      "predicate": "traveling_mode_width_>=_8_ft"
+                    },
+                    {
+                      "predicate": "traveling_mode_length_>=_40_ft"
+                    },
+                    {
+                      "predicate": "erected_area_>=_320_ft2"
+                    }
+                  ]
+                },
+                {
+                  "predicate": "designed_as_dwelling_with_or_without_permanent_foundation"
+                }
+              ]
+            },
+            {
+              "predicate": "is_factory_assembled_dwelling_without_permanent_foundation_connected_to_required_utilities"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "classification": "structure_is_mobile_or_manufactured_home_subject_to_article_550",
+        "note": "The term mobile home includes manufactured homes and excludes park trailers defined in 552.4.",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_park_trailer_per_552_4"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Manufacturer data plate showing structure dimensions and chassis construction",
+        "HUD certification or manufacturer voluntary certification filing where size thresholds are not met",
+        "Site plan identifying the unit as dwelling use"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_550_12_branch_circuits_required",
+      "cite": "550.12",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_12",
+      "title": "Provide required branch circuits in each mobile home",
+      "intent": "Ensure each mobile home has enough dedicated branch circuits for lighting, small-appliance, laundry, general appliance, and bathroom loads so circuits are not overloaded.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_provision",
+        "constraints": [
+          "lighting_circuit_count_>=_3va_per_ft2_times_outside_dimensions_divided_by_120v_times_circuit_rating",
+          "kitchen_pantry_dining_breakfast_small_appliance_circuits_>=_2_at_20a_with_no_other_outlets",
+          "kitchen_countertop_receptacles_supplied_by_>=_2_small_appliance_circuits",
+          "laundry_area_dedicated_20a_circuit_with_no_other_outlets_where_laundry_area_provided",
+          "fixed_appliance_load_<=_50_percent_of_circuit_rating_where_lighting_outlets_on_same_circuit",
+          "single_cord_and_plug_appliance_on_dedicated_circuit_<=_80_percent_of_circuit_rating",
+          "bathroom_receptacles_supplied_by_>=_1_20a_circuit_with_no_other_outlets"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_outlet_solely_for_electric_clock_in_550_12_b_rooms"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "receptacle_for_supplemental_equipment_and_lighting_on_gas_fired_range_oven_or_cooktop"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "single_receptacle_for_refrigeration_on_individual_branch_circuit_rated_>=_15a"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Panelboard schedule showing circuit count, ratings, and dedicated small-appliance/laundry/bathroom circuits",
+        "Floor plan with outside dimensions used in the 3 VA/ft2 lighting circuit calculation",
+        "Receptacle layout showing which circuits serve kitchen countertops, laundry, and bathrooms",
+        "Appliance schedule with nameplate ratings vs circuit ratings"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_18"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_14_luminaires_and_appliances",
+      "cite": "550.14",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_14",
+      "title": "Secure appliances for transit, keep appliances accessible, and use wet-location luminaires over tubs/showers",
+      "intent": "Prevent transit damage and shock hazards from appliances and luminaires in mobile homes, including moisture exposure at bathtubs and showers.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        }
+      ],
+      "requires": {
+        "type": "equipment_installation",
+        "constraints": [
+          "appliances_securely_fastened_for_transit",
+          "every_appliance_accessible_for_inspection_service_repair_replacement_without_removal_of_permanent_construction",
+          "luminaire_over_bathtub_or_in_shower_stall_enclosed_gasketed_type_listed_for_wet_locations",
+          "pendant_luminaires_and_pendant_cords_listed"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire schedule showing enclosed/gasketed wet-location listing for tub and shower luminaires",
+        "Appliance mounting/fastening details for transit",
+        "Reflected ceiling plan showing luminaire locations relative to bathtub/shower"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_16"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_15_wiring_methods_and_materials",
+      "cite": "550.15",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_15",
+      "title": "Use Code wiring methods in mobile homes with cable protection and wet-location under-chassis wiring",
+      "intent": "Ensure mobile home wiring uses recognized methods and is protected against physical damage, stowage damage, stud penetration damage, and weather exposure under the chassis.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "constraints": [
+          "nonmetallic_boxes_only_with_nonmetallic_cable_or_raceways",
+          "exposed_nonmetallic_cable_<=_15_in_above_floor_protected_by_covering_boards_guard_strips_or_raceways",
+          "cable_within_1_25_in_of_stud_surface_protected_by_steel_plate_or_tube_wall_thickness_>=_0.053_in",
+          "type_nm_or_se_cable_not_used_to_connect_range_or_dryer",
+          "range_dryer_metal_covered_cable_or_fmc_unsupported_length_>=_3_ft",
+          "rmc_or_imc_at_enclosure_with_locknut_and_bushing_two_locknuts_one_inside_one_outside",
+          "lighting_circuit_switches_rated_>=_10a_120_to_125v_and_not_less_than_connected_load",
+          "exposed_under_chassis_line_voltage_wiring_in_conduit_or_raceway_identified_for_wet_locations_with_wet_location_conductors",
+          "boxes_fittings_cabinets_securely_fastened_and_supported_from_structural_member",
+          "appliance_terminals_over_60c_served_by_conductors_with_suitable_insulation_or_tap_per_550_15_j_2"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "snap_in_type_boxes_or_devices_with_integral_enclosures_identified_for_the_use"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Wiring method specification (cable types, raceways) for the unit",
+        "Details of cable protection at studs and within 15 in. of the floor",
+        "Under-chassis wiring detail showing wet-location raceway and conductor types",
+        "Range/dryer connection detail showing cable type and unsupported length",
+        "Switch schedule with ratings"
+      ],
+      "depends_on": [
+        "cec_404_9",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_404_14"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_16_grounding",
+      "cite": "550.16",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_16",
+      "title": "Ground mobile home through panelboard grounding bus; isolate neutral from frame",
+      "intent": "Prevent the mobile home chassis and appliance frames from becoming energized by keeping the grounded (neutral) conductor insulated from grounding parts and bonding all exposed metal to the panelboard grounding terminal.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        }
+      ],
+      "requires": {
+        "type": "grounding_and_bonding",
+        "constraints": [
+          "grounding_via_green_insulated_conductor_in_supply_cord_or_feeder_to_grounding_bus_in_service_entrance_equipment",
+          "mobile_home_frame_and_appliance_frames_not_connected_to_grounded_circuit_conductor",
+          "grounded_conductor_insulated_from_grounding_conductors_and_enclosures",
+          "neutral_bonding_screws_straps_buses_removed_and_discarded_in_panelboard_and_appliances",
+          "range_and_dryer_connections_4_conductor_cord_with_3_pole_4_wire_grounding_plug_or_ac_mc_cable_or_fmc",
+          "exposed_metal_parts_bonded_to_panelboard_grounding_terminal",
+          "chassis_bonding_conductor_>=_8_awg_copper_between_panelboard_and_accessible_chassis_terminal"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "panelboard_is_service_equipment_per_550_32_b"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "Where the panelboard is the service equipment, the neutral conductors and the equipment grounding bus shall be connected."
+        }
+      ],
+      "evidence_required": [
+        "Panelboard detail showing isolated neutral bus and separate grounding bus",
+        "Chassis bonding conductor size and termination detail (8 AWG copper minimum)",
+        "Range/dryer 4-wire connection detail",
+        "Bonding details for metallic piping, ducts, roof, and exterior covering"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_32",
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_250_32"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_18_load_calculations",
+      "cite": "550.18",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_18",
+      "title": "Calculate mobile home supply-cord and panelboard load by the 550.18 method",
+      "intent": "Standardize sizing of each mobile home feeder assembly using the Article 550 calculation in lieu of Article 220 so the power supply matches the connected load.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "sizing_supply_cord_or_distribution_panelboard_feeder_assembly"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "constraints": [
+          "basis_3_wire_120_240v_supply_with_120v_loads_balanced",
+          "lighting_va_=_length_x_width_x_3va_per_ft2",
+          "small_appliance_va_=_1500va_per_20a_appliance_receptacle_circuit",
+          "laundry_va_=_1500va",
+          "net_va_=_first_3000va_at_100_percent_plus_remainder_at_35_percent",
+          "add_nameplate_amperes_for_motors_and_heaters_omitting_smaller_of_heating_and_cooling",
+          "add_25_percent_of_largest_motor_current",
+          "appliance_total_at_75_percent_where_more_than_3_of_disposer_dishwasher_water_heater_dryer_oven_cooktop",
+          "freestanding_range_demand_per_550_18_b_5_table"
+        ],
+        "alternative": "optional_method_per_220_82_permitted",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Load calculation worksheet per 550.18 (or 220.82 optional method)",
+        "Floor dimensions used for lighting VA",
+        "Appliance and HVAC nameplate data",
+        "Selected feeder assembly / power-supply cord rating vs calculated amperes per leg"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_19_multi_section_interconnection",
+      "cite": "550.19",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_19",
+      "title": "Join circuits between multi-section home units with listed fixed wiring, accessible for disassembly",
+      "intent": "Ensure circuits spanning sections of multi-section mobile or manufactured homes are joined with approved fixed wiring methods that can be safely disassembled for relocation.",
+      "applies_when": [
+        {
+          "predicate": "is_multiple_section_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "circuit_crosses_between_adjacent_sections"
+        }
+      ],
+      "requires": {
+        "type": "wiring_method",
+        "constraints": [
+          "approved_and_listed_fixed_type_wiring_methods_for_cross_section_junctions",
+          "circuit_junction_accessible_for_disassembly_when_home_prepared_for_relocation"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Crossover connection details/listing for inter-section wiring",
+        "Plan showing junction locations and access provisions",
+        "For movable expandable/multiunit homes without permanent feeders: disconnecting means and branch-circuit protection in each unit satisfying 550.10 after assembly"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_20_outdoor_outlets_and_equipment",
+      "cite": "550.20",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_20",
+      "title": "List outdoor luminaires/equipment for wet locations and label outside HVAC branch-circuit connections",
+      "intent": "Protect outdoor electrical equipment at mobile homes from moisture and ensure field-connected outside heating/air-conditioning circuits are terminated and identified for safe connection.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_or_manufactured_home"
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "has_outdoor_luminaires_or_equipment"
+            },
+            {
+              "predicate": "has_branch_circuit_for_outside_heating_or_air_conditioning_equipment"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "equipment_installation",
+        "constraints": [
+          "outdoor_luminaires_and_equipment_listed_for_wet_locations_or_outdoor_use",
+          "luminaires_under_home_or_roof_extensions_listed_for_damp_locations",
+          "outdoor_receptacles_comply_with_406_9",
+          "outside_hvac_branch_circuit_terminates_in_listed_outlet_box_or_disconnecting_means_on_outside_of_home",
+          "permanent_label_adjacent_to_outlet_box_stating_ampere_rating_voltage_conductor_ampacity_and_disconnect_within_sight",
+          "label_min_size_3_in_x_1_75_in_and_min_thickness_0_020_in_etched_brass_stainless_or_equivalent"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Outdoor equipment schedule with wet/damp location listings",
+        "Detail of outside HVAC connection outlet box and permanently affixed label text",
+        "Branch-circuit rating and conductor ampacity for outside HVAC circuit"
+      ],
+      "depends_on": [
+        "cec_406_9"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_31_park_demand_factors",
+      "cite": "550.31",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_31",
+      "title": "Calculate mobile home park wiring on at least 16,000 VA per lot or the 550.18 load",
+      "intent": "Ensure mobile home park services and feeders are sized for the largest typical home each lot will accept, with demand factors applied only as permitted by Table 550.31.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_home_park_electrical_wiring_system"
+        }
+      ],
+      "requires": {
+        "type": "load_calculation",
+        "basis_voltage": "120/240",
+        "per_lot_load_va_>=": "larger_of_16000va_or_550_18_calculated_load_for_largest_typical_home_lot_will_accept",
+        "feeder_or_service_demand_factors": "table_550_31_permitted",
+        "no_demand_factor_for_other_loads_except_as_provided_in_code": true,
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Park service/feeder load calculation showing per-lot VA basis (>= 16,000 VA or 550.18 result)",
+        "Table 550.31 demand factor application by number of mobile homes",
+        "One-line diagram of park distribution with feeder and service sizes"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_18"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_32_a_service_equipment_location_rating",
+      "cite": "550.32(A), 550.32(C), 550.32(E)",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_32",
+      "title": "Locate mobile home service equipment adjacent to (not on) the home, within sight and 30 ft, rated 100 A minimum",
+      "intent": "Ensure a readily accessible, adequately rated service disconnect exists near each mobile home so power can be removed quickly and the feeder assembly connected by a permanent wiring method.",
+      "applies_when": [
+        {
+          "predicate": "is_mobile_home_service_equipment"
+        }
+      ],
+      "requires": {
+        "type": "service_equipment",
+        "constraints": [
+          "service_equipment_located_adjacent_to_mobile_home_not_mounted_in_or_on_home",
+          "service_equipment_in_sight_from_and_<=_30_ft_from_exterior_wall_of_home_served",
+          "remote_service_permitted_only_with_service_rated_disconnect_in_sight_and_<=_30_ft_from_home",
+          "rating_>=_100a_at_120_240v",
+          "permanent_wiring_method_provision_for_feeder_assembly_connection",
+          "power_outlet_receptacles_<=_50a_with_appropriate_overcurrent_protection_and_figure_550_10_c_configuration",
+          "outside_receptacles_gfci_protected_per_210_8_a",
+          "means_provided_for_fixed_wiring_connection_of_accessory_buildings_or_additional_outside_equipment"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "receptacle_provides_power_to_mobile_or_manufactured_home_per_550_10"
+            }
+          ],
+          "effect": "rule_does_not_apply",
+          "note": "GFCI protection is not required for the receptacle supplying the home feeder assembly."
+        }
+      ],
+      "evidence_required": [
+        "Site plan showing service equipment location, sight line, and distance to home exterior wall",
+        "Service equipment rating (amperes, volts) and receptacle configuration",
+        "Grounding detail at disconnecting means per 250.32",
+        "GFCI protection specification for additional outside receptacles"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_250_32"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_550_32_b_manufactured_home_on_unit_service",
+      "cite": "550.32(B)",
+      "section_node": "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_32",
+      "title": "Permit service equipment in or on a manufactured home only under the seven 550.32(B) conditions",
+      "intent": "Allow on-unit service equipment for manufactured homes only when anchoring, service installation, grounding electrode provisions, and warning labeling ensure a safe permanent installation.",
+      "applies_when": [
+        {
+          "predicate": "is_manufactured_home"
+        },
+        {
+          "predicate": "service_equipment_installed_in_or_on_unit"
+        }
+      ],
+      "requires": {
+        "type": "service_equipment",
+        "constraints": [
+          "manufacturer_installation_instructions_require_anchoring_system_or_permanent_foundation",
+          "service_installation_complies_with_article_230_parts_i_through_vii",
+          "means_provided_for_grounding_electrode_conductor_connection_and_routing_outside_structure",
+          "service_bonding_and_grounding_per_article_250_parts_i_through_v",
+          "instructions_include_one_grounding_method_and_reference_article_250_for_others",
+          "minimum_grounding_electrode_conductor_size_specified_in_instructions",
+          "warning_label_per_110_21_b_stating_do_not_provide_power_until_grounding_electrode_installed_and_connected"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer written installation instructions (anchoring/foundation, grounding method, GEC size)",
+        "Warning label text and location on or adjacent to service equipment",
+        "Service installation details showing Article 230 compliance",
+        "Grounding electrode conductor routing detail to outside the structure"
+      ],
+      "depends_on": [
+        "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_250_32"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

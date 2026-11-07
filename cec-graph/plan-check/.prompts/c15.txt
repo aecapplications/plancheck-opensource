@@ -1,0 +1,124 @@
+You are a plan-check rule extraction subagent. The graph community "Interconnected Power Sources — Article 705" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c15_interconnected_power_sources_article_705_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_1  705.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_10  705.10 Identification of Power Sources
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_11  705.11 Supply-Side Source Connections
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12  705.12 Load-Side Source Connections
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12_a  705.12(A) Dedicated Overcurrent and Disconnect
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12_b  705.12(B) Bus or Conductor Ampere Rating
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12_c  705.12(C) Marking
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12_d  705.12(D) Suitable for Backfeed
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_12_e  705.12(E) Fastening
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_13  705.13 Power Control Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_14  705.14 Output Characteristics
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_16  705.16 Interrupting and Short-Circuit Current Rating
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_2  705.2 Definitions
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_20  705.20 Disconnecting Means Source
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_25  705.25 Wiring Methods
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_28  705.28 Circuit Sizing and Current
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_30  705.30 Overcurrent Protection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_32  705.32 Ground-Fault Protection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_40  705.40 Loss of Primary Source
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_45  705.45 Unbalanced Interconnections
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_50  705.50 System Operation Microgrid
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_6  705.6 Equipment Approval
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_60  705.60 Primary Power Source Connection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_65  705.65 Reconnection to Primary Power Source
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_70  705.70 Microgrid Interconnect Devices MID
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_8  705.8 System Installation
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_1  706.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_10  706.10 California Energy Code Requirements CEC
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_15  706.15 Disconnecting Means
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_16  706.16 Connection to Energy Sources
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_2  706.2 Definitions
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_20  706.20 General Installation
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_21  706.21 Directory Identification of Power Sources
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_3  706.3 Qualified Personnel
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_30  706.30 Circuit Sizing and Current
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_31  706.31 Overcurrent Protection
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_33  706.33 Charge Control
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_4  706.4 System Requirements
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_40  706.40 General Flow Battery
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_41  706.41 Electrolyte Classification
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_42  706.42 Electrolyte Containment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_43  706.43 Flow Controls
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_44  706.44 Pumps and Fluid Handling Equipment
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_5  706.5 Listing
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_50  706.50 General Other ESS Technologies
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_6  706.6 Multiple Systems
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_7  706.7 Maintenance
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_8  706.8 Storage Batteries
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_706_9  706.9 Maximum Voltage
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_710_1  710.1 Scope
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_710_10  710.10 Identification of Power Sources
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_710_12  710.12 Stand-Alone Inverter Input Circuit Current
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_710_15  710.15 General
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_710_6  710.6 Equipment Approval
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_energy_storage_system  Energy Storage System ESS (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_interconnected_power_source  Interconnected Electric Power Production Source (named)
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_microgrid_interconnect_device  Microgrid Interconnect Device MID
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_microgrid_system  Microgrid System
+  23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_stand_alone_system  Stand-Alone System (named)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo_705_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Interconnected Power Sources — Article 705",
+  "community_id": 15,
+  "extracted_from_sections": ["23_chapter_7_special_conditions_article_700_emergency_systems_article_710_stand_alo.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 13-54 rules. After writing the file, just confirm "wrote c15_interconnected_power_sources_article_705_rules.json with N rules" and stop.

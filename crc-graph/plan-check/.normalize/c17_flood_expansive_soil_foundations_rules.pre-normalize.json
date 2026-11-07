@@ -1,0 +1,566 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Flood & Expansive Soil Foundations",
+  "community_id": 17,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_c.md",
+    "chapter_4_foundations_a.md",
+    "chapter_4_foundations_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r322_1",
+      "cite": "R322.1",
+      "section_node": "r322_1",
+      "title": "Flood-resistant design required in flood hazard areas",
+      "intent": "Ensure buildings located wholly or partly in flood hazard areas are designed and constructed to resist flood loads using the provisions of R322 (or ASCE 24 in floodways).",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "located_in_flood_hazard_area_per_table_r301_2"
+            },
+            {
+              "predicate": "located_in_a_zone"
+            },
+            {
+              "predicate": "located_in_v_zone"
+            },
+            {
+              "predicate": "located_in_coastal_a_zone"
+            },
+            {
+              "predicate": "is_substantial_improvement_in_flood_hazard_area"
+            },
+            {
+              "predicate": "is_repair_of_substantial_damage_in_flood_hazard_area"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "flood_resistant_design",
+        "design_basis": "section_r322_provisions",
+        "if_in_floodway": "design_per_ASCE_24",
+        "if_in_multiple_flood_hazard_areas": "comply_with_most_restrictive",
+        "tested_per": [
+          "std_asce_24"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "design_uses_ASCE_24_alternative_per_r322_1_1"
+            }
+          ],
+          "effect": "alternative_compliance_path_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Site plan showing FEMA flood zone designation (A, V, Coastal A) per Table R301.2",
+        "Determination of design flood elevation (DFE) including basis (BFE, FIRM map, jurisdictional map)",
+        "Sealed structural calculations demonstrating flotation, collapse, and lateral movement resistance to flood loads",
+        "ASCE 24 compliance documentation if building is located in a designated floodway",
+        "Registered design professional's seal on flood-design construction documents"
+      ],
+      "depends_on": [
+        "table_r301_2",
+        "section_r322_1_1",
+        "r322_2",
+        "r322_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required",
+      "_was_section_node": "section_r322_1"
+    },
+    {
+      "id": "rule_r322_2",
+      "cite": "R322.2",
+      "section_node": "r322_2",
+      "title": "Elevation, openings, and foundations in A-Zone flood hazard areas",
+      "intent": "Protect buildings in non-coastal flood hazard areas (A Zones) by elevating the lowest floor above DFE, providing flood openings in enclosed areas below DFE, and using foundations that resist flood loads.",
+      "applies_when": [
+        {
+          "predicate": "located_in_flood_hazard_area_a_zone"
+        },
+        {
+          "predicate": "not_located_in_coastal_a_zone"
+        },
+        {
+          "predicate": "not_located_in_v_zone"
+        }
+      ],
+      "requires": {
+        "type": "flood_zone_a_construction",
+        "elevation": {
+          "general": "lowest_floor_>=_BFE_+_1ft_or_DFE_whichever_higher",
+          "ao_shallow_flooding": "lowest_floor_>=_highest_adjacent_grade_+_FIRM_depth_+_1ft_or_>=_3ft_if_no_depth",
+          "basements_below_grade_all_sides": "elevated_>=_BFE_+_1ft_or_DFE_whichever_higher",
+          "garage_carport_floors": "elevated_per_item_1_or_2_OR_at_or_above_grade_on_one_side"
+        },
+        "enclosed_areas_below_DFE": {
+          "use_limited_to": [
+            "vehicle_parking",
+            "building_access",
+            "storage"
+          ],
+          "flood_openings": {
+            "min_net_area": "1_sqin_per_sqft_of_enclosed_area_or_engineered_per_ASCE_24_2_7_2_2",
+            "min_dimension": ">=_3in_in_any_direction",
+            "count": ">=_2_openings_on_different_sides_per_enclosed_area",
+            "bottom_of_opening": "<=_1ft_above_higher_of_interior_or_exterior_grade",
+            "covers_must_allow_automatic_flow": true
+          }
+        },
+        "foundations": "comply_with_chapter_4",
+        "underground_tanks": "anchored_to_prevent_flotation_collapse_lateral_movement_at_base_flood",
+        "above_ground_tanks": "elevated_per_R322_2_1_or_anchored",
+        "tested_per": [
+          "std_asce_24"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "foundation_walls_not_designed_per_R404"
+            },
+            {
+              "any_of": [
+                {
+                  "predicate": "wall_is_6in_plain_masonry_unsupported_height_<=_3ft"
+                },
+                {
+                  "predicate": "wall_is_8in_plain_masonry_unsupported_height_<=_4ft"
+                },
+                {
+                  "predicate": "wall_is_8in_reinforced_masonry_unsupported_height_<=_8ft"
+                }
+              ]
+            }
+          ],
+          "effect": "prescriptive_unsupported_height_limits_apply_in_lieu_of_R404_design"
+        }
+      ],
+      "evidence_required": [
+        "Elevation Certificate or sealed elevation drawing showing lowest-floor elevation vs. BFE+1ft / DFE",
+        "Plan and section drawings of flood openings (count, size, sill height, location on different sides)",
+        "Engineered-opening certification by registered design professional, if used (per ASCE 24 Section 2.7.2.2)",
+        "Foundation drawings demonstrating compliance with Chapter 4 or with the prescriptive masonry exception",
+        "Tank anchoring details (calculations and connection details) for underground and above-ground tanks"
+      ],
+      "depends_on": [
+        "r322_1",
+        "section_r322_2_1",
+        "section_r322_2_2",
+        "section_r322_2_2_1",
+        "section_r322_2_3",
+        "section_r322_2_4",
+        "chapter_4_foundations",
+        "section_r404"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required",
+      "_was_section_node": "section_r322_2"
+    },
+    {
+      "id": "rule_r322_3",
+      "cite": "R322.3",
+      "section_node": "r322_3",
+      "title": "Coastal high-hazard area (V Zone / Coastal A Zone) construction requirements",
+      "intent": "Protect buildings in coastal high-hazard areas from wave action, scour, and erosion by elevating on pilings or columns, restricting fill, and limiting wall and slab construction below DFE.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "located_in_v_zone"
+            },
+            {
+              "predicate": "located_in_coastal_high_hazard_area"
+            },
+            {
+              "predicate": "located_in_designated_coastal_a_zone"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "coastal_high_hazard_construction",
+        "site": {
+          "new_or_substantial_improvement": "located_landward_of_mean_high_tide",
+          "dune_or_mangrove_alteration": "engineering_analysis_demonstrating_no_increase_in_flood_damage_potential"
+        },
+        "elevation": {
+          "lowest_horizontal_structural_member": "at_or_above_BFE_+_1ft_or_DFE_whichever_higher",
+          "basements_below_grade_all_sides": "prohibited",
+          "fill_for_structural_support": "prohibited"
+        },
+        "foundations": {
+          "type": "pilings_or_columns_with_adequate_anchorage",
+          "piling_embedment": "resists_combined_wave_and_wind_lateral_uplift_with_scour_consideration",
+          "spread_footing_mat_raft": "prohibited_where_R401_4_soil_investigation_indicates_scour_or_erosion_unless_designed_per_ASCE_24",
+          "loads": "design_flood_wave_loads_combined_with_code_wind_loads",
+          "documents": "sealed_per_R322_3_9"
+        },
+        "concrete_slabs_below_structure": {
+          "options": [
+            "structurally_independent_frangible_<=_4in_thick_no_reinforcement_no_turned_down_edges_isolation_joints_at_pilings_control_joints_<=_4ft",
+            "self_supporting_structural_slab_remaining_intact_under_base_flood_with_main_structure_designed_for_added_loads_and_scour"
+          ]
+        },
+        "walls_below_DFE": {
+          "must_be_non_structural": true,
+          "options": [
+            "insect_screening_or_open_lattice",
+            "breakaway_walls_10_to_20_psf_ASD",
+            "engineered_breakaway_with_RDP_seal_when_wind_>_20_psf_ASD"
+          ],
+          "breakaway_walls_must_have_flood_openings_per_R322_2_2_item_2": true
+        },
+        "enclosed_areas_below_DFE_use_limited_to": [
+          "vehicle_parking",
+          "building_access",
+          "storage"
+        ],
+        "stairways_ramps_below_DFE": "open_riser_or_breakaway_or_retractable_or_designed_to_resist_flood_loads",
+        "decks_porches": "elevated_per_R322_3_2_and_either_meet_foundation_requirements_or_cantilevered_knee_braced",
+        "tanks": "anchored_or_elevated_per_R322_3_2_with_platforms_cantilevered_or_knee_braced",
+        "tested_per": [
+          "std_asce_24"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "located_in_coastal_a_zone"
+            },
+            {
+              "predicate": "uses_stem_wall_foundation_supporting_floor_system_with_backfill_to_underside"
+            },
+            {
+              "predicate": "stem_wall_designed_for_wave_action_debris_impact_erosion_local_scour"
+            }
+          ],
+          "effect": "stem_wall_foundation_permitted_in_lieu_of_pilings_columns",
+          "additional_requirement": "deep_footings_required_where_soils_susceptible_to_erosion_and_scour"
+        }
+      ],
+      "evidence_required": [
+        "Site plan showing mean high tide line and proposed building location",
+        "Engineered foundation drawings showing piling/column embedment depth, anchorage, and scour analysis",
+        "Sealed calculations for combined wave + wind loads (lateral and uplift) per design flood",
+        "Breakaway wall details with calculated collapse load (10-20 psf ASD or sealed engineered design)",
+        "R401.4 soil investigation report addressing scour/erosion potential if spread/mat/raft footings proposed",
+        "RDP-sealed construction documents per R322.3.9"
+      ],
+      "depends_on": [
+        "r322_1",
+        "section_r322_2_2",
+        "section_r322_3_1",
+        "section_r322_3_2",
+        "section_r322_3_3",
+        "section_r322_3_4",
+        "section_r322_3_5",
+        "section_r322_3_6",
+        "section_r322_3_7",
+        "section_r322_3_8",
+        "section_r322_3_9",
+        "section_r322_3_10",
+        "r401_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required",
+      "_was_section_node": "section_r322_3"
+    },
+    {
+      "id": "rule_r401_4",
+      "cite": "R401.4",
+      "section_node": "r401_4",
+      "title": "Soil tests when problem soils are likely",
+      "intent": "Allow the building official to require an approved-method soil test where data indicate expansive, compressible, shifting, or otherwise questionable soils are likely present, so foundation design is based on actual site conditions.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "data_indicates_expansive_soils_likely"
+            },
+            {
+              "predicate": "data_indicates_compressible_soils_likely"
+            },
+            {
+              "predicate": "data_indicates_shifting_soils_likely"
+            },
+            {
+              "predicate": "data_indicates_other_questionable_soil_characteristics_likely"
+            },
+            {
+              "predicate": "site_likely_has_soils_with_allowable_bearing_<_1500_psf"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "soil_investigation",
+        "trigger": "building_official_determination",
+        "performed_by": "approved_agency",
+        "method": "approved_method",
+        "deliverable": "report_of_soil_characteristics_and_allowable_bearing_capacity",
+        "interaction_with_table_r401_4_1": "presumptive_load_bearing_values_assumed_only_in_lieu_of_complete_geotechnical_evaluation",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "top_or_subsoils_are_compressible_or_shifting"
+            },
+            {
+              "predicate": "soils_removed_to_depth_and_width_for_stable_moisture_in_active_zone"
+            },
+            {
+              "predicate": "not_used_as_fill_or_stabilized_within_active_zone_by_chemical_dewatering_or_presaturation"
+            }
+          ],
+          "effect": "compliance_alternative_per_R401_4_2_in_lieu_of_complete_geotechnical_evaluation"
+        }
+      ],
+      "evidence_required": [
+        "Geotechnical / soils report by an approved agency, sealed by registered civil engineer",
+        "Description of test method used and confirmation it is an approved method",
+        "Report of allowable bearing capacity (especially where presumptive value < 1,500 psf)",
+        "Foundation recommendations addressing identified problem soils (expansive, compressible, shifting)",
+        "Building-official approval letter or permit condition incorporating recommendations"
+      ],
+      "depends_on": [
+        "table_r401_4_1",
+        "r401_4_1",
+        "r401_4_2",
+        "def_expansive_soil"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required",
+      "_was_section_node": "section_r401_4"
+    },
+    {
+      "id": "rule_r401_4_1_1_ca",
+      "cite": "R401.4.1.1",
+      "section_node": "r401_4_1_1",
+      "title": "California HCD: preliminary soil report and lot-level soil investigation for subdivisions",
+      "intent": "California HCD amendment requiring local jurisdictions to enact ordinances mandating preliminary soil reports for subdivisions and lot-level soil investigations where critically expansive or other problem soils are present.",
+      "applies_when": [
+        {
+          "predicate": "is_application_regulated_by_HCD_per_section_1_8_2_1_1"
+        },
+        {
+          "predicate": "is_subdivision_requiring_tentative_and_final_map_per_govt_code_66426"
+        }
+      ],
+      "requires": {
+        "type": "subdivision_soil_program",
+        "preliminary_soil_report": {
+          "required_by_local_ordinance": true,
+          "prepared_by": "civil_engineer_registered_in_california",
+          "based_on": "adequate_test_borings_or_excavations",
+          "may_be_waived_if": "building_dept_determines_no_preliminary_analysis_necessary_due_to_known_soil_qualities"
+        },
+        "lot_level_soil_investigation": {
+          "trigger": "preliminary_report_indicates_critically_expansive_soils_or_other_problem_soils",
+          "scope": "each_lot_in_subdivision",
+          "prepared_by": "civil_engineer_registered_in_california",
+          "shall_recommend": "corrective_action_likely_to_prevent_structural_damage_to_each_dwelling"
+        },
+        "approval": {
+          "by": "building_department_or_enforcement_agency",
+          "criterion": "recommended_action_likely_to_prevent_structural_damage",
+          "permit_condition": "approved_recommended_action_incorporated_in_each_dwelling_construction",
+          "appeal_to": "local_appeals_board"
+        },
+        "alternate_procedures_permitted": "ordinance_equal_to_or_more_restrictive_than_R401_4_1_1_1_through_R401_4_1_1_3",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Preliminary soil report prepared and sealed by California-registered civil engineer, with test boring/excavation logs",
+        "Local ordinance citation showing adoption of R401.4.1.1 procedures (or approved alternate)",
+        "Lot-by-lot soil investigation report with corrective-action recommendations where critically expansive soils are identified",
+        "Building department approval documentation showing recommended actions are incorporated as permit conditions",
+        "Construction documents showing recommended corrective action implemented in dwelling foundation design"
+      ],
+      "depends_on": [
+        "r401_4",
+        "section_r401_4_1_1_1",
+        "section_r401_4_1_1_2",
+        "section_r401_4_1_1_3",
+        "section_r401_4_1_1_5",
+        "def_expansive_soil"
+      ],
+      "amends": "model_IRC_R401_4_1_1",
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r401_4_1_1"
+    },
+    {
+      "id": "rule_r403_1_8",
+      "cite": "R403.1.8",
+      "section_node": "r403_1_8",
+      "title": "Foundations and slabs on expansive soils",
+      "intent": "Require engineered foundation and floor slab design per CBC Section 1808.6 when building on expansive soils to mitigate heave/shrink damage.",
+      "applies_when": [
+        {
+          "predicate": "site_soils_meet_expansive_soil_classification_per_R403_1_8_1",
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "predicate": "plasticity_index_>=_15_per_ASTM_D4318"
+                },
+                {
+                  "predicate": "more_than_10_percent_pass_no_200_sieve_per_ASTM_D422"
+                },
+                {
+                  "predicate": "more_than_10_percent_particles_<_5_micrometers_per_ASTM_D422"
+                }
+              ]
+            },
+            {
+              "predicate": "expansion_index_>_20_per_ASTM_D4829"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "expansive_soil_foundation_design",
+        "design_basis": "California_Building_Code_Section_1808_6",
+        "scope": [
+          "foundation",
+          "floor_slabs"
+        ],
+        "tested_per": [
+          "std_astm_d4318",
+          "std_astm_d422",
+          "std_astm_d4829",
+          "std_cbc_1808_6"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "uses_slab_on_ground_or_other_foundation_system_with_adequate_performance_history_in_similar_soil_conditions"
+            },
+            {
+              "predicate": "approved_by_building_official"
+            }
+          ],
+          "effect": "engineered_design_per_CBC_1808_6_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Soils report classifying site soils as expansive per R403.1.8.1 (PI, sieve, particle-size, or Expansion Index test results)",
+        "ASTM D4318 (PI), ASTM D422 (gradation), and/or ASTM D4829 (Expansion Index) laboratory test reports",
+        "Sealed foundation and slab design demonstrating compliance with CBC Section 1808.6",
+        "If exception used: documentation of comparable site conditions and prior adequate performance, plus building-official written approval",
+        "Construction details showing required reinforcement, slab thickness, moisture conditioning, and footing depth"
+      ],
+      "depends_on": [
+        "r401_4",
+        "section_r403_1_8_1",
+        "def_expansive_soil",
+        "cbc_1808_6"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r403_1_8"
+    },
+    {
+      "id": "rule_r404_4",
+      "cite": "R404.4",
+      "section_node": "r404_4",
+      "title": "Engineered design of free-standing and laterally-loaded retaining walls",
+      "intent": "Ensure that retaining walls retaining significant unbalanced fill or resisting non-soil lateral loads are engineered for stability against overturning, sliding, bearing, and water uplift with a 1.5 safety factor.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "predicate": "is_retaining_wall_not_laterally_supported_at_top"
+                },
+                {
+                  "predicate": "unbalanced_fill_>_48_inches"
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "predicate": "is_retaining_wall_height_>_24_inches"
+                },
+                {
+                  "predicate": "wall_resists_lateral_loads_in_addition_to_soil"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "predicate": "wall_is_not_a_foundation_wall_supporting_a_building"
+        }
+      ],
+      "requires": {
+        "type": "retaining_wall_engineered_design",
+        "design_method": "accepted_engineering_practice",
+        "stability_checks": [
+          "overturning",
+          "sliding",
+          "foundation_bearing_pressure",
+          "water_uplift"
+        ],
+        "minimum_safety_factor": {
+          "lateral_sliding": 1.5,
+          "overturning": 1.5
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "wall_is_foundation_wall_supporting_a_building"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Sealed retaining wall calculations showing overturning, sliding, bearing, and uplift checks",
+        "Demonstration of >= 1.5 safety factor for both sliding and overturning",
+        "Soil parameters used (active/passive pressures, friction, allowable bearing) consistent with site soils report",
+        "Wall section drawings showing height, unbalanced fill, footing dimensions, drainage, and reinforcement",
+        "Identification of any surcharge or additional lateral loads beyond retained soil"
+      ],
+      "depends_on": [
+        "r401_4",
+        "section_r404"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required",
+      "_was_section_node": "section_r404_4"
+    }
+  ]
+}

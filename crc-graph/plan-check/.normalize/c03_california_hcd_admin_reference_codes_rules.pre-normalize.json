@@ -1,0 +1,804 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "California HCD Admin & Reference Codes",
+  "community_id": 3,
+  "extracted_from_sections": [
+    "appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+    "chapter_1_scope_and_application.md",
+    "chapter_2_definitions.md",
+    "chapter_3_building_planning_a.md",
+    "chapter_44_referenced_standards.md",
+    "chapter_4_foundations_b.md",
+    "chapter_5_floors.md",
+    "chapter_6_wall_construction_e.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_ay_103_structural_stability",
+      "cite": "AY103",
+      "section_node": "ay_103_structural_stability",
+      "title": "Structural stability of evacuation-supporting portions in CVFPP areas",
+      "intent": "Ensure portions of buildings supporting evacuation locations resist flood-induced flotation, collapse and lateral movement during a 200-year flood event in areas protected by the Central Valley Flood Protection Plan.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "in_central_valley_flood_protection_plan_area": true
+            },
+            {
+              "flood_levels_anticipated_>_3_ft_for_200_year_event": true
+            },
+            {
+              "portion_supports_evacuation_location": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "structural_design",
+        "must_resist": [
+          "flotation",
+          "collapse",
+          "permanent_lateral_movement"
+        ],
+        "load_basis": "hydrostatic_loads_at_WSEL200",
+        "hydrostatic_load_method": "ASCE 7 Chapter 5",
+        "design_responsibility": "registered_design_professional_when_using_automatic_floodwater_entry_exit_openings",
+        "tested_per": [
+          "asce_7",
+          "std_asce_7"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "flood_vents_per_figure_AY103_provided_on_two_opposite_sides": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Construction documents showing WSEL200 and floor/roof elevations (per AY101.1)",
+        "Hydrostatic load calculations per ASCE 7 Chapter 5 referencing depth from WSEL200",
+        "Structural drawings of anchorage and load path for evacuation-supporting portions",
+        "If using flood vents under exception, drawings showing minimum one vent on two opposite sides per Figure AY103",
+        "Registered design professional stamp where automatic-entry openings, valves or yield panels are used"
+      ],
+      "depends_on": [
+        "asce_7",
+        "std_asce_7"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r201_general",
+      "cite": "R201",
+      "section_node": "section_r201_general",
+      "title": "Use of defined terms and fallback meanings",
+      "intent": "Establish that defined terms govern code interpretation and provide an authoritative fallback to the California Building Standards Code (and Webster's for SFM applications) when terms are not defined.",
+      "applies_when": [
+        {
+          "interpreting_a_term_used_in_this_code": true
+        }
+      ],
+      "requires": {
+        "type": "interpretation",
+        "ordering": [
+          "use_meanings_in_chapter_2_unless_otherwise_expressly_stated",
+          "if_undefined_use_meanings_in_california_building_standards_code_title_24",
+          "if_still_undefined_use_ordinarily_accepted_meanings",
+          "for_office_of_state_fire_marshal_applications_per_section_1_11_use_websters_third_new_international_dictionary"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Construction documents and specifications using terms consistent with Chapter 2 definitions",
+        "For SFM-regulated occupancies under Section 1.11, references documenting Webster's Third fallback when applicable"
+      ],
+      "depends_on": [
+        "chapter_2_definitions",
+        "california_building_code"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301",
+      "cite": "R301.1",
+      "section_node": "section_r301",
+      "title": "Complete load path for all prescribed loads",
+      "intent": "Require buildings to safely support all prescribed loads with a complete load path from origin to foundation so prescriptive construction is presumed compliant.",
+      "applies_when": [
+        {
+          "is_building_or_structure_or_part_thereof_within_scope_of_CRC": true
+        }
+      ],
+      "requires": {
+        "type": "structural_design",
+        "loads_to_resist": [
+          "dead_load",
+          "live_load",
+          "roof_load",
+          "flood_load",
+          "snow_load",
+          "wind_load",
+          "seismic_load"
+        ],
+        "must_provide_complete_load_path_to_foundation": true,
+        "deemed_to_comply_when_built_per_prescriptive_provisions": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "existing_protective_social_care_home_or_facility_established_before_1972": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Structural plans showing continuous load path from roof to foundation",
+        "Load schedules listing dead, live, roof, flood, snow, wind and seismic loads applicable to the project",
+        "Indication of which prescriptive provisions are being used (or engineered design package per R301.1.3)",
+        "Climatic and geographic design criteria filled in per Table R301.2"
+      ],
+      "depends_on": [
+        "chapter_2_definitions"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_1_alternative_provisions",
+      "cite": "R301.1.1",
+      "section_node": "section_r301_1_alternative_provisions",
+      "title": "Permitted alternative prescriptive standards to R301",
+      "intent": "Allow specific industry standards (WFCM, AISI S230, ICC 400) as alternatives to R301 prescriptive provisions, with engineered portions referred to the California Building Code.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "design_uses_awc_wfcm": true
+            },
+            {
+              "design_uses_aisi_s230_for_one_and_two_family_dwellings": true
+            },
+            {
+              "design_uses_icc_400_log_structures": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "alternative_compliance",
+        "permitted_standards": [
+          "awc_wfcm",
+          "aisi_s230",
+          "icc_400"
+        ],
+        "subject_to_limitations_in_each_standard_and_this_code": true,
+        "engineered_design_in_conjunction_with_these_standards_must_use_california_building_code": true,
+        "tested_per": [
+          "awc_wfcm",
+          "aisi_s230",
+          "icc_400"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Designation of which alternative standard (WFCM, AISI S230, or ICC 400) governs the design",
+        "Cross-reference table demonstrating compliance with the chosen standard's limits",
+        "If engineering supplements the prescriptive standard, engineered calculations per California Building Code stamped by a California-licensed design professional",
+        "Identification of any provisions of this code that still apply to elements outside the chosen standard"
+      ],
+      "depends_on": [
+        "awc_wfcm",
+        "aisi_s230",
+        "icc_400",
+        "california_building_code"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_1_3_engineered_design",
+      "cite": "R301.1.3",
+      "section_node": "section_r301_1_3_engineered_design",
+      "title": "Engineered design required for elements exceeding prescriptive limits",
+      "intent": "Require accepted engineering practice (and California-licensed architect/engineer stamp where amended) for any structural element that exceeds R301 prescriptive limits or otherwise does not conform to the code.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "contains_structural_element_exceeding_section_r301_limits": true
+            },
+            {
+              "contains_structural_element_not_conforming_to_this_code": true
+            },
+            {
+              "is_woodframe_dwelling_more_than_two_stories_and_basement": true
+            },
+            {
+              "is_dwelling_with_cold_formed_steel_concrete_masonry_or_sip_floor_wall_or_roof_ceiling_elements": true
+            },
+            {
+              "is_irregular_or_non_conforming_woodframe_portion": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "engineered_design",
+        "design_basis": "accepted_engineering_practice",
+        "scope": "demonstrate_compliance_of_nonconventional_elements_compatible_with_conventional_framed_system",
+        "california_amendments": {
+          "irregular_or_non_conforming_woodframe_portion_requires_ca_licensed_architect_or_engineer_stamp": true,
+          "woodframe_dwellings_more_than_two_stories_and_basement_require_ca_licensed_architect_or_engineer_stamp": true,
+          "cold_formed_steel_concrete_masonry_or_sip_floor_wall_or_roof_ceiling_elements_require_ca_licensed_architect_or_engineer_stamp": true,
+          "statutory_basis": "Business and Professions Code Sections 5537 and 6737.1"
+        },
+        "engineered_design_per_california_building_code_permitted_for_buildings_in_scope_of_crc": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Engineering calculations and structural drawings stamped by a California-licensed architect or engineer for the nonconforming portion",
+        "Identification of which elements exceed R301 prescriptive limits and the basis for engineered design",
+        "Demonstration that engineered elements are compatible with the surrounding conventional framing",
+        "For woodframe dwellings >2 stories + basement, complete stamped construction documents",
+        "For cold-formed steel, concrete, masonry, or SIP buildings, stamped floor/wall/roof-ceiling structural drawings"
+      ],
+      "depends_on": [
+        "california_building_code",
+        "section_r301"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_1_4_intermodal",
+      "cite": "R301.1.4",
+      "section_node": "section_r301_1_4_intermodal",
+      "title": "Intermodal shipping containers as buildings",
+      "intent": "Direct designers of repurposed intermodal shipping containers to the structural provisions of the California Building Code rather than CRC prescriptive provisions.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_intermodal_shipping_container": true
+            },
+            {
+              "is_repurposed_for_use_as_building_or_structure": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "engineered_design",
+        "design_per": "California Building Code Section 3115",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural calculations and drawings demonstrating compliance with CBC Section 3115",
+        "Identification of container origin, size, and modification details (cuts, openings, reinforcements)",
+        "California-licensed architect or engineer stamp on container structural design",
+        "Connection details for stacking, anchorage, and load path to foundation"
+      ],
+      "depends_on": [
+        "california_building_code",
+        "def_intermodal_shipping_container"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_1_1_wind_limits",
+      "cite": "R301.2.1.1",
+      "section_node": "section_r301_2_1_1_wind_limits",
+      "title": "Wind design required where prescriptive wind provisions do not apply",
+      "intent": "Require an engineered wind design (using one of the listed methods) wherever Figure R301.2.1.1 mandates wind design or where the ultimate design wind speed in a special wind region equals or exceeds 140 mph.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "wind_design_required_per_figure_r301_2_1_1": true
+            },
+            {
+              "all_of": [
+                {
+                  "in_special_wind_region": true
+                },
+                {
+                  "ultimate_design_wind_speed_Vult_>=_140_mph": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "wind_design",
+        "must_use_one_of": [
+          "AWC Wood Frame Construction Manual (WFCM)",
+          "ICC Standard for Residential Construction in High-Wind Regions (ICC 600)",
+          "ASCE 7 Minimum Design Loads for Buildings and Other Structures",
+          "AISI Standard for Cold-Formed Steel Framing - Prescriptive Method (AISI S230)",
+          "California Building Code"
+        ],
+        "elements_not_addressed_by_chosen_method_must_follow_this_code": true,
+        "if_using_asce_7_or_cbc_then_wind_speed_map_and_exposure_per_those_documents_govern": true,
+        "tested_per": [
+          "awc_wfcm",
+          "asce_7",
+          "std_asce_7",
+          "aisi_s230"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "is_concrete_construction_per_sections_r404_and_r608": true
+            }
+          ],
+          "effect": "wind_provisions_of_this_code_apply_within_those_section_limits"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "is_structural_insulated_panel_construction_per_section_r610": true
+            }
+          ],
+          "effect": "wind_provisions_of_this_code_apply_within_section_r610_limits"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "is_cold_formed_steel_light_frame_construction_per_sections_r505_r603_r804": true
+            }
+          ],
+          "effect": "wind_provisions_of_this_code_apply_within_those_section_limits"
+        }
+      ],
+      "evidence_required": [
+        "Identification of ultimate design wind speed Vult and whether the site is in a special wind region",
+        "Indication of which Figure R301.2.1.1 region applies",
+        "Wind design package using one of the five permitted methods (WFCM, ICC 600, ASCE 7, AISI S230, or CBC)",
+        "Stamped calculations by a California-licensed engineer for engineered wind designs",
+        "Schedule of components and cladding pressures for wall coverings, windows, doors, garage doors and skylights"
+      ],
+      "depends_on": [
+        "awc_wfcm",
+        "asce_7",
+        "std_asce_7",
+        "aisi_s230",
+        "california_building_code",
+        "figure_r301_2_1_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_2_1_2_protection",
+      "cite": "R301.2.1.2",
+      "section_node": "section_r301_2_1_2_protection",
+      "title": "Protection of openings in windborne debris regions",
+      "intent": "Require glazed exterior openings in windborne debris regions to be protected against impact and pressure to keep the building envelope intact during high-wind events.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "in_windborne_debris_region": true
+            },
+            {
+              "has_exterior_glazing_or_glazed_door_or_garage_door_with_glazing": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "opening_protection",
+        "glazing_protection_must_meet": [
+          "Large Missile Test of ASTM E1886",
+          "ASTM E1996 as modified in Section R301.2.1.2.1"
+        ],
+        "garage_door_glazing_protection_must_meet": [
+          "approved_impact_resisting_standard",
+          "ANSI/DASMA 115"
+        ],
+        "wind_zone_classification_per_section_r301_2_1_2_1": true,
+        "tested_per": [
+          "asce_7",
+          "std_asce_7"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "uses_wood_structural_panels_thickness_>=_7_16_in": true
+                },
+                {
+                  "panel_span_<=_8_ft": true
+                },
+                {
+                  "panels_precut_predrilled_and_attached_with_permanent_corrosion_resistant_hardware": true
+                },
+                {
+                  "any_of": [
+                    {
+                      "all_of": [
+                        {
+                          "mean_roof_height_<=_45_ft": true
+                        },
+                        {
+                          "ultimate_design_wind_speed_Vult_<=_180_mph": true
+                        },
+                        {
+                          "attachment_per_table_r301_2_1_2": true
+                        }
+                      ]
+                    },
+                    {
+                      "attachment_designed_for_component_and_cladding_loads_per_table_r301_2_1_or_asce_7": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "wood_structural_panel_protection_permitted_in_lieu_of_tested_glazed_protection"
+        }
+      ],
+      "evidence_required": [
+        "Designation that the project site is in a windborne debris region (per Table R301.2 footnote m and Figure R301.2(2))",
+        "Test reports showing glazed openings comply with ASTM E1886 (Large Missile) and ASTM E1996",
+        "For garage doors with glazing, ANSI/DASMA 115 or approved impact-resistance test report",
+        "If wood structural panel exception is used: panel thickness, span, precut/predrilled detail, attachment hardware schedule, and Vult/mean roof height calculations",
+        "Component and cladding pressure calculations per Table R301.2.1(1) or ASCE 7"
+      ],
+      "depends_on": [
+        "asce_7",
+        "std_asce_7",
+        "section_r301_2_1_1_wind_limits"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_4_dead_load",
+      "cite": "R301.4",
+      "section_node": "section_r301_4_dead_load",
+      "title": "Use actual material weights for dead load",
+      "intent": "Require dead load determination to use actual material weights and account for fixed service equipment so the structure is not under-designed for self-weight.",
+      "applies_when": [
+        {
+          "is_structural_design_under_this_code": true
+        }
+      ],
+      "requires": {
+        "type": "load_determination",
+        "dead_load_basis": "actual_weights_of_materials_and_construction",
+        "must_include_fixed_service_equipment": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Dead load schedule listing each assembly (roof, floors, walls, partitions) with material weights",
+        "Inventory of fixed service equipment (HVAC units, water heaters, solar arrays, etc.) and their weights included in dead load",
+        "Manufacturer data sheets supporting equipment weights",
+        "Structural calculations showing dead load values used in member sizing"
+      ],
+      "depends_on": [
+        "section_r301"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r301_5_live_load",
+      "cite": "R301.5",
+      "section_node": "section_r301_5_live_load",
+      "title": "Minimum uniformly distributed live loads",
+      "intent": "Require structural members to be designed for at least the minimum uniformly distributed live loads in Table R301.5 to ensure adequate occupant and use-load capacity.",
+      "applies_when": [
+        {
+          "is_structural_design_under_this_code": true
+        }
+      ],
+      "requires": {
+        "type": "load_determination",
+        "minimum_uniformly_distributed_live_loads_per": "Table R301.5",
+        "concentrated_load_provisions_per_table_r301_5_footnotes": {
+          "elevated_garage_floor_concentrated_load_lb": 2000,
+          "elevated_garage_concentrated_load_area_in": "4.5 by 4.5",
+          "stair_tread_concentrated_load_lb": 300,
+          "stair_tread_concentrated_load_area_in": "2 by 2"
+        }
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Live load schedule per occupancy/use that references Table R301.5 values",
+        "Member sizing calculations using the tabulated live loads",
+        "Verification of stair tread capacity for the 300-lb concentrated load on a 2x2 area",
+        "Verification of elevated garage floor capacity for the 2,000-lb concentrated load on a 4.5x4.5 area",
+        "Identification of attic live load category (with or without storage) and corresponding load"
+      ],
+      "depends_on": [
+        "section_r301"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r408",
+      "cite": "R408.1",
+      "section_node": "section_r408",
+      "title": "Under-floor space moisture control",
+      "intent": "Prevent moisture damage and decay in crawl spaces by requiring either ventilation (R408.2) or unvented-with-controls construction (R408.3), plus access, debris removal, grading, flood resistance and a vapor retarder where applicable.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "has_under_floor_space_between_floor_joists_and_earth": true
+            },
+            {
+              "is_not_basement": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "moisture_and_access_control",
+        "must_comply_with_one_of": [
+          "section_r408_2_openings_for_under_floor_ventilation",
+          "section_r408_3_unvented_crawl_space"
+        ],
+        "ventilation_minimum_net_area_ratio": "1 sq ft per 150 sq ft of under-floor area (or 1/1500 with Class I vapor retarder over ground)",
+        "ventilation_opening_within_3_ft_of_each_external_corner": true,
+        "ventilation_covering_least_dimension_<=_1_4_in": true,
+        "unvented_crawl_space_requirements": [
+          "continuous_class_I_vapor_retarder_on_exposed_earth_with_6_in_lap_sealed_or_taped",
+          "one_of_continuous_mechanical_exhaust_or_conditioned_supply_or_plenum_or_dehumidification"
+        ],
+        "access_opening_minimum_floor_18x24_in": true,
+        "access_opening_minimum_perimeter_wall_16x24_in": true,
+        "remove_vegetation_organic_material_and_concrete_forms_before_occupancy": true,
+        "flood_hazard_area_requires_flood_openings_per_r322_2_2_and_under_floor_grade_>=_outside_grade_on_one_side": true,
+        "vapor_retarder_required_in_climate_zones_1A_2A_3A_below_warm_humid_line_max_perm_1_5_per_astm_e96_procedure_b": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "under_floor_space_meets_FEMA_TB_11_1": true
+            }
+          ],
+          "effect": "flood_under_floor_grade_requirement_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "unvented_crawl_space_per_r408_3": true
+            }
+          ],
+          "effect": "under_floor_vapor_retarder_per_r408_8_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Crawl-space ventilation calculation showing net area >= 1/150 (or 1/1500 with Class I vapor retarder) of under-floor area",
+        "Plan showing ventilation openings within 3 ft of each external corner (or cross-ventilation layout when vapor retarder is used)",
+        "If unvented: Class I vapor retarder spec, mechanical exhaust/conditioned-supply/plenum/dehumidification design",
+        "Access opening dimensions on plans (>= 18x24 in floor or 16x24 in wall) and areaway detail where below grade",
+        "For flood hazard areas: flood opening details per R322.2.2 and grading sections showing under-floor grade vs outside finished grade"
+      ],
+      "depends_on": [
+        "section_r301"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r501",
+      "cite": "R501.2",
+      "section_node": "section_r501",
+      "title": "Floor construction must accommodate and transmit Section R301 loads",
+      "intent": "Ensure all floors (including attic-equipment-supporting floors) are designed to carry and transfer R301 loads to the supporting structure.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_floor_for_a_building_within_scope_of_crc": true
+            },
+            {
+              "is_attic_floor_used_to_house_mechanical_or_plumbing_fixtures_and_equipment": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "structural_design",
+        "must_accommodate_loads_per": "section_r301",
+        "must_transmit_loads_to_supporting_structural_elements": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor framing plans with member sizes, spans and spacings",
+        "Load takedown showing R301 loads carried by each floor and transferred to supporting walls/beams/foundations",
+        "Identification of attic spaces housing mechanical/plumbing equipment with corresponding floor design",
+        "Connection details transmitting loads to supporting structural elements"
+      ],
+      "depends_on": [
+        "section_r301"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r502",
+      "cite": "R502.1",
+      "section_node": "section_r502",
+      "title": "Wood floor framing materials must be identified and conform to standards",
+      "intent": "Ensure wood and wood-based products used for load-supporting floor framing are identifiable, traceable to recognized standards, and of established structural capacity.",
+      "applies_when": [
+        {
+          "is_wood_or_wood_based_product_used_for_load_supporting_purposes_in_floor_framing": true
+        }
+      ],
+      "requires": {
+        "type": "material_identification",
+        "sawn_lumber": "grade_mark_of_accredited_lumber_grading_or_inspection_agency_with_design_values_certified_per_DOC_PS_20_or_certificate_of_inspection",
+        "preservative_treated_lumber_identified_per_section_r317_2": true,
+        "end_jointed_lumber_grade_mark_per_r502_1_1_with_HRA_designation_when_used_in_fire_resistance_rated_assemblies": true,
+        "prefabricated_wood_i_joists_per_ASTM_D5055": true,
+        "structural_glued_laminated_timbers_per_ANSI_A190_1_ANSI_117_ASTM_D3737": true,
+        "structural_log_members_per_icc_400": true,
+        "structural_composite_lumber_per_ASTM_D5456": true,
+        "cross_laminated_timber_per_ANSI_APA_PRG_320": true,
+        "engineered_wood_rim_board_per_ANSI_APA_PRR_410_or_ASTM_D7672": true,
+        "tested_per": [
+          "icc_400"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Lumber grade marks visible on submitted samples or specified in construction documents",
+        "Manufacturer specifications and ICC-ES or equivalent reports for prefabricated I-joists, glulam, SCL, CLT and rim boards",
+        "ANSI/APA, ASTM and DOC PS 20 references in the wood material schedule",
+        "For preservative-treated members, identification per R317.2",
+        "For end-jointed lumber in fire-resistance-rated assemblies, HRA designation in grade mark"
+      ],
+      "depends_on": [
+        "icc_400",
+        "section_r501"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_12",
+      "cite": "R502.12",
+      "section_node": "r502_12",
+      "title": "Draftstopping required in floor assemblies",
+      "intent": "Require draftstopping in floor framing per R302.12 to limit concealed-space air movement that could spread fire or smoke.",
+      "applies_when": [
+        {
+          "has_floor_assembly_with_concealed_spaces_subject_to_section_r302_12": true
+        }
+      ],
+      "requires": {
+        "type": "fire_protection",
+        "draftstopping_per": "section_r302_12"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor framing plans showing draftstop locations and continuity per R302.12",
+        "Specification of draftstop materials (e.g., 1/2-in gypsum, 3/8-in wood structural panel, or other approved materials) per R302.12",
+        "Section details showing draftstop full-depth integration with framing",
+        "Coordination with fireblocking per R502.13/R302.11 at penetrations"
+      ],
+      "depends_on": [
+        "section_r502"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_section_r609_6",
+      "cite": "R609.6",
+      "section_node": "section_r609_6",
+      "title": "Windborne debris protection of windows, glass doors and doors with glass",
+      "intent": "Require fenestration in windborne debris regions to be protected by tested-and-labeled assemblies or impact-protective systems so the building envelope remains intact during high-wind events.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "in_windborne_debris_region": true
+            },
+            {
+              "any_of": [
+                {
+                  "has_exterior_window": true
+                },
+                {
+                  "has_glass_door": true
+                },
+                {
+                  "has_door_with_glass": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "opening_protection",
+        "must_comply_with": "section_r301_2_1_2",
+        "fenestration_testing_and_labeling_options": [
+          "ASTM E1886 and ASTM E1996",
+          "AAMA 506"
+        ],
+        "fenestration_label_must_identify": [
+          "manufacturer",
+          "performance_characteristics",
+          "approved_inspection_agency"
+        ],
+        "impact_protective_systems": {
+          "impact_test": "ASTM E1886 and ASTM E1996",
+          "design_wind_pressure_test": "ASTM E330",
+          "design_wind_pressure_basis": "Table R301.2.1(1) adjusted by Table R301.2.1(2) or ASCE 7 (with optional 0.6 multiplier when ASCE 7 used)",
+          "labeling_includes_manufacturer_performance_characteristics_approved_inspection_agency": true,
+          "permanent_label_method": "acid_etched_sand_blasted_ceramic_fired_laser_etched_embossed_or_non_removable_equivalent"
+        },
+        "tested_per": [
+          "asce_7",
+          "std_asce_7"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Test reports for fenestration to ASTM E1886 + ASTM E1996 (or AAMA 506) from approved independent laboratory",
+        "Labels on installed fenestration showing manufacturer, performance characteristics, and approved inspection agency",
+        "For impact protective systems: ASTM E1886/E1996 impact reports plus ASTM E330 design wind pressure reports",
+        "Design wind pressure calculations per Table R301.2.1(1) adjusted by R301.2.1(2) or per ASCE 7 (with 0.6 multiplier documentation if used)",
+        "Permanent (non-removable) label evidence on impact protective systems"
+      ],
+      "depends_on": [
+        "asce_7",
+        "std_asce_7",
+        "section_r301_2_1_2_protection"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

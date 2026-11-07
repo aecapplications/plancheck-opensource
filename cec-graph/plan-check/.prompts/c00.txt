@@ -1,0 +1,263 @@
+You are a plan-check rule extraction subagent. The graph community "Wiring Methods — Article 300" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c00_wiring_methods_article_300_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_1  300.1 Scope
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_1_a  300.1(A) All Wiring Installations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_1_b  300.1(B) Integral Parts of Equipment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_1_c  300.1(C) Metric Designators and Trade Sizes
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_10  300.10 Electrical Continuity of Metal Raceways and Enclosure
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_11  300.11 Securing and Supporting
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_11_a  300.11(A) Secured in Place
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_11_b  300.11(B) Wiring Systems Installed Above Suspended Ceilings
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_11_c  300.11(C) Raceways Used as Means of Support
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_11_d  300.11(D) Cables Not Used as Means of Support
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_12  300.12 Mechanical Continuity — Raceways and Cables
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_13  300.13 Mechanical and Electrical Continuity — Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_14  300.14 Length of Free Conductors at Outlets, Junctions, and 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_15  300.15 Boxes, Conduit Bodies, or Fittings — Where Required
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_16  300.16 Raceway or Cable to Open or Concealed Wiring
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_17  300.17 Number and Size of Conductors in Raceway
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_18  300.18 Raceway Installations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_19  300.19 Supporting Conductors in Vertical Raceways
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_2  300.2 Limitations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_2_a  300.2(A) Voltage
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_2_b  300.2(B) Temperature
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_20  300.20 Induced Currents in Ferrous Metal Enclosures or Racew
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_20_a  300.20(A) Conductors Grouped Together
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_20_b  300.20(B) Individual Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_21  300.21 Spread of Fire or Products of Combustion
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_22  300.22 Wiring in Ducts and Plenums
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_22_a  300.22(A) Ducts for Dust, Loose Stock, or Vapor Removal
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_22_b  300.22(B) Ducts Specifically Fabricated for Environmental Ai
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_22_c  300.22(C) Other Spaces Used for Environmental Air (Plenums)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_22_d  300.22(D) Information Technology Equipment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_23  300.23 Panels Designed to Allow Access
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_25  300.25 Exit Enclosures (Stair Towers)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3  300.3 Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_a  300.3(A) Single Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_b  300.3(B) Conductors of the Same Circuit
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_b_1  300.3(B)(1) Paralleled Installations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_b_2  300.3(B)(2) Grounding and Bonding Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_b_3  300.3(B)(3) Nonferrous Wiring Methods
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_b_4  300.3(B)(4) Column-Width Panelboard Enclosures
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_c  300.3(C) Conductors of Different Systems
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_c_1  300.3(C)(1) 1000 Volts, Nominal, or Less
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_3_c_2  300.3(C)(2) Over 1000 Volts, Nominal
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_31  300.31 Covers Required
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_32  300.32 Conductors of Different Systems
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_34  300.34 Conductor Bending Radius
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_35  300.35 Protection Against Induction Heating
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_37  300.37 Aboveground Wiring Methods
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_38  300.38 Raceways in Wet Locations Above Grade
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_39  300.39 Braid-Covered Insulated Conductors — Exposed Installa
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4  300.4 Protection Against Physical Damage
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_a  300.4(A) Cables and Raceways Through Wood Members
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_b  300.4(B) Nonmetallic-Sheathed Cables and ENT Through Metal F
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_c  300.4(C) Cables Through Spaces Behind Panels Designed to All
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_d  300.4(D) Cables and Raceways Parallel to Framing Members and
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_e  300.4(E) Cables, Raceways, or Boxes in or Under Roof Decking
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_f  300.4(F) Cables and Raceways in Shallow Grooves
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_g  300.4(G) Fittings
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_4_h  300.4(H) Structural Joints
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_40  300.40 Insulation Shielding
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_42  300.42 Moisture or Mechanical Protection for Metal-Sheathed 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_45  300.45 Danger Signs
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5  300.5 Underground Installations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_a  300.5(A) Minimum Cover Requirements
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_b  300.5(B) Wet Locations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_c  300.5(C) Underground Cables and Conductors Under Buildings
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_d  300.5(D) Protection from Damage
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_e  300.5(E) Splices and Taps
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_f  300.5(F) Backfill
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_g  300.5(G) Raceway Seals
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_h  300.5(H) Bushing
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_i  300.5(I) Conductors of the Same Circuit
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_j  300.5(J) Earth Movement
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_5_k  300.5(K) Directional Boring
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_50  300.50 Underground Installations (Over 1000V)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_6  300.6 Protection Against Corrosion and Deterioration
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_6_a  300.6(A) Ferrous Metal Equipment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_6_b  300.6(B) Aluminum Metal Equipment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_6_c  300.6(C) Nonmetallic Equipment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_6_d  300.6(D) Indoor Wet Locations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_7  300.7 Raceways Exposed to Different Temperatures
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_8  300.8 Installation of Conductors with Other Systems
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_9  300.9 Raceways in Wet Locations Abovegrade
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_1  310.1 Scope
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10  310.10 Uses Permitted
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_a  310.10(A) Dry Locations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_b  310.10(B) Dry and Damp Locations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_c  310.10(C) Wet Locations
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_d  310.10(D) Locations Exposed to Direct Sunlight
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_e  310.10(E) Direct-Burial Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_f  310.10(F) Corrosive Conditions
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_10_g  310.10(G) Conductors in Parallel
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_12  310.12 Single-Phase Dwelling Services and Feeders
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_14  310.14 Ampacities for Conductors Rated 0–2000 Volts
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_14_a  310.14(A) General
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_14_a_3  310.14(A)(3) Temperature Limitation of Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_14_b  310.14(B) Engineering Supervision
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15  310.15 Ampacity Tables
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_b  310.15(B) Ambient Temperature Correction Factors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_b_1  310.15(B)(1) General Temperature Correction
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_b_2  310.15(B)(2) Rooftop
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_c  310.15(C) Adjustment Factors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_c_1  310.15(C)(1) More than Three Current-Carrying Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_d  310.15(D) Bare or Covered Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_e  310.15(E) Neutral Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_15_f  310.15(F) Grounding or Bonding Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_16  310.16 Ampacities of Insulated Conductors in Raceway, Cable,
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_17  310.17 Ampacities of Single-Insulated Conductors in Free Air
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_18  310.18 Ampacities of Insulated Conductors (High-Temp) in Rac
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_19  310.19 Ampacities of Single-Insulated Conductors (High-Temp)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_20  310.20 Ampacities of Conductors Supported on a Messenger
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_21  310.21 Ampacities of Bare or Covered Conductors in Free Air
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_3  310.3 Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_4  310.4 Conductor Constructions and Applications
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_6  310.6 Conductor Identification
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_310_8  310.8 Marking
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_1  311.1 Scope
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_10  311.10 Constructions and Applications
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_12  311.12 Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_14  311.14 Conductor Identification
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_16  311.16 Marking
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_2  311.2 Definitions
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_30  311.30 Installation
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_32  311.32 Uses Permitted
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_36  311.36 Direct-Burial Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_40  311.40 Support
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_44  311.44 Shielding
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_6  311.6 Listing Requirements
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60  311.60 Ampacities of Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_a  311.60(A) General
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_b  311.60(B) Engineering Supervision
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_c  311.60(C) Tables
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_d  311.60(D) Ampacity Adjustment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_e  311.60(E) Ampacity in Air
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_311_60_f  311.60(F) Ampacity in Underground Electrical Ducts and Direc
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_300_19_a  Table 300.19(A) Spacings for Conductor Supports
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_300_1_c  Table 300.1(C) Metric Designators and Trade Sizes
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_300_5  Table 300.5 Minimum Cover Requirements (0–1000V)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_300_50  Table 300.50 Minimum Cover Requirements (Over 1000V)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_12  Table 310.12 Single-Phase Dwelling Services and Feeders
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_15_b_1  Table 310.15(B)(1) Ambient Temperature Correction Factors (3
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_15_b_2  Table 310.15(B)(2) Ambient Temperature Correction Factors (4
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_15_c_1  Table 310.15(C)(1) Adjustment Factors for More Than Three CC
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_16  Table 310.16 Ampacities in Raceway/Cable/Earth
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_17  Table 310.17 Ampacities Single-Insulated Conductors in Free 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_18  Table 310.18 Ampacities (High-Temp) in Raceway or Cable
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_19  Table 310.19 Ampacities (High-Temp) in Free Air
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_20  Table 310.20 Ampacities Conductors on Messenger
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_21  Table 310.21 Ampacities of Bare or Covered Conductors in Fre
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_4_a  Table 310.4(A) Conductor Applications and Insulations Rated 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_310_4_b  Table 310.4(B) Thickness of Insulation for Nonshielded RHH/R
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_10_a  Table 311.10(A) Type MV Conductor Application and Insulation
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_10_b  Table 311.10(B) Insulation/Jacket Thickness for Nonshielded 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_10_c  Table 311.10(C) Insulation Thickness for Shielded MV (2001–3
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_12_a  Table 311.12(A) Minimum Size of MV Conductors
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_67  Table 311.60(C)(67) Ampacities Single Copper Triplexed in Ai
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_68  Table 311.60(C)(68) Ampacities Single Aluminum Triplexed in 
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_69  Table 311.60(C)(69) Ampacities Single Copper Isolated in Air
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_70  Table 311.60(C)(70) Ampacities Single Aluminum Isolated in A
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_77  Table 311.60(C)(77) Ampacities Three Copper Conductors Under
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_81  Table 311.60(C)(81) Ampacities Single Copper Directly Buried
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_c_86  Table 311.60(C)(86) Ampacities Triplexed Single Aluminum Dir
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_table_311_60_d_4  Table 311.60(D)(4) Ambient Temperature Correction (Type MV)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_busway  Busway / Cablebus
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_cable_tray  Cable Tray
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_concept_ampacity  Concept: Ampacity
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_concept_grounding_bonding  Concept: Grounding and Bonding
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_concept_physical_protection  Concept: Physical Damage Protection
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_concept_temperature_correction  Concept: Temperature Correction & Adjustment
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_concept_underground_installation  Concept: Underground Installation
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_fep  Type FEP/FEPB Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_mtw  Type MTW Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_mv_105  Type MV-105 Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_mv_90  Type MV-90 Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_pfa  Type PFA Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_rhh  Type RHH Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_rhw  Type RHW Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_se  Type SE Service-Entrance Cable
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_thhn  Type THHN Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_thw  Type THW Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_thwn  Type THWN Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_thwn_2  Type THWN-2 Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_tw  Type TW Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_xhhw  Type XHHW Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_xhhw_2  Type XHHW-2 Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_conductor_z  Type Z Conductor
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_emt  Electrical Metallic Tubing (EMT)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_ent  Electrical Nonmetallic Tubing (ENT)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_imc  Intermediate Metal Conduit (IMC)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_nonmetallic_sheathed_cable  Nonmetallic-Sheathed Cable
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_pvc_conduit  PVC Conduit (Schedule 40/80)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_rmc  Rigid Metal Conduit (RMC)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_rtrc  Reinforced Thermosetting Resin Conduit (RTRC)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_ac_cable  Type AC Cable (Armored Cable)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_mc_cable  Type MC Cable (Metal-Clad)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_mi_cable  Type MI Cable (Mineral-Insulated, Metal-Sheathed)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_mv_cable  Type MV Cable (Medium Voltage)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_uf_cable  Type UF Cable (Underground Feeder)
+  06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_type_use_cable  Type USE Cable (Underground Service-Entrance)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri_300_1>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Wiring Methods — Article 300",
+  "community_id": 0,
+  "extracted_from_sections": ["06_chapter_3_wiring_methods_and_materials_article_300_general_requirements_for_wiri.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 33-134 rules. After writing the file, just confirm "wrote c00_wiring_methods_article_300_rules.json with N rules" and stop.

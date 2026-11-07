@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PlanCheck</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>PlanCheck</h1>
+    <p class="sub">Upload a plan-set submittal PDF. We extract project facts
+      from the drawings and notes, run the rule engine for each selected
+      California code book, and flag each sheet for compliance.</p>
+  </header>
+
+  <main>
+    <!-- Upload -->
+    <section id="upload-card" class="card">
+      <fieldset id="book-select" class="book-select">
+        <legend>Code books to check</legend>
+        <div id="book-options" class="book-options"></div>
+      </fieldset>
+      <div id="dropzone" class="dropzone">
+        <p>Drag a plan-set PDF here, or</p>
+        <label class="btn">
+          Choose file
+          <input id="file-input" type="file" accept="application/pdf" hidden />
+        </label>
+        <p id="upload-hint" class="hint">Max 60 pages, 80 MB.</p>
+      </div>
+      <div id="recent-jobs" class="recent hidden">
+        <h3>Past jobs</h3>
+        <ul id="recent-list"></ul>
+      </div>
+    </section>
+
+    <!-- Progress -->
+    <section id="progress-card" class="card hidden">
+      <h2 id="progress-phase">Starting…</h2>
+      <div class="bar"><div id="progress-fill" class="bar-fill"></div></div>
+      <p id="progress-msg" class="hint"></p>
+      <div id="book-progress" class="book-progress"></div>
+      <p id="progress-updated" class="hint"></p>
+      <div id="progress-warnings" class="warnings hidden"></div>
+    </section>
+
+    <!-- Error -->
+    <section id="error-card" class="card hidden">
+      <h2>Something went wrong</h2>
+      <pre id="error-msg"></pre>
+      <div id="error-warnings" class="warnings hidden"></div>
+      <button class="btn" onclick="location.reload()">Start over</button>
+    </section>
+
+    <!-- Results -->
+    <section id="results" class="hidden">
+      <div id="book-chips" class="book-chips hidden"></div>
+      <div id="warnings-banner" class="warnings hidden"></div>
+      <div id="summary" class="summary"></div>
+
+      <div class="tabs">
+        <button class="tab active" data-tab="sheets">Sheets</button>
+        <button class="tab" data-tab="unmapped">Project-level findings</button>
+        <button class="tab" data-tab="review">Needs review</button>
+        <button class="tab" data-tab="report">Full report</button>
+      </div>
+
+      <div id="tab-sheets" class="tab-panel">
+        <div class="sheet-layout">
+          <div id="sheet-grid" class="sheet-grid"></div>
+          <aside id="flag-panel" class="flag-panel">
+            <p class="hint">Select a sheet to see its compliance flags.</p>
+          </aside>
+        </div>
+      </div>
+
+      <div id="tab-unmapped" class="tab-panel hidden"></div>
+      <div id="tab-review" class="tab-panel hidden"></div>
+      <div id="tab-report" class="tab-panel hidden"><div id="report-md" class="report-md"></div></div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3/dist/purify.min.js"></script>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,431 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Wood Wall Fastening & Stud Sizing",
+  "community_id": 12,
+  "extracted_from_sections": [
+    "chapter_5_floors.md",
+    "chapter_6_wall_construction_a.md",
+    "chapter_6_wall_construction_b.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r502_5",
+      "cite": "R502.5",
+      "section_node": "r502_5",
+      "title": "Limit girder and header spans to Tables R602.7(1)-(3)",
+      "intent": "Ensure dimension-lumber girders and headers carrying floor loads are sized within prescriptive span limits so they do not deflect or fail under the assumed gravity loads.",
+      "applies_when": [
+        {
+          "predicate": "is_girder_or_header"
+        },
+        {
+          "predicate": "fabricated_of_dimension_lumber"
+        }
+      ],
+      "requires": {
+        "type": "tabulated_span_limit",
+        "spans_shall_not_exceed_tables": [
+          "TABLE R602.7(1)",
+          "TABLE R602.7(2)",
+          "TABLE R602.7(3)"
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Framing plan showing each girder and header with member size, species/grade, and clear span",
+        "Span calculations or call-outs referencing Table R602.7(1), R602.7(2), or R602.7(3)",
+        "Loading assumptions (number of stories supported, snow load, building width) matching the table column used",
+        "Lumber grade stamp or specification confirming species and grade assumed in the table"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r502_9",
+      "cite": "R502.9",
+      "section_node": "r502_9",
+      "title": "Nail floor framing per Table R602.3(1) and provide positive uplift/lateral connections at posts and beams",
+      "intent": "Ensure floor framing develops the lateral and uplift load path by using the prescribed fastening schedule and positive connections at post-and-beam supports.",
+      "applies_when": [
+        {
+          "predicate": "is_floor_framing"
+        }
+      ],
+      "requires": {
+        "type": "fastening_schedule",
+        "nail_per_table": "TABLE R602.3(1)",
+        "additional_when_post_and_beam_or_girder_supports_floor": {
+          "provide": "positive_connections",
+          "to_resist": [
+            "uplift",
+            "lateral_displacement"
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Framing details and nailing schedule on plans matching Table R602.3(1) line items for floor framing",
+        "Connection details (clips, straps, or hangers) at every post-to-beam and beam-to-girder interface that supports floor framing",
+        "Specification of nail type, size, and spacing for joist-to-plate, joist-to-rim, blocking, and lap-splice locations",
+        "Manufacturer cut sheets or ICC-ES reports for any proprietary connectors used in lieu of nailed connections"
+      ],
+      "depends_on": [
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_3",
+      "cite": "R602.3",
+      "section_node": "section_r602_3",
+      "title": "Design and fasten exterior wood-frame walls per Figures R602.3(1)-(2) and Tables R602.3(1)-(4); studs continuous from sole to top plate",
+      "intent": "Establish the prescriptive baseline for wood-frame exterior wall design, fastening, sheathing wind resistance, and continuity of studs so the wall develops both gravity and out-of-plane load paths.",
+      "applies_when": [
+        {
+          "predicate": "is_exterior_wall"
+        },
+        {
+          "predicate": "is_wood_frame_construction"
+        }
+      ],
+      "requires": {
+        "type": "prescriptive_assembly",
+        "design_and_construct_per_figures": [
+          "FIGURE R602.3(1)",
+          "FIGURE R602.3(2)"
+        ],
+        "or_design_per_standard": "AWC NDS",
+        "fasten_components_per_tables": [
+          "TABLE R602.3(1)",
+          "TABLE R602.3(2)",
+          "TABLE R602.3(3)",
+          "TABLE R602.3(4)"
+        ],
+        "wall_sheathing_on_exterior_face_shall": [
+          "be_fastened_directly_to_framing_members",
+          "resist_wind_pressures_from_table_r301_2_1_1_adjusted_per_table_r301_2_1_2",
+          "conform_to_table_r602_3_3"
+        ],
+        "stud_continuity": "continuous_from_sole_plate_to_top_plate_to_resist_loads_perpendicular_to_wall",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_jack_trimmer_or_cripple_stud_at_opening"
+            },
+            {
+              "predicate": "complies_with_table_r602_7_1_or_r602_7_2"
+            }
+          ],
+          "effect": "stud_continuity_requirement_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Wall framing elevations showing studs running continuous from sole plate to top plate at each support",
+        "Fastening schedule on plans matching Tables R602.3(1) through R602.3(4) for sheathing, plates, and studs",
+        "Wind-pressure verification for exterior sheathing from Table R301.2.1(1) with height/exposure adjustment from Table R301.2.1(2), keyed to Table R602.3(3) sheathing requirements",
+        "If designed by AWC NDS instead of prescriptive figures, signed/sealed structural calculations on file"
+      ],
+      "depends_on": [
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r602_10_8",
+      "cite": "R602.10.8",
+      "section_node": "section_r602_10_8",
+      "title": "Connect braced wall panels to floor framing or foundation with rim/blocking and Table R602.3(1) fastening",
+      "intent": "Provide a continuous shear-and-uplift load path from each braced wall panel into the floor diaphragm or foundation by requiring rim joists, end joists, or blocking and prescribed nailing.",
+      "applies_when": [
+        {
+          "predicate": "is_braced_wall_panel"
+        }
+      ],
+      "requires": {
+        "type": "load_path_connection",
+        "case_joists_perpendicular_to_panel": {
+          "provide_along_entire_panel_length": "rim_joist_or_band_joist_or_blocking",
+          "per_figure": "FIGURE R602.10.8(1)",
+          "fasten_top_and_bottom_plates_to_framing_per_table": "TABLE R602.3(1)"
+        },
+        "case_joists_parallel_to_panel": {
+          "provide_directly_above_and_below_panel": "rim_joist_or_end_joist_or_other_parallel_framing_member",
+          "per_figure": "FIGURE R602.10.8(2)",
+          "if_parallel_member_cannot_be_located_directly_above_and_below": {
+            "provide": "full_depth_blocking_at_16_inch_spacing_between_parallel_members_each_side_of_panel",
+            "per_figure": "FIGURE R602.10.8(2)"
+          },
+          "fasten_blocking_and_wall_plates_per_table": "TABLE R602.3(1)"
+        },
+        "case_connection_to_concrete_or_masonry": {
+          "per_section": "R403.1.6"
+        },
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Braced wall panel connection details showing rim joist, band joist, end joist, or blocking along the full panel length above and below",
+        "Plate-to-framing nailing call-outs taken from Table R602.3(1)",
+        "Where joists are parallel and a parallel member cannot be located above/below the panel, details of full-depth blocking at 16 inches o.c. on each side",
+        "For panels bearing on concrete or masonry, anchor bolt schedule and detail per Section R403.1.6"
+      ],
+      "depends_on": [
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r603_3",
+      "cite": "R603.3",
+      "section_node": "section_r603_3",
+      "title": "Construct cold-formed steel exterior and interior load-bearing walls per Section R603 (scope)",
+      "intent": "Direct designers using cold-formed steel wall framing to the prescriptive subsections that govern wall-to-foundation connections, stud sizing, and bracing so the assembly is built within the AISI S230-based applicability limits.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_exterior_cold_formed_steel_framed_wall"
+            },
+            {
+              "predicate": "is_interior_load_bearing_cold_formed_steel_framed_wall"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope_reference",
+        "construct_in_accordance_with_section": "R603",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Identification on plans that walls are CFS framed and which walls are load-bearing exterior vs. interior load-bearing",
+        "Confirmation that the building falls within R603.1.1 applicability limits (\u226460 ft long, \u226440 ft wide, \u22643 stories, wind <140 mph, Exposure B or C, snow \u226470 psf)",
+        "Cross-references on the structural sheets to R603.3.1 (anchorage), R603.3.2 (stud size), and R603.9 (bracing)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r603_3_1",
+      "cite": "R603.3.1",
+      "section_node": "section_r603_3_1",
+      "title": "Anchor cold-formed steel walls to foundation/floor per Table R603.3.1 with anchor-bolt placement and embedment",
+      "intent": "Provide a prescriptive shear-and-uplift connection between CFS walls and the supporting foundation or floor using tabulated screws, anchor bolts, and minimum embedment so the wall transfers lateral and overturning loads.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_exterior_cold_formed_steel_framed_wall"
+            },
+            {
+              "predicate": "is_interior_load_bearing_cold_formed_steel_framed_wall"
+            }
+          ]
+        },
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "wall_anchored_to_foundation"
+            },
+            {
+              "predicate": "wall_anchored_to_floor"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "anchorage",
+        "connection_per_table": "TABLE R603.3.1",
+        "and_per_figures": [
+          "FIGURE R603.3.1(1)",
+          "FIGURE R603.3.1(2)",
+          "FIGURE R603.3.1(3)",
+          "FIGURE R603.3.1(4)"
+        ],
+        "anchor_bolt_location": "not_more_than_12_inches_from_corners_or_termination_of_bottom_tracks",
+        "anchor_bolt_minimum_embedment": {
+          "into_masonry": "15_inches",
+          "into_concrete": "7_inches"
+        },
+        "foundation_anchor_strap_alternative": "permitted_in_lieu_of_anchor_bolts_when_spaced_for_equivalent_anchorage_and_installed_per_manufacturer",
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Foundation/floor anchorage detail showing screws or anchor bolts sized and spaced per Table R603.3.1 for the design wind speed and exposure category",
+        "Plan callouts confirming anchor bolts are within 12 inches of corners and ends of bottom tracks",
+        "Embedment dimensions on the foundation detail showing \u226515 in into masonry or \u22657 in into concrete",
+        "Manufacturer cut sheets and ICC-ES report when foundation anchor straps are substituted for anchor bolts"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r603_3_2",
+      "cite": "R603.3.2",
+      "section_node": "section_r603_3_2",
+      "title": "Size cold-formed steel wall studs per Tables R603.3.2(2)-(16); fasten per Table R603.3.2(1); top/bottom tracks match stud thickness",
+      "intent": "Ensure CFS exterior and interior load-bearing wall studs are sized for the controlling wind, snow, height, and spacing combination and that tracks and fasteners match so axial and lateral capacity assumed in the tables is realized.",
+      "applies_when": [
+        {
+          "predicate": "any_of",
+          "of": [
+            {
+              "predicate": "is_exterior_cold_formed_steel_framed_wall"
+            },
+            {
+              "predicate": "is_interior_load_bearing_cold_formed_steel_framed_wall"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "member_sizing",
+        "construct_per_figures": [
+          "FIGURE R603.3.1(1)",
+          "FIGURE R603.3.1(2)",
+          "FIGURE R603.3.1(3)"
+        ],
+        "exterior_wall_stud_size_and_thickness_per_tables": [
+          "TABLE R603.3.2(2)",
+          "TABLE R603.3.2(3)",
+          "TABLE R603.3.2(4)",
+          "TABLE R603.3.2(5)",
+          "TABLE R603.3.2(6)",
+          "TABLE R603.3.2(7)",
+          "TABLE R603.3.2(8)",
+          "TABLE R603.3.2(9)",
+          "TABLE R603.3.2(10)",
+          "TABLE R603.3.2(11)",
+          "TABLE R603.3.2(12)",
+          "TABLE R603.3.2(13)",
+          "TABLE R603.3.2(14)",
+          "TABLE R603.3.2(15)",
+          "TABLE R603.3.2(16)"
+        ],
+        "interior_load_bearing_stud_assumptions": {
+          "ultimate_design_wind_speed_mph": 115,
+          "exposure_category": "B"
+        },
+        "fastening_per": [
+          "section_r603_2_5",
+          "TABLE R603.3.2(1)"
+        ],
+        "top_and_bottom_tracks_minimum_thickness": "same_as_wall_studs",
+        "minimum_reduced_thickness_when_reduction_allowed": "33_mils",
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "is_exterior_cold_formed_steel_framed_wall"
+            },
+            {
+              "predicate": "interior_face_has_min_one_half_inch_gypsum_board_fastened_per_section_r702"
+            },
+            {
+              "predicate": "outside_face_has_min_seven_sixteenths_osb_or_fifteen_thirtyseconds_plywood_fastened_per_section_r603_9_1_and_table_r603_3_2_1"
+            }
+          ],
+          "effect": "exterior_wall_studs_may_be_reduced_to_next_thinner_size_but_not_less_than_33_mils"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "is_interior_load_bearing_cold_formed_steel_framed_wall"
+            },
+            {
+              "predicate": "both_sides_have_min_one_half_inch_gypsum_board_fastened_per_section_r702"
+            }
+          ],
+          "effect": "interior_load_bearing_wall_studs_may_be_reduced_to_next_thinner_size_but_not_less_than_33_mils"
+        }
+      ],
+      "evidence_required": [
+        "CFS stud schedule showing member size, thickness (mils), and steel grade for each wall, keyed to the applicable Table R603.3.2(2) through R603.3.2(16)",
+        "Design parameters on the structural cover sheet (ultimate wind speed, exposure category, stud spacing, building width, ground snow load, attic load, story count) matching the table column",
+        "Track schedule confirming top and bottom tracks are at least the same thickness as the studs",
+        "Where a thinner stud is used by exception, gypsum board and structural sheathing specs and fastening schedules per R603.2.5/R702/R603.9.1 and Table R603.3.2(1)",
+        "Connection schedule showing screw type, size, and spacing per Section R603.2.5 and Table R603.3.2(1)"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r604",
+      "cite": "R604",
+      "section_node": "section_r604",
+      "title": "Identify, span, and fasten wood structural panel wall sheathing per R604.1-R604.3",
+      "intent": "Ensure wood structural panel wall sheathing is a recognized graded panel, used within its allowable span, and fastened per the prescriptive nailing schedules so it can deliver the assumed shear and out-of-plane capacity.",
+      "applies_when": [
+        {
+          "predicate": "is_wood_structural_panel_wall_sheathing"
+        }
+      ],
+      "requires": {
+        "type": "material_and_installation",
+        "panels_shall_conform_to_one_of": [
+          "DOC PS 1",
+          "DOC PS 2",
+          "ANSI/APA PRP 210",
+          "CSA O325",
+          "CSA O437"
+        ],
+        "panels_identified_by": "grade_mark_or_certificate_of_inspection_from_approved_agency",
+        "maximum_allowable_spans_per_table": "TABLE R602.3(3)",
+        "attachment_per_tables": [
+          "TABLE R602.3(1)",
+          "TABLE R602.3(3)"
+        ],
+        "tested_per": [
+          "DOC PS 1",
+          "DOC PS 2",
+          "ANSI/APA PRP 210",
+          "CSA O325",
+          "CSA O437"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel specification on plans referencing DOC PS 1, DOC PS 2, ANSI/APA PRP 210, CSA O325, or CSA O437",
+        "Photograph or call-out for the APA/agency grade mark on each panel type used",
+        "Sheathing schedule showing stud spacing and panel span rating within the limits of Table R602.3(3)",
+        "Nailing schedule for wall sheathing matching Table R602.3(1) or R602.3(3) (nail type, size, edge and field spacing)"
+      ],
+      "depends_on": [
+        "table_r602_3_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    }
+  ]
+}

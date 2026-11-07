@@ -1,0 +1,2034 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Luminaires & Appliance Branch Circuits",
+  "community_id": 22,
+  "extracted_from_sections": [
+    "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps.txt",
+    "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo.txt"
+  ],
+  "rules": [
+    {
+      "id": "rule_xref_110_25",
+      "cite": "110.25 (as invoked by 410.141(B), 422.31, 424.19, 425.19)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+      "title": "Provide lockable-open disconnecting means where disconnect is out of sight",
+      "intent": "Ensure a disconnecting means that is not within sight of the equipment it controls cannot be inadvertently re-energized while the equipment is being serviced.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_has_required_disconnecting_means"
+            },
+            {
+              "predicate": "disconnecting_means_not_within_sight_of_equipment"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraint": "disconnecting_means_capable_of_being_locked_in_open_position_per_110_25",
+        "lockable_open": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule or one-line diagram identifying the disconnecting means location relative to served equipment",
+        "Cut sheet or listing label for the lockable disconnect device or breaker lock-off accessory",
+        "Floor plan showing sight-line distance between disconnect and equipment"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_200_6",
+      "cite": "200.6 (as invoked by 410.69)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_200_6",
+      "title": "Do not use grounded-conductor identification colors for luminaire control conductors",
+      "intent": "Prevent misidentification of an energized control conductor as the grounded (neutral) branch-circuit conductor identified per 200.6.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "control_conductors_spliced_terminated_or_connected_in_same_luminaire_or_enclosure_as_branch_circuit_conductors"
+            },
+            {
+              "predicate": "conductor_is_field_connected_control_conductor"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "constraint": "control_conductor_color_not_reserved_for_grounded_conductor_per_200_6",
+        "prohibited_colors": [
+          "white",
+          "gray"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "gray_control_conductor_permanently_reidentified_at_termination_and_all_visible_accessible_locations"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Luminaire wiring diagram showing control conductor color coding",
+        "Specification section for conductor identification/color schedule",
+        "Fixture schedule noting 0-10V or other control wiring within luminaires"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_69"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_210_19_a",
+      "cite": "210.19(A)(3) (as invoked by 422.10(A))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_19_a",
+      "title": "Size household range and cooking appliance branch circuits per 210.19(A)(3) and Table 220.55",
+      "intent": "Allow demand-factored conductor sizing for household cooking equipment while keeping conductors adequate for the load.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_household_range_or_cooking_appliance"
+            },
+            {
+              "predicate": "appliance_supplied_by_branch_circuit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraint": "branch_circuit_conductors_sized_per_210_19_a_3_using_table_220_55_demand"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Range/cooking appliance nameplate kW rating on plans or appliance schedule",
+        "Table 220.55 demand calculation for the cooking load",
+        "Panel schedule showing branch-circuit conductor size and breaker rating"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_table_220_55",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_210_23",
+      "cite": "210.23 (as invoked by 422.10(B), 422.15(A))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_23",
+      "title": "Determine multi-load branch circuit ratings per 210.23",
+      "intent": "Ensure branch circuits shared by appliances and other loads are rated per the permissible-load rules of 210.23.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "branch_circuit_supplies_appliance_and_other_loads"
+            },
+            {
+              "predicate": "central_vacuum_outlet_assembly_connected_to_branch_circuit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_rating",
+        "constraint": "circuit_rating_determined_per_210_23_permissible_loads"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule showing all loads on the shared branch circuit",
+        "Load calculation demonstrating compliance with 210.23 load limits",
+        "Appliance schedule with nameplate ratings"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_central_vacuum"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_240_10",
+      "cite": "240.10 (as invoked by 422.11(F), 424.22(C), 425.22(C))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_10",
+      "title": "Provide compliant supplementary overcurrent devices for subdivided heating loads",
+      "intent": "Ensure supplementary overcurrent devices protecting subdivided resistance heating loads are factory-provided, accessible, and suitable for branch-circuit protection.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "heating_elements_subdivided_into_loads"
+            },
+            {
+              "predicate": "supplementary_overcurrent_protection_provided_for_subdivided_loads"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "device_factory_installed_within_or_on_heater_enclosure_or_provided_as_separate_assembly_by_manufacturer",
+          "device_accessible",
+          "device_suitable_for_branch_circuit_protection"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Heater manufacturer cut sheet showing factory-installed supplementary overcurrent devices",
+        "Equipment listing label or documentation showing devices suitable for branch-circuit protection",
+        "Installation drawing showing accessibility of the supplementary devices"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_240_4",
+      "cite": "240.4 (as invoked by 422.11(A), 424.22(E), 425.22(E))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_4",
+      "title": "Protect appliance and heater branch circuits per 240.4 conductor protection",
+      "intent": "Ensure branch-circuit conductors serving appliances and heating equipment are protected against overcurrent in accordance with their ampacity.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "branch_circuit_supplies_appliance"
+            },
+            {
+              "predicate": "field_wired_conductors_between_heater_and_supplementary_overcurrent_devices"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraint": "conductors_protected_in_accordance_with_240_4_ampacity_rules"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule with breaker/fuse ratings versus conductor sizes",
+        "Conductor ampacity calculation or schedule",
+        "Feeder/branch one-line diagram"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_240_40",
+      "cite": "240.40 (as invoked by 424.72(C), 425.72(D))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_40",
+      "title": "Permit single disconnecting means for cartridge-fused subdivided boiler circuits",
+      "intent": "Allow one disconnecting means to serve several subdivided boiler heating circuits protected by cartridge fuses, consistent with the fuse disconnect rules of 240.40.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "boiler_heating_elements_subdivided_into_loads"
+            },
+            {
+              "predicate": "cartridge_fuses_used_for_supplementary_overcurrent_protection"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraint": "single_disconnecting_means_permitted_for_several_subdivided_circuits_per_240_40"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Boiler wiring diagram showing cartridge fuse blocks and disconnect arrangement",
+        "Equipment cut sheet showing the single disconnecting means ahead of the fuses"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_72",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "advisory"
+    },
+    {
+      "id": "rule_xref_250_110",
+      "cite": "250.110 (as invoked by 422.15(C))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_250_110",
+      "title": "Ground central vacuum assembly metal parts per 250.110",
+      "intent": "Ensure exposed metal parts of central vacuum outlet assemblies likely to become energized are connected to an equipment grounding conductor.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "central_vacuum_outlet_assembly_installed"
+            },
+            {
+              "predicate": "assembly_has_accessible_non_current_carrying_metal_parts_likely_to_become_energized"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "grounding",
+        "constraint": "metal_parts_connected_to_equipment_grounding_conductor_per_250_110"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "metal_parts_are_incidental_screws_or_rivets_installed_into_or_on_insulating_material"
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Central vacuum outlet assembly listing/cut sheet",
+        "Wiring detail showing equipment grounding conductor connection",
+        "Branch-circuit schedule for the vacuum assembly circuit"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_central_vacuum",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_15"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_250_119",
+      "cite": "250.119 (as invoked by 410.69)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_250_119",
+      "title": "Keep equipment-grounding-conductor colors off luminaire control conductors",
+      "intent": "Prevent a luminaire control conductor from being mistaken for the equipment grounding conductor identified per 250.119.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "control_conductors_spliced_terminated_or_connected_in_same_luminaire_or_enclosure_as_branch_circuit_conductors"
+            },
+            {
+              "predicate": "conductor_is_field_connected_control_conductor"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "constraint": "control_conductor_color_not_reserved_for_equipment_grounding_conductor_per_250_119",
+        "prohibited_colors": [
+          "green",
+          "green_with_yellow_stripes"
+        ],
+        "reidentification_color_must_not_be": [
+          "white",
+          "gray",
+          "green"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Luminaire/control wiring diagram with conductor color schedule",
+        "Specification for conductor identification",
+        "Field re-identification detail where gray control conductors are used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_69"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_141_a",
+      "cite": "410.141(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_141",
+      "title": "Control over-1000V electric-discharge luminaires with a switch opening all ungrounded primary conductors",
+      "intent": "Ensure high-voltage electric-discharge lighting can be fully de-energized on the primary side by an externally operable device.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "electric_discharge_lighting_system"
+            },
+            {
+              "predicate": "open_circuit_voltage_>_1000v"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "control_and_disconnection",
+        "constraint": "externally_operable_switch_or_circuit_breaker_opens_all_ungrounded_primary_conductors",
+        "control_scope": "singly_or_in_groups"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Lighting one-line diagram showing the primary-side switch or circuit breaker",
+        "Fixture schedule identifying over-1000V electric-discharge equipment",
+        "Switch/breaker cut sheet showing all ungrounded poles switched"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_141_b",
+      "cite": "410.141(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_141",
+      "title": "Locate the high-voltage lighting control switch within sight or make it lockable open",
+      "intent": "Guarantee servicing personnel can verify or secure the de-energized state of over-1000V lighting equipment.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "electric_discharge_lighting_system"
+            },
+            {
+              "predicate": "open_circuit_voltage_>_1000v"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means_location",
+        "any_of": [
+          "switch_or_breaker_within_sight_from_luminaires_or_lamps",
+          "switch_or_breaker_lockable_open_per_110_25"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Reflected ceiling plan or site plan showing switch location relative to luminaires",
+        "Lock-off provision cut sheet if switch is remote"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_410_69",
+      "cite": "410.69",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_410_69",
+      "title": "Identify luminaire control conductor insulation distinctly from grounded and grounding conductors",
+      "intent": "Prevent shock and miswiring hazards when control conductors share a luminaire or enclosure with branch-circuit conductors.",
+      "applies_when": [
+        {
+          "predicate": "control_conductors_spliced_terminated_or_connected_in_same_luminaire_or_enclosure_as_branch_circuit_conductors"
+        }
+      ],
+      "requires": {
+        "type": "conductor_identification",
+        "constraint": "field_connected_control_conductor_not_colored_as_grounded_or_equipment_grounding_conductor",
+        "effective_date": "2022-01-01"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "predicate": "control_conductor_is_gray"
+                },
+                {
+                  "predicate": "insulation_permanently_reidentified_at_termination_and_each_visible_accessible_location"
+                },
+                {
+                  "predicate": "reidentification_encircles_insulation_and_is_color_other_than_white_gray_or_green"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Luminaire wiring diagram showing control (e.g., 0-10V dimming) conductor colors",
+        "Conductor identification specification",
+        "Fixture schedule identifying luminaires with field-connected control conductors"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_200_6",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_250_119"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_10_a",
+      "cite": "422.10(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10",
+      "title": "Size individual appliance branch-circuit conductors to the marked rating (125% if continuous)",
+      "intent": "Ensure branch circuits can carry appliance current without overheating.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_supplied_by_individual_branch_circuit"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraints": [
+          "conductor_ampacity_>=_marked_appliance_rating",
+          "branch_circuit_rating_>=_125_percent_of_marked_rating_if_continuous_load_non_motor_operated",
+          "motor_operated_appliance_without_marked_rating_sized_per_article_430_part_ii"
+        ],
+        "continuous_load_alternative": "100_percent_permitted_if_branch_circuit_device_and_assembly_listed_for_continuous_loading_at_100_percent"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate ratings on appliance schedule",
+        "Branch-circuit conductor size and ampacity on panel schedule",
+        "Continuous-load determination and 125% sizing calculation"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_table_220_55",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_19_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_10_b",
+      "cite": "422.10(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10",
+      "title": "Rate shared appliance branch circuits per 210.23",
+      "intent": "Prevent overload of branch circuits that supply an appliance together with other loads.",
+      "applies_when": [
+        {
+          "predicate": "branch_circuit_supplies_appliance_and_other_loads"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_rating",
+        "constraint": "rating_determined_in_accordance_with_210_23"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule listing all loads on the circuit",
+        "210.23 permissible-load check calculation"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_23"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_11_a",
+      "cite": "422.11(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+      "title": "Do not exceed the appliance-marked overcurrent device rating",
+      "intent": "Protect appliance internal wiring by honoring the manufacturer's marked maximum protective device rating.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "branch_circuit_supplies_appliance"
+            },
+            {
+              "predicate": "protective_device_rating_marked_on_appliance"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraint": "branch_circuit_overcurrent_device_rating_<=_marked_protective_device_rating"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate photo or cut sheet showing maximum overcurrent protective device rating",
+        "Panel schedule showing installed breaker/fuse rating"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_11_b",
+      "cite": "422.11(B)-(D)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+      "title": "Cap heating-appliance circuits at 50 A (subdivide household surface-element loads over 60 A demand)",
+      "intent": "Limit fault energy and overload exposure on high-demand heating appliance circuits.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "predicate": "appliance_is_household_type_with_surface_heating_elements"
+                },
+                {
+                  "predicate": "maximum_demand_per_table_220_55_>_60a"
+                }
+              ]
+            },
+            {
+              "predicate": "appliance_is_infrared_lamp_commercial_or_industrial_heating_appliance"
+            },
+            {
+              "predicate": "appliance_is_commercial_heating_appliance_with_open_coil_or_exposed_sheathed_coil_surface_elements"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "power_supply_subdivided_into_two_or_more_circuits_where_household_surface_element_demand_>_60a",
+          "each_circuit_overcurrent_protection_<=_50a"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Table 220.55 demand calculation for the appliance",
+        "Panel schedule showing subdivided circuits and breaker ratings not over 50 A",
+        "Appliance cut sheet identifying element type and configuration"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_table_220_55",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_11_c",
+      "cite": "422.11(E)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+      "title": "Limit overcurrent protection for a single non-motor-operated appliance",
+      "intent": "Match the overcurrent device to the appliance rating when no protective device rating is marked.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "branch_circuit_supplies_single_non_motor_operated_appliance"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "rating_<=_marked_on_appliance_where_marked",
+          "rating_<=_20a_where_unmarked_and_appliance_rated_<=_13.3a",
+          "rating_<=_150_percent_of_appliance_rated_current_where_unmarked_and_appliance_rated_>_13.3a"
+        ],
+        "rounding": "next_higher_standard_rating_permitted_where_150_percent_not_standard"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate current rating",
+        "Panel schedule showing breaker/fuse rating on the individual circuit",
+        "150% sizing calculation where applicable"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_11_d",
+      "cite": "422.11(F)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+      "title": "Subdivide resistance heating elements over 48 A and protect each subdivision at 60 A max",
+      "intent": "Keep resistance-element circuit sizes within safe overcurrent-protection limits.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_employs_resistance_type_heating_elements"
+            },
+            {
+              "predicate": "heating_element_load_rated_>_48a"
+            },
+            {
+              "not": {
+                "any_of": [
+                  {
+                    "predicate": "appliance_is_household_type_with_surface_heating_elements"
+                  },
+                  {
+                    "predicate": "appliance_is_commercial_heating_appliance_with_open_coil_or_exposed_sheathed_coil_surface_elements"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "heating_elements_subdivided",
+          "each_subdivided_load_<=_48a",
+          "each_subdivided_load_protected_at_<=_60a"
+        ],
+        "alternative": "commercial_kitchen_cooking_and_water_heater_boiler_elements_permitted_subdivided_<=_120a_protected_<=_150a_where_enclosed_or_asme_vessel_conditions_met"
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "any_of": [
+                {
+                  "predicate": "elements_integral_with_and_enclosed_within_cooking_surface"
+                },
+                {
+                  "predicate": "elements_completely_contained_within_enclosure_identified_as_suitable"
+                },
+                {
+                  "predicate": "elements_contained_within_asme_rated_and_stamped_vessel"
+                },
+                {
+                  "predicate": "elements_included_in_listed_instantaneous_water_heater"
+                },
+                {
+                  "predicate": "elements_installed_in_low_pressure_or_open_outlet_water_heater_tank"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Appliance internal wiring diagram showing element subdivision",
+        "Supplementary overcurrent device ratings on manufacturer cut sheet",
+        "ASME stamp documentation or listing where the 120 A/150 A alternative is used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_water_heater",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_13",
+      "cite": "422.13",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_13",
+      "title": "Size storage water heater (120 gal or less) circuit at 125% of heater rating",
+      "intent": "Treat fixed storage water heaters as continuous loads so conductors and overcurrent devices do not run at full rating.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_fixed_storage_type_water_heater"
+            },
+            {
+              "predicate": "water_heater_capacity_<=_450l_120gal"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_and_ocpd_sizing",
+        "constraint": "branch_circuit_overcurrent_device_and_conductors_>=_125_percent_of_water_heater_rating"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Water heater nameplate rating (kW/amperes) and tank capacity",
+        "Panel schedule showing conductor size and breaker rating",
+        "125% sizing calculation"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_water_heater",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_15",
+      "cite": "422.15",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_15",
+      "title": "Connect central vacuum outlet assemblies with adequate conductors and grounding",
+      "intent": "Ensure listed central vacuum assemblies are supplied per 210.23(A), with connecting conductors at least as large as the branch-circuit conductors and metal parts grounded.",
+      "applies_when": [
+        {
+          "predicate": "central_vacuum_outlet_assembly_installed"
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_connection",
+        "constraints": [
+          "assembly_listed",
+          "connection_to_branch_circuit_per_210_23_a",
+          "connecting_conductor_ampacity_>=_branch_circuit_conductor_ampacity",
+          "accessible_metal_parts_likely_to_become_energized_connected_to_equipment_grounding_conductor_per_250_110"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Central vacuum assembly listing documentation",
+        "Conductor sizes for connecting and branch-circuit conductors",
+        "Grounding connection detail"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_central_vacuum",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_23",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_250_110"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_3",
+      "cite": "422.3",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_3",
+      "title": "Apply Article 430 to motor-operated appliances and Article 440 to hermetic-compressor appliances",
+      "intent": "Route motor and refrigerant-compressor appliances to the motor and HVAC-equipment rules except where Article 422 amends them.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "appliance_is_motor_operated"
+            },
+            {
+              "predicate": "appliance_contains_hermetic_refrigerant_motor_compressor"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "motor_operated_appliance_installation_complies_with_article_430",
+          "hermetic_compressor_appliance_installation_complies_with_article_440"
+        ],
+        "unless": "specifically_amended_in_article_422"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance schedule identifying motor-operated and compressor-bearing appliances",
+        "Motor circuit sizing per Article 430 shown on plans"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_7",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_440_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_3_a",
+      "cite": "422.3(A) [CEC]",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_3",
+      "title": "Provide electric-readiness circuits in single-family dwellings (heat pump water heater, cooktop, dryer)",
+      "intent": "Implement California Energy Code electrification-readiness requirements for one- and two-dwelling residential buildings.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "building_is_single_family_residential_with_one_or_two_dwellings"
+            },
+            {
+              "predicate": "scope_includes_dwelling_unit_construction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "electric_readiness",
+        "constraints": [
+          "heat_pump_water_heater_designated_space_receptacle_branch_circuit_and_circuit_identification_per_energy_code_150_0_n",
+          "electric_cooktop_dedicated_circuit_and_circuit_identification_per_energy_code_150_0_u",
+          "electric_clothes_dryer_dedicated_circuit_and_circuit_identification_per_energy_code_150_0_v"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule showing dedicated/reserved circuits with required identifications",
+        "Floor plan showing designated heat pump water heater space and receptacle",
+        "Title 24 Part 6 (Energy Code) compliance forms referencing 150.0(n), 150.0(u), 150.0(v)"
+      ],
+      "depends_on": [],
+      "amends": "422.3",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_3_b",
+      "cite": "422.3(B) [CEC]",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_3",
+      "title": "Provide electric-readiness circuits in multifamily dwelling units (cooktop, dryer)",
+      "intent": "Implement California Energy Code electrification-readiness requirements for multifamily buildings.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "building_is_multifamily"
+            },
+            {
+              "predicate": "scope_includes_dwelling_unit_construction"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "electric_readiness",
+        "constraints": [
+          "electric_cooktop_dedicated_circuit_and_circuit_identification_per_energy_code_160_9_b",
+          "electric_clothes_dryer_dedicated_circuit_and_circuit_identification_per_energy_code_160_9_c"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Unit panel schedules showing dedicated circuits and identifications",
+        "Title 24 Part 6 (Energy Code) compliance forms referencing 160.9(b) and 160.9(c)"
+      ],
+      "depends_on": [],
+      "amends": "422.3",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_30",
+      "cite": "422.30",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_30",
+      "title": "Provide a simultaneous all-ungrounded-conductor disconnect for each appliance",
+      "intent": "Guarantee every appliance can be fully isolated from its supply for service and safety.",
+      "applies_when": [
+        {
+          "predicate": "appliance_installed_in_any_occupancy"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraints": [
+          "means_simultaneously_disconnects_appliance_from_all_ungrounded_conductors",
+          "multiple_supply_disconnects_grouped_and_identified_where_appliance_supplied_by_more_than_one_branch_circuit_or_feeder"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "One-line diagram or panel schedule identifying each appliance disconnecting means",
+        "Detail showing grouping and identification labels where multiple sources supply one appliance"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_31_a",
+      "cite": "422.31(A)-(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_31",
+      "title": "Use branch-circuit device as disconnect for permanently connected appliances only if within sight or lockable",
+      "intent": "Allow the branch-circuit overcurrent device or switch to serve as the appliance disconnect while preserving servicing safety.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_permanently_connected"
+            },
+            {
+              "predicate": "branch_circuit_device_intended_as_disconnecting_means"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "any_of": [
+          "switch_or_circuit_breaker_within_sight_from_appliance",
+          "switch_or_circuit_breaker_lockable_open_per_110_25"
+        ],
+        "note": "appliances_rated_<=_300va_or_1_8_hp_may_use_branch_circuit_overcurrent_device; appliances_rated_>_300va_may_use_branch_circuit_switch_or_circuit_breaker"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule identifying the branch-circuit device serving as disconnect",
+        "Plan showing device location within sight of the appliance or lock-off accessory cut sheet",
+        "Appliance nameplate volt-ampere rating"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_30",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_31_b",
+      "cite": "422.31(C)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_31",
+      "title": "Locate the disconnect within sight (or lockable) for motor-operated appliances over 1/8 hp",
+      "intent": "Protect personnel servicing motor-operated appliances by keeping the disconnect visible or locked open, per motor disconnect rules.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_permanently_connected"
+            },
+            {
+              "predicate": "appliance_motor_rated_>_1_8_hp"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraints": [
+          "disconnecting_means_complies_with_430_109_and_430_110"
+        ],
+        "any_of": [
+          "disconnecting_means_within_sight_from_appliance",
+          "disconnecting_means_lockable_open_per_110_25"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "appliance_provided_with_unit_switch_complying_with_422_34_a_through_d"
+            }
+          ],
+          "effect": "other_disconnecting_means_permitted_out_of_sight_from_appliance"
+        }
+      ],
+      "evidence_required": [
+        "Appliance motor horsepower rating from nameplate or cut sheet",
+        "Plan showing disconnect location relative to appliance",
+        "Disconnect device rating documentation per 430.109/430.110"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_109",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_110",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_34"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_33",
+      "cite": "422.33",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_33",
+      "title": "Use an accessible plug-and-receptacle as the disconnect for cord-and-plug appliances, rated for the appliance",
+      "intent": "Permit the attachment plug or separable connector to serve as the appliance disconnect when it is accessible and adequately rated.",
+      "applies_when": [
+        {
+          "predicate": "appliance_is_cord_and_plug_or_attachment_fitting_connected"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraints": [
+          "separable_connector_or_plug_and_receptacle_accessible",
+          "receptacle_or_separable_connector_rating_>=_connected_appliance_rating",
+          "where_not_accessible_provide_disconnecting_means_per_422_31"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "demand_factors_authorized_elsewhere_in_code_applied_to_receptacle_or_connector_rating"
+            }
+          ],
+          "effect": "receptacle_rating_permitted_below_appliance_rating_per_demand_factors"
+        }
+      ],
+      "evidence_required": [
+        "Receptacle rating on plans versus appliance nameplate rating",
+        "Plan detail showing receptacle accessibility (e.g., range rear-base connection accessible by drawer removal)",
+        "Appliance cord-and-plug configuration cut sheet"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_31",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_34",
+      "cite": "422.34",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_34",
+      "title": "Accept a marked-off unit switch as the appliance disconnect only with an occupancy-appropriate backup disconnect",
+      "intent": "Allow integral appliance unit switches to serve as the disconnect while ensuring a second means of disconnection exists per occupancy type.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_has_unit_switch_with_marked_off_position"
+            },
+            {
+              "predicate": "unit_switch_disconnects_all_ungrounded_conductors"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraint": "other_disconnecting_means_provided_per_occupancy",
+        "occupancy_rules": [
+          "multifamily_dwelling_other_disconnect_within_dwelling_unit_or_on_same_floor",
+          "two_family_dwelling_other_disconnect_inside_or_outside_dwelling_unit",
+          "one_family_dwelling_service_disconnect_permitted_as_other_means",
+          "other_occupancies_branch_circuit_switch_or_breaker_readily_accessible_for_servicing"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance cut sheet showing unit switch with marked-off position",
+        "Plan identifying the other disconnecting means and its location per occupancy type",
+        "Occupancy classification on drawings"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_30",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_47",
+      "cite": "422.47",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_47",
+      "title": "Equip water heaters with a supplemental temperature-limiting disconnect and T&P relief marking",
+      "intent": "Prevent scald and explosion hazards by requiring an over-temperature cutout in addition to the operating thermostat.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "appliance_is_storage_type_water_heater"
+            },
+            {
+              "predicate": "appliance_is_instantaneous_type_water_heater"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "control_and_protection",
+        "constraints": [
+          "temperature_limiting_means_in_addition_to_control_thermostat",
+          "means_disconnects_all_ungrounded_conductors",
+          "installed_to_sense_maximum_water_temperature",
+          "trip_free_manually_reset_type_or_replacement_element_type",
+          "heater_marked_to_require_temperature_and_pressure_relief_valve"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "predicate": "storage_water_heater_identified_suitable_for_supply_water_temperature_>=_82c_180f"
+                },
+                {
+                  "predicate": "water_heater_capacity_>=_60kw"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "predicate": "instantaneous_water_heater_identified_suitable_for_such_use"
+                },
+                {
+                  "predicate": "water_heater_capacity_<=_4l_1gal"
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Water heater listing/cut sheet showing high-limit (energy cutoff) device",
+        "Nameplate marking requiring temperature and pressure relief valve",
+        "Plumbing plan showing T&P relief valve installation"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_equipment_water_heater"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_60",
+      "cite": "422.60",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_60",
+      "title": "Provide a visible appliance nameplate with identifying name and electrical rating",
+      "intent": "Enable plan check and field verification of circuit sizing against manufacturer ratings.",
+      "applies_when": [
+        {
+          "predicate": "appliance_installed_in_any_occupancy"
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "constraints": [
+          "nameplate_with_identifying_name_and_rating_in_volts_and_amperes_or_volts_and_watts",
+          "frequency_marked_if_appliance_for_specific_frequency",
+          "external_motor_overload_protection_requirement_marked_where_required",
+          "marking_visible_or_easily_accessible_after_installation"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate data on appliance schedule or submittal",
+        "Installation detail showing nameplate visibility/accessibility"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_422_62",
+      "cite": "422.62",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_62",
+      "title": "Mark combined motor-and-load appliances with equivalent horsepower and circuit sizing data",
+      "intent": "Ensure appliances consisting of motors and other loads carry the ratings needed to select supply conductors and overcurrent protection.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "appliance_nameplate_includes_horsepower_rating"
+            },
+            {
+              "predicate": "appliance_consists_of_motor_with_other_loads_or_multiple_motors"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "constraints": [
+          "nameplate_horsepower_>=_motor_nameplate_horsepower",
+          "combined_load_nameplate_>=_equivalent_horsepower_per_430_110_c_1",
+          "marking_specifies_minimum_supply_circuit_conductor_ampacity_and_maximum_overcurrent_device_rating_per_422_62_b_1_or_alternate_marking_per_b_2"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "predicate": "appliance_nameplate_complies_with_422_60"
+                },
+                {
+                  "predicate": "minimum_supply_circuit_conductor_ampacity_<=_15a"
+                },
+                {
+                  "predicate": "maximum_overcurrent_device_rating_<=_15a"
+                }
+              ]
+            }
+          ],
+          "effect": "b1_marking_not_required"
+        }
+      ],
+      "evidence_required": [
+        "Appliance nameplate/submittal showing minimum circuit ampacity (MCA) and maximum overcurrent protection (MOP)",
+        "Motor nameplate horsepower documentation",
+        "Panel schedule showing circuit sized to marked MCA/MOP"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_110",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_60"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_19",
+      "cite": "424.19",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_19",
+      "title": "Provide a 125%-rated, lockable, simultaneous disconnect for fixed electric space-heating equipment",
+      "intent": "Allow safe servicing of heaters, motor controllers, and supplementary overcurrent devices by fully isolating all ungrounded conductors.",
+      "applies_when": [
+        {
+          "predicate": "equipment_is_fixed_electric_space_heating"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraints": [
+          "simultaneously_disconnects_heater_motor_controllers_and_supplementary_ocpd_from_all_ungrounded_conductors",
+          "disconnect_ampere_rating_>=_125_percent_of_total_motor_and_heater_load",
+          "lockable_open_per_110_25",
+          "multiple_source_disconnects_grouped_and_identified",
+          "with_supplementary_ocp_disconnect_within_sight_from_and_on_supply_side_of_devices_if_fuses"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Heater and motor load schedule with 125% disconnect sizing calculation",
+        "Disconnect cut sheet showing ampere rating and lock-open provision",
+        "Plan showing disconnect location relative to heater/controller and supplementary overcurrent devices"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_34"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_22_a",
+      "cite": "424.22(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_22",
+      "title": "Protect space-heating resistance elements at 60 A max and subdivide loads over 48 A",
+      "intent": "Limit each resistance heating element circuit to a safe overcurrent level.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_electric_space_heating"
+            },
+            {
+              "predicate": "equipment_employs_resistance_type_heating_elements"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "resistance_elements_protected_at_<=_60a",
+          "equipment_rated_>_48a_has_elements_subdivided",
+          "each_subdivided_load_<=_48a",
+          "subdivided_load_<_48a_ocpd_rating_complies_with_424_4_b"
+        ],
+        "alternative": "asme_rated_and_stamped_vessel_boiler_permitted_to_comply_with_424_72_a"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Heater cut sheet showing element subdivision and supplementary device ratings",
+        "Nameplate amperes versus 48 A subdivision check",
+        "Supplementary overcurrent device schedule"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_72",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_22_b",
+      "cite": "424.22(E)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_22",
+      "title": "Size field-wired subdivided-load conductors at 125% and protect them per 240.4",
+      "intent": "Keep field conductors between the heater and its supplementary overcurrent devices from operating above safe loading.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_electric_space_heating"
+            },
+            {
+              "predicate": "field_wired_conductors_between_heater_and_supplementary_overcurrent_devices"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraints": [
+          "conductors_sized_>=_125_percent_of_load_served",
+          "supplementary_ocpd_protects_conductors_per_240_4"
+        ],
+        "alternative": "heaters_>=_50kw_permitted_100_percent_where_marked_minimum_conductor_size_met_and_temperature_actuated_cyclic_control_provided"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Conductor sizing calculation at 125% of subdivided load",
+        "Heater marking of minimum conductor size where 100% alternative used",
+        "Wiring diagram of field conductors and supplementary devices"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_3",
+      "cite": "424.3",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_3",
+      "title": "Apply Article 440 to space-heating equipment with hermetic refrigerant motor-compressors",
+      "intent": "Route heat-pump style space-heating equipment to the refrigerant-compressor equipment rules in addition to Article 424.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_electric_space_heating"
+            },
+            {
+              "predicate": "equipment_incorporates_hermetic_refrigerant_motor_compressor"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraint": "equipment_also_complies_with_article_440"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Equipment schedule identifying compressor-bearing heating equipment",
+        "Nameplate MCA/MOP data per Article 440 marking"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_440_4"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_4_a",
+      "cite": "424.4(A)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_4",
+      "title": "Limit multi-outlet space-heating branch circuits to 30 A (50 A infrared in non-dwellings)",
+      "intent": "Cap the rating of branch circuits serving multiple fixed space-heating outlets.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_electric_space_heating"
+            },
+            {
+              "predicate": "branch_circuit_supplies_two_or_more_outlets"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "branch_circuit_rating",
+        "constraints": [
+          "circuit_rating_<=_30a",
+          "fixed_infrared_heating_in_other_than_dwelling_unit_permitted_circuit_rating_<=_50a"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Panel schedule showing heating circuit ratings and outlet counts",
+        "Plan identifying infrared heating equipment and occupancy type"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_10"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_4_b",
+      "cite": "424.4(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_4",
+      "title": "Size space-heating branch-circuit conductors at 125% of the load",
+      "intent": "Treat fixed electric space heating and associated motors as continuous loads for conductor sizing.",
+      "applies_when": [
+        {
+          "predicate": "equipment_is_fixed_electric_space_heating"
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraint": "branch_circuit_conductors_>=_125_percent_of_heating_and_motor_load"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Heating load schedule with 125% conductor sizing calculation",
+        "Panel schedule showing conductor sizes for heating circuits"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_72",
+      "cite": "424.72(A)-(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_72",
+      "title": "Protect resistance-type boiler elements at 150 A/120 A (ASME vessel) or 60 A/48 A (non-ASME)",
+      "intent": "Bound the overcurrent protection and load subdivision of resistance-type space-heating boilers based on vessel construction.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_boiler_employing_resistance_type_heating_elements"
+            },
+            {
+              "predicate": "equipment_is_fixed_electric_space_heating"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "any_of": [
+          {
+            "all_of": [
+              "elements_contained_in_asme_rated_and_stamped_vessel",
+              "elements_protected_at_<=_150a",
+              "boiler_rated_>_120a_has_elements_subdivided_into_loads_<=_120a"
+            ]
+          },
+          {
+            "all_of": [
+              "elements_not_contained_in_asme_rated_and_stamped_vessel",
+              "elements_protected_at_<=_60a",
+              "boiler_rated_>_48a_has_elements_subdivided_into_loads_<=_48a"
+            ]
+          }
+        ],
+        "subdivided_load_below_threshold": "ocpd_rating_complies_with_424_4_b"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Boiler cut sheet with ASME stamp documentation where the 150 A/120 A limits are used",
+        "Element subdivision and supplementary overcurrent device schedule",
+        "Boiler nameplate ampere rating"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_40"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_424_82",
+      "cite": "424.82",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_424_82",
+      "title": "Size electrode boiler branch-circuit conductors and overcurrent devices at 125% of total load",
+      "intent": "Ensure electrode-type space-heating boiler circuits are sized as continuous loads.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_electrode_type_boiler"
+            },
+            {
+              "predicate": "boiler_operating_voltage_<=_600v_nominal"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_and_ocpd_sizing",
+        "constraints": [
+          "branch_circuit_conductors_and_ocpd_calculated_at_125_percent_of_total_load_motors_not_included",
+          "contactor_or_relay_approved_for_continuous_operation_at_100_percent_permitted_to_supply_full_rated_load"
+        ],
+        "alternative": "boiler_>=_50kw_conductors_permitted_at_100_percent_of_nameplate_where_marked_minimum_conductor_size_met_and_temperature_or_pressure_actuated_cyclic_control_provided",
+        "excluded": "conductors_forming_integral_part_of_approved_boiler"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Electrode boiler nameplate rating and 125% sizing calculation",
+        "Panel schedule showing conductor and overcurrent device sizes",
+        "Contactor/relay 100%-continuous listing documentation where used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_19_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_425_19",
+      "cite": "425.19",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_19",
+      "title": "Provide a 125%-rated, lockable, simultaneous disconnect for fixed industrial process heating equipment",
+      "intent": "Allow safe servicing of industrial process heaters by fully isolating heaters, controllers, and supplementary overcurrent devices.",
+      "applies_when": [
+        {
+          "predicate": "equipment_is_fixed_industrial_process_heating"
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraints": [
+          "simultaneously_disconnects_heater_motor_controllers_and_supplementary_ocpd_from_all_ungrounded_conductors",
+          "disconnect_ampere_rating_>=_125_percent_of_total_motor_and_heater_load",
+          "lockable_open_per_110_25",
+          "multiple_source_disconnects_grouped_and_identified",
+          "with_supplementary_ocp_disconnect_within_sight_from_and_on_supply_side_of_devices_if_fuses"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Process heater load schedule with 125% disconnect sizing calculation",
+        "Disconnect cut sheet showing lock-open capability",
+        "Plan showing disconnect location relative to heater, controller, and supplementary devices"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_110_25",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_425_2",
+      "cite": "425.2",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_2",
+      "title": "Apply Articles 440 and 430 to industrial process heating equipment with compressors or motors",
+      "intent": "Route compressor- and motor-bearing industrial process heating equipment to the applicable motor and refrigeration equipment rules.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "predicate": "industrial_process_heating_equipment_incorporates_hermetic_refrigerant_motor_compressor"
+            },
+            {
+              "predicate": "industrial_process_heating_equipment_incorporates_motors"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "constraints": [
+          "compressor_bearing_equipment_also_complies_with_article_440",
+          "motor_bearing_equipment_also_complies_with_article_430"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Equipment schedule identifying motors and compressors within process heating equipment",
+        "Motor/compressor circuit sizing documentation per Articles 430/440"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_440_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_7"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_425_22",
+      "cite": "425.22(B)-(E)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_22",
+      "title": "Protect industrial process resistance elements at 60 A/48 A (or 150 A/120 A where enclosed or ASME) and size subdivided-load conductors at 125%",
+      "intent": "Bound overcurrent protection and conductor sizing for resistance-type industrial process heating elements.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_industrial_process_heating"
+            },
+            {
+              "predicate": "equipment_employs_resistance_type_heating_elements"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "constraints": [
+          "resistance_elements_protected_at_<=_60a",
+          "equipment_rated_>_48a_has_elements_subdivided_with_each_subdivided_load_<=_48a",
+          "field_wired_conductors_between_heater_and_supplementary_ocpd_sized_>=_125_percent_of_load_and_protected_per_240_4",
+          "supplementary_ocpd_factory_installed_accessible_and_suitable_for_branch_circuit_protection"
+        ],
+        "alternative": "subdivision_<=_120a_protected_<=_150a_permitted_where_elements_integral_with_process_heating_surface_or_within_identified_enclosure_or_within_asme_rated_and_stamped_vessel"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Process heater cut sheet showing element subdivision and device ratings",
+        "ASME stamp or enclosure identification where the 120 A/150 A alternative is used",
+        "Field conductor sizing calculation at 125%"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_4",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_10",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_72"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_425_72",
+      "cite": "425.72(A)-(B)",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_72",
+      "title": "Protect industrial process boiler elements at 150 A/120 A (ASME vessel) or 60 A/48 A (non-ASME)",
+      "intent": "Bound overcurrent protection and load subdivision for resistance-type industrial process boilers based on vessel construction.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_industrial_process_heating"
+            },
+            {
+              "predicate": "equipment_is_boiler_employing_resistance_type_heating_elements"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "overcurrent_protection",
+        "any_of": [
+          {
+            "all_of": [
+              "elements_contained_in_asme_rated_and_stamped_vessel",
+              "elements_protected_at_<=_150a",
+              "boiler_rated_>_120a_has_elements_subdivided_into_loads_<=_120a"
+            ]
+          },
+          {
+            "all_of": [
+              "elements_not_contained_in_asme_rated_and_stamped_vessel",
+              "elements_protected_at_<=_60a",
+              "boiler_rated_>_48a_has_elements_subdivided_into_loads_<=_48a"
+            ]
+          }
+        ],
+        "subdivided_load_below_threshold": "ocpd_rating_complies_with_425_4_b"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Boiler ASME stamp documentation where 150 A/120 A limits are used",
+        "Element subdivision and supplementary device schedule",
+        "Boiler nameplate ampere rating"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_supplementary_overcurrent",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_240_40",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_22"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_425_82",
+      "cite": "425.82",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_425_82",
+      "title": "Size industrial electrode boiler conductors and overcurrent devices at 125% of total load",
+      "intent": "Ensure industrial process electrode boiler circuits are sized as continuous loads.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_fixed_industrial_process_heating"
+            },
+            {
+              "predicate": "equipment_is_electrode_type_boiler"
+            },
+            {
+              "predicate": "boiler_operating_voltage_<=_600v_nominal"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_and_ocpd_sizing",
+        "constraints": [
+          "branch_circuit_conductors_and_ocpd_calculated_at_125_percent_of_total_load_motors_not_included",
+          "contactor_or_relay_listed_for_continuous_operation_at_100_percent_permitted_to_supply_full_rated_load"
+        ],
+        "alternative": "electrode_boiler_>=_50kw_conductors_permitted_at_100_percent_of_nameplate_where_marked_minimum_conductor_size_met_and_temperature_or_pressure_actuated_switch_controls_cyclic_operation",
+        "excluded": "conductors_forming_integral_part_of_approved_boiler"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Electrode boiler nameplate rating and 125% sizing calculation",
+        "Panel schedule showing conductor and overcurrent device sizes",
+        "Contactor/relay 100%-continuous listing documentation where used"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_210_19_a"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_430_109",
+      "cite": "430.109 (as invoked by 422.31(C))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_109",
+      "title": "Use a 430.109-compliant disconnect type for motor-operated appliances over 1/8 hp",
+      "intent": "Ensure the disconnecting means for motor-operated appliances is of a type recognized for motor circuits.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_motor_operated"
+            },
+            {
+              "predicate": "appliance_motor_rated_>_1_8_hp"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means",
+        "constraint": "disconnecting_means_type_complies_with_430_109"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Disconnect device cut sheet showing horsepower rating or other 430.109-recognized type",
+        "Appliance motor nameplate horsepower"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_31",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_disconnecting_means"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_430_110",
+      "cite": "430.110 (as invoked by 422.31(C), 422.62(A))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_110",
+      "title": "Rate motor-appliance disconnects and combined-load equivalence per 430.110",
+      "intent": "Ensure appliance disconnect ampere ratings and combined motor-plus-load horsepower equivalence follow the motor-circuit sizing rules.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "predicate": "appliance_is_motor_operated"
+                },
+                {
+                  "predicate": "appliance_motor_rated_>_1_8_hp"
+                }
+              ]
+            },
+            {
+              "predicate": "appliance_consists_of_motor_with_other_loads_or_multiple_motors"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "disconnecting_means_rating",
+        "constraints": [
+          "disconnect_ampere_rating_complies_with_430_110",
+          "combined_load_equivalent_horsepower_calculated_per_430_110_c_1"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Disconnect ampere/horsepower rating documentation",
+        "Equivalent horsepower calculation for combined loads",
+        "Appliance nameplate data"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_62",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_31"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_430_7",
+      "cite": "430.7 (as invoked by 422.11(G))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_430_7",
+      "title": "Mark motor-operated appliances with 430.7 data where separate overcurrent devices are required",
+      "intent": "Give installers and plan checkers the motor data needed to select separate overload/overcurrent devices.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "appliance_is_motor_operated"
+            },
+            {
+              "predicate": "appliance_overcurrent_protective_devices_separate_from_appliance_required"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "marking",
+        "constraint": "device_selection_data_marked_on_appliance_with_minimum_marking_per_430_7"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate showing motor data per 430.7",
+        "Overload/overcurrent device selection documentation matching marked data"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_xref_440_4",
+      "cite": "440.4 (as invoked by 422.11(G))",
+      "section_node": "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_xref_440_4",
+      "title": "Protect hermetic compressor appliances per Article 440 and mark selection data per 440.4",
+      "intent": "Ensure hermetic refrigerant motor-compressors in appliances have proper overload protection and marking for device selection.",
+      "applies_when": [
+        {
+          "predicate": "appliance_contains_hermetic_refrigerant_motor_compressor"
+        }
+      ],
+      "requires": {
+        "type": "overload_protection_and_marking",
+        "constraints": [
+          "compressor_overload_protection_per_article_440_part_vi",
+          "device_selection_data_marked_on_appliance_with_minimum_marking_per_440_4"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Appliance nameplate showing rated-load current and branch-circuit selection current per 440.4",
+        "Overload protection documentation for the compressor",
+        "Panel schedule showing circuit sized to nameplate data"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_11",
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_422_3"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_675_9",
+      "cite": "675.9",
+      "section_node": "21_chapter_6_special_equipment_article_669_electroplating_article_690_solar_photovo_675_9",
+      "title": "Size irrigation machine branch-circuit conductors to the equivalent continuous-current rating",
+      "intent": "Ensure branch-circuit conductors for electrically driven or controlled irrigation machines carry the duty-cycle-adjusted continuous load.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "equipment_is_electrically_driven_or_controlled_irrigation_machine"
+            },
+            {
+              "predicate": "branch_circuit_supplies_irrigation_machine_motors"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "conductor_sizing",
+        "constraint": "branch_circuit_conductor_ampacity_>=_equivalent_continuous_current_rating_per_675_7_a_or_675_22_a",
+        "calculation": "125_percent_of_largest_motor_full_load_current_plus_duty_cycle_weighted_sum_of_remaining_motor_full_load_currents"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Irrigation machine motor schedule with nameplate full-load currents",
+        "Equivalent continuous-current calculation per 675.7(A) or 675.22(A)",
+        "Conductor size and ampacity on circuit schedule or one-line diagram"
+      ],
+      "depends_on": [
+        "11_chapter_4_equipment_for_general_use_article_410_luminaires_lampholders_and_lamps_concept_125_percent_branch_circuit_sizing"
+      ],
+      "amends": null,
+      "jurisdiction": "model_NEC",
+      "severity": "required"
+    }
+  ]
+}

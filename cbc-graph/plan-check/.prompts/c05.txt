@@ -1,0 +1,145 @@
+You are a plan-check rule extraction subagent. The graph community "Chapter 22 Steel" has been identified as a coherent rule pack from the 2022 California Building Code (Title 24 Part 2, based on the 2021 IBC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cbc-graph/chapters/ch19a_chapter_19a_concrete.md
+cbc-graph/chapters/ch22_chapter_22_steel.md
+cbc-graph/chapters/ch22a_chapter_22a_steel.md
+cbc-graph/chapters/ch25_chapter_25_gypsum_board_gypsum_panel_products_and_plaster.md
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cbc-graph/plan-check/c05_chapter_22_steel_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  ch19a_section_1901a_general                                   Section 1901A General
+  ch19a_section_1902a_coordination_of_terminology               Section 1902A Coordination of Terminology
+  ch19a_section_1903a_specifications_for_tests_and_materials    Section 1903A Specifications for Tests and Materials
+  ch19a_section_1904a_durability_requirements                   Section 1904A Durability Requirements
+  ch19a_section_1906a_footings_for_light_frame_construction     Section 1906A Footings for Light-Frame Construction
+  ch19a_section_1907a_minimum_slab_provisions                   Section 1907A Minimum Slab Provisions
+  ch19a_section_1908a_shotcrete                                 Section 1908A Shotcrete
+  ch19a_section_1910a_concrete_reinforcement_and_anchor_testing  Section 1910A Concrete, Reinforcement and Anchor Testing
+  ch19a_section_1911a_existing_concrete_structures              Section 1911A Existing Concrete Structures
+  ch22_section_2201_general                                     Section 2201 General
+  ch22_section_2202_identification_of_steel                     Section 2202 Identification of Steel for Structural Purposes
+  ch22_section_2203_protection_of_steel                         Section 2203 Protection of Steel for Structural Purposes
+  ch22_section_2204_connections                                 Section 2204 Connections
+  ch22_section_2205_structural_steel                            Section 2205 Structural Steel
+  ch22a_section_2205a_structural_steel                          Section 2205A Structural Steel
+  ch22_section_2206_composite_structural_steel_and_concrete     Section 2206 Composite Structural Steel and Concrete Structu
+  ch22a_section_2206a_composite_structural_steel_and_concrete   Section 2206A Composite Structural Steel and Concrete Struct
+  ch22_section_2207_steel_joists                                Section 2207 Steel Joists
+  ch22a_section_2207a_steel_joists                              Section 2207A Steel Joists
+  ch22_section_2208_steel_cable_structures                      Section 2208 Steel Cable Structures
+  ch22_section_2209_steel_storage_racks                         Section 2209 Steel Storage Racks
+  ch22_section_2210_cold_formed_steel                           Section 2210 Cold-Formed Steel
+  ch22_section_2211_cold_formed_steel_light_frame_construction  Section 2211 Cold-Formed Steel Light-Frame Construction
+  ch22a_section_2211a_cold_formed_steel_light_frame_construction  Section 2211A Cold-Formed Steel Light-Frame Construction
+  ch22_section_2212_additional_requirements_community_colleges  Section 2212 Additional Requirements for Community Colleges
+  ch22a_section_2212a_light_modular_steel_moment_frames         Section 2212A Light Modular Steel Moment Frames for Schools
+  ch22_section_2213_testing_and_field_verification              Section 2213 Testing and Field Verification
+  ch22a_section_2213a_testing_and_field_verification            Section 2213A Testing and Field Verification
+  ch25_section_2503_inspection                                  Section 2503 Inspection
+  ch25_section_2504_vertical_and_horizontal_assemblies          Section 2504 Vertical and Horizontal Assemblies
+  ch25_section_2505_shear_wall_construction                     Section 2505 Shear Wall Construction
+  ch25_section_2507_lathing_and_plastering                      Section 2507 Lathing and Plastering
+  ch25_section_2510_lathing_furring_cement_plaster_stucco       Section 2510 Lathing and Furring for Cement Plaster (Stucco)
+  ch25_section_2511_interior_plaster                            Section 2511 Interior Plaster
+  ch25_section_2512_exterior_plaster                            Section 2512 Exterior Plaster
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  ch19a_table_21_2_2_strength_reduction_factor                  Table 21.2.2 Strength Reduction Factor phi
+  ch25_table_2506_2_gypsum_board_materials                      Table 2506.2 Gypsum Board Materials and Accessories
+  ch25_table_2507_2_lath_plastering_materials                   Table 2507.2 Lath, Plastering Materials and Accessories
+  ch25_table_2508_6_gypsum_diaphragm_ceiling                    Table 2508.6 Shear Capacity Gypsum Board Diaphragm Ceiling
+  ch19a_anchoring_to_concrete                                   Anchoring to Concrete (cast-in, post-installed, adhesive anc
+  ch19a_chapter_19a_concrete                                    CBC Chapter 19A Concrete
+  ch19a_frp_strengthening                                       Externally Bonded Fiber Reinforced Polymer (FRP) Strengtheni
+  ch19a_glass_fiber_reinforced_concrete                         Glass Fiber-Reinforced Concrete (GFRC)
+  ch19a_insulating_concrete_form_systems                        Flat Wall Insulating Concrete Form (ICF) Systems
+  ch19a_post_installed_anchor_testing                           Post-Installed Anchor Testing
+  ch19a_prestressed_concrete                                    Prestressed Concrete and Tendons
+  ch19a_shotcrete_material                                      Shotcrete
+  ch19a_special_structural_wall                                 Special Structural Wall
+  ch22_aisi_s100                                                AISI S100 North American Specification for Cold-Formed Steel
+  ch22_aisi_s220                                                AISI S220 Cold-Formed Steel Nonstructural Members
+  ch22_aisi_s240                                                AISI S240 Cold-Formed Steel Structural Framing
+  ch22_aisi_s400                                                AISI S400 Seismic Design of Cold-Formed Steel Structural Sys
+  ch22_aws_d1_1                                                 AWS D1.1 Structural Welding Code Steel
+  ch22_chapter_22_steel                                         CBC Chapter 22 Steel
+  ch22_high_strength_bolts                                      High-Strength Bolts, Nuts and Washers
+  ch22_seismic_force_resisting_system                           Steel Seismic Force-Resisting System
+  ch22_sji_specifications                                       SJI 100 / SJI 200 Steel Joist Institute Specifications
+  ch22_special_moment_frame                                     Special and Intermediate Moment Frame Connections
+  ch22a_beam_to_column_strength_ratio                           Beam-to-Column Strength Ratio (Equation 22A-1)
+  ch22a_bolted_sideplate_moment_connection                      Bolted Sideplate Steel Moment Connection
+  ch22a_chapter_22a_steel                                       CBC Chapter 22A Steel (DSA-SS / OSHPD)
+  ch22a_welded_sideplate_moment_connection                      Welded Sideplate Steel Moment Connection
+  ch25_cement_plaster_stucco                                    Cement Plaster (Stucco)
+  ch25_water_resistive_barrier                                  Water-Resistive Barriers for Stucco
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  ch19a_aci_318                                                 ACI 318 Building Code Requirements for Structural Concrete
+  ch19a_section_1905a_modifications_to_aci_318                  Section 1905A Modifications to ACI 318
+  ch22_aisc_341                                                 AISC 341 Seismic Provisions for Structural Steel Buildings
+  ch22_aisc_358                                                 AISC 358 Prequalified Connections for Special and Intermedia
+  ch22_aisc_360                                                 AISC 360 Specification for Structural Steel Buildings
+  ch22_asce_7                                                   ASCE 7 Minimum Design Loads
+  ch25_astm_c1063                                               ASTM C1063 Lathing and Furring for Cement Plaster
+  ch25_astm_c1396                                               ASTM C1396 Standard Specification for Gypsum Board
+  ch25_astm_c926                                                ASTM C926 Application of Portland Cement-Based Plaster
+  ch25_chapter_25_gypsum_board_and_plaster                      CBC Chapter 25 Gypsum Board, Gypsum Panel Products and Plast
+  ch25_gypsum_board                                             Gypsum Board / Gypsum Panel Products
+  ch25_section_2506_gypsum_board_materials                      Section 2506 Gypsum Board and Gypsum Panel Product Materials
+  ch25_section_2508_gypsum_construction                         Section 2508 Gypsum Construction
+  ch25_section_2514_reinforced_gypsum_concrete                  Section 2514 Reinforced Gypsum Concrete
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "1010.1.2",
+  "section_node": "<the graph node id from the list above, e.g. ch19a_section_1901a_general>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_IBC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (building domain):
+- snake_case
+- Specific over generic: `is_group_r2_occupancy` not `is_residentialish`; `is_type_va_construction` not `is_wood`
+- Numeric thresholds inline: `occupant_load_>=_50`, `travel_distance_>_250_ft`, `fire_separation_distance_<_10_ft`
+- Boolean facts: `is_sprinklered_nfpa13`, `is_rated_corridor`, `is_accessible_route`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (code analysis, occupancy/egress plans, rated assembly details and listings, occupant load and travel distance calculations, accessibility details).
+6. California amendments: set `jurisdiction: "California"` (CBC-specific or state-agency-marked section, e.g. [DSA], [OSHPD], [SFM], or an -A/-B suffixed chapter); otherwise `"model_IBC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Building Code (Title 24 Part 2)",
+  "rule_pack": "Chapter 22 Steel",
+  "community_id": 5,
+  "extracted_from_sections": ["ch19a_chapter_19a_concrete.md", "ch22_chapter_22_steel.md", "ch22a_chapter_22a_steel.md", "ch25_chapter_25_gypsum_board_gypsum_panel_products_and_plaster.md"],
+  "rules": [ ... ]
+}
+
+Aim for 8-35 rules. After writing the file, just confirm "wrote c05_chapter_22_steel_rules.json with N rules" and stop.

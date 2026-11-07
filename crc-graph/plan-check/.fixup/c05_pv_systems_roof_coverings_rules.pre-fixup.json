@@ -1,0 +1,982 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "PV Systems & Roof Coverings",
+  "community_id": 5,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_a.md",
+    "chapter_3_building_planning_c.md",
+    "chapter_44_referenced_standards.md",
+    "chapter_7_wall_covering.md",
+    "chapter_9_roof_assemblies.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r324_scope",
+      "cite": "R324",
+      "section_node": "section_r324",
+      "title": "Solar energy systems comply with Section R324",
+      "intent": "Establishes the scope: any solar energy system installed on a one- or two-family dwelling falls under Section R324.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "is_solar_thermal_system": true
+            },
+            {
+              "is_photovoltaic_system": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "must_comply_with_section": "R324"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Identification of the solar energy system type on plans (PV, BIPV, solar thermal)",
+        "Reference on plans to Section R324 compliance"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_3_pv_systems",
+      "cite": "R324.3",
+      "section_node": "r324_3",
+      "title": "PV systems designed and installed per R324.3.1-R324.7.1, manufacturer instructions, and CA Electrical Code",
+      "intent": "Ensures PV systems follow the specific PV subsections, the manufacturer's installation instructions, and the California Electrical Code for electrical work.",
+      "applies_when": [
+        {
+          "is_photovoltaic_system": true
+        }
+      ],
+      "requires": {
+        "type": "design_and_installation",
+        "must_comply_with_sections": [
+          "R324.3.1",
+          "R324.4",
+          "R324.5",
+          "R324.6",
+          "R324.7"
+        ],
+        "must_follow_manufacturer_installation_instructions": true,
+        "electrical_portion_per": "California Electrical Code"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Manufacturer's installation instructions submitted with the plan set",
+        "Electrical plans stamped or noted as compliant with California Electrical Code",
+        "PV system layout drawing referencing R324.3 through R324.7"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_3_1_equipment_listings",
+      "cite": "R324.3.1",
+      "section_node": "r324_3_1",
+      "title": "PV panels, modules, inverters, and mounting systems must be listed and labeled",
+      "intent": "Ensures all PV equipment carries the proper safety listings so it has been independently tested for fire, electrical, and mounting safety.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "component_is_pv_panel_or_module": true
+            },
+            {
+              "component_is_inverter": true
+            },
+            {
+              "component_is_pv_mounting_system": true
+            },
+            {
+              "all_of": [
+                {
+                  "component_is_inverter": true
+                },
+                {
+                  "system_connected_to_utility_grid": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "listing_and_labeling",
+        "panel_or_module_listed_to": {
+          "any_of": [
+            "std_ul_1703",
+            {
+              "all_of": [
+                "std_ul_61730_1",
+                "std_ul_61730_2"
+              ]
+            }
+          ]
+        },
+        "inverter_listed_to": "std_ul_1741",
+        "grid_tied_inverter_listed_for_utility_interaction": true,
+        "mounting_system_listed_to": "std_ul_2703",
+        "mounting_system_installed_per_manufacturer_and_listing": true,
+        "tested_per": [
+          "std_ul_1703",
+          "std_ul_61730_1",
+          "std_ul_61730_2",
+          "std_ul_1741",
+          "std_ul_2703"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Cut sheets / spec sheets for PV modules showing UL 1703 or UL 61730-1/-2 listing marks",
+        "Inverter cut sheet showing UL 1741 listing and, if grid-tied, utility-interaction listing",
+        "Mounting system cut sheet showing UL 2703 listing",
+        "Manufacturer installation instructions for the mounting system"
+      ],
+      "depends_on": [
+        "std_ul_1703",
+        "std_ul_61730_1",
+        "std_ul_61730_2",
+        "std_ul_1741",
+        "std_ul_2703"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_4_1_structural",
+      "cite": "R324.4.1",
+      "section_node": "r324_4_1",
+      "title": "Rooftop PV systems and their supporting roofs designed for applicable gravity loads",
+      "intent": "Ensures both the PV array structure and the roof underneath can carry the weight and gravity loads that come with adding PV.",
+      "applies_when": [
+        {
+          "is_rooftop_mounted_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "structural_design",
+        "pv_system_supports_itself_and_gravity_loads_per": "Chapter 3",
+        "supporting_roof_designed_per": "chapter_8"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural calculations for the PV racking/support system signed by a licensed engineer",
+        "Roof framing calculations or analysis demonstrating capacity to carry added PV dead load",
+        "Plan note referencing Chapter 3 (gravity loads) and Chapter 8 (roof-ceiling construction)"
+      ],
+      "depends_on": [
+        "chapter_8"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_4_1_1_roof_load",
+      "cite": "R324.4.1.1",
+      "section_node": "r324_4_1_1",
+      "title": "Roof load cases for portions covered and not covered by PV",
+      "intent": "Defines the specific load combinations the roof must be designed for so PV addition does not under-stress areas with PV (snow case) or leave bare areas under-designed for live/snow load.",
+      "applies_when": [
+        {
+          "is_rooftop_mounted_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "structural_load_cases",
+        "uncovered_roof_designed_for": [
+          "dead_load_per_R301_4",
+          "roof_load_per_R301_6"
+        ],
+        "pv_covered_roof_designed_for_load_cases": [
+          {
+            "case": 1,
+            "combination": "dead_load_including_pv_panel_weight + snow_load",
+            "snow_load_per": "table_r301_2"
+          },
+          {
+            "case": 2,
+            "combination": "dead_load_excluding_pv_panel_weight + greater_of(roof_live_load, snow_load)",
+            "live_or_snow_per": "R301.6"
+          }
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Structural calculations showing both load cases for PV-covered roof areas",
+        "Structural calculations showing dead + roof live/snow for non-PV-covered roof areas",
+        "Reference to Table R301.2 climatic snow load on plans"
+      ],
+      "depends_on": [
+        "table_r301_2"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_4_1_2_wind_load",
+      "cite": "R324.4.1.2",
+      "section_node": "r324_4_1_2",
+      "title": "Rooftop PV designed for component-and-cladding wind loads",
+      "intent": "Ensures rooftop PV panels and supports resist wind uplift using component-and-cladding pressures, adjusted for site height and exposure.",
+      "applies_when": [
+        {
+          "is_rooftop_mounted_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "wind_load_design",
+        "component_and_cladding_loads_per": "table_r301_2_1_1",
+        "height_and_exposure_adjustment_per": "Table R301.2.1(2)"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Wind-load calculations for the PV array using Table R301.2.1(1) C&C loads",
+        "Site exposure category and mean roof height documented in calculations",
+        "Attachment / anchor capacity calculations stamped by an engineer"
+      ],
+      "depends_on": [
+        "table_r301_2_1_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_5_bipv_systems",
+      "cite": "R324.5",
+      "section_node": "r324_5",
+      "title": "BIPV systems serving as roof covering installed per Section R905",
+      "intent": "Treats BIPV products that act as roofing the same as any other roof covering for installation purposes.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_building_integrated_pv_system": true
+            },
+            {
+              "serves_as_roof_covering": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_installation",
+        "must_comply_with_section": "R905"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan identifying BIPV product as the roof covering",
+        "Reference on plans to Section R905 compliance for the BIPV product"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_5_1_pv_shingles",
+      "cite": "R324.5.1",
+      "section_node": "r324_5_1",
+      "title": "Photovoltaic shingles comply with R905.16",
+      "intent": "Routes PV shingle installation to the dedicated shingle requirements (deck, slope, underlayment, listing, attachment, wind).",
+      "applies_when": [
+        {
+          "is_photovoltaic_shingle_system": true
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_installation",
+        "must_comply_with_section": "R905.16"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan identifying PV shingles as roof covering",
+        "Reference on plans to Section R905.16"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_5_2_bipv_fire_class",
+      "cite": "R324.5.2",
+      "section_node": "r324_5_2",
+      "title": "BIPV systems must have fire classification per R902.3",
+      "intent": "Ensures BIPV products carry a roof-covering fire class (A, B or C) so they meet the same fire performance as a conventional roof covering.",
+      "applies_when": [
+        {
+          "is_building_integrated_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "fire_classification",
+        "fire_class_per_section": "R902.3",
+        "tested_per": [
+          "std_ul_7103"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "BIPV product listing/label showing UL 7103 fire classification (Class A, B, or C)",
+        "Plan note specifying required fire class for the project (per R902.1.1/R902.1.2)"
+      ],
+      "depends_on": [
+        "std_ul_7103"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_5_3_bipv_roof_panels",
+      "cite": "R324.5.3",
+      "section_node": "r324_5_3",
+      "title": "BIPV roof panels comply with R905.17",
+      "intent": "Routes BIPV roof panel installation to the dedicated section covering deck, slope, underlayment, ice barrier, material standards, and attachment.",
+      "applies_when": [
+        {
+          "is_bipv_roof_panel_system": true
+        }
+      ],
+      "requires": {
+        "type": "roof_covering_installation",
+        "must_comply_with_section": "R905.17"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan identifying BIPV roof panels as the roof covering",
+        "Reference on plans to Section R905.17"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_7_ground_mounted",
+      "cite": "R324.7",
+      "section_node": "r324_7",
+      "title": "Ground-mounted PV systems designed and installed per Section R301",
+      "intent": "Applies the general structural design provisions of Section R301 to ground-mounted PV arrays so they resist gravity, wind, and seismic loads.",
+      "applies_when": [
+        {
+          "is_ground_mounted_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "structural_design",
+        "must_comply_with_section": "R301",
+        "ground_array_clear_brushfree_area_min_ft": 10,
+        "subject_to_fire_separation_distance_per_enforcing_agency": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Site plan showing the ground-mounted array location and a minimum 10-foot clear, brush-free perimeter",
+        "Structural calculations for the ground-mount foundation/support per Section R301",
+        "Documentation of fire-separation distance from the enforcing agency"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_8_elevated_pv_scope",
+      "cite": "R324.8",
+      "section_node": "r324_8",
+      "title": "Elevated PV support structures comply with R324.8.1 or R324.8.2",
+      "intent": "Captures the scope choice for elevated PV support structures (carports, trellises, canopies) between two compliance paths based on the deck/roof beneath.",
+      "applies_when": [
+        {
+          "is_elevated_pv_support_structure": true
+        }
+      ],
+      "requires": {
+        "type": "compliance_path",
+        "must_comply_with_one_of": [
+          "R324.8.1",
+          "R324.8.2"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "elevated_pv_support_for_agricultural_use": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Plan note identifying the chosen compliance path (R324.8.1 or R324.8.2)",
+        "Cross-section or detail showing whether the deck below the PV is open grid/noncombustible or a roof assembly"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_8_1_elevated_pv_open_grid",
+      "cite": "R324.8.1",
+      "section_node": "r324_8_1",
+      "title": "Elevated PV over open grid framing or noncombustible deck must use fire-rated PV panels",
+      "intent": "Bans 'not fire rated' modules in elevated structures that lack a fire-resistive roof beneath, where the PV panel itself is the fire barrier.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_elevated_pv_support_structure": true
+            },
+            {
+              "any_of": [
+                {
+                  "deck_is_open_grid_framing": true
+                },
+                {
+                  "deck_is_noncombustible": true
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_rating",
+        "pv_panels_listed_with_fire_type_rating": true,
+        "tested_per": [
+          "std_ul_1703",
+          "std_ul_61730_1",
+          "std_ul_61730_2"
+        ],
+        "panels_marked_not_fire_rated_prohibited": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV module listing/label showing UL 1703 (or UL 61730-1 + 61730-2) fire type rating",
+        "Plan note prohibiting use of modules marked 'not fire rated'",
+        "Detail showing the open grid framing or noncombustible deck below the panels"
+      ],
+      "depends_on": [
+        "std_ul_1703",
+        "std_ul_61730_1",
+        "std_ul_61730_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r324_8_2_elevated_pv_over_roof",
+      "cite": "R324.8.2",
+      "section_node": "r324_8_2",
+      "title": "Elevated PV installed over a roof assembly fire-classified per R324.4",
+      "intent": "When the elevated PV sits over a real roof assembly, the system is treated as rooftop-mounted PV for fire classification purposes.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_elevated_pv_support_structure": true
+            },
+            {
+              "installed_over_roof_assembly": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_classification",
+        "fire_class_per_section": "R324.4"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV system fire-classification documentation matching the roof assembly required class",
+        "Cross-section showing PV elevated above an existing roof assembly"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r703_2_water_resistive_barrier",
+      "cite": "R703.2",
+      "section_node": "section_r703_2",
+      "title": "Continuous water-resistive barrier behind exterior wall veneer",
+      "intent": "Ensures liquid water that gets past the cladding has a continuous drainage plane back out of the wall assembly.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "wall_is_exterior": true
+            },
+            {
+              "has_exterior_wall_covering": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "barrier",
+        "min_layers_water_resistive_barrier": 1,
+        "applied_over": [
+          "studs",
+          "sheathing"
+        ],
+        "flashing_per_section": "R703.4",
+        "barrier_continuous_to_top_of_walls": true,
+        "barrier_terminated_at_penetrations_and_appendages": true,
+        "acceptable_materials": [
+          {
+            "name": "No. 15 felt",
+            "tested_per": [
+              "std_astm_d226"
+            ],
+            "type": "Type 1"
+          },
+          {
+            "name": "ASTM E2556 Type 1 or 2"
+          },
+          {
+            "name": "ASTM E331 per R703.1.1"
+          },
+          {
+            "name": "Other approved per manufacturer instructions"
+          }
+        ],
+        "horizontal_lap_min_in": 2,
+        "joint_lap_min_in": 6
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Specification of the WRB material with ASTM compliance noted on the wall section/details",
+        "Wall section showing continuous WRB to top of wall and around penetrations",
+        "Detail showing 2-inch minimum horizontal lap and 6-inch minimum joint lap (felt or ASTM E2556)",
+        "Flashing details at openings keyed to Section R703.4"
+      ],
+      "depends_on": [
+        "std_astm_d226"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r901_scope",
+      "cite": "R901",
+      "section_node": "section_r901",
+      "title": "Roof assembly design, materials, construction and quality governed by Chapter 9",
+      "intent": "Establishes that any roof assembly on a one- or two-family dwelling falls under Chapter 9 for design, materials, construction, and quality.",
+      "applies_when": [
+        {
+          "is_roof_assembly": true
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "must_comply_with_chapter": "Chapter 9"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof plan and details on the construction documents",
+        "Specification of roof covering type and roof assembly components"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_3_bipv_fire_classification",
+      "cite": "R902.3",
+      "section_node": "r902_3",
+      "title": "BIPV products as roof covering: tested, listed, and labeled to UL 7103",
+      "intent": "California amendment requiring BIPV products acting as roof covering to be fire-classified to UL 7103, with mandatory installation of Class A/B/C BIPV near a lot line.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "is_building_integrated_pv_product": true
+            },
+            {
+              "installed_as_roof_covering": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "fire_classification",
+        "tested_listed_and_labeled_to": "std_ul_7103",
+        "fire_classes_recognized": [
+          "A",
+          "B",
+          "C"
+        ],
+        "mandatory_class_a_b_or_c_when": "edge_of_roof_<3_ft_from_lot_line",
+        "tested_per": [
+          "std_ul_7103"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "BIPV product UL 7103 listing/label documentation",
+        "Site plan dimensioning the closest roof edge to lot lines",
+        "Plan note declaring fire class (A, B or C) of the BIPV product"
+      ],
+      "depends_on": [
+        "std_ul_7103"
+      ],
+      "amends": "model_IRC_R902.3",
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r902_4_rooftop_pv_fire_classification",
+      "cite": "R902.4",
+      "section_node": "r902_4",
+      "title": "Rooftop-mounted PV systems: tested and identified to UL 2703",
+      "intent": "Requires rooftop-mounted PV (mounted on or above the roof covering) to carry a UL 2703 fire-classification listing and to be installed per the listing.",
+      "applies_when": [
+        {
+          "is_rooftop_mounted_pv_system": true
+        }
+      ],
+      "requires": {
+        "type": "fire_classification",
+        "tested_listed_and_identified_to": "std_ul_2703",
+        "install_per_manufacturer_and_listing": true,
+        "fire_classes_recognized": [
+          "A",
+          "B",
+          "C"
+        ],
+        "mandatory_class_a_b_or_c_when": {
+          "any_of": [
+            "jurisdiction_designated_by_law",
+            "edge_of_roof_<3_ft_from_lot_line"
+          ]
+        },
+        "tested_per": [
+          "std_ul_2703"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "PV system UL 2703 listing/label and fire-classification documentation",
+        "Manufacturer installation instructions consistent with the listing",
+        "Site plan dimensioning roof edge to lot lines",
+        "Plan note declaring jurisdictional fire class requirement, if any"
+      ],
+      "depends_on": [
+        "std_ul_2703"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r903_weather_protection",
+      "cite": "R903",
+      "section_node": "section_r903",
+      "title": "Roof decks covered with approved roof coverings; flashings, coping, and drainage installed",
+      "intent": "Ensures the roof assembly keeps water out of the building through approved coverings, flashings at intersections and penetrations, parapet copings, and proper drainage.",
+      "applies_when": [
+        {
+          "is_roof_assembly": true
+        }
+      ],
+      "requires": {
+        "type": "weather_protection",
+        "roof_deck_covered_with_approved_roof_covering": true,
+        "secured_per_chapter_9_and_manufacturer": true,
+        "flashing_required_at": [
+          "wall_and_roof_intersections",
+          "changes_in_roof_slope_or_direction",
+          "around_roof_openings",
+          "where_eave_meets_vertical_sidewall"
+        ],
+        "metal_flashing_min_thickness_in": 0.019,
+        "metal_flashing_corrosion_resistant": true,
+        "cricket_or_saddle_when": "ridge_side_of_chimney_or_penetration_>_30_in_wide",
+        "parapet_walls_coped_with_noncombustible_weatherproof_material": true,
+        "roof_drains_at_each_low_point_unless_sloped_to_drain_over_edges": true
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "is_unit_skylight_per_R308_6": true
+                },
+                {
+                  "flashed_per_manufacturer_instructions": true
+                }
+              ]
+            }
+          ],
+          "effect": "no_cricket_or_saddle_required"
+        }
+      ],
+      "evidence_required": [
+        "Roof covering specification (approved type per R905)",
+        "Flashing details at parapet walls, sidewalls, eave-to-sidewall, and roof penetrations",
+        "Cricket/saddle detail for any chimney or penetration wider than 30 inches",
+        "Coping detail for parapet walls",
+        "Drainage plan with low-point drains and overflow drains/scuppers per R903.4.1"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r904_materials",
+      "cite": "R904",
+      "section_node": "section_r904",
+      "title": "Roof covering materials compatible, conform to standards, and bear identifying marks",
+      "intent": "Quality-control requirements: roof materials must be compatible, meet referenced standards, and arrive at the site in identifiable, labeled packaging.",
+      "applies_when": [
+        {
+          "is_roof_assembly": true
+        }
+      ],
+      "requires": {
+        "type": "materials",
+        "must_be_compatible_with_each_other_and_substrate": true,
+        "must_conform_to_standards_in_chapter_9": true,
+        "delivered_with_manufacturer_marks_and_testing_agency_labels": true,
+        "bulk_shipments_with_certificate_or_bill_of_lading": true,
+        "installed_per_section_r905_and_manufacturer_instructions": true
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Specification listing roof covering material and applicable ASTM/UL standard",
+        "Submittal of cut sheets / labels showing compliance and testing agency",
+        "Compatibility statement for combined materials in the roof assembly"
+      ],
+      "depends_on": [],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_requirements_scope",
+      "cite": "R905",
+      "section_node": "section_r905",
+      "title": "Roof coverings installed per applicable subsections of R905 and manufacturer instructions",
+      "intent": "Establishes Section R905 as the controlling section for the installation of every type of roof covering, including the requirement to resist component-and-cladding wind loads.",
+      "applies_when": [
+        {
+          "is_roof_covering_installation": true
+        }
+      ],
+      "requires": {
+        "type": "scope",
+        "must_comply_with_applicable_subsection_of_section": "R905",
+        "must_follow_manufacturer_installation_instructions": true,
+        "wind_resistance_for_component_and_cladding_loads_per": "table_r301_2_1_1",
+        "height_and_exposure_adjustment_per": "Table R301.2.1(2)"
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Plan reference to specific R905 subsection for the chosen roof covering",
+        "Manufacturer installation instructions on the submittal",
+        "Component-and-cladding wind pressure values used in the design"
+      ],
+      "depends_on": [
+        "table_r301_2_1_1"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_1_underlayment",
+      "cite": "R905.1.1",
+      "section_node": "section_r905_1",
+      "title": "Underlayment for listed roof coverings conforms to standards and is applied/attached per R905.1.1 tables",
+      "intent": "Requires the underlayment beneath shingles, tile, metal, slate, wood, and PV shingles to meet a recognized standard and be installed and fastened per the prescriptive tables.",
+      "applies_when": [
+        {
+          "any_of": [
+            {
+              "roof_covering": "asphalt_shingles"
+            },
+            {
+              "roof_covering": "clay_or_concrete_tile"
+            },
+            {
+              "roof_covering": "metal_roof_shingles"
+            },
+            {
+              "roof_covering": "mineral_surfaced_roll_roofing"
+            },
+            {
+              "roof_covering": "slate_or_slate_type_shingles"
+            },
+            {
+              "roof_covering": "wood_shingles"
+            },
+            {
+              "roof_covering": "wood_shakes"
+            },
+            {
+              "roof_covering": "metal_roof_panels"
+            },
+            {
+              "roof_covering": "photovoltaic_shingles"
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "underlayment",
+        "conforms_to_standards_per_table": "table_r905_1_1",
+        "labeled_for_compliance_when_applicable_to": [
+          "std_astm_d226",
+          "std_astm_d1970",
+          "std_astm_d4869",
+          "ASTM D6757"
+        ],
+        "applied_per_table": "Table R905.1.1(2)",
+        "attached_per_table": "Table R905.1.1(3)",
+        "tested_per": [
+          "std_astm_d226",
+          "std_astm_d1970",
+          "std_astm_d4869"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "underlayment_is_self_adhering_polymer_modified_bitumen": true
+                },
+                {
+                  "labeled_to": "std_astm_d1970"
+                },
+                {
+                  "installed_per_underlayment_and_roof_covering_manufacturer_instructions": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_compliance_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "all_of": [
+                {
+                  "deck_joints_covered_with_min_4_in_strip_self_adhering_polymer_modified_bitumen": true
+                },
+                {
+                  "strip_labeled_to": "std_astm_d1970"
+                },
+                {
+                  "underlayment_complies_with_table_r905_1_1_for_areas_no_wind_design": true
+                }
+              ]
+            }
+          ],
+          "effect": "alternative_compliance_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Underlayment product spec sheet showing ASTM D226 / D1970 / D4869 / D6757 compliance label",
+        "Roof detail showing underlayment lap pattern per Table R905.1.1(2)",
+        "Fastening schedule for the underlayment per Table R905.1.1(3)",
+        "If using a R905.1.1 exception, the alternative product data and installation method documented"
+      ],
+      "depends_on": [
+        "table_r905_1_1",
+        "std_astm_d226",
+        "std_astm_d1970",
+        "std_astm_d4869"
+      ],
+      "amends": null,
+      "jurisdiction": "model_IRC",
+      "severity": "required"
+    },
+    {
+      "id": "rule_r905_16_pv_shingles",
+      "cite": "R905.16",
+      "section_node": "section_r905_16",
+      "title": "Photovoltaic shingles: deck, slope, underlayment, listing, attachment, and wind resistance",
+      "intent": "Provides the full prescriptive package for installing PV shingles as the roof covering, paralleling other shingle products plus a UL listing for the PV product itself.",
+      "applies_when": [
+        {
+          "is_photovoltaic_shingle_system": true
+        }
+      ],
+      "requires": {
+        "type": "roof_covering",
+        "deck": {
+          "must_be_solid_or_closely_fitted": true,
+          "spaced_sheathing_only_when_specifically_designed": true
+        },
+        "min_roof_slope": "2:12",
+        "underlayment_per_section": "R905.1.1",
+        "ice_barrier_when_required_per_section": "R905.1.2",
+        "material_listing": {
+          "any_of": [
+            "std_ul_7103",
+            {
+              "all_of": [
+                "std_ul_61730_1",
+                "std_ul_61730_2"
+              ]
+            }
+          ]
+        },
+        "attachment_per_manufacturer_instructions": true,
+        "wind_resistance_per_table": "Table R905.16.6",
+        "must_also_comply_with": [
+          "R324",
+          "California Electrical Code"
+        ],
+        "tested_per": [
+          "std_ul_7103",
+          "std_ul_61730_1",
+          "std_ul_61730_2"
+        ]
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Roof framing detail showing solid or closely-fitted deck",
+        "Roof plan or section confirming slope is 2:12 or greater",
+        "Underlayment specification per R905.1.1 and ice barrier per R905.1.2 if applicable",
+        "PV shingle UL 7103 (or UL 61730-1 + UL 61730-2) listing/label",
+        "Manufacturer attachment schedule and Table R905.16.6 wind classification matched to site Vult"
+      ],
+      "depends_on": [
+        "std_ul_7103",
+        "std_ul_61730_1",
+        "std_ul_61730_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": "0.1",
+  "description": "Predicate decomposition table. Each entry says how a composite predicate is implied by atomic facts. The decomposer expands a fact set by asserting any composite whose decomposition is satisfied.",
+
+  "aliases": {
+    "_doc": "Equivalent spellings — declaring any one asserts all the others.",
+    "groups": [
+      ["in_sdc_c", "in_seismic_design_category_c", "is_in_seismic_design_category_c"],
+      ["in_sdc_d0", "in_seismic_design_category_d0", "is_in_seismic_design_category_d0"],
+      ["in_sdc_d1", "in_seismic_design_category_d1", "is_in_seismic_design_category_d1"],
+      ["in_sdc_d2", "in_seismic_design_category_d2", "is_in_seismic_design_category_d2"],
+      ["is_wood_wall_framing", "is_wood_light_frame", "is_wood_framed"],
+      ["is_pv_rooftop_mounted", "is_rooftop_mounted_pv_system", "has_rooftop_pv"],
+      ["in_wildland_urban_interface_fire_area", "in_wui", "in_wui_fire_area"],
+      ["in_fire_hazard_severity_zone", "in_fhsz"]
+    ]
+  },
+
+  "compounds": {
+    "_doc": "Composite predicates explicitly defined as a logical combination of atomics.",
+    "is_detached_one_or_two_family_dwelling": {
+      "all_of": [
+        "is_one_or_two_family_dwelling",
+        "is_detached_dwelling"
+      ]
+    },
+    "is_wood_light_frame_townhouse": {
+      "all_of": ["is_wood_light_frame", "is_townhouse"]
+    },
+    "in_sdc_d0_or_d1": {
+      "any_of": ["in_sdc_d0", "in_sdc_d1"]
+    },
+    "in_sdc_d0_d1": {
+      "any_of": ["in_sdc_d0", "in_sdc_d1"]
+    },
+    "in_sdc_d0_d1_or_d2": {
+      "any_of": ["in_sdc_d0", "in_sdc_d1", "in_sdc_d2"]
+    },
+    "in_sdc_c_d0_d1_or_d2": {
+      "any_of": ["in_sdc_c", "in_sdc_d0", "in_sdc_d1", "in_sdc_d2"]
+    },
+    "in_seismic_design_category_d0_d1_or_d2": {
+      "any_of": ["in_sdc_d0", "in_sdc_d1", "in_sdc_d2"]
+    },
+    "in_seismic_design_category_c_d0_d1_or_d2": {
+      "any_of": ["in_sdc_c", "in_sdc_d0", "in_sdc_d1", "in_sdc_d2"]
+    },
+    "in_seismic_design_category_d0_or_d1": {
+      "any_of": ["in_sdc_d0", "in_sdc_d1"]
+    }
+  },
+
+  "patterns": {
+    "_doc": "Regex patterns auto-decomposed without explicit table entries.",
+    "rules": [
+      {
+        "name": "is_X_in_sdc_<list>",
+        "match": "^(is_.+?)_in_sdc_([cd012_or]+)$",
+        "decompose": {
+          "all_of": [
+            {"predicate_capture": 1},
+            {"any_of_capture_sdcs": 2}
+          ]
+        }
+      },
+      {
+        "name": "is_X_in_seismic_design_category_<list>",
+        "match": "^(is_.+?)_in_seismic_design_category_([cd012_or]+)$",
+        "decompose": {
+          "all_of": [
+            {"predicate_capture": 1},
+            {"any_of_capture_sdcs": 2}
+          ]
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,189 @@
+You are a plan-check rule extraction subagent. The graph community "Switches & General-Use Cords" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/03_chapter_1_general.txt
+cec-graph/chapters/10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c04_switches_general_use_cords_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_110_26  110.26 (clearances)
+  03_chapter_1_general_110_59                                   110.59
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_210_12  210.12 (AFCI areas)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_210_21_b  210.21(B)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_210_70  210.70
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_210_8  210.8 (GFCI)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_240_21  240.21 (taps)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_240_8  240.8 (fuses in parallel)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_250_122  250.122
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_250_130  250.130
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_250_146_d  250.146(D)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_250_28_d  250.28(D)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_250_36  250.36 (high-impedance grounded)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_300_15_e  300.15(E)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_312_2  312.2 (damp/wet enclosures)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_312_6  312.6 (wire-bending space)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_312_8  312.8
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_400_31  400.31 Construction
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_1  404.1 Scope
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_10  404.10 Mounting of General-Use Snap Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_11  404.11 Circuit Breakers as Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_12  404.12 Grounding of Enclosures
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_13  404.13 Knife Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_14  404.14 Rating and Use of Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_2  404.2 Switch Connections
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_20  404.20 Marking
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_22  404.22 Electronic Control Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_26  404.26 Knife Switches Rated 600 to 1000 Volts
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_27  404.27 Fused Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_28  404.28 Wire-Bending Space
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_3  404.3 Enclosure
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_4  404.4 Damp or Wet Locations
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_5  404.5 Time Switches, Flashers, and Similar Devices
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_6  404.6 Position and Connection of Switches
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_7  404.7 Indicating
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_8  404.8 Accessibility and Grouping
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_404_9  404.9 General-Use Snap Switches, Dimmers, and Control Switch
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_1  406.1 Scope
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_10  406.10 Grounding-Type Receptacles, Adapters, Cord Connectors
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_11  406.11 Connecting Receptacle Grounding Terminal to Box
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_12  406.12 Tamper-Resistant Receptacles
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_13  406.13 Single-Pole Separable-Connector Type
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_2  406.2 Definitions
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_3  406.3 Receptacle Rating and Type
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_4  406.4 General Installation Requirements
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_5  406.5 Receptacle Mounting
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_6  406.6 Receptacle Faceplates (Cover Plates)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_7  406.7 Attachment Plugs, Cord Connectors, and Flanged Surface
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_8  406.8 Noninterchangeability
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_406_9  406.9 Receptacles in Damp or Wet Locations
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_1  408.1 Scope
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_16  408.16 Switchboards and Switchgear in Damp or Wet Locations
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_17  408.17 Location Relative to Easily Ignitible Material
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_18  408.18 Clearances
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_19  408.19 Conductor Insulation
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_2  408.2 Other Articles
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_20  408.20 Location of Switchboards and Switchgear
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_22  408.22 Grounding of Instruments, Relays, Meters
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_23  408.23 Power Monitoring and Energy Management Equipment
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_3  408.3 Support and Arrangement of Busbars and Conductors
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_30  408.30 General (Panelboard rating)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_36  408.36 Overcurrent Protection
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_37  408.37 Panelboards in Damp or Wet Locations
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_38  408.38 Enclosure
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_39  408.39 Relative Arrangement of Switches and Fuses
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_4  408.4 Field Identification Required
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_40  408.40 Grounding of Panelboards
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_41  408.41 Grounded Conductor Terminations
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_43  408.43 Panelboard Orientation
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_5  408.5 Clearance for Conductor Entering Bus Enclosures
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_50  408.50 Panels
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_51  408.51 Busbars
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_52  408.52 Protection of Instrument Circuits
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_53  408.53 Component Parts
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_54  408.54 Maximum Number of Overcurrent Devices
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_55  408.55 Wire-Bending Space Within an Enclosure Containing a P
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_56  408.56 Minimum Spacings
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_58  408.58 Panelboard Marking
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_6  408.6 Short-Circuit Current Rating
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_7  408.7 Unused Openings
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_408_8  408.8 Reconditioning of Equipment
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_1  409.1 Scope
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_100  409.100 Enclosures
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_102  409.102 Busbars and Conductors
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_104  409.104 Wiring Space
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_106  409.106 Spacings
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_108  409.108 Service Equipment
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_110  409.110 Marking
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_20  409.20 Conductor - Minimum Size and Ampacity
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_21  409.21 Overcurrent Protection
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_22  409.22 Short-Circuit Current Rating
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_3  409.3 Other Articles
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_30  409.30 Disconnecting Means
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_409_60  409.60 Grounding
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_430_52  430.52 (motor branch-circuit protection)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_517_123_c  517.123(C) (Call System bath stations)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_518_2  518.2
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_550_13  550.13
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_table_408_5  Table 408.5 Clearance for Conductors Entering Bus Enclosures
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_table_408_56  Table 408.56 Minimum Spacings Between Bare Metal Parts
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_table_409_3  Table 409.3 Other Articles
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_110_28  Table 110.28
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_430_97_d  Table 430.97(D)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_def_child_care_facility  Child Care Facility (406.2)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_def_outlet_box_hood  Outlet Box Hood (406.2)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_attachment_plug  Attachment Plug
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_busbar  Busbar
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_circuit_breaker  Circuit Breaker
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_cord_cap  Cord Cap (Attachment Plug)
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_cord_connector  Cord Connector
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_dimmer  Dimmer Switch
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_flanged_surface_inlet  Flanged Surface Inlet
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_industrial_control_panel  Industrial Control Panel
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_isolated_ground_receptacle  Isolated Ground Receptacle
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_knife_switch  Knife Switch
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_panelboard  Panelboard
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_receptacle  Receptacle
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_snap_switch  Snap Switch
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_switch  Switch
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_switchboard  Switchboard
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_switchgear  Switchgear
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_tamper_resistant_receptacle  Tamper-Resistant Receptacle
+  10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_equipment_weather_resistant_receptacle  Weather-Resistant Receptacle
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl_xref_110_26>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Switches & General-Use Cords",
+  "community_id": 4,
+  "extracted_from_sections": ["03_chapter_1_general.txt", "10_chapter_4_equipment_for_general_use_article_400_flexible_cords_and_flexible_cabl.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 24-98 rules. After writing the file, just confirm "wrote c04_switches_general_use_cords_rules.json with N rules" and stop.

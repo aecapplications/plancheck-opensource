@@ -1,0 +1,298 @@
+{
+  "_comment": "Regenerate chapters/ from your own copy of the code PDF: python tools/split_chapters.py build --book crc --pdf <path>. Pages are 1-based and inclusive. No code text is stored here.",
+  "source": {
+    "title": "2022 California Residential Code (Title 24, Part 2.5), 1st printing",
+    "filename": "2022_ca_residential_code_title_24_part_2.5_1st_ptg.pdf",
+    "page_count": 741
+  },
+  "chapters": [
+    {
+      "file": "appendix_af_radon_control_methods.md",
+      "title": "APPENDIX AF RADON CONTROL METHODS",
+      "pages": [
+        626,
+        639
+      ]
+    },
+    {
+      "file": "appendix_ah_patio_covers.md",
+      "title": "APPENDIX AH PATIO COVERS",
+      "pages": [
+        640,
+        643
+      ]
+    },
+    {
+      "file": "appendix_ai_private_sewage_disposal.md",
+      "title": "APPENDIX AI PRIVATE SEWAGE DISPOSAL",
+      "pages": [
+        644,
+        645
+      ]
+    },
+    {
+      "file": "appendix_aj_existing_buildings_and_structures.md",
+      "title": "APPENDIX AJ EXISTING BUILDINGS AND STRUCTURES",
+      "pages": [
+        646,
+        651
+      ]
+    },
+    {
+      "file": "appendix_ak_sound_transmission.md",
+      "title": "APPENDIX AK SOUND TRANSMISSION",
+      "pages": [
+        652,
+        653
+      ]
+    },
+    {
+      "file": "appendix_al_permit_fees.md",
+      "title": "APPENDIX AL PERMIT FEES",
+      "pages": [
+        654,
+        659
+      ]
+    },
+    {
+      "file": "appendix_ao_automatic_vehicular_gates.md",
+      "title": "APPENDIX AO AUTOMATIC VEHICULAR GATES",
+      "pages": [
+        660,
+        663
+      ]
+    },
+    {
+      "file": "appendix_aq_tiny_houses.md",
+      "title": "APPENDIX AQ TINY HOUSES",
+      "pages": [
+        664,
+        667
+      ]
+    },
+    {
+      "file": "appendix_ar_light_straw_clay_construction.md",
+      "title": "APPENDIX AR LIGHT STRAW-CLAY CONSTRUCTION",
+      "pages": [
+        668,
+        671
+      ]
+    },
+    {
+      "file": "appendix_as_strawbale_construction.md",
+      "title": "APPENDIX AS STRAWBALE CONSTRUCTION",
+      "pages": [
+        672,
+        689
+      ]
+    },
+    {
+      "file": "appendix_at_re_solar_ready_provisions_detached_one_and_two_family_dwellings_and_townhouses.md",
+      "title": "APPENDIX AT [RE] SOLAR-READY PROVISIONS—DETACHED ONE- AND TWO-FAMILY DWELLINGS AND TOWNHOUSES",
+      "pages": [
+        690,
+        691
+      ]
+    },
+    {
+      "file": "appendix_au_cob_construction_monolithic_adobe.md",
+      "title": "APPENDIX AU COB CONSTRUCTION (MONOLITHIC ADOBE)",
+      "pages": [
+        692,
+        707
+      ]
+    },
+    {
+      "file": "appendix_av_board_of_appeals.md",
+      "title": "APPENDIX AV BOARD OF APPEALS",
+      "pages": [
+        708,
+        709
+      ]
+    },
+    {
+      "file": "appendix_aw_3d_printed_building_construction.md",
+      "title": "APPENDIX AW 3D-PRINTED BUILDING CONSTRUCTION",
+      "pages": [
+        710,
+        711
+      ]
+    },
+    {
+      "file": "appendix_ax_swimming_pool_safety_act.md",
+      "title": "APPENDIX AX SWIMMING POOL SAFETY ACT",
+      "pages": [
+        712,
+        715
+      ]
+    },
+    {
+      "file": "appendix_ay_areas_protected_by_the_facilities_of_the_central_valley_flood_protection_plan.md",
+      "title": "APPENDIX AY AREAS PROTECTED BY THE FACILITIES OF THE CENTRAL VALLEY FLOOD PROTECTION PLAN",
+      "pages": [
+        716,
+        721
+      ]
+    },
+    {
+      "file": "appendix_az_emergency_housing.md",
+      "title": "APPENDIX AZ EMERGENCY HOUSING",
+      "pages": [
+        722,
+        741
+      ]
+    },
+    {
+      "file": "chapter_10_chimneys_and_fireplaces.md",
+      "title": "CHAPTER 10 CHIMNEYS AND FIREPLACES",
+      "pages": [
+        570,
+        593
+      ]
+    },
+    {
+      "file": "chapter_1_scope_and_application.md",
+      "title": "CHAPTER 1 SCOPE AND APPLICATION",
+      "pages": [
+        32,
+        59
+      ]
+    },
+    {
+      "file": "chapter_2_definitions.md",
+      "title": "CHAPTER 2 DEFINITIONS",
+      "pages": [
+        60,
+        77
+      ]
+    },
+    {
+      "file": "chapter_3_building_planning_a.md",
+      "title": "CHAPTER 3 BUILDING PLANNING (a)",
+      "pages": [
+        78,
+        118
+      ]
+    },
+    {
+      "file": "chapter_3_building_planning_b.md",
+      "title": "CHAPTER 3 BUILDING PLANNING (b)",
+      "pages": [
+        119,
+        146
+      ]
+    },
+    {
+      "file": "chapter_3_building_planning_c.md",
+      "title": "CHAPTER 3 BUILDING PLANNING (c)",
+      "pages": [
+        147,
+        172
+      ]
+    },
+    {
+      "file": "chapter_3_building_planning_d.md",
+      "title": "CHAPTER 3 BUILDING PLANNING (d)",
+      "pages": [
+        173,
+        181
+      ]
+    },
+    {
+      "file": "chapter_44_referenced_standards.md",
+      "title": "CHAPTER 44 REFERENCED STANDARDS",
+      "pages": [
+        594,
+        625
+      ]
+    },
+    {
+      "file": "chapter_4_foundations_a.md",
+      "title": "CHAPTER 4 FOUNDATIONS (a)",
+      "pages": [
+        182,
+        201
+      ]
+    },
+    {
+      "file": "chapter_4_foundations_b.md",
+      "title": "CHAPTER 4 FOUNDATIONS (b)",
+      "pages": [
+        202,
+        229
+      ]
+    },
+    {
+      "file": "chapter_5_floors.md",
+      "title": "CHAPTER 5 FLOORS",
+      "pages": [
+        230,
+        275
+      ]
+    },
+    {
+      "file": "chapter_6_wall_construction_a.md",
+      "title": "CHAPTER 6 WALL CONSTRUCTION (a)",
+      "pages": [
+        276,
+        328
+      ]
+    },
+    {
+      "file": "chapter_6_wall_construction_b.md",
+      "title": "CHAPTER 6 WALL CONSTRUCTION (b)",
+      "pages": [
+        329,
+        367
+      ]
+    },
+    {
+      "file": "chapter_6_wall_construction_c.md",
+      "title": "CHAPTER 6 WALL CONSTRUCTION (c)",
+      "pages": [
+        368,
+        381
+      ]
+    },
+    {
+      "file": "chapter_6_wall_construction_d.md",
+      "title": "CHAPTER 6 WALL CONSTRUCTION (d)",
+      "pages": [
+        382,
+        452
+      ]
+    },
+    {
+      "file": "chapter_6_wall_construction_e.md",
+      "title": "CHAPTER 6 WALL CONSTRUCTION (e)",
+      "pages": [
+        453,
+        469
+      ]
+    },
+    {
+      "file": "chapter_7_wall_covering.md",
+      "title": "CHAPTER 7 WALL COVERING",
+      "pages": [
+        470,
+        501
+      ]
+    },
+    {
+      "file": "chapter_8_roof_ceiling_construction.md",
+      "title": "CHAPTER 8 ROOF-CEILING CONSTRUCTION",
+      "pages": [
+        502,
+        551
+      ]
+    },
+    {
+      "file": "chapter_9_roof_assemblies.md",
+      "title": "CHAPTER 9 ROOF ASSEMBLIES",
+      "pages": [
+        552,
+        569
+      ]
+    }
+  ]
+}

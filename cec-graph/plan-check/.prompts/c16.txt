@@ -1,0 +1,132 @@
+You are a plan-check rule extraction subagent. The graph community "Grounded Conductor Identification" has been identified as a coherent rule pack from the 2022 California Electrical Code (Title 24 Part 3, which adopts the 2020 NEC with California amendments). Your job is to read the source files and produce a structured rules.json file that a plan-check rule engine could execute.
+
+Files to read in full:
+cec-graph/chapters/03_chapter_1_general.txt
+cec-graph/chapters/04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt
+cec-graph/chapters/08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt
+cec-graph/chapters/17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt
+cec-graph/chapters/19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt
+cec-graph/chapters/24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt
+
+If any file above is missing, STOP and report which ones — never write rules from memory. (Code-book text is not distributed; it is regenerated locally with tools/split_chapters.py.)
+
+Output path (relative to the repo root): cec-graph/plan-check/c16_grounded_conductor_identification_rules.json
+
+Rule-bearing sections to extract (one rule per section that contains a 'shall' requirement; some sections may yield multiple rules if they have distinct provisions):
+
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_110_21  110.21
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_110_26  110.26
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6  200.6
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a  200.6(A)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_a_1  200.6(A)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_6_b  200.6(B)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_200_7  200.7
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_12  210.12
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5  210.5
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c  210.5(C)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_1  210.5(C)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_5_c_2  210.5(C)(2)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8  210.8
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a  210.8(A)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_1  210.8(A)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_3  210.8(A)(3)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_a_5  210.8(A)(5)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_210_8_b_1  210.8(B)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_12  215.12
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_215_9  215.9
+  cec_29_6                                                      29.6
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_300_1  300.1
+  03_chapter_1_general_300_22                                   300.22
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_310_8  310.8
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_342_20  342.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_12  348.12
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_20  348.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_348_30  348.30
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_350_20  350.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_10  352.10
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_352_20  352.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_353_20  353.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_354_120  354.120
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_354_20  354.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_355_20  355.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_120  356.120
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_2  356.2
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_356_20  356.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_360_20  360.20
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_362_20  362.20
+  cec_402_8                                                     402.8
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_410_117  410.117
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_137  410.137
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_410_90  410.90
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5  422.5
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_a  422.5(A)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_a_5  422.5(A)(5)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_1  422.5(B)(1)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_422_5_b_3  422.5(B)(3)
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_426_28  426.28
+  08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_430_245  430.245
+  17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil_550_13  550.13
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_555_9  555.9
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_590_6  590.6
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_604_10  604.10
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_21  620.21
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_25  620.25
+  19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti_620_5  620.5
+  04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c_690_41  690.41
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_121  760.121
+  24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f_760_41  760.41
+
+Other graph nodes in this community (tables, defined terms — DO NOT generate standalone rules for these, but reference them in `applies_when`, `requires`, or `depends_on` when the source text cites them):
+  (none)
+
+Standards / referenced codes available for `tested_per` and `depends_on` (use these existing graph IDs):
+  (none — no referenced standards in this community)
+
+For each rule-bearing section produce a JSON rule object matching this schema:
+
+{
+  "id": "rule_<section_normalized>",
+  "cite": "210.8(A)(1)",
+  "section_node": "<the graph node id from the list above, e.g. 08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty_110_21>",
+  "title": "<short imperative title>",
+  "intent": "<one sentence WHY>",
+  "applies_when": [ {...predicate clauses, can nest with any_of/all_of/not...} ],
+  "requires": { "type": "<category>", ...structured constraints..., "tested_per": ["<std node id>"] },
+  "exceptions": [ { "id": "ex1", "applies_when": [...], "effect": "rule_does_not_apply" } ],
+  "evidence_required": [ "<concrete plan-check deliverable 1>", ... ],
+  "depends_on": [ "<graph node ID>", ... ],
+  "amends": null,
+  "jurisdiction": "California" | "model_NEC",
+  "severity": "required" | "advisory",
+  "verbatim": "<the most load-bearing sentence quoted from source>"
+}
+
+Predicate naming conventions (electrical domain):
+- snake_case
+- Specific over generic: `in_wet_location` not `in_bad_spot`; `is_class_i_division_1` not `is_hazardous`
+- Numeric thresholds inline: `circuit_rating_>=_20a`, `voltage_to_ground_>_277v`, `conductor_size_<_8_awg`
+- Boolean facts: `is_gfci_protected`, `is_dwelling_unit_receptacle`, `is_metallic_raceway`
+- Composite: any_of, all_of, not (with "of" or "clauses" key for nested)
+
+Rules:
+1. ONE rule per section unless the section has clearly distinct sub-provisions (then split with id suffix _a/_b).
+2. Use the existing graph node IDs (listed above) for `section_node`, `tested_per`, `depends_on` — copy them verbatim.
+3. EXTRACTED triggers only — do not invent conditions the code doesn't state.
+4. ALWAYS quote the load-bearing sentence in `verbatim` (it anchors the extraction; tools/strip_verbatim.py removes it before anything is committed to the public repo).
+5. `evidence_required`: 2-5 concrete deliverables a plan-checker would actually look for (panel schedules, conductor/conduit specs, listing labels, calculations, test reports, one-line diagrams).
+6. California amendments: set `jurisdiction: "California"` (CEC-specific or HCD/SFM-marked section); otherwise `"model_NEC"`.
+7. Each exception is a separate object in `exceptions`.
+8. If a section has no operative requirement (purely a header pointing to subsections), produce a "scope" rule capturing the trigger conditions for the subtree.
+
+Wrap rules in this top-level container:
+
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Electrical Code (Title 24 Part 3)",
+  "rule_pack": "Grounded Conductor Identification",
+  "community_id": 16,
+  "extracted_from_sections": ["03_chapter_1_general.txt", "04_chapter_2_wiring_and_protection_article_200_use_and_identification_of_grounded_c.txt", "08_chapter_3_wiring_methods_and_materials_article_342_intermediate_metal_conduit_ty.txt", "17_chapter_5_special_occupancies_article_518_assembly_occupancies_article_550_mobil.txt", "19_chapter_6_special_equipment_article_600_electric_signs_and_outline_lighting_arti.txt", "24_chapter_7_special_conditions_article_712_direct_current_microgrids_article_760_f.txt"],
+  "rules": [ ... ]
+}
+
+Aim for 15-61 rules. After writing the file, just confirm "wrote c16_grounded_conductor_identification_rules.json with N rules" and stop.

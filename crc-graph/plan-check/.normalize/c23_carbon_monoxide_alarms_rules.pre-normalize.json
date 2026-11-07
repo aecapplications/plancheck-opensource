@@ -1,0 +1,431 @@
+{
+  "schema_version": "0.1",
+  "source_corpus": "2022 California Residential Code (Title 24 Part 2.5)",
+  "rule_pack": "Carbon Monoxide Alarms",
+  "community_id": 23,
+  "extracted_from_sections": [
+    "chapter_3_building_planning_c.md"
+  ],
+  "rules": [
+    {
+      "id": "rule_r315_2",
+      "cite": "R315.2",
+      "section_node": "r315_2",
+      "title": "Provide carbon monoxide alarms in dwelling units with fuel-fired appliances or attached garage",
+      "intent": "Ensure carbon monoxide alarms are installed in dwelling units that have credible CO sources so occupants are warned of dangerous CO levels.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "is_dwelling_unit",
+              "value": true
+            },
+            {
+              "any_of": [
+                {
+                  "predicate": "scope_is_existing_building_or_new_construction",
+                  "value": true
+                },
+                {
+                  "predicate": "is_alteration_repair_or_addition",
+                  "value": true
+                }
+              ]
+            },
+            {
+              "any_of": [
+                {
+                  "predicate": "dwelling_contains_fuel_fired_appliance_or_fireplace",
+                  "value": true
+                },
+                {
+                  "predicate": "dwelling_has_attached_garage_with_opening_communicating_to_dwelling",
+                  "value": true
+                },
+                {
+                  "all_of": [
+                    {
+                      "predicate": "is_addition_to_existing_dwelling",
+                      "value": true
+                    },
+                    {
+                      "predicate": "co_alarms_not_previously_required",
+                      "value": true
+                    }
+                  ]
+                },
+                {
+                  "all_of": [
+                    {
+                      "predicate": "fuel_burning_heater_appliance_or_fireplace_added_to_existing_dwelling",
+                      "value": true
+                    },
+                    {
+                      "predicate": "co_alarms_not_previously_required",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "device_installation",
+        "device": "carbon_monoxide_alarm",
+        "must_be_provided": true,
+        "must_be_listed_per": [
+          "UL_2034"
+        ],
+        "combination_co_smoke_must_be_listed_per": [
+          "UL_217",
+          "UL_2034"
+        ],
+        "must_be_approved_and_listed_by": "Office_of_the_State_Fire_Marshal",
+        "tested_per": [
+          "std_ul_2034",
+          "std_ul_217"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "work_scope_is_exterior_surfaces_only",
+              "value": true,
+              "examples": [
+                "roofing",
+                "siding",
+                "windows",
+                "doors",
+                "porch_or_deck"
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "work_is_plumbing_install_alter_or_repair_only",
+              "value": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "work_is_non_fuel_fired_mechanical_only",
+              "value": true
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Floor plan annotation identifying each dwelling unit and presence of fuel-fired appliances/fireplaces or attached garages with openings to the dwelling",
+        "CO alarm cut sheet/spec showing UL 2034 listing (or UL 217 + UL 2034 for combination CO/smoke alarms)",
+        "California State Fire Marshal (SFM) approval/listing documentation for the specified device",
+        "Scope-of-work narrative for additions/alterations indicating whether CO alarms were previously required"
+      ],
+      "depends_on": [
+        "r315_3",
+        "std_ul_2034",
+        "std_ul_217",
+        "ca_health_safety_code_17926"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r315_2"
+    },
+    {
+      "id": "rule_r315_3",
+      "cite": "R315.3",
+      "section_node": "r315_3",
+      "title": "Install carbon monoxide alarms at required locations within dwelling units",
+      "intent": "Place CO alarms where they will reliably wake sleeping occupants and detect CO on every habitable level.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "is_dwelling_unit",
+              "value": true
+            },
+            {
+              "predicate": "co_alarms_required_by_r315_2",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "device_placement",
+        "device": "carbon_monoxide_alarm",
+        "install_per": "manufacturer_published_instructions",
+        "locations": [
+          {
+            "id": "loc_outside_sleeping_area",
+            "description": "Outside of each separate sleeping area in the immediate vicinity of the bedrooms",
+            "required": true
+          },
+          {
+            "id": "loc_every_occupiable_level",
+            "description": "On every occupiable level of a dwelling unit, including basements",
+            "required": true
+          },
+          {
+            "id": "loc_bedroom_with_fuel_burning_appliance",
+            "description": "Within a bedroom where a fuel-burning appliance is located within the bedroom or its attached bathroom",
+            "required_when": {
+              "predicate": "fuel_burning_appliance_in_bedroom_or_attached_bathroom",
+              "value": true
+            }
+          }
+        ],
+        "tested_per": []
+      },
+      "exceptions": [],
+      "evidence_required": [
+        "Floor plans showing CO alarm symbols at each required location (outside sleeping areas, each occupiable level including basement, and inside bedrooms with fuel-burning appliances)",
+        "Manufacturer installation instructions for the specified CO alarm",
+        "Identification of fuel-burning appliances inside any bedroom or its attached bathroom on mechanical/architectural plans",
+        "Reflected ceiling/electrical plan confirming alarm mounting locations"
+      ],
+      "depends_on": [
+        "r315_2"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r315_3"
+    },
+    {
+      "id": "rule_r315_5",
+      "cite": "R315.5",
+      "section_node": "r315_5",
+      "title": "Interconnect multiple carbon monoxide alarms within a dwelling unit",
+      "intent": "Ensure that activation of any one CO alarm sounds all alarms throughout the dwelling so occupants in any area receive warning.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "is_dwelling_unit",
+              "value": true
+            },
+            {
+              "predicate": "more_than_one_co_alarm_required_per_r315_3",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "system_integration",
+        "interconnection_required": true,
+        "behavior": "actuation_of_one_alarm_activates_all_alarms_in_individual_dwelling_unit",
+        "physical_interconnect_required_unless": {
+          "all_of": [
+            {
+              "predicate": "alarms_are_listed_wireless",
+              "value": true
+            },
+            {
+              "predicate": "all_alarms_sound_upon_activation_of_one_alarm",
+              "value": true
+            }
+          ]
+        },
+        "tested_per": []
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "building_built_before_2011_01_01",
+              "value": true
+            },
+            {
+              "any_of": [
+                {
+                  "all_of": [
+                    {
+                      "predicate": "alterations_or_repairs_do_not_remove_interior_wall_or_ceiling_finishes_exposing_structure",
+                      "value": true
+                    },
+                    {
+                      "predicate": "no_attic_crawl_or_basement_access_available_for_interconnection_without_finish_removal",
+                      "value": true
+                    }
+                  ]
+                },
+                {
+                  "predicate": "no_construction_taking_place",
+                  "value": true
+                },
+                {
+                  "predicate": "work_scope_is_exterior_surfaces_only",
+                  "value": true
+                },
+                {
+                  "all_of": [
+                    {
+                      "predicate": "work_is_plumbing_mechanical_or_electrical_install_alter_or_repair",
+                      "value": true
+                    },
+                    {
+                      "predicate": "work_does_not_remove_interior_finishes_exposing_structure_in_co_alarm_areas",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "rule_does_not_apply"
+        }
+      ],
+      "evidence_required": [
+        "Electrical plan or alarm-system diagram showing interconnection wiring (or wireless listing for each alarm)",
+        "Listing/spec sheet demonstrating wireless alarms are listed and sound in unison when one activates",
+        "Quantity and locations of CO alarms required by R315.3 (to confirm whether more than one is required)",
+        "For pre-2011 existing buildings claiming exception: dated permit history/build records and scope-of-work statement matching one of the listed conditions"
+      ],
+      "depends_on": [
+        "r315_3"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r315_5"
+    },
+    {
+      "id": "rule_r315_6",
+      "cite": "R315.6",
+      "section_node": "r315_6",
+      "title": "Power carbon monoxide alarms from building wiring with battery backup",
+      "intent": "Ensure CO alarms remain operational under both normal building power and during power interruptions, with no inadvertent disconnect.",
+      "applies_when": [
+        {
+          "all_of": [
+            {
+              "predicate": "is_dwelling_unit",
+              "value": true
+            },
+            {
+              "predicate": "co_alarms_required_by_r315_2",
+              "value": true
+            }
+          ]
+        }
+      ],
+      "requires": {
+        "type": "power_source",
+        "primary_power": "building_wiring_from_commercial_source",
+        "secondary_power_on_primary_interruption": "battery",
+        "wiring": {
+          "permanent": true,
+          "disconnect_switch_allowed": false,
+          "disconnect_switch_exception": "overcurrent_protection_only"
+        },
+        "tested_per": [
+          "std_nfpa_72"
+        ]
+      },
+      "exceptions": [
+        {
+          "id": "ex1",
+          "applies_when": [
+            {
+              "predicate": "building_has_no_commercial_power",
+              "value": true
+            }
+          ],
+          "effect": "battery_operated_permitted"
+        },
+        {
+          "id": "ex2",
+          "applies_when": [
+            {
+              "predicate": "alarm_installed_per_r315_2_2",
+              "value": true
+            }
+          ],
+          "effect": "battery_powered_permitted"
+        },
+        {
+          "id": "ex3",
+          "applies_when": [
+            {
+              "predicate": "occupancy_is_group_r",
+              "value": true
+            }
+          ],
+          "effect": "primary_power_from_other_sources_recognized_by_NFPA_72_permitted"
+        },
+        {
+          "id": "ex4",
+          "applies_when": [
+            {
+              "predicate": "occupancy_is_group_r",
+              "value": true
+            },
+            {
+              "predicate": "building_built_before_2011_01_01",
+              "value": true
+            },
+            {
+              "any_of": [
+                {
+                  "predicate": "no_construction_taking_place",
+                  "value": true
+                },
+                {
+                  "predicate": "alterations_or_repairs_do_not_remove_interior_wall_or_ceiling_finishes_exposing_structure_in_co_alarm_areas",
+                  "value": true
+                },
+                {
+                  "predicate": "work_scope_is_exterior_surfaces_only",
+                  "value": true
+                },
+                {
+                  "all_of": [
+                    {
+                      "predicate": "work_is_plumbing_mechanical_or_electrical_install_alter_or_repair",
+                      "value": true
+                    },
+                    {
+                      "predicate": "work_does_not_remove_interior_finishes_exposing_structure_in_co_alarm_areas",
+                      "value": true
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "effect": "battery_powered_or_plug_in_with_battery_backup_permitted"
+        }
+      ],
+      "evidence_required": [
+        "Electrical plan showing CO alarms connected to permanent building wiring served from commercial power",
+        "Confirmation that the alarm circuit has no disconnecting switch other than overcurrent protection (panel schedule/single-line)",
+        "Manufacturer spec sheet showing battery backup capability",
+        "If exception claimed: documentation of building age (pre-2011), occupancy classification (Group R), absence of commercial power, or scope-of-work statement matching the cited exception"
+      ],
+      "depends_on": [
+        "section_r315_2_2",
+        "std_nfpa_72"
+      ],
+      "amends": null,
+      "jurisdiction": "California",
+      "severity": "required",
+      "_was_section_node": "section_r315_6"
+    }
+  ]
+}
