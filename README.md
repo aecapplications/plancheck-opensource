@@ -91,13 +91,18 @@ Job artifacts land in `webapp/jobs/<id>/` (untracked): shared
 The project skill [`.claude/skills/add-code-book/`](.claude/skills/add-code-book/SKILL.md)
 is the runbook. In Claude Code, run `/add-code-book <book>`; without it,
 follow `SKILL.md` and its `reference/` files by hand. You need your own copy
-of the code PDF. In outline, for a new book (here the California Fire Code,
-id `cfc`):
+of the code PDF, Python 3.10 or later, and, to build graphs,
+[graphify](https://github.com/safishamsi/graphify)
+(`pip install graphifyy==0.5.4 && graphify install --platform claude`).
+Contributors work in a fork of this repository; see
+[CONTRIBUTING.md](CONTRIBUTING.md). In outline, for a new book (here the
+California Fire Code, id `cfc`):
 
 1. Draft a chapter manifest from the PDF's bookmarks and build local chapter
    text:
    `python tools/split_chapters.py init --book cfc --pdf <PDF> --level 2 --chapters-only`,
-   review `cfc-graph/chapters.manifest.json`, then `split_chapters.py build`.
+   review `cfc-graph/chapters.manifest.json`, then
+   `python tools/split_chapters.py build --book cfc --pdf <PDF>`.
 2. Build the knowledge graph (`/graphify chapters` from `cfc-graph/`).
 3. Scaffold `cfc-graph/plan-check/` from `cec-graph/plan-check/`.
 4. Add a `BOOK_META` entry and generate extraction prompts with
@@ -112,8 +117,8 @@ id `cfc`):
 
 The webapp picks the book up automatically once its corpus exists.
 `python .claude/skills/add-code-book/scripts/book_status.py` shows where
-each book stands and what's next. See [CONTRIBUTING.md](CONTRIBUTING.md) for
-the pull-request checklist.
+each book stands and what's next, and checks your setup. See
+[CONTRIBUTING.md](CONTRIBUTING.md) for the pull-request checklist.
 
 ## Working on this repo with Claude
 

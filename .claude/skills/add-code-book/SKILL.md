@@ -10,14 +10,53 @@ Book requested: $ARGUMENTS. If that is blank, infer the book from the
 request or ask. `<book>` below is the short lowercase id; the book lives in
 `<book>-graph/` at the repo root.
 
+## Prerequisites
+
+- **Python 3.10 or later, in the repo's venv**, with the webapp
+  requirements (PyMuPDF is needed from step 1). macOS's built-in `python3`
+  is 3.9, so use a newer interpreter (pyenv, Homebrew, or python.org):
+  ```bash
+  python3.12 -m venv .venv && source .venv/bin/activate && pip install -r webapp/requirements.txt
+  claude      # start Claude Code from this activated shell
+  ```
+  Claude Code's Bash tool doesn't keep a `source .venv/bin/activate`
+  between commands, so start Claude Code from the activated shell. Then
+  `python` and `graphify` resolve to the venv everywhere below. If it was
+  started some other way, use `.venv/bin/python` in place of `python`.
+- **graphify**, for step 2 only. It's an MIT-licensed Claude Code skill
+  plus a CLI. Pin the version the committed graphs were built with:
+  ```bash
+  pip install graphifyy==0.5.4 && graphify install --platform claude   # adds /graphify
+  ```
+  Run this inside the activated venv so the `graphify` CLI lands there.
+  Restart Claude Code afterwards so `/graphify` appears.
+- **Your own copy of the code PDF**, for steps 1, 2, 4, and 5. Code text
+  is never distributed (see Guardrails).
+
+## Who you are: contributor or maintainer
+
+- **Contributors** work in a fork of the public repo
+  (`aecapplications/plancheck-opensource`), on a branch, and submit pull
+  requests at the stages listed in `CONTRIBUTING.md`. Never commit `chapters/`
+  (it is gitignored there), and skip "Publishing to the public repo".
+- **Maintainers** work in the private repo, which tracks `chapters/`.
+  Only maintainers publish. If a contributor asks for private-repo access,
+  point them to the public repo instead: the private repo contains the
+  maintainer's licensed code text.
+
+`book_status.py` prints which one this checkout is, and whether the
+prerequisites are met.
+
 ## Start here
 
-1. Check where the book stands:
+1. Check your setup and where the book stands:
    ```bash
    python .claude/skills/add-code-book/scripts/book_status.py <book>
    ```
-   It checks every step's artifacts on disk and prints `next: step N`.
-   Begin at that step. Don't assume progress from memory or older docs.
+   Fix any unchecked prerequisite it reports first. It then checks every
+   step's artifacts on disk and prints `next: step N`. Begin at that step,
+   and don't assume progress from memory or older docs. Before step 2,
+   confirm the graphify row is checked.
 2. Read [reference/books.md](reference/books.md) for the book's quirks
    (hand-authored CRC prompts, CBC id conventions, donor files).
 
@@ -140,10 +179,11 @@ A live run on a representative plan set (about $2 per book, needs
 be small, and flags should land on sensible sheets. Ask the user before
 spending on it.
 
-## Publishing to the public repo
+## Publishing to the public repo (maintainers only)
 
-Only from the **private** repo, after committing. This publishes, so ask
-the user first:
+Contributors skip this section: a merged pull request is how your work
+reaches the public repo. Maintainers run it from the **private** repo after
+committing. It publishes, so ask the user first:
 
 ```bash
 rm -rf /tmp/pc-release && python tools/export_public.py /tmp/pc-release --sync-to ../plancheck-opensource
@@ -160,7 +200,9 @@ commit and push from the clone.
 
 ## Committing
 
-Commit at each milestone: the manifest (step 1), the graph (step 2), the
+Contributors commit on a branch in their fork and open a pull request when
+a milestone is done. Maintainers commit in the private repo. Either way,
+commit at each milestone: the manifest (step 1), the graph (step 2), the
 scaffold (step 3), the dispatch prompts (step 4), and each extraction batch
 after step 6 and the step 9 checks pass. Stage the book's whole
 `<book>-graph/` change set, not just the packs. `git status <book>-graph`
@@ -169,7 +211,8 @@ should show every file below as staged:
 - the new `c<cid>_*_rules.json` packs;
 - step 6 outputs: `.fixup/`, `.normalize/`, `canonical/`, `all_rules.json`;
 - any reviewed `graphify-out/graph.json` additions from `fixup_ids.py`;
-- in the private repo only, new `chapters/` files.
+- in the private repo only (maintainers), new `chapters/` files. They
+  never go into a public clone or a pull request.
 
 Never stage PDFs, `webapp/jobs/`, or graphify caches; `.gitignore` covers
 them. Ask before committing if the user didn't request it.

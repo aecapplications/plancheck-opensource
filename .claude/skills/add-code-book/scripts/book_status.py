@@ -11,8 +11,11 @@ prints the next step. Read-only; uses only the standard library.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -136,12 +139,49 @@ def status(book: str, reg: dict, show_remaining: bool) -> None:
     print()
 
 
+GRAPHIFY_VERSION = "0.5.4"  # the version the committed graphs were built with
+
+
+def environment() -> None:
+    """Print repo role and tool readiness so missing setup shows up front."""
+    tracked = subprocess.run(["git", "ls-files", "--", "*-graph/chapters/*"],
+                             cwd=ROOT, capture_output=True, text=True).stdout
+    role = ("private maintainer repo (chapters/ tracked; publish with "
+            "tools/export_public.py)" if tracked.strip() else
+            "public clone (contributor: work on a branch, open a pull request)")
+    print(f"repo: {role}")
+
+    py_ok = sys.version_info >= (3, 10)
+    mupdf = importlib.util.find_spec("pymupdf") or importlib.util.find_spec("fitz")
+    print(f"  [{'x' if py_ok and mupdf else ' '}] python {sys.version.split()[0]}"
+          + ("" if py_ok else " (needs >= 3.10)")
+          + (" with PyMuPDF" if mupdf else
+             " without PyMuPDF — run with .venv/bin/python, or start Claude Code"
+             " from an activated .venv (pip install -r webapp/requirements.txt)"))
+
+    skill = next((d / "SKILL.md" for d in (Path.home() / ".claude" / "skills" / "graphify",
+                                            ROOT / ".claude" / "skills" / "graphify")
+                  if (d / "SKILL.md").is_file()), None)
+    version = ""
+    if skill and (skill.parent / ".graphify_version").is_file():
+        version = (skill.parent / ".graphify_version").read_text().strip()
+    cli = shutil.which("graphify")
+    ok = bool(skill and cli)
+    detail = (f"skill {version or 'installed'}" if ok else
+              f"missing — pip install graphifyy=={GRAPHIFY_VERSION} && graphify install --platform claude")
+    if ok and version and version != GRAPHIFY_VERSION:
+        detail += f" (graphs were built with {GRAPHIFY_VERSION})"
+    print(f"  [{'x' if ok else ' '}] graphify (step 2 only) — {detail}")
+    print()
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("book", nargs="?")
     ap.add_argument("--remaining", action="store_true",
                     help="list prompts that have no extracted pack yet")
     args = ap.parse_args()
+    environment()
     books = [args.book] if args.book else sorted(
         p.name[:-len("-graph")] for p in ROOT.glob("*-graph") if p.is_dir())
     if args.book and not (ROOT / f"{args.book}-graph").is_dir():
