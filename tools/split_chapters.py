@@ -10,8 +10,8 @@ graph and extraction prompts reference.
     # rebuild an existing book's chapters from your PDF
     python tools/split_chapters.py build --book cec --pdf ~/codes/2022_CEC.pdf
 
-    # draft a manifest for a new book from the PDF's bookmarks, then edit it
-    python tools/split_chapters.py init --book calgreen --pdf CALGreen.pdf --level 1
+    # draft a manifest for a new book from the PDF's bookmarks, then review it
+    python tools/split_chapters.py init --book cfc --pdf CFC.pdf --level 2 --chapters-only
 
     # preflight: does every chapter file the prompts/graph reference exist?
     python tools/split_chapters.py check --book cec
@@ -86,6 +86,25 @@ def cmd_build(args) -> int:
 
 
 # --------------------------------------------------------------------------- #
+TAG = r"(?:\[\w+\]\s*)?"  # ICC origin markers such as "[A] APPENDIX O"
+KEEP_RE = TAG + r"(chapters?|appendix|article|annex|part)\b"
+FOLD_RE = r"matrix adoption table"
+DROP_RE = r"\breserved\b"
+
+
+def file_key(title: str, index: int) -> str:
+    """CBC-style filename token: CHAPTER 11B → ch11b, APPENDIX P → appp;
+    anything else falls back to a two-digit running index."""
+    title = re.sub(r"^\[\w+\]\s*", "", title)
+    m = re.match(r"(?i)chapters?\s+([0-9]+[a-z]?)\b", title)
+    if m:
+        return f"ch{m.group(1).lower()}"
+    m = re.match(r"(?i)appendix\s+([a-z0-9]+)\b", title)
+    if m:
+        return f"app{m.group(1).lower()}"
+    return f"{index:02d}"
+
+
 def cmd_init(args) -> int:
     import pymupdf
 
@@ -93,28 +112,80 @@ def cmd_init(args) -> int:
     if p.exists() and not args.force:
         raise SystemExit(f"{p.relative_to(ROOT)} exists (use --force)")
     doc = pymupdf.open(args.pdf)
-    toc = [(t, pg) for lvl, t, pg in doc.get_toc() if lvl == args.level]
-    if not toc:
-        levels = sorted({lvl for lvl, _, _ in doc.get_toc()})
+    full = [(lvl, " ".join(t.split()), pg) for lvl, t, pg in doc.get_toc()]
+    # An entry ends just before the earliest page among the following
+    # bookmarks at the same or a shallower level, up to and including the
+    # next same-level one. Shallower bookmarks (PART dividers, INDEX) end it
+    # too, so the last chapter doesn't swallow a trailing index; taking the
+    # earliest page copes with divider bookmarks that point past their
+    # first child (CFC's "PART II" sits two pages after its first chapter).
+    entries = []
+    for i, (lvl, title, start) in enumerate(full):
+        if lvl != args.level:
+            continue
+        nxt = doc.page_count + 1
+        for l2, _, pg in full[i + 1:]:
+            if l2 <= lvl and pg > start:
+                nxt = min(nxt, pg)
+            if l2 == lvl:
+                break
+        entries.append((title, start, max(start, nxt - 1)))
+    if not entries:
+        levels = sorted({lvl for lvl, _, _ in full})
         raise SystemExit(f"no bookmarks at level {args.level} "
                          f"(levels present: {levels or 'none'})")
-    chapters = []
-    for i, (title, start) in enumerate(toc):
-        end = (toc[i + 1][1] - 1) if i + 1 < len(toc) else doc.page_count
-        chapters.append({"file": f"{i + 1:02d}_{slug(title)}.md",
-                         "title": title, "pages": [start, max(start, end)]})
-    m = {"_comment": "Draft from PDF bookmarks — edit before use: drop front "
-                     "matter/index entries, split very large chapters (keep "
-                     "an NN_ or chNN_ filename prefix; graphify and "
-                     "make_dispatch key off it). Pages are 1-based, inclusive.",
+
+    chapters, folded, dropped = [], 0, []
+    if args.chapters_only:
+        keep = re.compile(args.keep, re.I)
+        fold = re.compile(args.fold, re.I) if args.fold else None
+        drop = re.compile(args.drop, re.I) if args.drop else None
+        pending = None  # start page of fold entries awaiting the next chapter
+        for title, start, end in entries:
+            if drop and drop.search(title):
+                dropped.append(title)
+                pending = None
+            elif keep.match(title):
+                chapters.append((title, pending or start, end))
+                folded += pending is not None
+                pending = None
+            elif fold and fold.search(title):
+                pending = pending or start
+            else:
+                dropped.append(title)
+                pending = None
+    else:
+        chapters = entries
+
+    out, seen = [], set()
+    for i, (title, start, end) in enumerate(chapters, 1):
+        key = file_key(title, i) if args.chapters_only else f"{i:02d}"
+        stem = slug(re.sub(r"^\[\w+\]\s*", "", title))
+        name = f"{key}_{stem}.md"
+        n = 2
+        while name in seen:
+            name = f"{key}_{stem}_{n}.md"
+            n += 1
+        seen.add(name)
+        out.append({"file": name, "title": title, "pages": [start, end]})
+
+    m = {"_comment": "Draft from PDF bookmarks — review before use: drop any "
+                     "front matter/index entries left, split very large "
+                     "chapters (_a/_b; keep the leading NN_/chNN_/appX_ "
+                     "token — graphify and make_dispatch key off it). Pages "
+                     "are 1-based, inclusive.",
          "source": {"title": args.title or Path(args.pdf).stem,
                     "filename": Path(args.pdf).name,
                     "page_count": doc.page_count},
-         "chapters": chapters}
+         "chapters": out}
     p.parent.mkdir(parents=True, exist_ok=True)
     p.write_text(json.dumps(m, indent=2, ensure_ascii=False) + "\n")
-    print(f"wrote {p.relative_to(ROOT)} with {len(chapters)} entries — "
-          f"review it, then run `build`")
+    print(f"wrote {p.relative_to(ROOT)} with {len(out)} entries"
+          + (f" ({folded} with folded-in pages, {len(dropped)} dropped)"
+             if args.chapters_only else "")
+          + " — review it, then run `build`")
+    for t in dropped:
+        print(f"  dropped: {t}")
     return 0
 
 
@@ -193,6 +264,17 @@ def main() -> int:
     i.add_argument("--level", type=int, default=1,
                    help="bookmark depth that corresponds to chapters")
     i.add_argument("--title", help="human-readable source title")
+    i.add_argument("--chapters-only", action="store_true",
+                   help="keep only chapter-like entries (see --keep), fold "
+                        "--fold entries into the next chapter, drop --drop "
+                        "entries, and use chNN_/appX_ filename prefixes")
+    i.add_argument("--keep", default=KEEP_RE,
+                   help=f"regex for chapter titles (default: {KEEP_RE!r})")
+    i.add_argument("--fold", default=FOLD_RE,
+                   help="regex for entries whose pages belong to the next "
+                        f"chapter (default: {FOLD_RE!r}; '' to disable)")
+    i.add_argument("--drop", default=DROP_RE,
+                   help=f"regex for entries to drop (default: {DROP_RE!r})")
     i.add_argument("--force", action="store_true")
     i.set_defaults(func=cmd_init)
 

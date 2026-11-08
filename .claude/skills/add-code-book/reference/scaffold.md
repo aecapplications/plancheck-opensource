@@ -25,7 +25,11 @@ cp cec-graph/plan-check/{engine,integrate,normalize_clauses,render_report,decomp
 3. `is_terminal()` decides what counts as a leaf citation (tables, figures,
    referenced standards) in this book's id scheme.
 
-Derive all three from real ids in the book's `graph.json`. For example:
+Derive all three from real ids in the book's `graph.json`. CRC
+(`r602_10_…`) and CEC (`…_article_300_…_300_3_b_1`) are the only adapted
+examples so far. The first book with CBC-style ids (`ch15_section_1501_…`;
+CBC or CFC) sets the pattern for the others, so record what you chose in
+[books.md](books.md). To list some ids:
 
 ```bash
 python -c "import json; [print(n['id']) for n in json.load(open('<book>-graph/graphify-out/graph.json'))['nodes'][:60]]"

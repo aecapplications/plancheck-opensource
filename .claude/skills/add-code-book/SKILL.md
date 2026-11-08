@@ -80,7 +80,7 @@ says.
 - [ ] 5 Extract rule packs             → reference/dispatch-and-extraction.md
 - [ ] 6 Fix up + integrate             → reference/integrate-and-webapp.md
 - [ ] 7 Decomposition + sample facts   → reference/integrate-and-webapp.md
-- [ ] 8 Webapp pickup                  → reference/integrate-and-webapp.md
+- [ ] 8 Webapp pickup + docs           → reference/integrate-and-webapp.md
 - [ ] 9 Verify                         → below
 ```
 
@@ -104,9 +104,9 @@ Step 5 is the usual recurring task: one agent session per
 `plan-check/.prompts/c<cid>.txt`, about $2–5 each. "The next N packs" means
 the first N ids from `book_status.py <book> --remaining`, unless the user
 names specific ones. Extract the batch (packs are independent, so run them
-in parallel), and validate each pack. Record the step 9 engine baseline,
-then run step 6 once for the batch, then run the automated checks in
-step 9.
+in parallel), and validate each pack. Record the step 9 engine baseline (if
+the book already has `all_rules.json` and a fixture), then run step 6 once
+for the batch, then run the automated checks in step 9.
 
 ## Step 9: verify (feedback loop)
 
@@ -119,7 +119,9 @@ first becomes available or webapp code changed.
    compare the `fired:` count (printed on stderr) with the baseline you
    recorded **before** step 6, running the same command against the old
    `all_rules.json`. It must not drop unexpectedly, and new packs should add
-   rules their sections imply:
+   rules their sections imply. A new book has no baseline until its first
+   fixture exists (step 7). Then the check is that `fired:` is above 0 for
+   its fixture, and it becomes the baseline for later batches:
    ```bash
    cd <book>-graph/plan-check && python engine.py sample-facts/<fixture>.json all_rules.json /tmp/v.json 2>&1 | grep -E "evaluated|fired"
    ```
@@ -137,6 +139,24 @@ A live run on a representative plan set (about $2 per book, needs
 `ANTHROPIC_API_KEY`) is the final check: `books/<book>/rejected.json` should
 be small, and flags should land on sensible sheets. Ask the user before
 spending on it.
+
+## Publishing to the public repo
+
+Only from the **private** repo, after committing. This publishes, so ask
+the user first:
+
+```bash
+rm -rf /tmp/pc-release && python tools/export_public.py /tmp/pc-release --sync-to ../plancheck-opensource
+```
+
+The export drops `chapters/` (manifests stay), strips `verbatim` quotes,
+regenerates and checks the parity baseline, and audits for code text. If the
+audit flags a requirement field, paraphrase it in the private repo, commit,
+and re-run the whole command. The export refuses a non-empty destination,
+which is why it starts with `rm -rf`. `--sync-to` then mirrors the result into the public clone
+(refusing a dirty clone or the private repo) and prints its `git status`.
+Check that a new `<book>-graph/` has a manifest and no `chapters/`, then
+commit and push from the clone.
 
 ## Committing
 

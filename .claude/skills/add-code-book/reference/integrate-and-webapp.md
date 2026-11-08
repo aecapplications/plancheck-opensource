@@ -69,3 +69,8 @@ in the upload checkboxes.
   `DRAWING_TYPES` / `TEXT_TYPES`. Any schema change invalidates the
   server-side structured-output grammar cache. The startup warm-up
   (`webapp/extractor/warmup.py`) recompiles it automatically.
+- **Docs.** Add or update the book's section in the skill's
+  `reference/books.md` (bookmark level, id style, `BOOK_META` source, and
+  quirks found along the way). Add or update its row in the README's
+  "Code books" table (book, code, rule count from `book_status.py`,
+  status).

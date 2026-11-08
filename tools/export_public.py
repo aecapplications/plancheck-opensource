@@ -17,7 +17,13 @@ unless --worktree is given):
    fail on any publisher license footer, any surviving ``verbatim`` key, or
    any verbatim run longer than --max-run words.
 
-DEST is left as a plain directory (no .git) for review. Nothing is pushed.
+DEST is left as a plain directory (no .git) for review. With
+``--sync-to CLONE`` the verified export is then mirrored into a local clone of
+the public repository (``rsync --delete``, keeping its .git) and the
+resulting ``git status`` is shown. Nothing is committed or pushed: review the
+diff in CLONE, then commit and push there.
+
+    python tools/export_public.py /tmp/pc-release --sync-to ../plancheck-opensource
 """
 from __future__ import annotations
 
@@ -61,6 +67,39 @@ def extract(dest: Path, treeish: str) -> None:
         tar.extractall(dest, filter="data")
 
 
+def git(clone: Path, *args: str) -> str:
+    return subprocess.run(["git", "-C", str(clone), *args], capture_output=True,
+                          text=True, check=True).stdout.rstrip()
+
+
+def check_clone(clone: Path) -> None:
+    """Refuse anything but a clean clone of a different (public) repository."""
+    if not (clone / ".git").exists():
+        raise SystemExit(f"--sync-to: {clone} is not a git clone")
+    if clone == ROOT or ROOT in clone.parents:
+        raise SystemExit("--sync-to must point outside the private repo")
+    private = subprocess.run(["git", "remote", "get-url", "origin"], cwd=ROOT,
+                             capture_output=True, text=True).stdout.strip()
+    if private and git(clone, "remote", "get-url", "origin").strip() == private:
+        raise SystemExit("--sync-to: that clone's origin is the private repo")
+    if git(clone, "status", "--porcelain"):
+        raise SystemExit(f"--sync-to: {clone} has uncommitted changes")
+
+
+def sync(dest: Path, clone: Path) -> None:
+    print(f"\n7. syncing into {clone}")
+    subprocess.run(["rsync", "-a", "--delete", "--exclude", ".git",
+                    f"{dest}/", f"{clone}/"], check=True)
+    status = git(clone, "status", "--porcelain")
+    if not status:
+        print("  public clone already up to date — nothing to commit")
+        return
+    print(status)
+    print(f"\n  review: git -C {clone} diff\n"
+          f"  then:   git -C {clone} add -A && git -C {clone} commit && "
+          f"git -C {clone} push")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("dest", type=Path)
@@ -68,10 +107,16 @@ def main() -> int:
                     help="interpreter with webapp requirements (parity gate)")
     ap.add_argument("--worktree", action="store_true",
                     help="export the working tree instead of HEAD (testing)")
+    ap.add_argument("--sync-to", type=Path, metavar="CLONE",
+                    help="after a passing export, mirror it into this clean "
+                         "local clone of the public repo (no commit/push)")
     ap.add_argument("--max-run", type=int, default=30,
                     help="longest verbatim run (words) allowed in any file")
     args = ap.parse_args()
     dest = args.dest.resolve()
+    clone = args.sync_to.resolve() if args.sync_to else None
+    if clone:
+        check_clone(clone)
 
     if dest.exists() and any(dest.iterdir()):
         raise SystemExit(f"{dest} exists and is not empty")
@@ -123,6 +168,8 @@ def main() -> int:
         print("FAIL: audit found publishable code text (see above)")
         return 1
     print(f"\nexport OK: {dest}")
+    if clone:
+        sync(dest, clone)
     return 0
 
 

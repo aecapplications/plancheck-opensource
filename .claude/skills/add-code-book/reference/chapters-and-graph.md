@@ -23,32 +23,45 @@ A different printing shifts every page range, so ask the user for the
 matching printing instead of passing `--force`. Existing files are kept
 unless you pass `--overwrite`.
 
-**New book:** draft a manifest from the PDF's bookmarks. `init` creates
-`<book>-graph/`. If you copy the PDF into that directory, it stays
-untracked (`*-graph/*.pdf` is gitignored).
+**New book:**
 
-```bash
-python tools/split_chapters.py init --book <book> --pdf <path> --level 1
-```
-
-`--level` is the bookmark depth where chapters sit: 1 for CRC and CEC, 2
-for CBC. For an unknown book, start with 1. If that level is empty, the
-tool lists the levels that exist. If level 1 holds only front matter, try
-the next level and pick the one whose entries are the chapters and
-appendices. Then
-edit the manifest:
-
-- Drop front matter, tables of contents, and indexes.
-- Split very large chapters into separate page ranges with `_a`/`_b`
-  suffixes (CRC's `chapter_6_wall_construction_a.md`/`_b.md` is the
-  example).
-- Every filename needs a leading `NN_` or `chNN_`-style token followed by
-  `_`. graphify and `make_dispatch.py` map node ids to files by that token.
+1. **Pick the book id**: a short lowercase abbreviation of the code's name
+   (`cfc` for the California Fire Code, `calgreen`, `cmc`, `cpc`). It
+   names `<book>-graph/`, the webapp `Book` entry, and the prompts module,
+   so it's hard to change later.
+2. **Find the chapter level.** Run `init` without `--chapters-only` at a
+   guessed `--level`. It lists the levels present if that one is empty.
+   Open the manifest and look for the level whose entries are
+   `CHAPTER …` / `APPENDIX …` (CRC and CEC: 1; CBC and CFC: 2).
+3. **Draft the manifest:**
+   ```bash
+   python tools/split_chapters.py init --book <book> --pdf <path> --level <n> --chapters-only --force
+   ```
+   `--chapters-only` keeps chapter, appendix, article, annex, and part
+   entries (ICC `[A]`-style tags allowed). It folds each **matrix adoption
+   table** into the chapter that follows. California's ICC-based books
+   bookmark these tables separately, before every chapter, and they say
+   which state agencies adopt which sections, so they belong with their
+   chapter. It drops `RESERVED` placeholders and any other non-chapter
+   entry (front matter, index), printing each dropped title. Filenames get
+   CBC-style tokens, for example `ch9_chapter_9_fire_protection….md` and
+   `appp_appendix_p_….md`. Override the patterns with `--keep`, `--fold`,
+   and `--drop` (regexes) if a book is laid out differently. `init` creates
+   `<book>-graph/`. A PDF copied there stays untracked
+   (`*-graph/*.pdf` is gitignored).
+4. **Review the manifest:**
+   - Read the dropped titles; restore anything that is really a chapter.
+   - Split very large chapters into separate page ranges with `_a`/`_b`
+     suffixes (CRC's `chapter_6_wall_construction_a.md`/`_b.md`).
+     Existing books top out around 70–130 pages per file.
+   - Every filename must keep its leading token (`NN_`, `chNN_`, or
+     `appX_`) followed by `_`. graphify and `make_dispatch.py` map node ids
+     to files by that token.
 
 Run `build`, open two or three of the generated files to confirm each one
 starts at its chapter heading, fix the page ranges, and rebuild with
-`--overwrite`. Commit the manifest; `chapters/` is gitignored in the public
-repo.
+`--overwrite`. Commit the manifest. In the private repo, commit `chapters/`
+too. A public clone gitignores it.
 
 ## Step 2 — Graphify
 

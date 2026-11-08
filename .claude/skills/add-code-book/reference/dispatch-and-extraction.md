@@ -22,8 +22,13 @@ rule-bearing graph community in `plan-check/.prompts/c<cid>.txt`.
 - Always run and edit `tools/make_dispatch.py`.
   `cec-graph/plan-check/make_dispatch.py` is a backward-compatibility shim
   that forwards to it.
-- A new book needs a `BOOK_META` entry in `tools/make_dispatch.py`; copy the
-  `_CEC_META` or `_CBC_META` shape. Fields: `corpus_long`, `corpus_short`,
+- A new book needs a `BOOK_META` entry in `tools/make_dispatch.py`. Copy
+  the entry whose numbering is closest: `_CBC_META` for books built on ICC
+  model codes (IBC, IFC, IRC, so CFC; `903.2.8`-style numbering), and
+  `_CEC_META` for NFPA 70-style `210.8(A)(1)` numbering. For a California-only
+  code, check that `cite_re` matches its section numbers (for example
+  CALGreen's `4.106.4`) on a few real graph labels. Then change the corpus names, `model_jurisdiction` (for
+  example `model_IFC`), and the domain examples. Fields: `corpus_long`, `corpus_short`,
   `cite_example`, `model_jurisdiction`, `amendment_note`, `domain_name`,
   `conventions` (predicate-naming examples), `evidence_examples`,
   `cite_re`, `std_tokens`, `header_prefixes`. Without one, `DEFAULT_META`

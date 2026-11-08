@@ -43,6 +43,27 @@ These are stable facts about each book. For current progress, run
 - Rough extraction budget: $60–150 for all packs.
 - Chapter manifest bookmark level: 2.
 
+CBC's committed manifest predates `split_chapters.py init --chapters-only`.
+It omits Appendix O (folded into Appendix N), attaches each chapter's
+matrix adoption table to the end of the previous chapter, and runs Appendix
+P through the index. Its graph was built on that layout, so leave it unless
+CBC is re-graphified.
+
+## CFC — 2022 California Fire Code (Title 24 Part 9) (not started)
+
+- Based on the 2021 IFC, it uses the same numbering family as CBC
+  (`903.2.8`), so copy `_CBC_META` with `model_jurisdiction: "model_IFC"`.
+- Chapter manifest bookmark level: 2. Run `init --chapters-only`: it keeps
+  71 chapters and appendices, folds the 71 matrix adoption tables, and
+  drops 5 RESERVED entries. Its level-1 PART dividers point two pages past
+  their first chapter; `init` handles this.
+- With matrix tables folded in, the largest chapters are Ch. 9 fire
+  protection systems (76 pages) and Ch. 10 egress (62 pages), in line with
+  other books, so splitting is optional.
+- Plan sets include fire sprinkler, fire alarm, and fire access sheets.
+  Expect to extend `SheetType` in step 8.
+- Rough total: graphify $25–60 plus about 40 packs of extraction.
+
 ## CALGreen — Title 24 Part 11 (not started)
 
 - Run the full workflow from step 1. Expect a smaller corpus than CBC. The

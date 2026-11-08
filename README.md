@@ -88,18 +88,39 @@ Job artifacts land in `webapp/jobs/<id>/` (untracked): shared
 
 ## Adding or extending a code book
 
-The project skill `.claude/skills/add-code-book/` is the runbook: rebuild
-chapter text from the code PDF, graphify, scaffold `plan-check/`, generate
-extraction prompts with `tools/make_dispatch.py`, extract rule packs (one
-agent session per pack), integrate, and the webapp picks the book up
-automatically. `python .claude/skills/add-code-book/scripts/book_status.py`
-shows where each book stands.
+The project skill [`.claude/skills/add-code-book/`](.claude/skills/add-code-book/SKILL.md)
+is the runbook. In Claude Code, run `/add-code-book <book>`; without it,
+follow `SKILL.md` and its `reference/` files by hand. You need your own copy
+of the code PDF. In outline, for a new book (here the California Fire Code,
+id `cfc`):
+
+1. Draft a chapter manifest from the PDF's bookmarks and build local chapter
+   text:
+   `python tools/split_chapters.py init --book cfc --pdf <PDF> --level 2 --chapters-only`,
+   review `cfc-graph/chapters.manifest.json`, then `split_chapters.py build`.
+2. Build the knowledge graph (`/graphify chapters` from `cfc-graph/`).
+3. Scaffold `cfc-graph/plan-check/` from `cec-graph/plan-check/`.
+4. Add a `BOOK_META` entry and generate extraction prompts with
+   `tools/make_dispatch.py`.
+5. Extract rule packs, one agent session per prompt, about $2–5 each.
+6. Integrate (`fixup_ids.py`, `normalize_clauses.py`, `integrate.py`).
+7. Write `predicate_decomposition.json` and a sample-facts fixture.
+8. Register the book in the webapp and update the docs (README table,
+   `reference/books.md`).
+9. Verify: the engine on sample facts, `python tools/parity_gate.py`, and a
+   FAKE-mode run.
+
+The webapp picks the book up automatically once its corpus exists.
+`python .claude/skills/add-code-book/scripts/book_status.py` shows where
+each book stands and what's next. See [CONTRIBUTING.md](CONTRIBUTING.md) for
+the pull-request checklist.
 
 ## Working on this repo with Claude
 
 Run `/add-code-book <book>` (or just ask, e.g. "run the next CEC packs") to
-onboard a new book or extract more rule packs. Rule extraction is the one
-LLM-paid step (~$2–5 per pack); everything else is deterministic Python.
+onboard a new book or extract more rule packs. Graphify and rule extraction
+are the LLM-paid steps (about $25–60 per book and $2–5 per pack); everything
+else is deterministic Python.
 
 ## License
 
