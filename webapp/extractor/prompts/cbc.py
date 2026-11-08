@@ -1,7 +1,7 @@
 """Extraction prompts for the California Building Code (CBC) — stub.
 
 The CBC book is registered but has no rule corpus yet (see plan.md /
-docs/adding-a-code-book.md). These building-domain prompts are a starting
+.claude/skills/add-code-book/). These building-domain prompts are a starting
 point; refine them against the vocabulary once integrate.py produces one.
 """
 from __future__ import annotations

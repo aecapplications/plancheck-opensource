@@ -35,7 +35,8 @@ def validate_pack(pack: dict, graph_ids: set[str]) -> dict:
     rules = pack.get('rules', [])
     for r in rules:
         rid = r.get('id', '?')
-        for f in ('cite', 'title', 'verbatim', 'jurisdiction', 'severity'):
+        # `verbatim` (quoted code text) is optional: public-repo packs are stripped
+        for f in ('cite', 'title', 'jurisdiction', 'severity'):
             if not r.get(f):
                 errors.append(f'{rid}: missing field "{f}"')
         sn = r.get('section_node')

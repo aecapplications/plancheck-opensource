@@ -88,17 +88,18 @@ Job artifacts land in `webapp/jobs/<id>/` (untracked): shared
 
 ## Adding or extending a code book
 
-`docs/adding-a-code-book.md` is the runbook: split the code PDF into
-chapters, graphify, scaffold `plan-check/`, generate extraction prompts with
-`tools/make_dispatch.py`, extract rule packs (one agent session per pack),
-integrate, and the webapp picks the book up automatically.
+The project skill `.claude/skills/add-code-book/` is the runbook: rebuild
+chapter text from the code PDF, graphify, scaffold `plan-check/`, generate
+extraction prompts with `tools/make_dispatch.py`, extract rule packs (one
+agent session per pack), integrate, and the webapp picks the book up
+automatically. `python .claude/skills/add-code-book/scripts/book_status.py`
+shows where each book stands.
 
 ## Working on this repo with Claude
 
-The project skill `.claude/skills/add-code-book/` is the entry point for
-onboarding a new book or extracting more rule packs — it defers to the
-runbook above. Rule extraction is the one LLM-paid step (~$2–5 per pack);
-everything else is deterministic Python.
+Run `/add-code-book <book>` (or just ask, e.g. "run the next CEC packs") to
+onboard a new book or extract more rule packs. Rule extraction is the one
+LLM-paid step (~$2–5 per pack); everything else is deterministic Python.
 
 ## License
 

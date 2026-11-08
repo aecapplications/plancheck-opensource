@@ -25,7 +25,7 @@ Selection: communities with >= --min-nodes nodes (default 10), skipping any
 with zero rule-bearing sections.
 
 NOTE: this generator does NOT run any LLM. Feed the emitted prompts to a
-model to produce the c<cid>_*_rules.json packs (see docs/adding-a-code-book.md).
+model to produce the c<cid>_*_rules.json packs (see .claude/skills/add-code-book/).
 
 Node classification (off id + label, since many nodes have null source_location):
   table     — id has _table_  or label starts "Table"

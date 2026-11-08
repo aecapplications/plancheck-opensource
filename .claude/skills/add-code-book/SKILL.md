@@ -1,66 +1,175 @@
 ---
 name: add-code-book
-description: Onboard a new California code book into PlanCheck, or extend an existing one — extract rule packs, integrate them, and verify. Trigger on "add a code book", "onboard <book>", "extract rule packs", "run the next CEC/CBC packs", "integrate rule packs".
+description: Onboards a new California code book (e.g. CALGreen) into PlanCheck or extends an existing one (CBC, CEC, CRC). Covers rebuilding local chapter text from the user's PDF, graphifying, scaffolding plan-check/, dispatching and extracting rule packs, integrating them, registering the book in the webapp, and verifying with the parity gate. Use when the user asks to add or onboard a code book, extract or continue rule packs ("run the next CEC packs"), integrate rule packs, or check how far a book's onboarding has got.
+argument-hint: "[book-id, e.g. cec | cbc | calgreen]"
 ---
 
 # Add or extend a code book
 
-`docs/adding-a-code-book.md` is the single source of truth — follow its
-numbered steps for the situation at hand. This skill is the entry point and
-guardrail summary, not a replacement for the runbook.
+Book requested: $ARGUMENTS. If that is blank, infer the book from the
+request or ask. `<book>` below is the short lowercase id; the book lives in
+`<book>-graph/` at the repo root.
 
-## First: code-book text is local-only
+## Start here
 
-`<book>-graph/chapters/` is not distributed. Before any step that reads code
-text (graphify, dispatch, extraction), run
-`python tools/split_chapters.py check --book <book>`. If it reports missing
-files, ask the user for the path to their copy of the code PDF and run
-`python tools/split_chapters.py build --book <book> --pdf <path>` — never
-proceed by writing rules from memory, and never fetch code text from the web.
+1. Check where the book stands:
+   ```bash
+   python .claude/skills/add-code-book/scripts/book_status.py <book>
+   ```
+   It checks every step's artifacts on disk and prints `next: step N`.
+   Begin at that step. Don't assume progress from memory or older docs.
+2. Read [reference/books.md](reference/books.md) for the book's quirks
+   (hand-authored CRC prompts, CBC id conventions, donor files).
 
-## Which steps apply
+## Guardrails
 
-- **Brand-new book** (e.g. CALGreen): runbook steps 1–9 in order.
-- **CBC** (graph + dispatch exist): rebuild chapters, then steps 3–9; see
-  runbook Appendix A.
-- **CEC** (live, 9/41 packs done): rebuild chapters, then steps 5–6 per
-  batch of packs; see Appendix B.
+- **Code text stays local.** Source PDFs are never committed anywhere.
+  `<book>-graph/chapters/` is copyrighted text. The **private** repo tracks
+  it as the full-fidelity copy, so commit a new book's chapters there. A
+  **public** clone gitignores it, and it never goes public. Before any step
+  that reads code text (1, 2, 4, 5), run `python tools/split_chapters.py check --book <book>`. If
+  files are missing, ask the user for the path to their PDF and run
+  `python tools/split_chapters.py build --book <book> --pdf <path>`. Never
+  write rules from memory, and never fetch code text from the web.
+- **Shared files stay byte-identical.** `engine.py`, `integrate.py`,
+  `normalize_clauses.py`, and `render_report.py` are identical across
+  books. Never parameterize them.
+- **Graph ids are copied, never invented.** Every `section_node`,
+  `depends_on`, and `tested_per` entry in a rule pack must be a node id from
+  the prompt's lists. `scripts/validate_pack.py` checks this.
+- **Ask before spending.** Get the user's go-ahead before graphify (about
+  $25–60 per book), before extracting more than the packs they asked for
+  (about $2–5 each), and before any live webapp run.
+- **Never run `tools/make_dispatch.py` on `crc-graph`.** Its prompts are
+  hand-authored.
+- **Stay deterministic.** Every set iteration in a book's `chain.py` and
+  `decompose.py` is sorted. The parity gate depends on byte-identical
+  output.
+- **No code text in commits.** Rule packs cite and paraphrase. The
+  `verbatim` field is a local extraction aid only (see "Before committing:
+  no code text").
 
-## Non-negotiable invariants (from the runbook)
+## What a finished book looks like
 
-1. `engine.py`, `integrate.py`, `normalize_clauses.py`, `render_report.py`
-   stay **byte-identical across books** — never parameterize them.
-2. Rule extraction: every `section_node` / `depends_on` value is a graph node
-   id copied **verbatim** from the dispatch prompt's lists — never invented.
-   Every rule quotes its load-bearing source sentence in `verbatim` — a
-   local working aid only: run `python tools/strip_verbatim.py` before
-   committing to the public repo (`--check` must pass). Output must parse
-   with `json.load` before a session reports done. Preflight each session
-   with `split_chapters.py check --book <book> --prompt c<cid>.txt`.
-3. **Never run `tools/make_dispatch.py --graph-dir crc-graph`** — crc's 21
-   prompts are hand-authored and regeneration clobbers them.
-4. All set iterations in book-adapted `chain.py`/`decompose.py` stay sorted
-   (deterministic output across processes; the parity gate depends on it).
-5. After every integrate: the CRC parity gate (`python tools/parity_gate.py`)
-   must still pass byte-identical, and each book's `sample-facts/` must fire
-   its expected rule counts.
-6. No code text in commits: `python tools/audit_verbatim.py --max-run 30`
-   (with chapters present) passes — no long verbatim runs in any field, no
-   publisher license footers. Paraphrase; cite sections.
-
-## Key commands
-
-```bash
-python tools/split_chapters.py build --book <book> --pdf <path>   # local chapters/
-python tools/split_chapters.py check --book <book> [--prompt c07.txt]
-python tools/make_dispatch.py --graph-dir <book>-graph      # step 4
-# step 5: one agent session per plan-check/.prompts/c<cid>.txt
-cd <book>-graph/plan-check && \
-  python fixup_ids.py && python normalize_clauses.py && python integrate.py   # step 6
-python tools/strip_verbatim.py && python tools/strip_verbatim.py --check    # public repo, before commit
-python tools/parity_gate.py
+```
+<book>-graph/
+  chapters.manifest.json         # committed: filenames + page ranges, no text
+  chapters/                      # code text: private repo only, rebuilt from the user's PDF
+  graphify-out/graph.json        # knowledge graph (+ GRAPH_REPORT.md, cost.json)
+  plan-check/
+    engine.py integrate.py normalize_clauses.py render_report.py   # byte-shared
+    decompose.py chain.py fixup_ids.py canonicalize.py             # book-adapted
+    .dispatch_plan.json .prompts/c<cid>.txt                        # make_dispatch.py
+    c<cid>_<label>_rules.json                                      # extracted packs
+    all_rules.json canonical/vocabulary.json                       # integrate.py
+    predicate_decomposition.json sample-facts/*.json               # hand-authored
+webapp/extractor/prompts/<book>.py   +   a Book entry in webapp/books.py
 ```
 
-Rule packs are independent — extract in any order, integrate per batch, and
-the webapp picks up new rule counts automatically (`webapp/books.py`
-availability is file-based). Budget ~$2–5 per pack session.
+## Workflow
+
+Copy this checklist into your response and tick items off as you go.
+Brand-new books start at step 1; existing books start where `book_status.py`
+says.
+
+```
+- [ ] 1 Manifest + local chapters/     → reference/chapters-and-graph.md
+- [ ] 2 Graphify                       → reference/chapters-and-graph.md
+- [ ] 3 Scaffold plan-check/           → reference/scaffold.md
+- [ ] 4 Dispatch prompts               → reference/dispatch-and-extraction.md
+- [ ] 5 Extract rule packs             → reference/dispatch-and-extraction.md
+- [ ] 6 Fix up + integrate             → reference/integrate-and-webapp.md
+- [ ] 7 Decomposition + sample facts   → reference/integrate-and-webapp.md
+- [ ] 8 Webapp pickup                  → reference/integrate-and-webapp.md
+- [ ] 9 Verify                         → below
+```
+
+Read the linked reference before doing a step. Commands assume the repo
+root unless they `cd`. `/graphify` is a skill, not a shell command, and it
+writes into the current directory. Run `cd <book>-graph` in the main
+session's Bash tool first, then invoke it. Don't delegate it to a subagent,
+whose shell may start elsewhere. The core commands:
+
+```bash
+python tools/split_chapters.py build --book <book> --pdf <path>         # 1 (existing manifest)
+# 2: cd <book>-graph, then invoke the skill: /graphify chapters --obsidian
+python tools/make_dispatch.py --graph-dir <book>-graph                  # 4
+python tools/split_chapters.py check --book <book> --prompt c<cid>.txt  # 5 preflight, every pack
+python .claude/skills/add-code-book/scripts/validate_pack.py <pack>.json  # 5 validate, every pack
+cd <book>-graph/plan-check && \
+  python fixup_ids.py && python normalize_clauses.py && python integrate.py   # 6
+```
+
+Step 5 is the usual recurring task: one agent session per
+`plan-check/.prompts/c<cid>.txt`, about $2–5 each. "The next N packs" means
+the first N ids from `book_status.py <book> --remaining`, unless the user
+names specific ones. Extract the batch (packs are independent, so run them
+in parallel), and validate each pack. Record the step 9 engine baseline,
+then run step 6 once for the batch, then run the automated checks in
+step 9.
+
+## Step 9: verify (feedback loop)
+
+Fix and re-run until every check passes, and only then report the work as
+done. Checks 1, 2, and 4 are automated; run them after every extraction
+batch. Check 3 needs a browser: run it, or ask the user to, when a book
+first becomes available or webapp code changed.
+
+1. **Engine on sample facts.** For each fixture `book_status.py` lists,
+   compare the `fired:` count (printed on stderr) with the baseline you
+   recorded **before** step 6, running the same command against the old
+   `all_rules.json`. It must not drop unexpectedly, and new packs should add
+   rules their sections imply:
+   ```bash
+   cd <book>-graph/plan-check && python engine.py sample-facts/<fixture>.json all_rules.json /tmp/v.json 2>&1 | grep -E "evaluated|fired"
+   ```
+2. **CRC parity gate.** It must print `PARITY OK`:
+   ```bash
+   python tools/parity_gate.py
+   ```
+3. **FAKE-mode UI run.** Run `EXTRACTOR_FAKE=1 uvicorn webapp.app:app
+   --port 8000` and upload any PDF with the book selected. Expect per-book
+   progress, results chips, and a report.
+4. **Status.** `book_status.py <book>` shows the expected rows checked and
+   `webapp availability: AVAILABLE` once steps 6–7 are done.
+
+A live run on a representative plan set (about $2 per book, needs
+`ANTHROPIC_API_KEY`) is the final check: `books/<book>/rejected.json` should
+be small, and flags should land on sensible sheets. Ask the user before
+spending on it.
+
+## Committing
+
+Commit at each milestone: the manifest (step 1), the graph (step 2), the
+scaffold (step 3), the dispatch prompts (step 4), and each extraction batch
+after step 6 and the step 9 checks pass. Stage the book's whole
+`<book>-graph/` change set, not just the packs. `git status <book>-graph`
+should show every file below as staged:
+
+- the new `c<cid>_*_rules.json` packs;
+- step 6 outputs: `.fixup/`, `.normalize/`, `canonical/`, `all_rules.json`;
+- any reviewed `graphify-out/graph.json` additions from `fixup_ids.py`;
+- in the private repo only, new `chapters/` files.
+
+Never stage PDFs, `webapp/jobs/`, or graphify caches; `.gitignore` covers
+them. Ask before committing if the user didn't request it.
+
+## Before committing: no code text
+
+To tell which repo you're in, look for `*-graph/chapters/` in
+`git ls-files`. If it's listed, this is the private repo; if it isn't, this
+is a public clone.
+
+- **Public clone:** strip the quotes, then audit. Paraphrase anything the
+  audit flags and re-run it.
+  ```bash
+  python tools/strip_verbatim.py && python tools/strip_verbatim.py --check
+  python tools/audit_verbatim.py --max-run 30     # needs chapters/ present
+  ```
+- **Private repo:** commit packs with their quotes; `strip_verbatim.py`
+  refuses to run here. Running the audit directly would flag the quotes
+  themselves. Instead, check that requirement fields don't copy long
+  passages with a scratch export, which strips and then audits:
+  ```bash
+  python tools/export_public.py /tmp/plancheck-export-check --worktree && rm -rf /tmp/plancheck-export-check
+  ```
